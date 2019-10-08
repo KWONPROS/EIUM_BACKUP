@@ -68,7 +68,7 @@ float: left;
 		<tr>
 			<td>
 				<h1>
-					<font size=30>스프링실습 홈페이지!!</font>
+					<font size=30>스프링 실습 홈페이지!!</font>
 				</h1>
 			</td>
 	
