@@ -16,10 +16,7 @@
         border: 0px solid #bcbcbc;
       }
       #header {
-        padding: 5px;
-        margin-bottom: 5px;
         border: 0px solid #bcbcbc;
-         background-color: lightgreen;
       }
       #sidebar-left {
         width: 15%;
