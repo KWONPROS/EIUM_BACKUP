@@ -23,7 +23,7 @@
 				for (var i=0; i<data.child.length; i++) {
 					if (data.child[i] != null) {			
 						$('.big').append('<li class ="menu" id='+i+'>');
-						$('#'+i).append('<a><i class="fa fa-plus"></i>'+ data.child[i].name+'</a>');
+						$('#'+i).append('<a><i class="fa fa-minus"></i>'+ data.child[i].name+'</a>');
 						$('#'+i).append('<ul class="hide">');
 						for ( var j=0; j<data.child[i].child.length; j++) {
 							if (data.child[i].child[j] != null) {
@@ -354,55 +354,18 @@
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style type="text/css"> /* 트리메뉴 */
 
-#div{
-background-color: #212121;
-color: white;
-}
+<style type="text/css"> 
 
-
-li {
-	list-style: none;
-}
-
-A:link {
-	font-size: 10pt;
-	font-family: 굴림;
-	color: white;
-	text-decoration: none;
-}
-
-A:visited {
-	font-size: 10pt;
-	font-family: 굴림;
-	color: white;
-	text-decoration: none;
-}
-
-A:active {
-	font-size: 10pt;
-	font-family: 굴림;
-	color: #FF6000;
-	text-decoration: none;
-}
-
-A:hover {
-	font-size: 10pt;
-	font-family: 굴림;
-	color: #FF6000;
-	text-decoration: none;
-}
-</style>
-<style> /* 배너단 */
+/* 배너단 */
 .logo {
 	width: auto;
 	height: 80px;
 }
-
 .box {
 	background-color: #212121;
-	padding: 10px;
+	padding: 10px;  
+	padding-bottom: 0px;
 }
 
 .container-1 {
@@ -433,10 +396,70 @@ A:hover {
 .icon {
 	color: #4f5b66;
 }
-
 .no-underline {
 	text-decoration: none;
 }
+
+
+/* 트리메뉴 */
+#div {
+	background-color: #E0E0E0;
+	color: white;
+	width: 190px;  
+	font-size: 15px; 
+	
+}
+ul{
+background-color:#2C3E50;
+padding-left: 0px;
+list-style: none;
+}
+ul li{    
+
+}
+ul i {
+margin-left: 10px;
+margin-right: 10px;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+
+
+ul li ul{
+padding-left:30px;
+background-color:#E0E0E0;
+	
+}
+
+ul li ul li{ 
+padiing-top:2px; 
+padding-bottom: 2px;
+}
+
+A:link {
+	
+	color:#212121; 	
+	text-decoration: none;
+}
+
+A:visited {
+
+	color:#212121; 	
+	text-decoration: none;
+}
+
+A:active {
+
+	bacolor: #FF6000;
+	text-decoration: none;
+}
+
+A:hover {
+
+	color: #FF6000;
+	text-decoration: none;
+}
+ 
 </style>
 <meta charset="UTF-8">
 <title>사이드 메뉴</title>
