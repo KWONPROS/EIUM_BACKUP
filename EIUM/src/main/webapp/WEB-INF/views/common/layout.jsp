@@ -9,44 +9,46 @@
   <head>
     <meta charset="UTF-8">
     <style>
-      #container {
-        width: 100%;
-        margin: 0px auto;
-          text-align:center;
-        border: 0px solid #bcbcbc;
-      }
-      #header {
-        border: 0px solid #bcbcbc;
-      }
-      #sidebar-left {
-        width: 15%;
-        height:700px;
-        padding: 5px;
-        margin-right: 5px;
-        margin-bottom: 5px;
-        float: left;
-         background-color: yellow;
-        border: 0px solid #bcbcbc;
-        font-size:10px;
-      }
-      #content {
-        width: 75%;
-        padding: 5px;
-        margin-right: 5px;
-        float: left;
-        border: 0px solid #bcbcbc;
-      }
-      #footer {
-        clear: both;
-        padding: 5px;
-        border: 0px solid #bcbcbc;
-         background-color: lightblue;
-      }
-      
-    </style>
+#container {
+	width: 100%;
+	text-align: left;
+	border: 0px solid #bcbcbc;
+}
+#header {
+	width: calc(100% - 190px);
+	height: 30px;                   
+	position : absolute;
+	top: 5px;
+	left: 190px;
+	border: 0px solid #bcbcbc;               
+}
+#sidebar-left {
+	width: 190px;
+	height: 100%;
+	background-color: #E0E0E0;
+	border: 0px solid #bcbcbc;
+	font-size: 10px;
+}
+#content {
+	width: calc(100% - 190px);
+	height: 100%;
+	position: absolute;
+	top: 30px;
+	left: 190px;    
+	border: 0px solid #bcbcbc;
+}
+#footer {
+	width: 100%;      
+	position: relative;        
+	padding:1px;      
+	border: 0px solid #bcbcbc;
+	background-color: #212121;
+	color: white;
+}
+</style>
     <title><tiles:insertAttribute name="title" /></title>
   </head>
-    <body>
+    <body topmargin="0"  leftmargin="0" marginwidth="0" marginheight="0">
     <div id="container">
       <div id="header">
          <tiles:insertAttribute name="header"/>
