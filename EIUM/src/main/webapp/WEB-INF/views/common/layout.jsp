@@ -25,9 +25,8 @@
 #sidebar-left {
 	width: 190px;
 	height: 100%;
-	background-color: #E0E0E0;
+	background-color: #212121;
 	border: 0px solid #bcbcbc;
-	font-size: 10px;
 }
 #content {
 	width: calc(100% - 190px);
