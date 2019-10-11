@@ -404,27 +404,19 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
 	padding: 10px;  
 	padding-bottom: 0px;
 }
-<<<<<<< HEAD
 .logobox .logo {
 	width: auto;
 	height: 80px;
 }
 
 .logobox .sideSearchBar {
-=======
-.container-1 {
->>>>>>> refs/remotes/origin/master
 	width: 170px;
 	vertical-align: middle;
 	white-space: nowrap;
 	position: relative;
 }
-<<<<<<< HEAD
 
 .logobox .sideSearchBar input#search {
-=======
-.container-1 input#search {
->>>>>>> refs/remotes/origin/master
 	width: 170px;
 	height: 30px;
 	background: #ffffff;
@@ -434,21 +426,12 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
 	padding-left: 35px;
 	border-radius: 5px;
 }
-<<<<<<< HEAD
 
 .sideSearchBar .icon {
-=======
-.container-1 .icon {
->>>>>>> refs/remotes/origin/master
 	position: absolute;
 	margin-left: -160px;
 	margin-top: 3px;
 	z-index: 1;
-<<<<<<< HEAD
-=======
-}
-.icon {
->>>>>>> refs/remotes/origin/master
 	color: #4f5b66;
 }
 
@@ -516,15 +499,9 @@ list-style: none;
 </style>
 <meta charset="UTF-8">
 <title>사이드 메뉴</title>
-
 </head>
-<<<<<<< HEAD
 <body>
 	<div class="logobox">
-=======
-<body>
-	<div class="box">
->>>>>>> refs/remotes/origin/master
 		<a href="${contextPath}/main.do"> <img class="logo"
 			src="${contextPath}/resources/image/EIUM_banner.png" />
 		</a>
@@ -534,10 +511,6 @@ list-style: none;
 		</div>
 	</div>
 	
-<<<<<<< HEAD
 	<div id="sideMenu"></div>
-=======
-	<div id="div"></div>
->>>>>>> refs/remotes/origin/master
 </body>
 </html>
