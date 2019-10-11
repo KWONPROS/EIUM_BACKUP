@@ -21,15 +21,12 @@
 	color: #212121;
 	font-size: 12px;
 }
-
 .currentInfo #headerinfo  {
 	margin-right: 15px;
 }
-
 .currentInfo #headerinfo b {
 	font-weight: normal;
 }
-
 .homelogin {
 	padding: 0px 0px 95px 10px;
 	color: #212121;
@@ -37,12 +34,32 @@
 	position : absolute;
 	top: 5px;
 	right: 15px;
+	
 }
-
 .homelogin #headerinfo {
 	margin-right: 15px;
 	margin-left: 15px;
 }
+.homelogin A:link {
+	color:#212121; 	
+	text-decoration: none;
+}
+
+.homelogin A:visited {
+	color:#212121; 	
+	text-decoration: none;
+}
+
+.homelogin A:active {
+	bacolor: #FF6000;
+	text-decoration: none;
+}
+
+.homelogin A:hover {
+	color: #FF6000;
+	text-decoration: none;
+}
+
 </style>
 <meta charset="UTF-8">
 <title>헤더</title>
