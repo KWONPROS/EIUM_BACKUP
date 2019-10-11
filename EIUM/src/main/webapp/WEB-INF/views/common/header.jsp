@@ -22,11 +22,11 @@
 	font-size: 12px;
 }
 
-.currentInfo span {
+.currentInfo #headerinfo  {
 	margin-right: 15px;
 }
 
-.currentInfo span b {
+.currentInfo #headerinfo b {
 	font-weight: normal;
 }
 
@@ -39,7 +39,7 @@
 	right: 15px;
 }
 
-.homelogin span {
+.homelogin #headerinfo {
 	margin-right: 15px;
 	margin-left: 15px;
 }
@@ -50,15 +50,14 @@
 <body>
 
 	<div class="currentInfo">
-		<span class="user">사용자 : OOO</span> <span class="company">회사 :
-			(주)00전자</span> <span class="logindate">접속일시 : <b id="clock1"></b>
+		<span id="headerinfo" class="user">사용자 : OOO</span> <span id="headerinfo" class="company">회사 :
+			(주)00전자</span> <span id="headerinfo" class="logindate">접속일시 : <b id="systemClock"></b>
 		</span>
 	</div>
 
 	<div class="homelogin">
-		<a href="#"><span class="icon"><i class="fa fa-home">
-					Home</i></span></a> <a href="#"><span class="icon"><i
-				class="fa fa-share-square-o"> Logout</i></span></a>
+		<a href="#"><span id="headerinfo" class="icon"><i class="fa fa-home">
+					Home</i></span></a> <a href="#"><span id="headerinfo" class="icon"><i class="fa fa-share-square-o"> Logout</i></span></a>
 	</div>
 
 </body>
