@@ -20,7 +20,7 @@
 	position : absolute;
 	top: 5px;
 	left: 190px;
-	border: 0px solid #bcbcbc;               
+	border: 0px solid #bcbcbc;
 }
 #sidebar-left {
 	width: 190px;

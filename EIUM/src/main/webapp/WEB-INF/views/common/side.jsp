@@ -13,8 +13,49 @@
 <html>
 <head>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script> //메뉴트리
+<script>
+function printClock() {
+	var clock = document.getElementById("clock1"); // 출력할 장소 선택
+	var currentDate = new Date(); // 현재시간
+	var dd = currentDate.getDate();
+	var mm = (currentDate.getMonth() + 1);
 
+	if (dd < 10) {
+		dd = '0' + dd;
+	}
+	if (mm < 10) {
+		mm = '0' + mm;
+	}
+	var calendar = currentDate.getFullYear() + "-" + mm + "-" + dd; // 현재 날짜
+	var amPm = 'AM'; // 초기값 AM
+	var currentHours = addZeros(currentDate.getHours(), 2);
+	var currentMinute = addZeros(currentDate.getMinutes(), 2);
+	var currentSeconds = addZeros(currentDate.getSeconds(), 2);
+	if (currentHours >= 12) { // 시간이 12보다 클 때 PM으로 세팅, 12를 빼줌
+		amPm = 'PM';
+		currentHours = addZeros(currentHours - 12, 2);
+	}
+	clock.innerHTML = calendar + " " + currentHours + ":" + currentMinute
+			+ ":" + currentSeconds + " " + amPm; //날짜를 출력해 줌
+
+	setTimeout("printClock()", 1000); // 1초마다 printClock() 함수 호출
+
+}
+
+function addZeros(num, digit) { // 자릿수 맞춰주기
+	var zero = '';
+	num = num.toString();
+	if (num.length < digit) {
+		for (i = 0; i < digit - num.length; i++) {
+			zero += '0';
+		}
+	}
+	return zero + num;
+}
+</script>
+
+
+<script> //메뉴트리
 	function CreateTree(tag) { //tag == div
 	
 		this.data_init = function(data) { //div태크안에다가 만들어주는 메소드
@@ -34,8 +75,8 @@
 				}
 			};
 	}
-	window.onload = function() {
-	
+	window.onload = function() {	
+		   printClock(); //헤더의 현재시간 생성
 		   var tree = new CreateTree(document.getElementById('div'));	
 			//메뉴객체 생성
 			//name : a 태그에 나타나는 내용
