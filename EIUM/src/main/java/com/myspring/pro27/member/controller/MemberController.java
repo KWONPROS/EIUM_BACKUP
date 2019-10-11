@@ -16,4 +16,5 @@ public interface MemberController {
 	public ModelAndView addMember(MemberVO memberVO,HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView removeMember(String id, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView login(MemberVO memberVO, RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 }
