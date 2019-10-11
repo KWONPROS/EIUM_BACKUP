@@ -12,6 +12,10 @@
 
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Script-Type" content="text/javascript" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
@@ -19,19 +23,16 @@
 	width: auto;
 	height: 80px;
 }
-
 .box {
 	background-color: #212121;
 	padding: 10px;
 }
-
 .container-1 {
 	width: 170px;
 	vertical-align: middle;
 	white-space: nowrap;
 	position: relative;
 }
-
 .container-1 input#search {
 	width: 170px;
 	height: 30px;
@@ -42,73 +43,24 @@
 	padding-left: 35px;
 	border-radius: 5px;
 }
-
 .container-1 .icon {
 	position: absolute;
 	margin-left: -160px;
 	margin-top: 3px;
 	z-index: 1;
 }
-
 .icon {
 	color: #4f5b66;
 }
-
 .no-underline {
 	text-decoration: none;
 }
 </style>
 <meta charset="UTF-8">
 <title>사이드 메뉴</title>
+
 </head>
 <body>
-	<div class="box">
-		<a href="${contextPath}/main.do"> <img class="logo"
-			src="${contextPath}/resources/image/EIUM_banner.png" />
-		</a>
-		<div class="container-1">
-			<input type="search" id="search" placeholder="찾을 메뉴 입력..." /> <span
-				class="icon"><i class="fa fa-search"></i></span>
-		</div>
-	</div>
-	<h1>사이드 메뉴</h1>
-	<h1>
-		<a href="${contextPath}/member/listMembers.do" class="no-underline">회원관리</a><br>
-		<a href="#" class="no-underline">게시판관리</a><br> <a href="#"
-			class="no-underline">상품관리</a><br>
-		<a href="#" class="no-underline">게시판관리</a><br> <a href="#"
-			class="no-underline">상품관리</a><br>
-		<a href="#" class="no-underline">게시판관리</a><br> <a href="#"
-			class="no-underline">상품관리</a><br>
-		<a href="#" class="no-underline">게시판관리</a><br> <a href="#"
-			class="no-underline">상품관리</a><br>
-		<a href="#" class="no-underline">게시판관리</a><br> <a href="#"
-			class="no-underline">상품관리</a><br>
-		<a href="#" class="no-underline">게시판관리</a><br> <a href="#"
-			class="no-underline">상품관리</a><br>
-		<a href="#" class="no-underline">게시판관리</a><br> <a href="#"   
-			class="no-underline">상품관리</a><br>
-		<a href="#" class="no-underline">게시판관리</a><br> <a href="#"
-			class="no-underline">상품관리</a><br>
-		<a href="#" class="no-underline">게시판관리</a><br> <a href="#"
-			class="no-underline">상품관리</a><br>
-		<a href="#" class="no-underline">게시판관리</a><br> <a href="#"
-			class="no-underline">상품관리</a><br>
-		<a href="#" class="no-underline">게시판관리</a><br> <a href="#"
-			class="no-underline">상품관리</a><br>
-		<a href="#" class="no-underline">게시판관리</a><br> <a href="#"
-			class="no-underline">상품관리</a><br>
-		<a href="#" class="no-underline">게시판관리</a><br> <a href="#"
-			class="no-underline">상품관리</a><br>
-		<a href="#" class="no-underline">게시판관리</a><br> <a href="#"
-			class="no-underline">상품관리</a><br>
-		<a href="#" class="no-underline">게시판관리</a><br> <a href="#"
-			class="no-underline">상품관리</a><br>
-		<a href="#" class="no-underline">게시판관리</a><br> <a href="#"
-			class="no-underline">상품관리</a><br>
-		<a href="#" class="no-underline">게시판관리</a><br> <a href="#"
-			class="no-underline">상품관리</a><br>
-		
-	</h1>
+
 </body>
 </html>
