@@ -393,7 +393,6 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
 	}
 </script>
 
->>>>>>> refs/remotes/origin/master
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
