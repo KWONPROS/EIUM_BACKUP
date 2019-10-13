@@ -35,4 +35,9 @@
       <put-attribute name="title" value="회원상세창" />
       <put-attribute name="body" value="/WEB-INF/views/member/viewDetail.jsp" />
    </definition>
+   
+   <definition name="/member/Login" extends="baseLayout">
+      <put-attribute name="title" value="로그인창" />
+      <put-attribute name="body" value="/WEB-INF/views/member/Login.jsp" />
+   </definition>
 </tiles-definitions>
