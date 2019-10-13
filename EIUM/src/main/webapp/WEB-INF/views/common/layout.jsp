@@ -39,7 +39,7 @@
 #footer {
 	width: 100%;      
 	position: relative;        
-	padding:1px;      
+	padding:0.5px;      
 	border: 0px solid #bcbcbc;
 	background-color: #212121;
 	color: white;

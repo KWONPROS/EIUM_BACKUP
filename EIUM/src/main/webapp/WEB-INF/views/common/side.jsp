@@ -15,7 +15,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script>
 function printClock() {
-	var clock = document.getElementById("clock1"); // 출력할 장소 선택
+	var clock = document.getElementById("systemClock"); // 출력할 장소 선택
 	var currentDate = new Date(); // 현재시간
 	var dd = currentDate.getDate();
 	var mm = (currentDate.getMonth() + 1);
@@ -60,15 +60,15 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
 	
 		this.data_init = function(data) { //div태크안에다가 만들어주는 메소드
 			
-			$(tag).append('<ul class="big">')
+			$(tag).append('<ul class="topVoidLevel">')
 				for (var i=0; i<data.child.length; i++) {
 					if (data.child[i] != null) {			
-						$('.big').append('<li class ="menu" id='+i+'>');
-						$('#'+i).append('<a><i class="fa fa-minus"></i>'+ data.child[i].name+'</a>');
-						$('#'+i).append('<ul class="hide">');
+						$('.topVoidLevel').append('<li class ="menu" class=firstMenu id=firstLevel'+i+'>');
+						$('#firstLevel'+i).append('<a><i class="fa fa-minus"></i>'+ data.child[i].name+'</a>');
+						$('#firstLevel'+i).append('<ul class="secondLevel">');
 						for ( var j=0; j<data.child[i].child.length; j++) {
 							if (data.child[i].child[j] != null) {
-								$('#'+i+'>.hide').append('<li><a href = '+data.child[i].child[j].href+ ' target ='+data.child[i].child[j].target+'>' +data.child[i].child[j].name+'</a><li/>');
+								$('#firstLevel'+i+'>.secondLevel').append('<li><a href = '+data.child[i].child[j].href+'  id="secondMenu" target ='+data.child[i].child[j].target+'>' +data.child[i].child[j].name+'</a><li/>');
 							}
 						}
 					}
@@ -77,7 +77,7 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
 	}
 	window.onload = function() {	
 		   printClock(); //헤더의 현재시간 생성
-		   var tree = new CreateTree(document.getElementById('div'));	
+		   var tree = new CreateTree(document.getElementById('sideMenu'));	
 			//메뉴객체 생성
 			//name : a 태그에 나타나는 내용
 			//href : a 태그에 사용될 URL
@@ -377,7 +377,7 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
 		tree.data_init(data);
 		//트리메뉴를 화면에 보여준다
 
-		$('.menu>a').click(function() {
+		$('.topVoidLevel>.menu>a').click(function() {
 
 			var submenu = $(this).next("ul");
 			// submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
@@ -399,22 +399,24 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
 <style type="text/css"> 
 
 /* 배너단 */
-.logo {
-	width: auto;
-	height: 80px;
-}
-.box {
+.logobox {
 	background-color: #212121;
 	padding: 10px;  
 	padding-bottom: 0px;
 }
-.container-1 {
+.logobox .logo {
+	width: auto;
+	height: 80px;
+}
+
+.logobox .sideSearchBar {
 	width: 170px;
 	vertical-align: middle;
 	white-space: nowrap;
 	position: relative;
 }
-.container-1 input#search {
+
+.logobox .sideSearchBar input#search {
 	width: 170px;
 	height: 30px;
 	background: #ffffff;
@@ -424,37 +426,33 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
 	padding-left: 35px;
 	border-radius: 5px;
 }
-.container-1 .icon {
+
+.sideSearchBar .icon {
 	position: absolute;
 	margin-left: -160px;
 	margin-top: 3px;
 	z-index: 1;
-}
-.icon {
 	color: #4f5b66;
 }
-.no-underline {
-	text-decoration: none;
-}
+
 
 
 /* 트리메뉴 */
-#div {
+
+#sideMenu {
 	background-color: #E0E0E0;
 	color: white;
 	width: 190px;  
 	font-size: 15px; 
 	
 }
-ul{
+#sideMenu .topVoidLevel{
 background-color:#2C3E50;
 padding-left: 0px;
 list-style: none;
 }
-ul li{    
 
-}
-ul i {
+#sideMenu .topVoidLevel i {
 margin-left: 10px;
 margin-right: 10px;
 margin-top: 5px;
@@ -462,36 +460,37 @@ margin-bottom: 5px;
 }
 
 
-ul li ul{
+#sideMenu .topVoidLevel .menu ul{
 padding-left:30px;
 background-color:#E0E0E0;
 	
 }
 
-ul li ul li{ 
+#sideMenu .topVoidLevel .menu ul li{
 padiing-top:2px; 
 padding-bottom: 2px;
+list-style: none;
 }
 
-A:link {
+#sideMenu .topVoidLevel A:link {
 	
 	color:#212121; 	
 	text-decoration: none;
 }
 
-A:visited {
+#sideMenu .topVoidLevel A:visited {
 
 	color:#212121; 	
 	text-decoration: none;
 }
 
-A:active {
+#sideMenu .topVoidLevel A:active {
 
 	bacolor: #FF6000;
 	text-decoration: none;
 }
 
-A:hover {
+#sideMenu .topVoidLevel A:hover {
 
 	color: #FF6000;
 	text-decoration: none;
@@ -500,19 +499,18 @@ A:hover {
 </style>
 <meta charset="UTF-8">
 <title>사이드 메뉴</title>
-
 </head>
 <body>
-	<div class="box">
+	<div class="logobox">
 		<a href="${contextPath}/main.do"> <img class="logo"
 			src="${contextPath}/resources/image/EIUM_banner.png" />
 		</a>
-		<div class="container-1">
+		<div class="sideSearchBar">
 			<input type="search" id="search" placeholder="찾을 메뉴 입력..." /> <span
 				class="icon"><i class="fa fa-search"></i></span>
 		</div>
 	</div>
 	
-	<div id="div"></div>
+	<div id="sideMenu"></div>
 </body>
 </html>

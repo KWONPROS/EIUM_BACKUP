@@ -21,15 +21,12 @@
 	color: #212121;
 	font-size: 12px;
 }
-
-.currentInfo span {
+.currentInfo #headerinfo  {
 	margin-right: 15px;
 }
-
-.currentInfo span b {
+.currentInfo #headerinfo b {
 	font-weight: normal;
 }
-
 .homelogin {
 	padding: 0px 0px 95px 10px;
 	color: #212121;
@@ -37,12 +34,32 @@
 	position : absolute;
 	top: 5px;
 	right: 15px;
+	
 }
-
-.homelogin span {
+.homelogin #headerinfo {
 	margin-right: 15px;
 	margin-left: 15px;
 }
+.homelogin A:link {
+	color:#212121; 	
+	text-decoration: none;
+}
+
+.homelogin A:visited {
+	color:#212121; 	
+	text-decoration: none;
+}
+
+.homelogin A:active {
+	bacolor: #FF6000;
+	text-decoration: none;
+}
+
+.homelogin A:hover {
+	color: #FF6000;
+	text-decoration: none;
+}
+
 </style>
 <meta charset="UTF-8">
 <title>헤더</title>
@@ -50,15 +67,14 @@
 <body>
 
 	<div class="currentInfo">
-		<span class="user">사용자 : OOO</span> <span class="company">회사 :
-			(주)00전자</span> <span class="logindate">접속일시 : <b id="clock1"></b>
+		<span id="headerinfo" class="user">사용자 : OOO</span> <span id="headerinfo" class="company">회사 :
+			(주)00전자</span> <span id="headerinfo" class="logindate">접속일시 : <b id="systemClock"></b>
 		</span>
 	</div>
 
 	<div class="homelogin">
-		<a href="#"><span class="icon"><i class="fa fa-home">
-					Home</i></span></a> <a href="#"><span class="icon"><i
-				class="fa fa-share-square-o"> Logout</i></span></a>
+		<a href="#"><span id="headerinfo" class="icon"><i class="fa fa-home">
+					Home</i></span></a> <a href="#"><span id="headerinfo" class="icon"><i class="fa fa-share-square-o"> Logout</i></span></a>
 	</div>
 
 </body>
