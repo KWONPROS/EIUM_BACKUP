@@ -34,6 +34,11 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/member/viewDetail.jsp" />
 	</definition>
+	
+	<definition name="departure" extends="baseLayout">
+	<put-attribute name="title" value="부서" />
+	<put-attribute name="body" value="/WEB-INF/views/departure.jsp"/>
+	</definition>
 
 
 

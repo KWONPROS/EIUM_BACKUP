@@ -147,7 +147,7 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
 		};
 		var childA3 = {
 			name : "부서등록",
-			href : "http://w3.schools.com",
+			href : "http://localhost:8090/EIUM/departure.do",
 			target : "_blank",
 			child : []
 		};

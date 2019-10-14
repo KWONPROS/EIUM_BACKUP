@@ -41,7 +41,7 @@ public class HomeController {
 */
 
 
-//´Ù±¹¾î ±â´É ÄÚµå
+//ï¿½Ù±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Úµï¿½
 @Controller
 public class HomeController {
 	
@@ -56,5 +56,10 @@ public class HomeController {
 	public String Loginform(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		return "Login";
 	}
+	@RequestMapping(value = "/departure.do", method =  RequestMethod.GET)
+	public String departure(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		return "departure";
+	}
+	
 }
 
