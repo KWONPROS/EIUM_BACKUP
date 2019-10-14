@@ -12,6 +12,46 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script>
+function printClock() {
+	var clock = document.getElementById("systemClock"); // 출력할 장소 선택
+	var currentDate = new Date(); // 현재시간
+	var dd = currentDate.getDate();
+	var mm = (currentDate.getMonth() + 1);
+
+	if (dd < 10) {
+		dd = '0' + dd;
+	}
+	if (mm < 10) {
+		mm = '0' + mm;
+	}
+	var calendar = currentDate.getFullYear() + "-" + mm + "-" + dd; // 현재 날짜
+	var amPm = 'AM'; // 초기값 AM
+	var currentHours = addZeros(currentDate.getHours(), 2);
+	var currentMinute = addZeros(currentDate.getMinutes(), 2);
+	var currentSeconds = addZeros(currentDate.getSeconds(), 2);
+	if (currentHours >= 12) { // 시간이 12보다 클 때 PM으로 세팅, 12를 빼줌
+		amPm = 'PM';
+		currentHours = addZeros(currentHours - 12, 2);
+	}
+	clock.innerHTML = calendar + " " + currentHours + ":" + currentMinute
+			+ ":" + currentSeconds + " " + amPm; //날짜를 출력해 줌
+
+	setTimeout("printClock()", 1000); // 1초마다 printClock() 함수 호출
+
+}
+
+function addZeros(num, digit) { // 자릿수 맞춰주기
+	var zero = '';
+	num = num.toString();
+	if (num.length < digit) {
+		for (i = 0; i < digit - num.length; i++) {
+			zero += '0';
+		}
+	}
+	return zero + num;
+}
+</script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -65,7 +105,8 @@
 <title>헤더</title>
 </head>
 <body>
-
+	<script>$(document).ready(function(){printClock();}); </script>
+	
 	<div class="currentInfo">
 		<span id="headerinfo" class="user">사용자 : OOO</span> <span id="headerinfo" class="company">회사 :
 			(주)00전자</span> <span id="headerinfo" class="logindate">접속일시 : <b id="systemClock"></b>
