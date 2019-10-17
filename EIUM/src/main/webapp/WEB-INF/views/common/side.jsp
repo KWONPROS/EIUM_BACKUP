@@ -24,6 +24,7 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
 <style type="text/css">
 
 /* 배너단 */
@@ -37,14 +38,12 @@
 	width: auto;
 	height: 80px;
 }
-
 .logobox .sideSearchBar {
 	width: 170px;
 	vertical-align: middle;
 	white-space: nowrap;
 	position: relative;
 }
-
 .logobox .sideSearchBar input#search {
 	width: 170px;
 	height: 30px;
@@ -55,7 +54,6 @@
 	padding-left: 35px;
 	border-radius: 5px;
 }
-
 .sideSearchBar .icon {
 	position: absolute;
 	margin-left: -160px;
@@ -65,12 +63,15 @@
 }
 
 /* 트리메뉴 */
+
 #sidexx {
+
 	background-color: #E0E0E0;
 	width: 190px;
 	height: 100%;
 	background-color: #212121;
 }
+
 </style>
 <meta charset="UTF-8">
 <title>사이드 메뉴</title>
@@ -227,6 +228,7 @@ $(document).ready(function(){
 	}
 
 }
+
 </script>
 </head>
 <body>
