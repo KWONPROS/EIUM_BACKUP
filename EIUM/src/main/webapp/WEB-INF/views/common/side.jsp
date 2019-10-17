@@ -173,7 +173,7 @@ $(document).ready(function(){
 				}],
 				contents:[{
 					type:"iframe",	
-					contents:"./main.do"
+					contents:""
 				}],
 				customZone:{
 					width:"0px"

@@ -44,6 +44,16 @@
 			value="org.springframework.web.servlet.view.tiles2.TilesView" />
 	</beans:bean>
 
+
+	<mvc:interceptors>
+		<beans:bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<beans:property name="paramName" value="lang" />
+		</beans:bean>
+	</mvc:interceptors>
+
+
+
+
 	<!-- 인터셉터 실습 설정 -->
 	<!-- <mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/*/*.do"/> 
 		<beans:bean class="com.myspring.pro27.member.interceptor.ViewNameInterceptor" 

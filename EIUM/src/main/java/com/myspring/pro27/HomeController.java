@@ -1,7 +1,5 @@
 package com.myspring.pro27;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,11 +7,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 /**
  * Handles requests for the application home page.
@@ -41,21 +44,38 @@ public class HomeController {
 */
 
 
-//ï¿½Ù±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Úµï¿½
 @Controller
 public class HomeController {
-	
+	@Autowired 
+	SessionLocaleResolver localeResolver; 
+	@Autowired 
+	MessageSource messageSource;
+
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
+		
 		return "main";
 	}
 	
+
 	@RequestMapping(value = "/Login.do", method =  RequestMethod.GET)
-	public String Loginform(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String Loginform( Locale locale,HttpServletRequest request, HttpServletResponse response) throws Exception {
+	
+		// RequestMapingHandler·Î ºÎÅÍ ¹ÞÀº Locale °´Ã¼¸¦ Ãâ·ÂÇØ º¾´Ï´Ù. 
+		logger.info("Welcome i18n! The client locale is {}.", locale); 
+		// localeResolver ·ÎºÎÅÍ Locale À» Ãâ·ÂÇØ º¾´Ï´Ù. 
+		logger.info("Session locale is {}.", localeResolver.resolveLocale(request));
+		logger.info("site.count : {}", messageSource.getMessage("login", new String[] {"Ã¹¹øÂ°"}, "default text", locale)); 
+		logger.info("not.exist : {}", messageSource.getMessage("findId", null, "default text", locale)); 
+		//logger.info("not.exist ±âº»°ª ¾øÀ½ : {}", messageSource.getMessage("not.exist", null, locale));
+
+
+		
 		return "Login";
 	}
+	
 	@RequestMapping(value = "/departure.do", method =  RequestMethod.GET)
 	public String departure(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		return "departure";
