@@ -96,8 +96,8 @@
 	width: auto;
 	height: auto;
 	z-index: -1;
-	overflow: hidden;
 }
+body {overflow:hidden}
 </style>
 
 <meta charset="UTF-8">

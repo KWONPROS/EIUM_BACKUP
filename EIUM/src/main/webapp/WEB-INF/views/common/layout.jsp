@@ -12,7 +12,7 @@
 #container {
 	width: 100%;
 	text-align: left;
-	border: 0px solid #bcbcbc;
+	
 }
 #header {
 	width: calc(100% - 190px);
@@ -20,29 +20,21 @@
 	position : absolute;
 	top: 5px;
 	left: 190px;
-	border: 0px solid #bcbcbc;
+
 }
 #sidebar-left {
 	width: 190px;
 	height: 100%;
 	background-color: #212121;
-	border: 0px solid #bcbcbc;
-}
-#content {
-	width: calc(100% - 190px);
-	height: 100%;
-	position: absolute;
-	top: 30px;
-	left: 190px;    
-	border: 0px solid #bcbcbc;
+
 }
 #footer {
 	width: 100%;      
 	position: relative;        
 	padding:0.5px;      
 	border: 0px solid #bcbcbc;
-	background-color: #212121;
 	color: white;
+	background-color: #212121;
 }
 </style>
     <title><tiles:insertAttribute name="title" /></title>
@@ -55,7 +47,8 @@
       <div id="sidebar-left">
           <tiles:insertAttribute name="side"/> 
       </div>
-      <div id="content">
+    
+      <div id="contents">
           <tiles:insertAttribute name="body"/>
       </div>
       <div id="footer">

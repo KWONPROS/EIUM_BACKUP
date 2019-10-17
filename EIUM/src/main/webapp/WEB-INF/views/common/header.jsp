@@ -1,17 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"
-    isELIgnored="false" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+	pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
   request.setCharacterEncoding("UTF-8");
-%> 
-<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
 <html>
 <head>
+<title>header</title>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="${contextPath}/resources/sheet/ibleaders.js"></script>
+<script src="${contextPath}/resources/sheet/ibsheetinfo.js"></script>
+<script src="${contextPath}/resources/sheet/ibsheet.js"></script>
+<link href="${contextPath}/resources/tab/css/ibtab-style.css"
+	rel="stylesheet">
+<script src="${contextPath}/resources/tab/js/ibtab.js"
+	type="text/javascript"></script>
+<script src="${contextPath}/resources/tab/js/ibtabinfo.js"
+	type="text/javascript"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <script>
 function printClock() {
 	var clock = document.getElementById("systemClock"); // 출력할 장소 선택
@@ -51,42 +64,46 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
 	}
 	return zero + num;
 }
+$(document).ready(function(){printClock();});
 </script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style type="text/css">
 .currentInfo {
 	padding: 0px 0px 95px 10px;
 	color: #212121;
 	font-size: 12px;
+	position: absolute;
+	top: 2px;
 }
-.currentInfo #headerinfo  {
+
+.currentInfo #headerinfo {
 	margin-right: 15px;
 }
+
 .currentInfo #headerinfo b {
 	font-weight: normal;
 }
+
 .homelogin {
 	padding: 0px 0px 95px 10px;
 	color: #212121;
 	font-size: 15px;
-	position : absolute;
+	position: absolute;
 	top: 5px;
 	right: 15px;
-	
 }
+
 .homelogin #headerinfo {
 	margin-right: 15px;
 	margin-left: 15px;
 }
+
 .homelogin A:link {
-	color:#212121; 	
+	color: #212121;
 	text-decoration: none;
 }
 
 .homelogin A:visited {
-	color:#212121; 	
+	color: #212121;
 	text-decoration: none;
 }
 
@@ -100,23 +117,34 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
 	text-decoration: none;
 }
 
+#cc {
+	width: 100%;
+	position: absolute;
+	top: 30px;
+	height: 1050px;
+}
 </style>
 <meta charset="UTF-8">
 <title>헤더</title>
 </head>
 <body>
-	<script>$(document).ready(function(){printClock();}); </script>
-	
+
 	<div class="currentInfo">
-		<span id="headerinfo" class="user">사용자 : OOO</span> <span id="headerinfo" class="company">회사 :
-			(주)00전자</span> <span id="headerinfo" class="logindate">접속일시 : <b id="systemClock"></b>
+		<span id="headerinfo" class="user">사용자 : OOO</span> <span
+			id="headerinfo" class="company">회사 : (주)00전자</span> <span
+			id="headerinfo" class="logindate">접속일시 : <b id="systemClock"></b>
 		</span>
 	</div>
 
 	<div class="homelogin">
-		<a href="#"><span id="headerinfo" class="icon"><i class="fa fa-home">
-					Home</i></span></a> <a href="#"><span id="headerinfo" class="icon"><i class="fa fa-share-square-o"> Logout</i></span></a>
+		<a href="#"><span id="headerinfo" class="icon"><i
+				class="fa fa-home"> Home</i></span></a> <a href="#"><span id="headerinfo"
+			class="icon"><i class="fa fa-share-square-o"> Logout</i></span></a>
 	</div>
 
+	<div id="cc">
+		<div id="tabBar" class="ib-tab-tabs"></div>
+		<div id="tabContents" class="ib-tab-contents"></div>
+	</div>
 </body>
 </html>

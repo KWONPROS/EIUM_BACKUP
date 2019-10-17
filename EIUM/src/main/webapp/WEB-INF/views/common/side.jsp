@@ -2,33 +2,37 @@
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <%
   request.setCharacterEncoding("UTF-8");
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-
 <!DOCTYPE html>
-
 <html>
 <head>
+
+<title>side</title>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-
-
-
-
-
+<script src="${contextPath}/resources/sheet/ibleaders.js"></script>
+<script src="${contextPath}/resources/sheet/ibsheetinfo.js"></script>
+<script src="${contextPath}/resources/sheet/ibsheet.js"></script>
+<link href="${contextPath}/resources/tab/css/ibtab-style.css"
+	rel="stylesheet">
+<script src="${contextPath}/resources/tab/js/ibtab.js"
+	type="text/javascript"></script>
+<script src="${contextPath}/resources/tab/js/ibtabinfo.js"
+	type="text/javascript"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<style type="text/css"> 
+<style type="text/css">
 
 /* 배너단 */
 .logobox {
 	background-color: #212121;
-	padding: 10px;  
-	padding-bottom: 0px;
+	padding: 10px;
+	padding-bottom: 15px;
 }
+
 .logobox .logo {
 	width: auto;
 	height: 80px;
@@ -60,417 +64,186 @@
 	color: #4f5b66;
 }
 
-
-
 /* 트리메뉴 */
-
-#sideMenu {
+#sidexx {
 	background-color: #E0E0E0;
-	color: white;
-	width: 190px;  
-	font-size: 15px; 
-	
+	width: 190px;
+	height: 100%;
+	background-color: #212121;
 }
-#sideMenu .topVoidLevel{
-background-color:#2C3E50;
-padding-left: 0px;
-list-style: none;
-}
-
-#sideMenu .topVoidLevel i {
-margin-left: 10px;
-margin-right: 10px;
-margin-top: 5px;
-margin-bottom: 5px;
-}
-
-
-#sideMenu .topVoidLevel .menu ul{
-padding-left:30px;
-background-color:#E0E0E0;
-	
-}
-
-#sideMenu .topVoidLevel .menu ul li{
-padiing-top:2px; 
-padding-bottom: 2px;
-list-style: none;
-}
-
-#sideMenu .topVoidLevel A:link {
-	
-	color:#212121; 	
-	text-decoration: none;
-}
-
-#sideMenu .topVoidLevel A:visited {
-
-	color:#212121; 	
-	text-decoration: none;
-}
-
-#sideMenu .topVoidLevel A:active {
-
-	bacolor: #FF6000;
-	text-decoration: none;
-}
-
-#sideMenu .topVoidLevel A:hover {
-
-	color: #FF6000;
-	text-decoration: none;
-}
- 
 </style>
 <meta charset="UTF-8">
 <title>사이드 메뉴</title>
-</head>
-<body>
+
 <script> //메뉴트리
-	function CreateTree(tag) { //tag == div
+
+//데이터는 서버로 옮겨야 함
+var data = {Data:[
+	{menuCode:"m00",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"등록정보관리"},
+	{menuCode:"m01",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"Login.do",TITLE:"회사등록"},
+	{menuCode:"m02",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"member/loginForm.do", TITLE:"사업장등록"},
+	{menuCode:"m03",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"01/multiline.html", TITLE:"부서등록"},
+	{menuCode:"m04",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"01/multiline2.html", TITLE:"사원등록"},
+	{menuCode:"m05",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"01/subSheet.html", TITLE:"사용자권한설정"},
+	{menuCode:"m06",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"기초환경설정"},
+	{menuCode:"m07",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"02/header.html", TITLE:"호봉테이블등록 "},
+	{menuCode:"m08",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"02/filter.html", TITLE:"지급일등록"},
+	{menuCode:"m09",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"인사관리"},
+	{menuCode:"m10",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/group.html", TITLE:"인사정보등록"},
+	{menuCode:"m12",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"인사기록카드"},
+	{menuCode:"m13",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"교육관리"},
+	{menuCode:"m14",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"교육평가"},
+	{menuCode:"m15",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"인사발령등록"},
+	{menuCode:"m16",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"인사발령"},
+	{menuCode:"m17",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"인사발령공고"},
+	{menuCode:"m18",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"인사발령리포트"},
+	{menuCode:"m19",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"사원정보현황"},
+	{menuCode:"m20",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"인사고과/상벌현황"},
+	{menuCode:"m21",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"사원입퇴사현황"},
+	{menuCode:"m22",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"책정임금현황"},
+	{menuCode:"m23",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"근속년수현황"},
+	{menuCode:"m24",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"교육현황"},
+	{menuCode:"m25",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"급여관리"},
+	{menuCode:"m26",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"급여입력및계산"},
+	{menuCode:"m27",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"급여대장"},
+	{menuCode:"m28",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"급여명세"},
+	{menuCode:"m29",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"급상여이체현황"},
+	{menuCode:"m30",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"월별지급현황"},
+	{menuCode:"m31",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"사원임금통계"},
+	{menuCode:"m32",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"근태관리"},
+	{menuCode:"m33",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"근태입력"},
+	{menuCode:"m34",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"휴가관리"},
+	{menuCode:"m35",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"휴가내역"},
+	{menuCode:"m36",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"출장관리"},
+	{menuCode:"m37",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"출장조회"},
+	{menuCode:"m38",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"출장조회(사원별)"},
+	]};
+
+
+$(document).ready(function(){	
 	
-		this.data_init = function(data) { //div태크안에다가 만들어주는 메소드
-			
-			$(tag).append('<ul class="topVoidLevel">')
-				for (var i=0; i<data.child.length; i++) {
-					if (data.child[i] != null) {			
-						$('.topVoidLevel').append('<li class ="menu" class=firstMenu id=firstLevel'+i+'>');
-						$('#firstLevel'+i).append('<a><i class="fa fa-minus"></i>'+ data.child[i].name+'</a>');
-						$('#firstLevel'+i).append('<ul class="secondLevel">');
-						for ( var j=0; j<data.child[i].child.length; j++) {
-							if (data.child[i].child[j] != null) {
-								$('#firstLevel'+i+'>.secondLevel').append('<li><a href = '+data.child[i].child[j].href+'  id="secondMenu" target ='+data.child[i].child[j].target+'>' +data.child[i].child[j].name+'</a><li/>');
-							}
+	var sheetHeight = $(window).height();	//높이 자동계산
+	createIBSheet2(document.getElementById("sideMenu"),"mySheet","100%",sheetHeight+"px");
+	mySheet.CustomScroll =3;	//스크롤 모양
+	mySheet.SetTheme("LGY2","LightGray2");
+	mySheet.NoTreeLines = 1; //트리모양
+	var ibdata = {};
+	ibdata.Cfg = {SizeMode:"sizeAdvancedAuto",DataRowHeight:30, MouseHoverMode:2};
+	ibdata.HeaderMode = {};
+	ibdata.Cols = [
+		{Header:"타이틀",Type:"Text",SaveName:"TITLE", Width:100,TreeCol:1,Edit:0,ImgWidth:9,ImgHeight:9}, //효과적용X
+		{Header:"URL",Type:"Text",SaveName:"URL",Hidden:1},	//컬럼숨김
+		{Header:"menuCode",Type:"Text",SaveName:"menuCode",Hidden:1}	//컬럼숨김
+	];  
+	IBS_InitSheet(mySheet,ibdata); //초기화
+	
+	mySheet.SetExtendLastCol(1);	//마지막 컬럼 늘임여부
+	mySheet.SetRowHidden(0,1); //(로우,히든여부)
+	mySheet.SetWaitImageVisible(0); //로딩이미지
+	mySheet.SetFocusAfterProcess(0); //조회 후 포커스를두지않음
+	
+	mySheet.LoadSearchData(data); //시작
+	
+	//tab 객체 생성
+		createIBTab(document.getElementById("tabBar"),document.getElementById("tabContents"),"tabMenu",
+		{
+			widthTabBar: "100%",
+			heightTabBar:"45px",
+			heightContents:"calc(100% - 40px)",
+			 themes: {
+			  tabs: "material_black",
+			  contents: "",
+			  contextMenu: "material_black"
+			}
+    });
+    
+    	tabMenu.setOptions({
+    		
+    		tabs : [{
+					type : "tab", //탭 유형 설정
+					title : "Home",  //탭 제목 설정
+					hold : true,
+					style : {
+						btnClose:false,
+						icon: {
+							type: "none"  // 탭 아이콘 유형 설정
 						}
 					}
+				}],
+				contents:[{
+					type:"iframe",	
+					contents:"./main.do"
+				}],
+				customZone:{
+					width:"0px"
 				}
-			};
+			});
+
+
+	
+	
+});
+
+ function mySheet_OnClick(r,c,v){
+	 if(mySheet.IsHaveChild(r)){	//트리 펼침여부
+		mySheet.SetRowExpanded(r  ,  !(mySheet.GetRowExpanded(r)));
+	} 
+	
+	//이미 열린 텝인지 확인
+	var obj = tabMenu.findTabId(mySheet.GetCellValue(r,"menuCode"));
+	//없으면 undefined가 리턴됨.
+
+	
+	if(obj){
+		tabMenu.goToTab(obj.getIndex());
+		return;
+	}
+	//전체 열린 텝의 개수가 10개 이상이면 경고 발생
+	if(tabMenu.tabs.getCountTab()>10){
+//		if(confirm("열린 텝이 10개가 넘었습니다. 텝을 하나 닫을까요?")){
+			tabMenu.removeTab(1);		
+//		}
+	}
+	
+	
+	if(mySheet.GetCellValue(r,"URL")!=""){
+			//텝 추가
+			tabMenu.addTab({
+			  tabs: {
+			    title: v,
+			    focus: true,
+			    id:mySheet.GetCellValue(r,"menuCode"),
+			    style : {
+						btnClose:true
+					}
+
+			  },
+			  contents: {
+			    type:"iframe",	
+				contents:mySheet.GetCellValue(r,"URL")
+			  }
+			});
+
 	}
 
-	$(document).ready(function(){
-	
-	var tree = new CreateTree(document.getElementById('sideMenu'));
-	//메뉴객체 생성
-	//name : a 태그에 나타나는 내용
-	//href : a 태그에 사용될 URL
-	//icon : 기본 아이콘 대신할 아이콘 URL
-	//child : 자식배열
-
-	//root객체, root객체는 실제로 보이지 않는다
-	var data = {
-		name : "name",
-		href : "A링크",
-		target : "target",
-		child : []
-	};
-	//자식개체를 하나 생성
-	var childA = {
-		name : "등록정보관리",
-		href : "",
-		target : "",
-		child : []
-	};
-	var childB = {
-		name : "기초환경설정",
-		href : "",
-
-		target : "",
-		child : []
-	};
-	var childC = {
-		name : "인사관리",
-		href : "",
-		target : "",
-		child : []
-	};
-	var childD = {
-		name : "급여관리",
-		href : "",
-		target : "",
-		child : []
-	};
-	var childE = {
-		name : "근태관리",
-		href : "",
-		target : "",
-		child : []
-	};
-	//자식1를 맨위개체에 붙이기
-	data.child.push(childA);
-	data.child.push(childB);
-	data.child.push(childC);
-	data.child.push(childD);
-	data.child.push(childE);
-
-	//자식1의 하위개체를 생성
-	var childA1 = {
-		name : "회사등록",
-		href : "http://w3.schools.com",
-		target : "_blank",
-
-		child : []
-	};
-	var childA2 = {
-		name : "사업장등록",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	var childA3 = {
-		name : "부서등록",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	var childA4 = {
-		name : "사원등록",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	var childA5 = {
-		name : "사용자권한설정",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	childA.child.push(childA1);
-	childA.child.push(childA2);
-	childA.child.push(childA3);
-	childA.child.push(childA4);
-	childA.child.push(childA5);
-
-	var childB1 = {
-		name : "호봉테이블등록",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	var childB2 = {
-		name : "지급일등록",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-
-	childB.child.push(childB1);
-	childB.child.push(childB2);
-
-	var childC1 = {
-		name : "인사정보등록",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	var childC2 = {
-		name : "인사기록카드",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	var childC3 = {
-		name : "교육관리",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	var childC4 = {
-		name : "교육평가",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	var childC5 = {
-		name : "인사발령등록",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	var childC6 = {
-		name : "인사발령",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	var childC7 = {
-		name : "인사발령공고",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	var childC8 = {
-		name : "인사발령리포트",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	var childC9 = {
-		name : "사원정보현황",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	var childC10 = {
-		name : "인사고과/상별현황",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	var childC11 = {
-		name : "사원입퇴사현황",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	var childC12 = {
-		name : "책정임금현황",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	var childC13 = {
-		name : "근속년수현황",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	var childC14 = {
-		name : "교육현황",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	childC.child.push(childC1);
-	childC.child.push(childC2);
-	childC.child.push(childC3);
-	childC.child.push(childC4);
-	childC.child.push(childC5);
-	childC.child.push(childC6);
-	childC.child.push(childC7);
-	childC.child.push(childC8);
-	childC.child.push(childC9);
-	childC.child.push(childC10);
-	childC.child.push(childC11);
-	childC.child.push(childC12);
-	childC.child.push(childC13);
-	childC.child.push(childC14);
-
-	var childD1 = {
-		name : "급여입력및계산",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	var childD2 = {
-		name : "급여대장",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	var childD3 = {
-		name : "급여명세",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	var childD4 = {
-		name : "급상여이체현황",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	var childD5 = {
-		name : "월별지급현황",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	var childD6 = {
-		name : "사원임금통계",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	childD.child.push(childD1);
-	childD.child.push(childD2);
-	childD.child.push(childD3);
-	childD.child.push(childD4);
-	childD.child.push(childD5);
-	childD.child.push(childD6);
-
-	var childE1 = {
-		name : "근태입력",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	var childE2 = {
-		name : "휴가관리",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	var childE3 = {
-		name : "휴가내역",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	var childE4 = {
-		name : "출장관리",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	var childE5 = {
-		name : "출장조회",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-	var childE6 = {
-		name : "출장조회(사원별)",
-		href : "http://w3.schools.com",
-		target : "_blank",
-		child : []
-	};
-
-	childE.child.push(childE1);
-	childE.child.push(childE2);
-	childE.child.push(childE3);
-	childE.child.push(childE4);
-	childE.child.push(childE5);
-	childE.child.push(childE6);
-
-	//트리에 메뉴객체를 연결
-	tree.data_init(data);
-	//트리메뉴를 화면에 보여준다
-
-	$('.topVoidLevel>.menu>a').click(function() {
-
-		var submenu = $(this).next("ul");
-		// submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
-		if (submenu.is(":visible")) {
-			$(this).children("i").attr("class", 'fa fa-plus');
-			submenu.slideUp();
-		} else {
-			$(this).children("i").attr("class", 'fa fa-minus');
-			submenu.slideDown();
-		}
-	});
-	
-	});
+}
 </script>
-	<div class="logobox">
-		<a href="${contextPath}/main.do"> <img class="logo"
-			src="${contextPath}/resources/image/EIUM_banner.png" />
-		</a>
-		<div class="sideSearchBar">
-			<input type="search" id="search" placeholder="찾을 메뉴 입력..." /> <span
-				class="icon"><i class="fa fa-search"></i></span>
+</head>
+<body>
+
+	<div id="sidexx">
+		<div class="logobox">
+			<a href="${contextPath}/main.do"> <img class="logo"
+				src="${contextPath}/resources/image/EIUM_banner.png" /></a>
+				
+			<div class="sideSearchBar">
+				<input type="search" id="search" placeholder="찾을 메뉴 입력..." /> <span
+					class="icon"><i class="fa fa-search"></i></span>
+			</div>
+			
 		</div>
+		<div id="sideMenu"></div>
 	</div>
-	
-	<div id="sideMenu"></div>
+
 </body>
 </html>
