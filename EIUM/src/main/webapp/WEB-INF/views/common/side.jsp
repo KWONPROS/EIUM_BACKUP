@@ -124,10 +124,10 @@ var data = {Data:[
 $(document).ready(function(){	
 	
 	var sheetHeight = $(window).height();	//높이 자동계산
-	createIBSheet2(document.getElementById("sideMenu"),"mySheet","100%",sheetHeight+"px");
-	mySheet.CustomScroll =3;	//스크롤 모양
-	mySheet.SetTheme("LGY2","LightGray2");
-	mySheet.NoTreeLines = 1; //트리모양
+	createIBSheet2(document.getElementById("sideMenu"),"leftMenu","100%",sheetHeight+"px");
+	leftMenu.CustomScroll =3;	//스크롤 모양
+	leftMenu.SetTheme("LGY2","LightGray2");
+	leftMenu.NoTreeLines = 1; //트리모양
 	var ibdata = {};
 	ibdata.Cfg = {SizeMode:"sizeAdvancedAuto",DataRowHeight:30, MouseHoverMode:2};
 	ibdata.HeaderMode = {};
@@ -136,14 +136,14 @@ $(document).ready(function(){
 		{Header:"URL",Type:"Text",SaveName:"URL",Hidden:1},	//컬럼숨김
 		{Header:"menuCode",Type:"Text",SaveName:"menuCode",Hidden:1}	//컬럼숨김
 	];  
-	IBS_InitSheet(mySheet,ibdata); //초기화
+	IBS_InitSheet(leftMenu,ibdata); //초기화
 	
-	mySheet.SetExtendLastCol(1);	//마지막 컬럼 늘임여부
-	mySheet.SetRowHidden(0,1); //(로우,히든여부)
-	mySheet.SetWaitImageVisible(0); //로딩이미지
-	mySheet.SetFocusAfterProcess(0); //조회 후 포커스를두지않음
+	leftMenu.SetExtendLastCol(1);	//마지막 컬럼 늘임여부
+	leftMenu.SetRowHidden(0,1); //(로우,히든여부)
+	leftMenu.SetWaitImageVisible(0); //로딩이미지
+	leftMenu.SetFocusAfterProcess(0); //조회 후 포커스를두지않음
 	
-	mySheet.LoadSearchData(data); //시작
+	leftMenu.LoadSearchData(data); //시작
 	
 	//tab 객체 생성
 		createIBTab(document.getElementById("tabBar"),document.getElementById("tabContents"),"tabMenu",
@@ -185,13 +185,13 @@ $(document).ready(function(){
 	
 });
 
- function mySheet_OnClick(r,c,v){
-	 if(mySheet.IsHaveChild(r)){	//트리 펼침여부
-		mySheet.SetRowExpanded(r  ,  !(mySheet.GetRowExpanded(r)));
+ function leftMenu_OnClick(r,c,v){
+	 if(leftMenu.IsHaveChild(r)){	//트리 펼침여부
+		leftMenu.SetRowExpanded(r  ,  !(leftMenu.GetRowExpanded(r)));
 	} 
 	
 	//이미 열린 텝인지 확인
-	var obj = tabMenu.findTabId(mySheet.GetCellValue(r,"menuCode"));
+	var obj = tabMenu.findTabId(leftMenu.GetCellValue(r,"menuCode"));
 	//없으면 undefined가 리턴됨.
 
 	
@@ -207,13 +207,13 @@ $(document).ready(function(){
 	}
 	
 	
-	if(mySheet.GetCellValue(r,"URL")!=""){
+	if(leftMenu.GetCellValue(r,"URL")!=""){
 			//텝 추가
 			tabMenu.addTab({
 			  tabs: {
 			    title: v,
 			    focus: true,
-			    id:mySheet.GetCellValue(r,"menuCode"),
+			    id:leftMenu.GetCellValue(r,"menuCode"),
 			    style : {
 						btnClose:true
 					}
@@ -221,7 +221,7 @@ $(document).ready(function(){
 			  },
 			  contents: {
 			    type:"iframe",	
-				contents:mySheet.GetCellValue(r,"URL")
+				contents:leftMenu.GetCellValue(r,"URL")
 			  }
 			});
 
