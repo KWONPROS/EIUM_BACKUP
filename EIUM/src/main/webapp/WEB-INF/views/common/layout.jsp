@@ -36,6 +36,9 @@
 	color: white;
 	background-color: #212121;
 }
+body {
+	overflow-x: hidden
+}
 </style>
     <title><tiles:insertAttribute name="title" /></title>
   </head>

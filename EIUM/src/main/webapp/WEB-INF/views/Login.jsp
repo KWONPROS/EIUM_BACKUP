@@ -11,6 +11,24 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<script type="text/javascript">
+function fn_findID(){
+    var url = "findID.do";
+    var name = "Find My ID";
+    var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+    window.open(url, name, option);
+}
+function fn_findPWD(){
+    var url = "findPWD.do";
+    var name = "Find My PWD";
+    var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+    window.open(url, name, option);
+}
+
+</script>
+
+
 <style type="text/css">
 .login-container {
 	position: absolute;
@@ -144,8 +162,8 @@ right: 15px;
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="ID" value="" /><br>
 						<input type="password" class="form-control" placeholder="Password" value="" /><br> 
-						<a href="#" class="Forget"><spring:message code="findId"  text="ID 찾기"/></a><br> 
-						<a href="#" class="Forget"><spring:message code="findPwd"  text="비밀번호 찾기" /></a>
+						<a onclick="fn_findID()" class="Forget"><spring:message code="findId"  text="ID 찾기"/></a><br> 
+						<a onclick="fn_findPWD()" class="Forget"><spring:message code="findPwd"  text="비밀번호 찾기" /></a>
 						<input type="submit" class="btnSubmit" value="다음" />  
 					</div>
 					

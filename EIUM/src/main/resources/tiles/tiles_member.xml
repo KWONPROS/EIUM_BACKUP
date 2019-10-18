@@ -63,6 +63,12 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/member/loginForm.jsp" />
 	</definition>
+	
+	<definition name="/util/findID" extends="baseLayout2">
+		<put-attribute name="title" value="아이디 찾기" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/util/findID.jsp" />
+	</definition>
      
      
 </tiles-definitions>
