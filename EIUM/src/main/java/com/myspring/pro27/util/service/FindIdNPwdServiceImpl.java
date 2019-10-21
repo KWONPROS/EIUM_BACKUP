@@ -42,7 +42,7 @@ public class FindIdNPwdServiceImpl implements FindIdNPwdService {
 		String host = "smtp.naver.com"; 
 		final String username = "won0935"; //네이버 아이디를 입력해주세요. @nave.com은 입력하지 마시구요. 
 		final String password = "Songjw0935!"; //네이버 이메일 비밀번호를 입력해주세요. 
-		int port=8090; //포트번호 
+		int port=465; //포트번호 
 		
 		// 메일 내용 
 		String recipient = findIdNPwdVO.getEmail(); //받는 사람의 메일주소를 입력해주세요. 

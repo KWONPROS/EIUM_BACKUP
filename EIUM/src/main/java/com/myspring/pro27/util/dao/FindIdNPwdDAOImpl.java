@@ -12,11 +12,11 @@ public class FindIdNPwdDAOImpl implements FindIdNPwdDAO {
 	private SqlSession sqlSession;
 
 	public FindIdNPwdVO findId(FindIdNPwdVO findIdNPwdVO) {
-		findIdNPwdVO = sqlSession.selectOne("mapper.util.findId", findIdNPwdVO);
+		findIdNPwdVO = sqlSession.selectOne("mapper.util.findId");
 		return findIdNPwdVO;
 	}
 	public FindIdNPwdVO findPwd(FindIdNPwdVO findIdNPwdVO) {
-		findIdNPwdVO = sqlSession.selectOne("mapper.util.findId", findIdNPwdVO);
+		findIdNPwdVO = sqlSession.selectOne("mapper.util.findId");
 		return findIdNPwdVO;
 	}
 	

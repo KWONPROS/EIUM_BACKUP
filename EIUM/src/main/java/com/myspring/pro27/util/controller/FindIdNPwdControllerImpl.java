@@ -11,42 +11,36 @@ import org.springframework.web.servlet.ModelAndView;
 import com.myspring.pro27.util.service.FindIdNPwdService;
 import com.myspring.pro27.util.vo.FindIdNPwdVO;
 
-
-
-
 @Controller
 public class FindIdNPwdControllerImpl implements FindIdNPwdController {
 	@Autowired
 	FindIdNPwdService findIdNPwdservice;
 	@Autowired
-	FindIdNPwdVO FindIdNPwdvO ;
-	
-	@Override
-	@RequestMapping(value="/util/FindIdNPwd.do" ,method = RequestMethod.POST)
-	public ModelAndView findInfo(@ModelAttribute("FindIdNPwdVo") FindIdNPwdVO FindIdNPwdVo, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = getViewName(request);
-		ModelAndView mav = new ModelAndView(viewName);
-		
-		if(FindIdNPwdVo!=null) {
-			FindIdNPwdVO reVo = findIdNPwdservice.findInfo(FindIdNPwdVo);
-			 mav = new ModelAndView("/util/listFindIdNPwdResult.do");
-			
-			
-			findIdNPwdservice.mailSender(reVo);
-			
-			
-		}
-		
-		return mav;
-	}
-	
-	
-	
-	
-	
-	
+	FindIdNPwdVO FindIdNPwdvO;
 
- 
+	@Override
+	@RequestMapping(value = "/util/findIdNPwd.do", method = RequestMethod.GET)
+	public ModelAndView findInfo(@ModelAttribute("FindIdNPwdVo") FindIdNPwdVO FindIdNPwdVo, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView("/util/findIdNPwd");
+
+		
+		if (FindIdNPwdVo != null) {
+			FindIdNPwdVO reVo = findIdNPwdservice.findInfo(FindIdNPwdVo);
+			mav = new ModelAndView("/util/listFindIdNPwdResult");
+
+			findIdNPwdservice.mailSender(reVo);
+
+		}
+
+		return mav;
+		
+		
+		
+	}
+
+	
+	
 	private String getViewName(HttpServletRequest request) throws Exception {
 		String contextPath = request.getContextPath();
 		String uri = (String) request.getAttribute("javax.servlet.include.request_uri");
@@ -73,11 +67,9 @@ public class FindIdNPwdControllerImpl implements FindIdNPwdController {
 			viewName = viewName.substring(0, viewName.lastIndexOf("."));
 		}
 		if (viewName.lastIndexOf("/") != -1) {
-			viewName = viewName.substring(viewName.lastIndexOf("/",1), viewName.length());
+			viewName = viewName.substring(viewName.lastIndexOf("/", 1), viewName.length());
 		}
 		return viewName;
 	}
-
-
 
 }
