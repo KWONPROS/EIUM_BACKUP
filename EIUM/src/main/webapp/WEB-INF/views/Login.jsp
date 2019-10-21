@@ -14,13 +14,13 @@
 
 <script type="text/javascript">
 function fn_findID(){
-    var url = "findID.do";
+    var url = "util/findID.do";
     var name = "Find My ID";
     var option = "width = 500, height = 500, top = 100, left = 200, location = no"
     window.open(url, name, option);
 }
 function fn_findPWD(){
-    var url = "findPWD.do";
+    var url = "util/findPWD.do";
     var name = "Find My PWD";
     var option = "width = 500, height = 500, top = 100, left = 200, location = no"
     window.open(url, name, option);
