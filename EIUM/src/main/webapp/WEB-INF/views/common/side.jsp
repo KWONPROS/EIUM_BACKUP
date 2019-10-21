@@ -66,7 +66,6 @@
 
 #sidexx {
 
-	background-color: #E0E0E0;
 	width: 190px;
 	height: 100%;
 	background-color: #212121;
@@ -83,8 +82,8 @@ var data = {Data:[
 	{menuCode:"m00",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"등록정보관리"},
 	{menuCode:"m01",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0001.do",TITLE:"회사등록"},
 	{menuCode:"m02",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"member/loginForm.do", TITLE:"사업장등록"},
-	{menuCode:"m03",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"Login.do", TITLE:"부서등록"},
-	{menuCode:"m04",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"Login.do", TITLE:"사원등록"},
+	{menuCode:"m03",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"main.do", TITLE:"부서등록"},
+	{menuCode:"m04",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"01/multiline2.html", TITLE:"사원등록"},
 	{menuCode:"m05",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"01/subSheet.html", TITLE:"사용자권한설정"},
 	{menuCode:"m06",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"기초환경설정"},
 	{menuCode:"m07",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"02/header.html", TITLE:"호봉테이블등록 "},
@@ -124,7 +123,7 @@ var data = {Data:[
 $(document).ready(function(){	
 	
 	var sheetHeight = $(window).height();	//높이 자동계산
-	createIBSheet2(document.getElementById("sideMenu"),"leftMenu","100%",sheetHeight+"px");
+	createIBSheet2(document.getElementById("sideMenu"),"leftMenu","100%",(sheetHeight-173)+"px");
 	leftMenu.CustomScroll =3;	//스크롤 모양
 	leftMenu.SetTheme("LGY2","LightGray2");
 	leftMenu.NoTreeLines = 1; //트리모양
@@ -199,11 +198,11 @@ $(document).ready(function(){
 		tabMenu.goToTab(obj.getIndex());
 		return;
 	}
-	//전체 열린 텝의 개수가 10개 이상이면 경고 발생
-	if(tabMenu.tabs.getCountTab()>10){
-//		if(confirm("열린 텝이 10개가 넘었습니다. 텝을 하나 닫을까요?")){
+	//전체 열린 텝의 개수가 15개 이상이면 경고 발생
+	if(tabMenu.tabs.getCountTab()>15){
+		if(confirm("탭이 너무 많습니다. 하나 닫을까요?")){
 			tabMenu.removeTab(1);		
-//		}
+		}
 	}
 	
 	

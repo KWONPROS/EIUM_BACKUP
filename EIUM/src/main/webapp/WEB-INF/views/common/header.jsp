@@ -119,9 +119,9 @@ $(document).ready(function(){printClock();});
 
 #cc {
 	width: 100%;
+	height: 900px;  
 	position: absolute;
 	top: 30px;
-	height: 1050px;
 }
 </style>
 <meta charset="UTF-8">
@@ -137,8 +137,8 @@ $(document).ready(function(){printClock();});
 	</div>
 
 	<div class="homelogin">
-		<a href="#"><span id="headerinfo" class="icon"><i
-				class="fa fa-home"> Home</i></span></a> <a href="#"><span id="headerinfo"
+		<a onclick="tabMenu.goToFirstTab()"><span id="headerinfo" class="icon"><i
+				class="fa fa-home"> Home</i></span></a> <a href="Login.do"><span id="headerinfo"
 			class="icon"><i class="fa fa-share-square-o"> Logout</i></span></a>
 	</div>
 
