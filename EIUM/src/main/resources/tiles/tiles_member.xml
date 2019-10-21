@@ -64,5 +64,10 @@
 			value="/WEB-INF/views/member/loginForm.jsp" />
 	</definition>
      
+     <definition name="/sm/p0001" extends="baseLayout2">
+     	<put-attribute name="title" value="회사등록" />
+     	<put-attribute name="body"
+     		value="/WEB-INF/views/sm/p0001.jsp" />
+     </definition>
      
 </tiles-definitions>

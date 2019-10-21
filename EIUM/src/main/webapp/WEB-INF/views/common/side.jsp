@@ -81,10 +81,10 @@
 //데이터는 서버로 옮겨야 함
 var data = {Data:[
 	{menuCode:"m00",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"등록정보관리"},
-	{menuCode:"m01",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"Login.do",TITLE:"회사등록"},
+	{menuCode:"m01",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0001.do",TITLE:"회사등록"},
 	{menuCode:"m02",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"member/loginForm.do", TITLE:"사업장등록"},
-	{menuCode:"m03",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"01/multiline.html", TITLE:"부서등록"},
-	{menuCode:"m04",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"01/multiline2.html", TITLE:"사원등록"},
+	{menuCode:"m03",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"Login.do", TITLE:"부서등록"},
+	{menuCode:"m04",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"Login.do", TITLE:"사원등록"},
 	{menuCode:"m05",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"01/subSheet.html", TITLE:"사용자권한설정"},
 	{menuCode:"m06",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"기초환경설정"},
 	{menuCode:"m07",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"02/header.html", TITLE:"호봉테이블등록 "},
