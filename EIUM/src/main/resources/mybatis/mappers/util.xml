@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.util">
+	<resultMap id="resultVO" type="FindIdNPwdVO">
+		<result property="empCode" column="EMPLOYEE_CODE" />
+        <result property="id" column="EMPLOYEE_ID" />
+        <result property="pwd" column="EMPLOYEE_PASSWORD" />
+        <result property="email" column="EMAIL" />
+
+	</resultMap> 
+	<!-- 
+	<resultMap id="memResult" type="java.util.HashMap">
+      <result property="id" column="id" />
+      <result property="pwd" column="pwd" />
+      <result property="name" column="name" />
+      <result property="email" column="email" />
+      <result property="joinDate" column="joinDate" />
+   </resultMap> -->
+
+	<select id="findId"  parameterType="String" resultType="FindIdNPwdVO" >
+      <![CDATA[
+         select a.EMPLOYEE_CODE , a.EMPLOYEE_ID , b.EMAIL
+         from ACCOUNT a, EMPLOYEE_HR_INFO b
+         where a.EMPLOYEE_CODE = b.EMPLOYEE_CODE
+         and a.EMPLOYEE_CODE = #{empCode}
+         and b.EMAIL = #{email}
+      ]]>
+	 </select>	
+	<select id="findPWD"  parameterType="String" resultType="FindIdNPwdVO" >
+      <![CDATA[
+         select a.EMPLOYEE_CODE , a.EMPLOYEE_ID, a.EMPLOYEE_PASSWORD , b.EMAIL, 
+         from ACCOUNT a, EMPLOYEE_HR_INFO b
+         where a.EMPLOYEE_CODE = b.EMPLOYEE_CODE
+         and a.EMPLOYEE_CODE = #{empCode}
+         and a.EMPLOYEE_ID = #{id}
+         and b.EMAIL = #{email}
+      ]]>
+	 </select>	
+	
+
+
+</mapper>

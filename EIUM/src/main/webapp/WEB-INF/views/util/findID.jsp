@@ -82,5 +82,6 @@ input[type=text]:focus {
 	<button class="button" style="vertical-align: middle">
 		<span>다음 </span>
 	</button>
+
 </body>
 </html>
