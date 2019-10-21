@@ -30,7 +30,7 @@ public class FindIdNPwdServiceImpl implements FindIdNPwdService {
 		}else {
 			findIdNPwdVO = findIdNPwdDAO.findPwd(findIdNPwdVO);
 		}
-		
+		  
 		return findIdNPwdVO;
 	}
 	
