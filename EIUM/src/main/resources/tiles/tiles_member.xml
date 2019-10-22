@@ -30,10 +30,7 @@
 		<put-attribute name="body" value="" />
 	</definition>
 
-	<definition name="Login" extends="baseLayout2">
-		<put-attribute name="title" value="로그인창" />
-		<put-attribute name="body" value="/WEB-INF/views/Login.jsp" />
-	</definition>
+
      
      
      
@@ -69,11 +66,12 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/util/findIdNPwd.jsp" />
 	</definition>
+	<definition name="/util/findIdNPwdResult" extends="baseLayout2">
+		<put-attribute name="title" value="아이디 찾기" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/util/findIdNPwdResult.jsp" />
+	</definition>
      
-     <definition name="/sm/p0001" extends="baseLayout2">
-     	<put-attribute name="title" value="회사등록" />
-     	<put-attribute name="body"
-     		value="/WEB-INF/views/sm/p0001.jsp" />
-     </definition>
+ 
      
 </tiles-definitions>

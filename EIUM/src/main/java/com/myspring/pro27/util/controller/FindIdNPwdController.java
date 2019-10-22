@@ -14,6 +14,6 @@ import com.myspring.pro27.util.vo.FindIdNPwdVO;
 
 public interface FindIdNPwdController {
 
-	public ModelAndView findInfo(FindIdNPwdVO FindIdNPwdVo, HttpServletRequest request, HttpServletResponse response)
-			throws Exception;
+	public ModelAndView findInfo( HttpServletRequest request, HttpServletResponse response) throws Exception;
+
 }

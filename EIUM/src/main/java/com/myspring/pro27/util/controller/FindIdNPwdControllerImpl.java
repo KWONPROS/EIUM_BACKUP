@@ -1,5 +1,8 @@
 package com.myspring.pro27.util.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,26 +23,29 @@ public class FindIdNPwdControllerImpl implements FindIdNPwdController {
 
 	@Override
 	@RequestMapping(value = "/util/findIdNPwd.do", method = RequestMethod.GET)
-	public ModelAndView findInfo(@ModelAttribute("FindIdNPwdVo") FindIdNPwdVO FindIdNPwdVo, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public ModelAndView findInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView("/util/findIdNPwd");
 
-		
-		if (FindIdNPwdVo != null) {
-			FindIdNPwdVO reVo = findIdNPwdservice.findInfo(FindIdNPwdVo);
-			mav = new ModelAndView("/util/listFindIdNPwdResult");
+		mav.addObject("command", request.getParameter("command"));
+
+		if (request.getParameter("EMPLOYEE_CODE") != null) {
+			
+			Map<String, Object> searchMap = new HashMap<String, Object>(); // 검색조건
+			
+			searchMap.put("EMPLOYEE_CODE", request.getParameter("EMPLOYEE_CODE"));
+			searchMap.put("EMPLOYEE_ID", request.getParameter("EMPLOYEE_ID"));
+			searchMap.put("EMAIL", request.getParameter("EMAIL"));
+			
+	
+			FindIdNPwdVO reVo = findIdNPwdservice.findInfo(searchMap);
+			mav = new ModelAndView("/util/findIdNPwdResult");
 
 			findIdNPwdservice.mailSender(reVo);
-
 		}
 
 		return mav;
-		
-		
-		
-	}
 
-	
+	}
 	
 	private String getViewName(HttpServletRequest request) throws Exception {
 		String contextPath = request.getContextPath();

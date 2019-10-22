@@ -115,41 +115,17 @@ body {
 
 	<div class="find-container">
 		<div class="find-form">
-			<form action="findIdNPwd.do" method="get">
+			<form>
 				<h3>
 					<img class="logo" alt="logo"
 						src="${contextPath}/resources/image/EIUM_logo.png"> EIUM
 				</h3>
 
-				<c:choose>
-					<c:when test="${command eq 'id'}">
-						<h3>
-							<spring:message code="findId" text="아이디 찾기" />
-						</h3>
-					</c:when>
-					<c:when test="${command eq 'pwd'}">
-						<h3>
-							<spring:message code="findPwd" text="비밀번호 찾기" />
-						</h3>
-					</c:when>
-				</c:choose>
+				<h3>
+					<spring:message code="findResult" text="이메일로 발송하였습니다." />
+				</h3>
 
-				<div class="form-group">
-
-					<c:choose>
-						<c:when test="${command eq 'pwd'}">
-							<input type="text" name="EMPLOYEE_ID" class="form-control" placeholder="ID" value="" />
-							<br>
-						</c:when>
-					</c:choose>
-
-					<input type="text" name="EMPLOYEE_CODE" class="form-control" placeholder="사원번호" value="" /><br>
-					<input type="text" name="EMAIL" class="form-control" placeholder="이메일" value="" /><br>
-
-					<input type="submit" class="btnSubmit" value="다음" />
-				</div>
-
-
+					<input type="submit" onClick='window.close()' class="btnSubmit" value="창 닫기" />
 			</form>
 		</div>
 	</div>

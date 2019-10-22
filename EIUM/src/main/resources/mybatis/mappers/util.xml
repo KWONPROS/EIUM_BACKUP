@@ -13,34 +13,27 @@
 	</resultMap> 
 
 
-	<select id="findId"   resultMap="resultVO" >
+	<select id="findId"   resultMap="resultVO" parameterType="java.util.HashMap"> 
       <![CDATA[
          select a.EMPLOYEE_CODE , a.EMPLOYEE_ID , b.EMAIL
          from ACCOUNT a, EMPLOYEE_HR_INFO b
          where a.EMPLOYEE_CODE = b.EMPLOYEE_CODE
-       
+       	 and a.EMPLOYEE_CODE = #{EMPLOYEE_CODE}
+         and b.EMAIL = #{EMAIL}
       ]]>
        </select>
       
-	<!-- <select id="findId"  parameterType="FindIdNPwdVO" resultMap="resultVO" >
+
+	<select id="findPwd"  resultMap="resultVO" parameterType="java.util.HashMap"> 
       <![CDATA[
-         select a.EMPLOYEE_CODE , a.EMPLOYEE_ID , b.EMAIL
+         select a.EMPLOYEE_CODE , a.EMPLOYEE_ID, a.EMPLOYEE_PASSWORD , b.EMAIL 
          from ACCOUNT a, EMPLOYEE_HR_INFO b
          where a.EMPLOYEE_CODE = b.EMPLOYEE_CODE
-         and a.EMPLOYEE_CODE = #{empCode}
-         and b.EMAIL = #{email}
+         and a.EMPLOYEE_CODE = #{EMPLOYEE_CODE}
+         and a.EMPLOYEE_ID = #{EMPLOYEE_ID}
+        and b.EMAIL = #{EMAIL}
       ]]>
-	 </select>	
-	<select id="findPWD"  parameterType="FindIdNPwdVO" resultMap="resultVO" >
-      <![CDATA[
-         select a.EMPLOYEE_CODE , a.EMPLOYEE_ID, a.EMPLOYEE_PASSWORD , b.EMAIL, 
-         from ACCOUNT a, EMPLOYEE_HR_INFO b
-         where a.EMPLOYEE_CODE = b.EMPLOYEE_CODE
-         and a.EMPLOYEE_CODE = #{empCode}
-         and a.EMPLOYEE_ID = #{id}
-         and b.EMAIL = #{email}
-      ]]>
-	 </select>	 -->
+	 </select>
 	
 
 

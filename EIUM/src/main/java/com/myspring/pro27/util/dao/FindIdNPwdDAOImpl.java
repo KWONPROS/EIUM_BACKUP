@@ -1,5 +1,7 @@
 package com.myspring.pro27.util.dao;
 
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -10,14 +12,17 @@ import com.myspring.pro27.util.vo.FindIdNPwdVO;
 public class FindIdNPwdDAOImpl implements FindIdNPwdDAO {
 	@Autowired
 	private SqlSession sqlSession;
+	@Autowired
+	FindIdNPwdVO FindIdNPwdvO;
+	
 
-	public FindIdNPwdVO findId(FindIdNPwdVO findIdNPwdVO) {
-		findIdNPwdVO = sqlSession.selectOne("mapper.util.findId");
-		return findIdNPwdVO;
+	public FindIdNPwdVO findId(Map<String, Object> searchMap) {
+		FindIdNPwdvO = sqlSession.selectOne("mapper.util.findId",searchMap);
+		return FindIdNPwdvO;
 	}
-	public FindIdNPwdVO findPwd(FindIdNPwdVO findIdNPwdVO) {
-		findIdNPwdVO = sqlSession.selectOne("mapper.util.findId");
-		return findIdNPwdVO;
+	public FindIdNPwdVO findPwd(Map<String, Object> searchMap) {
+		FindIdNPwdvO = sqlSession.selectOne("mapper.util.findPwd", searchMap);
+		return FindIdNPwdvO;
 	}
 	
 

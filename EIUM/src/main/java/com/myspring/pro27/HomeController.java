@@ -58,7 +58,12 @@ public class HomeController {
 		
 		return "main";
 	}
-	
+	@RequestMapping(value = "/p0001.do", method = RequestMethod.GET)
+	public String test(Locale locale, Model model) {
+		
+		return "p0001";
+	}
+
 
 	@RequestMapping(value = "/Login.do", method =  RequestMethod.GET)
 	public String Loginform( Locale locale,HttpServletRequest request, HttpServletResponse response) throws Exception {

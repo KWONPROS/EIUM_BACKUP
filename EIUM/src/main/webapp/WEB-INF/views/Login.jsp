@@ -5,22 +5,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
-<%
-  request.setCharacterEncoding("UTF-8");
-%> 
+ 
 <!DOCTYPE html>
 <html>
 <head>
 
 <script type="text/javascript">
 function fn_findID(){
-    var url = "util/findID.do";
+    var url = "util/findIdNPwd.do?command=id";
     var name = "Find My ID";
     var option = "width = 500, height = 500, top = 100, left = 200, location = no"
     window.open(url, name, option);
 }
 function fn_findPWD(){
-    var url = "util/findPWD.do";
+    var url = "util/findIdNPwd.do?command=pwd";
     var name = "Find My PWD";
     var option = "width = 500, height = 500, top = 100, left = 200, location = no"
     window.open(url, name, option);

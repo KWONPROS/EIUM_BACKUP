@@ -1,5 +1,6 @@
 package com.myspring.pro27.util.service;
 
+import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -21,17 +22,22 @@ import com.myspring.pro27.util.dao.FindIdNPwdDAO;
 public class FindIdNPwdServiceImpl implements FindIdNPwdService {
 	@Autowired
 	private FindIdNPwdDAO findIdNPwdDAO;
-
+	@Autowired
+	FindIdNPwdVO FindIdNPwdvO;
+	
+	
 	@Override
-	public FindIdNPwdVO findInfo(FindIdNPwdVO findIdNPwdVO) throws Exception {
+	public FindIdNPwdVO findInfo(Map<String, Object> searchMap) throws Exception {
 				
-		if(findIdNPwdVO.getId()==null||"".equals(findIdNPwdVO.getId())) {
-			findIdNPwdVO = findIdNPwdDAO.findId(findIdNPwdVO);
+		if(searchMap.get("EMPLOYEE_ID")==null||"".equals(searchMap.get("EMPLOYEE_ID"))) {
+			FindIdNPwdvO = findIdNPwdDAO.findId(searchMap);
+			
 		}else {
-			findIdNPwdVO = findIdNPwdDAO.findPwd(findIdNPwdVO);
+			System.out.println(searchMap+"searchMap");
+			FindIdNPwdvO = findIdNPwdDAO.findPwd(searchMap);
 		}
 		  
-		return findIdNPwdVO;
+		return FindIdNPwdvO;
 	}
 	
 	
@@ -46,13 +52,21 @@ public class FindIdNPwdServiceImpl implements FindIdNPwdService {
 		
 		// 메일 내용 
 		String recipient = findIdNPwdVO.getEmail(); //받는 사람의 메일주소를 입력해주세요. 
-		String subject = "EIUM - 찾으신 정보의 결과입니다."; //메일 제목 입력해주세요. 
+		String subject = "EIUM - 요청정보 전송"; //메일 제목 입력해주세요. 
 		
-		String body = findIdNPwdVO.getEmpCode() + "님의 정보입니다.";
-		body += "ID: " + findIdNPwdVO.getId();
-		if (findIdNPwdVO.getPwd() == null || "".equals(findIdNPwdVO.getPwd())) {
-			body += "Password: " + findIdNPwdVO.getPwd();
+
+		String body = "";
+		if (findIdNPwdVO.getPwd() != null || !"".equals(findIdNPwdVO.getPwd())) {
+			body = String.join( System.getProperty("line.separator"),
+					"사원번호: "+ findIdNPwdVO.getEmpCode(),
+			        "ID: " + findIdNPwdVO.getId(),
+			        "Password: " + findIdNPwdVO.getPwd());
+		}else {
+			body = String.join( System.getProperty("line.separator"),
+			        "사원번호: "+ findIdNPwdVO.getEmpCode(),
+			        "ID: " + findIdNPwdVO.getId() );
 		}
+		
 		Properties props = System.getProperties(); // 정보를 담기 위한 객체 생성
 
 		// SMTP 서버 정보 설정 
@@ -70,6 +84,7 @@ public class FindIdNPwdServiceImpl implements FindIdNPwdService {
 		mimeMessage.setFrom(new InternetAddress("won0935@naver.com")); //발신자 셋팅 , 보내는 사람의 이메일주소를 한번 더 입력합니다. 이때는 이메일 풀 주소를 다 작성해주세요. 
 		mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient)); //수신자셋팅 //.TO 외에 .CC(참조) .BCC(숨은참조) 도 있음 
 		mimeMessage.setSubject(subject); //제목셋팅 
+		mimeMessage.setText(body); //내용셋팅 
 		mimeMessage.setText(body); //내용셋팅 
 		Transport.send(mimeMessage); //javax.mail.Transport.send() 이용 }
 	}
