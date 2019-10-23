@@ -66,18 +66,7 @@ public class HomeController {
 
 
 	@RequestMapping(value = "/Login.do", method =  RequestMethod.GET)
-	public String Loginform( Locale locale,HttpServletRequest request, HttpServletResponse response) throws Exception {
-	
-		// RequestMapingHandler로 부터 받은 Locale 객체를 출력해 봅니다. 
-		logger.info("Welcome i18n! The client locale is {}.", locale); 
-		// localeResolver 로부터 Locale 을 출력해 봅니다. 
-		logger.info("Session locale is {}.", localeResolver.resolveLocale(request));
-		logger.info("site.count : {}", messageSource.getMessage("login", new String[] {"첫번째"}, "default text", locale)); 
-		logger.info("not.exist : {}", messageSource.getMessage("findId", null, "default text", locale)); 
-		//logger.info("not.exist 기본값 없음 : {}", messageSource.getMessage("not.exist", null, locale));
-
-
-		
+	public String Login( Locale locale,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		return "Login";
 	}
 	
