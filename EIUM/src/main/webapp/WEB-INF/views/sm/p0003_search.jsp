@@ -51,7 +51,7 @@ function doAction(sAction){
 	case "search":      //조회
 
 		var param = FormQueryStringEnc(document.frm);
-		mySheet.DoSearch("${contextPath}/departure/searchList.do", param);
+		mySheet.DoSearch("${contextPath}/p0003/searchList.do", param);
 
 		break;
 	case "reload":
@@ -59,7 +59,7 @@ function doAction(sAction){
 		mySheet.RemoveAll();
 		break;
 	case "save":
-		mySheet.DoSave("${contextPath}/departure/saveData.do")
+		mySheet.DoSave("${contextPath}/p0003/saveData.do")
 		var tempStr = mySheet.GetSaveString();
 		alert("서버로 전달되는 문자열 확인 :"+tempStr);
 
@@ -93,7 +93,7 @@ function selectSite(){
 
 $.ajax({
 	
-    url:"${contextPath}/departure/SiteList.do",//목록을 조회 할 url
+    url:"${contextPath}/p0003/SiteList.do",//목록을 조회 할 url
 
 
     type:"POST",
@@ -127,7 +127,7 @@ $.ajax({
 </script>
 
   <script language="javascript">
-  function showPopup() { window.open("${contextPath}/departure/popup.do", "a", "width=600, height=500, left=100, top=50"); }
+  function showPopup() { window.open("${contextPath}/p0003/popup.do", "a", "width=600, height=500, left=100, top=50"); }
   </script>
   
 </head>

@@ -32,7 +32,7 @@ function LoadPage(){
 	mySheet.SetEditableColorDiff(1);
 
 	//mySheet.SetColEditable(2,0);
-	mySheet.DoSearch("${contextPath}//searchpopup.do")
+	mySheet.DoSearch("${contextPath}/p0003/searchpopup.do")
 
 
 }

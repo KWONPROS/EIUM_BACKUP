@@ -58,13 +58,13 @@ public class S0002ControllerImpl implements S0002Controller {
 	@ResponseBody
 	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		Map<String, Object> searchMap = new HashMap<String, Object>(); // °Ë»öÁ¶°Ç
-		Map<String, Object> resultMap = new HashMap<String, Object>(); // Á¶È¸°á°ú
+		Map<String, Object> searchMap = new HashMap<String, Object>(); // ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ï¿½
+		Map<String, Object> resultMap = new HashMap<String, Object>(); // ï¿½ï¿½È¸ï¿½ï¿½ï¿½
 		
-		// °Ë»öÁ¶°Ç¼³Á¤
+		// ï¿½Ë»ï¿½ï¿½ï¿½ï¿½Ç¼ï¿½ï¿½ï¿½
 		searchMap.put("p_cust_id", request.getParameter("p_cust_id"));
 		
-		//µ¥ÀÌÅÍ Á¶È¸
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 		List<S0002VO> data = s0002Service.searchList(searchMap);
         resultMap.put("Data", data);
     	System.out.println("resultMap::::"+resultMap);
@@ -76,8 +76,8 @@ public class S0002ControllerImpl implements S0002Controller {
 	@ResponseBody
 	public String searchList2(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-        String str = "{\"Data\":[{\"ID\":\"±×°Í¸¸ÀÌ ³» ¼¼»ó\",\"PWD\":\"Keys to the Heart\",\"NAME\":\"2017\",\"EMAIL\":\"ÇÑ±¹\",\"JOINDATE\":\"20190101\",\"NUM\":\"1\"}]}";
-        //JSON ¹ÝÈ¯ 
+        String str = "{\"Data\":[{\"ID\":\"ï¿½×°Í¸ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½\",\"PWD\":\"Keys to the Heart\",\"NAME\":\"2017\",\"EMAIL\":\"ï¿½Ñ±ï¿½\",\"JOINDATE\":\"20190101\",\"NUM\":\"1\"}]}";
+        //JSON ï¿½ï¿½È¯ 
         return str;
 	}
 	
@@ -86,10 +86,10 @@ public class S0002ControllerImpl implements S0002Controller {
 	@ResponseBody
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		Map<String, String[]> dataMap = new HashMap<String, String[]>(); // ÀúÀåÇÒData
-		Map<String, Object> resultMap = new HashMap<String, Object>(); // Ã³¸®°á°ú
+		Map<String, String[]> dataMap = new HashMap<String, String[]>(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Data
+		Map<String, Object> resultMap = new HashMap<String, Object>(); // Ã³ï¿½ï¿½ï¿½ï¿½ï¿½
 		
-		// ÀúÀå Data ÃßÃâÇÏ±â
+		// ï¿½ï¿½ï¿½ï¿½ Data ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 		Enumeration enu = request.getParameterNames();
 		while (enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
@@ -101,10 +101,10 @@ public class S0002ControllerImpl implements S0002Controller {
 		try {
 			s0002Service.saveData(dataMap);	
 			result.put("Code","0");
-			result.put("Message","ÀúÀåµÇ¾ú½À´Ï´Ù");
+			result.put("Message","ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½");
 		}catch(Exception e) {
 			result.put("Code","-1");
-			result.put("Message","ÀúÀå¿¡ ½ÇÆÐÇÏ¿´½À´Ï´Ù");
+			result.put("Message","ï¿½ï¿½ï¿½å¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½");
 			e.printStackTrace();
 		}
 		

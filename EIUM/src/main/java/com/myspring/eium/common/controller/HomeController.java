@@ -42,11 +42,19 @@ public class HomeController {
 		return "main";
 	}
 
-	@RequestMapping(value = "/login.do", method =  RequestMethod.GET)
-	public String Login( Locale locale,HttpServletRequest request, HttpServletResponse response) throws Exception {
-		return "/common/cm_login";
-	}
-	
+	@RequestMapping(value = "login.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView Login(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("common/cm_login");
+		return mav;
+	} 
+
+
+//	@RequestMapping(value = "/login.do", method =  RequestMethod.GET)
+//	public String Login( Locale locale,HttpServletRequest request, HttpServletResponse response) throws Exception {
+//		return "common/cm_login";
+//	}
+//	
 	
 	@RequestMapping(value = "/findIdNPwd.do", method = RequestMethod.GET)
 	public ModelAndView findInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -56,7 +64,7 @@ public class HomeController {
 
 		if (request.getParameter("EMPLOYEE_CODE") != null) {
 			
-			Map<String, Object> searchMap = new HashMap<String, Object>(); // °Ë»öÁ¶°Ç
+			Map<String, Object> searchMap = new HashMap<String, Object>(); // ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ï¿½
 			
 			searchMap.put("EMPLOYEE_CODE", request.getParameter("EMPLOYEE_CODE"));
 			searchMap.put("EMPLOYEE_ID", request.getParameter("EMPLOYEE_ID"));

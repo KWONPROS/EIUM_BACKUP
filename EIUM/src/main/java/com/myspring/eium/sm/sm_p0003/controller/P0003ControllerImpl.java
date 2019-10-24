@@ -38,6 +38,16 @@ public class P0003ControllerImpl implements P0003Controller{
 	@Autowired
 	P0003VO p0003VO;
 	
+	
+	@Override
+	@RequestMapping(value = "/p0003/searchInit.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("/sm/p0003_search");
+	
+		return mav;
+	} 
+	
 
 	@Override
 	@RequestMapping(value = "/p0003/searchList.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -100,7 +110,7 @@ public class P0003ControllerImpl implements P0003Controller{
 	@RequestMapping(value = "/p0003/popup.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView popup(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("departurePopup");
+		ModelAndView mav = new ModelAndView("sm/p0003_search_p01");
 		return mav;
 	} 
 

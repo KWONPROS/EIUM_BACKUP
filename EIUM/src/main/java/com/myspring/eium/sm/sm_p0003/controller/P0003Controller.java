@@ -19,5 +19,6 @@ public interface P0003Controller {
 	public Map searchpopup(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map saveDataPopup(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map searchSiteList(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 }
