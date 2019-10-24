@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.myspring.eium.sm.sm_p0003.vo.DepartureVO;
+import com.myspring.eium.sm.sm_p0003.vo.P0003VO;
 
 
-public interface DepartureController {
+public interface P0003Controller {
 	public ModelAndView popup(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception;

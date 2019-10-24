@@ -8,17 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import com.myspring.eium.sm.sm_p0003.vo.DepartureVO;
+import com.myspring.eium.sm.sm_p0003.vo.P0003VO;
 
-@Repository("departureDAO")
-public class DepartureDAOImpl implements DepartureDAO {
+@Repository("P0003DAO")
+public class P0003DAOImpl implements P0003DAO {
 
 	@Autowired
 	private SqlSession sqlSession;
 
 	@Override
-	public List<DepartureVO> searchList(Map<String, Object> searchMap) throws DataAccessException {
-		List<DepartureVO> list = sqlSession.selectList("departure.searchDep", searchMap);
+	public List<P0003VO> searchList(Map<String, Object> searchMap) throws DataAccessException {
+		List<P0003VO> list = sqlSession.selectList("departure.searchDep", searchMap);
 		System.out.println("++++++dao"+searchMap);
 		return list;
 	}
@@ -49,8 +49,8 @@ public class DepartureDAOImpl implements DepartureDAO {
 	
 	
 	@Override
-	public List<DepartureVO> searchpopup(Map<String, Object> searchMap) throws DataAccessException {
-		List<DepartureVO> list = sqlSession.selectList("departure.searchPopup", searchMap);
+	public List<P0003VO> searchpopup(Map<String, Object> searchMap) throws DataAccessException {
+		List<P0003VO> list = sqlSession.selectList("departure.searchPopup", searchMap);
 		return list;
 	}
 	
@@ -75,8 +75,8 @@ public class DepartureDAOImpl implements DepartureDAO {
 
 
 	@Override
-	public List<DepartureVO> searchSiteList(Map<String, Object> searchMap) throws DataAccessException {
-		List<DepartureVO> list = sqlSession.selectList("departure.searchSiteList", searchMap);
+	public List<P0003VO> searchSiteList(Map<String, Object> searchMap) throws DataAccessException {
+		List<P0003VO> list = sqlSession.selectList("departure.searchSiteList", searchMap);
 		return list;
 	}
 

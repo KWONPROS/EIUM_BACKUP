@@ -10,19 +10,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.myspring.eium.sm.sm_p0003.dao.DepartureDAO;
-import com.myspring.eium.sm.sm_p0003.vo.DepartureVO;
+import com.myspring.eium.sm.sm_p0003.dao.P0003DAO;
+import com.myspring.eium.sm.sm_p0003.vo.P0003VO;
 
-@Service("departureService")
+@Service("P0003Service")
 @Transactional(propagation = Propagation.REQUIRED)
-public class DepartureServiceImpl implements DepartureService {
+public class P0003ServiceImpl implements P0003Service {
 
 	@Autowired
-	private DepartureDAO departureDAO;
+	private P0003DAO p0003DAO;
 
 	@Override
-	public List<DepartureVO> searchList(Map<String, Object> searchMap) throws DataAccessException {
-		List<DepartureVO> list=departureDAO.searchList(searchMap);
+	public List<P0003VO> searchList(Map<String, Object> searchMap) throws DataAccessException {
+		List<P0003VO> list=p0003DAO.searchList(searchMap);
 
 		return list;
 	}
@@ -38,11 +38,11 @@ public class DepartureServiceImpl implements DepartureService {
 		for(String str : status) {
 			Map<String, String> row = getRow(dataMap, length, i); // ���� Index�� Row Map
 			if("I".equals(str)) { // �߰�
-				departureDAO.insertData(row);
+				p0003DAO.insertData(row);
 			}else if("U".equals(str)) { // ����
-				departureDAO.updateData(row);
+				p0003DAO.updateData(row);
 			}else if("D".equals(str)) { // ����
-				departureDAO.deleteData(row);
+				p0003DAO.deleteData(row);
 			}
 			i++;
 		}
@@ -63,8 +63,8 @@ public class DepartureServiceImpl implements DepartureService {
 	
 
 	@Override
-	public List<DepartureVO> searchpopup(Map<String, Object> searchMap) throws DataAccessException {
-		List<DepartureVO> list=departureDAO.searchpopup(searchMap);
+	public List<P0003VO> searchpopup(Map<String, Object> searchMap) throws DataAccessException {
+		List<P0003VO> list=p0003DAO.searchpopup(searchMap);
 
 		return list;
 	}
@@ -78,19 +78,19 @@ public class DepartureServiceImpl implements DepartureService {
 		for(String str : status) {
 			Map<String, String> row = getRow(dataMap, length, i); // ���� Index�� Row Map
 			if("I".equals(str)) { // �߰�
-				departureDAO.insertDatapopup(row);
+				p0003DAO.insertDatapopup(row);
 			}else if("U".equals(str)) { // ����
-				departureDAO.updateDatapopup(row);
+				p0003DAO.updateDatapopup(row);
 			}else if("D".equals(str)) { // ����
-				departureDAO.deleteDatapopup(row);
+				p0003DAO.deleteDatapopup(row);
 			}
 			i++;
 		}
 	}
 	
 	@Override
-	public List<DepartureVO> searchSiteList(Map<String, Object> searchMap) throws DataAccessException {
-		List<DepartureVO> list=departureDAO.searchSiteList(searchMap);
+	public List<P0003VO> searchSiteList(Map<String, Object> searchMap) throws DataAccessException {
+		List<P0003VO> list=p0003DAO.searchSiteList(searchMap);
 
 		return list;
 	}

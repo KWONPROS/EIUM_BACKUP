@@ -2,8 +2,8 @@ package com.myspring.eium.sm.sm_p0003.vo;
 
 import org.springframework.stereotype.Component;
 
-@Component("departureVO")
-public class DepartureVO {
+@Component("P0003VO")
+public class P0003VO {
 
 
 	public String getDEPARTMENT_CODE() {

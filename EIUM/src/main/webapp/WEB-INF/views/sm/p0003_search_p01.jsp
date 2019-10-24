@@ -32,7 +32,7 @@ function LoadPage(){
 	mySheet.SetEditableColorDiff(1);
 
 	//mySheet.SetColEditable(2,0);
-	mySheet.DoSearch("${contextPath}/departure/searchpopup.do")
+	mySheet.DoSearch("${contextPath}//searchpopup.do")
 
 
 }
@@ -45,7 +45,7 @@ function doAction(sAction){
 		mySheet.RemoveAll();
 		break;
 	case "save":
-		mySheet.DoSave("${contextPath}/departure/saveDatapopup.do")
+		mySheet.DoSave("${contextPath}/p0003/saveDatapopup.do")
 		var tempStr = mySheet.GetSaveString();
 		alert("서버로 전달되는 문자열 확인 :"+tempStr);
 
