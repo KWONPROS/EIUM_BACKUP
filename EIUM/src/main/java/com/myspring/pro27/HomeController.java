@@ -52,6 +52,11 @@ public class HomeController {
 		return "main";
 	}
 	
+	@RequestMapping(value = "/main2.do", method = RequestMethod.GET)
+	public String main2(Locale locale, Model model) {
+		return "main2";
+	}
+	
 	@RequestMapping(value = "/Login.do", method =  RequestMethod.GET)
 	public String Loginform(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		return "Login";
@@ -60,6 +65,6 @@ public class HomeController {
 	public String departure(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		return "departure";
 	}
-	
+
 }
 

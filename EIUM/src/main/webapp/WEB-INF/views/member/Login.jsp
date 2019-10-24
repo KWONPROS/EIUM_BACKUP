@@ -108,7 +108,7 @@
 	</video>
 	<div class="login-container">
 			<div class="login-form">
-				<form>
+				<form  name="frmLogin" method="post"  action="${contextPath}/member/loginDo.do">
 				<h3><img class="logo" alt="logo" src="${contextPath}/resources/image/EIUM_logo.png"> EIUM</h3>
 					<h3>로그인</h3>
 					<div class="form-group">

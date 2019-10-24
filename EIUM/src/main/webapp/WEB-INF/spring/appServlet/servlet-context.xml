@@ -43,9 +43,17 @@
 		<beans:property name="viewClass"
 			value="org.springframework.web.servlet.view.tiles2.TilesView" />
 	</beans:bean>
+	
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
+		<beans:property name="prefix" value="/WEB-INF/views/" /> 
+		<beans:property name="suffix" value=".jsp" /> 
+	</beans:bean>
 
 	<!-- 인터셉터 실습 설정 -->
 	<!-- <mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/*/*.do"/> 
 		<beans:bean class="com.myspring.pro27.member.interceptor.ViewNameInterceptor" 
 		/> </mvc:interceptor> </mvc:interceptors> -->
 </beans:beans>
+
+
+

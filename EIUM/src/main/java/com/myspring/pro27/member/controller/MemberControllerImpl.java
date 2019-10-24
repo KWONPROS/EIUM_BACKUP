@@ -105,9 +105,11 @@ public class MemberControllerImpl   implements MemberController {
 	}
 
 	@Override
-	@RequestMapping(value="/member/login.do", method=RequestMethod.POST)
+	@RequestMapping(value="/member/loginDo.do", method=RequestMethod.POST)
 	public ModelAndView login(@ModelAttribute("member") MemberVO member, RedirectAttributes rAttr, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		
+		System.out.println("ì½˜ì†”ì¶œë ¥@@@@@@@@@@@@@@@@@");
 		ModelAndView mav = new ModelAndView();
 		memberVO = memberService.login(member);
 		
@@ -117,7 +119,7 @@ public class MemberControllerImpl   implements MemberController {
 			session.setAttribute("isLogOn", true);
 			mav.setViewName("redirect:/member/listMembers.do");
 		}else {
-			//RedirectAttributes: redirect¿¡¼­ Data¸¦ Àü´ÞÇÏ´Â ¹æ¹ýÀ» Á¦°ø
+			//RedirectAttributes: redirectï¿½ï¿½ï¿½ï¿½ Dataï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			rAttr.addAttribute("result", "loginFailed");
 			mav.setViewName("redirect:/member/loginForm.do");
 		}
