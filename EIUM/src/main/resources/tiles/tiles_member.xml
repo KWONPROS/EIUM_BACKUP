@@ -18,44 +18,5 @@
 		<put-attribute name="title" value="메인페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/common/cm_main.jsp" />
 	</definition>
-
-
-
-
-<!-- //////////////////////////////////////////////.do//////////////////////////////////////////// -->     
-
-
-<!-- 	<definition name="baseLayout2" template="/WEB-INF/views/tiles_jsp/layout2.jsp">
-		<put-attribute name="body" value="" />
-	</definition>
-    
-     
-     <definition name="/member/listMembers" extends="baseLayout2">
-		<put-attribute name="title" value="회원목록창" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/member/listMembers.jsp" />
-	</definition>
-
-	<definition name="/member/memberForm" extends="baseLayout2">
-		<put-attribute name="title" value="회원등록창" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/member/memberForm.jsp" />
-	</definition>
-
-	<definition name="/member/viewDetail" extends="baseLayout2">
-		<put-attribute name="title" value="회원상세창" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/member/viewDetail.jsp" />
-	</definition>
-	
-	<definition name="/member/loginForm" extends="baseLayout2">
-		<put-attribute name="title" value="로그인폼" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/member/loginForm.jsp" />
-	</definition> -->
-	
-
-     
- 
      
 </tiles-definitions>
