@@ -4,7 +4,8 @@
 
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.myspring.pro27.member.vo.MemberVO"  alias="memberVO" />
-		<typeAlias type="com.myspring.pro27.sm.vo.DepartureVO" alias="departureVO" />
+				<typeAlias type="com.myspring.eium.common.vo.HomeVO"  alias="HomeVO" />
+				<typeAlias type="com.myspring.eium.pm.pm_p0001.vo.DepartureVO" alias="departureVO" />
+
 	</typeAliases>
 </configuration>

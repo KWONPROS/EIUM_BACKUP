@@ -4,8 +4,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.myspring</groupId>
-	<artifactId>pro27</artifactId>
-	<name>pro27</name>
+	<artifactId>eium</artifactId>
+	<name>eium</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
@@ -190,7 +190,7 @@
 	<dependency>
 	    <groupId>org.aspectj</groupId>
 	    <artifactId>aspectjweaver</artifactId>
-	    <version>${org.aspectj-version}</version>
+	<version>${org.aspectj-version}</version>
 	</dependency>
 	
 	<dependency>
@@ -214,6 +214,17 @@
     <artifactId>json</artifactId>
     <version>20090211</version>
 	</dependency>
+
+
+
+	<!-- Mail -->
+	<dependency>
+		<groupId>javax.mail</groupId>
+		<artifactId>mail</artifactId>
+		<version>1.4.7</version>
+	</dependency>
+
+
 
 	</dependencies>
 	<build>
