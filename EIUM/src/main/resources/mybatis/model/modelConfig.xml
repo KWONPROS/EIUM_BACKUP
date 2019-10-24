@@ -4,7 +4,6 @@
 
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.myspring.pro27.member.vo.MemberVO"  alias="memberVO" />
-		<typeAlias type="com.myspring.pro27.util.vo.FindIdNPwdVO"  alias="FindIdNPwdVO" />
+				<typeAlias type="com.myspring.eium.common.vo.HomeVO"  alias="HomeVO" />
 	</typeAliases>
 </configuration>

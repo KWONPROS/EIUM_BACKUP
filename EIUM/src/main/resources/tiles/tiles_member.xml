@@ -3,21 +3,20 @@
 "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
 "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 
-<!-- //////////////////////////////////////////////메인레이아웃//////////////////////////////////////////// -->
 
 <tiles-definitions>
-	<definition name="baseLayout" template="/WEB-INF/views/common/layout.jsp">
+	<definition name="baseLayout" template="/WEB-INF/views/tiles_jsp/layout.jsp">
 		<put-attribute name="title" value="" />
-		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
-		<put-attribute name="side" value="/WEB-INF/views/common/side.jsp" />
+		<put-attribute name="header" value="/WEB-INF/views/tiles_jsp/header.jsp" />
+		<put-attribute name="side" value="/WEB-INF/views/tiles_jsp/side.jsp" />
 		<put-attribute name="body" value="" />
-		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/tiles_jsp/footer.jsp" />
 	</definition>
 
 
 	<definition name="main" extends="baseLayout">
 		<put-attribute name="title" value="메인페이지" />
-		<put-attribute name="body" value="/WEB-INF/views/main.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/common/cm_main.jsp" />
 	</definition>
 
 
@@ -26,7 +25,7 @@
 <!-- //////////////////////////////////////////////.do//////////////////////////////////////////// -->     
 
 
-	<definition name="baseLayout2" template="/WEB-INF/views/common/layout2.jsp">
+<!-- 	<definition name="baseLayout2" template="/WEB-INF/views/tiles_jsp/layout2.jsp">
 		<put-attribute name="body" value="" />
 	</definition>
     
@@ -53,18 +52,9 @@
 		<put-attribute name="title" value="로그인폼" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/member/loginForm.jsp" />
-	</definition>
+	</definition> -->
 	
-	<definition name="/util/findIdNPwd" extends="baseLayout2">
-		<put-attribute name="title" value="아이디 찾기" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/util/findIdNPwd.jsp" />
-	</definition>
-	<definition name="/util/findIdNPwdResult" extends="baseLayout2">
-		<put-attribute name="title" value="아이디 찾기" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/util/findIdNPwdResult.jsp" />
-	</definition>
+
      
  
      

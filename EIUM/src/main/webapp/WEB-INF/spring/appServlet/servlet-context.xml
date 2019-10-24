@@ -25,7 +25,7 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" /> <beans:property 
 		name="suffix" value=".jsp" /> </beans:bean> -->
 	<context:component-scan
-		base-package="com.myspring.pro27" />
+		base-package="com.myspring.eium" />
 
 	<!-- 타일즈 실습 설정 -->
 	<beans:bean id="tilesConfigurer"
@@ -64,6 +64,6 @@
 
 	<!-- 인터셉터 실습 설정 -->
 	<!-- <mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/*/*.do"/> 
-		<beans:bean class="com.myspring.pro27.member.interceptor.ViewNameInterceptor" 
+		<beans:bean class="com.myspring.eium.member.interceptor.ViewNameInterceptor" 
 		/> </mvc:interceptor> </mvc:interceptors> -->
 </beans:beans>
