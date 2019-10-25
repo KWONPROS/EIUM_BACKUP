@@ -6,6 +6,6 @@
 	<typeAliases>
 				<typeAlias type="com.myspring.eium.common.vo.HomeVO"  alias="HomeVO" />
 				<typeAlias type="com.myspring.eium.sm.sm_p0003.vo.P0003VO" alias="P0003VO" />
-
+				<typeAlias type="com.myspring.eium.sm.sm_p0001.vo.P0001VO" alias="P0001VO" />
 	</typeAliases>
 </configuration>
