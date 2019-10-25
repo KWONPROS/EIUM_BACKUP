@@ -5,18 +5,23 @@
 
 
 <tiles-definitions>
+
 	<definition name="baseLayout" template="/WEB-INF/views/tiles_jsp/layout.jsp">
+
 		<put-attribute name="title" value="" />
 		<put-attribute name="header" value="/WEB-INF/views/tiles_jsp/header.jsp" />
 		<put-attribute name="side" value="/WEB-INF/views/tiles_jsp/side.jsp" />
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/WEB-INF/views/tiles_jsp/footer.jsp" />
+
 	</definition>
 
 
 	<definition name="main" extends="baseLayout">
 		<put-attribute name="title" value="메인페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/common/cm_main.jsp" />
+
 	</definition>
-     
+
+
 </tiles-definitions>

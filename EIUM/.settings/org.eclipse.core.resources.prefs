@@ -1,2 +1,8 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
 encoding/<project>=UTF-8
+=======
+encoding//src/main/resources/mybatis/mappers/main/java/project/util/IBMultipartResolver.java=UTF-8
+encoding//src/main/resources/mybatis/mappers/main/java/project/util/IBSheetFileController.java=UTF-8
+encoding//src/main/resources/mybatis/mappers/main/java/project/util/IBSheetUtil.java=UTF-8
+>>>>>>> refs/remotes/origin/master
