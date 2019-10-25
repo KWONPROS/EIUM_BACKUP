@@ -32,13 +32,10 @@ public class HomeController {
 	@Autowired 
 	HomeVO homeVO;
 	
-	
-
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		
 		return "main";
 	}
 
