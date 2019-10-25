@@ -79,6 +79,7 @@
 
 //데이터는 서버로 옮겨야 함
 var data = {Data:[
+
 	{menuCode:"m00",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"등록정보관리"},
 	{menuCode:"m01",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"p0001/searchInit.do",TITLE:"회사등록"},
 	{menuCode:"m02",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"s0002/SITE.do", TITLE:"사업장등록"},
@@ -178,10 +179,6 @@ $(document).ready(function(){
 					width:"0px"
 				}
 			});
-
-
-	
-	
 });
 
  function leftMenu_OnClick(r,c,v){
