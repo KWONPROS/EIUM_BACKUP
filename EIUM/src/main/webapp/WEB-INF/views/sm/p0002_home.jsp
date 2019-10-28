@@ -117,23 +117,21 @@
 	$(document).ready(function () {
 	
 		//사업자등록번호
-   $(function () {    
-            $('input[name=site_RESISTRATION_NUMBER]').keydown(function (event) {
-             var key = event.charCode || event.keyCode || 0;
-             $text = $(this); 
-             if (key !== 8 && key !== 9) {
-                 if ($text.val().length === 3) {
-                     $text.val($text.val() + '-');
-                 }
-                 if ($text.val().length === 6) {
-                     $text.val($text.val() + '-');
-                 }
-             }
-             return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
-         })
-   });
-		//법인등록번호
-   $(function () {            
+   $(function () { 
+	   $('input[name=site_RESISTRATION_NUMBER]').keydown(function (event) {
+           var key = event.charCode || event.keyCode || 0;
+           $text = $(this); 
+           if (key !== 8 && key !== 9) {
+               if ($text.val().length === 3) {
+                   $text.val($text.val() + '-');
+               }
+               if ($text.val().length === 6) {
+                   $text.val($text.val() + '-');
+               }
+           }
+           return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
+       })
+       //법인등록번호
 	   $('input[name=site_CORPARATION_NUMBER]').keydown(function (event) {
            var key = event.charCode || event.keyCode || 0;
            $text = $(this); 
@@ -144,21 +142,34 @@
            }
              return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
          })
+          //전화번호,팩스
+         $('.siteNUM').keydown(function (event) {
+        var key = event.charCode || event.keyCode || 0;
+        $text = $(this);
+        if (key !== 8 && key !== 9) {
+        	if($text.val().substr(0,2)=='02'){
+        		if ($text.val().length === 2) {
+                    $text.val($text.val() + '-');
+                }
+                if ($text.val().length === 6) {
+                    $text.val($text.val() + '-');
+                }
+        	}else{
+        		if ($text.val().length === 3) {
+                    $text.val($text.val() + '-');
+                }
+                if ($text.val().length === 8) {
+                    $text.val($text.val() + '-');
+                }
+        	}
+      
+        }
+        return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
+    })
    });
-   
-		//전화번호,팩스
-	 $(function () {            
-		   $('input[name=site_CONTACT]','input[name=site_FAX]').keydown(function (event) {
-			   $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})/,"$1-$2-$3").replace("--", "-"));
-			   
-		   })
-	 });
-		
 });//document.ready
 	
-	
-	
-	
+
 	//도로명주소검색 API
 	function goPopup(){
 		var pop = window.open("findAddress.do","addressPopup","width=570,height=420, scrollbars=yes, resizable=yes"); 
@@ -297,12 +308,12 @@ border-radius: 2px;
 			<tr>
 				<td>사업장전화번호</td>
 				<td></td>
-				<td><input type="text" name="site_CONTACT" id="site_CONTACT" placeholder="__-___-____" maxlength="13"></td>
+				<td><input type="text" name="site_CONTACT" id="site_CONTACT" class="siteNUM" placeholder="__-___-____" maxlength="13"></td>
 			</tr>
 			<tr>
 				<td>사업장팩스</td>
 				<td></td>
-				<td><input type="text" name="site_FAX" id="site_FAX" placeholder="__-___-____" maxlength="13"></td>
+				<td><input type="text" name="site_FAX" id="site_FAX" class="siteNUM" placeholder="__-___-____" maxlength="13"></td>
 			</tr>
 			<tr>
 				<td>업태</td>
