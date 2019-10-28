@@ -15,35 +15,48 @@
 
 	/*Sheet 기본 설정 */
 	function LoadPage() {
-		mySheet.RemoveAll();
 		
-		//아이비시트 초기화
+		//아이비시트1 
+		mySheet.RemoveAll();
 		var initSheet = {};
 		initSheet.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0};
 		initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 		initSheet.Cols = [
-			{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
-			{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},
-			{Header:"코드",Type:"Text",SaveName:"site_CODE",MinWidth:80,KeyField:1, Align:"Center"},
-			{Header:"사업장명",Type:"Text",SaveName:"site_NAME",MinWidth:170,KeyField:1, Align:"Center"},			
-			{Header:"사업자등록번호",Type:"Text",SaveName:"site_RESISTRATION_NUMBER",KeyField:1 ,Hidden:1},			
-			{Header:"법인등록번호",Type:"Text",SaveName:"site_CORPARATION_NUMBER",Hidden:1},			
-			{Header:"대표자명",Type:"Text",SaveName:"site_REPRESENTATIVE_NAME",KeyField:1,Hidden:1 },			
-			{Header:"사업장우편번호",Type:"Text",SaveName:"site_ZIP_CODE",Hidden:1},			
-			{Header:"사업장주소",Type:"Text",SaveName:"site_ADDRESS",KeyField:1,Hidden:1},			
-			{Header:"사업장번지",Type:"Text",SaveName:"site_ADDRESS_DETAIL",Hidden:1},			
-			{Header:"사업장전화번호",Type:"Text",SaveName:"site_CONTACT",Hidden:1},			
-			{Header:"사업장팩스",Type:"Text",SaveName:"site_FAX",Hidden:1},			
-			{Header:"업태",Type:"Text",SaveName:"site_CATEGORY",KeyField:1,Hidden:1},			
-			{Header:"종목",Type:"Text",SaveName:"site_TYPE",KeyField:1,Hidden:1},			
-			{Header:"개업연월일",Type:"Text",SaveName:"site_OPENBUSINESS_DATE",Hidden:1},
-			{Header:"폐업연월일",Type:"Text",SaveName:"site_CLOSEBUSINESS_DATE",Hidden:1},
-			{Header:"본점여부",Type:"Text",SaveName:"site_BUSINESS_AVAILABLE",KeyField:1,Hidden:1}
+			
+			{Header:"코드",Type:"Text",SaveName:"admin_CODE",MinWidth:80,KeyField:1, Align:"Center"},
+			{Header:"관리항목명",Type:"Text",SaveName:"admin_NAME",MinWidth:170,KeyField:1, Align:"Center"},			
+			{Header:"관리내역코드",Type:"Text",SaveName:"admin_LIST_CODE",KeyField:1 ,Hidden:1},			
+			{Header:"관리내역명",Type:"Text",SaveName:"admin_LIST_NAME",Hidden:1},			
+			{Header:"테이블물리명",Type:"Text",SaveName:"admin_TABLE_NAME",KeyField:1,Hidden:1 }			
+		
 		];   
 		IBS_InitSheet( mySheet , initSheet);
   
 		mySheet.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
 		mySheet.SetSheetHeight(700);
+		
+		
+		//아이비시트2 
+		mySheet2.RemoveAll();
+		var initSheet2 = {};
+		initSheet2.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0};
+		initSheet2.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
+		initSheet2.Cols = [
+			
+	     	{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
+	        {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},	
+			{Header:"코드",Type:"Text",SaveName:"admin_LIST_CODE",KeyField:1},			
+			{Header:"관리내역명",Type:"Text",SaveName:"admin_LIST_NAME"}					
+		
+		];   
+		IBS_InitSheet( mySheet2 , initSheet2);
+  
+		mySheet2.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
+		mySheet2.SetSheetHeight(700);
+		
+		
+		
+		
 		mySheet.DoSearch("${contextPath}/sm/p0002/searchList.do");
 	}
 	
@@ -301,89 +314,11 @@ border-radius: 2px;
 	</div>
 
 <div class="title"> 
-<header> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 등록정보관리 : 사업장등록</header>
+<header> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 기초환경설정 : 인사기초코드등록</header>
 </div>
 
 	<div class="left"><script>createIBSheet("mySheet", "100%", "100%");</script></div>
-	 
-	 
-	 <form name="form" id="form" method="post">
-	 <div class="right" >
-		<h3 class="innerheader">기본정보</h3>
-		<table>
-			<tr>
-				<td>사업자등록번호</td>
-				<td><input type="hidden" name="myRow"></td>
-				<td><input type="text" name="site_RESISTRATION_NUMBER"
-					maxlength="12" placeholder="___-__-_____" style="background: #F8FAE6;"></td>
-			</tr>
-			<tr>
-				<td>법인등록번호</td>
-				<td></td>
-				<td><input type="text" name="site_CORPARATION_NUMBER"
-				maxlength="14" placeholder="______-_______" ></td>
-			</tr>
-			<tr>
-				<td>대표자명</td>
-				<td></td>
-				<td><input type="text" name="site_REPRESENTATIVE_NAME" style="background: #F8FAE6;"></td>
-			</tr>
-			<tr>
-				<td>사업장우편번호</td>
-				<td></td>
-				<td><input type="text" name="site_ZIP_CODE" id="site_ZIP_CODE" style="width: 50px;"><a href="javascript:goPopup();"><i class="fa fa-map-o" > 주소 검색</i></a></td>
-			</tr>
-			<tr>
-				<td>사업장주소</td>
-				<td></td>
-				<td><input type="text" name="site_ADDRESS" id="site_ADDRESS" style="width: 400px;background: #F8FAE6;"></td>
-			</tr>
-			<tr>
-				<td>사업장번지</td>
-				<td></td>
-				<td><input type="text" name="site_ADDRESS_DETAIL"  id="site_ADDRESS_DETAIL" style="width: 400px;"></td>
-			</tr>
-			<tr>
-				<td>사업장전화번호</td>
-				<td></td>
-				<td><input type="text" name="site_CONTACT" id="site_CONTACT" placeholder="__-___-____" class="siteNUM" maxlength="13"></td>
-			</tr>
-			<tr>
-				<td>사업장팩스</td>
-				<td></td>
-				<td><input type="text" name="site_FAX" id="site_FAX" placeholder="__-___-____" class="siteNUM" maxlength="13" ></td>
-			</tr>
-			<tr>
-				<td>업태</td>
-				<td></td>
-				<td><input type="text" name="site_CATEGORY" style="background: #F8FAE6;"></td>
-			</tr>
-			<tr>
-				<td>종목</td>
-				<td></td>
-				<td><input type="text" name="site_TYPE" style="background: #F8FAE6;"></td>
-			</tr>
-			<tr>
-				<td>개업연월일</td>
-				<td></td>
-				<td><input type="date" name="site_OPENBUSINESS_DATE" style="width: 140px;"></td>
-			</tr>
-			<tr>
-				<td>폐업연월일</td>
-				<td></td>
-				<td><input type="date" name="site_CLOSEBUSINESS_DATE" style="width: 140px;"></td>
-			</tr>
-			<tr>
-				<td>본점여부</td>
-				<td></td>
-				<td><select name=site_BUSINESS_AVAILABLE style="background: #F8FAE6;"><option value='Y' selected>여</option><option value='N' >부</option></select></td>
-			</tr>
-
-		</table>
-	</div>
-
-</form>
-
+	<div class="right"><script>createIBSheet("mySheet2", "100%", "100%");</script></div>
 
 
 </body>
