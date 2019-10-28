@@ -11,6 +11,8 @@
 <script src="${contextPath}/resources/ibsheet/ibsheetinfo.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibsheet.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibleaders.js"></script>
+<script src="${contextPath}/resources/maskedit/ibmaskedit.js"></script>
+<script src="${contextPath}/resources/maskedit/ibmaskeditinfo.js"></script>
 <script language="javascript">
 
 	/*Sheet 기본 설정 */
@@ -115,34 +117,32 @@
 	
 	//Formating
 	$(document).ready(function () {
+   
+ //사업자등록번호
+   $('input[name=site_RESISTRATION_NUMBER]').IBMaskEdit('999-##-9##9',{	
+		   unmaskOnSubmit: true,
+	   	   passwordChar:"*",
+	   	   rules:{
+	   		   "#":{
+	   			   exp:"[0-9]",
+	   			   password:true
+	   		   }
+	   	   }
+		});
+   //법인등록번호
+	   $('input[name=site_CORPARATION_NUMBER]').IBMaskEdit('999999-9#####9',{	
+		   unmaskOnSubmit: true,
+	   	   passwordChar:"*",
+	   	   rules:{
+	   		   "#":{
+	   			   exp:"[0-9]",
+	   			   password:true
+	   		   }
+	   	   }
+		});
 	
-		//사업자등록번호
+   //전화번호,팩스
    $(function () { 
-	   $('input[name=site_RESISTRATION_NUMBER]').keydown(function (event) {
-           var key = event.charCode || event.keyCode || 0;
-           $text = $(this); 
-           if (key !== 8 && key !== 9) {
-               if ($text.val().length === 3) {
-                   $text.val($text.val() + '-');
-               }
-               if ($text.val().length === 6) {
-                   $text.val($text.val() + '-');
-               }
-           }
-           return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
-       })
-       //법인등록번호
-	   $('input[name=site_CORPARATION_NUMBER]').keydown(function (event) {
-           var key = event.charCode || event.keyCode || 0;
-           $text = $(this); 
-           if (key !== 8 && key !== 9) {
-               if ($text.val().length === 6) {
-                   $text.val($text.val() + '-');
-               }	    
-           }
-             return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
-         })
-          //전화번호,팩스
          $('.siteNUM').keydown(function (event) {
         var key = event.charCode || event.keyCode || 0;
         $text = $(this);
@@ -166,7 +166,9 @@
         }
         return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
     })
-   });
+   }); 
+ 
+	   
 });//document.ready
 	
 
@@ -308,12 +310,12 @@ border-radius: 2px;
 			<tr>
 				<td>사업장전화번호</td>
 				<td></td>
-				<td><input type="text" name="site_CONTACT" id="site_CONTACT" class="siteNUM" placeholder="__-___-____" maxlength="13"></td>
+				<td><input type="text" name="site_CONTACT" id="site_CONTACT" placeholder="__-___-____" class="siteNUM" maxlength="13"></td>
 			</tr>
 			<tr>
 				<td>사업장팩스</td>
 				<td></td>
-				<td><input type="text" name="site_FAX" id="site_FAX" class="siteNUM" placeholder="__-___-____" maxlength="13"></td>
+				<td><input type="text" name="site_FAX" id="site_FAX" placeholder="__-___-____" class="siteNUM" maxlength="13" ></td>
 			</tr>
 			<tr>
 				<td>업태</td>
