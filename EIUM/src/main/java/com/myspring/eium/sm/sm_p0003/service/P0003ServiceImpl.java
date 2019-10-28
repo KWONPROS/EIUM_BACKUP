@@ -32,16 +32,16 @@ public class P0003ServiceImpl implements P0003Service {
 	@Override
 	public void saveData(Map<String, String[]> dataMap) throws DataAccessException {
 		String[] status = dataMap.get("Status");
-		int length = status.length; // row��
+		int length = status.length; // row수
 		int i = 0;
 		
 		for(String str : status) {
-			Map<String, String> row = getRow(dataMap, length, i); // ���� Index�� Row Map
-			if("I".equals(str)) { // �߰�
+			Map<String, String> row = getRow(dataMap, length, i); // 현재 Index의 Row Map
+			if("I".equals(str)) { // 추가
 				p0003DAO.insertData(row);
-			}else if("U".equals(str)) { // ����
+			}else if("U".equals(str)) { // 수정
 				p0003DAO.updateData(row);
-			}else if("D".equals(str)) { // ����
+			}else if("D".equals(str)) { // 삭제
 				p0003DAO.deleteData(row);
 			}
 			i++;

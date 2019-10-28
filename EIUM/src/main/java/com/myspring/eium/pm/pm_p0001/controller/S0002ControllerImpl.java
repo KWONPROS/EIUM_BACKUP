@@ -58,13 +58,13 @@ public class S0002ControllerImpl implements S0002Controller {
 	@ResponseBody
 	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		Map<String, Object> searchMap = new HashMap<String, Object>(); // �˻�����
-		Map<String, Object> resultMap = new HashMap<String, Object>(); // ��ȸ���
+		Map<String, Object> searchMap = new HashMap<String, Object>(); // 占싯삼옙占쏙옙占쏙옙
+		Map<String, Object> resultMap = new HashMap<String, Object>(); // 占쏙옙회占쏙옙占�
 		
-		// �˻����Ǽ���
+		// 검색조건설정
 		searchMap.put("p_cust_id", request.getParameter("p_cust_id"));
 		
-		//������ ��ȸ
+		//데이터 조회
 		List<S0002VO> data = s0002Service.searchList(searchMap);
         resultMap.put("Data", data);
     	System.out.println("resultMap::::"+resultMap);
@@ -76,8 +76,8 @@ public class S0002ControllerImpl implements S0002Controller {
 	@ResponseBody
 	public String searchList2(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-        String str = "{\"Data\":[{\"ID\":\"�װ͸��� �� ����\",\"PWD\":\"Keys to the Heart\",\"NAME\":\"2017\",\"EMAIL\":\"�ѱ�\",\"JOINDATE\":\"20190101\",\"NUM\":\"1\"}]}";
-        //JSON ��ȯ 
+        String str = "{\"Data\":[{\"ID\":\"그것만이 내 세상\",\"PWD\":\"Keys to the Heart\",\"NAME\":\"2017\",\"EMAIL\":\"한국\",\"JOINDATE\":\"20190101\",\"NUM\":\"1\"}]}";
+        //JSON 반환 
         return str;
 	}
 	
@@ -86,10 +86,10 @@ public class S0002ControllerImpl implements S0002Controller {
 	@ResponseBody
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		Map<String, String[]> dataMap = new HashMap<String, String[]>(); // ������Data
-		Map<String, Object> resultMap = new HashMap<String, Object>(); // ó�����
+		Map<String, String[]> dataMap = new HashMap<String, String[]>(); // 占쏙옙占쏙옙占쏙옙Data
+		Map<String, Object> resultMap = new HashMap<String, Object>(); // 처占쏙옙占쏙옙占�
 		
-		// ���� Data �����ϱ�
+		// 저장 Data 추출하기
 		Enumeration enu = request.getParameterNames();
 		while (enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
@@ -101,10 +101,10 @@ public class S0002ControllerImpl implements S0002Controller {
 		try {
 			s0002Service.saveData(dataMap);	
 			result.put("Code","0");
-			result.put("Message","����Ǿ����ϴ�");
+			result.put("Message","저장되었습니다");
 		}catch(Exception e) {
 			result.put("Code","-1");
-			result.put("Message","���忡 �����Ͽ����ϴ�");
+			result.put("Message","저장에 실패하였습니다");
 			e.printStackTrace();
 		}
 		
