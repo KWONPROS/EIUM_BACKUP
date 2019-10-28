@@ -20,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.myspring.eium.sm.sm_p0001.service.P0001Service;
 import com.myspring.eium.sm.sm_p0001.vo.P0001VO;
 
-@Controller("P0001Controller")
+@Controller
 public class P0001ControllerImpl implements P0001Controller {
 	private static final Logger logger = LoggerFactory.getLogger(P0001ControllerImpl.class);
 	
@@ -31,15 +31,15 @@ public class P0001ControllerImpl implements P0001Controller {
 	P0001VO p0001VO;
 	
 	@Override
-	@RequestMapping(value = "/p0001/searchInit.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/sm/p0001/searchInit.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("/sm/p0001_home");
+		ModelAndView mav = new ModelAndView("sm/p0001_home");
 		return mav;
 	} 
 	
 	@Override
-	@RequestMapping(value = "/p0001/searchList.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/sm/p0001/searchList.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
@@ -70,7 +70,7 @@ public class P0001ControllerImpl implements P0001Controller {
 	 */
 	
 	@Override
-	@RequestMapping(value = "/p0001/saveData.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/sm/p0001/saveData.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
@@ -100,9 +100,5 @@ public class P0001ControllerImpl implements P0001Controller {
         return resultMap;
 	}
 
-	@Override
-	public String searchList2(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 }

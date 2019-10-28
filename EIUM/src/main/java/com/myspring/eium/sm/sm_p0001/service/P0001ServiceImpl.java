@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.myspring.eium.sm.sm_p0001.dao.P0001DAO;
 import com.myspring.eium.sm.sm_p0001.vo.P0001VO;
 
-@Service("P0001Service")
+@Service
 @Transactional(propagation = Propagation.REQUIRED)
 public class P0001ServiceImpl implements P0001Service {
 	
@@ -28,7 +28,7 @@ public class P0001ServiceImpl implements P0001Service {
 
 	@Override
 	public void saveData(Map<String, String[]> dataMap)  throws DataAccessException  {
-		String[] status = dataMap.get("sStatus");
+		String[] status = dataMap.get("STATUS");
 		System.out.println("status :"+ status);
 		int length = status.length; // row수
 		System.out.println("P0001WerviceImpl-length:"+length);

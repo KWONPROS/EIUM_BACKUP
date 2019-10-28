@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.myspring.eium.sm.sm_p0001.vo.P0001VO;
 
 
-@Repository("P0001DAO")
+@Repository
 public class P0001DAOImpl implements P0001DAO{
 
 	@Autowired
@@ -19,7 +19,7 @@ public class P0001DAOImpl implements P0001DAO{
 	
 	@Override
 	public List<P0001VO> searchList(Map<String, Object> searchMap) throws DataAccessException {
-		List<P0001VO> list = sqlSession.selectList("sm.p0001.searchList", searchMap);
+		List<P0001VO> list = sqlSession.selectList("mapper.sm_p0001.searchList", searchMap);
 		System.out.println("P0001DAOImpl++++++dao"+searchMap);
 		return list;
 	}

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="sm.p0001">
+<mapper namespace="mapper.sm_p0001">
 	<resultMap id="p0001Result01" type="p0001VO">
 		<result property="company_CODE" column="COMPANY_CODE" />
 		<result property="company_NAME" column="COMPANY_NAME" />
