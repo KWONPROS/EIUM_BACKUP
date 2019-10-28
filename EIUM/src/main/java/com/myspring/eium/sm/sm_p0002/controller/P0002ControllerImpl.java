@@ -46,7 +46,7 @@ public class P0002ControllerImpl implements P0002Controller {
 	@RequestMapping(value = "/sm/p0002/searchInit.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("sm/p0002_home");
+		ModelAndView mav = new ModelAndView("sm/sm_p0002/p0002_home");
 	
 		return mav;
 	} 
@@ -104,7 +104,7 @@ public class P0002ControllerImpl implements P0002Controller {
 	@Override
 	@RequestMapping(value = "/sm/p0002/findAddress.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView findAddress(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView mav = new ModelAndView("/sm/p0002_home_p01");
+		ModelAndView mav = new ModelAndView("/sm/sm_p0002/p0002_home_p01");
 		return mav;
 
 	}
