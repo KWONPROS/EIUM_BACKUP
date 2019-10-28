@@ -8,5 +8,8 @@
 				<typeAlias type="com.myspring.eium.sm.sm_p0001.vo.P0001VO" alias="P0001VO" /> 
 				<typeAlias type="com.myspring.eium.sm.sm_p0002.vo.P0002VO" alias="P0002VO" />
 				<typeAlias type="com.myspring.eium.sm.sm_p0003.vo.P0003VO" alias="P0003VO" />
+				
+				<typeAlias type="com.myspring.eium.hm.hm_p0003.vo.P0003VO" alias="P0003VO" />
+				
 	</typeAliases>
 </configuration>
