@@ -113,8 +113,10 @@
 	}
 	
 	
-	//사업자,법인번호 유효성 검사
+	//Formating
 	$(document).ready(function () {
+	
+		//사업자등록번호
    $(function () {    
             $('input[name=site_RESISTRATION_NUMBER]').keydown(function (event) {
              var key = event.charCode || event.keyCode || 0;
@@ -130,6 +132,7 @@
              return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
          })
    });
+		//법인등록번호
    $(function () {            
 	   $('input[name=site_CORPARATION_NUMBER]').keydown(function (event) {
            var key = event.charCode || event.keyCode || 0;
@@ -142,9 +145,18 @@
              return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
          })
    });
-
-});
-
+   
+		//전화번호,팩스
+	 $(function () {            
+		   $('input[name=site_CONTACT]','input[name=site_FAX]').keydown(function (event) {
+			   $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})/,"$1-$2-$3").replace("--", "-"));
+			   
+		   })
+	 });
+		
+});//document.ready
+	
+	
 	
 	
 	//도로명주소검색 API
@@ -222,6 +234,7 @@ height: 25px;
 width: 130px;
 height: 20px;
 padding-left: 10px;
+margin-right:10px;
 box-sizing: border-box;
 border: 1px solid #CCCCCC;
 border-radius: 2px;
@@ -269,7 +282,7 @@ border-radius: 2px;
 			<tr>
 				<td>사업장우편번호</td>
 				<td></td>
-				<td><input type="text" name="site_ZIP_CODE" id="site_ZIP_CODE" style="width: 50px;"><i class="fa fa-map-marked" onClick="goPopup();"></i></td>
+				<td><input type="text" name="site_ZIP_CODE" id="site_ZIP_CODE" style="width: 50px;"><a href="javascript:goPopup();"><i class="fa fa-map-o" > 주소 검색</i></a></td>
 			</tr>
 			<tr>
 				<td>사업장주소</td>
@@ -284,12 +297,12 @@ border-radius: 2px;
 			<tr>
 				<td>사업장전화번호</td>
 				<td></td>
-				<td><input type="text" name="site_CONTACT"></td>
+				<td><input type="text" name="site_CONTACT" id="site_CONTACT" placeholder="__-___-____" maxlength="13"></td>
 			</tr>
 			<tr>
 				<td>사업장팩스</td>
 				<td></td>
-				<td><input type="text" name="site_FAX"></td>
+				<td><input type="text" name="site_FAX" id="site_FAX" placeholder="__-___-____" maxlength="13"></td>
 			</tr>
 			<tr>
 				<td>업태</td>
