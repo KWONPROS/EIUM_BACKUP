@@ -27,29 +27,29 @@
 				{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},
 				{Header:"회사코드",Type:"Text",SaveName:"company_CODE",MinWidth:80, KeyField:1, Align:"Center"},
 				{Header:"회사명",Type:"Text",SaveName:"company_NAME",MinWidth:170, KeyField:1, Align:"Center"},			
-				{Header:"구분",Type:"Text",SaveName:"company_YN", KeyField:1},			
-				{Header:"사업자 등록번호",Type:"Text",SaveName:"company_RESISTRATION_NUMBER", KeyField:1},			
-				{Header:"법인등록번호",Type:"Text",SaveName:"company_CORPARATION_NUMBER", KeyField:1},
-				{Header:"대표자성명",Type:"Text",SaveName:"company_REPRESENTATIVE_NAME", KeyField:1},
-				{Header:"외국인여부",Type:"Text",SaveName:"company_REPRESENTATIVE_FOREIGN"},			
-				{Header:"주민등록번호",Type:"Text",SaveName:"company_REPRESENTATIVE_NUMBER", KeyField:1},			
-				{Header:"본점우편번호",Type:"Text",SaveName:"company_ZIP_CODE"},			
-				{Header:"본점주소",Type:"Text",SaveName:"company_ADDRESS", KeyField:1},			
-				{Header:"본점번지",Type:"Text",SaveName:"company_ADDRESS_DETAIL"},			
-				{Header:"본점전화번호",Type:"Text",SaveName:"company_CONTACT"},			
-				{Header:"본점 FAX",Type:"Text",SaveName:"company_FAX"},			
-				{Header:"업체",Type:"Text",SaveName:"company_CATEGORY", KeyField:1},			
-				{Header:"종목",Type:"Text",SaveName:"company_TYPE", KeyField:1},
-				{Header:"설립연월일",Type:"Date",SaveName:"company_ESTABLISHED_DATE"},
-				{Header:"개업연월일",Type:"Date",SaveName:"company_OPENBUSINESS_DATE"},
-				{Header:"폐업연월일",Type:"Date",SaveName:"company_CLOSEBUSINESS_DATE"},
-				{Header:"사용여부",Type:"Text",SaveName:"company_BUSINESS_YN", KeyField:1}
+				{Header:"구분",Type:"Combo",SaveName:"company_YN", KeyField:1, MinWidth:80, Edit: 1, ComboText:"0. 법인|1. 개인", ComboCode:"0|1", Align:"Center"},			
+				{Header:"사업자 등록번호",Type:"Text",SaveName:"company_RESISTRATION_NUMBER", KeyField:1, Hidden:1},			
+				{Header:"법인등록번호",Type:"Text",SaveName:"company_CORPARATION_NUMBER", KeyField:1, Hidden:1},
+				{Header:"대표자성명",Type:"Text",SaveName:"company_REPRESENTATIVE_NAME", KeyField:1, Hidden:1},
+				{Header:"외국인여부",Type:"Text",SaveName:"company_REPRESENTATIVE_FOREIGN",Hidden:1},			
+				{Header:"주민등록번호",Type:"Text",SaveName:"company_REPRESENTATIVE_NUMBER", KeyField:1, Hidden:1},			
+				{Header:"본점우편번호",Type:"Text",SaveName:"company_ZIP_CODE" ,Hidden:1},			
+				{Header:"본점주소",Type:"Text",SaveName:"company_ADDRESS", KeyField:1 ,Hidden:1},			
+				{Header:"본점번지",Type:"Text",SaveName:"company_ADDRESS_DETAIL", KeyField:1 ,Hidden:1},			
+				{Header:"본점전화번호",Type:"Text",SaveName:"company_CONTACT" ,Hidden:1},			
+				{Header:"본점 FAX",Type:"Text",SaveName:"company_FAX" ,Hidden:1},			
+				{Header:"업체",Type:"Text",SaveName:"company_CATEGORY", KeyField:1 ,Hidden:1},			
+				{Header:"종목",Type:"Text",SaveName:"company_TYPE", KeyField:1 ,Hidden:1},
+				{Header:"설립연월일",Type:"Date",SaveName:"company_ESTABLISHED_DATE" ,Hidden:1},
+				{Header:"개업연월일",Type:"Date",SaveName:"company_OPENBUSINESS_DATE" ,Hidden:1},
+				{Header:"폐업연월일",Type:"Date",SaveName:"company_CLOSEBUSINESS_DATE" ,Hidden:1},
+				{Header:"사용여부",Type:"Text",SaveName:"company_BUSINESS_YN", KeyField:1 ,Hidden:1}
 				
 				];
 			IBS_InitSheet(mySheet, initSheet);
 			
 			mySheet.SetEditableColorDiff(1); //편집불가능한 셀 표시 구분
-			mySheet.SetSheetHeight(730);
+			/* mySheet.SetSheetHeight(1000); */
 			mySheet.DoSearch("${contextPath}/sm/p0001/searchList.do");
 		}
 	
@@ -66,6 +66,23 @@
 			mySheet.RemoveAll();
 			break;
 		case "save": //저장
+			mySheet.SetCellValue($('input[name=myRow]').val(),5,$('input[name=company_RESISTRATION_NUMBER]').val());
+			mySheet.SetCellValue($('input[name=myRow]').val(),6,$('input[name=company_CORPARATION_NUMBER]').val());
+			mySheet.SetCellValue($('input[name=myRow]').val(),7,$('input[name=company_REPRESENTATIVE_NAME]').val());
+			mySheet.SetCellValue($('input[name=myRow]').val(),8,$('select[name=company_REPRESENTATIVE_FOREIGN]').val());
+			mySheet.SetCellValue($('input[name=myRow]').val(),9,$('input[name=company_REPRESENTATIVE_NUMBER]').val());
+			mySheet.SetCellValue($('input[name=myRow]').val(),10,$('input[name=company_ZIP_CODE]').val());
+			mySheet.SetCellValue($('input[name=myRow]').val(),11,$('input[name=company_ADDRESS]').val());
+			mySheet.SetCellValue($('input[name=myRow]').val(),12,$('input[name=company_ADDRESS_DETAIL]').val());
+			mySheet.SetCellValue($('input[name=myRow]').val(),13,$('input[name=company_CONTACT]').val());
+			mySheet.SetCellValue($('input[name=myRow]').val(),14,$('input[name=company_FAX]').val());
+			mySheet.SetCellValue($('input[name=myRow]').val(),15,$('input[name=company_CATEGORY]').val());
+			mySheet.SetCellValue($('input[name=myRow]').val(),16,$('input[name=company_TYPE]').val());
+			mySheet.SetCellValue($('input[name=myRow]').val(),17,$('input[name=company_ESTABLISHED_DATE]').val());
+			mySheet.SetCellValue($('input[name=myRow]').val(),18,$('input[name=company_OPENBUSINESS_DATE]').val());
+			mySheet.SetCellValue($('input[name=myRow]').val(),19,$('input[name=company_CLOSEBUSINESS_DATE]').val());
+			mySheet.SetCellValue($('input[name=myRow]').val(),20,$('select[name=company_BUSINESS_YN]').val()); 
+			
 			var tempStr = mySheet.GetSaveString();
 			alert("서버로 전달되는 문자열 확인 : " + tempStr);
 			mySheet.DoSave("${contextPath}/sm/p0001/saveData.do");		
@@ -77,6 +94,29 @@
 		case "insert": //신규행 추가
 			var row = mySheet.DataInsert();
 			break;
+		}
+	}
+	
+	//로우 클릭시
+	function mySheet_OnClick(Row, Col){
+		if(Row!=0){
+			$('input[name=myRow]').val(Row);
+			$('input[name=company_RESISTRATION_NUMBER]').val(mySheet.GetCellValue(Row,5));
+		    $('input[name=company_CORPARATION_NUMBER]').val(mySheet.GetCellValue(Row,6));
+		    $('input[name=company_REPRESENTATIVE_NAME]').val(mySheet.GetCellValue(Row,7));
+		    $('select[name=company_REPRESENTATIVE_FOREIGN]').val(mySheet.GetCellValue(Row,8));
+		    $('input[name=company_REPRESENTATIVE_NUMBER]').val(mySheet.GetCellValue(Row,9));
+		    $('input[name=company_ZIP_CODE]').val(mySheet.GetCellValue(Row,10));
+		    $('input[name=company_ADDRESS]').val(mySheet.GetCellValue(Row,11));
+		    $('input[name=company_ADDRESS_DETAIL]').val(mySheet.GetCellValue(Row,12));
+		    $('input[name=company_CONTACT]').val(mySheet.GetCellValue(Row,13));
+		    $('input[name=company_FAX]').val(mySheet.GetCellValue(Row,14));
+		    $('input[name=company_CATEGORY]').val(mySheet.GetCellValue(Row,15));
+		    $('input[name=company_TYPE]').val(mySheet.GetCellValue(Row,16));
+		    $('input[name=company_ESTABLISHED_DATE]').val(mySheet.GetCellValue(Row,17));
+		    $('input[name=company_OPENBUSINESS_DATE]').val(mySheet.GetCellValue(Row,18));
+		    $('input[name=company_CLOSEBUSINESS_DATE]').val(mySheet.GetCellValue(Row,19));
+		    $('select[name=company_BUSINESS_YN]').val(mySheet.GetCellValue(Row,20));
 		}
 	}
 	// 조회완료 후 처리할 작업
@@ -94,18 +134,58 @@
 		}	
 	}
 	
-	//도로명주소검색 API
+	//도로명주소검색 API //변경!!!!!!!!!!!!!!!!주의
 	function goPopup(){
 		var pop = window.open("findAddress.do","addressPopup","width=570,height=420, scrollbars=yes, resizable=yes"); 
 	}
 
 	function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
 
-		document.form.site_ZIP_CODE.value = zipNo;	
-		document.form.site_ADDRESS.value = roadAddrPart1;	
-		document.form.site_ADDRESS_DETAIL.value = addrDetail;	
+		document.form.company_ZIP_CODE.value = zipNo;	
+		document.form.company_ADDRESS.value = roadAddrPart1;	
+		document.form.company_ADDRESS_DETAIL.value = addrDetail;	
 	}
 </script>
+
+<style type="text/css">
+.left{
+position: absolute;
+top: 145px;
+left: 50px;
+}
+.right{
+position: relative;
+top: 10px;
+left: 500px;
+width: 700px;
+background: #EDF0F5;
+border-radius: 10px;
+}
+
+.right table{
+font-size:13px;
+font-weight:bold;
+position: relative;
+left: 40px;
+padding: 20px;
+}
+.right table tr td:nth-child(1){
+text-align:right;
+}
+.right table tr td:nth-child(2){
+width: 20px;
+height: 25px;
+}
+.right table tr td:nth-child(3) input{
+width: 130px;
+height: 20px;
+padding-left: 10px;
+margin-right:10px;
+box-sizing: border-box;
+border: 1px solid #CCCCCC;
+border-radius: 2px;
+} 
+</style>
 
 </head>
 <body onload="LoadPage()">
@@ -129,22 +209,16 @@
 	</div>
 
 	<div class="clear hidden"></div>
+	<div class="left">
 	<div class="ib_product">
 		<script>
 			//IBSheet 객체 생성 (객체 id, 너비, 높이)
 			createIBSheet("mySheet", "100%", "100%");
 		</script>
 	</div>
-	
+	</div>
 	<form name="form" id="form" method="post">
-		<div class="right">
-			<table>
-				<tr>
-					<td>
-				
-			
-			</table>
-		</div>
+		
 	<div class="right">
 		<table>
 			<tr>
@@ -177,7 +251,7 @@
 			<tr>
 				<td>본점우편번호</td>
 				<td></td>
-				<td><input type="text" name="company_ZIP_CODE" id="company_ZIP_CODE" style="width: 50px;"><i class="fa fa-map-marked" onClick="goPopup();"></i></td>
+				<td><input type="text" name="company_ZIP_CODE" id="company_ZIP_CODE" style="width: 50px;"><a href="javascript:goPopup();"><i class="fa fa-map-o" > 주소 검색</i></a></td>
 			</tr>
 			<tr>
 				<td>본점주소</td>

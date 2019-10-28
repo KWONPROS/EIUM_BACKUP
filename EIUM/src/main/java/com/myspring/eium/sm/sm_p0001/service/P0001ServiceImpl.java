@@ -31,7 +31,7 @@ public class P0001ServiceImpl implements P0001Service {
 		String[] status = dataMap.get("STATUS");
 		System.out.println("status :"+ status);
 		int length = status.length; // row수
-		System.out.println("P0001WerviceImpl-length:"+length);
+		System.out.println("P0001ServiceImpl-length:"+length);
 		int i = 0;
 		
 		for(String str : status) {
@@ -47,7 +47,7 @@ public class P0001ServiceImpl implements P0001Service {
 		}
 	}
 	
-	private Map getRow(Map<String, String[]> dataMap, int length, int index) {
+	private Map<String, String> getRow(Map<String, String[]> dataMap, int length, int index) {
 		Map<String, String> row = new HashMap<String, String>();
 		for(String name : dataMap.keySet()) {
 			String[] data = dataMap.get(name);

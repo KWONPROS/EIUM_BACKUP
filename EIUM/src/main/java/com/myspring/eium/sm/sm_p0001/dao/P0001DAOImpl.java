@@ -26,19 +26,19 @@ public class P0001DAOImpl implements P0001DAO{
 
 	@Override
 	public void insertData(Map<String, String> row) throws DataAccessException {
-		sqlSession.update("sm.p0001.insertData", row);
+		sqlSession.update("mapper.sm_p0001.insertData", row);
 		
 	}
 
 	@Override
 	public void updateData(Map<String, String> row) throws DataAccessException {
-		sqlSession.update("sm.p0001.updateData", row);
+		sqlSession.update("mapper.sm_p0001.updateData", row);
 		
 	}
 
 	@Override
 	public void deleteData(Map<String, String> row) throws DataAccessException {
-		sqlSession.update("sm.p0001.deleteData", row);
+		sqlSession.update("mapper.sm_p0001.deleteData", row);
 		
 	}
 

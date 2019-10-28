@@ -100,5 +100,13 @@ public class P0001ControllerImpl implements P0001Controller {
         return resultMap;
 	}
 
+	@Override
+	@RequestMapping(value = "/sm/p0001/findAddress.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView findAddress(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView("/sm/p0001_home_p01");
+		return mav;
+
+	}
+
 	
 }
