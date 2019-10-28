@@ -41,7 +41,7 @@
 			{Header:"본점여부",Type:"Text",SaveName:"site_BUSINESS_AVAILABLE",KeyField:1,Hidden:1}
 		];   
 		IBS_InitSheet( mySheet , initSheet);
-
+  
 		mySheet.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
 		mySheet.SetSheetHeight(700);
 		mySheet.DoSearch("${contextPath}/sm/p0002/searchList.do");
