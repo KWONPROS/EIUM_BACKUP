@@ -11,8 +11,6 @@
 <script src="${contextPath}/resources/ibsheet/ibsheetinfo.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibsheet.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibleaders.js"></script>
-<script src="${contextPath}/resources/maskedit/ibmaskedit.js"></script>
-<script src="${contextPath}/resources/maskedit/ibmaskeditinfo.js"></script>
 <script language="javascript">
 
 	/*Sheet 기본 설정 */
@@ -88,8 +86,10 @@
 	function mySheet_OnClick(Row, Col) {
 		if(Row!=0){
 		$('input[name=myRow]').val(Row);
-      $('input[name=site_RESISTRATION_NUMBER]').val(mySheet.GetCellValue(Row,4));
-      $('input[name=site_CORPARATION_NUMBER]').val(mySheet.GetCellValue(Row,5));
+	
+	
+       $('input[name=site_RESISTRATION_NUMBER]').val(mySheet.GetCellValue(Row,4));
+      $('input[name=site_CORPARATION_NUMBER]').val(mySheet.GetCellValue(Row,5)); 
       $('input[name=site_REPRESENTATIVE_NAME]').val(mySheet.GetCellValue(Row,6));
       $('input[name=site_ZIP_CODE]').val(mySheet.GetCellValue(Row,7));
       $('input[name=site_ADDRESS]').val(mySheet.GetCellValue(Row,8));
@@ -118,28 +118,36 @@
 	//Formating
 	$(document).ready(function () {
    
- //사업자등록번호
-   $('input[name=site_RESISTRATION_NUMBER]').IBMaskEdit('999-##-9##9',{	
-		   unmaskOnSubmit: true,
-	   	   passwordChar:"*",
-	   	   rules:{
-	   		   "#":{
-	   			   exp:"[0-9]",
-	   			   password:true
-	   		   }
-	   	   }
-		});
-   //법인등록번호
-	   $('input[name=site_CORPARATION_NUMBER]').IBMaskEdit('999999-9#####9',{	
-		   unmaskOnSubmit: true,
-	   	   passwordChar:"*",
-	   	   rules:{
-	   		   "#":{
-	   			   exp:"[0-9]",
-	   			   password:true
-	   		   }
-	   	   }
-		});
+		  //사업자등록번호
+		   $(function () {    
+		            $('input[name=site_RESISTRATION_NUMBER]').keydown(function (event) {
+		             var key = event.charCode || event.keyCode || 0;
+		             $text = $(this); 
+		             if (key !== 8 && key !== 9) {
+		                 if ($text.val().length === 3) {
+		                     $text.val($text.val() + '-');
+		                 }
+		                 if ($text.val().length === 6) {
+		                     $text.val($text.val() + '-');
+		                 }
+		             }
+		             return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
+		         })
+		   });
+		      //법인등록번호
+		   $(function () {            
+		      $('input[name=site_CORPARATION_NUMBER]').keydown(function (event) {
+		           var key = event.charCode || event.keyCode || 0;
+		           $text = $(this); 
+		           if (key !== 8 && key !== 9) {
+		               if ($text.val().length === 6) {
+		                   $text.val($text.val() + '-');
+		               }       
+		           }
+		             return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
+		         })
+		   });
+
 	
    //전화번호,팩스
    $(function () { 
@@ -189,44 +197,64 @@
 <style type="text/css">
 
  .title {
+ 	width:100%;
 	color: #2C3E50;
 	font-weight: bold;
 	font-size: 20px;
-	margin: 10px 0px 20px 0px;
 	padding-left : 30px;
 	padding-bottom: 10px;
-	border-bottom: thin dashed #212121;
-}
-.buttons{
-	margin-bottom: 20px;
-	margin-right: 30px;
+	padding-top:20px;
+	border-top: thin solid #5E5E5E;
+	border-bottom: thin dashed #5E5E5E;
 	position: absolute;
-	right: 40px;
+	top: 50px;
+
 }
-.buttons .IBbutton {
+.leftbuttons{
+	margin-top:40px;
+	margin:10px;
+	position: absolute;
+	left: 0px;
+}
+.rightbuttons{
+	margin-top:40px;
+	margin:10px;
+	position: absolute;
+	right: 0px;
+}
+
+ .IBbutton {
 	font-size: 13px;
-	margin-left: 10px;
+	margin-left: 5px;
 	background-color: #2B69A0;
 	color: white;
 	padding: 5px 15px;
 	border-radius: 7px;
 	text-decoration: none;	
 }
-.buttons .IBbutton:hover {
+
+.IBbutton:hover {
 background-color: #2C3E50;
 }
 .left{
-position: absolute;
-top: 110px;
+position: relative;
+top: 130px;
 left: 60px;
 }
 .right{
 position: relative;
-top: 45px;
+top: -550px;
 left: 500px;
-width: 1100px;
+width: 900px;
 background: #EDF0F5;
 border-radius: 10px;
+}
+
+.innerheader{
+position:relative;
+margin:20px;
+top:20px;
+left:10px;
 }
 
 .right table{
@@ -234,7 +262,7 @@ font-size:13px;
 font-weight:bold;
 position: relative;
 left: 40px;
-padding: 20px;
+padding:10px;
 }
 .right table tr td:nth-child(1){
 text-align:right;
@@ -255,25 +283,33 @@ border-radius: 2px;
 
 </style>
 </head>
-<body onload="LoadPage()">
+<body onload="LoadPage()" style="overflow-x: hidden">
 
-<div class="title"> <header>등록정보관리 ▶ 사업장등록</header></div>
-    
-  
-    <div class="buttons">
-	  <a href="javascript:doAction('reload')" class="IBbutton">초기화</a>
-	  <a href="javascript:doAction('insert')" class="IBbutton">추가</a>
-	  <a href="javascript:doAction('search')" class="IBbutton">조회</a>
-	  <a href="javascript:doAction('save')" class="IBbutton">저장</a>
+
+
+ <div class="leftbuttons">
+		<a href="javascript:doAction('print')" class="IBbutton">인쇄</a> <a
+			href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
+	</div> 
+
+
+	<div class="rightbuttons">
+		<a href="javascript:doAction('reload')" class="IBbutton">초기화</a> <a
+			href="javascript:doAction('insert')" class="IBbutton">추가</a> <a
+			href="javascript:doAction('search')" class="IBbutton">조회</a> <a
+			href="javascript:doAction('save')" class="IBbutton">저장</a>
 	</div>
 
-	
+<div class="title"> 
+<header> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 등록정보관리 : 사업장등록</header>
+</div>
+
 	<div class="left"><script>createIBSheet("mySheet", "100%", "100%");</script></div>
 	 
 	 
 	 <form name="form" id="form" method="post">
 	 <div class="right" >
-	
+		<h3 class="innerheader">기본정보</h3>
 		<table>
 			<tr>
 				<td>사업자등록번호</td>
