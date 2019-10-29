@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.myspring.eium.sm.sm_p0001.dao.P0001DAO;
 import com.myspring.eium.sm.sm_p0001.vo.P0001VO;
 
-@Service
+@Service("sm_p0001Service")
 @Transactional(propagation = Propagation.REQUIRED)
 public class P0001ServiceImpl implements P0001Service {
 	

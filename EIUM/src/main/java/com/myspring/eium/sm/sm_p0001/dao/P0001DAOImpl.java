@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.myspring.eium.sm.sm_p0001.vo.P0001VO;
 
 
-@Repository
+@Repository("sm_p0001DAO")
 public class P0001DAOImpl implements P0001DAO{
 
 	@Autowired

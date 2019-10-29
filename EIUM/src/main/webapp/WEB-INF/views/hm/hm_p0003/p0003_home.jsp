@@ -281,7 +281,7 @@ left: 500px;
 	</div>
 
 <div class="title"> 
-<header> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 기초환경설정 : 인사기초코드등록</header>
+<header> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 기초환경설정 : 호봉테이블등록</header>
 </div>
 	<div class="left"><script>createIBSheet("mySheet", "100%", "100%");</script></div>
 	<div class="right"><script>createIBSheet("mySheet2", "100%", "100%");</script></div>

@@ -20,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.myspring.eium.sm.sm_p0001.service.P0001Service;
 import com.myspring.eium.sm.sm_p0001.vo.P0001VO;
 
-@Controller
+@Controller("sm_p0001Controller")
 public class P0001ControllerImpl implements P0001Controller {
 	private static final Logger logger = LoggerFactory.getLogger(P0001ControllerImpl.class);
 	
