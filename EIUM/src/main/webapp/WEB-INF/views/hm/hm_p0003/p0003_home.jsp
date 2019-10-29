@@ -36,7 +36,7 @@
 		mySheet.SetSheetHeight(700);
 		
 		
-		//아이비시트2 
+		//아이비시트2 -----------------------------------------------------------------------------------------------------
 		mySheet2.RemoveAll();
 		var initSheet2 = {};
 		initSheet2.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0};
@@ -209,7 +209,7 @@
 </script>
 <style type="text/css">
 
- .title {
+.title {
  	width:100%;
 	color: #2C3E50;
 	font-weight: bold;
@@ -235,7 +235,6 @@
 	position: absolute;
 	right: 0px;
 }
-
  .IBbutton {
 	font-size: 13px;
 	margin-left: 5px;
@@ -255,44 +254,12 @@ top: 130px;
 left: 60px;
 }
 .right{
-position: relative;
-top: -550px;
-left: 500px;
-width: 900px;
-background: #EDF0F5;
-border-radius: 10px;
+ position: relative;
+top: -570px;
+left: 500px; 
+
 }
 
-.innerheader{
-position:relative;
-margin:20px;
-top:20px;
-left:10px;
-}
-
-.right table{
-font-size:13px;
-font-weight:bold;
-position: relative;
-left: 40px;
-padding:10px;
-}
-.right table tr td:nth-child(1){
-text-align:right;
-}
-.right table tr td:nth-child(2){
-width: 20px;
-height: 25px;
-}
-.right table tr td:nth-child(3) input{
-width: 130px;
-height: 20px;
-padding-left: 10px;
-margin-right:10px;
-box-sizing: border-box;
-border: 1px solid #CCCCCC;
-border-radius: 2px;
-} 
 
 </style>
 </head>
@@ -316,10 +283,7 @@ border-radius: 2px;
 <div class="title"> 
 <header> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 기초환경설정 : 인사기초코드등록</header>
 </div>
-
 	<div class="left"><script>createIBSheet("mySheet", "100%", "100%");</script></div>
 	<div class="right"><script>createIBSheet("mySheet2", "100%", "100%");</script></div>
-
-
 </body>
 </html>
