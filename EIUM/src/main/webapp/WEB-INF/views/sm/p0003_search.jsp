@@ -13,6 +13,24 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>  
 <script type="text/javascript">
 var pageheightoffset = 200; //시트높이 계산용
+function setSite(){
+	
+	 siteName=document.getElementById("PsiteName").value;
+	 siteCode=document.getElementById("PsiteCode").value;
+	mySheet.SetCellText(row,col,siteCode);
+	mySheet.SetCellText(row,col+1,siteName);
+
+	
+};
+function setSector(){
+	
+	 sectorName=document.getElementById("PsectorName").value;
+	 sectorCode=document.getElementById("PsectorCode").value;
+	mySheet.SetCellText(row,col,sectorCode);
+	mySheet.SetCellText(row,col+1,sectorName);
+
+	
+};
 
 //sheet 기본설정
 function LoadPage(){
@@ -26,20 +44,38 @@ function LoadPage(){
 		{Header:"삭제	",Type:"DelCheck",Width:60,SaveName:"Delete",Align:"Center"},
 		{Header:"부서코드",Type:"Text",Width:100,SaveName:"department_CODE",Align:"Center",UpdateEdit:0},
 		{Header:"부서이름",Type:"Text",Width:100,SaveName:"department_NAME",Align:"Center"},
-		{Header:"부문코드",Type:"Text",Width:60,SaveName:"sector_CODE",Align:"Center"}, 
-		{Header:"부문명",Type:"Text",Width:150,SaveName:"sector_NAME",Align:"Center"},
+		{Header:"사업장코드",Type:"Text",Width:120,SaveName:"site_CODE",Align:"Center",InsertEdit:0}, 
+		{Header:"사업장이름",Type:"Text",Width:120,SaveName:"site_NAME",Align:"Center",InsertEdit:0}, 
+		{Header:"부문코드",Type:"Text",Width:60,SaveName:"sector_CODE",Align:"Center",InsertEdit:0}, 
+		{Header:"부문명",Type:"Text",Width:150,SaveName:"sector_NAME",Align:"Center",InsertEdit:0},
 		{Header:"사용기간",Type:"Text",Width:120,SaveName:"department_TERM",Align:"Center"},
-		{Header:"사업장코드",Type:"Text",Width:120,SaveName:"site_CODE",Align:"Center"}, 
-		{Header:"사업장이름",Type:"Text",Width:120,SaveName:"site_NAME",Align:"Center"}, 
+	
 
 		];
 	IBS_InitSheet(mySheet,initSheet);
 	mySheet.SetEditableColorDiff(1);
 	mySheet.SetActionMenu("엑셀 파일 저장")
-	
-	
 
 
+
+}
+
+function mySheet_OnDblClick(Row,Col,Value){
+	var status=mySheet.GetCellValue(Row,0);
+	console.log("row"+Row,"col"+Col);
+	row=Row;
+	col=Col;
+	
+	if(Col=="4"&&status=="I"){
+		
+	window.open("${contextPath}/sm/p0003/siteSearch_Init.do", "a", "width=500, height=700, left=100, top=50"); 
+
+	}
+	if (Col=="6"&&status=="I"){
+	window.open("${contextPath}/sm/p0003/sectorSearch_Init.do", "a", "width=500, height=700, left=100, top=50");	
+
+}
+	
 }
 function mySheet_OnSelectMenu(text,code){
 	if(text=="엑셀 파일 저장"){
@@ -51,7 +87,7 @@ function doAction(sAction){
 	case "search":      //조회
 
 		var param = FormQueryStringEnc(document.frm);
-		mySheet.DoSearch("${contextPath}/p0003/searchList.do", param);
+		mySheet.DoSearch("${contextPath}/sm/p0003/searchList.do", param);
 
 		break;
 	case "reload":
@@ -59,7 +95,7 @@ function doAction(sAction){
 		mySheet.RemoveAll();
 		break;
 	case "save":
-		mySheet.DoSave("${contextPath}/p0003/saveData.do")
+		mySheet.DoSave("${contextPath}/sm/p0003/saveData.do")
 		var tempStr = mySheet.GetSaveString();
 		alert("서버로 전달되는 문자열 확인 :"+tempStr);
 
@@ -93,7 +129,7 @@ function selectSite(){
 
 $.ajax({
 	
-    url:"${contextPath}/p0003/SiteList.do",//목록을 조회 할 url
+    url:"${contextPath}/sm/p0003/SiteList.do",//목록을 조회 할 url
 
 
     type:"POST",
@@ -126,8 +162,8 @@ $.ajax({
 };
 </script>
 
-  <script language="javascript">
-  function showPopup() { window.open("${contextPath}/p0003/popup.do", "a", "width=600, height=500, left=100, top=50"); }
+  <script>
+  function showPopup() { window.open("${contextPath}/sm/p0003/registSector_p01.do", "a", "width=600, height=500, left=100, top=50"); }
   </script>
   
 </head>
@@ -147,7 +183,7 @@ $.ajax({
         
         
 		
-            <div class="ib_function float_right">
+             <div class="buttons">
                 <a href="javascript:doAction('reload')" class="f1_btn_gray lightgray">초기화</a>
                 <a href="javascript:doAction('insert')" class="f1_btn_gray lightgray">추가</a>
                 <a href="javascript:doAction('search')" class="f1_btn_white gray">조회</a>
@@ -163,11 +199,16 @@ $.ajax({
 				<script>
 					createIBSheet("mySheet", "100%", "500px");
 					selectSite();
+
 				</script>
 				
             </div>
         </div>
-
+	<input type="hidden" id="PsiteCode">
+	<input type="hidden" id="PsiteName">
+	<input type="hidden" id="PsectorCode">
+	<input type="hidden" id="PsectorName">
+	
 
 </body>
 </html>

@@ -42,19 +42,13 @@ public class HomeController {
 		return "main";
 	}
 
-	@RequestMapping(value = "login.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView Login(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("common/cm_login");
-		return mav;
-	} 
 
 
-//	@RequestMapping(value = "/login.do", method =  RequestMethod.GET)
-//	public String Login( Locale locale,HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		return "common/cm_login";
-//	}
-//	
+	@RequestMapping(value = "/login.do", method =  RequestMethod.GET)
+	public String Login( Locale locale,HttpServletRequest request, HttpServletResponse response) throws Exception {
+		return "common/cm_login";
+	}
+	
 	
 	@RequestMapping(value = "/findIdNPwd.do", method = RequestMethod.GET)
 	public ModelAndView findInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {

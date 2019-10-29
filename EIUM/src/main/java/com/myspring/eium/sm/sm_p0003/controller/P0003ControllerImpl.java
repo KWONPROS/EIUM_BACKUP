@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class P0003ControllerImpl implements P0003Controller{
 	
 	
 	@Override
-	@RequestMapping(value = "/p0003/searchInit.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "sm/p0003/searchInit.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		ModelAndView mav = new ModelAndView("/sm/p0003_search");
@@ -50,14 +51,14 @@ public class P0003ControllerImpl implements P0003Controller{
 	
 
 	@Override
-	@RequestMapping(value = "/p0003/searchList.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "sm/p0003/searchList.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		Map<String, Object> searchMap = new HashMap<String, Object>(); // �˻�����
 		Map<String, Object> resultMap = new HashMap<String, Object>(); // ��ȸ���
 		
-		// �˻����Ǽ���
+	
 		searchMap.put("SiteList", request.getParameter("SiteList"));
 	
 		List<P0003VO> data = p0003Service.searchList(searchMap);
@@ -65,10 +66,11 @@ public class P0003ControllerImpl implements P0003Controller{
        
         return resultMap;
 	}
+	
 
 
 	@Override
-	@RequestMapping(value = "/p0003/saveData.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "sm/p0003/saveData.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
@@ -107,16 +109,16 @@ public class P0003ControllerImpl implements P0003Controller{
 	
 	
 	@Override
-	@RequestMapping(value = "/p0003/popup.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "sm/p0003/registSector_p01.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView popup(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("sm/p0003_search_p01");
+		ModelAndView mav = new ModelAndView("sm/p0003_registSector_p01");
 		return mav;
 	} 
 
 
 	@Override
-	@RequestMapping(value = "/p0003/searchpopup.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "sm/p0003/searchpopup.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Map searchpopup(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
@@ -137,7 +139,7 @@ public class P0003ControllerImpl implements P0003Controller{
 	
 	
 	@Override
-	@RequestMapping(value = "/p0003/saveDatapopup.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "sm/p0003/saveDatapopup.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Map saveDataPopup(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
@@ -169,7 +171,7 @@ public class P0003ControllerImpl implements P0003Controller{
 	}
 	
 	@Override
-	@RequestMapping(value = "/p0003/SiteList.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "sm/p0003/SiteList.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Map searchSiteList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
@@ -185,7 +187,69 @@ public class P0003ControllerImpl implements P0003Controller{
        
         return resultMap;
 	}
+	
+	@Override
+	@RequestMapping(value = "sm/p0003/sectorSearch_Init.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView sectorSerch_init(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("/sm/p0003_sectorSearch_p01");
+	
+		return mav;
+	} 
+	
+	@Override
+	@RequestMapping(value = "sm/p0003/sectorSearch_p01.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map sectorSearch(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>(); // �˻�����
+		Map<String, Object> resultMap = new HashMap<String, Object>(); // ��ȸ���
+		
 
+		searchMap.put("p_id", request.getParameter("p_id"));
+		
+
+		List<P0003VO> data = p0003Service.searchpopup(searchMap);
+        resultMap.put("Data", data);
+       
+        return resultMap;
+	}
+	@Override
+	@RequestMapping(value = "sm/p0003/siteSearch_Init.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView siteSerch_init(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("/sm/p0003_siteSearch_p01");
+	
+		return mav;
+	} 
+
+	@Override
+	@RequestMapping(value = "sm/p0003/siteSearch_p01.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map siteSearch(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>(); // �˻�����
+		Map<String, Object> resultMap = new HashMap<String, Object>(); // ��ȸ���
+		
+		// �˻����Ǽ���
+		searchMap.put("p_id", request.getParameter("p_id"));
+		
+		//������ ��ȸ
+		List<P0003VO> data = p0003Service.searchSiteList(searchMap);
+        resultMap.put("Data", data);
+       
+        return resultMap;
+	}
+	
+	@Override
+	@RequestMapping(value = "sm/p0003/siteSearchInit_p01.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView siteSearchInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("sm/p0003_siteSearch_p01");
+		return mav;
+	} 
+
+	
 	
 
 }

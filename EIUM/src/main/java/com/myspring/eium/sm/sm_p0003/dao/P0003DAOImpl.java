@@ -18,8 +18,7 @@ public class P0003DAOImpl implements P0003DAO {
 
 	@Override
 	public List<P0003VO> searchList(Map<String, Object> searchMap) throws DataAccessException {
-		List<P0003VO> list = sqlSession.selectList("departure.searchDep", searchMap);
-		System.out.println("++++++dao"+searchMap);
+		List<P0003VO> list = sqlSession.selectList("sm_p0003.searchDep", searchMap);
 		return list;
 	}
 	
@@ -27,19 +26,19 @@ public class P0003DAOImpl implements P0003DAO {
 
 	@Override
 	public void insertData(Map<String, String> row) {
-		sqlSession.update("departure.insertData", row);
+		sqlSession.update("sm_p0003.insertData", row);
 		
 	}
 
 	@Override
 	public void updateData(Map<String, String> row) {
-		sqlSession.update("departure.updateData", row);
+		sqlSession.update("sm_p0003.updateData", row);
 		
 	}
 
 	@Override
 	public void deleteData(Map<String, String> row) {
-		sqlSession.update("departure.deleteData", row);
+		sqlSession.update("sm_p0003.deleteData", row);
 		
 	}
 	
@@ -50,25 +49,25 @@ public class P0003DAOImpl implements P0003DAO {
 	
 	@Override
 	public List<P0003VO> searchpopup(Map<String, Object> searchMap) throws DataAccessException {
-		List<P0003VO> list = sqlSession.selectList("departure.searchPopup", searchMap);
+		List<P0003VO> list = sqlSession.selectList("sm_p0003.searchPopup", searchMap);
 		return list;
 	}
 	
 	@Override
 	public void insertDatapopup(Map<String, String> row) {
-		sqlSession.update("departure.insertDataPopup", row);
+		sqlSession.update("sm_p0003.insertDataPopup", row);
 		
 	}
 
 	@Override
 	public void updateDatapopup(Map<String, String> row) {
-		sqlSession.update("departure.updateDataPopup", row);
+		sqlSession.update("sm_p0003.updateDataPopup", row);
 		
 	}
 
 	@Override
 	public void deleteDatapopup(Map<String, String> row) {
-		sqlSession.update("departure.deleteDataPopup", row);
+		sqlSession.update("sm_p0003.deleteDataPopup", row);
 		
 	}
 
@@ -76,7 +75,7 @@ public class P0003DAOImpl implements P0003DAO {
 
 	@Override
 	public List<P0003VO> searchSiteList(Map<String, Object> searchMap) throws DataAccessException {
-		List<P0003VO> list = sqlSession.selectList("departure.searchSiteList", searchMap);
+		List<P0003VO> list = sqlSession.selectList("sm_p0003.searchSiteList", searchMap);
 		return list;
 	}
 

@@ -32,7 +32,7 @@ function LoadPage(){
 	mySheet.SetEditableColorDiff(1);
 
 	//mySheet.SetColEditable(2,0);
-	mySheet.DoSearch("${contextPath}/p0003/searchpopup.do")
+	mySheet.DoSearch("${contextPath}/sm/p0003/searchpopup.do")
 
 
 }
@@ -45,7 +45,7 @@ function doAction(sAction){
 		mySheet.RemoveAll();
 		break;
 	case "save":
-		mySheet.DoSave("${contextPath}/p0003/saveDatapopup.do")
+		mySheet.DoSave("${contextPath}/sm/p0003/saveDatapopup.do")
 		var tempStr = mySheet.GetSaveString();
 		alert("서버로 전달되는 문자열 확인 :"+tempStr);
 
@@ -65,8 +65,10 @@ function doAction(sAction){
 <title>부문등록</title>
 </head>
 <body onload="LoadPage()">
+  			  <div class="buttons">
  				<a href="javascript:doAction('insert')" class="f1_btn_gray lightgray">추가</a>
                 <a href="javascript:doAction('save')" class="f1_btn_white gray">저장</a>
+               </div>
 <script>
 createIBSheet("mySheet","100","300px");
 </script>
