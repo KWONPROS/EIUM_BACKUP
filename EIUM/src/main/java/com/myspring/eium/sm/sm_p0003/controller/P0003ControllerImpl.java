@@ -44,7 +44,7 @@ public class P0003ControllerImpl implements P0003Controller{
 	@RequestMapping(value = "sm/p0003/searchInit.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("/sm/p0003_search");
+		ModelAndView mav = new ModelAndView("/sm/sm_p0003/p0003_search");
 	
 		return mav;
 	} 
@@ -113,6 +113,7 @@ public class P0003ControllerImpl implements P0003Controller{
 	public ModelAndView popup(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		ModelAndView mav = new ModelAndView("sm/p0003_registSector_p01");
+
 		return mav;
 	} 
 

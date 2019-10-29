@@ -37,36 +37,36 @@ public class HomeService {
 	
 
 	public void mailSender(HomeVO homeVO) throws Exception {
-		// ³×ÀÌ¹öÀÏ °æ¿ì smtp.naver.com À» ÀÔ·ÂÇÕ´Ï´Ù. 
-		// GoogleÀÏ °æ¿ì smtp.gmail.com À» ÀÔ·ÂÇÕ´Ï´Ù. 
+		// ë„¤ì´ë²„ì¼ ê²½ìš° smtp.naver.com ì„ ì…ë ¥í•©ë‹ˆë‹¤. 
+		// Googleì¼ ê²½ìš° smtp.gmail.com ì„ ì…ë ¥í•©ë‹ˆë‹¤. 
 		String host = "smtp.naver.com"; 
-		final String username = "won0935"; //³×ÀÌ¹ö ¾ÆÀÌµğ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä. @nave.comÀº ÀÔ·ÂÇÏÁö ¸¶½Ã±¸¿ä. 
-		final String password = "Songjw0935!"; //³×ÀÌ¹ö ÀÌ¸ŞÀÏ ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä. 
-		int port=465; //Æ÷Æ®¹øÈ£ 
+		final String username = "won0935"; //ë„¤ì´ë²„ ì•„ì´ë””ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”. @nave.comì€ ì…ë ¥í•˜ì§€ ë§ˆì‹œêµ¬ìš”. 
+		final String password = "Songjw0935!"; //ë„¤ì´ë²„ ì´ë©”ì¼ ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”. 
+		int port=465; //í¬íŠ¸ë²ˆí˜¸ 
 		
-		// ¸ŞÀÏ ³»¿ë 
-		String recipient = homeVO.getEmail(); //¹Ş´Â »ç¶÷ÀÇ ¸ŞÀÏÁÖ¼Ò¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä. 
-		String subject = "EIUM - ¿äÃ»Á¤º¸ Àü¼Û"; //¸ŞÀÏ Á¦¸ñ ÀÔ·ÂÇØÁÖ¼¼¿ä. 
+		// ë©”ì¼ ë‚´ìš© 
+		String recipient = homeVO.getEmail(); //ë°›ëŠ” ì‚¬ëŒì˜ ë©”ì¼ì£¼ì†Œë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”. 
+		String subject = "EIUM - ìš”ì²­ì •ë³´ ì „ì†¡"; //ë©”ì¼ ì œëª© ì…ë ¥í•´ì£¼ì„¸ìš”. 
 		
 
 		String body = "";
 		if (homeVO.getPwd() != null || !"".equals(homeVO.getPwd())) {
 			body = String.join( System.getProperty("line.separator"),
-					"»ç¿ø¹øÈ£: "+ homeVO.getEmpCode(),
+					"ì‚¬ì›ë²ˆí˜¸: "+ homeVO.getEmpCode(),
 			        "ID: " + homeVO.getId(),
 			        "Password: " + homeVO.getPwd());
 		}else {
 			body = String.join( System.getProperty("line.separator"),
-			        "»ç¿ø¹øÈ£: "+ homeVO.getEmpCode(),
+			        "ì‚¬ì›ë²ˆí˜¸: "+ homeVO.getEmpCode(),
 			        "ID: " + homeVO.getId() );
 		}
 		
-		Properties props = System.getProperties(); // Á¤º¸¸¦ ´ã±â À§ÇÑ °´Ã¼ »ı¼º
+		Properties props = System.getProperties(); // ì •ë³´ë¥¼ ë‹´ê¸° ìœ„í•œ ê°ì²´ ìƒì„±
 
-		// SMTP ¼­¹ö Á¤º¸ ¼³Á¤ 
+		// SMTP ì„œë²„ ì •ë³´ ì„¤ì • 
 		props.put("mail.smtp.host", host); props.put("mail.smtp.port", port); 
 		props.put("mail.smtp.auth", "true"); props.put("mail.smtp.ssl.enable", "true"); 
-		props.put("mail.smtp.ssl.trust", host); //Session »ı¼º 
+		props.put("mail.smtp.ssl.trust", host); //Session ìƒì„± 
 		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() { 
 			String un=username; 
 			String pw=password;
@@ -74,13 +74,13 @@ public class HomeService {
 				return new javax.mail.PasswordAuthentication(un, pw); } }); 
 		session.setDebug(true); //for debug 
 		
-		Message mimeMessage = new MimeMessage(session); //MimeMessage »ı¼º 
-		mimeMessage.setFrom(new InternetAddress("won0935@naver.com")); //¹ß½ÅÀÚ ¼ÂÆÃ , º¸³»´Â »ç¶÷ÀÇ ÀÌ¸ŞÀÏÁÖ¼Ò¸¦ ÇÑ¹ø ´õ ÀÔ·ÂÇÕ´Ï´Ù. ÀÌ¶§´Â ÀÌ¸ŞÀÏ Ç® ÁÖ¼Ò¸¦ ´Ù ÀÛ¼ºÇØÁÖ¼¼¿ä. 
-		mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient)); //¼ö½ÅÀÚ¼ÂÆÃ //.TO ¿Ü¿¡ .CC(ÂüÁ¶) .BCC(¼ûÀºÂüÁ¶) µµ ÀÖÀ½ 
-		mimeMessage.setSubject(subject); //Á¦¸ñ¼ÂÆÃ 
-		mimeMessage.setText(body); //³»¿ë¼ÂÆÃ 
-		mimeMessage.setText(body); //³»¿ë¼ÂÆÃ 
-		Transport.send(mimeMessage); //javax.mail.Transport.send() ÀÌ¿ë }
+		Message mimeMessage = new MimeMessage(session); //MimeMessage ìƒì„± 
+		mimeMessage.setFrom(new InternetAddress("won0935@naver.com")); //ë°œì‹ ì ì…‹íŒ… , ë³´ë‚´ëŠ” ì‚¬ëŒì˜ ì´ë©”ì¼ì£¼ì†Œë¥¼ í•œë²ˆ ë” ì…ë ¥í•©ë‹ˆë‹¤. ì´ë•ŒëŠ” ì´ë©”ì¼ í’€ ì£¼ì†Œë¥¼ ë‹¤ ì‘ì„±í•´ì£¼ì„¸ìš”. 
+		mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient)); //ìˆ˜ì‹ ìì…‹íŒ… //.TO ì™¸ì— .CC(ì°¸ì¡°) .BCC(ìˆ¨ì€ì°¸ì¡°) ë„ ìˆìŒ 
+		mimeMessage.setSubject(subject); //ì œëª©ì…‹íŒ… 
+		mimeMessage.setText(body); //ë‚´ìš©ì…‹íŒ… 
+		mimeMessage.setText(body); //ë‚´ìš©ì…‹íŒ… 
+		Transport.send(mimeMessage); //javax.mail.Transport.send() ì´ìš© }
 	}
 	
 	

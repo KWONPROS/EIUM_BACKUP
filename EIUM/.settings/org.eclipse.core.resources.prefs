@@ -1,4 +1,6 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=refs/remotes/origin/master
 eclipse.preferences.version=1
-encoding//src/main/resources/mybatis/mappers/main/java/project/util/IBMultipartResolver.java=UTF-8
-encoding//src/main/resources/mybatis/mappers/main/java/project/util/IBSheetFileController.java=UTF-8
-encoding//src/main/resources/mybatis/mappers/main/java/project/util/IBSheetUtil.java=UTF-8
+encoding//src/main/java/com/myspring/eium/pm/pm_p0001/controller/S0002ControllerImpl.java=UTF-8
+encoding/<project>=UTF-8
