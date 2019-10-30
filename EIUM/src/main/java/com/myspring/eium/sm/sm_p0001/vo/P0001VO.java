@@ -4,7 +4,7 @@ import java.sql.Date;
 
 import org.springframework.stereotype.Component;
 
-@Component("P0001VO")
+@Component("sm_P0001VO")
 public class P0001VO {
 	private String company_CODE = "";
 	private String company_NAME = "";
