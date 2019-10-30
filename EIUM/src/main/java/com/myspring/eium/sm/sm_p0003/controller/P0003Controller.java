@@ -20,5 +20,10 @@ public interface P0003Controller {
 	public Map saveDataPopup(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map searchSiteList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	
+	public ModelAndView sectorSerch_init(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public Map sectorSearch(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView siteSerch_init(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public Map siteSearch(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	ModelAndView siteSearchInit(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
 }

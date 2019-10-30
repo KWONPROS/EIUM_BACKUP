@@ -1,47 +1,50 @@
-package com.myspring.eium.sm.sm_p0001.service;
+package com.myspring.eium.hm.hm_p0003.service;
+
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.myspring.eium.sm.sm_p0001.dao.P0001DAO;
-import com.myspring.eium.sm.sm_p0001.vo.P0001VO;
+import com.myspring.eium.hm.hm_p0003.dao.P0003DAO;
+import com.myspring.eium.hm.hm_p0003.vo.P0003VO;
 
-@Service("sm_p0001Service")
+
+
+
+
+@Service
 @Transactional(propagation = Propagation.REQUIRED)
-public class P0001ServiceImpl implements P0001Service {
-	
+public class P0003ServiceImpl implements P0003Service {
 	@Autowired
-	private P0001DAO p0001DAO;
+	private P0003DAO p0002DAO;
 
 	@Override
-	public List<P0001VO> searchList(Map<String, Object> searchMap) throws DataAccessException {
-		List<P0001VO> list =  p0001DAO.searchList(searchMap); 
+	public List<P0003VO> searchList(Map<String, Object> searchMap) throws DataAccessException {
+		List<P0003VO> list =  p0002DAO.searchList(searchMap); 
 		return list;
 	}
 
 	@Override
 	public void saveData(Map<String, String[]> dataMap)  throws DataAccessException  {
 		String[] status = dataMap.get("STATUS");
-		System.out.println("status :"+ status);
-		int length = status.length; // row수
-		System.out.println("P0001ServiceImpl-length:"+length);
+		int length = status.length; 
 		int i = 0;
 		
 		for(String str : status) {
-			Map<String, String> row = getRow(dataMap, length, i); // 현재 Index의 Row Map
-			if("I".equals(str)) { // 추가
-				p0001DAO.insertData(row);
-			}else if("U".equals(str)) { // 수정
-				p0001DAO.updateData(row);
-			}else if("D".equals(str)) { // 삭제
-				p0001DAO.deleteData(row);
+			Map<String, String> row = getRow(dataMap, length, i); 
+			if("I".equals(str)) { 
+				p0002DAO.insertData(row);
+			}else if("U".equals(str)) { 
+				p0002DAO.updateData(row);
+			}else if("D".equals(str)) { 
+				p0002DAO.deleteData(row);
 			}
 			i++;
 		}

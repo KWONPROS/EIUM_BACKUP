@@ -15,4 +15,5 @@ public interface P0001Controller {
 	 * response) throws Exception;
 	 */
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView findAddress(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

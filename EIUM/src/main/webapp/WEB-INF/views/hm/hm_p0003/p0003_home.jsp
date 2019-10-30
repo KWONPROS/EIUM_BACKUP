@@ -11,41 +11,52 @@
 <script src="${contextPath}/resources/ibsheet/ibsheetinfo.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibsheet.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibleaders.js"></script>
-<script src="${contextPath}/resources/maskedit/ibmaskedit.js"></script>
-<script src="${contextPath}/resources/maskedit/ibmaskeditinfo.js"></script>
 <script language="javascript">
 
 	/*Sheet 기본 설정 */
 	function LoadPage() {
-		mySheet.RemoveAll();
 		
-		//아이비시트 초기화
+		//아이비시트1 
+		mySheet.RemoveAll();
 		var initSheet = {};
 		initSheet.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0};
 		initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 		initSheet.Cols = [
-			{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
-			{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},
-			{Header:"코드",Type:"Text",SaveName:"site_CODE",MinWidth:80,KeyField:1, Align:"Center"},
-			{Header:"사업장명",Type:"Text",SaveName:"site_NAME",MinWidth:170,KeyField:1, Align:"Center"},			
-			{Header:"사업자등록번호",Type:"Text",SaveName:"site_RESISTRATION_NUMBER",KeyField:1 ,Hidden:1},			
-			{Header:"법인등록번호",Type:"Text",SaveName:"site_CORPARATION_NUMBER",Hidden:1},			
-			{Header:"대표자명",Type:"Text",SaveName:"site_REPRESENTATIVE_NAME",KeyField:1,Hidden:1 },			
-			{Header:"사업장우편번호",Type:"Text",SaveName:"site_ZIP_CODE",Hidden:1},			
-			{Header:"사업장주소",Type:"Text",SaveName:"site_ADDRESS",KeyField:1,Hidden:1},			
-			{Header:"사업장번지",Type:"Text",SaveName:"site_ADDRESS_DETAIL",Hidden:1},			
-			{Header:"사업장전화번호",Type:"Text",SaveName:"site_CONTACT",Hidden:1},			
-			{Header:"사업장팩스",Type:"Text",SaveName:"site_FAX",Hidden:1},			
-			{Header:"업태",Type:"Text",SaveName:"site_CATEGORY",KeyField:1,Hidden:1},			
-			{Header:"종목",Type:"Text",SaveName:"site_TYPE",KeyField:1,Hidden:1},			
-			{Header:"개업연월일",Type:"Text",SaveName:"site_OPENBUSINESS_DATE",Hidden:1},
-			{Header:"폐업연월일",Type:"Text",SaveName:"site_CLOSEBUSINESS_DATE",Hidden:1},
-			{Header:"본점여부",Type:"Text",SaveName:"site_BUSINESS_AVAILABLE",KeyField:1,Hidden:1}
+			
+			{Header:"코드",Type:"Text",SaveName:"admin_CODE",MinWidth:80,KeyField:1, Align:"Center"},
+			{Header:"관리항목명",Type:"Text",SaveName:"admin_NAME",MinWidth:170,KeyField:1, Align:"Center"},			
+			{Header:"관리내역코드",Type:"Text",SaveName:"admin_LIST_CODE",KeyField:1 ,Hidden:1},			
+			{Header:"관리내역명",Type:"Text",SaveName:"admin_LIST_NAME",Hidden:1},			
+			{Header:"테이블물리명",Type:"Text",SaveName:"admin_TABLE_NAME",KeyField:1,Hidden:1 }			
+		
 		];   
 		IBS_InitSheet( mySheet , initSheet);
-
+  
 		mySheet.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
 		mySheet.SetSheetHeight(700);
+		
+		
+		//아이비시트2 -----------------------------------------------------------------------------------------------------
+		mySheet2.RemoveAll();
+		var initSheet2 = {};
+		initSheet2.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0};
+		initSheet2.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
+		initSheet2.Cols = [
+			
+	     	{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
+	        {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},	
+			{Header:"코드",Type:"Text",SaveName:"admin_LIST_CODE",KeyField:1},			
+			{Header:"관리내역명",Type:"Text",SaveName:"admin_LIST_NAME"}					
+		
+		];   
+		IBS_InitSheet( mySheet2 , initSheet2);
+  
+		mySheet2.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
+		mySheet2.SetSheetHeight(700);
+		
+		
+		
+		
 		mySheet.DoSearch("${contextPath}/sm/p0002/searchList.do");
 	}
 	
@@ -88,8 +99,10 @@
 	function mySheet_OnClick(Row, Col) {
 		if(Row!=0){
 		$('input[name=myRow]').val(Row);
-      $('input[name=site_RESISTRATION_NUMBER]').val(mySheet.GetCellValue(Row,4));
-      $('input[name=site_CORPARATION_NUMBER]').val(mySheet.GetCellValue(Row,5));
+	
+	
+       $('input[name=site_RESISTRATION_NUMBER]').val(mySheet.GetCellValue(Row,4));
+      $('input[name=site_CORPARATION_NUMBER]').val(mySheet.GetCellValue(Row,5)); 
       $('input[name=site_REPRESENTATIVE_NAME]').val(mySheet.GetCellValue(Row,6));
       $('input[name=site_ZIP_CODE]').val(mySheet.GetCellValue(Row,7));
       $('input[name=site_ADDRESS]').val(mySheet.GetCellValue(Row,8));
@@ -118,28 +131,36 @@
 	//Formating
 	$(document).ready(function () {
    
- //사업자등록번호
-   $('input[name=site_RESISTRATION_NUMBER]').IBMaskEdit('999-##-9##9',{	
-		   unmaskOnSubmit: true,
-	   	   passwordChar:"*",
-	   	   rules:{
-	   		   "#":{
-	   			   exp:"[0-9]",
-	   			   password:true
-	   		   }
-	   	   }
-		});
-   //법인등록번호
-	   $('input[name=site_CORPARATION_NUMBER]').IBMaskEdit('999999-9#####9',{	
-		   unmaskOnSubmit: true,
-	   	   passwordChar:"*",
-	   	   rules:{
-	   		   "#":{
-	   			   exp:"[0-9]",
-	   			   password:true
-	   		   }
-	   	   }
-		});
+		  //사업자등록번호
+		   $(function () {    
+		            $('input[name=site_RESISTRATION_NUMBER]').keydown(function (event) {
+		             var key = event.charCode || event.keyCode || 0;
+		             $text = $(this); 
+		             if (key !== 8 && key !== 9) {
+		                 if ($text.val().length === 3) {
+		                     $text.val($text.val() + '-');
+		                 }
+		                 if ($text.val().length === 6) {
+		                     $text.val($text.val() + '-');
+		                 }
+		             }
+		             return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
+		         })
+		   });
+		      //법인등록번호
+		   $(function () {            
+		      $('input[name=site_CORPARATION_NUMBER]').keydown(function (event) {
+		           var key = event.charCode || event.keyCode || 0;
+		           $text = $(this); 
+		           if (key !== 8 && key !== 9) {
+		               if ($text.val().length === 6) {
+		                   $text.val($text.val() + '-');
+		               }       
+		           }
+		             return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
+		         })
+		   });
+
 	
    //전화번호,팩스
    $(function () { 
@@ -188,167 +209,81 @@
 </script>
 <style type="text/css">
 
- .title {
+.title {
+ 	width:100%;
 	color: #2C3E50;
 	font-weight: bold;
 	font-size: 20px;
-	margin: 10px 0px 20px 0px;
 	padding-left : 30px;
 	padding-bottom: 10px;
-	border-bottom: thin dashed #212121;
-}
-.buttons{
-	margin-bottom: 20px;
-	margin-right: 30px;
+	padding-top:20px;
+	border-top: thin solid #5E5E5E;
+	border-bottom: thin dashed #5E5E5E;
 	position: absolute;
-	right: 40px;
+	top: 50px;
+
 }
-.buttons .IBbutton {
+.leftbuttons{
+	margin-top:40px;
+	margin:10px;
+	position: absolute;
+	left: 0px;
+}
+.rightbuttons{
+	margin-top:40px;
+	margin:10px;
+	position: absolute;
+	right: 0px;
+}
+ .IBbutton {
 	font-size: 13px;
-	margin-left: 10px;
+	margin-left: 5px;
 	background-color: #2B69A0;
 	color: white;
 	padding: 5px 15px;
 	border-radius: 7px;
 	text-decoration: none;	
 }
-.buttons .IBbutton:hover {
+
+.IBbutton:hover {
 background-color: #2C3E50;
 }
 .left{
-position: absolute;
-top: 110px;
+position: relative;
+top: 130px;
 left: 60px;
 }
 .right{
-position: relative;
-top: 45px;
-left: 500px;
-width: 1100px;
-background: #EDF0F5;
-border-radius: 10px;
+ position: relative;
+top: -570px;
+left: 500px; 
+
 }
 
-.right table{
-font-size:13px;
-font-weight:bold;
-position: relative;
-left: 40px;
-padding: 20px;
-}
-.right table tr td:nth-child(1){
-text-align:right;
-}
-.right table tr td:nth-child(2){
-width: 20px;
-height: 25px;
-}
-.right table tr td:nth-child(3) input{
-width: 130px;
-height: 20px;
-padding-left: 10px;
-margin-right:10px;
-box-sizing: border-box;
-border: 1px solid #CCCCCC;
-border-radius: 2px;
-} 
 
 </style>
 </head>
-<body onload="LoadPage()">
+<body onload="LoadPage()" style="overflow-x: hidden">
 
-<div class="title"> <header>등록정보관리 ▶ 사업장등록</header></div>
-    
-  
-    <div class="buttons">
-	  <a href="javascript:doAction('reload')" class="IBbutton">초기화</a>
-	  <a href="javascript:doAction('insert')" class="IBbutton">추가</a>
-	  <a href="javascript:doAction('search')" class="IBbutton">조회</a>
-	  <a href="javascript:doAction('save')" class="IBbutton">저장</a>
+
+
+ <div class="leftbuttons">
+		<a href="javascript:doAction('print')" class="IBbutton">인쇄</a> <a
+			href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
+	</div> 
+
+
+	<div class="rightbuttons">  
+		<a href="javascript:doAction('reload')" class="IBbutton">초기화</a> <a
+			href="javascript:doAction('insert')" class="IBbutton">추가</a> <a
+			href="javascript:doAction('search')" class="IBbutton">조회</a> <a
+			href="javascript:doAction('save')" class="IBbutton">저장</a>
 	</div>
 
-	
+<div class="title"> 
+<header> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 기초환경설정 : 호봉테이블등록</header>
+</div>
 	<div class="left"><script>createIBSheet("mySheet", "100%", "100%");</script></div>
-	 
-	 
-	 <form name="form" id="form" method="post">
-	 <div class="right" >
-	
-		<table>
-			<tr>
-				<td>사업자등록번호</td>
-				<td><input type="hidden" name="myRow"></td>
-				<td><input type="text" name="site_RESISTRATION_NUMBER"
-					maxlength="12" placeholder="___-__-_____" style="background: #F8FAE6;"></td>
-			</tr>
-			<tr>
-				<td>법인등록번호</td>
-				<td></td>
-				<td><input type="text" name="site_CORPARATION_NUMBER"
-				maxlength="14" placeholder="______-_______" ></td>
-			</tr>
-			<tr>
-				<td>대표자명</td>
-				<td></td>
-				<td><input type="text" name="site_REPRESENTATIVE_NAME" style="background: #F8FAE6;"></td>
-			</tr>
-			<tr>
-				<td>사업장우편번호</td>
-				<td></td>
-				<td><input type="text" name="site_ZIP_CODE" id="site_ZIP_CODE" style="width: 50px;"><a href="javascript:goPopup();"><i class="fa fa-map-o" > 주소 검색</i></a></td>
-			</tr>
-			<tr>
-				<td>사업장주소</td>
-				<td></td>
-				<td><input type="text" name="site_ADDRESS" id="site_ADDRESS" style="width: 400px;background: #F8FAE6;"></td>
-			</tr>
-			<tr>
-				<td>사업장번지</td>
-				<td></td>
-				<td><input type="text" name="site_ADDRESS_DETAIL"  id="site_ADDRESS_DETAIL" style="width: 400px;"></td>
-			</tr>
-			<tr>
-				<td>사업장전화번호</td>
-				<td></td>
-				<td><input type="text" name="site_CONTACT" id="site_CONTACT" placeholder="__-___-____" class="siteNUM" maxlength="13"></td>
-			</tr>
-			<tr>
-				<td>사업장팩스</td>
-				<td></td>
-				<td><input type="text" name="site_FAX" id="site_FAX" placeholder="__-___-____" class="siteNUM" maxlength="13" ></td>
-			</tr>
-			<tr>
-				<td>업태</td>
-				<td></td>
-				<td><input type="text" name="site_CATEGORY" style="background: #F8FAE6;"></td>
-			</tr>
-			<tr>
-				<td>종목</td>
-				<td></td>
-				<td><input type="text" name="site_TYPE" style="background: #F8FAE6;"></td>
-			</tr>
-			<tr>
-				<td>개업연월일</td>
-				<td></td>
-				<td><input type="date" name="site_OPENBUSINESS_DATE" style="width: 140px;"></td>
-			</tr>
-			<tr>
-				<td>폐업연월일</td>
-				<td></td>
-				<td><input type="date" name="site_CLOSEBUSINESS_DATE" style="width: 140px;"></td>
-			</tr>
-			<tr>
-				<td>본점여부</td>
-				<td></td>
-				<td><select name=site_BUSINESS_AVAILABLE style="background: #F8FAE6;"><option value='Y' selected>여</option><option value='N' >부</option></select></td>
-			</tr>
-
-		</table>
-	</div>
-
-</form>
-
-
-
+	<div class="right"><script>createIBSheet("mySheet2", "100%", "100%");</script></div>
 </body>
 </html>

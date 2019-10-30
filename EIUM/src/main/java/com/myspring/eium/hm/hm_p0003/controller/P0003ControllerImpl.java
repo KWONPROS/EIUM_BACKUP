@@ -1,4 +1,5 @@
-package com.myspring.eium.sm.sm_p0002.controller;
+package com.myspring.eium.hm.hm_p0003.controller;
+
 
 
 import java.io.File;
@@ -29,38 +30,38 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.myspring.eium.sm.sm_p0002.service.P0002Service;
-import com.myspring.eium.sm.sm_p0002.vo.P0002VO;
+import com.myspring.eium.hm.hm_p0003.service.P0003Service;
+import com.myspring.eium.hm.hm_p0003.vo.P0003VO;
 
 
 
 
 @Controller
-public class P0002ControllerImpl implements P0002Controller {
-	private static final Logger logger = LoggerFactory.getLogger(P0002ControllerImpl.class);
+public class P0003ControllerImpl implements P0003Controller {
+	private static final Logger logger = LoggerFactory.getLogger(P0003ControllerImpl.class);
 	@Autowired
-	P0002Service p0002Service;
+	P0003Service p0003Service;
 	
 	@Override
-	@RequestMapping(value = "/sm/p0002/searchInit.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/hm/p0003/searchInit.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("sm/sm_p0002/p0002_home");
+		ModelAndView mav = new ModelAndView("hm/hm_p0003/p0003_home");
 	
 		return mav;
 	} 
 	
 	@Override
-	@RequestMapping(value = "/sm/p0002/searchList.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/hm/p0003/searchList.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
-				
+					//testetstettt
 		
 		
-		List<P0002VO> data = p0002Service.searchList(searchMap);
+		List<P0003VO> data = p0003Service.searchList(searchMap);
 
         resultMap.put("Data", data);
     	System.out.println("resultMap::::"+resultMap);
@@ -69,7 +70,7 @@ public class P0002ControllerImpl implements P0002Controller {
 	
 
 	@Override
-	@RequestMapping(value = "/sm/p0002/saveData.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/hm/p0003/saveData.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
@@ -86,7 +87,7 @@ public class P0002ControllerImpl implements P0002Controller {
 		
 		Map<String, String> result = new HashMap<String, String>();
 		try {
-			p0002Service.saveData(dataMap);	
+			p0003Service.saveData(dataMap);	
 			result.put("Code","0");
 			result.put("Message","저장성공");
 		}catch(Exception e) {
@@ -101,9 +102,9 @@ public class P0002ControllerImpl implements P0002Controller {
 
 	
 	@Override
-	@RequestMapping(value = "/sm/p0002/findAddress.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/hm/p0003/findAddress.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView findAddress(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView mav = new ModelAndView("/sm/sm_p0002/p0002_home_p01");
+		ModelAndView mav = new ModelAndView("/hm/hm_p0003/p0003_home_p01");
 		return mav;
 
 	}
