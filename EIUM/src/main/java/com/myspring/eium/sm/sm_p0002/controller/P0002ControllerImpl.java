@@ -29,7 +29,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.myspring.eium.common.vo.HomeVO;
 import com.myspring.eium.sm.sm_p0002.service.P0002Service;
 import com.myspring.eium.sm.sm_p0002.vo.P0002VO;
 
