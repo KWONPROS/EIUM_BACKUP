@@ -1,4 +1,4 @@
-package com.myspring.eium.login.cotroller;
+package com.myspring.eium.login.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
