@@ -147,7 +147,7 @@ right: 15px;
 	</video>
 	<div class="login-container">
 			<div class="login-form">
-				<form>
+				<form name="form"  method="post" action="${contextPath}/login/Login.do">
 				<h3><img class="logo" alt="logo" src="${contextPath}/resources/image/EIUM_logo.png"> EIUM</h3>
 				
 					<h3 id="languages" >
@@ -158,8 +158,8 @@ right: 15px;
 						   
 				 	<h3><spring:message code="login"  text="로그인" /></h3>
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="ID" value="" /><br>
-						<input type="password" class="form-control" placeholder="Password" value="" /><br> 
+						<input type="text" class="form-control" placeholder="ID" value="" name="employee_id"/><br>
+						<input type="password" class="form-control" placeholder="Password" value="" name="employee_password"/><br> 
 						<a onclick="fn_findID()" class="Forget"><spring:message code="findId"  text="ID 찾기"/></a><br> 
 						<a onclick="fn_findPWD()" class="Forget"><spring:message code="findPwd"  text="비밀번호 찾기" /></a>
 						<input type="submit" class="btnSubmit" value="다음" />  

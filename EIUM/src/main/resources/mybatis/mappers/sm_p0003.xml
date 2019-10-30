@@ -4,7 +4,7 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="sm_p0003">
-	<resultMap id="Result01" type="P0003VO">
+	<resultMap id="Result01" type="SM_P0003VO">
 		<result property="DEPARTMENT_CODE" column="DEPARTMENT_CODE" />
 		<result property="DEPARTMENT_NAME" column="DEPARTMENT_NAME" />
 		<result property="DEPARTMENT_END_DATE" column="DEPARTMENT_END_DATE" />
@@ -15,7 +15,7 @@
 		<result property="SECTOR_NAME" column="SECTOR_NAME" />
 		
 	</resultMap>
-	<resultMap id="Result02" type="P0003VO">
+	<resultMap id="Result02" type="SM_P0003VO">
 
 		<result property="SITE_NAME" column="SITE_NAME" />
 
@@ -83,7 +83,7 @@ from department d , sector s , site si
 	
 	
 		
-	<resultMap id="ResultPopup" type="P0003VO">
+	<resultMap id="ResultPopup" type="SM_P0003VO">
 
 		<result property="SECTOR_CODE" column="SECTOR_CODE" />
 		<result property="SECTOR_NAME" column="SECTOR_NAME" />

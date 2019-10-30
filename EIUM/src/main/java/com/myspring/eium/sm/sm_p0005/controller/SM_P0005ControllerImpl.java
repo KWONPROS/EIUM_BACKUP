@@ -36,7 +36,7 @@ public class SM_P0005ControllerImpl implements SM_P0005Controller{
 	@RequestMapping(value = "/sm/p0005/searchInit.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("sm/p0005");
+		ModelAndView mav = new ModelAndView("sm/sm_p0005/p0005");
 		return mav;
 	} 
 	

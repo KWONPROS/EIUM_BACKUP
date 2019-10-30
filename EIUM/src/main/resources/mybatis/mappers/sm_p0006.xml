@@ -4,7 +4,7 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mapper.sm_p0006">
-	<resultMap id="p0006Result" type="P0006VO">
+	<resultMap id="p0006Result" type="SM_P0006VO">
 		<result property="AUTHORITY_CODE" column="AUTHORITY_CODE" />
 		<result property="AUTHORITY_NAME" column="AUTHORITY_NAME" />
 		<result property="MENU_CODE" column="MENU_CODE" />
@@ -19,7 +19,7 @@
 
 
 
-	<resultMap id="p0006_01Result" type="P0006_01VO">
+	<resultMap id="p0006_01Result" type="SM_P0006_01VO">
 		<result property="AUTHORITY_NAME" column="AUTHORITY_NAME" />
 		<result property="AUTHORITY_GRANT" column="AUTHORITY_GRANT" />
 		<result property="AUTHORITY_CODE" column="AUTHORITY_CODE" />

@@ -84,7 +84,7 @@ var data = {Data:[
 	{menuCode:"m01",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0001/searchInit.do",TITLE:"회사등록"},
 	{menuCode:"m02",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0002/searchInit.do", TITLE:"사업장등록"},
 	{menuCode:"m03",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0003/searchInit.do", TITLE:"부서등록"},
-	{menuCode:"m04",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"login.do", TITLE:"사원등록"},
+	{menuCode:"m04",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0004/searchInit.do", TITLE:"사원등록"},
 	{menuCode:"m05",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0005/searchInit.do", TITLE:"권한관리"},
 	{menuCode:"m38",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0006/searchInit.do", TITLE:"계정별권한설정"},
 	{menuCode:"m06",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"기초환경설정"},

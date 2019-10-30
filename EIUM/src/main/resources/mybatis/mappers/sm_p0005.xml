@@ -142,7 +142,7 @@
 	
 	
 	
-    <resultMap id="p0005_01Result" type="P0005_01VO">
+    <resultMap id="p0005_01Result" type="SM_P0005_01VO">
 		<result property="ACCESS_GRANT" column="ACCESS_GRANT" />
 		<result property="MENU_CODE" column="MENU_CODE" />
 		<result property="MENU_NAME" column="MENU_NAME" />
