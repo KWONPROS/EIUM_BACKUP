@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.hm_p0001">
+	<resultMap id="P0001resultVO" type="HM_P0001VO">
+		<result property="position_CODE" column="POSITION_CODE" />
+        <result property="position_NAME" column="POSITION_NAME" />
+	</resultMap> 
+ 
+	<select id="searchList" resultMap="P0001resultVO" parameterType="java.util.Map"> 
+      <![CDATA[
+         select POSITION_CODE,POSITION_NAME
+         from POSITION
+      ]]>
+      
+	</select>
+	
+	<update id="updateData" parameterType="java.util.Map">
+		update POSITION
+		set  
+		     POSITION_NAME = #{position_NAME}
+		   
+		where TRIM(POSITION_CODE) = #{position_CODE}
+	</update>	
+	
+ <insert id="insertData" parameterType="java.util.Map">
+		insert into POSITION(POSITION_CODE,POSITION_NAME) 
+		values(#{position_CODE},#{position_NAME})
+	</insert>	
+	
+	<delete id="deleteData" parameterType="java.util.Map">
+		delete POSITION
+		where TRIM(POSITION_CODE) = #{position_CODE}
+	</delete>
+
+
+</mapper>

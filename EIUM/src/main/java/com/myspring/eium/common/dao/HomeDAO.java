@@ -13,6 +13,7 @@ public class HomeDAO{
 	@Autowired
 	HomeVO homeVO;
 	
+	
 
 	public HomeVO findId(Map<String, Object> searchMap) {
 		homeVO = sqlSession.selectOne("mapper.common.findId",searchMap);

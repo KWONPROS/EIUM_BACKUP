@@ -130,7 +130,7 @@ $(document).ready(function(){printClock();});
 <body>
 
 	<div class="currentInfo">
-		<span id="headerinfo" class="user">사용자 : OOO</span> <span
+		<span id="headerinfo" class="user">사용자 : ${sessionScope.login.employee_name}</span> <span
 			id="headerinfo" class="company">회사 : (주)00전자</span> <span
 			id="headerinfo" class="logindate">접속일시 : <b id="systemClock"></b>
 		</span>

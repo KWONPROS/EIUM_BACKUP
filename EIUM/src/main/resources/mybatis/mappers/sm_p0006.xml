@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.sm_p0006">
+	<resultMap id="p0006Result" type="SM_P0006VO">
+		<result property="AUTHORITY_CODE" column="AUTHORITY_CODE" />
+		<result property="AUTHORITY_NAME" column="AUTHORITY_NAME" />
+		<result property="MENU_CODE" column="MENU_CODE" />
+		<result property="MENU_NAME" column="MENU_NAME" />
+	</resultMap>
+
+	<select id="searchList" resultMap="p0006Result">
+      <![CDATA[
+         select EMPLOYEE_ID, EMPLOYEE_NAME from ACCOUNT A, EMPLOYEE E where A.EMPLOYEE_CODE = E.EMPLOYEE_CODE
+      ]]>
+	</select>
+
+
+
+	<resultMap id="p0006_01Result" type="SM_P0006_01VO">
+		<result property="AUTHORITY_NAME" column="AUTHORITY_NAME" />
+		<result property="AUTHORITY_GRANT" column="AUTHORITY_GRANT" />
+		<result property="AUTHORITY_CODE" column="AUTHORITY_CODE" />
+	</resultMap>
+
+	<select id="searchList_01" resultMap="p0006_01Result">
+      <![CDATA[
+         select ACCESS_AUTHORITY.AUTHORITY_CODE, ACCESS_AUTHORITY.AUTHORITY_NAME, USER_AUTH.AUTHORITY_GRANT 
+         from ACCESS_AUTHORITY LEFT OUTER JOIN USER_AUTH 
+         ON ACCESS_AUTHORITY.AUTHORITY_CODE = USER_AUTH.AUTHORITY_CODE
+      ]]>
+	</select>
+
+	<insert id="insertData_01" parameterType="java.util.Map">
+		insert into
+		user_auth(employee_id, authority_code, authority_grant) values( #{x},
+		#{authority_CODE}, #{authority_GRANT} )
+	</insert>
+
+<!--	<choose>
+		<when test ="name !=null && name !='' ">//조건1
+			위에 조건이 맞을시 실행할 구문
+		</when>
+
+		<when test="조건">//조건2
+			위에 조건이 맞을시 실행할 구문
+		</when>
+
+		<otherwise>
+			조건1, 조건2, 조건3이 틀릴경우 실행할 구문
+		</otherwise>
+	</choose>
+
+	 <update id="updateData_01" parameterType="java.util.Map"> update MENU_BY_AUTHORITY 
+		set ACCESS_GRANT = #{access_GRANT, jdbcType=VARCHAR} , ACCESS_RANGE = #{access_RANGE, 
+		jdbcType=VARCHAR} , ACCESS_INSERT = #{access_INSERT, jdbcType=VARCHAR} , 
+		ACCESS_UPDATE = #{access_UPDATE, jdbcType=VARCHAR} , ACCESS_DELETE = #{access_DELETE, 
+		jdbcType=VARCHAR} , ACCESS_PRINT = #{access_PRINT, jdbcType=VARCHAR} where 
+		AUTHORITY_CODE = #{x, jdbcType=VARCHAR} and MENU_NAME = #{menu_NAME} </update> -->
+
+
+</mapper>
