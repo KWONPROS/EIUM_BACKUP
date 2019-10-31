@@ -5,8 +5,26 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+.rightbuttons{
+   margin-top:40px;
+   margin:10px;
+   position: absolute;
+   right: 0px;
+}
+ .IBbutton {
+   font-size: 13px;
+   margin-left: 5px;
+   background-color: #2B69A0;
+   color: white;
+   padding: 5px 15px;
+   border-radius: 7px;
+   text-decoration: none;   
+}
+
+</style>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>부서등록</title>
 <script src="${contextPath}/resources/ibsheet/ibsheetinfo.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibsheet.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibleaders.js"></script>
@@ -42,8 +60,8 @@ function LoadPage(){
 	initSheet.Cols=[
 		{Header:"상태",Type:"Status",Width:60,SaveName:"Status",Align:"Center"},
 		{Header:"삭제	",Type:"DelCheck",Width:60,SaveName:"Delete",Align:"Center"},
-		{Header:"부서코드",Type:"Text",Width:100,SaveName:"department_CODE",Align:"Center",UpdateEdit:0},
-		{Header:"부서이름",Type:"Text",Width:100,SaveName:"department_NAME",Align:"Center"},
+		{Header:"NO",Type:"Text",Width:100,SaveName:"department_CODE",Align:"Center",UpdateEdit:0},
+		{Header:"순번",Type:"Text",Width:100,SaveName:"department_NAME",Align:"Center"},
 		{Header:"사업장코드",Type:"Text",Width:120,SaveName:"site_CODE",Align:"Center",InsertEdit:0}, 
 		{Header:"사업장이름",Type:"Text",Width:120,SaveName:"site_NAME",Align:"Center",InsertEdit:0}, 
 		{Header:"부문코드",Type:"Text",Width:60,SaveName:"sector_CODE",Align:"Center",InsertEdit:0}, 
@@ -55,8 +73,6 @@ function LoadPage(){
 	IBS_InitSheet(mySheet,initSheet);
 	mySheet.SetEditableColorDiff(1);
 	mySheet.SetActionMenu("엑셀 파일 저장")
-
-
 
 }
 
@@ -175,26 +191,27 @@ $.ajax({
            
             </div>
      <form name='frm'>
+     
         사업장: <select id="SiteList">
         <option value="" selected>전체</option>
-    
 		</select>
       </form>
         
         
 		
-             <div class="buttons">
-                <a href="javascript:doAction('reload')" class="f1_btn_gray lightgray">초기화</a>
-                <a href="javascript:doAction('insert')" class="f1_btn_gray lightgray">추가</a>
-                <a href="javascript:doAction('search')" class="f1_btn_white gray">조회</a>
-                <a href="javascript:doAction('save')" class="f1_btn_white gray">저장</a>
-                <a href="javascript:doAction('save2')" class="f1_btn_white gray">저장 JSON</a> 
+             <div class="rightbuttons">
+                <a href="javascript:doAction('reload')" class="IBbutton" >초기화</a>
+                <a href="javascript:doAction('insert')" class="IBbutton">추가</a>
+                <a href="javascript:doAction('search')" class="IBbutton">조회</a>
+                <a href="javascript:doAction('save')" class="IBbutton">저장</a>
+                <a href="javascript:doAction('save2')" class="IBbutton">저장 JSON</a> 
             </div>
             
             <div class="clear hidden"></div>  
-
-			<p class="subtit_sheet">부서등록</p>
-			<input type="button" value="부문등록" onclick="showPopup();" />
+<div>
+부서등록
+</div>
+<br>
             <div>
 				<script>
 					createIBSheet("mySheet", "100%", "500px");
