@@ -19,11 +19,11 @@
 		//아이비시트1 
 		mySheet.RemoveAll();
 		var initSheet = {};
-		initSheet.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0,MouseHoverMode:2};
+		initSheet.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0,MouseHoverMode:2, MergeSheet:msHeaderOnly};
 		initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:10,HeaderCheck:1};
 		initSheet.Cols = [
-			{Header:"직급코드",Type:"Text",SaveName:"position_CODE",MinWidth:80,KeyField:1, Align:"Center"},
-			{Header:"직급명",Type:"Text",SaveName:"position_NAME",MinWidth:170,KeyField:1, Align:"Center"}		
+			{Header:"대상직급|직급코드",Type:"Text",SaveName:"position_CODE",MinWidth:80,KeyField:1, Align:"Center"},
+			{Header:"대상직급|직급명",Type:"Text",SaveName:"position_NAME",MinWidth:170,KeyField:1, Align:"Center"}		
 		];   
 		IBS_InitSheet( mySheet , initSheet);
   
@@ -34,14 +34,14 @@
 		//아이비시트2 -----------------------------------------------------------------------------------------------------
 		mySheet2.RemoveAll();
 		var initSheet2 = {};
-		initSheet2.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0};
+		initSheet2.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0,MergeSheet:msHeaderOnly};
 		initSheet2.HeaderMode = {Sort:1,ColMove:1,ColResize:10,HeaderCheck:1};
 		initSheet2.Cols = [
-	     	{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
-	        {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},	
-			{Header:"호봉",Type:"Text",SaveName:"pay_GRADE",MinWidth:50 ,KeyField:1, Align:"Center"},			
-			{Header:"기본급",Type:"Int",SaveName:"salary",MinWidth:90 , Align:"Center"},
-			{Header:"합계",Type:"Int",SaveName:"salary",MinWidth:90 , Align:"Center", CalcLogic:"|3|"}
+	     	{Header:"상태|상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
+	        {Header:"삭제|삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},	
+			{Header:"호봉|호봉",Type:"Text",SaveName:"pay_GRADE",MinWidth:50 ,KeyField:1, Align:"Center"},			
+			{Header:"호봉테이블|기본급",Type:"Int",SaveName:"salary",MinWidth:90 , Align:"Center"},
+			{Header:"합계|합계",Type:"Int",SaveName:"salary",MinWidth:90 , Align:"Center", CalcLogic:"|3|"}
 		];   
 		IBS_InitSheet( mySheet2 , initSheet2);
   
