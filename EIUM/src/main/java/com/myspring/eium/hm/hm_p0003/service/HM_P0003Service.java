@@ -13,10 +13,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.myspring.eium.hm.hm_p0003.vo.HM_P0003VO;
 
 
-
-
 public interface HM_P0003Service {
 	 public List<HM_P0003VO> searchList(Map<String, Object> searchMap) throws DataAccessException;
 
-	public void saveData(Map<String, String[]> dataMap)  throws DataAccessException ;
+	public void saveData(Map<String, String[]> dataMap,String table_NAME)  throws DataAccessException ;
+
+	public List<HM_P0003VO> searchList2(Map<String, String> searchMap) throws DataAccessException;
 }
