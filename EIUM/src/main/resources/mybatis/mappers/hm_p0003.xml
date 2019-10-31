@@ -17,6 +17,7 @@
       ]]>
 	</select>
 	
+	<!-- /////////////////////////////POSITION///////////////////////////////////// -->
 	
 	<resultMap id="POSITION_P0003resultVO" type="HM_P0003VO">
 		<result property="admin_LIST_CODE" column="POSITION_CODE" />
@@ -44,6 +45,38 @@
 	<delete id="POSITION_deleteData" parameterType="java.util.Map">
 		delete POSITION
 		where TRIM(POSITION_CODE) = #{admin_LIST_CODE}
+	</delete>
+	
+	
+	
+	<!-- /////////////////////////////////PAYMENT_DES/////////////////////////////////////// -->
+	
+	<resultMap id="PAYMENT_DES_P0003resultVO" type="HM_P0003VO">
+		<result property="admin_LIST_CODE" column="PAYMENT_DES_CODE" />
+		<result property="admin_LIST_NAME" column="PAYMENT_DES_NAME" />
+	</resultMap>
+ 
+	
+	<select id="PAYMENT_DES_searchList" resultMap="PAYMENT_DES_P0003resultVO" parameterType="java.util.Map"> 
+         select PAYMENT_DES_CODE,PAYMENT_DES_NAME         
+         from PAYMENT_DES
+	</select>
+	
+	<update id="PAYMENT_DES_updateData" parameterType="java.util.Map">
+		update PAYMENT_DES
+		set  
+		     PAYMENT_DES_NAME = #{admin_LIST_NAME}
+		where TRIM(PAYMENT_DES_CODE) = #{admin_LIST_CODE}
+	</update>	
+	
+ <insert id="PAYMENT_DES_insertData" parameterType="java.util.Map">
+		insert into PAYMENT_DES(PAYMENT_DES_CODE,PAYMENT_DES_NAME) 
+		values(#{admin_LIST_CODE},#{admin_LIST_NAME})
+	</insert>	
+	
+	<delete id="PAYMENT_DES_deleteData" parameterType="java.util.Map">
+		delete PAYMENT_DES
+		where TRIM(PAYMENT_DES_CODE) = #{admin_LIST_CODE}
 	</delete>
 
 
