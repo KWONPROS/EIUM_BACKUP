@@ -19,11 +19,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.eium.hm.hm_p0001.service.HM_P0001Service;
 import com.myspring.eium.hm.hm_p0001.vo.HM_P0001VO;
+import com.myspring.eium.hm.hm_p0001.vo.HM_P0001_01VO;
 
 
-@Controller("hm_p0001Controller")
+@Controller
 public class HM_P0001ControllerImpl implements HM_P0001Controller {
 	private static final Logger logger = LoggerFactory.getLogger(HM_P0001ControllerImpl.class);
+	
 	@Autowired
 	HM_P0001Service p0001Service;
 	
@@ -51,7 +53,22 @@ public class HM_P0001ControllerImpl implements HM_P0001Controller {
         return resultMap;
 	}
 	
-
+	@Override
+	@RequestMapping(value = "/hm/p0001/searchList2.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map searchList2(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		System.out.println("------------");
+		Map<String, String> searchMap = new HashMap<String, String>();
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		searchMap.put("P_POSITION_CODE", request.getParameter("position_CODE"));
+		List<HM_P0001_01VO> data = p0001Service.searchList2(searchMap);
+		resultMap.put("Data", data);
+		System.out.println("HM-P0001ControllerImpl-resultMap::::" + resultMap);
+		return resultMap;
+	}
+	
 	@Override
 	@RequestMapping(value = "/hm/p0001/saveData.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
@@ -60,7 +77,10 @@ public class HM_P0001ControllerImpl implements HM_P0001Controller {
 		Map<String, String[]> dataMap = new HashMap<String, String[]>(); 
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
 		
-	
+		String p_position_CODE = request.getParameter("p_postion_CODE");
+		
+		System.out.println("p_position_CODE : " + p_position_CODE);
+		
 		Enumeration enu = request.getParameterNames();
 		while (enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
@@ -70,7 +90,7 @@ public class HM_P0001ControllerImpl implements HM_P0001Controller {
 		
 		Map<String, String> result = new HashMap<String, String>();
 		try {
-			p0001Service.saveData(dataMap);	
+			p0001Service.saveData(dataMap,p_position_CODE);	
 			result.put("Code","0");
 			result.put("Message","저장성공");
 		}catch(Exception e) {
@@ -83,12 +103,8 @@ public class HM_P0001ControllerImpl implements HM_P0001Controller {
         return resultMap;
 	}
 
-	
-	@Override
-	@RequestMapping(value = "/hm/p0001/findAddress.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView findAddress(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView mav = new ModelAndView("/hm/hm_p0001/p0001_home_p01");
-		return mav;
 
-	}
+
+	
+	
 }

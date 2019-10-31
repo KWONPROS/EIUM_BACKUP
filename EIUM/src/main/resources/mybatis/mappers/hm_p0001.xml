@@ -17,6 +17,22 @@
       
 	</select>
 	
+	<!-- ///////////////////////////////////POSITION_CODE_SEARCH////////////// -->
+	
+	<resultMap id="P0001_01resultVO" type="HM_P0001_01VO" >
+		<result property="position_CODE" column="POSITION_CODE" />
+		<result property="pay_GRADE" column="PAY_GRADE" />
+		<result property="salary" column="SALARY" />
+	</resultMap>
+	
+	<select id="searchList_01" resultMap="P0001_01resultVO">
+	<![CDATA[
+		select PAY_GRADE, SALARY
+		from PAY_GRADE_TABLE
+		where TRIM(position_CODE) = #{P_POSITION_CODE, jdbcType=VARCHAR}
+	]]>
+	</select>
+	
 	<update id="updateData" parameterType="java.util.Map">
 		update POSITION
 		set  

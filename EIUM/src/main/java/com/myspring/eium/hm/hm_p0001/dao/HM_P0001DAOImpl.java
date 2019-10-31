@@ -1,6 +1,7 @@
 package com.myspring.eium.hm.hm_p0001.dao;
 
 
+
 import java.util.List;
 import java.util.Map;
 
@@ -10,12 +11,13 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.myspring.eium.hm.hm_p0001.vo.HM_P0001VO;
+import com.myspring.eium.hm.hm_p0001.vo.HM_P0001_01VO;
 
 
 
 
 
-@Repository("hm_p0001DAO")
+@Repository
 public class HM_P0001DAOImpl implements HM_P0001DAO {
 	@Autowired
 	private SqlSession sqlSession;
@@ -26,7 +28,14 @@ public class HM_P0001DAOImpl implements HM_P0001DAO {
 		List<HM_P0001VO> list = sqlSession.selectList("mapper.hm_p0001.searchList", searchMap);
 		return list;
 	}
-
+	
+	@Override
+	public List<HM_P0001_01VO> searchList2(Map<String, String> searchMap) throws DataAccessException {
+		System.out.println("searchList2 - searchMap: "+searchMap);
+		List<HM_P0001_01VO> list = sqlSession.selectList("mapper.hm_p0001.searchList_01", searchMap);
+		return list;
+	}
+	
 	@Override
 	public void insertData(Map<String, String> row) throws DataAccessException {
 		sqlSession.update("mapper.hm_p0001.insertData", row);
@@ -41,5 +50,7 @@ public class HM_P0001DAOImpl implements HM_P0001DAO {
 	public void deleteData(Map<String, String> row) throws DataAccessException {
 		sqlSession.update("mapper.hm_p0001.deleteData", row);
 	}
+
+	
 
 }

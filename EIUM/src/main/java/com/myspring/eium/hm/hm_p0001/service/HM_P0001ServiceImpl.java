@@ -14,12 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.myspring.eium.hm.hm_p0001.dao.HM_P0001DAO;
 import com.myspring.eium.hm.hm_p0001.vo.HM_P0001VO;
+import com.myspring.eium.hm.hm_p0001.vo.HM_P0001_01VO;
 
 
 
 
 
-@Service("hm_p0001Service")
+@Service
 @Transactional(propagation = Propagation.REQUIRED)
 public class HM_P0001ServiceImpl implements HM_P0001Service {
 	@Autowired
@@ -30,9 +31,15 @@ public class HM_P0001ServiceImpl implements HM_P0001Service {
 		List<HM_P0001VO> list =  p0001DAO.searchList(searchMap); 
 		return list;
 	}
-
+	
 	@Override
-	public void saveData(Map<String, String[]> dataMap)  throws DataAccessException  {
+	public List<HM_P0001_01VO> searchList2(Map<String, String> searchMap) throws DataAccessException {
+		List<HM_P0001_01VO> list = p0001DAO.searchList2(searchMap);
+		return list;
+	}	
+	
+	@Override
+	public void saveData(Map<String, String[]> dataMap, String p_position_CODE)  throws DataAccessException  {
 		String[] status = dataMap.get("STATUS");
 		int length = status.length; 
 		int i = 0;
@@ -59,5 +66,5 @@ public class HM_P0001ServiceImpl implements HM_P0001Service {
 			}
 		}		
 		return row;
-	}	
+	}
 }
