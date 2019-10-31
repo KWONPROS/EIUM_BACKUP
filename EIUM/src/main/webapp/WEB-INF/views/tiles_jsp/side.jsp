@@ -91,7 +91,7 @@ var data = {Data:[
 	{menuCode:"m08",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"s0002/searchInit.do", TITLE:"지급일등록"},
 	{menuCode:"m09",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0003/searchInit.do", TITLE:"인사기초코드등록 "},
 	{menuCode:"m10",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"인사관리"},
-	{menuCode:"m11",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/group.html", TITLE:"인사정보등록"},
+	{menuCode:"m11",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0004/searchInit.do", TITLE:"인사정보등록"},
 	{menuCode:"m12",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"인사기록카드"},
 	{menuCode:"m13",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"교육관리"},
 	{menuCode:"m14",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"교육평가"},
@@ -128,12 +128,13 @@ $(document).ready(function(){
 	createIBSheet2(document.getElementById("sideMenu"),"leftMenu","100%",(sheetHeight-173)+"px");
 	leftMenu.CustomScroll =3;	//스크롤 모양
 	leftMenu.SetTheme("LGY2","LightGray2");
+
 	leftMenu.NoTreeLines = 1; //트리모양
 	var ibdata = {};
-	ibdata.Cfg = {SizeMode:"sizeAdvancedAuto",DataRowHeight:30, MouseHoverMode:2};
+	ibdata.Cfg = {SizeMode:"sizeAdvancedAuto",DataRowHeight:30, MouseHoverMode:2,DragMode:-1};
 	ibdata.HeaderMode = {};
 	ibdata.Cols = [
-		{Header:"타이틀",Type:"Text",SaveName:"TITLE", Width:100,TreeCol:1,Edit:0,ImgWidth:9,ImgHeight:9}, //효과적용X
+		{Header:"타이틀",Type:"Text",SaveName:"TITLE", Width:100,TreeCol:1,Edit:0 }, //효과적용X
 		{Header:"URL",Type:"Text",SaveName:"URL",Hidden:1},	//컬럼숨김
 		{Header:"menuCode",Type:"Text",SaveName:"menuCode",Hidden:1}	//컬럼숨김
 	];  
