@@ -112,7 +112,7 @@ public class SM_P0003ControllerImpl implements SM_P0003Controller{
 	@RequestMapping(value = "sm/p0003/registSector_p01.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView popup(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("sm/p0003_registSector_p01");
+		ModelAndView mav = new ModelAndView("sm/sm_p0003/p0003_registSector_p01");
 
 		return mav;
 	} 
@@ -193,7 +193,7 @@ public class SM_P0003ControllerImpl implements SM_P0003Controller{
 	@RequestMapping(value = "sm/p0003/sectorSearch_Init.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView sectorSerch_init(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("/sm/p0003_sectorSearch_p01");
+		ModelAndView mav = new ModelAndView("/sm/sm_p0003/p0003_sectorSearch_p01");
 	
 		return mav;
 	} 
@@ -219,7 +219,7 @@ public class SM_P0003ControllerImpl implements SM_P0003Controller{
 	@RequestMapping(value = "sm/p0003/siteSearch_Init.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView siteSerch_init(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("/sm/p0003_siteSearch_p01");
+		ModelAndView mav = new ModelAndView("/sm/sm_p0003/p0003_siteSearch_p01");
 	
 		return mav;
 	} 
@@ -246,7 +246,7 @@ public class SM_P0003ControllerImpl implements SM_P0003Controller{
 	@RequestMapping(value = "sm/p0003/siteSearchInit_p01.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView siteSearchInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("sm/p0003_siteSearch_p01");
+		ModelAndView mav = new ModelAndView("sm/sm_p0003/p0003_siteSearch_p01");
 		return mav;
 	} 
 
