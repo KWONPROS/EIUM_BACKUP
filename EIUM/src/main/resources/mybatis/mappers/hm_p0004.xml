@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.hm_p0004">
+	<resultMap id="P0004resultVO" type="HM_P0004VO">
+		<result property="emp_CODE" column="EMPLOYEE_CODE" />
+		<result property="emp_NAME" column="EMPLOYEE_NAME" />
+		<result property="dep_NAME" column="DEPARTMENT_NAME" />
+
+	</resultMap>
+	<select id="searchList" resultMap="P0004resultVO"
+		parameterType="java.util.Map"> 
+      <![CDATA[
+         select A.EMPLOYEE_CODE,A.EMPLOYEE_NAME,B.DEPARTMENT_NAME
+         from EMPLOYEE A, DEPARTMENT B
+         WHERE A.DEPARTMENT_CODE = B.DEPARTMENT_CODE
+      ]]>
+		<choose>
+			<when test="command == 'doWork'">
+				AND A.EMPLOYEE_JOIN_DATE IS NOT null
+				AND A.EMPLOYEE_RESIGNATION_DATE IS null
+			</when>
+			<when test="command == 'noWork'">
+			    AND A.EMPLOYEE_JOIN_DATE IS NOT null
+				AND A.EMPLOYEE_RESIGNATION_DATE IS NOT null
+			</when>
+		</choose>
+	</select>
+	
+</mapper>

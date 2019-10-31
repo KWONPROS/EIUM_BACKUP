@@ -1462,7 +1462,7 @@ TABS COMPONENT
 .ib-tab-tabs.ib-flat_blue {
   list-style: none;
   margin: 0;
-  padding: 1rem 0 0 0;
+  padding: 1rem 0 0 1rem;
   height: auto;
   width: 100%;
   visibility: visible; }
@@ -1479,8 +1479,8 @@ TABS COMPONENT
       margin-left: 0px;
       margin-right: 2px;
       padding: 0px 6px 0px 6px;
-      color: #f1f1f1;
-      background-color: #67aaf8;
+      color: #212121;
+      background-color: #BEBEBE;
       text-align: center;
       -webkit-transition: z-index 0.3s, opacity 0.3s ease-in-out, color 0.3s, border-color 0.3s, background-color 0.3s, border-radius 0.2s;
       -moz-transition: z-index 0.3s, opacity 0.3s ease-in-out, color 0.3s, border-color 0.3s, background-color 0.3s, border-radius 0.2s;
@@ -1491,10 +1491,10 @@ TABS COMPONENT
       z-index: 1; }
       .ib-tab-tabs.ib-flat_blue .ib-tab-tabs-item .ib-tab-tabs-item__link.is-active {
         color: white;
-        background-color: #0b74ee; }
+        background-color: #5E5E5E; }
       .ib-tab-tabs.ib-flat_blue .ib-tab-tabs-item .ib-tab-tabs-item__link:hover {
         color: white;
-        background-color: #0b74ee; }
+        background-color: #5E5E5E; }
       .ib-tab-tabs.ib-flat_blue .ib-tab-tabs-item .ib-tab-tabs-item__link.is-disable {
         color: #f1f1f1 !important;
         background-color: #b3b3b3 !important;
@@ -1559,9 +1559,11 @@ TABS COMPONENT
 .ib-tab-contents.ib-flat_blue {
   position: relative;
   top: 0px;
-  background-color: white;
+  background-color: m;
+  padding: 10px;
   visibility: visible; }
   .ib-tab-contents.ib-flat_blue .ib-tab-contents__item {
+  	color:#212121;
     padding: 0;
     border: 0; }
   .ib-tab-contents.ib-flat_blue.animated {
@@ -1600,11 +1602,11 @@ TABS COMPONENT
         margin-bottom: 0; }
       .ib-context-menu.ib-flat_blue .ib-context-menu__items .ib-context-menu__item .ib-context-menu__link {
         padding: 0px 4px;
-        color: #67aaf8;
+        color: #BEBEBE;
         text-decoration: none; }
         .ib-context-menu.ib-flat_blue .ib-context-menu__items .ib-context-menu__item .ib-context-menu__link:hover {
           color: white;
-          background-color: #0b74ee; }
+          background-color: #5E5E5E; }
 
 /**
 * DropDown Menu
@@ -1629,11 +1631,11 @@ TABS COMPONENT
   .ib-tab-tabs.ib-flat_blue .ib-tab-tabs-dropdown .ib-tab-tabs-dropdown-wrapBtn .ib-tab-tabs-arrow.is-active {
     opacity: 1;
     color: #f1f1f1;
-    background-color: #67aaf8;
+    background-color: #BEBEBE;
     pointer-events: auto;
     cursor: pointer; }
   .ib-tab-tabs.ib-flat_blue .ib-tab-tabs-dropdown .ib-tab-tabs-dropdown-wrapBtn .ib-tab-tabs-arrow.is-active:hover {
-    background-color: #0b74ee; }
+    background-color: #5E5E5E; }
   .ib-tab-tabs.ib-flat_blue .ib-tab-tabs-dropdown .ib-tab-tabs-dropdown-wrapBtn .ib-tab-tabs-arrow.left {
     border-radius: 5px 0px 0px 5px; }
   .ib-tab-tabs.ib-flat_blue .ib-tab-tabs-dropdown .ib-tab-tabs-dropdown-wrapBtn .ib-tab-tabs-arrow.right {
@@ -1645,7 +1647,7 @@ TABS COMPONENT
   margin-right: 2px;
   padding: 0px 6px 0px 6px;
   color: #f1f1f1;
-  background-color: #67aaf8;
+  background-color: #BEBEBE;
   text-align: center;
   -webkit-transition: opacity 0.3s ease-in-out, color 0.3s, border-color 0.3s, background-color 0.3s, border-radius 0.3s;
   -moz-transition: opacity 0.3s ease-in-out, color 0.3s, border-color 0.3s, background-color 0.3s, border-radius 0.3s;
@@ -1656,12 +1658,12 @@ TABS COMPONENT
   font-size: 12px;
   cursor: pointer; }
   .ib-tab-tabs.ib-flat_blue .ib-tab-tabs-dropdown .ib-tab-tabs-dropdown-wrapBtn .ib-tab-tabs-dropbtn.is-active {
-    background-color: #0b74ee; }
+    background-color: #5E5E5E; }
   .ib-tab-tabs.ib-flat_blue .ib-tab-tabs-dropdown .ib-tab-tabs-dropdown-wrapBtn .ib-tab-tabs-dropbtn:hover {
-    background-color: #0b74ee; }
+    background-color: #5E5E5E; }
 
 .ib-tab-tabs.ib-flat_blue .ib-tab-tabs-dropdown .ib-tab-tabs-dropdown-contents {
-  color: #67aaf8;
+  color: #BEBEBE;
   overflow: auto;
   background-color: white;
   border: solid 1px #f1f1f1;
@@ -1681,15 +1683,15 @@ TABS COMPONENT
     margin-left: 0px;
     margin-right: 0px;
     padding: 0px 6px 0px 6px;
-    color: #67aaf8;
+    color: #BEBEBE;
     background-color: white;
     border-radius: 0; }
     .ib-tab-tabs.ib-flat_blue .ib-tab-tabs-dropdown .ib-tab-tabs-dropdown-contents .ib-tab-tabs-item__link:hover {
       color: white;
-      background-color: #0b74ee; }
+      background-color: #5E5E5E; }
     .ib-tab-tabs.ib-flat_blue .ib-tab-tabs-dropdown .ib-tab-tabs-dropdown-contents .ib-tab-tabs-item__link.is-active {
       color: white;
-      background-color: #0b74ee; }
+      background-color: #5E5E5E; }
 
 /* -----------------------------------------------------------------------------
 
@@ -1724,12 +1726,12 @@ TABS COMPONENT
 ----------------------------------------------------------------------------- */
 .ib-tab-tabs.ib-flat_blue a,
 .ib-context-menu.ib-flat_blue a {
-  color: #67aaf8;
+  color: #BEBEBE;
   text-decoration: none; }
 
 .ib-tab-tabs.ib-flat_blue a:hover,
 .ib-context-menu.ib-flat_blue a:hover {
-  color: #0b74ee; }
+  color: #5E5E5E; }
 
 .ib-tab-tabs.ib-flat_blue b,
 .ib-tab-tabs.ib-flat_blue strong,
@@ -2638,7 +2640,7 @@ TABS COMPONENT
       padding: 0px 6px 0px 6px;
       color: #272727;
       border: white 1px solid;
-      border-bottom-color: #67aaf8;
+      border-bottom-color: #BEBEBE;
       background-color: white;
       text-align: center;
       -webkit-transition: z-index 0.3s, opacity 0.3s ease-in-out, color 0.3s, border-color 0.3s, background-color 0.3s, border-radius 0.2s;
@@ -2651,13 +2653,13 @@ TABS COMPONENT
       .ib-tab-tabs.ib-classic_blue .ib-tab-tabs-item .ib-tab-tabs-item__link.is-active {
         color: #272727;
         background-color: white;
-        border: #0b74ee 1px solid;
+        border: #5E5E5E 1px solid;
         border-bottom-color: white;
         z-index: 1; }
       .ib-tab-tabs.ib-classic_blue .ib-tab-tabs-item .ib-tab-tabs-item__link:hover {
         color: #f1f1f1;
-        border: #67aaf8 1px solid;
-        background-color: #67aaf8;
+        border: #BEBEBE 1px solid;
+        background-color: #BEBEBE;
         z-index: 1; }
       .ib-tab-tabs.ib-classic_blue .ib-tab-tabs-item .ib-tab-tabs-item__link.is-disable {
         color: #f1f1f1 !important;
@@ -2724,7 +2726,7 @@ TABS COMPONENT
   position: relative;
   top: -1px;
   background-color: white;
-  border: #0b74ee 1px solid;
+  border: #5E5E5E 1px solid;
   visibility: visible; }
   .ib-tab-contents.ib-classic_blue .ib-tab-contents__item {
     padding: 0;
@@ -2769,7 +2771,7 @@ TABS COMPONENT
         text-decoration: none; }
         .ib-context-menu.ib-classic_blue .ib-context-menu__items .ib-context-menu__item .ib-context-menu__link:hover {
           color: white;
-          background-color: #0b74ee; }
+          background-color: #5E5E5E; }
 
 /**
 * DropDown Menu
@@ -2799,7 +2801,7 @@ TABS COMPONENT
     cursor: pointer; }
   .ib-tab-tabs.ib-classic_blue .ib-tab-tabs-dropdown .ib-tab-tabs-dropdown-wrapBtn .ib-tab-tabs-arrow.is-active:hover {
     color: #f1f1f1;
-    background-color: #0b74ee; }
+    background-color: #5E5E5E; }
   .ib-tab-tabs.ib-classic_blue .ib-tab-tabs-dropdown .ib-tab-tabs-dropdown-wrapBtn .ib-tab-tabs-arrow.left {
     border-radius: 5px 0px 0px 5px; }
   .ib-tab-tabs.ib-classic_blue .ib-tab-tabs-dropdown .ib-tab-tabs-dropdown-wrapBtn .ib-tab-tabs-arrow.right {
@@ -2823,10 +2825,10 @@ TABS COMPONENT
   cursor: pointer; }
   .ib-tab-tabs.ib-classic_blue .ib-tab-tabs-dropdown .ib-tab-tabs-dropdown-wrapBtn .ib-tab-tabs-dropbtn.is-active {
     color: #151515;
-    background-color: #0b74ee; }
+    background-color: #5E5E5E; }
   .ib-tab-tabs.ib-classic_blue .ib-tab-tabs-dropdown .ib-tab-tabs-dropdown-wrapBtn .ib-tab-tabs-dropbtn:hover {
     color: #f1f1f1;
-    background-color: #0b74ee; }
+    background-color: #5E5E5E; }
 
 .ib-tab-tabs.ib-classic_blue .ib-tab-tabs-dropdown .ib-tab-tabs-dropdown-contents {
   color: #272727;
@@ -2854,10 +2856,10 @@ TABS COMPONENT
     border-radius: 0; }
     .ib-tab-tabs.ib-classic_blue .ib-tab-tabs-dropdown .ib-tab-tabs-dropdown-contents .ib-tab-tabs-item__link:hover {
       color: white;
-      background-color: #0b74ee; }
+      background-color: #5E5E5E; }
     .ib-tab-tabs.ib-classic_blue .ib-tab-tabs-dropdown .ib-tab-tabs-dropdown-contents .ib-tab-tabs-item__link.is-active {
       color: white;
-      background-color: #0b74ee; }
+      background-color: #5E5E5E; }
 
 /* -----------------------------------------------------------------------------
 
@@ -2892,12 +2894,12 @@ TABS COMPONENT
 ----------------------------------------------------------------------------- */
 .ib-tab-tabs.ib-classic_blue a,
 .ib-context-menu.ib-classic_blue a {
-  color: #67aaf8;
+  color: #BEBEBE;
   text-decoration: none; }
 
 .ib-tab-tabs.ib-classic_blue a:hover,
 .ib-context-menu.ib-classic_blue a:hover {
-  color: #0b74ee; }
+  color: #5E5E5E; }
 
 .ib-tab-tabs.ib-classic_blue b,
 .ib-tab-tabs.ib-classic_blue strong,

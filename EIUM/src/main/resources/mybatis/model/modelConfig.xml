@@ -20,6 +20,7 @@
 				
 				<typeAlias type="com.myspring.eium.hm.hm_p0001.vo.HM_P0001VO" alias="HM_P0001VO" />
 				<typeAlias type="com.myspring.eium.hm.hm_p0003.vo.HM_P0003VO" alias="HM_P0003VO" />
+				<typeAlias type="com.myspring.eium.hm.hm_p0004.vo.HM_P0004VO" alias="HM_P0004VO" />
 				
 	</typeAliases>
 </configuration>
