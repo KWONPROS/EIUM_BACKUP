@@ -8,6 +8,32 @@
 		<result property="emp_CODE" column="EMPLOYEE_CODE" />
 		<result property="emp_NAME" column="EMPLOYEE_NAME" />
 		<result property="dep_NAME" column="DEPARTMENT_NAME" />
+		<result property="emp_NAME_EN" column="EMPLOYEE_NAME_EN" />
+		<result property="emp_NAME_HN" column="EMPLOYEE_NAME_HN" />
+		<result property="foreign_YN" column="FOREIGNER_YN" />
+		<result property="rr_NUM" column="RESIDENT_RESISTRATION_NUMBER" />
+		<result property="sex" column="SEX" />
+		<result property="birth" column="BIRTH" />
+		<result property="contact" column="CONTACT" />
+		<result property="final_EDU" column="FINAL_EDUCATION" />
+		<result property="picture" column="PICTURE" />
+		<result property="res_ADDRESS" column="RESIST_ADDRESS" />
+		<result property="res_ADDRESS_DETAIL"
+			column="RESIST_ADDRESS_DETAIL" />
+		<result property="res_ADDRESS_EN" column="RESIST_ADDRESS_EN" />
+		<result property="email" column="EMAIL" />
+		<result property="card_NUM" column="SUCURITY_CARD_NUMBER" />
+		<result property="hh_YN" column="HOUSEHOLD_YN" />
+		<result property="hc_YN" column="HANDICAPPED_YN" />
+		<result property="nationality" column="NATIONALITY" />
+		<result property="hire_TYPE" column="HIRE_TYPE" />
+		<result property="hire_NUM" column="HIRE_NUMBER" />
+		<result property="cur_ADDRESS" column="CURRENT_ADDRESS" />
+		<result property="cur_ADDRESS_DETAIL"
+			column="CURRENT_ADDRESS_DETAIL" />
+		<result property="mil_TYPE" column="MILITARY_TYPE" />
+		<result property="mil_NUM" column="MILITARY_NUMBER" />
+
 
 	</resultMap>
 	<select id="searchList" resultMap="P0004resultVO"
@@ -20,13 +46,48 @@
 		<choose>
 			<when test="command == 'doWork'">
 				AND A.EMPLOYEE_JOIN_DATE IS NOT null
-				AND A.EMPLOYEE_RESIGNATION_DATE IS null
+				AND
+				A.EMPLOYEE_RESIGNATION_DATE IS null
 			</when>
 			<when test="command == 'noWork'">
-			    AND A.EMPLOYEE_JOIN_DATE IS NOT null
-				AND A.EMPLOYEE_RESIGNATION_DATE IS NOT null
+				AND A.EMPLOYEE_JOIN_DATE IS NOT null
+				AND A.EMPLOYEE_RESIGNATION_DATE IS
+				NOT null
 			</when>
 		</choose>
 	</select>
-	
+	<select id="searchList2" resultMap="P0004resultVO"
+		parameterType="java.util.Map"> 
+      <![CDATA[
+         select 
+         EMPLOYEE_CODE
+		,EMPLOYEE_NAME_EN
+		,EMPLOYEE_NAME_HN
+		,FOREIGNER_YN
+		,RESIDENT_RESISTRATION_NUMBER
+		,SEX
+		,BIRTH
+		,CONTACT
+		,FINAL_EDUCATION
+		,RESIST_ADDRESS
+		,RESIST_ADDRESS_DETAIL
+		,RESIST_ADDRESS_EN
+		,EMAIL
+		,SUCURITY_CARD_NUMBER
+		,HOUSEHOLD_YN
+		,HANDICAPPED_YN
+		,NATIONALITY
+		,HIRE_TYPE
+		,HIRE_NUMBER
+		,CURRENT_ADDRESS
+		,CURRENT_ADDRESS_DETAIL
+		,MILITARY_TYPE
+		,MILITARY_NUMBER
+         from EMPLOYEE_HR_INFO
+      ]]>
+
+		WHERE EMPLOYEE_CODE=#{emp_CODE}
+
+	</select>
+
 </mapper>

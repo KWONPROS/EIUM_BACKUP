@@ -50,7 +50,7 @@
 		    },
 		    allowCloseBTN: false
 		});
-
+		
 		
 		
 		mySheet2.RemoveAll();
@@ -59,8 +59,27 @@
 		initSheet2.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 		initSheet2.Cols = [		
 	        {Header:"사원코드",Type:"Text",SaveName:"emp_CODE",KeyField:1,Hidden:1},	
-			{Header:"사원명",Type:"Text",SaveName:"emp_NAME", Hidden:1},			
-				
+			{Header:"사원명(영문)",Type:"Text",SaveName:"emp_NAME_EN", Hidden:1},			
+			{Header:"사원명(한자)",Type:"Text",SaveName:"emp_NAME_HN", Hidden:1},			
+			{Header:"내외국인구분",Type:"Text",SaveName:"foreign_YN", Hidden:1},			
+			{Header:"주민등록번호",Type:"Text",SaveName:"rr_NUM", Hidden:1},			
+			{Header:"성별",Type:"Text",SaveName:"sex", Hidden:1},			
+			{Header:"생년월일",Type:"Text",SaveName:"birth", Hidden:1},			
+			{Header:"전화번호",Type:"Text",SaveName:"contact", Hidden:1},			
+			{Header:"최종학력",Type:"Text",SaveName:"final_EDU", Hidden:1},			
+			{Header:"사진",Type:"Text",SaveName:"picture", Hidden:1},			
+			{Header:"주민등록주소",Type:"Text",SaveName:"res_ADDRESS", Hidden:1},			
+			{Header:"상세주소",Type:"Text",SaveName:"res_ADDRESS_DETAIL", Hidden:1},			
+			{Header:"영문주소",Type:"Text",SaveName:"res_ADDRESS_EN", Hidden:1},			
+			{Header:"이메일",Type:"Text",SaveName:"email", /* Hidden:1 */},			
+			{Header:"출입카드번호",Type:"Text",SaveName:"card_NUM", Hidden:1},			
+			{Header:"세대주여부",Type:"Text",SaveName:"hh_YN", Hidden:1},			
+			{Header:"장애인구분",Type:"Text",SaveName:"hc_YN", Hidden:1},			
+			{Header:"국적",Type:"Text",SaveName:"nationality", Hidden:1},			
+			{Header:"병역구분",Type:"Text",SaveName:"mil_TYPE", Hidden:1},			
+			{Header:"군번",Type:"Text",SaveName:"mil_NUM", Hidden:1},			
+			{Header:"채용구분",Type:"Text",SaveName:"hire_TYPE", Hidden:1},					
+			{Header:"기수",Type:"Text",SaveName:"hire_NUM", Hidden:1}					
 		];   
 		IBS_InitSheet( mySheet2 , initSheet2);
   
@@ -72,6 +91,8 @@
 		switch (sAction) {
 		case "search": //조회
 			mySheet.DoSearch("${contextPath}/hm/p0004/searchList.do");
+		console.log(mySheet2.GetRowData(1));
+			$('input[name=engName]').val(mySheet2.GetCellValue(1,3));
 			break;
 
 		case "reload": //초기화
@@ -91,11 +112,15 @@
 	//로우 클릭시
 	function mySheet_OnClick(Row, Col) {
 		if (Row != 0) {
-			mySheet2.DoSearch("${contextPath}/hm/p0003/searchList2.do",
-					"admin_LIST_NAME=" + mySheet.GetCellValue(Row, 2));
-			mySheet2.SetCellValue(0, 2, mySheet.GetCellValue(Row, 2));
-
+			mySheet2.DoSearch("${contextPath}/hm/p0004/searchList2.do", "emp_CODE=" + mySheet.GetCellValue(Row, 2));
+			
+			
+			
+			
+			
+			
 		}
+
 	}
 
 	// 저장완료 후 처리할 작업
@@ -236,7 +261,7 @@ border : none;
 	</div>
 
 	<div class="right">
-
+	<div class="mySheet2" style="position: relative;top: 100px;left: 300px;"><script>createIBSheet("mySheet2",0,0);</script></div>
 		<div id="ib_sheetTab">
 			<div class="ib-tab-tabs-item">
 				<a class="ib-tab-tabs-item__link is-active"><span class="ib-tab-tabs-item__title">인적정보 </span></a> 
