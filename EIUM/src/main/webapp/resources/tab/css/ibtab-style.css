@@ -612,7 +612,7 @@ TABS COMPONENT
   display: inline-block;
   white-space: nowrap;
   overflow: hidden;
-  font-size: 14px; }
+  font-size: 12px; }
 
 .ib-tab-tabs .ib-tab-tabs-item .ib-tab-tabs-item__link.is-hold i.fa-lock {
   display: block !important; }
@@ -647,7 +647,7 @@ TABS COMPONENT
   .ib-tab-tabs .ib-tab-tabs-item .ib-tab-tabs-item__link span.ib-tab-tabs-item__title {
     margin-left: 2px;
     margin-right: 2px;
-    font-size: 16px; } }
+    font-size: 12px; } }
 
 .ib-errors {
   font-family: "나눔고딕", NanumGothic, "Lucida Grande", "Lucida Sans Unicode", Helvetica, "애플고딕", AppleGothic, MalgunGothic, "맑은 고딕", "Malgun Gothic", sans-serif;
@@ -1009,7 +1009,7 @@ TABS COMPONENT
   font-size: 16px; }
 
 .ib-tab-tabs.ib-flat_old .ib-tab-tabs-item .ib-tab-tabs-item__link span.ib-tab-tabs-item__title {
-  font-size: 16px; }
+  font-size: 12px; }
 
 .ib-tab-tabs.ib-flat_old .ib-tab-tabs-dropdown .ib-tab-tabs-item__link i,
 .ib-tab-tabs.ib-flat_old .ib-tab-tabs-dropdown .ib-tab-tabs-item__link span {
@@ -1380,7 +1380,7 @@ TABS COMPONENT
   font-size: 9px; }
 
 .ib-tab-tabs.ib-bootstrap_blue .ib-tab-tabs-item .ib-tab-tabs-item__link span.ib-tab-tabs-item__title {
-  font-size: 14px; }
+  font-size: 12px; }
 
 .ib-tab-tabs.ib-bootstrap_blue .ib-tab-tabs-item .ib-tab-tabs-item__link.is-hold i.fa-lock {
   display: block !important; }
@@ -1746,7 +1746,7 @@ TABS COMPONENT
 .ib-tab-tabs.ib-flat_blue .ib-tab-tabs-item .ib-tab-tabs-item__link i,
 .ib-tab-tabs.ib-flat_blue .ib-tab-tabs-item .ib-tab-tabs-item__link span {
   margin: 0;
-  padding: 5px 2px 5px 2px;
+  padding: 5px 4px 5px 4px;
   line-height: 1.2; }
 
 .ib-tab-tabs.ib-flat_blue .ib-tab-tabs-item .ib-tab-tabs-item__link i {
@@ -1756,7 +1756,7 @@ TABS COMPONENT
   font-size: 16px; }
 
 .ib-tab-tabs.ib-flat_blue .ib-tab-tabs-item .ib-tab-tabs-item__link span.ib-tab-tabs-item__title {
-  font-size: 16px; }
+  font-size: 12px; }
 
 .ib-tab-tabs.ib-flat_blue .ib-tab-tabs-item .ib-tab-tabs-item__link.is-hold i.fa-lock {
   display: block !important; }
@@ -2155,7 +2155,7 @@ TABS COMPONENT
   font-size: 12px; }
 
 .ib-tab-tabs.ib-simple_blue .ib-tab-tabs-item .ib-tab-tabs-item__link span.ib-tab-tabs-item__title {
-  font-size: 16px; }
+  font-size: 12px; }
 
 .ib-tab-tabs.ib-simple_blue .ib-tab-tabs-dropdown .ib-tab-tabs-item__link i,
 .ib-tab-tabs.ib-simple_blue .ib-tab-tabs-dropdown .ib-tab-tabs-item__link span {
@@ -2281,7 +2281,7 @@ TABS COMPONENT
   font-size: 16px; }
 
 .ib-tab-tabs.ib-simple_under_blue .ib-tab-tabs-item .ib-tab-tabs-item__link span.ib-tab-tabs-item__title {
-  font-size: 16px; }
+  font-size: 12px; }
 
 .ib-tab-tabs.ib-simple_under_blue .ib-tab-tabs-dropdown .ib-tab-tabs-item__link i,
 .ib-tab-tabs.ib-simple_under_blue .ib-tab-tabs-dropdown .ib-tab-tabs-item__link span {
@@ -2924,7 +2924,7 @@ TABS COMPONENT
   font-size: 16px; }
 
 .ib-tab-tabs.ib-classic_blue .ib-tab-tabs-item .ib-tab-tabs-item__link span.ib-tab-tabs-item__title {
-  font-size: 16px; }
+  font-size: 12px; }
 
 .ib-tab-tabs.ib-classic_blue .ib-tab-tabs-item .ib-tab-tabs-item__link.is-hold i.fa-lock {
   display: block !important; }
@@ -3309,7 +3309,7 @@ TABS COMPONENT
   font-size: 16px; }
 
 .ib-tab-tabs.ib-classic_red .ib-tab-tabs-item .ib-tab-tabs-item__link span.ib-tab-tabs-item__title {
-  font-size: 16px; }
+  font-size: 12px; }
 
 .ib-tab-tabs.ib-classic_red .ib-tab-tabs-item .ib-tab-tabs-item__link.is-hold i.fa-lock {
   display: block !important; }
