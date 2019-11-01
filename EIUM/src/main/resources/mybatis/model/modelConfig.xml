@@ -13,8 +13,9 @@
 				<typeAlias type="com.myspring.eium.sm.sm_p0005.vo.SM_P0005VO" alias="SM_P0005VO" />
 				<typeAlias type="com.myspring.eium.sm.sm_p0005.vo.SM_P0005_01VO" alias="SM_P0005_01VO" />
 				<typeAlias type="com.myspring.eium.sm.sm_p0006.vo.SM_P0006VO" alias="SM_P0006VO" />
-				<typeAlias type="com.myspring.eium.sm.sm_p0006.vo.SM_P0006_01VO" alias="SM_P0006_01VO" />
-				
+				<typeAlias type="com.myspring.eium.sm.sm_p0006.vo.SM_P0006_01VO" alias="SM_P0006_01VO" />				
 				<typeAlias type="com.myspring.eium.hm.hm_p0003.vo.HM_P0003VO" alias="HM_P0003VO" />
+				<typeAlias type="com.myspring.eium.hm.hm_p0007.vo.HM_P0007VO" alias="HM_P0007VO" />
+				
 	</typeAliases>
 </configuration>

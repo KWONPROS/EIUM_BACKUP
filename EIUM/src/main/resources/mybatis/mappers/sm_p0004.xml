@@ -25,12 +25,13 @@
 
 	<select id="selectAllp0004List" resultMap="p0004Result">
       <![CDATA[
-         select e.employee_code, e.employee_name, e.department_code, d.department_name, e.employee_join_date, e.employee_resignation_date, e.employee_available_yn, ac.employee_id , ac.employee_password, ua.authority_code, ei.contact
-         from employee e, account ac, department d, employee_hr_info ei, user_auth ua
-         where e.department_code = d.department_code
-         and e.employee_code = ei.employee_code
-         and e.employee_code = ac.employee_code
-         and ac.employee_id = ua.employee_id
+         select employee.employee_code, employee.employee_name, employee.department_code, department.department_name, employee.employee_join_date, employee.employee_resignation_date, employee.employee_available_yn, account.employee_id , account.employee_password, user_auth.authority_code, employee_hr_info.contact
+         from employee, account, employee_hr_info
+         LEFTOUTER JOIN department ON employee.department_code = department.department_code        
+         LEFTOUTER JOIN user_auth ON account.employee_id = user_auth.employee_id
+         where employee.employee_code = employee_hr_info.employee_code
+         and employee.employee_code = account.employee_code
+
       ]]>
 	</select>
 	
