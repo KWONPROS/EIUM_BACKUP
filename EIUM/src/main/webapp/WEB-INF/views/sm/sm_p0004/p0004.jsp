@@ -36,7 +36,7 @@ function LoadPage(){
 	   {Header:"아이디",SaveName:"employee_id",type:"Text",width:100, UpdateEdit:"0"},
 	   {Header:"암호",SaveName:"employee_password",type:"Text",width:100},
 	   //{Header:"조회권한", Type:"Combo", SaveName:"auth_code", Edit: 1,Width:100, Align: "Center", ComboText:"Clerk|Assist Manager|Manager|General Manager|Director", ComboCode:"1|2|3|4|5"},
-	   {Header:"조회권한", Type:"Combo", SaveName:"authority_code", Edit: 1,Width:100, Align: "Center"},
+	   {Header:"조회권한", Type:"Text", SaveName:"authority_code", Edit: 1,Width:100, Align: "Center"},
 	   {Header:"비상연락망",SaveName:"contact",Type:"Text",Width:100}
 /* 	   {Header:"접근자",SaveName:"user",Type:"Text", Hidden:"ture", Width:100},
  */	      ];
