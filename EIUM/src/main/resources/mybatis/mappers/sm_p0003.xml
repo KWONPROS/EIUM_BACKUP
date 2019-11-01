@@ -15,6 +15,7 @@
 		<result property="SECTOR_NAME" column="SECTOR_NAME" />
 		
 	</resultMap>
+	
 	<resultMap id="Result02" type="SM_P0003VO">
 
 		<result property="SITE_NAME" column="SITE_NAME" />

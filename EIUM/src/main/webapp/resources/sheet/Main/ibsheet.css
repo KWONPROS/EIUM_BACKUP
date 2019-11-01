@@ -235,8 +235,8 @@ u.GMDateRight,u.GMPopupRight { padding-right:0!important; padding-left:17px; }
 .GMDateRight {background:url(calendar.png) no-repeat 0px center; background-size:14px;}
 .GMEnumRight { background:url(combo.png) no-repeat 0px center; background-size:16px;}
 u.GMEnumRight {padding-right:0; padding-left:17px}
-.GMExpandLeft { background:url(ic_plus.png) no-repeat 3px center; background-size: 12px; padding:2px 0 0  18px; _padding:0 0 0 18px }
-.GMCollapseLeft { background:url(ic_minus.png) no-repeat 3px center; background-size: 12px; padding:2px 0 0  18px; _padding:0 0 0 18px }
+.GMExpandLeft { background:url(ic_plus.gif) no-repeat 3px center; background-size: 12px; padding:2px 0 0  18px; _padding:0 0 0 18px }
+.GMCollapseLeft { background:url(ic_minus.gif) no-repeat 3px center; background-size: 12px; padding:2px 0 0  18px; _padding:0 0 0 18px }
 
 .GMRadio0Left,.GMRadio1Left,.GMRadio2Left,.GMRadio3Left,.GMRadioRO0Left,.GMRadioRO1Left,.GMRadioRO2Left,.GMRadioRO3Left { padding-left:17px; padding-right:10px; line-height:17px; background-repeat:no-repeat; background-position:3px 50%;}
 .GMRadio0Right,.GMRadio1Right,.GMRadio2Right,.GMRadio3Right,.GMRadioRO0Right,.GMRadioRO1Right,.GMRadioRO2Right,.GMRadioRO3Right {line-height:17px; padding-right:17px; padding-left:10px; background-repeat:no-repeat; background-position:3px 50%;}
@@ -394,9 +394,9 @@ u.GMFilter0,u.GMFilter1 { padding-left:16px; }
 .GMColorMultiRowFocused     { background-color:#e9f5d0; }
 
 /* Hover, focus, edit cursors */
-.GMHoverRowBackground 	{ opacity:0.2; filter:alpha(opacity=20); background:#8238f0; } /* 일반모드에서의 Hover Row의 Background*/
-.GMHoverRowBorder		{ z-index:0; border-top:1px solid #bda7dc; border-bottom:1px solid #bda7dc; } /* 일반모드에서의 Hover Row의 Border*/
-.GMHoverCellBorder 		{ z-index:0; border:1px solid #bda7dc; cursor:default; } /* 일반모드에서의 Hover Cell의 Border*/
+.GMHoverRowBackground 	{ opacity:0.2; filter:alpha(opacity=20); background:#8238f0; } /* �씪諛섎え�뱶�뿉�꽌�쓽 Hover Row�쓽 Background*/
+.GMHoverRowBorder		{ z-index:0; border-top:1px solid #bda7dc; border-bottom:1px solid #bda7dc; } /* �씪諛섎え�뱶�뿉�꽌�쓽 Hover Row�쓽 Border*/
+.GMHoverCellBorder 		{ z-index:0; border:1px solid #bda7dc; cursor:default; } /* �씪諛섎え�뱶�뿉�꽌�쓽 Hover Cell�쓽 Border*/
 .GMFocusRowBackground   { opacity:0.1; filter:alpha(opacity=20); background:/*IBSB*/#009688; } /* <-- Sheet : Selected Row Background */
 .GMFocusRowBorder       { z-index:0; border:1px solid /*IBSB*/#009688; } /* <-- Sheet : Selected Row Border */
 .GMFocusCellBorder      { z-index:0; border:2px solid #009688;} /* <-- Sheet : Selected Cell Border */

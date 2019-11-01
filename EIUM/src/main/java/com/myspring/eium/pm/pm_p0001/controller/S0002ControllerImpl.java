@@ -30,19 +30,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 
-import com.myspring.eium.pm.pm_p0001.service.PM_S0002Service;
-import com.myspring.eium.pm.pm_p0001.vo.PM_S0002VO;
+import com.myspring.eium.pm.pm_p0001.service.S0002Service;
+import com.myspring.eium.pm.pm_p0001.vo.S0002VO;
 
 
 
 
-@Controller
-public class PM_S0002ControllerImpl implements PM_S0002Controller {
-	private static final Logger logger = LoggerFactory.getLogger(PM_S0002ControllerImpl.class);
+@Controller("s0002Controller")
+public class S0002ControllerImpl implements S0002Controller {
+	private static final Logger logger = LoggerFactory.getLogger(S0002ControllerImpl.class);
 	@Autowired
-	PM_S0002Service pM_S0002Service;
+	S0002Service s0002Service;
 	@Autowired
-	PM_S0002VO pM_S0002VO;
+	S0002VO s0002VO;
 	
 	@Override
 	@RequestMapping(value = "/s0002/searchInit.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -65,7 +65,7 @@ public class PM_S0002ControllerImpl implements PM_S0002Controller {
 		searchMap.put("p_cust_id", request.getParameter("p_cust_id"));
 		
 		//데이터 조회
-		List<PM_S0002VO> data = pM_S0002Service.searchList(searchMap);
+		List<S0002VO> data = s0002Service.searchList(searchMap);
         resultMap.put("Data", data);
     	System.out.println("resultMap::::"+resultMap);
         return resultMap;
@@ -99,7 +99,7 @@ public class PM_S0002ControllerImpl implements PM_S0002Controller {
 		
 		Map<String, String> result = new HashMap<String, String>();
 		try {
-			pM_S0002Service.saveData(dataMap);	
+			s0002Service.saveData(dataMap);	
 			result.put("Code","0");
 			result.put("Message","저장되었습니다");
 		}catch(Exception e) {

@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.dao.DataAccessException;
@@ -16,24 +18,25 @@ import com.myspring.eium.hm.hm_p0003.dao.HM_P0003DAO;
 import com.myspring.eium.hm.hm_p0003.vo.HM_P0003VO;
 
 
-
-
-
-
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
 public class HM_P0003ServiceImpl implements HM_P0003Service {
 	@Autowired
-	private HM_P0003DAO p0002DAO;
+	private HM_P0003DAO p0003DAO;
 
 	@Override
 	public List<HM_P0003VO> searchList(Map<String, Object> searchMap) throws DataAccessException {
-		List<HM_P0003VO> list =  p0002DAO.searchList(searchMap); 
+		List<HM_P0003VO> list =  p0003DAO.searchList(searchMap); 
+		return list;
+	}
+	@Override
+	public List<HM_P0003VO> searchList2(Map<String, String> searchMap) throws DataAccessException {
+		List<HM_P0003VO> list =  p0003DAO.searchList2(searchMap); 		
 		return list;
 	}
 
 	@Override
-	public void saveData(Map<String, String[]> dataMap)  throws DataAccessException  {
+	public void saveData(Map<String, String[]> dataMap,String table_NAME)  throws DataAccessException  {
 		String[] status = dataMap.get("STATUS");
 		int length = status.length; 
 		int i = 0;
@@ -41,11 +44,11 @@ public class HM_P0003ServiceImpl implements HM_P0003Service {
 		for(String str : status) {
 			Map<String, String> row = getRow(dataMap, length, i); 
 			if("I".equals(str)) { 
-				p0002DAO.insertData(row);
+				p0003DAO.insertData(row,table_NAME);
 			}else if("U".equals(str)) { 
-				p0002DAO.updateData(row);
+				p0003DAO.updateData(row,table_NAME);
 			}else if("D".equals(str)) { 
-				p0002DAO.deleteData(row);
+				p0003DAO.deleteData(row,table_NAME);
 			}
 			i++;
 		}

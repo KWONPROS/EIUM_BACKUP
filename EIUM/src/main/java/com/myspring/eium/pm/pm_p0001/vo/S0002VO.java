@@ -1,8 +1,8 @@
 package com.myspring.eium.pm.pm_p0001.vo;
 import org.springframework.stereotype.Component;
 
-@Component
-public class PM_S0002VO {
+@Component("s0002VO")
+public class S0002VO {
 	
 	private String cust_id="";
 	private String cust_name="";
