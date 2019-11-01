@@ -91,7 +91,7 @@ var data = {Data:[
 	{menuCode:"m08",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0002/searchInit.do", TITLE:"지급일등록"},
 	{menuCode:"m09",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0003/searchInit.do", TITLE:"인사기초코드등록 "},
 	{menuCode:"m10",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"인사관리"},
-	{menuCode:"m11",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/group.html", TITLE:"인사정보등록"},
+	{menuCode:"m11",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0004/searchInit.do", TITLE:"인사정보등록"},
 	{menuCode:"m12",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0007/searchInit.do", TITLE:"인사기록카드"},
 	{menuCode:"m13",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"교육관리"},
 	{menuCode:"m14",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"교육평가"},
