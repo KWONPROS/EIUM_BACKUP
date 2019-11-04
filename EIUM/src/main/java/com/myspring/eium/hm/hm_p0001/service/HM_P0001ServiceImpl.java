@@ -14,12 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.myspring.eium.hm.hm_p0001.dao.HM_P0001DAO;
 import com.myspring.eium.hm.hm_p0001.vo.HM_P0001VO;
+import com.myspring.eium.hm.hm_p0001.vo.HM_P0001_01VO;
 
 
 
 
 
-@Service("hm_p0001Service")
+@Service
 @Transactional(propagation = Propagation.REQUIRED)
 public class HM_P0001ServiceImpl implements HM_P0001Service {
 	@Autowired
@@ -30,15 +31,21 @@ public class HM_P0001ServiceImpl implements HM_P0001Service {
 		List<HM_P0001VO> list =  p0001DAO.searchList(searchMap); 
 		return list;
 	}
-
+	
 	@Override
-	public void saveData(Map<String, String[]> dataMap)  throws DataAccessException  {
+	public List<HM_P0001_01VO> searchList2(Map<String, String> searchMap) throws DataAccessException {
+		List<HM_P0001_01VO> list = p0001DAO.searchList2(searchMap);
+		return list;
+	}	
+	
+	@Override
+	public void saveData(Map<String, String[]> dataMap, String p_position_CODE)  throws DataAccessException  {
 		String[] status = dataMap.get("STATUS");
 		int length = status.length; 
 		int i = 0;
 		
 		for(String str : status) {
-			Map<String, String> row = getRow(dataMap, length, i); 
+			Map<String, String> row = getRow(dataMap, length, i, p_position_CODE); 
 			if("I".equals(str)) { 
 				p0001DAO.insertData(row);
 			}else if("U".equals(str)) { 
@@ -50,14 +57,16 @@ public class HM_P0001ServiceImpl implements HM_P0001Service {
 		}
 	}
 	
-	private Map<String, String> getRow(Map<String, String[]> dataMap, int length, int index) {
+	private Map<String, String> getRow(Map<String, String[]> dataMap, int length, int index, String p_position_CODE) {
 		Map<String, String> row = new HashMap<String, String>();
 		for(String name : dataMap.keySet()) {
 			String[] data = dataMap.get(name);
 			if(length == data.length) {
 				row.put(name, data[index]);
+				row.put("p_position_CODE", p_position_CODE);
+
 			}
 		}		
 		return row;
-	}	
+	}
 }

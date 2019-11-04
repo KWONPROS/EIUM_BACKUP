@@ -62,7 +62,7 @@
 	function doAction(sAction) {
 		switch(sAction) {
 			case "search": //조회
-				mySheet.DoSearch("${contextPath}/hm/p0003/searchList.do");
+				 mySheet2.DoSearch("${contextPath}/hm/p0003/searchList2.do","admin_LIST_NAME="+mySheet.GetCellValue(mySheet.GetSelectRow(),2));
 				break;
 				
 			case "reload": //초기화

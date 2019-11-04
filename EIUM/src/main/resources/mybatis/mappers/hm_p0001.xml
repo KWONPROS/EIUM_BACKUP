@@ -17,22 +17,40 @@
       
 	</select>
 	
+	<!-- ///////////////////////////////////POSITION_CODE_SEARCH////////////// -->
+	
+	<resultMap id="P0001_01resultVO" type="HM_P0001_01VO" >
+		<result property="position_CODE" column="POSITION_CODE" />
+		<result property="pay_GRADE" column="PAY_GRADE" />
+		<result property="salary" column="SALARY" />
+	</resultMap>
+	
+	<select id="searchList_01" resultMap="P0001_01resultVO">
+	<![CDATA[
+		select PAY_GRADE, SALARY
+		from PAY_GRADE_TABLE
+		where TRIM(position_CODE) = #{P_POSITION_CODE, jdbcType=VARCHAR}
+	]]>
+	</select>
+	
+	
+	<!-- ///////////////////////////////////PAY_GRADE_TABLE_INSERT_UPDATE_DELETE/////////////////////////////////////////////////-->
 	<update id="updateData" parameterType="java.util.Map">
-		update POSITION
+		update PAY_GRADE_TABLE
 		set  
-		     POSITION_NAME = #{position_NAME}
+		     SALARY = #{salary}
 		   
-		where TRIM(POSITION_CODE) = #{position_CODE}
+		where TRIM(POSITION_CODE) = #{p_position_CODE}
 	</update>	
 	
- <insert id="insertData" parameterType="java.util.Map">
-		insert into POSITION(POSITION_CODE,POSITION_NAME) 
-		values(#{position_CODE},#{position_NAME})
+ 	<insert id="insertData" parameterType="java.util.Map">
+		insert into PAY_GRADE_TABLE(POSITION_CODE, PAY_GRADE, SALARY) 
+		values(#{p_position_CODE}, #{pay_GRADE}, #{salary})
 	</insert>	
 	
 	<delete id="deleteData" parameterType="java.util.Map">
-		delete POSITION
-		where TRIM(POSITION_CODE) = #{position_CODE}
+		delete PAY_GRADE_TABLE
+		where TRIM(POSITION_CODE) = #{p_position_CODE}
 	</delete>
 
 

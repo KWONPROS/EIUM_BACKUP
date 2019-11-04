@@ -27,14 +27,16 @@ function LoadPage(){
 	   {Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck"},
 	   {Header:"사원코드",SaveName:"employee_code",Type:"Text",width:100, UpdateEdit:"0"},
 	   {Header:"사원명",SaveName:"employee_name",Type:"Text",width:100},
-	   {Header:"부서코드", Type:"Combo", SaveName:"department_code", Edit: 1,Width:100, Align: "Center", ComboText:"Clerk|Assist Manager|Manager|General Manager|Director", ComboCode:"1|2|3|4|5"},
+	   //{Header:"부서코드", Type:"Combo", SaveName:"department_code", Edit: 1,Width:100, Align: "Center", ComboText:"Clerk|Assist Manager|Manager|General Manager|Director", ComboCode:"1|2|3|4|5"},
+	   {Header:"부서코드", Type:"Text", SaveName:"department_code", Edit: 1,Width:100, Align: "Center"},
 	   {Header:"부서명",SaveName:"department_name",type:"Text",width:100},
 	   {Header:"입사일",SaveName:"employee_join_date",type:"Text",width:100},
 	   {Header:"퇴사일",SaveName:"employee_resignation_date",type:"Text",width:100},
 	   {Header:"사용자여부",SaveName:"employee_available_yn",type:"Text",width:100},
 	   {Header:"아이디",SaveName:"employee_id",type:"Text",width:100, UpdateEdit:"0"},
 	   {Header:"암호",SaveName:"employee_password",type:"Text",width:100},
-	   {Header:"조회권한", Type:"Combo", SaveName:"auth_code", Edit: 1,Width:100, Align: "Center", ComboText:"Clerk|Assist Manager|Manager|General Manager|Director", ComboCode:"1|2|3|4|5"},
+	   //{Header:"조회권한", Type:"Combo", SaveName:"auth_code", Edit: 1,Width:100, Align: "Center", ComboText:"Clerk|Assist Manager|Manager|General Manager|Director", ComboCode:"1|2|3|4|5"},
+	   {Header:"조회권한", Type:"Combo", SaveName:"authority_code", Edit: 1,Width:100, Align: "Center"},
 	   {Header:"비상연락망",SaveName:"contact",Type:"Text",Width:100}
 /* 	   {Header:"접근자",SaveName:"user",Type:"Text", Hidden:"ture", Width:100},
  */	      ];

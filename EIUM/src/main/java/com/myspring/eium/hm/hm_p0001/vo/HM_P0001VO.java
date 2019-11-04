@@ -3,7 +3,7 @@ package com.myspring.eium.hm.hm_p0001.vo;
 
 import org.springframework.stereotype.Component;
 
-@Component("hm_P0001VO")
+@Component
 public class HM_P0001VO {
 	
 	private String  position_CODE;
