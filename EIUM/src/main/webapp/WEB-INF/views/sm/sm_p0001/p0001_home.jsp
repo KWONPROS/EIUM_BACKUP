@@ -40,9 +40,9 @@
 				{Header:"본점 FAX",Type:"Text",SaveName:"company_FAX" ,Hidden:1},			
 				{Header:"업체",Type:"Text",SaveName:"company_CATEGORY", KeyField:1 ,Hidden:1},			
 				{Header:"종목",Type:"Text",SaveName:"company_TYPE", KeyField:1 ,Hidden:1},
-				{Header:"설립연월일",Type:"Date",SaveName:"company_ESTABLISHED_DATE" ,Hidden:1},
-				{Header:"개업연월일",Type:"Date",SaveName:"company_OPENBUSINESS_DATE" ,Hidden:1},
-				{Header:"폐업연월일",Type:"Date",SaveName:"company_CLOSEBUSINESS_DATE" ,Hidden:1},
+				{Header:"설립연월일",Type:"Text",SaveName:"company_ESTABLISHED_DATE" ,Hidden:1},
+				{Header:"개업연월일",Type:"Text",SaveName:"company_OPENBUSINESS_DATE" ,Hidden:1},
+				{Header:"폐업연월일",Type:"Text",SaveName:"company_CLOSEBUSINESS_DATE" ,Hidden:1},
 				{Header:"사용여부",Type:"Text",SaveName:"company_BUSINESS_YN", KeyField:1 ,Hidden:1}
 				
 				];
@@ -263,40 +263,45 @@ position: relative;
 top: -350px;
 left: 600px;
 width: 900px;
-background: #EDF0F5;
+height: 630px;
+background: #EBEBEB;
 border-radius: 10px;
 }
 
 .innerheader{
+font-size:14px;
+border-radius:3px;
 position:relative;
 margin:20px;
 top:20px;
 left:10px;
+background: #333333;
+width: 100px;
+text-align: center;
+color:white;
+padding: 10px;0px;10px;0px;
 }
 
-.right table{
-font-size:13px;
-font-weight:bold;
-position: relative;
-left: 40px;
-padding:10px;
-}
-.right table tr td:nth-child(1){
-text-align:right;
-}
-.right table tr td:nth-child(2){
-width: 20px;
-height: 25px;
-}
-.right table tr td:nth-child(3) input{
-width: 130px;
-height: 20px;
+
+.right .tg input,select{
+height: 22px;
+border-radius: 3px;
+border : none;
 padding-left: 10px;
-margin-right:10px;
-box-sizing: border-box;
-border: 1px solid #CCCCCC;
-border-radius: 2px;
-} 
+width: 80%;
+}
+.tg img{
+padding: 0px 5px 0px 5px;
+}
+
+.tg  {border-collapse:collapse;border-spacing:0;width:70%; position: relative; top:20px;left:20px;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:7px 2px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:0px 5px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-lu1x{font-size:12px;font-family:Verdana, Geneva, sans-serif !important;;background-color:#333333;color:#ffffff;border-color:inherit;text-align:center;vertical-align:center;width:30px; border-radius:2px;}
+.tg .tg-au0w{font-size:12px;font-family:Verdana, Geneva, sans-serif !important;;border-color:inherit;text-align:left;vertical-align:center}
+.tg .tg-8thm{font-size:12px;font-family:Verdana, Geneva, sans-serif !important;;background-color:#d4d4d4;border-color:inherit;text-align:right;vertical-align:center}
+.tg .tg-v9i9{font-size:12px;font-family:Verdana, Geneva, sans-serif !important;;background-color:#d4d4d4;border-color:inherit;text-align:left;vertical-align:center}
+
 </style>
 
 </head>
@@ -328,93 +333,78 @@ border-radius: 2px;
 	<form name="form" id="form" method="post">
 		
 	<div class="right">
-	<h3 class="innerheader">기본정보</h3>
-		<table>
+		<table class="tg">
 			<tr>
-				<td>사업자등록번호</td>
-				<td><input type="hidden" name="myRow"></td>
-				<td><input type="text" name="company_RESISTRATION_NUMBER"
-					maxlength="12" placeholder="___-__-_____" style="background: #F8FAE6;"></td>
+				<th class="tg-lu1x" rowspan="16"><i class="fa fa-address-book" aria-hidden="true"></i><br>기<br>본<br>정<br>보</th>
+				 <th class="tg-au0w" rowspan="16"></th>
+    			<td class="tg-8thm">사업자등록번호</td>
+    			<th class="tg-v9i9" rowspan="16"></th>
+				<td class="tg-v9i9"><input type="text" name="company_RESISTRATION_NUMBER"
+               maxlength="12" placeholder="___-__-_____" ><input type="hidden" name="myRow"></td>
 			</tr>
 			<tr>
-				<td>법인등록번호</td>
-				<td></td>
-				<td><input type="text" name="company_CORPARATION_NUMBER"
-					maxlength="14" placeholder="______-_______" ></td>
+				<td class="tg-8thm">법인 등록번호</td>
+    			<td class="tg-v9i9"><input type="text" name="company_CORPARATION_NUMBER"
+            maxlength="14" placeholder="______-_______" ></td>
 			</tr>
 			<tr>
-				<td>대표자성명</td>
-				<td></td>
-				<td><input type="text" name="company_REPRESENTATIVE_NAME" style="background: #F8FAE6;"></td>
+				<td class="tg-8thm">대표자성명</td>
+				<td class="tg-v9i9"><input type="text" name="company_REPRESENTATIVE_NAME"></td>
 			</tr>
 			<tr>
-				<td>외국인여부</td>
-				<td></td>
-				<td><select name=company_REPRESENTATIVE_FOREIGN style="background: #F8FAE6;"><option value='N' selected>0. 내국인</option><option value='Y' >1. 외국인</option></select></td>
+				<td class="tg-8thm">외국인여부</td>
+				<td class="tg-v9i9" ><select name=company_REPRESENTATIVE_FOREIGN><option value='N' selected>0. 내국인</option><option value='Y' >1. 외국인</option></select></td>
 			</tr>
 			<tr>
-				<td>주민등록번호</td>
-				<td></td>
-				<td><input type="text" name="company_REPRESENTATIVE_NUMBER" style="background: #F8FAE6;"></td>
+				<td class="tg-8thm">주민등록번호</td>
+				<td class="tg-v9i9"><input type="text" name="company_REPRESENTATIVE_NUMBER" style="background: #F8FAE6;"></td>
 			</tr>
 			<tr>
-				<td>본점우편번호</td>
-				<td></td>
-				<td><input type="text" name="company_ZIP_CODE" id="company_ZIP_CODE" style="width: 50px;"><a href="javascript:goPopup();"><i class="fa fa-map-o" > 주소 검색</i></a></td>
+				<td class="tg-8thm">본점우편번호</td>
+				<td class="tg-v9i9"><input type="text" name="company_ZIP_CODE" id="company_ZIP_CODE" style="width: 50px;"><a href="javascript:goPopup();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a></td>
+  			</tr>
+			<tr>
+				<td class="tg-8thm">본점주소</td>
+				<td class="tg-v9i9"><input type="text" name="company_ADDRESS" id="company_ADDRESS"></td>
 			</tr>
 			<tr>
-				<td>본점주소</td>
-				<td></td>
-				<td><input type="text" name="company_ADDRESS" id="company_ADDRESS" style="width: 400px;background: #F8FAE6;"></td>
+				<td class="tg-8thm">본점번지</td>
+				<td class="tg-v9i9"><input type="text" name="company_ADDRESS_DETAIL"  id="company_ADDRESS_DETAIL" ></td>
 			</tr>
 			<tr>
-				<td>본점번지</td>
-				<td></td>
-				<td><input type="text" name="company_ADDRESS_DETAIL"  id="company_ADDRESS_DETAIL" style="width: 400px;"></td>
+				<td class="tg-8thm">본점전화번호</td>
+				<td class="tg-v9i9"><input type="text" name="company_CONTACT" id="site_CONTACT" placeholder="__-___-____" class="companyNUM" maxlength="13"></td>
 			</tr>
 			<tr>
-				<td>본점전화번호</td>
-				<td></td>
-				<td><input type="text" name="company_CONTACT" id="site_CONTACT" placeholder="__-___-____" class="companyNUM" maxlength="13"></td>
+				<td class="tg-8thm">본점FAX</td>
+				<td class="tg-v9i9"><input type="text" name="company_FAX" id="site_FAX" placeholder="__-___-____" class="siteNUM" maxlength="13" ></td>
 			</tr>
 			<tr>
-				<td>본점FAX</td>
-				<td></td>
-				<td><input type="text" name="company_FAX" id="site_FAX" placeholder="__-___-____" class="siteNUM" maxlength="13" ></td>
+				<td class="tg-8thm">업태</td>
+				<td class="tg-v9i9"><input type="text" name="company_CATEGORY" ></td>
 			</tr>
 			<tr>
-				<td>업태</td>
-				<td></td>
-				<td><input type="text" name="company_CATEGORY" style="background: #F8FAE6;"></td>
+				<td class="tg-8thm">종목</td>
+				<td class="tg-v9i9"><input type="text" name="company_TYPE" ></td>
 			</tr>
 			<tr>
-				<td>종목</td>
-				<td></td>
-				<td><input type="text" name="company_TYPE" style="background: #F8FAE6;"></td>
+				<td class="tg-8thm">설립연월일</td>
+				<td class="tg-v9i9"><input type="date" name="company_ESTABLISHED_DATE" ></td>
 			</tr>
 			<tr>
-				<td>설립연월일</td>
-				<td></td>
-				<td><input type="date" name="company_ESTABLISHED_DATE" style="width: 140px;"></td>
+				<td class="tg-8thm">개업연월일</td>
+				<td class="tg-v9i9"><input type="date" name="company_OPENBUSINESS_DATE" ></td>
 			</tr>
 			<tr>
-				<td>개업연월일</td>
-				<td></td>
-				<td><input type="date" name="company_OPENBUSINESS_DATE" style="width: 140px;"></td>
+				<td class="tg-8thm">폐업연월일</td>
+				<td class="tg-v9i9"><input type="date" name="company_CLOSEBUSINESS_DATE" ></td>
 			</tr>
 			<tr>
-				<td>폐업연월일</td>
-				<td></td>
-				<td><input type="date" name="company_CLOSEBUSINESS_DATE" style="width: 140px;"></td>
-			</tr>
-			<tr>
-				<td>사용여부</td>
-				<td></td>
-				<td><select name=company_BUSINESS_YN style="background: #F8FAE6;"><option value='N' selected>0. 미사용</option><option value='Y' >1. 사용</option></select></td>
+				<td class="tg-8thm">사용여부</td>
+				<td class="tg-v9i9"><select name=company_BUSINESS_YN style="width: 50px;"><option value='N' selected>0. 미사용</option><option value='Y' >1. 사용</option></select></td>
 			</tr>
 		</table>		
 	</div>
 	</form>
-  </div>
 </body>
 </html>
