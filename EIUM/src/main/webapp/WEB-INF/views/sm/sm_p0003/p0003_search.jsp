@@ -60,8 +60,8 @@ function LoadPage(){
 	initSheet.Cols=[
 		{Header:"상태",Type:"Status",Width:60,SaveName:"Status",Align:"Center"},
 		{Header:"삭제	",Type:"DelCheck",Width:60,SaveName:"Delete",Align:"Center"},
-		{Header:"NO",Type:"Text",Width:100,SaveName:"department_CODE",Align:"Center",UpdateEdit:0},
-		{Header:"순번",Type:"Text",Width:100,SaveName:"department_NAME",Align:"Center"},
+		{Header:"부서코드",Type:"Text",Width:100,SaveName:"department_CODE",Align:"Center",UpdateEdit:0},
+		{Header:"부서명",Type:"Text",Width:100,SaveName:"department_NAME",Align:"Center"},
 		{Header:"사업장코드",Type:"Text",Width:120,SaveName:"site_CODE",Align:"Center",InsertEdit:0}, 
 		{Header:"사업장이름",Type:"Text",Width:120,SaveName:"site_NAME",Align:"Center",InsertEdit:0}, 
 		{Header:"부문코드",Type:"Text",Width:60,SaveName:"sector_CODE",Align:"Center",InsertEdit:0}, 
