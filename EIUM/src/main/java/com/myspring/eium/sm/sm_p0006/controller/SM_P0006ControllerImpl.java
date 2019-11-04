@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myspring.eium.sm.sm_p0003.vo.SM_P0003VO;
 import com.myspring.eium.sm.sm_p0006.service.SM_P0006Service;
 import com.myspring.eium.sm.sm_p0006.vo.SM_P0006VO;
 
@@ -48,7 +49,10 @@ public class SM_P0006ControllerImpl implements SM_P0006Controller{
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 
-		searchMap.put("p_employee__code", request.getParameter("p_employee__code"));
+		searchMap.put("SiteList", request.getParameter("SiteList"));
+		searchMap.put("DeptList", request.getParameter("DeptList"));
+		searchMap.put("Employee_Select", request.getParameter("Employee_Select"));
+		searchMap.put("p_text", request.getParameter("p_text"));
 		
 		List<SM_P0006VO> data = sM_P0006Service.searchList(searchMap);
         resultMap.put("Data", data);
@@ -56,5 +60,40 @@ public class SM_P0006ControllerImpl implements SM_P0006Controller{
         return resultMap;
 	}
 
+	@Override
+	@RequestMapping(value = "sm/p0006/SiteList.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map searchSiteList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>(); // �˻�����
+		Map<String, Object> resultMap = new HashMap<String, Object>(); // ��ȸ���
+		
+		// �˻����Ǽ���
+		searchMap.put("p_id", request.getParameter("p_id"));
+		
+		//������ ��ȸ
+		List<SM_P0006VO> data = sM_P0006Service.searchSiteList(searchMap);
+        resultMap.put("Data", data);
+       
+        return resultMap;
+	}
+	
+	@Override
+	@RequestMapping(value = "sm/p0006/DeptList.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map searchDeptList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>(); // �˻�����
+		Map<String, Object> resultMap = new HashMap<String, Object>(); // ��ȸ���
+		
+		// �˻����Ǽ���
+		searchMap.put("SiteList", request.getParameter("SiteList"));
+		
+		//������ ��ȸ
+		List<SM_P0006VO> data = sM_P0006Service.searchDeptList(searchMap);
+        resultMap.put("Data", data);
+       
+        return resultMap;
+	}
 	
 }
