@@ -1,12 +1,10 @@
-package com.myspring.eium.hm.hm_p0004.service;
+package com.myspring.eium.pm.pm_p0001.service;
 
 
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -15,38 +13,38 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.myspring.eium.hm.hm_p0004.dao.HM_P0004DAO;
-import com.myspring.eium.hm.hm_p0004.vo.HM_P0004VO;
+import com.myspring.eium.pm.pm_p0001.dao.PM_P0001DAO;
+import com.myspring.eium.pm.pm_p0001.vo.PM_P0001VO;
 
 
 
-@Service
+
+@Service("s0002Service")
 @Transactional(propagation = Propagation.REQUIRED)
-public class HM_P0004ServiceImpl implements HM_P0004Service {
+public class PM_P0001ServiceImpl implements PM_P0001Service {
 	@Autowired
-	private HM_P0004DAO p0004DAO;
+	private PM_P0001DAO s0002DAO;
 
 	@Override
-	public List<HM_P0004VO> searchList(Map<String, Object> searchMap) throws DataAccessException {
-		List<HM_P0004VO> list =  p0004DAO.searchList(searchMap); 
+	public List<PM_P0001VO> searchList(Map<String, Object> searchMap) throws DataAccessException {
+		List<PM_P0001VO> list =  s0002DAO.searchList(searchMap); 
 		return list;
 	}
-	
 
 	@Override
-	public void saveData(Map<String, String[]> dataMap,String table_NAME)  throws DataAccessException  {
+	public void saveData(Map<String, String[]> dataMap)  throws DataAccessException  {
 		String[] status = dataMap.get("STATUS");
-		int length = status.length; 
+		int length = status.length; // row��
 		int i = 0;
 		
 		for(String str : status) {
-			Map<String, String> row = getRow(dataMap, length, i); 
-			if("I".equals(str)) { 
-				p0004DAO.insertData(row,table_NAME);
-			}else if("U".equals(str)) { 
-				p0004DAO.updateData(row,table_NAME);
-			}else if("D".equals(str)) { 
-				p0004DAO.deleteData(row,table_NAME);
+			Map<String, String> row = getRow(dataMap, length, i); // ���� Index�� Row Map
+			if("I".equals(str)) { // �߰�
+				s0002DAO.insertData(row);
+			}else if("U".equals(str)) { // ����
+				s0002DAO.updateData(row);
+			}else if("D".equals(str)) { // ����
+				s0002DAO.deleteData(row);
 			}
 			i++;
 		}

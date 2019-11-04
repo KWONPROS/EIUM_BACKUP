@@ -14,12 +14,18 @@ public class SM_P0006VO {
 	private String UPT_USER_ID;
 	private Date UPT_DATE;
 	
+	private String SITE_CODE;
+	private String SITE_NAME;
+	
+	private String DEPARTMENT_CODE;
+	private String DEPARTMENT_NAME;
+	
 	public SM_P0006VO() {
 
 	}
 
 	public SM_P0006VO(String EMPLOYEE_ID, String EMPLOYEE_CODE, String EMPLOYEE_NAME, String INT_USER_ID,
-			Date INT_DATE, String UPT_USER_ID, Date UPT_DATE) {
+			Date INT_DATE, String UPT_USER_ID, Date UPT_DATE, String SITE_CODE, String SITE_NAME, String DEPARTMENT_CODE, String DEPARTMENT_NAME) {
 		
 		this.EMPLOYEE_ID = EMPLOYEE_ID;
 		this.EMPLOYEE_CODE = EMPLOYEE_CODE;
@@ -28,6 +34,12 @@ public class SM_P0006VO {
 		this.INT_DATE = INT_DATE;
 		this.UPT_USER_ID = UPT_USER_ID;
 		this.UPT_DATE = UPT_DATE;
+		
+		this.SITE_CODE = SITE_CODE;
+		this.SITE_NAME = SITE_NAME;
+		
+		this.DEPARTMENT_CODE = DEPARTMENT_CODE;
+		this.DEPARTMENT_NAME = DEPARTMENT_NAME;
 	
 	}
 
@@ -85,6 +97,38 @@ public class SM_P0006VO {
 
 	public void setUPT_DATE(Date uPT_DATE) {
 		UPT_DATE = uPT_DATE;
+	}
+
+	public String getSITE_CODE() {
+		return SITE_CODE;
+	}
+
+	public void setSITE_CODE(String sITE_CODE) {
+		SITE_CODE = sITE_CODE;
+	}
+
+	public String getSITE_NAME() {
+		return SITE_NAME;
+	}
+
+	public void setSITE_NAME(String sITE_NAME) {
+		SITE_NAME = sITE_NAME;
+	}
+
+	public String getDEPARTMENT_CODE() {
+		return DEPARTMENT_CODE;
+	}
+
+	public void setDEPARTMENT_CODE(String dEPARTMENT_CODE) {
+		DEPARTMENT_CODE = dEPARTMENT_CODE;
+	}
+
+	public String getDEPARTMENT_NAME() {
+		return DEPARTMENT_NAME;
+	}
+
+	public void setDEPARTMENT_NAME(String dEPARTMENT_NAME) {
+		DEPARTMENT_NAME = dEPARTMENT_NAME;
 	}
 
 

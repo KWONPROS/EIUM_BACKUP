@@ -20,5 +20,5 @@ public interface HM_P0004Service {
 
 	public void saveData(Map<String, String[]> dataMap,String table_NAME)  throws DataAccessException ;
 
-	public List<HM_P0004VO> searchList2(Map<String, String> searchMap) throws DataAccessException;
+	
 }

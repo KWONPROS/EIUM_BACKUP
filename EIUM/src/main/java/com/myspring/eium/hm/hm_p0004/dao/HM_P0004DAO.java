@@ -19,6 +19,5 @@ public interface HM_P0004DAO {
 
 	public void deleteData(Map<String, String> row,String table_NAME) throws DataAccessException;
 
-	public List<HM_P0004VO> searchList2(Map<String, String> searchMap) throws DataAccessException;
 	 
 }

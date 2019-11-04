@@ -1,5 +1,4 @@
-package com.myspring.eium.hm.hm_p0004.controller;
-
+package com.myspring.eium.pm.pm_p0001.controller;
 
 
 import java.io.File;
@@ -30,53 +29,55 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.myspring.eium.hm.hm_p0004.service.HM_P0004Service;
-import com.myspring.eium.hm.hm_p0004.vo.HM_P0004VO;
+
+import com.myspring.eium.pm.pm_p0001.service.PM_P0001Service;
+import com.myspring.eium.pm.pm_p0001.vo.PM_P0001VO;
+
+
+
 
 @Controller
-public class HM_P0004ControllerImpl implements HM_P0004Controller {
-	private static final Logger logger = LoggerFactory.getLogger(HM_P0004ControllerImpl.class);
-
+public class PM_P0001ControllerImpl implements PM_P0001Controller {
+	private static final Logger logger = LoggerFactory.getLogger(PM_P0001ControllerImpl.class);
 	@Autowired
-	HM_P0004Service p0004Service;
-	
+	PM_P0001Service pM_P0001Service;
+	@Autowired
+	PM_P0001VO pM_P0001VO;
 	
 	@Override
-	@RequestMapping(value = "/hm/p0004/searchInit.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/pm/p0001/searchInit.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("hm/hm_p0004/p0004_home");
+		ModelAndView mav = new ModelAndView("pm/pm_p0001/p0001_home");
 	
 		return mav;
 	} 
 	
 	@Override
-	@RequestMapping(value = "/hm/p0004/searchList.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/pm/p0001/searchList.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		Map<String, Object> searchMap = new HashMap<String, Object>();
+		Map<String, Object> searchMap = new HashMap<String, Object>(); 
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
-		searchMap.put("command", request.getParameter("command"));
-		List<HM_P0004VO> data = p0004Service.searchList(searchMap);
-
+		
+		//데이터 조회
+		List<PM_P0001VO> data = pM_P0001Service.searchList(searchMap);
+		
         resultMap.put("Data", data);
     	System.out.println("resultMap::::"+resultMap);
         return resultMap;
 	}
 	
-
-
 	@Override
-	@RequestMapping(value = "/hm/p0004/saveData.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/pm/p0001/saveData.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		Map<String, String[]> dataMap = new HashMap<String, String[]>(); 
-		Map<String, Object> resultMap = new HashMap<String, Object>(); 
-
-		String table_NAME = request.getParameter("table_NAME");
+		Map<String, String[]> dataMap = new HashMap<String, String[]>(); // 占쏙옙占쏙옙占쏙옙Data
+		Map<String, Object> resultMap = new HashMap<String, Object>(); // 처占쏙옙占쏙옙占�
 		
+		// 저장 Data 추출하기
 		Enumeration enu = request.getParameterNames();
 		while (enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
@@ -86,24 +87,17 @@ public class HM_P0004ControllerImpl implements HM_P0004Controller {
 		
 		Map<String, String> result = new HashMap<String, String>();
 		try {
-			p0004Service.saveData(dataMap,table_NAME);	
+			pM_P0001Service.saveData(dataMap);	
 			result.put("Code","0");
-			result.put("Message","저장성공");
+			result.put("Message","저장되었습니다");
 		}catch(Exception e) {
 			result.put("Code","-1");
-			result.put("Message","저장실패");
+			result.put("Message","저장에 실패하였습니다");
 			e.printStackTrace();
 		}
 		
-		resultMap.put("Result", result);        
+		resultMap.put("Result", result);         
         return resultMap;
 	}
 
-	@Override
-	@RequestMapping(value = "/hm/p0004/findAddress.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView findAddress(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView mav = new ModelAndView("/hm/hm_p0004/p0004_home_p01");
-		return mav;
-
-	}
 }

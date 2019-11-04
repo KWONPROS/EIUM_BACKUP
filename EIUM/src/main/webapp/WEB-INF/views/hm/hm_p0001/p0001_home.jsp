@@ -169,7 +169,7 @@ left: 300px;
 }
 .bottom{
 position: absolute;
-top:  550px;
+top:  600px;
 left: 40px;
 }
 
