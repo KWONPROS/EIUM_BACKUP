@@ -25,11 +25,7 @@ public class HM_P0004DAOImpl implements HM_P0004DAO {
 		List<HM_P0004VO> list = sqlSession.selectList("mapper.hm_p0004.searchList", searchMap);
 		return list;
 	}
-	@Override
-	public List<HM_P0004VO> searchList2(Map<String, String> searchMap) throws DataAccessException {
-		List<HM_P0004VO> list = sqlSession.selectList("mapper.hm_p0004.searchList2", searchMap);
-		return list;
-	}
+	
 
 	@Override
 	public void insertData(Map<String, String> row,String table_NAME) throws DataAccessException {

@@ -31,11 +31,7 @@ public class HM_P0004ServiceImpl implements HM_P0004Service {
 		List<HM_P0004VO> list =  p0004DAO.searchList(searchMap); 
 		return list;
 	}
-	@Override
-	public List<HM_P0004VO> searchList2(Map<String, String> searchMap) throws DataAccessException {
-		List<HM_P0004VO> list =  p0004DAO.searchList2(searchMap); 		
-		return list;
-	}
+	
 
 	@Override
 	public void saveData(Map<String, String[]> dataMap,String table_NAME)  throws DataAccessException  {

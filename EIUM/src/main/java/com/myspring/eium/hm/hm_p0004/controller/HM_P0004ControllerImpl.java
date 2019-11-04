@@ -65,22 +65,7 @@ public class HM_P0004ControllerImpl implements HM_P0004Controller {
         return resultMap;
 	}
 	
-	
-	@Override
-	@RequestMapping(value = "/hm/p0004/searchList2.do", method = { RequestMethod.GET, RequestMethod.POST })
-	@ResponseBody
-	public Map searchList2(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-		
-		Map<String, String> searchMap = new HashMap<String, String>();
-		Map<String, Object> resultMap = new HashMap<String, Object>(); 	
-		searchMap.put("emp_CODE", request.getParameter("emp_CODE"));
-		List<HM_P0004VO> data = p0004Service.searchList2(searchMap);
-		resultMap.put("Data", data);
-		System.out.println("resultMap::::"+data.get(0).getEmail());
-		return resultMap;
-	}
-	
+
 
 	@Override
 	@RequestMapping(value = "/hm/p0004/saveData.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -114,5 +99,11 @@ public class HM_P0004ControllerImpl implements HM_P0004Controller {
         return resultMap;
 	}
 
-	
+	@Override
+	@RequestMapping(value = "/hm/p0004/findAddress.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView findAddress(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView("/hm/hm_p0004/p0004_home_p01");
+		return mav;
+
+	}
 }
