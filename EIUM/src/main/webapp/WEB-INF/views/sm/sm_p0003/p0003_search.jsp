@@ -197,7 +197,7 @@ $.ajax({
 		</select>
       </form>
         
-        
+        <button onClick="showPopup()">부문등록</button>
 		
              <div class="rightbuttons">
                 <a href="javascript:doAction('reload')" class="IBbutton" >초기화</a>
