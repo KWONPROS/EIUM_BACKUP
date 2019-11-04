@@ -49,7 +49,7 @@
 			IBS_InitSheet(mySheet, initSheet);
 			
 			mySheet.SetEditableColorDiff(1); //편집불가능한 셀 표시 구분
-			/* mySheet.SetSheetHeight(1000); */
+			mySheet.SetSheetHeight(500);
 			mySheet.DoSearch("${contextPath}/sm/p0001/searchList.do");
 		}
 	
@@ -134,6 +134,70 @@
 		}	
 	}
 	
+	//Formating
+	   $(document).ready(function () {
+	   
+	        //사업자등록번호
+	         $(function () {    
+	                  $('input[name=company_RESISTRATION_NUMBER]').keydown(function (event) {
+	                   var key = event.charCode || event.keyCode || 0;
+	                   $text = $(this); 
+	                   if (key !== 8 && key !== 9) {
+	                       if ($text.val().length === 3) {
+	                           $text.val($text.val() + '-');
+	                       }
+	                       if ($text.val().length === 6) {
+	                           $text.val($text.val() + '-');
+	                       }
+	                   }
+	                   return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
+	               })
+	         });
+	            //법인등록번호
+	         $(function () {            
+	            $('input[name=company_CORPARATION_NUMBER]').keydown(function (event) {
+	                 var key = event.charCode || event.keyCode || 0;
+	                 $text = $(this); 
+	                 if (key !== 8 && key !== 9) {
+	                     if ($text.val().length === 6) {
+	                         $text.val($text.val() + '-');
+	                     }       
+	                 }
+	                   return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
+	               })
+	         });
+
+	   
+	   //전화번호,팩스
+	   $(function () { 
+	         $('.companyNUM').keydown(function (event) {
+	        var key = event.charCode || event.keyCode || 0;
+	        $text = $(this);
+	        if (key !== 8 && key !== 9) {
+	           if($text.val().substr(0,2)=='02'){
+	              if ($text.val().length === 2) {
+	                    $text.val($text.val() + '-');
+	                }
+	                if ($text.val().length === 6) {
+	                    $text.val($text.val() + '-');
+	                }
+	           }else{
+	              if ($text.val().length === 3) {
+	                    $text.val($text.val() + '-');
+	                }
+	                if ($text.val().length === 8) {
+	                    $text.val($text.val() + '-');
+	                }
+	           }
+	      
+	        }
+	        return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
+	    })
+	   }); 
+	 
+	      
+	});//document.ready
+	
 	//도로명주소검색 API //변경!!!!!!!!!!!!!!!!주의
 	function goPopup(){
 		var pop = window.open("findAddress.do","addressPopup","width=570,height=420, scrollbars=yes, resizable=yes"); 
@@ -148,18 +212,66 @@
 </script>
 
 <style type="text/css">
+
+ .title {
+    width:100%;
+   color: #2C3E50;
+   font-weight: bold;
+   font-size: 20px;
+   padding-left : 30px;
+   padding-bottom: 10px;
+   padding-top:20px;
+   border-top: thin solid #5E5E5E;
+   border-bottom: thin dashed #5E5E5E;
+   position: absolute;
+   top: 50px;
+
+}
+.leftbuttons{
+   margin-top:40px;
+   margin:10px;
+   position: absolute;
+   left: 0px;
+}
+.rightbuttons{
+   margin-top:40px;
+   margin:10px;
+   position: absolute;
+   right: 0px;
+}
+
+ .IBbutton {
+   font-size: 13px;
+   margin-left: 5px;
+   background-color: #2B69A0;
+   color: white;
+   padding: 5px 15px;
+   border-radius: 7px;
+   text-decoration: none;   
+}
+
+.IBbutton:hover {
+background-color: #2C3E50;
+}
 .left{
-position: absolute;
-top: 145px;
-left: 50px;
+position: relative;
+top: 130px;
+left: 60px;
 }
 .right{
 position: relative;
-top: 10px;
-left: 500px;
-width: 700px;
+top: -350px;
+left: 600px;
+width: 900px;
 background: #EDF0F5;
 border-radius: 10px;
+}
+
+.innerheader{
+position:relative;
+margin:20px;
+top:20px;
+left:10px;
 }
 
 .right table{
@@ -167,7 +279,7 @@ font-size:13px;
 font-weight:bold;
 position: relative;
 left: 40px;
-padding: 20px;
+padding:10px;
 }
 .right table tr td:nth-child(1){
 text-align:right;
@@ -188,38 +300,35 @@ border-radius: 2px;
 </style>
 
 </head>
-<body onload="LoadPage()">
-	<div class="page_title">
-   <span><a class="closeDepth" href="#">closeDepth</a></span>
-    <span class="title">등록정보관리 ▶<b> 회사등록</b></span>
-  </div>
-  <div class="main_content">
-    
-    <div class="exp_product">
-      <form name='frm'>
-        	회사 CODE: <input type='text' id="p_company_CODE" name="p_company_CODE" /> 
-      </form>
-    </div>
-    <div class="ib_function float_right">
-	  <a href="javascript:doAction('reload')" class="f1_btn_gray lightgray">초기화</a>
-	  <a href="javascript:doAction('insert')" class="f1_btn_gray lightgray">추가</a>
-	  <a href="javascript:doAction('search')" class="f1_btn_white gray">조회</a>
-	  <a href="javascript:doAction('save')" class="f1_btn_white gray">저장</a>
-	  <a href="javascript:doAction('save2')" class="f1_btn_white gray">저장 JSON</a> 
-	</div>
+<body onload="LoadPage()" style="overflow-x: hidden">
+ <div class="leftbuttons">
+      <a href="javascript:doAction('print')" class="IBbutton">인쇄</a> <a
+         href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
+   </div> 
 
-	<div class="clear hidden"></div>
+
+   <div class="rightbuttons">
+      <a href="javascript:doAction('reload')" class="IBbutton">초기화</a> <a
+         href="javascript:doAction('insert')" class="IBbutton">추가</a> <a
+         href="javascript:doAction('search')" class="IBbutton">조회</a> <a
+         href="javascript:doAction('save')" class="IBbutton">저장</a>
+   </div>
+
+<div class="title"> 
+<header> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 등록정보관리 : 회사등록</header>
+</div>
 	<div class="left">
-	<div class="ib_product">
+	
 		<script>
 			//IBSheet 객체 생성 (객체 id, 너비, 높이)
 			createIBSheet("mySheet", "100%", "100%");
 		</script>
 	</div>
-	</div>
+	
 	<form name="form" id="form" method="post">
 		
 	<div class="right">
+	<h3 class="innerheader">기본정보</h3>
 		<table>
 			<tr>
 				<td>사업자등록번호</td>
@@ -266,12 +375,12 @@ border-radius: 2px;
 			<tr>
 				<td>본점전화번호</td>
 				<td></td>
-				<td><input type="text" name="company_CONTACT"></td>
+				<td><input type="text" name="company_CONTACT" id="site_CONTACT" placeholder="__-___-____" class="companyNUM" maxlength="13"></td>
 			</tr>
 			<tr>
 				<td>본점FAX</td>
 				<td></td>
-				<td><input type="text" name="company_FAX"></td>
+				<td><input type="text" name="company_FAX" id="site_FAX" placeholder="__-___-____" class="siteNUM" maxlength="13" ></td>
 			</tr>
 			<tr>
 				<td>업태</td>
