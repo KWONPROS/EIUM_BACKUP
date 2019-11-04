@@ -93,7 +93,7 @@ var data = {Data:[
 	{menuCode:"m10",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"인사관리"},
 	{menuCode:"m11",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0004/searchInit.do", TITLE:"인사정보등록"},
 	{menuCode:"m12",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0007/searchInit.do", TITLE:"인사기록카드"},
-	{menuCode:"m13",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"교육관리"},
+	{menuCode:"m13",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0018/searchInit.do", TITLE:"교육관리"},
 	{menuCode:"m14",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"교육평가"},
 	{menuCode:"m15",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"인사발령등록"},
 	{menuCode:"m16",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"인사발령"},

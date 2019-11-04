@@ -74,10 +74,10 @@ public class HM_P0004ControllerImpl implements HM_P0004Controller {
 		
 		Map<String, String> searchMap = new HashMap<String, String>();
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 	
-		searchMap.put("TABLE_NAME", request.getParameter("admin_LIST_NAME"));
+		searchMap.put("emp_CODE", request.getParameter("emp_CODE"));
 		List<HM_P0004VO> data = p0004Service.searchList2(searchMap);
 		resultMap.put("Data", data);
-		System.out.println("resultMap::::"+resultMap);
+		System.out.println("resultMap::::"+data.get(0).getEmail());
 		return resultMap;
 	}
 	

@@ -45,7 +45,7 @@ public class HM_P0001ServiceImpl implements HM_P0001Service {
 		int i = 0;
 		
 		for(String str : status) {
-			Map<String, String> row = getRow(dataMap, length, i); 
+			Map<String, String> row = getRow(dataMap, length, i, p_position_CODE); 
 			if("I".equals(str)) { 
 				p0001DAO.insertData(row);
 			}else if("U".equals(str)) { 
@@ -57,12 +57,14 @@ public class HM_P0001ServiceImpl implements HM_P0001Service {
 		}
 	}
 	
-	private Map<String, String> getRow(Map<String, String[]> dataMap, int length, int index) {
+	private Map<String, String> getRow(Map<String, String[]> dataMap, int length, int index, String p_position_CODE) {
 		Map<String, String> row = new HashMap<String, String>();
 		for(String name : dataMap.keySet()) {
 			String[] data = dataMap.get(name);
 			if(length == data.length) {
 				row.put(name, data[index]);
+				row.put("p_position_CODE", p_position_CODE);
+
 			}
 		}		
 		return row;

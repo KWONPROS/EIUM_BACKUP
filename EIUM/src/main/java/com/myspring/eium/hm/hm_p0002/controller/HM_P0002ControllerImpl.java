@@ -19,9 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.myspring.eium.sm.sm_p0002.service.SM_P0002Service;
-import com.myspring.eium.sm.sm_p0002.vo.SM_P0002VO;
-
+import com.myspring.eium.hm.hm_p0002.service.HM_P0002Service;
+import com.myspring.eium.hm.hm_p0002.vo.HM_P0002VO;
 
 
 
@@ -32,10 +31,10 @@ public class HM_P0002ControllerImpl implements HM_P0002Controller{
 	private static final Logger logger = LoggerFactory.getLogger(HM_P0002ControllerImpl.class);
 	
 	@Autowired
-	private SM_P0002Service sM_P0002Service;
+	private HM_P0002Service hM_P0002Service;
 	
 	@Autowired
-	SM_P0002VO sM_P0003VO;
+	HM_P0002VO hM_P0003VO;
 	
 	
 	@Override

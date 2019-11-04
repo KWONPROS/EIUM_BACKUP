@@ -33,22 +33,24 @@
 	]]>
 	</select>
 	
+	
+	<!-- ///////////////////////////////////PAY_GRADE_TABLE_INSERT_UPDATE_DELETE/////////////////////////////////////////////////-->
 	<update id="updateData" parameterType="java.util.Map">
-		update POSITION
+		update PAY_GRADE_TABLE
 		set  
-		     POSITION_NAME = #{position_NAME}
+		     SALARY = #{salary}
 		   
-		where TRIM(POSITION_CODE) = #{position_CODE}
+		where TRIM(POSITION_CODE) = #{p_position_CODE}
 	</update>	
 	
- <insert id="insertData" parameterType="java.util.Map">
-		insert into POSITION(POSITION_CODE,POSITION_NAME) 
-		values(#{position_CODE},#{position_NAME})
+ 	<insert id="insertData" parameterType="java.util.Map">
+		insert into PAY_GRADE_TABLE(POSITION_CODE, PAY_GRADE, SALARY) 
+		values(#{p_position_CODE}, #{pay_GRADE}, #{salary})
 	</insert>	
 	
 	<delete id="deleteData" parameterType="java.util.Map">
-		delete POSITION
-		where TRIM(POSITION_CODE) = #{position_CODE}
+		delete PAY_GRADE_TABLE
+		where TRIM(POSITION_CODE) = #{p_position_CODE}
 	</delete>
 
 

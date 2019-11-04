@@ -39,6 +39,12 @@ public class HM_P0001DAOImpl implements HM_P0001DAO {
 	@Override
 	public void insertData(Map<String, String> row) throws DataAccessException {
 		sqlSession.update("mapper.hm_p0001.insertData", row);
+		
+		for ( String key : row.keySet() ) {
+		    System.out.println("방법1) key : " + key +" / value : " + row.get(key));
+		}
+		System.out.println("=======================");
+
 	}
 
 	@Override

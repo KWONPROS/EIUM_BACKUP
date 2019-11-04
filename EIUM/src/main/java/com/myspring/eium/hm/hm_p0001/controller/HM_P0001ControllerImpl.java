@@ -58,7 +58,6 @@ public class HM_P0001ControllerImpl implements HM_P0001Controller {
 	@ResponseBody
 	public Map searchList2(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		System.out.println("------------");
 		Map<String, String> searchMap = new HashMap<String, String>();
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
@@ -73,11 +72,13 @@ public class HM_P0001ControllerImpl implements HM_P0001Controller {
 	@RequestMapping(value = "/hm/p0001/saveData.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("SAVADATA-------");
 		request.setCharacterEncoding("utf-8");
 		Map<String, String[]> dataMap = new HashMap<String, String[]>(); 
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
 		
-		String p_position_CODE = request.getParameter("p_postion_CODE");
+		String p_position_CODE = request.getParameter("p_position_CODE");
+		
 		
 		System.out.println("p_position_CODE : " + p_position_CODE);
 		
@@ -88,9 +89,11 @@ public class HM_P0001ControllerImpl implements HM_P0001Controller {
 			dataMap.put(name, values);
 		}
 		
+		
+		
 		Map<String, String> result = new HashMap<String, String>();
 		try {
-			p0001Service.saveData(dataMap,p_position_CODE);	
+			p0001Service.saveData(dataMap, p_position_CODE);
 			result.put("Code","0");
 			result.put("Message","저장성공");
 		}catch(Exception e) {

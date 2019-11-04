@@ -11,10 +11,14 @@
 <script src="${contextPath}/resources/ibsheet/ibleaders.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>  
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>지급일등록</title>
 
 <script>
 function LoadPage(){
+	
+
+	
+	
 	mySheet.RemoveAll();
 	//아이비시트 초기화
 	var initSheet = {};
@@ -116,11 +120,22 @@ function doAction(sAction){
 		break;
 
 	}
+	
+
 }
 
+
+
+
+</script>
+
+<script>
+
+	
 </script>
 </head>
 <body onload="LoadPage()">
+
 <div style="position:absolute; top:100px; left:20px;">
 <script>
 createIBSheet("mySheet", "700px", "250px");
@@ -139,7 +154,29 @@ createIBSheet("mySheet2", "700px", "250px");
 createIBSheet("mySheet3", "1500px", "250px");
 </script>
 </div>
-		
+
+
+<% 
+java.util.Calendar date = java.util.Calendar.getInstance();
+%>
+<%int year=date.get(date.YEAR); %>
+<form>
+
+<input type=text value="<%=year%>" size="2"/>년
+<select id="ymd">
+
+<%int month=date.get(date.MONTH)+1; %>
+<%for(int i=1;i<13; i++){ %>
+<%if(i==month){%>
+	<option selected value="<%=i %>"> <%=i%> </option>
+<%} else{%>
+	<option value="<%=i %>"> <%=i%> </option>	
+<%}%>
+<%}%>
+</select>월
+</form>
+
+
              <div class="rightbuttons">
                 <a href="javascript:doAction('reload')" class="IBbutton" >초기화</a>
                 <a href="javascript:doAction('insert')" class="IBbutton">추가</a>
