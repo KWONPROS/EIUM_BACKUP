@@ -41,8 +41,10 @@
 			{Header:"성별",Type:"Text",SaveName:"sex", Hidden:1},			
 			{Header:"생년월일",Type:"Text",SaveName:"birth", Hidden:1},			
 			{Header:"전화번호",Type:"Text",SaveName:"contact", Hidden:1},			
-			{Header:"최종학력",Type:"Text",SaveName:"final_EDU", Hidden:1},			
-			{Header:"사진",Type:"Image",SaveName:"picture", /* Hidden:1 */},			
+			{Header:"최종학력코드",Type:"Text",SaveName:"final_EDU_CODE", Hidden:1},			
+			{Header:"최종학력이름",Type:"Text",SaveName:"final_EDU_NAME", Hidden:1},			
+			{Header:"사진",Type:"Image",SaveName:"picture",  Hidden:1 },			
+			{Header:"우편번호",Type:"Text",SaveName:"zip_CODE", Hidden:1},			
 			{Header:"주민등록주소",Type:"Text",SaveName:"res_ADDRESS", Hidden:1},			
 			{Header:"상세주소",Type:"Text",SaveName:"res_ADDRESS_DETAIL", Hidden:1},			
 			{Header:"영문주소",Type:"Text",SaveName:"res_ADDRESS_EN", Hidden:1},			
@@ -50,7 +52,8 @@
 			{Header:"출입카드번호",Type:"Text",SaveName:"card_NUM", Hidden:1},			
 			{Header:"세대주여부",Type:"Text",SaveName:"hh_YN", Hidden:1},			
 			{Header:"장애인구분",Type:"Text",SaveName:"hc_YN", Hidden:1},			
-			{Header:"국적",Type:"Text",SaveName:"nationality", Hidden:1},			
+			{Header:"국적코드",Type:"Text",SaveName:"country_CODE", Hidden:1},			
+			{Header:"국적이름",Type:"Text",SaveName:"country_NAME", Hidden:1},			
 			{Header:"병역구분",Type:"Text",SaveName:"mil_TYPE", Hidden:1},			
 			{Header:"군번",Type:"Text",SaveName:"mil_NUM", Hidden:1},			
 			{Header:"채용구분",Type:"Text",SaveName:"hire_TYPE", Hidden:1},					
@@ -60,8 +63,12 @@
   
 		mySheet.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
 		mySheet.SetSheetHeight(600);
+	
 		
 		
+		
+		
+
 		//탭
 		createIBTab($('#ib_sheetTab')[0], $('#ib_sheetContents')[0], 'sheetTab', {
 		    themes: {
@@ -95,38 +102,26 @@
 	            mySheet.SetCellValue($('input[name=myRow]').val(),10,$('input[name=birthDate]').val());
 	            mySheet.SetCellValue($('input[name=myRow]').val(),11,$('input[name=contactNum]').val());
 	            mySheet.SetCellValue($('input[name=myRow]').val(),12,$('input[name=finalEduCode]').val());
+	            mySheet.SetCellValue($('input[name=myRow]').val(),13,$('input[name=finalEduName]').val());
 	          
-	            mySheet.SetCellValue($('input[name=myRow]').val(),14,$('input[name=address]').val());
-	            mySheet.SetCellValue($('input[name=myRow]').val(),15,$('input[name=addressDetail]').val());
-	            mySheet.SetCellValue($('input[name=myRow]').val(),16,$('select[name=addressEng]').val()); 
-	            mySheet.SetCellValue($('input[name=myRow]').val(),17,$('select[name=email]').val()); 
-	            mySheet.SetCellValue($('input[name=myRow]').val(),18,$('select[name=accessCard]').val()); 
-	            mySheet.SetCellValue($('input[name=myRow]').val(),19,$('select[name=householdYN]').val()); 
-	            mySheet.SetCellValue($('input[name=myRow]').val(),20,$('select[name=handicappedYN]').val()); 
-	            mySheet.SetCellValue($('input[name=myRow]').val(),21,$('select[name=naitonality]').val()); 
-	            mySheet.SetCellValue($('input[name=myRow]').val(),22,$('select[name=milType]').val()); 
-	            mySheet.SetCellValue($('input[name=myRow]').val(),23,$('select[name=milNum]').val()); 
-	            mySheet.SetCellValue($('input[name=myRow]').val(),24,$('select[name=hireType]').val()); 
-	            mySheet.SetCellValue($('input[name=myRow]').val(),25,$('select[name=hireNum]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),15,$('input[name=zipcode]').val());
+	            mySheet.SetCellValue($('input[name=myRow]').val(),16,$('input[name=address]').val());
+	            mySheet.SetCellValue($('input[name=myRow]').val(),17,$('input[name=addressDetail]').val());
+	            mySheet.SetCellValue($('input[name=myRow]').val(),18,$('input[name=addressEng]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),19,$('input[name=email]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),20,$('input[name=accessCard]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),21,$('select[name=householdYN]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),22,$('select[name=handicappedYN]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),23,$('input[name=countryCODE]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),24,$('input[name=countryNAME]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),25,$('select[name=milType]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),26,$('input[name=milNum]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),27,$('select[name=hireType]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),28,$('input[name=hireNum]').val()); 
 	        
-	            var form = $('#FILE_FORM')[0];
-	            var formData = new FormData(form);
-	            formData.append("fileObj", $("#FILE_TAG")[0].files[0]);
-	            formData.append("fileObj2", $("#FILE_TAG2")[0].files[0]);
-
-	            $.ajax({
-	                url: "${contextPath}/hm/p0004/searchList2.do",
-	                        processData: false,
-	                        contentType: false,
-	                        data: formData,
-	                        type: 'POST',
-	                        success: function(result){
-	                            alert("업로드 성공!!");
-	                        }
-	                });
-	            
+	           
 	            var tempStr = mySheet.GetSaveString();
-	            alert("서버로 전달되는 문자열 확인 :"+tempStr+formData);
+	            alert("서버로 전달되는 문자열 확인 :"+tempStr);
 	            mySheet.DoSave("${contextPath}/hm/p0004/saveData.do");
 	            break;      
 		}
@@ -145,19 +140,22 @@
 		      $('input[name=birthDate]').val(mySheet.GetCellValue(Row,10));
 		      $('input[name=contactNum]').val(mySheet.GetCellValue(Row,11));
 		      $('input[name=finalEduCode]').val(mySheet.GetCellValue(Row,12));
-		     /*  $('input[id=pictureUpload]').val(mySheet.GetCellValue(Row,13)); */
-		      $('input[name=address]').val(mySheet.GetCellValue(Row,14));
-		      $('input[name=addressDetail]').val(mySheet.GetCellValue(Row,15));
-		      $('input[name=addressEng]').val(mySheet.GetCellValue(Row,16));
-		      $('input[name=email]').val(mySheet.GetCellValue(Row,17));
-		      $('input[name=accessCard]').val(mySheet.GetCellValue(Row,18));
-		      $('select[name=householdYN]').val(mySheet.GetCellValue(Row,19));
-		      $('select[name=handicappedYN]').val(mySheet.GetCellValue(Row,20));
-		      $('input[name=naitonality]').val(mySheet.GetCellValue(Row,21));
-		      $('select[name=milType]').val(mySheet.GetCellValue(Row,22));
-		      $('input[name=milNum]').val(mySheet.GetCellValue(Row,23));
-		      $('select[name=hireType]').val(mySheet.GetCellValue(Row,24));
-		      $('input[name=hireNum]').val(mySheet.GetCellValue(Row,25));
+		      $('input[name=finalEduName]').val(mySheet.GetCellValue(Row,13));
+		     /*  $('input[id=pictureUpload]').val(mySheet.GetCellValue(Row,14)); */
+		      $('input[name=zipcode]').val(mySheet.GetCellValue(Row,15));
+		      $('input[name=address]').val(mySheet.GetCellValue(Row,16));
+		      $('input[name=addressDetail]').val(mySheet.GetCellValue(Row,17));
+		      $('input[name=addressEng]').val(mySheet.GetCellValue(Row,18));
+		      $('input[name=email]').val(mySheet.GetCellValue(Row,19));
+		      $('input[name=accessCard]').val(mySheet.GetCellValue(Row,20));
+		      $('select[name=householdYN]').val(mySheet.GetCellValue(Row,21));
+		      $('select[name=handicappedYN]').val(mySheet.GetCellValue(Row,22));
+		      $('input[name=countryCODE]').val(mySheet.GetCellValue(Row,23));
+		      $('input[name=countryNAME]').val(mySheet.GetCellValue(Row,24));
+		      $('select[name=milType]').val(mySheet.GetCellValue(Row,25));
+		      $('input[name=milNum]').val(mySheet.GetCellValue(Row,26));
+		      $('select[name=hireType]').val(mySheet.GetCellValue(Row,27));
+		      $('input[name=hireNum]').val(mySheet.GetCellValue(Row,28));
 		
 		      
 		}
@@ -189,10 +187,24 @@
 	}
 	   
 	   
+	   function findPopup(tablename){
+	      var pop = window.open("findPopup.do?command="+tablename,"findPopup","width=342,height=520,resizable = no, scrollbars = no"); 
 
-	 
+	   }
+	   function searchCondition(){
+		  var cond =  document.getElementById("condition").value
+		  mySheet.DoSearch('${contextPath}/hm/p0004/searchList.do','condition='+cond);
+	   }
+
+	
+
+	
 </script>
 <style type="text/css">
+.modal {
+    max-width: 300px;
+}
+
 .title {
 	width: 100%;
 	color: #2C3E50;
@@ -255,6 +267,14 @@
 	left: 60px;
 	width: 403px;
 }
+.left input{
+	height: 22px;
+	border-radius: 3px;
+	border: none;
+	padding-left:5px;
+	vertical-align: middle;
+	}
+	
 
 .right {
 	position: relative;
@@ -279,6 +299,7 @@
 	height: 22px;
 	border-radius: 3px;
 	border: none;
+	padding-left:5px;
 }
 
 .tg img {
@@ -308,15 +329,6 @@
 	overflow: hidden;
 	word-break: normal;
 	border-color: black;
-}
-
-.tg .tg-yyj2 {
-	font-size: 12px;
-	font-family: Verdana, Geneva, sans-serif !important;;
-	background-color: #d4d4d4;
-	border-color: #bebebe;
-	text-align: left;
-	vertical-align: center
 }
 
 .tg .tg-dm68 {
@@ -385,25 +397,22 @@
 		</header>
 	</div>
 	<div class="left">
-		<form id="searchBar">
+		<form id="searchBar" action="javascript:searchCondition();">
 			조회기준 <input type="radio" name="emp_radio"
-				onclick="mySheet.DoSearch('${contextPath}/hm/p0004/searchList.do','command=doWork');">재직
+				onclick="mySheet.DoSearch('${contextPath}/hm/p0004/searchList.do','command=doWork');">재직  
 			<input type="radio" name="emp_radio"
-				onclick="mySheet.DoSearch('${contextPath}/hm/p0004/searchList.do','command=noWork');">퇴직
+				onclick="mySheet.DoSearch('${contextPath}/hm/p0004/searchList.do','command=noWork');">퇴직  
 			<input type="radio" name="emp_radio"
 				onclick="mySheet.DoSearch('${contextPath}/hm/p0004/searchList.do');"
-				checked="checked"> 전체<br> 사원검색 <input type="text"
-				name="" id=""> <input type="submit" value="조회">
+				checked="checked"> 전체<br> 사원검색   <input type="text"
+				name="condition" id="condition" placeholder="사원번호"> <input type="submit" value="조회" style="background-color: #5E5E5E; color:white;">
 		</form>
 
 		<script>createIBSheet("mySheet", "100%", "100%");</script>
 	</div>
 
 	<div class="right">
-		<div class="mySheet2"
-			style="position: relative; top: 100px; left: 300px;">
-			<script>createIBSheet("mySheet2",0,0);</script>
-		</div>
+
 		<div id="ib_sheetTab">
 			<div class="ib-tab-tabs-item">
 				<a class="ib-tab-tabs-item__link is-active"><span
@@ -474,10 +483,10 @@
 
 								<td class="tg-8thm">최종학력</td>
 								<td class="tg-v9i9" colspan="3"><input type="text"
-									id="finalEduCode" name="finalEduCode" style="width: 50px;"><a
-									href="javascript:goPopup();"><img
+									id="FINAL_EDU_CODE" name="finalEduCode" style="width: 50px;"><a
+									href="javascript:findPopup('FINAL_EDU');" ><img
 										src="${contextPath}/resources/image/icons/icon_plus.png"></a>
-									<input type="text" id="finalEduName" name="finalEduName"
+									<input type="text" id="FINAL_EDU_NAME" name="finalEduName"
 									style="width: 272px;"></td>
 							</tr>
 							<tr>
@@ -533,10 +542,10 @@
 							<tr>
 								<td class="tg-8thm">국적</td>
 								<td class="tg-v9i9" colspan="5"><input type="text"
-									id="naitonalityCode" name="naitonalityCode"
-									style="width: 50px;"><a href="javascript:goPopup();"><img
+									id="COUNTRY_CODE" name="countryCODE" style="width: 50px;"><a
+									href="javascript:findPopup('COUNTRY');"><img
 										src="${contextPath}/resources/image/icons/icon_plus.png"></a>
-									<input type="text" id="naitonality" name="naitonality"
+									<input type="text" id="COUNTRY_NAME" name="countryNAME"
 									style="width: 380px;"></td>
 							</tr>
 							<tr>
@@ -571,12 +580,21 @@
 			<div class="ib-tab-contents__item">
 				<div id='ib-container2'>
 
+					<form action="${contextPath}/hm/p0004/saveFile.do" method="post"
+						enctype="multipart/form-data">
+						<input type="file" name="file" /> <input type="submit"
+							value="서버전달" />
+					</form>
 
 
-</div>
+				</div>
 			</div>
 			<div class="ib-tab-contents__item">
-				<div id='ib-container3'>asdfggsaggr</div>
+				<div id='ib-container3'>
+					
+
+
+				</div>
 			</div>
 		</div>
 	</div>
