@@ -8,7 +8,6 @@
 <meta charset="UTF-8">
 <title>회사등록</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="${contextPath}/resources/css/style.css">
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibsheetinfo.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibsheet.js"></script>
@@ -260,10 +259,10 @@ left: 60px;
 }
 .right{
 position: relative;
-top: -350px;
-left: 600px;
-width: 900px;
-height: 630px;
+top: -370px;
+left: 550px;
+width: 850px;
+height: 650px;
 background: #EBEBEB;
 border-radius: 10px;
 }
@@ -401,7 +400,7 @@ padding: 0px 5px 0px 5px;
 			</tr>
 			<tr>
 				<td class="tg-8thm">사용여부</td>
-				<td class="tg-v9i9"><select name=company_BUSINESS_YN style="width: 50px;"><option value='N' selected>0. 미사용</option><option value='Y' >1. 사용</option></select></td>
+				<td class="tg-v9i9"><select name=company_BUSINESS_YN style="width: 100px;"><option value='N' selected>0. 미사용</option><option value='Y' >1. 사용</option></select></td>
 			</tr>
 		</table>		
 	</div>
