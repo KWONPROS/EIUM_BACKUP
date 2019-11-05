@@ -20,6 +20,7 @@ public class HM_P0018DAOImpl implements HM_P0018DAO{
 	@Override
 	public List<HM_P0018VO> searchList(Map<String, Object> searchMap) throws DataAccessException {
 		List<HM_P0018VO> list = sqlSession.selectList("mapper.hm_p0018.searchList", searchMap);
+		System.out.println("dao searcmap 에듀코드############"+searchMap.get("eduCode"));
 		return list;
 	}
 
