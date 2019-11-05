@@ -14,9 +14,12 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.myspring.eium.hm.hm_p0004.dao.HM_P0004DAO;
 import com.myspring.eium.hm.hm_p0004.vo.HM_P0004VO;
+
+import oracle.net.aso.p;
 
 
 
@@ -31,10 +34,15 @@ public class HM_P0004ServiceImpl implements HM_P0004Service {
 		List<HM_P0004VO> list =  p0004DAO.searchList(searchMap); 
 		return list;
 	}
+	@Override
+	public List<HM_P0004VO> searchList2(Map<String, Object> searchMap) throws DataAccessException {
+		List<HM_P0004VO> list =  p0004DAO.searchList2(searchMap); 
+		return list;
+	}
 	
 
 	@Override
-	public void saveData(Map<String, String[]> dataMap,String table_NAME)  throws DataAccessException  {
+	public void saveData(Map<String, String[]> dataMap)  throws DataAccessException  {
 		String[] status = dataMap.get("STATUS");
 		int length = status.length; 
 		int i = 0;
@@ -42,15 +50,16 @@ public class HM_P0004ServiceImpl implements HM_P0004Service {
 		for(String str : status) {
 			Map<String, String> row = getRow(dataMap, length, i); 
 			if("I".equals(str)) { 
-				p0004DAO.insertData(row,table_NAME);
+				p0004DAO.insertData(row);
 			}else if("U".equals(str)) { 
-				p0004DAO.updateData(row,table_NAME);
+				p0004DAO.updateData(row);
 			}else if("D".equals(str)) { 
-				p0004DAO.deleteData(row,table_NAME);
+				p0004DAO.deleteData(row);
 			}
 			i++;
 		}
 	}
+
 	
 	private Map<String, String> getRow(Map<String, String[]> dataMap, int length, int index) {
 		Map<String, String> row = new HashMap<String, String>();
@@ -62,4 +71,6 @@ public class HM_P0004ServiceImpl implements HM_P0004Service {
 		}		
 		return row;
 	}	
+	
+	
 }
