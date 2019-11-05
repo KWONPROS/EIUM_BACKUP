@@ -12,12 +12,6 @@
 <script src="${contextPath}/resources/ibsheet/ibsheetinfo.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibsheet.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibleaders.js"></script>
-<link href="${contextPath}/resources/tab/css/ibtab-style.css"
-	rel="stylesheet">
-<script src="${contextPath}/resources/tab/js/ibtab.js"
-	type="text/javascript"></script>
-<script src="${contextPath}/resources/tab/js/ibtabinfo.js"
-	type="text/javascript"></script>
 <script language="javascript">
 
 	/*Sheet 기본 설정 */
@@ -37,43 +31,29 @@
 		IBS_InitSheet( mySheet , initSheet);
   
 		mySheet.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
-		mySheet.SetSheetHeight(600);
+		mySheet.SetSheetHeight(350);
 		
-		
-		
-		
-		
+		//아이비시트2------------------------------------------------------
 		mySheet2.RemoveAll();
 		var initSheet2 = {};
-		initSheet2.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0};
-		initSheet2.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
-		initSheet2.Cols = [		
-	        {Header:"사원코드",Type:"Text",SaveName:"emp_CODE",KeyField:1,Hidden:1},	
-			{Header:"사원명(영문)",Type:"Text",SaveName:"emp_NAME_EN", Hidden:1},			
-			{Header:"사원명(한자)",Type:"Text",SaveName:"emp_NAME_HN", Hidden:1},			
-			{Header:"내외국인구분",Type:"Text",SaveName:"foreign_YN", Hidden:1},			
-			{Header:"주민등록번호",Type:"Text",SaveName:"rr_NUM", Hidden:1},			
-			{Header:"성별",Type:"Text",SaveName:"sex", Hidden:1},			
-			{Header:"생년월일",Type:"Text",SaveName:"birth", Hidden:1},			
-			{Header:"전화번호",Type:"Text",SaveName:"contact", Hidden:1},			
-			{Header:"최종학력",Type:"Text",SaveName:"final_EDU", Hidden:1},			
-			{Header:"사진",Type:"Text",SaveName:"picture", Hidden:1},			
-			{Header:"주민등록주소",Type:"Text",SaveName:"res_ADDRESS", Hidden:1},			
-			{Header:"상세주소",Type:"Text",SaveName:"res_ADDRESS_DETAIL", Hidden:1},			
-			{Header:"영문주소",Type:"Text",SaveName:"res_ADDRESS_EN", Hidden:1},			
-			{Header:"이메일",Type:"Text",SaveName:"email", /* Hidden:1 */},			
-			{Header:"출입카드번호",Type:"Text",SaveName:"card_NUM", Hidden:1},			
-			{Header:"세대주여부",Type:"Text",SaveName:"hh_YN", Hidden:1},			
-			{Header:"장애인구분",Type:"Text",SaveName:"hc_YN", Hidden:1},			
-			{Header:"국적",Type:"Text",SaveName:"nationality", Hidden:1},			
-			{Header:"병역구분",Type:"Text",SaveName:"mil_TYPE", Hidden:1},			
-			{Header:"군번",Type:"Text",SaveName:"mil_NUM", Hidden:1},			
-			{Header:"채용구분",Type:"Text",SaveName:"hire_TYPE", Hidden:1},					
-			{Header:"기수",Type:"Text",SaveName:"hire_NUM", Hidden:1}					
-		];   
+		initSheet2.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:0};
+		initSheet2.HeaderMode = {Sort:1, ColMove:0, ColResize:0, HeaderCheck:1};
+		initSheet2.Cols = [
+			
+			{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
+	        {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},	
+	        {Header:"NO",Type:"Text",SaveName:"NUMBER",MinWidth:50, Align:"Center" },	
+			{Header:"출근일자",Type:"Text",SaveName:"working_STATUS_DATE",MinWidth:120,KeyField:1, Align:"Center"},			
+			{Header:"출근시간",Type:"Text",SaveName:"working_STATUS_START_TIME",MinWidth:100},
+			{Header:"퇴근시간",Type:"Text",SaveName:"working_STATUS_END_TIME",MinWidth:100},
+			{Header:"총시간",Type:"Text",SaveName:"working_STATUS_TOTAL_TIME",MinWidth:50},
+			{Header:"비고",Type:"Text",SaveName:"working_STATUS_DESC",MinWidth:100}
+		];
+		
 		IBS_InitSheet( mySheet2 , initSheet2);
-  
-	
+		  
+		mySheet2.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
+		mySheet2.SetSheetHeight(350);
 	}
 
 	/*Sheet 각종 처리*/
@@ -124,6 +104,7 @@
 	}
 </script>
 <style type="text/css">
+
 .title {
 	width: 100%;
 	color: #2C3E50;
@@ -165,68 +146,69 @@
 .IBbutton:hover {
 	background-color: #2C3E50;
 }
-.pictureUpload{
-	font-size: 13px;
-	margin-left: 5px;
-	background-color: #3498DB;
-	color: white;
-	padding: 5px 50px;
-	border-radius: 7px;
-	text-decoration: none;
-}
-.pictureUpload:hover {
-	background-color: #2C3E50;
-}
 
-.left {
+.left{
 	position: relative;
 	top: 130px;
 	left: 60px;
-	width: 1000px;
+	width: 1053px;
 }
 
-.right {
+.right{
 	position: relative;
-	top: -560px;
+	top: -220px;
 	left: 500px;
-	height: 700px;
-	width: 1150px;
-	background: #EBEBEB;
-	border-radius:5px;
+	width: 750px;
+	
 }
-
 #searchBar {
 	background: #EBEBEB;
-	padding: 50px 40px;
+	padding: 15px 225px;
 	margin-bottom: 30px;
 	border-radius: 5px;
 	font-size: 12px;
 }
 
-.tg input,select{
-height: 22px;
-border-radius: 3px;
-border : none;
+.left input{
+	height: 22px;
+	width: 40px;
+	border-radius: 3px;
+	border: none;
+	padding-left:5px;
+	vertical-align: middle;
 }
 
-.tg  {border-collapse:collapse;border-spacing:0; width:70%;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:7px 2px;overflow:hidden;word-break:normal;border-color:black;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:0px 5px;overflow:hidden;word-break:normal;border-color:black;}
-.tg .tg-yyj2{font-size:12px;font-family:Verdana, Geneva, sans-serif !important;;background-color:#d4d4d4;border-color:#bebebe;text-align:left;vertical-align:center}
-.tg .tg-dm68{font-size:12px;font-family:Verdana, Geneva, sans-serif !important;;background-color:#d4d4d4;border-color:#bebebe;text-align:center;vertical-align:center}
-.tg .tg-lu1x{font-size:12px;font-family:Verdana, Geneva, sans-serif !important;;background-color:#333333;color:#ffffff;border-color:inherit;text-align:center;vertical-align:center;width:40px; border-radius:2px;}
-.tg .tg-au0w{font-size:12px;font-family:Verdana, Geneva, sans-serif !important;;border-color:inherit;text-align:left;vertical-align:center}
-.tg .tg-8thm{font-size:12px;font-family:Verdana, Geneva, sans-serif !important;;background-color:#d4d4d4;border-color:inherit;text-align:right;vertical-align:center}
-.tg .tg-v9i9{font-size:12px;font-family:Verdana, Geneva, sans-serif !important;;background-color:#d4d4d4;border-color:inherit;text-align:left;vertical-align:center}
-
+.left_rightsearch input{
+	height: 22px;
+	width: 100px;
+	border-radius: 3px;
+	border: none;
+	padding-left:5px;
+	vertical-align: middle;
+}
 .yearMonth {
-	background: #212121;
+	background: #5E5E5E;
+	padding: 5px 5px;
 	color: white;
+	border-radius: 5px;
 }
-
+.kindofsearch{
+	background: #5E5E5E;
+	padding: 5px 5px;
+	color: white;
+	border-radius: 5px;
+}
+.left_rightsearch{
+	display: inline;
+	float: right;
+}
+<% 
+java.util.Calendar date = java.util.Calendar.getInstance();
+%>
+<%int year=date.get(date.YEAR); %>
 </style>
 </head>
-<body onload="LoadPage()" style="overflow-x: hidden">
+<body onload="LoadPage()" >
 	<div class="leftbuttons">
 		<a href="javascript:doAction('print')" class="IBbutton">인쇄</a> <a
 			href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
@@ -240,15 +222,39 @@ border : none;
 
 	<div class="title">
 		<header>
-			<i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 인사관리 : 인사정보등록
+			<i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 근태관리 : 근태입력
 		</header>
 	</div>
 	<div class="left">
 		<form id="searchBar">
-			<span class="yearmonth">귀속연월</span>
+			<span class="yearMonth">귀속연월</span> <input type="text"
+				name="condition" id="condition" placeholder="YYYY"> 년
+				<select id="ymd">
+
+<%int month=date.get(date.MONTH)+1; %>
+<%for(int i=1;i<13; i++){ %>
+<%if(i==month){%>
+	<option selected value="<%=i %>"> <%=i%> </option>
+<%} else{%>
+	<option value="<%=i %>"> <%=i%> </option>	
+<%}%>
+<%}%>
+</select>월
+			<div class="left_rightsearch"><span class="kindofsearch">조회조건</span>
+				<select id="Employee_Select" float=right;>
+		    	<option value="" selected>구분</option>
+				<option value="employee_name">사업장</option>
+				<option value="employee_code">부서</option>
+			</select>
+			<input type="text" id="p_text" placeholder="사업장  or 부서">
+		</div>
 		</form>
 
 		<script>createIBSheet("mySheet", "100%", "100%");</script>
+	</div>
+	
+	<div class="right">
+		<script>createIBSheet("mySheet2", "100%", "100%");</script>
 	</div>
 
 </body>
