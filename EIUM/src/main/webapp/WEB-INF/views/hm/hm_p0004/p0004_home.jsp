@@ -222,7 +222,7 @@
 	font-weight: bold;
 	font-size: 20px;
 	padding-left: 30px;
-	padding-bottom: 10px;
+	padding-bottom: 10px; 
 	padding-top: 20px;
 	border-top: thin solid #5E5E5E;
 	border-bottom: thin dashed #5E5E5E;
