@@ -13,37 +13,37 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.myspring.eium.pm.pm_p0001.dao.S0002DAO;
-import com.myspring.eium.pm.pm_p0001.vo.S0002VO;
+import com.myspring.eium.pm.pm_p0001.dao.PM_P0001DAO;
+import com.myspring.eium.pm.pm_p0001.vo.PM_P0001VO;
 
 
 
 
 @Service("s0002Service")
 @Transactional(propagation = Propagation.REQUIRED)
-public class S0002ServiceImpl implements S0002Service {
+public class PM_P0001ServiceImpl implements PM_P0001Service {
 	@Autowired
-	private S0002DAO s0002DAO;
+	private PM_P0001DAO s0002DAO;
 
 	@Override
-	public List<S0002VO> searchList(Map<String, Object> searchMap) throws DataAccessException {
-		List<S0002VO> list =  s0002DAO.searchList(searchMap); 
+	public List<PM_P0001VO> searchList(Map<String, Object> searchMap) throws DataAccessException {
+		List<PM_P0001VO> list =  s0002DAO.searchList(searchMap); 
 		return list;
 	}
 
 	@Override
 	public void saveData(Map<String, String[]> dataMap)  throws DataAccessException  {
 		String[] status = dataMap.get("STATUS");
-		int length = status.length; // row¼ö
+		int length = status.length; // rowï¿½ï¿½
 		int i = 0;
 		
 		for(String str : status) {
-			Map<String, String> row = getRow(dataMap, length, i); // ÇöÀç IndexÀÇ Row Map
-			if("I".equals(str)) { // Ãß°¡
+			Map<String, String> row = getRow(dataMap, length, i); // ï¿½ï¿½ï¿½ï¿½ Indexï¿½ï¿½ Row Map
+			if("I".equals(str)) { // ï¿½ß°ï¿½
 				s0002DAO.insertData(row);
-			}else if("U".equals(str)) { // ¼öÁ¤
+			}else if("U".equals(str)) { // ï¿½ï¿½ï¿½ï¿½
 				s0002DAO.updateData(row);
-			}else if("D".equals(str)) { // »èÁ¦
+			}else if("D".equals(str)) { // ï¿½ï¿½ï¿½ï¿½
 				s0002DAO.deleteData(row);
 			}
 			i++;

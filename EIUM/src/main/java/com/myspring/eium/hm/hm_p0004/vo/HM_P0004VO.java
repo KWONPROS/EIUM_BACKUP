@@ -4,10 +4,12 @@ package com.myspring.eium.hm.hm_p0004.vo;
 
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 @Component
 public class HM_P0004VO {
 	
+
 	private String emp_CODE;
 	private String  emp_NAME;
 	private String  dep_NAME;
@@ -18,8 +20,10 @@ public class HM_P0004VO {
 	private String  sex;
 	private String  birth;
 	private String  contact;
-	private String  final_EDU;
-	private String  picture;
+	private String  final_EDU_CODE;
+	private String  final_EDU_NAME;
+	/* private MultipartFile picture; */
+	private String  zip_CODE;
 	private String  res_ADDRESS;
 	private String  res_ADDRESS_DETAIL;
 	private String  res_ADDRESS_EN;
@@ -27,13 +31,16 @@ public class HM_P0004VO {
 	private String  card_NUM;
 	private String  hh_YN;
 	private String  hc_YN;
-	private String  nationality;
+	private String  country_CODE;
+	private String  country_NAME;
 	private String  hire_TYPE;
 	private String  hire_NUM;
 	private String  cur_ADDRESS;
 	private String  cur_ADDRESS_DETAIL;
 	private String  mil_TYPE;
 	private String  mil_NUM;
+	
+
 	public String getEmp_CODE() {
 		return emp_CODE;
 	}
@@ -94,17 +101,23 @@ public class HM_P0004VO {
 	public void setContact(String contact) {
 		this.contact = contact;
 	}
-	public String getFinal_EDU() {
-		return final_EDU;
+	public String getFinal_EDU_CODE() {
+		return final_EDU_CODE;
 	}
-	public void setFinal_EDU(String final_EDU) {
-		this.final_EDU = final_EDU;
+	public void setFinal_EDU_CODE(String final_EDU_CODE) {
+		this.final_EDU_CODE = final_EDU_CODE;
 	}
-	public String getPicture() {
-		return picture;
+	public String getFinal_EDU_NAME() {
+		return final_EDU_NAME;
 	}
-	public void setPicture(String picture) {
-		this.picture = picture;
+	public void setFinal_EDU_NAME(String final_EDU_NAME) {
+		this.final_EDU_NAME = final_EDU_NAME;
+	}
+	public String getZip_CODE() {
+		return zip_CODE;
+	}
+	public void setZip_CODE(String zip_CODE) {
+		this.zip_CODE = zip_CODE;
 	}
 	public String getRes_ADDRESS() {
 		return res_ADDRESS;
@@ -148,11 +161,17 @@ public class HM_P0004VO {
 	public void setHc_YN(String hc_YN) {
 		this.hc_YN = hc_YN;
 	}
-	public String getNationality() {
-		return nationality;
+	public String getCountry_CODE() {
+		return country_CODE;
 	}
-	public void setNationality(String nationality) {
-		this.nationality = nationality;
+	public void setCountry_CODE(String country_CODE) {
+		this.country_CODE = country_CODE;
+	}
+	public String getCountry_NAME() {
+		return country_NAME;
+	}
+	public void setCountry_NAME(String country_NAME) {
+		this.country_NAME = country_NAME;
 	}
 	public String getHire_TYPE() {
 		return hire_TYPE;
@@ -190,5 +209,7 @@ public class HM_P0004VO {
 	public void setMil_NUM(String mil_NUM) {
 		this.mil_NUM = mil_NUM;
 	}
+	
+	
 	
 }

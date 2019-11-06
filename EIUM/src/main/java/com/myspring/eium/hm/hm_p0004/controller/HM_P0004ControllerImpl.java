@@ -3,6 +3,7 @@ package com.myspring.eium.hm.hm_p0004.controller;
 
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -24,10 +25,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.eium.hm.hm_p0004.service.HM_P0004Service;
@@ -58,30 +61,13 @@ public class HM_P0004ControllerImpl implements HM_P0004Controller {
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
 		searchMap.put("command", request.getParameter("command"));
+		searchMap.put("condition", request.getParameter("condition"));
 		List<HM_P0004VO> data = p0004Service.searchList(searchMap);
-
         resultMap.put("Data", data);
     	System.out.println("resultMap::::"+resultMap);
         return resultMap;
 	}
-	
-	
-	@Override
-	@RequestMapping(value = "/hm/p0004/searchList2.do", method = { RequestMethod.GET, RequestMethod.POST })
-	@ResponseBody
-	public Map searchList2(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
 		
-		Map<String, String> searchMap = new HashMap<String, String>();
-		Map<String, Object> resultMap = new HashMap<String, Object>(); 	
-		searchMap.put("emp_CODE", request.getParameter("emp_CODE"));
-		List<HM_P0004VO> data = p0004Service.searchList2(searchMap);
-		resultMap.put("Data", data);
-		System.out.println("resultMap::::"+data.get(0).getEmail());
-		return resultMap;
-	}
-	
-
 	@Override
 	@RequestMapping(value = "/hm/p0004/saveData.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
@@ -89,9 +75,8 @@ public class HM_P0004ControllerImpl implements HM_P0004Controller {
 		request.setCharacterEncoding("utf-8");
 		Map<String, String[]> dataMap = new HashMap<String, String[]>(); 
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
-
-		String table_NAME = request.getParameter("table_NAME");
 		
+	
 		Enumeration enu = request.getParameterNames();
 		while (enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
@@ -101,7 +86,7 @@ public class HM_P0004ControllerImpl implements HM_P0004Controller {
 		
 		Map<String, String> result = new HashMap<String, String>();
 		try {
-			p0004Service.saveData(dataMap,table_NAME);	
+			p0004Service.saveData(dataMap);	
 			result.put("Code","0");
 			result.put("Message","저장성공");
 		}catch(Exception e) {
@@ -110,9 +95,37 @@ public class HM_P0004ControllerImpl implements HM_P0004Controller {
 			e.printStackTrace();
 		}
 		
-		resultMap.put("Result", result);        
+		resultMap.put("Result", result);         
         return resultMap;
 	}
+	
+	@Override
+	@RequestMapping(value = "/hm/p0004/findAddress.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView findAddress(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView("/hm/hm_p0004/p0004_home_p01");
+		return mav;
 
+	}
+	@Override
+	@RequestMapping(value = "/hm/p0004/findPopup.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView findPopup(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView("/hm/hm_p0004/p0004_home_p02");
+		mav.addObject("command", request.getParameter("command"));
+		return mav;
+	}
+	@Override
+	@RequestMapping(value = "/hm/p0004/searchList2.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map searchList2(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+		searchMap.put("command", request.getParameter("command"));
+		List<HM_P0004VO> data = p0004Service.searchList2(searchMap);
+
+        resultMap.put("Data", data);
+    	System.out.println("resultMap::::"+resultMap);
+        return resultMap;
+	}
 	
 }

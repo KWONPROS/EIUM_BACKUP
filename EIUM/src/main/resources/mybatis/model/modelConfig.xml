@@ -24,5 +24,8 @@
 				<typeAlias type="com.myspring.eium.hm.hm_p0004.vo.HM_P0004VO" alias="HM_P0004VO" />
 				<typeAlias type="com.myspring.eium.hm.hm_p0007.vo.HM_P0007VO" alias="HM_P0007VO" />
 				
+				
+				<typeAlias type="com.myspring.eium.hm.hm_p0018.vo.HM_P0018VO" alias="HM_P0018VO" />
+				
 	</typeAliases>
 </configuration>

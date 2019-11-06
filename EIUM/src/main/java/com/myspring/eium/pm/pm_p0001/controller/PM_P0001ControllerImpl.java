@@ -30,59 +30,47 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 
-import com.myspring.eium.pm.pm_p0001.service.S0002Service;
-import com.myspring.eium.pm.pm_p0001.vo.S0002VO;
+import com.myspring.eium.pm.pm_p0001.service.PM_P0001Service;
+import com.myspring.eium.pm.pm_p0001.vo.PM_P0001VO;
 
 
 
 
-@Controller("s0002Controller")
-public class S0002ControllerImpl implements S0002Controller {
-	private static final Logger logger = LoggerFactory.getLogger(S0002ControllerImpl.class);
+@Controller
+public class PM_P0001ControllerImpl implements PM_P0001Controller {
+	private static final Logger logger = LoggerFactory.getLogger(PM_P0001ControllerImpl.class);
 	@Autowired
-	S0002Service s0002Service;
+	PM_P0001Service pM_P0001Service;
 	@Autowired
-	S0002VO s0002VO;
+	PM_P0001VO pM_P0001VO;
 	
 	@Override
-	@RequestMapping(value = "/s0002/searchInit.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/pm/p0001/searchInit.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("/s0002/s0002_home");
+		ModelAndView mav = new ModelAndView("pm/pm_p0001/p0001_home");
 	
 		return mav;
 	} 
 	
 	@Override
-	@RequestMapping(value = "/s0002/searchList.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/pm/p0001/searchList.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		Map<String, Object> searchMap = new HashMap<String, Object>(); // 占싯삼옙占쏙옙占쏙옙
-		Map<String, Object> resultMap = new HashMap<String, Object>(); // 占쏙옙회占쏙옙占�
-		
-		// 검색조건설정
-		searchMap.put("p_cust_id", request.getParameter("p_cust_id"));
+		Map<String, Object> searchMap = new HashMap<String, Object>(); 
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
 		
 		//데이터 조회
-		List<S0002VO> data = s0002Service.searchList(searchMap);
+		List<PM_P0001VO> data = pM_P0001Service.searchList(searchMap);
+		
         resultMap.put("Data", data);
     	System.out.println("resultMap::::"+resultMap);
         return resultMap;
 	}
 	
-	@Override 
-	@RequestMapping(value = "/s0002/searchList2.do", method = { RequestMethod.GET, RequestMethod.POST })
-	@ResponseBody
-	public String searchList2(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-        String str = "{\"Data\":[{\"ID\":\"그것만이 내 세상\",\"PWD\":\"Keys to the Heart\",\"NAME\":\"2017\",\"EMAIL\":\"한국\",\"JOINDATE\":\"20190101\",\"NUM\":\"1\"}]}";
-        //JSON 반환 
-        return str;
-	}
-	
 	@Override
-	@RequestMapping(value = "/s0002/saveData.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/pm/p0001/saveData.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
@@ -99,7 +87,7 @@ public class S0002ControllerImpl implements S0002Controller {
 		
 		Map<String, String> result = new HashMap<String, String>();
 		try {
-			s0002Service.saveData(dataMap);	
+			pM_P0001Service.saveData(dataMap);	
 			result.put("Code","0");
 			result.put("Message","저장되었습니다");
 		}catch(Exception e) {
@@ -111,4 +99,5 @@ public class S0002ControllerImpl implements S0002Controller {
 		resultMap.put("Result", result);         
         return resultMap;
 	}
+
 }

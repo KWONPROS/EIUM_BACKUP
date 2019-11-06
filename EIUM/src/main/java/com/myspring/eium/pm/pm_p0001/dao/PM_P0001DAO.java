@@ -7,13 +7,13 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
-import com.myspring.eium.pm.pm_p0001.vo.S0002VO;
+import com.myspring.eium.pm.pm_p0001.vo.PM_P0001VO;
 
 
 
 
-public interface S0002DAO {
-	 public List<S0002VO> searchList(Map<String, Object> searchMap) throws DataAccessException;
+public interface PM_P0001DAO {
+	 public List<PM_P0001VO> searchList(Map<String, Object> searchMap) throws DataAccessException;
 
 	public void insertData(Map<String, String> row) throws DataAccessException;
 

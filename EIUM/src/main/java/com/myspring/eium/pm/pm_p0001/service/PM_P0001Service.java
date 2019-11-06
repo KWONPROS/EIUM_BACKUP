@@ -12,14 +12,14 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.myspring.eium.pm.pm_p0001.vo.S0002VO;
+import com.myspring.eium.pm.pm_p0001.vo.PM_P0001VO;
 
 
 
 
 
-public interface S0002Service {
-	 public List<S0002VO> searchList(Map<String, Object> searchMap) throws DataAccessException;
+public interface PM_P0001Service {
+	 public List<PM_P0001VO> searchList(Map<String, Object> searchMap) throws DataAccessException;
 
 	public void saveData(Map<String, String[]> dataMap)  throws DataAccessException ;
 }

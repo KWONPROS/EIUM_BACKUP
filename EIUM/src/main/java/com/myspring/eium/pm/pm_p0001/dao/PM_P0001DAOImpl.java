@@ -11,20 +11,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import com.myspring.eium.pm.pm_p0001.vo.S0002VO;
+import com.myspring.eium.pm.pm_p0001.vo.PM_P0001VO;
 
 
 
 
 @Repository("s0002DAO")
-public class S0002DAOImpl implements S0002DAO {
+public class PM_P0001DAOImpl implements PM_P0001DAO {
 	@Autowired
 	private SqlSession sqlSession;
 
 	@Override
-	public List<S0002VO> searchList(Map<String, Object> searchMap) throws DataAccessException {
+	public List<PM_P0001VO> searchList(Map<String, Object> searchMap) throws DataAccessException {
 		System.out.println("searchMAp: "+searchMap);
-		List<S0002VO> list = sqlSession.selectList("hm.s0002.searchList", searchMap);
+		List<PM_P0001VO> list = sqlSession.selectList("hm.s0002.searchList", searchMap);
 		return list;
 	}
 

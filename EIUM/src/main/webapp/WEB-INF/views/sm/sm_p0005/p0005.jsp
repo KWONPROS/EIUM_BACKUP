@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="${contextPath}/resources/ibsheet/ibsheetinfo.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibsheet.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibleaders.js"></script>
@@ -81,51 +82,75 @@ function doAction(sAction){
    
 }
 	</script>
-	<script>
+	<style type="text/css">
+.title {
+    width:100%;
+   color: #2C3E50;
+   font-weight: bold;
+   font-size: 20px;
+   padding-left : 30px;
+   padding-bottom: 10px;
+   padding-top:20px;
+   border-top: thin solid #5E5E5E;
+   border-bottom: thin dashed #5E5E5E;
+   position: absolute;
+   top: 50px;
 
+}
+.leftbuttons{
+   margin-top:40px;
+   margin:10px;
+   position: absolute;
+   left: 0px;
+}
+.rightbuttons{
+   margin-top:40px;
+   margin:10px;
+   position: absolute;
+   right: 0px;
+}
+ .IBbutton {
+   font-size: 13px;
+   margin-left: 5px;
+   border:0;
+   background-color: #2B69A0;
+   color: white;
+   padding: 5px 15px;
+   border-radius: 7px;
+   text-decoration: none;   
+}
+.IBbutton:hover {
+background-color: #2C3E50;
+}
 	
-	</script>
+	</style>
 </head>
 <body onload="LoadPage()">
 	<form name="frm">
 	
-	<button type="button" onclick="doAction('print')">인쇄</button>
-	<button type="button" onclick="doAction('down')">엑셀</button>
-
-	<button type="button" onclick="doAction('reset')">초기화</button>
-	<button type="button" onclick="doAction('search')">조회</button>
-	<button type="button" onclick="doAction('insert')">추가</button>
-	<button type="button" onclick="doAction('save')">저장</button>
-	<hr>
+	<div class="leftbuttons">
+	<button type="button" onclick="doAction('print')" class="IBbutton">인쇄</button>
+	<button type="button" onclick="doAction('down')" class="IBbutton">엑셀</button>
+    </div> 
+    
+    <div class="rightbuttons">
+	<button type="button" onclick="doAction('reset')" class="IBbutton">초기화</button>
+	<button type="button" onclick="doAction('search')" class="IBbutton">조회</button>
+	<button type="button" onclick="doAction('insert')" class="IBbutton">추가</button>
+	<button type="button" onclick="doAction('save')" class="IBbutton">저장</button>
+	</div>
 	
-	<h2>&nbsp;&nbsp;▶ 권한관리</h2><br>
-
-<!--  &nbsp;&nbsp; 사업장 : <select name="sa_Name">
-		  <option>나의 사업장</option>
-		  <option>너의 사업장</option>
-		  <option>우리의 사업장</option>
-		</select>
-		
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 부서 : <select name="sa_Dept">
-		  <option>인사</option>
-		  <option>아싸</option>
-		  <option>안사</option>
-		</select>
-		
-  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <select name="sa_Select">
-          <option>사원명</option>
-          <option>사원코드</option>
-       </select>
-       
-       <input type="text" placeholder="내용을 입력해주세요.">  -->
-
-<div style="position:absolute; top:100px; left:20px;">
+	<div class="title"> 
+    <header> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 권한관리</header>
+    </div>
+    
+<div style="position:absolute; top:140px; left:65px;">
 <script type="text/javascript">
 createIBSheet("mySheet", "1500px", "600px");
 </script>
 </div>
 
-<div style="position:absolute; top:100px; left:400px;">
+<div style="position:absolute; top:140px; left:445px;">
 <script>
 createIBSheet("mySheet2", "1500px", "600px");
 </script>

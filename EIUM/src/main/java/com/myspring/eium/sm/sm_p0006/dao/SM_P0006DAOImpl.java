@@ -21,4 +21,16 @@ public class SM_P0006DAOImpl implements SM_P0006DAO {
 		return list;
 	}
 
+	@Override
+	public List<SM_P0006VO> searchSiteList(Map<String, Object> searchMap) {
+		List<SM_P0006VO> list = sqlSession.selectList("mapper.sm_p0006.searchSiteList", searchMap);
+		return list;
+	}
+
+	@Override
+	public List<SM_P0006VO> searchDeptList(Map<String, Object> searchMap) {
+		List<SM_P0006VO> list = sqlSession.selectList("mapper.sm_p0006.searchDeptList", searchMap);
+		return list;
+	}
+
 }

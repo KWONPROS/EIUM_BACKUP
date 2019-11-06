@@ -15,5 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public interface SM_P0006Controller {
 	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public Map searchSiteList(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public Map searchDeptList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 }
