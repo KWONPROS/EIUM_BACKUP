@@ -11,5 +11,8 @@ public interface SM_P0004Controller {
 	public ModelAndView form5(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public Map departmentSearch(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView departmentSerch_init(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public Map searchDepartmentList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
 
