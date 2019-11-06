@@ -519,7 +519,7 @@
 									onclick="javascript:goPopup();" style="width: 380px;"></td>
 							</tr>
 							<tr>
-								<td class="tg-8thm">상세주소</td>
+								<td class="tg-8thm">상세주소</td> 
 								<td class="tg-v9i9" colspan="5"><input type="text"
 									id="addressDetail" name="addressDetail" style="width: 460px;"></td>
 							</tr>
