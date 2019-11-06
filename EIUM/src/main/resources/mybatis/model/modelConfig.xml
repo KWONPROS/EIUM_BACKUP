@@ -8,7 +8,7 @@
 				<!-- common -->
 			 	<typeAlias type="com.myspring.eium.common.vo.HomeVO" alias="HomeVO" />
 			 	<typeAlias type="com.myspring.eium.login.vo.LoginVO" alias="LoginVO" />
-			 	
+				
 				<typeAlias type="com.myspring.eium.sm.sm_p0001.vo.SM_P0001VO" alias="SM_P0001VO" /> 
 				<typeAlias type="com.myspring.eium.sm.sm_p0002.vo.SM_P0002VO" alias="SM_P0002VO" />
 				<typeAlias type="com.myspring.eium.sm.sm_p0003.vo.SM_P0003VO" alias="SM_P0003VO" />

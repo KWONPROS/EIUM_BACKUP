@@ -13,8 +13,14 @@
 <script src="${contextPath}/resources/ibsheet/ibsheetinfo.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibsheet.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibleaders.js"></script>
+<link href="${contextPath}/resources/tab/css/ibtab-style.css"
+	rel="stylesheet">
+<script src="${contextPath}/resources/tab/js/ibtab.js"
+	type="text/javascript"></script>
+<script src="${contextPath}/resources/tab/js/ibtabinfo.js"
+	type="text/javascript"></script>
 
-<script language="javascript">
+<script>
 	/*Sheet 기본 설정 */
 	function LoadPage() {
 		mySheet.RemoveAll();
@@ -43,6 +49,9 @@
 			
 			mySheet.SetEditableColorDiff(1); //편집불가능한 셀 표시 구분
 			/* mySheet.SetSheetHeight(1000); */
+			
+			//탭
+
 		}
 	
 	/*Sheet 각종 처리*/
@@ -149,14 +158,35 @@
 </script>
 
 <style type="text/css">
+
+.IBbutton {
+	font-size: 13px;
+	margin-left: 5px;
+	background-color: #2B69A0;
+	color: white;
+	padding: 5px 15px;
+	border-radius: 7px;
+	text-decoration: none;
+}
+.IBbutton:hover {
+	background-color: #2C3E50;
+}
+
 .left{
 position: absolute;
 top: 145px;
 left: 50px;
 }
+
+.rightbuttons {
+	margin-top: 50px;
+	margin: 20px;
+	position: absolute;
+	right: 30px;
+}
 .right{
 position: relative;
-top: 20px;
+top: 150px;
 left: 600px;
 width: 700px;
 background: #EDF0F5;
@@ -186,23 +216,34 @@ box-sizing: border-box;
 border: 1px solid #CCCCCC;
 border-radius: 2px;
 } 
+.title {
+	width: 100%;
+	color: #2C3E50;
+	font-weight: bold;
+	font-size: 20px;
+	padding-left: 30px;
+	padding-bottom: 10px;
+	padding-top: 20px;
+	border-top: thin solid #5E5E5E;
+	border-bottom: thin dashed #5E5E5E;
+	position: absolute;
+	top: 50px;
+}
+
+
 </style>
 
 </head>
 <body onload="LoadPage()">
-	<div class="page_title">
-   <span><a class="closeDepth" href="#">closeDepth</a></span>
-    <span class="title">등록정보관리 ▶<b> 교육관리</b></span>
-  </div>
-  <div class="main_content">
-    
 
-    <div class="ib_function float_right">
-	  <a href="javascript:doAction('reload')" class="f1_btn_gray lightgray">초기화</a>
-	  <a href="javascript:doAction('insert')" class="f1_btn_gray lightgray">추가</a>
-	  <a href="javascript:doAction('search')" class="f1_btn_white gray">조회</a>
-	  <a href="javascript:doAction('save')" class="f1_btn_white gray">저장</a>
-	  <a href="javascript:doAction('save2')" class="f1_btn_white gray">저장 JSON</a> 
+
+
+    <div class="rightbuttons">
+	  <a href="javascript:doAction('reload')"  class="IBbutton">초기화</a>
+	  <a href="javascript:doAction('insert')"  class="IBbutton">추가</a>
+	  <a href="javascript:doAction('search')" class="IBbutton">조회</a>
+	  <a href="javascript:doAction('save')" class="IBbutton">저장</a>
+	  <a href="javascript:doAction('save2')" class="IBbutton">저장 JSON</a> 
 	</div>
 
 	<div class="clear hidden"></div>
@@ -210,10 +251,14 @@ border-radius: 2px;
 	<div class="ib_product">
 		<script>
 			//IBSheet 객체 생성 (객체 id, 너비, 높이)
-			createIBSheet("mySheet", "100%", "100%");
+			createIBSheet("mySheet", "100%", "304px");
 		</script>
 	</div>
 	</div>
+	
+
+  
+	
 	<form name="form" id="form" method="post">
 	
 	<div class="right">
@@ -265,6 +310,6 @@ border-radius: 2px;
 		</table>		
 	</div>
 	</form>
-  </div>
+
 </body>
 </html>

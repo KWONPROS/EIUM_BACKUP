@@ -70,6 +70,19 @@ public class SM_P0004ServiceImpl implements SM_P0004Service {
 		}		
 		return row;
 	}
+	
+
+	
+
+	
+	@Override
+	public List<SM_P0004VO> searchDepartmentList(Map<String, Object> searchMap) throws DataAccessException {
+		List<SM_P0004VO> list= p0004DAO.searchDepartmentList(searchMap);
+
+		return list;
+	}
+	
+	
 
 
 }

@@ -18,4 +18,12 @@ public interface HM_P0018Controller {
 	Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 	ModelAndView EduInit(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	ModelAndView tabInit(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	ModelAndView EdutargetInit(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	Map home2search(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	ModelAndView home2PopUPInit(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

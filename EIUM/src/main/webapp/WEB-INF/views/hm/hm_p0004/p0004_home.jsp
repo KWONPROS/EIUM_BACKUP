@@ -1,23 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />	
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibsheetinfo.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibsheet.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibleaders.js"></script>
-<link href="${contextPath}/resources/tab/css/ibtab-style.css"
-	rel="stylesheet">
-<script src="${contextPath}/resources/tab/js/ibtab.js"
-	type="text/javascript"></script>
-<script src="${contextPath}/resources/tab/js/ibtabinfo.js"
-	type="text/javascript"></script>
+<link href="${contextPath}/resources/tab/css/ibtab-style.css" rel="stylesheet">
+<script src="${contextPath}/resources/tab/js/ibtab.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/tab/js/ibtabinfo.js" type="text/javascript"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
 <script language="javascript">
 
 	/*Sheet 기본 설정 */
@@ -41,8 +39,10 @@
 			{Header:"성별",Type:"Text",SaveName:"sex", Hidden:1},			
 			{Header:"생년월일",Type:"Text",SaveName:"birth", Hidden:1},			
 			{Header:"전화번호",Type:"Text",SaveName:"contact", Hidden:1},			
-			{Header:"최종학력",Type:"Text",SaveName:"final_EDU", Hidden:1},			
-			{Header:"사진",Type:"Image",SaveName:"picture", /* Hidden:1 */},			
+			{Header:"최종학력코드",Type:"Text",SaveName:"final_EDU_CODE", Hidden:1},			
+			{Header:"최종학력이름",Type:"Text",SaveName:"final_EDU_NAME", Hidden:1},			
+			{Header:"사진",Type:"Image",SaveName:"picture",  Hidden:1 },			
+			{Header:"우편번호",Type:"Text",SaveName:"zip_CODE", Hidden:1},			
 			{Header:"주민등록주소",Type:"Text",SaveName:"res_ADDRESS", Hidden:1},			
 			{Header:"상세주소",Type:"Text",SaveName:"res_ADDRESS_DETAIL", Hidden:1},			
 			{Header:"영문주소",Type:"Text",SaveName:"res_ADDRESS_EN", Hidden:1},			
@@ -50,7 +50,8 @@
 			{Header:"출입카드번호",Type:"Text",SaveName:"card_NUM", Hidden:1},			
 			{Header:"세대주여부",Type:"Text",SaveName:"hh_YN", Hidden:1},			
 			{Header:"장애인구분",Type:"Text",SaveName:"hc_YN", Hidden:1},			
-			{Header:"국적",Type:"Text",SaveName:"nationality", Hidden:1},			
+			{Header:"국적코드",Type:"Text",SaveName:"country_CODE", Hidden:1},			
+			{Header:"국적이름",Type:"Text",SaveName:"country_NAME", Hidden:1},			
 			{Header:"병역구분",Type:"Text",SaveName:"mil_TYPE", Hidden:1},			
 			{Header:"군번",Type:"Text",SaveName:"mil_NUM", Hidden:1},			
 			{Header:"채용구분",Type:"Text",SaveName:"hire_TYPE", Hidden:1},					
@@ -60,8 +61,12 @@
   
 		mySheet.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
 		mySheet.SetSheetHeight(600);
+	
 		
 		
+		
+		
+
 		//탭
 		createIBTab($('#ib_sheetTab')[0], $('#ib_sheetContents')[0], 'sheetTab', {
 		    themes: {
@@ -73,7 +78,21 @@
 		});
 		
 		
-	
+		
+		
+		//달력 API
+		$(function() {
+		    $( "#testDatepicker" ).datepicker({
+		    	dateFormat: "yy-mm-dd",
+		    	showOn: "both", 
+		        buttonImage: "${contextPath}/resources/image/icons/icon_calendar.png", 
+		        buttonImageOnly: true , 
+		         dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+		         dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], 
+		         monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+		         monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+		  });
+		});
 	}
 
 	/*Sheet 각종 처리*/
@@ -95,38 +114,26 @@
 	            mySheet.SetCellValue($('input[name=myRow]').val(),10,$('input[name=birthDate]').val());
 	            mySheet.SetCellValue($('input[name=myRow]').val(),11,$('input[name=contactNum]').val());
 	            mySheet.SetCellValue($('input[name=myRow]').val(),12,$('input[name=finalEduCode]').val());
+	            mySheet.SetCellValue($('input[name=myRow]').val(),13,$('input[name=finalEduName]').val());
 	          
-	            mySheet.SetCellValue($('input[name=myRow]').val(),14,$('input[name=address]').val());
-	            mySheet.SetCellValue($('input[name=myRow]').val(),15,$('input[name=addressDetail]').val());
-	            mySheet.SetCellValue($('input[name=myRow]').val(),16,$('select[name=addressEng]').val()); 
-	            mySheet.SetCellValue($('input[name=myRow]').val(),17,$('select[name=email]').val()); 
-	            mySheet.SetCellValue($('input[name=myRow]').val(),18,$('select[name=accessCard]').val()); 
-	            mySheet.SetCellValue($('input[name=myRow]').val(),19,$('select[name=householdYN]').val()); 
-	            mySheet.SetCellValue($('input[name=myRow]').val(),20,$('select[name=handicappedYN]').val()); 
-	            mySheet.SetCellValue($('input[name=myRow]').val(),21,$('select[name=naitonality]').val()); 
-	            mySheet.SetCellValue($('input[name=myRow]').val(),22,$('select[name=milType]').val()); 
-	            mySheet.SetCellValue($('input[name=myRow]').val(),23,$('select[name=milNum]').val()); 
-	            mySheet.SetCellValue($('input[name=myRow]').val(),24,$('select[name=hireType]').val()); 
-	            mySheet.SetCellValue($('input[name=myRow]').val(),25,$('select[name=hireNum]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),15,$('input[name=zipcode]').val());
+	            mySheet.SetCellValue($('input[name=myRow]').val(),16,$('input[name=address]').val());
+	            mySheet.SetCellValue($('input[name=myRow]').val(),17,$('input[name=addressDetail]').val());
+	            mySheet.SetCellValue($('input[name=myRow]').val(),18,$('input[name=addressEng]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),19,$('input[name=email]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),20,$('input[name=accessCard]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),21,$('select[name=householdYN]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),22,$('select[name=handicappedYN]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),23,$('input[name=countryCODE]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),24,$('input[name=countryNAME]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),25,$('select[name=milType]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),26,$('input[name=milNum]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),27,$('select[name=hireType]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),28,$('input[name=hireNum]').val()); 
 	        
-	            var form = $('#FILE_FORM')[0];
-	            var formData = new FormData(form);
-	            formData.append("fileObj", $("#FILE_TAG")[0].files[0]);
-	            formData.append("fileObj2", $("#FILE_TAG2")[0].files[0]);
-
-	            $.ajax({
-	                url: "${contextPath}/hm/p0004/searchList2.do",
-	                        processData: false,
-	                        contentType: false,
-	                        data: formData,
-	                        type: 'POST',
-	                        success: function(result){
-	                            alert("업로드 성공!!");
-	                        }
-	                });
-	            
+	           
 	            var tempStr = mySheet.GetSaveString();
-	            alert("서버로 전달되는 문자열 확인 :"+tempStr+formData);
+	            alert("서버로 전달되는 문자열 확인 :"+tempStr);
 	            mySheet.DoSave("${contextPath}/hm/p0004/saveData.do");
 	            break;      
 		}
@@ -145,19 +152,22 @@
 		      $('input[name=birthDate]').val(mySheet.GetCellValue(Row,10));
 		      $('input[name=contactNum]').val(mySheet.GetCellValue(Row,11));
 		      $('input[name=finalEduCode]').val(mySheet.GetCellValue(Row,12));
-		     /*  $('input[id=pictureUpload]').val(mySheet.GetCellValue(Row,13)); */
-		      $('input[name=address]').val(mySheet.GetCellValue(Row,14));
-		      $('input[name=addressDetail]').val(mySheet.GetCellValue(Row,15));
-		      $('input[name=addressEng]').val(mySheet.GetCellValue(Row,16));
-		      $('input[name=email]').val(mySheet.GetCellValue(Row,17));
-		      $('input[name=accessCard]').val(mySheet.GetCellValue(Row,18));
-		      $('select[name=householdYN]').val(mySheet.GetCellValue(Row,19));
-		      $('select[name=handicappedYN]').val(mySheet.GetCellValue(Row,20));
-		      $('input[name=naitonality]').val(mySheet.GetCellValue(Row,21));
-		      $('select[name=milType]').val(mySheet.GetCellValue(Row,22));
-		      $('input[name=milNum]').val(mySheet.GetCellValue(Row,23));
-		      $('select[name=hireType]').val(mySheet.GetCellValue(Row,24));
-		      $('input[name=hireNum]').val(mySheet.GetCellValue(Row,25));
+		      $('input[name=finalEduName]').val(mySheet.GetCellValue(Row,13));
+		     /*  $('input[id=pictureUpload]').val(mySheet.GetCellValue(Row,14)); */
+		      $('input[name=zipcode]').val(mySheet.GetCellValue(Row,15));
+		      $('input[name=address]').val(mySheet.GetCellValue(Row,16));
+		      $('input[name=addressDetail]').val(mySheet.GetCellValue(Row,17));
+		      $('input[name=addressEng]').val(mySheet.GetCellValue(Row,18));
+		      $('input[name=email]').val(mySheet.GetCellValue(Row,19));
+		      $('input[name=accessCard]').val(mySheet.GetCellValue(Row,20));
+		      $('select[name=householdYN]').val(mySheet.GetCellValue(Row,21));
+		      $('select[name=handicappedYN]').val(mySheet.GetCellValue(Row,22));
+		      $('input[name=countryCODE]').val(mySheet.GetCellValue(Row,23));
+		      $('input[name=countryNAME]').val(mySheet.GetCellValue(Row,24));
+		      $('select[name=milType]').val(mySheet.GetCellValue(Row,25));
+		      $('input[name=milNum]').val(mySheet.GetCellValue(Row,26));
+		      $('select[name=hireType]').val(mySheet.GetCellValue(Row,27));
+		      $('input[name=hireNum]').val(mySheet.GetCellValue(Row,28));
 		
 		      
 		}
@@ -189,17 +199,30 @@
 	}
 	   
 	   
+	   function findPopup(tablename){
+	      var pop = window.open("findPopup.do?command="+tablename,"findPopup","width=342,height=520,resizable = no, scrollbars = no"); 
 
-	 
+	   }
+	   function searchCondition(){
+		 var cond =document.getElementById("condition").value;
+		 var cond2=$('input[name="emp_radio"]:checked').val();
+		 mySheet.DoSearch('${contextPath}/hm/p0004/searchList.do','condition='+cond+'&command='+cond2);
+	   }
+
+	
 </script>
 <style type="text/css">
+.ui-datepicker{ font-size: 12px; width: 160px; }
+.ui-datepicker select.ui-datepicker-month{ width:30%; font-size: 11px; }
+.ui-datepicker select.ui-datepicker-year{ width:40%; font-size: 11px; }
+
 .title {
 	width: 100%;
 	color: #2C3E50;
 	font-weight: bold;
 	font-size: 20px;
 	padding-left: 30px;
-	padding-bottom: 10px;
+	padding-bottom: 10px; 
 	padding-top: 20px;
 	border-top: thin solid #5E5E5E;
 	border-bottom: thin dashed #5E5E5E;
@@ -255,6 +278,14 @@
 	left: 60px;
 	width: 403px;
 }
+.left input{
+	height: 22px;
+	border-radius: 3px;
+	border: none;
+	padding-left:5px;
+	vertical-align: middle;
+	}
+	
 
 .right {
 	position: relative;
@@ -279,16 +310,20 @@
 	height: 22px;
 	border-radius: 3px;
 	border: none;
+	padding-left:5px;
+	vertical-align: middle;
 }
 
 .tg img {
-	padding: 0px 5px 0px 5px;
+	vertical-align: middle;
+	padding: 0px 5px 0px 2px;
 }
 
 .tg {
 	border-collapse: collapse;
 	border-spacing: 0;
 	width: 70%;
+	
 }
 
 .tg td {
@@ -308,15 +343,6 @@
 	overflow: hidden;
 	word-break: normal;
 	border-color: black;
-}
-
-.tg .tg-yyj2 {
-	font-size: 12px;
-	font-family: Verdana, Geneva, sans-serif !important;;
-	background-color: #d4d4d4;
-	border-color: #bebebe;
-	text-align: left;
-	vertical-align: center
 }
 
 .tg .tg-dm68 {
@@ -385,25 +411,20 @@
 		</header>
 	</div>
 	<div class="left">
-		<form id="searchBar">
-			조회기준 <input type="radio" name="emp_radio"
-				onclick="mySheet.DoSearch('${contextPath}/hm/p0004/searchList.do','command=doWork');">재직
-			<input type="radio" name="emp_radio"
-				onclick="mySheet.DoSearch('${contextPath}/hm/p0004/searchList.do','command=noWork');">퇴직
-			<input type="radio" name="emp_radio"
-				onclick="mySheet.DoSearch('${contextPath}/hm/p0004/searchList.do');"
-				checked="checked"> 전체<br> 사원검색 <input type="text"
-				name="" id=""> <input type="submit" value="조회">
+		<form id="searchBar" action="javascript:searchCondition();">
+			조회기준 
+			<input type="radio"  id="emp_radio"name="emp_radio" onclick="mySheet.DoSearch('${contextPath}/hm/p0004/searchList.do','command=doWork');" value="doWork">재직  
+			<input type="radio" id="emp_radio"name="emp_radio" onclick="mySheet.DoSearch('${contextPath}/hm/p0004/searchList.do','command=noWork');" value="noWork">퇴직  
+			<input type="radio" id="emp_radio"name="emp_radio" onclick="mySheet.DoSearch('${contextPath}/hm/p0004/searchList.do');" checked="checked" > 전체<br> 
+			사원검색   <input type="text" name="condition" id="condition" placeholder="사원번호"> 
+			<input type="submit" value="조회" style="background-color: #5E5E5E; color:white;">
 		</form>
 
 		<script>createIBSheet("mySheet", "100%", "100%");</script>
 	</div>
 
 	<div class="right">
-		<div class="mySheet2"
-			style="position: relative; top: 100px; left: 300px;">
-			<script>createIBSheet("mySheet2",0,0);</script>
-		</div>
+
 		<div id="ib_sheetTab">
 			<div class="ib-tab-tabs-item">
 				<a class="ib-tab-tabs-item__link is-active"><span
@@ -474,10 +495,10 @@
 
 								<td class="tg-8thm">최종학력</td>
 								<td class="tg-v9i9" colspan="3"><input type="text"
-									id="finalEduCode" name="finalEduCode" style="width: 50px;"><a
-									href="javascript:goPopup();"><img
+									id="FINAL_EDU_CODE" name="finalEduCode" style="width: 50px;"><a
+									href="javascript:findPopup('FINAL_EDU');"><img
 										src="${contextPath}/resources/image/icons/icon_plus.png"></a>
-									<input type="text" id="finalEduName" name="finalEduName"
+									<input type="text" id="FINAL_EDU_NAME" name="finalEduName"
 									style="width: 272px;"></td>
 							</tr>
 							<tr>
@@ -485,7 +506,7 @@
 								<td class="tg-au0w" colspan="7"></td>
 							</tr>
 							<tr>
-								<td class="tg-lu1x" rowspan="9"><i class="fa fa-id-card"
+								<td class="tg-lu1x" rowspan="9"><i class="fa fa-address-book"
 									aria-hidden="true"></i><br>거<br>주<br>정<br>보</td>
 
 								<td class="tg-8thm">주민등록주소</td>
@@ -498,7 +519,7 @@
 									onclick="javascript:goPopup();" style="width: 380px;"></td>
 							</tr>
 							<tr>
-								<td class="tg-8thm">상세주소</td>
+								<td class="tg-8thm">상세주소</td> 
 								<td class="tg-v9i9" colspan="5"><input type="text"
 									id="addressDetail" name="addressDetail" style="width: 460px;"></td>
 							</tr>
@@ -533,10 +554,10 @@
 							<tr>
 								<td class="tg-8thm">국적</td>
 								<td class="tg-v9i9" colspan="5"><input type="text"
-									id="naitonalityCode" name="naitonalityCode"
-									style="width: 50px;"><a href="javascript:goPopup();"><img
+									id="COUNTRY_CODE" name="countryCODE" style="width: 50px;"><a
+									href="javascript:findPopup('COUNTRY');"><img
 										src="${contextPath}/resources/image/icons/icon_plus.png"></a>
-									<input type="text" id="naitonality" name="naitonality"
+									<input type="text" id="COUNTRY_NAME" name="countryNAME"
 									style="width: 380px;"></td>
 							</tr>
 							<tr>
@@ -550,7 +571,7 @@
 								<td class="tg-8thm">군번</td>
 								<td class="tg-v9i9"></td>
 								<td class="tg-v9i9"><input type="text" id="milNum"
-									name="milNum" style="width: 270px;"></td>
+									name="milNum" style="width: 265px;"></td>
 							</tr>
 							<tr>
 								<td class="tg-8thm">채용구분</td>
@@ -561,7 +582,7 @@
 								<td class="tg-8thm">기수</td>
 								<td class="tg-v9i9"></td>
 								<td class="tg-v9i9"><input type="text" id="hireNum"
-									name="hireNum" style="width: 270px;"></td>
+									name="hireNum" style="width: 265px;"></td>
 							</tr>
 						</table>
 					</form>
@@ -571,12 +592,109 @@
 			<div class="ib-tab-contents__item">
 				<div id='ib-container2'>
 
+					<table class="tg">
+						<tr>
+							<th class="tg-lu1x" rowspan="5"><i class="fa fa-id-card"
+									aria-hidden="true"></i><br>입<br>사<br>정<br>보
+							</th>
+							<td class="tg-iks7" rowspan="5"></td>
+							<td class="tg-8thm">입사일자</td>
+							<td class="tg-v9i9" rowspan="5"></td>
+							<td class="tg-v9i9"><input type="text" id="testDatepicker"></td>
+							<td class="tg-8thm">퇴사일자</td>
+							<td class="tg-v9i9" rowspan="5"></td>
+							<td class="tg-v9i9"><input type="date" id="" name="" style="width: 100%;"></td>
+						</tr>
+						<tr>
+							<td class="tg-8thm">재직구분</td>
+							<td class="tg-v9i9">select</td>
+							<td class="tg-8thm"></td>
+							<td class="tg-v9i9"></td>
+						</tr>
+						<tr>
+							<td class="tg-8thm">수습적용</td>
+							<td class="tg-v9i9">yn</td>
+							<td class="tg-8thm">수습만료일</td>
+							<td class="tg-v9i9">date</td>
+						</tr>
+						<tr>
+							<td class="tg-8thm">근속기간포함</td>
+							<td class="tg-v9i9">yn</td>
+							<td class="tg-8thm"></td>
+							<td class="tg-v9i9"></td>
+						</tr>
+						<tr>
+							<td class="tg-8thm">휴직기간</td>
+							<td class="tg-v9i9" colspan="2">date ~ date</td>
+							<td class="tg-v9i9"></td>
+						</tr>
+						<tr>
+							<td class="tg-iks7" colspan="8"></td>
+						</tr>
+						<tr>
+							<td class="tg-lu1x" rowspan="11"><i class="fa fa-id-card"
+									aria-hidden="true"></i><br>근<br>무<br>정<br>보
+							</td>
+							<td class="tg-iks7" rowspan="11"></td>
+							<td class="tg-8thm">부서</td>
+							<td class="tg-v9i9" rowspan="11"></td>
+							<td class="tg-v9i9" colspan="4">text</td>
+						</tr>
+						<tr>
+							<td class="tg-8thm">고용형태</td>
+							<td class="tg-v9i9" colspan="4">text</td>
+						</tr>
+						<tr>
+							<td class="tg-8thm">직종</td>
+							<td class="tg-v9i9" colspan="4">text</td>
+						</tr>
+						<tr>
+							<td class="tg-8thm">급여형태</td>
+							<td class="tg-v9i9" colspan="4">text</td>
+						</tr>
+						<tr>
+							<td class="tg-8thm">프로젝트</td>
+							<td class="tg-v9i9" colspan="4">text</td>
+						</tr>
+						<tr>
+							<td class="tg-8thm">근무조</td>
+							<td class="tg-v9i9" colspan="4">text</td>
+						</tr>
+						<tr>
+							<td class="tg-8thm">직급</td>
+							<td class="tg-v9i9" colspan="4">text</td>
+						</tr>
+						<tr>
+							<td class="tg-8thm">직책</td>
+							<td class="tg-v9i9" colspan="4">text</td>
+						</tr>
+						<tr>
+							<td class="tg-8thm">직무</td>
+							<td class="tg-v9i9" colspan="4">text</td>
+						</tr>
+						<tr>
+							<td class="tg-8thm">분류코드</td>
+							<td class="tg-v9i9" colspan="4">text</td>
+						</tr>
+						<tr>
+							<td class="tg-8thm">퇴직사유</td>
+							<td class="tg-v9i9" colspan="4">text</td>
+						</tr>
+					</table>
 
 
-</div>
+				</div>
 			</div>
 			<div class="ib-tab-contents__item">
-				<div id='ib-container3'>asdfggsaggr</div>
+				<div id='ib-container3'>
+					
+<form action="${contextPath}/hm/p0004/saveFile.do" method="post"
+						enctype="multipart/form-data">
+						<input type="file" name="file" /> <input type="submit"
+							value="서버전달" />
+					</form>
+
+				</div>
 			</div>
 		</div>
 	</div>

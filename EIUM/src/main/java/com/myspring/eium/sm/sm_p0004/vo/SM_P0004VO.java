@@ -14,7 +14,6 @@ public class SM_P0004VO {
 	private String employee_available_yn;
 	private String employee_password;
 	private String access_range;
-	private String authority_code;
 	private String user;
 
 	
@@ -28,7 +27,7 @@ public class SM_P0004VO {
 
 	public SM_P0004VO(String employee_code, String employee_name, String employee_id, String department_code,
 			String department_name, String employee_join_date, String employee_resignation_date,
-			String employee_available_yn, String employee_password, String access_range, String authority_code, String user,
+			String employee_available_yn, String employee_password, String access_range, String user,
 			String contact) {
 		super();
 		this.employee_code = employee_code;
@@ -41,7 +40,6 @@ public class SM_P0004VO {
 		this.employee_available_yn = employee_available_yn;
 		this.employee_password = employee_password;
 		this.access_range = access_range;
-		this.authority_code = authority_code;
 		this.user = user;
 		this.contact = contact;
 	}
@@ -56,16 +54,6 @@ public class SM_P0004VO {
 
 	public void setUser(String user) {
 		this.user = user;
-	}
-
-
-
-	public void setauthority_code(String authority_code) {
-		this.authority_code = authority_code;
-	}
-	
-	public String getauthority_code() {
-		return authority_code;
 	}
 
 

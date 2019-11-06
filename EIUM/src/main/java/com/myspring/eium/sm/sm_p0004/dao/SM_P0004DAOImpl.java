@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.myspring.eium.sm.sm_p0003.vo.SM_P0003VO;
 import com.myspring.eium.sm.sm_p0004.vo.SM_P0004VO;
 
 @Repository
@@ -46,6 +47,7 @@ public class SM_P0004DAOImpl implements SM_P0004DAO {
 		sqlSession.update("mapper.sm_p0004.insertData2", row);
 		sqlSession.update("mapper.sm_p0004.insertData3", row);
 		sqlSession.update("mapper.sm_p0004.insertData4", row);
+
 	}
 
 	@Override
@@ -53,7 +55,6 @@ public class SM_P0004DAOImpl implements SM_P0004DAO {
 		sqlSession.update("mapper.sm_p0004.updateData1", row);
 		sqlSession.update("mapper.sm_p0004.updateData2", row);
 		sqlSession.update("mapper.sm_p0004.updateData3", row);
-		sqlSession.update("mapper.sm_p0004.updateData4", row);
 
 	}
 
@@ -78,8 +79,15 @@ public class SM_P0004DAOImpl implements SM_P0004DAO {
 		sqlSession.update("mapper.sm_p0004.deleteData17", row);
 		sqlSession.update("mapper.sm_p0004.deleteData18", row);
 		sqlSession.update("mapper.sm_p0004.deleteData19", row);
-		sqlSession.update("mapper.sm_p0004.deleteData20", row);
 
+	}
+	
+
+	
+	@Override
+	public List<SM_P0004VO> searchDepartmentList(Map<String, Object> searchMap) throws DataAccessException {
+		List<SM_P0004VO> list = sqlSession.selectList("mapper.sm_p0004.searchDepartmentList", searchMap);
+		return list;
 	}
 
 }

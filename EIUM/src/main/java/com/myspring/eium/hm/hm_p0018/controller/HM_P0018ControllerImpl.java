@@ -34,6 +34,23 @@ public class HM_P0018ControllerImpl implements HM_P0018Controller{
 	
 	@Override
 	@RequestMapping(value = "hm/p0018/searchInit.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView tabInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("hm/hm_p0018/p0018_tab");
+	
+		return mav;
+	}
+	@Override
+	@RequestMapping(value = "hm/p0018/home2_p01.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView home2PopUPInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("hm/hm_p0018/p0018_home2_p01");
+	
+		return mav;
+	}
+	
+	@Override
+	@RequestMapping(value = "hm/p0018/searchInit2.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView EduInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		ModelAndView mav = new ModelAndView("hm/hm_p0018/p0018_home");
@@ -41,9 +58,38 @@ public class HM_P0018ControllerImpl implements HM_P0018Controller{
 		return mav;
 	} 
 	@Override
+	@RequestMapping(value = "hm/p0018/searchInit3.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView EdutargetInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("hm/hm_p0018/p0018_home2");
+	
+		return mav;
+	} 
+	
+	
+	@Override
 	@RequestMapping(value = "/hm/p0018/searchList.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>(); // 검색조건
+		Map<String, Object> resultMap = new HashMap<String, Object>(); // 조회결과
+		
+		searchMap.put("eduCode", request.getParameter("eduCode"));
+		System.out.println("컨트롤러######"+request.getParameter("eduCode"));
+		List<HM_P0018VO> data = hM_P0018Service.searchList(searchMap);
+        resultMap.put("Data", data);
+        
+        
+        return resultMap;
+	}
+	
+
+	
+	@Override
+	@RequestMapping(value = "/hm/p0018/home2Search_p01.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map home2search(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		Map<String, Object> searchMap = new HashMap<String, Object>(); // 검색조건
 		Map<String, Object> resultMap = new HashMap<String, Object>(); // 조회결과
@@ -56,6 +102,9 @@ public class HM_P0018ControllerImpl implements HM_P0018Controller{
         
         return resultMap;
 	}
+	
+	
+	
 	
 	@Override
 	@RequestMapping(value = "hm/p0018/saveData.do", method = { RequestMethod.GET, RequestMethod.POST })

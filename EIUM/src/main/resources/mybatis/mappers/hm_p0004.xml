@@ -15,8 +15,10 @@
 		<result property="sex" column="SEX" />
 		<result property="birth" column="BIRTH" />
 		<result property="contact" column="CONTACT" />
-		<result property="final_EDU" column="FINAL_EDU_CODE" />
+		<result property="final_EDU_CODE" column="FINAL_EDU_CODE" />
+		<result property="final_EDU_NAME" column="FINAL_EDU_NAME" />
 		<result property="picture" column="PICTURE" />
+		<result property="zip_CODE" column="ZIP_CODE" />
 		<result property="res_ADDRESS" column="RESIST_ADDRESS" />
 		<result property="res_ADDRESS_DETAIL"
 			column="RESIST_ADDRESS_DETAIL" />
@@ -25,12 +27,10 @@
 		<result property="card_NUM" column="SUCURITY_CARD_NUMBER" />
 		<result property="hh_YN" column="HOUSEHOLD_YN" />
 		<result property="hc_YN" column="HANDICAPPED_YN" />
-		<result property="nationality" column="COUNTRY_CODE" />
+		<result property="country_CODE" column="COUNTRY_CODE" />
+		<result property="country_NAME" column="COUNTRY_NAME" />
 		<result property="hire_TYPE" column="HIRE_TYPE" />
 		<result property="hire_NUM" column="HIRE_NUMBER" />
-		<result property="cur_ADDRESS" column="CURRENT_ADDRESS" />
-		<result property="cur_ADDRESS_DETAIL"
-			column="CURRENT_ADDRESS_DETAIL" />
 		<result property="mil_TYPE" column="MILITARY_TYPE" />
 		<result property="mil_NUM" column="MILITARY_NUMBER" />
 
@@ -39,7 +39,7 @@
 	<select id="searchList" resultMap="P0004resultVO"
 		parameterType="java.util.Map"> 
       <![CDATA[
-         select A.EMPLOYEE_CODE,A.EMPLOYEE_NAME,B.DEPARTMENT_NAME
+         select DISTINCT A.EMPLOYEE_CODE,A.EMPLOYEE_NAME,B.DEPARTMENT_NAME
          ,C.EMPLOYEE_NAME_EN
 		,C.EMPLOYEE_NAME_HN
 		,C.FOREIGNER_YN
@@ -48,6 +48,9 @@
 		,C.BIRTH
 		,C.CONTACT
 		,C.FINAL_EDU_CODE
+		,C.FINAL_EDU_NAME
+		
+		,C.ZIP_CODE
 		,C.RESIST_ADDRESS
 		,C.RESIST_ADDRESS_DETAIL
 		,C.RESIST_ADDRESS_EN
@@ -56,10 +59,9 @@
 		,C.HOUSEHOLD_YN
 		,C.HANDICAPPED_YN
 		,C.COUNTRY_CODE
+		,C.COUNTRY_NAME
 		,C.HIRE_TYPE
 		,C.HIRE_NUMBER
-		,C.CURRENT_ADDRESS
-		,C.CURRENT_ADDRESS_DETAIL
 		,C.MILITARY_TYPE
 		,C.MILITARY_NUMBER
          
@@ -68,6 +70,9 @@
          WHERE A.DEPARTMENT_CODE = B.DEPARTMENT_CODE
          AND A.EMPLOYEE_CODE = C.EMPLOYEE_CODE
       ]]>
+		<if test="condition != '' ">
+			AND A.EMPLOYEE_CODE like '%'|| #{condition} || '%'
+		</if>
 		<choose>
 			<when test="command == 'doWork'">
 				AND A.EMPLOYEE_JOIN_DATE IS NOT null
@@ -80,6 +85,16 @@
 				NOT null
 			</when>
 		</choose>
+
+	</select>
+
+	<select id="searchList2" resultType="hashmap"
+		parameterType="java.util.Map">
+
+		select *
+
+		from ${command}
+
 	</select>
 
 	<update id="updateData" parameterType="java.util.Map">
@@ -92,23 +107,30 @@
 		,SEX= #{sex}
 		,BIRTH= #{birth}
 		,CONTACT= #{contact}
-		,FINAL_EDU_CODE= #{final_EDU}
-		,PICTURE= #{picture}
+		,FINAL_EDU_CODE=
+		#{final_EDU_CODE}
+		,FINAL_EDU_NAME= #{final_EDU_NAME}
+
+		,ZIP_CODE=
+		#{zip_CODE}
 		,RESIST_ADDRESS= #{res_ADDRESS}
-		,RESIST_ADDRESS_DETAIL= #{res_ADDRESS_DETAIL}
+		,RESIST_ADDRESS_DETAIL=
+		#{res_ADDRESS_DETAIL}
 		,RESIST_ADDRESS_EN= #{res_ADDRESS_EN}
-		,EMAIL= #{email}
+		,EMAIL=
+		#{email}
 		,SUCURITY_CARD_NUMBER= #{card_NUM}
 		,HOUSEHOLD_YN= #{hh_YN}
 		,HANDICAPPED_YN= #{hc_YN}
-		,COUNTRY_CODE= #{nationality}
+		,COUNTRY_CODE= #{country_CODE}
+		,COUNTRY_NAME=
+		#{country_NAME}
 		,HIRE_TYPE= #{hire_TYPE}
 		,HIRE_NUMBER= #{hire_NUM}
-		,CURRENT_ADDRESS= #{cur_ADDRESS}
-		,CURRENT_ADDRESS_DETAIL= #{cur_ADDRESS_DETAIL}
 		,MILITARY_TYPE= #{mil_TYPE}
 		,MILITARY_NUMBER= #{mil_NUM}
-		where TRIM(EMPLOYEE_CODE) = #{employee_CODE}
+		where
+		TRIM(EMPLOYEE_CODE) = #{emp_CODE}
 	</update>
 
 	<insert id="insertData" parameterType="java.util.Map">
@@ -123,7 +145,9 @@
 		,BIRTH
 		,CONTACT
 		,FINAL_EDU_CODE
-		,PICTURE
+		,FINAL_EDU_NAME
+
+		,ZIP_CODE
 		,RESIST_ADDRESS
 		,RESIST_ADDRESS_DETAIL
 		,RESIST_ADDRESS_EN
@@ -132,12 +156,12 @@
 		,HOUSEHOLD_YN
 		,HANDICAPPED_YN
 		,COUNTRY_CODE
+		,COUNTRY_NAME
 		,HIRE_TYPE
 		,HIRE_NUMBER
-		,CURRENT_ADDRESS
-		,CURRENT_ADDRESS_DETAIL
 		,MILITARY_TYPE
 		MILITARY_NUMBER)
+
 		values(
 		#{employee_CODE}
 		,#{emp_NAME_EN}
@@ -147,8 +171,10 @@
 		,#{sex}
 		,#{birth}
 		,#{contact}
-		,#{final_EDU}
-		,#{picture}
+		,#{final_EDU_CODE}
+		,#{final_EDU_NAME}
+
+		,#{zip_CODE}
 		,#{res_ADDRESS}
 		,#{res_ADDRESS_DETAIL}
 		,#{res_ADDRESS_EN}
@@ -156,18 +182,19 @@
 		,#{card_NUM}
 		,#{hh_YN}
 		,#{hc_YN}
-		,#{nationality}
+		,#{country_CODE}
+		,#{country_NAME}
 		,#{hire_TYPE}
 		,#{hire_NUM}
-		,#{cur_ADDRESS}
-		,#{cur_ADDRESS_DETAIL}
 		,#{mil_TYPE}
 		,#{mil_NUM})
-	</insert>	
-	
+	</insert>
+
+
+
 	<delete id="deleteData" parameterType="java.util.Map">
 		delete EMPLOYEE_HR_INFO
-		where TRIM(EMPLOYEE_CODE) = #{employee_CODE}
+		where TRIM(EMPLOYEE_CODE) = #{emp_CODE}
 	</delete>
 
 </mapper>

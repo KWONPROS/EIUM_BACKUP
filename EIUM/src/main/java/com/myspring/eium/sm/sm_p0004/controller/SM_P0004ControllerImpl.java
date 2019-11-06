@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.eium.login.vo.LoginVO;
+import com.myspring.eium.sm.sm_p0003.vo.SM_P0003VO;
 import com.myspring.eium.sm.sm_p0004.service.SM_P0004ServiceImpl;
 import com.myspring.eium.sm.sm_p0004.vo.SM_P0004VO;
 //import com.myspring.pro27.login.vo.LoginVO;
@@ -99,6 +100,52 @@ public class SM_P0004ControllerImpl implements SM_P0004Controller{
 		}
 		
 		resultMap.put("Result", result);         
+        return resultMap;
+	}
+	
+	@Override
+	@RequestMapping(value = "sm/p0004/DepartList.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map searchDepartmentList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>(); // �˻�����
+		Map<String, Object> resultMap = new HashMap<String, Object>(); // ��ȸ���
+		
+		// �˻����Ǽ���
+		searchMap.put("department_code", request.getParameter("department_code"));
+		
+		//������ ��ȸ
+		List<SM_P0004VO> data = p0004ServiceImpl.searchDepartmentList(searchMap);
+        resultMap.put("Data", data);
+       
+        return resultMap;
+	}
+	
+	
+	@Override
+	@RequestMapping(value = "sm/p0004/department_Search.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView departmentSerch_init(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("/sm/sm_p0004/p0004_departmentSearch");
+	
+		return mav;
+	} 
+
+	
+	@Override
+	@RequestMapping(value = "sm/p0004/department_search1.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map departmentSearch(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>(); // �˻�����
+		Map<String, Object> resultMap = new HashMap<String, Object>(); // ��ȸ���
+		
+		searchMap.put("department_code", request.getParameter("department_code"));
+		System.out.println(request.getParameter("department_code"));
+		//������ ��ȸ
+		List<SM_P0004VO> data = p0004ServiceImpl.searchDepartmentList(searchMap);
+        resultMap.put("Data", data);
+       
         return resultMap;
 	}
 	
