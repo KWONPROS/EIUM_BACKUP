@@ -39,7 +39,7 @@
 	<select id="searchList" resultMap="P0004resultVO"
 		parameterType="java.util.Map"> 
       <![CDATA[
-         select DISTINCT A.EMPLOYEE_CODE,A.EMPLOYEE_NAME,B.DEPARTMENT_NAME
+        select DISTINCT A.EMPLOYEE_CODE,A.EMPLOYEE_NAME,B.DEPARTMENT_NAME
          ,C.EMPLOYEE_NAME_EN
 		,C.EMPLOYEE_NAME_HN
 		,C.FOREIGNER_YN
@@ -48,7 +48,7 @@
 		,C.BIRTH
 		,C.CONTACT
 		,C.FINAL_EDU_CODE
-		,C.FINAL_EDU_NAME
+		,E.FINAL_EDU_NAME
 		
 		,C.ZIP_CODE
 		,C.RESIST_ADDRESS
@@ -59,29 +59,31 @@
 		,C.HOUSEHOLD_YN
 		,C.HANDICAPPED_YN
 		,C.COUNTRY_CODE
-		,C.COUNTRY_NAME
+		,F.COUNTRY_NAME
 		,C.HIRE_TYPE
 		,C.HIRE_NUMBER
 		,C.MILITARY_TYPE
 		,C.MILITARY_NUMBER
          
-         
-         from EMPLOYEE A, DEPARTMENT B,EMPLOYEE_HR_INFO C
-         WHERE A.DEPARTMENT_CODE = B.DEPARTMENT_CODE
+         from EMPLOYEE A, DEPARTMENT B,EMPLOYEE_HR_INFO C, EMPLOYEE_WORK D, FINAL_EDU E, COUNTRY F
+         WHERE D.DEPARTMENT_CODE = B.DEPARTMENT_CODE
          AND A.EMPLOYEE_CODE = C.EMPLOYEE_CODE
+         AND A.EMPLOYEE_CODE = D.EMPLOYEE_CODE
+         AND E.FINAL_EDU_CODE(+) = C.FINAL_EDU_CODE
+         AND F.COUNTRY_CODE(+) = C.COUNTRY_CODE
       ]]>
-		<if test="condition != '' ">
+		<if test="condition != '' and condtion != null">
 			AND A.EMPLOYEE_CODE like '%'|| #{condition} || '%'
 		</if>
 		<choose>
 			<when test="command == 'doWork'">
-				AND A.EMPLOYEE_JOIN_DATE IS NOT null
+				AND D.EMPLOYEE_JOIN_DATE IS NOT null
 				AND
-				A.EMPLOYEE_RESIGNATION_DATE IS null
+				D.EMPLOYEE_RESIGNATION_DATE IS null
 			</when>
 			<when test="command == 'noWork'">
-				AND A.EMPLOYEE_JOIN_DATE IS NOT null
-				AND A.EMPLOYEE_RESIGNATION_DATE IS
+				AND D.EMPLOYEE_JOIN_DATE IS NOT null
+				AND D.EMPLOYEE_RESIGNATION_DATE IS
 				NOT null
 			</when>
 		</choose>
@@ -91,8 +93,9 @@
 	<select id="searchList2" resultType="hashmap"
 		parameterType="java.util.Map">
 
-		select *
-
+		select 
+		${command}_CODE,
+		${command}_NAME
 		from ${command}
 
 	</select>
@@ -109,7 +112,6 @@
 		,CONTACT= #{contact}
 		,FINAL_EDU_CODE=
 		#{final_EDU_CODE}
-		,FINAL_EDU_NAME= #{final_EDU_NAME}
 
 		,ZIP_CODE=
 		#{zip_CODE}
@@ -123,8 +125,6 @@
 		,HOUSEHOLD_YN= #{hh_YN}
 		,HANDICAPPED_YN= #{hc_YN}
 		,COUNTRY_CODE= #{country_CODE}
-		,COUNTRY_NAME=
-		#{country_NAME}
 		,HIRE_TYPE= #{hire_TYPE}
 		,HIRE_NUMBER= #{hire_NUM}
 		,MILITARY_TYPE= #{mil_TYPE}
@@ -145,7 +145,6 @@
 		,BIRTH
 		,CONTACT
 		,FINAL_EDU_CODE
-		,FINAL_EDU_NAME
 
 		,ZIP_CODE
 		,RESIST_ADDRESS
@@ -172,7 +171,6 @@
 		,#{birth}
 		,#{contact}
 		,#{final_EDU_CODE}
-		,#{final_EDU_NAME}
 
 		,#{zip_CODE}
 		,#{res_ADDRESS}
@@ -183,7 +181,6 @@
 		,#{hh_YN}
 		,#{hc_YN}
 		,#{country_CODE}
-		,#{country_NAME}
 		,#{hire_TYPE}
 		,#{hire_NUM}
 		,#{mil_TYPE}

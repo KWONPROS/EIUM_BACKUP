@@ -11,6 +11,9 @@
 <script src="${contextPath}/resources/ibsheet/ibsheetinfo.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibsheet.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibleaders.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
 <script language="javascript">
 
    /*Sheet 기본 설정 */
@@ -45,6 +48,21 @@
       mySheet.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
       mySheet.SetSheetHeight(600);
       mySheet.DoSearch("${contextPath}/sm/p0002/searchList.do");
+      
+    //달력 API
+		$(function() {
+		    $( ".Datepicker" ).datepicker({
+		    	dateFormat: "yy-mm-dd",
+		    	showOn: "both", 
+		        buttonImage: "${contextPath}/resources/image/icons/icon_calendar.png", 
+		        buttonImageOnly: true , 
+		         dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+		         dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], 
+		         monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+		         monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+		  });
+		});
+      
    }
    
    /*Sheet 각종 처리*/
@@ -193,7 +211,9 @@
    
 </script>
 <style type="text/css">
-
+.ui-datepicker{ font-size: 12px; width: 160px; }
+.ui-datepicker select.ui-datepicker-month{ width:30%; font-size: 11px; }
+.ui-datepicker select.ui-datepicker-year{ width:40%; font-size: 11px; }
  .title {
     width:100%;
    color: #2C3E50;
@@ -271,8 +291,10 @@ border : none;
 padding-left: 10px;
 width: 80%;
 }
-.tg img{
-padding: 0px 5px 0px 5px;
+
+.tg img {
+	vertical-align: middle;
+	padding: 0px 5px 0px 2px;
 }
 
 .tg  {border-collapse:collapse;border-spacing:0;width:70%; position: relative; top:20px;left:20px;}
@@ -360,11 +382,11 @@ padding: 0px 5px 0px 5px;
   </tr>
   <tr>
     <td class="tg-8thm">개업연월일</td>
-    <td class="tg-v9i9"><input type="date" name="site_OPENBUSINESS_DATE" ></td>
+    <td class="tg-v9i9"><input type="text" class="Datepicker" name="site_OPENBUSINESS_DATE" ></td>
   </tr>
   <tr>
     <td class="tg-8thm">폐업연월일</td>
-    <td class="tg-v9i9"><input type="date" name="site_CLOSEBUSINESS_DATE" ></td>
+    <td class="tg-v9i9"><input type="text" class="Datepicker" name="site_CLOSEBUSINESS_DATE" ></td>
   </tr>
   <tr>
     <td class="tg-8thm">본점여부</td>
