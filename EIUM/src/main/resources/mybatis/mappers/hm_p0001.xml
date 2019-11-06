@@ -27,9 +27,9 @@
 	
 	<select id="searchList_01" resultMap="P0001_01resultVO">
 	<![CDATA[
-		select PAY_GRADE, SALARY
-		from PAY_GRADE_TABLE
-		where TRIM(position_CODE) = #{P_POSITION_CODE, jdbcType=VARCHAR}
+		select PA.PAY_GRADE, PA.SALARY
+		from PAY_GRADE_TABLE PA, POSITION PO
+		where PO.position_CODE = PA.position_CODE AND TRIM(PA.position_CODE) = #{P_POSITION_CODE, jdbcType=VARCHAR}
 	]]>
 	</select>
 	
@@ -40,7 +40,7 @@
 		set  
 		     SALARY = #{salary}
 		   
-		where TRIM(POSITION_CODE) = #{p_position_CODE}
+		where TRIM(PAY_GRADE) = #{pay_GRADE} AND TRIM(POSITION_CODE) = #{p_position_CODE}
 	</update>	
 	
  	<insert id="insertData" parameterType="java.util.Map">

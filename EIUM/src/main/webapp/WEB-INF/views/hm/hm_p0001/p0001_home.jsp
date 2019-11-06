@@ -165,7 +165,7 @@ left: 40px;
 .right{
  position: absolute;
 top: 130px;
-left: 300px; 
+left: 330px; 
 }
 .bottom{
 position: absolute;
@@ -196,7 +196,7 @@ left: 40px;
 <div class="title"> 
 <header> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 기초환경설정 : 호봉테이블등록</header>
 </div>
-	<div class="left"><script>createIBSheet("mySheet", "100%", "100%");</script></div>
+	<div class="left"><script>createIBSheet("mySheet", "1000px", "300px");</script></div>
 	<div class="right"><script>createIBSheet("mySheet2", "1500px", "300px");</script></div>
 	<div class="bottom"><script>createIBSheet("mySheet3", "1500px", "300px");</script></div>
 </body>
