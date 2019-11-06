@@ -70,7 +70,7 @@
          WHERE A.DEPARTMENT_CODE = B.DEPARTMENT_CODE
          AND A.EMPLOYEE_CODE = C.EMPLOYEE_CODE
       ]]>
-		<if test="condition != null">
+		<if test="condition != '' ">
 			AND A.EMPLOYEE_CODE like '%'|| #{condition} || '%'
 		</if>
 		<choose>
