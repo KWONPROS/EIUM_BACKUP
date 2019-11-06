@@ -57,6 +57,23 @@ public class HM_P0007ControllerImpl implements HM_P0007Controller {
         return resultMap;
 	}
 	
+	@Override
+	@RequestMapping(value = "/hm/p0007/searchList2.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map searchList2(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+					//testetstettt
+		
+		
+		List<HM_P0007VO> data = hM_P0007Service.searchList(searchMap);
+
+        resultMap.put("Data", data);
+    	System.out.println("resultMap::::"+resultMap);
+        return resultMap;
+	}
+	
 
 	@Override
 	@RequestMapping(value = "/hm/p0007/saveData.do", method = { RequestMethod.GET, RequestMethod.POST })

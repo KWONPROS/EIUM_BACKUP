@@ -13,6 +13,16 @@
 
 <script type="text/javascript">
 var pageheightoffset = 200; //시트높이 계산용
+function setDepartment(){
+	
+	 department_code=document.getElementById("Pdepartment_code").value;
+	 department_name=document.getElementById("Pdepartment_name").value;
+	mySheet.SetCellText(row,col,department_code);
+	mySheet.SetCellText(row,col+1,department_name);
+
+
+	
+};
 
 //sheet 기본설정
 function LoadPage(){
@@ -27,19 +37,15 @@ function LoadPage(){
 	   {Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck"},
 	   {Header:"사원코드",SaveName:"employee_code",Type:"Text",width:100, UpdateEdit:"0"},
 	   {Header:"사원명",SaveName:"employee_name",Type:"Text",width:100},
-	   //{Header:"부서코드", Type:"Combo", SaveName:"department_code", Edit: 1,Width:100, Align: "Center", ComboText:"Clerk|Assist Manager|Manager|General Manager|Director", ComboCode:"1|2|3|4|5"},
-	   {Header:"부서코드", Type:"Text", SaveName:"department_code", Edit: 1,Width:100, Align: "Center"},
-	   {Header:"부서명",SaveName:"department_name",type:"Text",width:100},
+	   {Header:"부서코드", Type:"Text", SaveName:"department_code",Width:100, Align: "Center", InsertEdit:"0", UpdateEdit:"0"},
+	   {Header:"부서명",SaveName:"department_name",type:"Text",width:100, InsertEdit:"0", UpdateEdit:"0"},
 	   {Header:"입사일",SaveName:"employee_join_date",type:"Text",width:100},
 	   {Header:"퇴사일",SaveName:"employee_resignation_date",type:"Text",width:100},
 	   {Header:"사용자여부",SaveName:"employee_available_yn",type:"Text",width:100},
 	   {Header:"아이디",SaveName:"employee_id",type:"Text",width:100, UpdateEdit:"0"},
 	   {Header:"암호",SaveName:"employee_password",type:"Text",width:100},
-	   //{Header:"조회권한", Type:"Combo", SaveName:"auth_code", Edit: 1,Width:100, Align: "Center", ComboText:"Clerk|Assist Manager|Manager|General Manager|Director", ComboCode:"1|2|3|4|5"},
-	   {Header:"조회권한", Type:"Text", SaveName:"authority_code", Edit: 1,Width:100, Align: "Center"},
 	   {Header:"비상연락망",SaveName:"contact",Type:"Text",Width:100}
-/* 	   {Header:"접근자",SaveName:"user",Type:"Text", Hidden:"ture", Width:100},
- */	      ];
+	      ];
    
   
    IBS_InitSheet(mySheet,initSheet);
@@ -49,11 +55,19 @@ function LoadPage(){
 
 }
 
-/* function mySheet_OnClick(Row){
-    x = "x=" + mySheet.GetCellValue(Row, 2);
-   mySheet2.DoSearch("${contextPath}/sm/p0004_01/search.do", x);
+function mySheet_OnDblClick(Row,Col,Value){
+	row=Row;
+	col=Col;
+	
+	if(Col=="4"){
+		
+	window.open("${contextPath}/sm/p0004/department_Search.do", "a", "width=500, height=700, left=100, top=50"); 
+	}
+	if(Col=="5"){
+		
+		window.open("${contextPath}/sm/p0004/department_Search.do", "a", "width=500, height=700, left=100, top=50"); 
+		}
 }
- */  
 function doAction(sAction){
    switch(sAction){
    case "search":
@@ -66,18 +80,62 @@ function doAction(sAction){
      mySheet.DoSave("${contextPath}/sm/p0004/saveData.do");
       var tempStr = mySheet.GetSaveString();
       break;
-      
+           
    case "insert":
       var row = mySheet.DataInsert();
       break;
    
    }
+}
+   
+   
   
    
-}
+
+
+function selectDepart(){
+	
+
+	$.ajax({
+		
+	    url:"${contextPath}/sm/p0004/DepartList.do",//목록을 조회 할 url
+
+
+	    type:"POST",
+
+	    dataType:"JSON",
+
+	    success:function(data){    
+
+	      for(var i = 0; i < data['Data'].length ; i++){
+		
+	    
+	        var option = "<option value='" + data['Data'][i].department_code + "'>" +data['Data'][i].department_code+ "</option>";        
+
+	        //대상 콤보박스에 추가
+
+	        $('#DepartList').append(option);
+
+	      }
+
+	    },
+
+	    error:function(jqxhr, status, error){
+
+	      alert("에러");
+
+	    }
+
+	  });
+
+	};
+
    </script>
+  
 </head>
 <body onload="LoadPage()">
+
+
    <form name="frm">
    
    <button type="button" onclick="doAction('print')">인쇄</button>
@@ -112,16 +170,20 @@ function doAction(sAction){
        <input type="text" placeholder="내용을 입력해주세요.">  -->
 
 <div style="position:absolute; top:100px; left:20px;">
-<script type="text/javascript">
-createIBSheet("mySheet", "1500px", "600px");
+<script>
+       createIBSheet("mySheet", "1500px", "600px");
 </script>
 </div>
 
-<div style="position:absolute; top:100px; left:400px;">
+<!-- <div style="position:absolute; top:100px; left:400px;">
 <script>
 createIBSheet("mySheet2", "1500px", "600px");
 </script>
-</div>
+</div> -->
+
+	<input type="hidden" id="Pdepartment_code">
+	<input type="hidden" id="Pdepartment_name">
 
    </form>
 </body>
+</html>

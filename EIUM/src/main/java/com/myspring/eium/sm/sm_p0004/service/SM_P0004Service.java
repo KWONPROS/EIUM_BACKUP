@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
+import com.myspring.eium.sm.sm_p0003.vo.SM_P0003VO;
 import com.myspring.eium.sm.sm_p0004.vo.SM_P0004VO;
 
 public interface SM_P0004Service {
@@ -14,4 +15,5 @@ public interface SM_P0004Service {
 	 
 	 public List<SM_P0004VO> searchList(Map<String, Object> searchMap) throws DataAccessException;
      public void saveData(Map<String, String[]> dataMap, String user)  throws DataAccessException;
+     public List<SM_P0004VO> searchDepartmentList(Map<String, Object> searchMap) throws DataAccessException;
 }

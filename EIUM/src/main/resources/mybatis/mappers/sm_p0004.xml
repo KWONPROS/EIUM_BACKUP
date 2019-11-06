@@ -15,22 +15,28 @@
         <result property="employee_available_yn" column="employee_available_yn" />
         <result property="employee_id" column="employee_password" />
         <result property="employee_password" column="employee_password" />
-        <result property="authority_code" column="authority_code" />
         <result property="contact" column="contact" />
         <result property="int_user_id" column="int_user_id" />
         <result property="int_date" column="int_date" />
         <result property="upt_user_id" column="upt_user_id" />
         <result property="upt_date" column="upt_date" />
 	</resultMap> 
+	
+		<select id="searchDepartmentList" resultMap="p0004Result" parameterType="java.util.List">
+	  <![CDATA[
+    select department_code, department_name
+    FROM department
+	
+      ]]>
+	</select>
 
 	<select id="selectAllp0004List" resultMap="p0004Result">
       <![CDATA[
-         select e.employee_code, e.employee_name, e.department_code, d.department_name, e.employee_join_date, e.employee_resignation_date, e.employee_available_yn, ac.employee_id , ac.employee_password, ua.authority_code, ei.contact
-         from employee e, account ac, department d, employee_hr_info ei, user_auth ua
+         select e.employee_code, e.employee_name, e.department_code, d.department_name, e.employee_join_date, e.employee_resignation_date, e.employee_available_yn, ac.employee_id , ac.employee_password, ei.contact
+         from employee e, account ac, department d, employee_hr_info ei
          where e.department_code = d.department_code
          and e.employee_code = ei.employee_code
          and e.employee_code = ac.employee_code
-         and ac.employee_id = ua.employee_id
       ]]>
 	</select>
 	
@@ -49,15 +55,12 @@
 		 	<insert id="insertData3" parameterType="java.util.Map">
 
 		insert into employee_hr_info(employee_code, contact, int_user_id, int_date) values(#{employee_code}, #{contact}, #{user}, sysdate)	
-			
 	</insert>
-	
-	
 		 	<insert id="insertData4" parameterType="java.util.Map">
 
-		insert into user_auth(employee_code, authority_code, int_user_id, int_date) values(#{employee_code}, #{authority_code}, #{user}, sysdate)	
-			
-	</insert>
+		insert into employee_salary(employee_code, int_user_id, int_date) values(#{employee_code}, #{user}, sysdate)	
+	</insert>			
+
 <!--	insert into employee_hr_info(employee_code, contact) values(#{employee_code}, #{contact})	
 	 insert into department(deplartment_code, department_name) values(#{department_code}, #{department_name}),
 		insert into account(employee_id, employee_password, employee_code) values(#{employee_code}, #{employee_password}, #{employee_code}), -->
@@ -91,13 +94,6 @@
 		where employee_code = #{employee_code, jdbcType=VARCHAR}
 	</update>
 	
-	<update id="updateData4" parameterType="java.util.Map">
-		update user_auth
-		set authority_code = #{authority_code, jdbcType=VARCHAR}
-			, upt_user_id = #{user, jdbcType=VARCHAR}
-			, upt_date = sysdate
-		where employee_id = #{employee_id, jdbcType=VARCHAR}
-	</update>
 	
 	<delete id="deleteData1" parameterType="java.util.Map">
 		delete employee
@@ -114,134 +110,84 @@
 		where employee_code = #{employee_code}
 	</delete>
 	
-		<delete id="deleteData4" parameterType="java.util.Map">
-		delete user_auth
-		where employee_id = #{employee_id}
-	</delete>
 	
-	<delete id="deleteData5" parameterType="java.util.Map">
+	<delete id="deleteData4" parameterType="java.util.Map">
 		delete employee_business_trip
 		where employee_code = #{employee_code}
 	</delete>
 	
-	<delete id="deleteData6" parameterType="java.util.Map">
+	<delete id="deleteData5" parameterType="java.util.Map">
 		delete employee_education
 		where employee_code = #{employee_code}
 	</delete>
 	
-	<delete id="deleteData7" parameterType="java.util.Map">
+	<delete id="deleteData6" parameterType="java.util.Map">
 		delete employee_career
 		where employee_code = #{employee_code}
 	</delete>
 	
-	<delete id="deleteData8" parameterType="java.util.Map">
+	<delete id="deleteData7" parameterType="java.util.Map">
 		delete employee_salary
 		where employee_code = #{employee_code}
 	</delete>
 	
-	<delete id="deleteData9" parameterType="java.util.Map">
+	<delete id="deleteData8" parameterType="java.util.Map">
 		delete employee_license
 		where employee_code = #{employee_code}
 	</delete>
 	
-	<delete id="deleteData10" parameterType="java.util.Map">
+	<delete id="deleteData9" parameterType="java.util.Map">
 		delete employee_language
 		where employee_code = #{employee_code}
 	</delete>
 	
-		<delete id="deleteData11" parameterType="java.util.Map">
+		<delete id="deleteData10" parameterType="java.util.Map">
 		delete hr_appoint
 		where employee_code = #{employee_code}
 	</delete>
 	
-		<delete id="deleteData12" parameterType="java.util.Map">
+		<delete id="deleteData11" parameterType="java.util.Map">
 		delete hr_assessment
 		where employee_code = #{employee_code}
 	</delete>
 	
-		<delete id="deleteData13" parameterType="java.util.Map">
+		<delete id="deleteData12" parameterType="java.util.Map">
 		delete hr_rnp
 		where employee_code = #{employee_code}
 	</delete>
 	
-		<delete id="deleteData14" parameterType="java.util.Map">
+		<delete id="deleteData13" parameterType="java.util.Map">
 		delete vacation
 		where employee_code = #{employee_code}
 	</delete>
 	
-	<delete id="deleteData15" parameterType="java.util.Map">
+	<delete id="deleteData14" parameterType="java.util.Map">
 		delete employee_training_assessment
 		where employee_code = #{employee_code}
 	</delete>
 	
-	<delete id="deleteData16" parameterType="java.util.Map">
+	<delete id="deleteData15" parameterType="java.util.Map">
 		delete employee_training_list
 		where employee_code = #{employee_code}
 	</delete>
 	
-	<delete id="deleteData17" parameterType="java.util.Map">
+	<delete id="deleteData16" parameterType="java.util.Map">
 		delete salary_deposit
 		where employee_code = #{employee_code}
 	</delete>
 	
-	<delete id="deleteData18" parameterType="java.util.Map">
+	<delete id="deleteData17" parameterType="java.util.Map">
 		delete payment_receipt
 		where employee_code = #{employee_code}
 	</delete>
 	
-	<delete id="deleteData19" parameterType="java.util.Map">
+	<delete id="deleteData18" parameterType="java.util.Map">
 		delete working_status
 		where employee_code = #{employee_code}
 	</delete>
 	
-	<delete id="deleteData20" parameterType="java.util.Map">
+	<delete id="deleteData19" parameterType="java.util.Map">
 		delete total_working_status
 		where employee_code = #{employee_code}
-	</delete>
-	
-<!--	
-	<update id="updateData" parameterType="java.util.Map">
-		update customers
-		set cust_name = #{cust_name, jdbcType=VARCHAR}
-			, cust_address = #{cust_address, jdbcType=VARCHAR}
-			, cust_city = #{cust_city, jdbcType=VARCHAR}
-			, cust_state = #{cust_state, jdbcType=VARCHAR}
-			, cust_zip = #{cust_zip, jdbcType=VARCHAR}
-			, cust_country = #{cust_country, jdbcType=VARCHAR}
-			, cust_contact = #{cust_contact, jdbcType=VARCHAR}
-			, cust_email = #{cust_email, jdbcType=VARCHAR}
-		where TRIM(cust_id) = #{cust_id, jdbcType=VARCHAR}
-	</update>	 -->
-	
-	
-	<!-- <resultMap id="p0004_01Result" type="p0004_01VO">
-		<result property="ACCESS_GRANT" column="ACCESS_GRANT" />
-		<result property="MENU_NAME" column="MENU_NAME" />
-        <result property="ACCESS_RANGE" column="ACCESS_RANGE" />
-        <result property="ACCESS_INSERT" column="ACCESS_INSERT" />
-        <result property="ACCESS_UPDATE" column="ACCESS_UPDATE" />
-        <result property="ACCESS_DELETE" column="ACCESS_DELETE" />
-        <result property="ACCESS_PRINT" column="ACCESS_PRINT" />
-	</resultMap> 
-
-	<select id="selectAllp0004_01List" resultMap="p0004_01Result">
-      <![CDATA[
-         select ACCESS_GRANT, MENU_NAME, ACCESS_RANGE, ACCESS_INSERT, ACCESS_UPDATE, ACCESS_DELETE, ACCESS_PRINT 
-         from MENU_BY_AUTHORITY where TRIM(AUTHORITY_CODE) = #{x, jdbcType=VARCHAR}
-      ]]>
-	</select>
-
-	<update id="updateData_01" parameterType="java.util.Map">
-		update MENU_BY_AUTHORITY
-		set ACCESS_GRANT = #{access_GRANT, jdbcType=VARCHAR}
-		    , ACCESS_RANGE = #{access_RANGE, jdbcType=VARCHAR}
-			, ACCESS_INSERT = #{access_INSERT, jdbcType=VARCHAR}
-			, ACCESS_UPDATE = #{access_UPDATE, jdbcType=VARCHAR}
-			, ACCESS_DELETE = #{access_DELETE, jdbcType=VARCHAR}
-			, ACCESS_PRINT = #{access_PRINT, jdbcType=VARCHAR}
-		where TRIM(AUTHORITY_CODE) = #{x, jdbcType=VARCHAR}
-	</update> -->
-	
-	
-	
+	</delete>	
 </mapper>
