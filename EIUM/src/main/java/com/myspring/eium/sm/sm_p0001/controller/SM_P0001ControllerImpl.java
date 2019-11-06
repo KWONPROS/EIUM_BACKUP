@@ -46,9 +46,6 @@ public class SM_P0001ControllerImpl implements SM_P0001Controller {
 		Map<String, Object> searchMap = new HashMap<String, Object>(); // 검색조건
 		Map<String, Object> resultMap = new HashMap<String, Object>(); // 조회결과
 		
-		// 검색조건설정
-		searchMap.put("p_company_CODE", request.getParameter("p_company_CODE"));
-		
 		//데이터 조회
 		List<SM_P0001VO> data = sM_P0001Service.searchList(searchMap);
         resultMap.put("Data", data);

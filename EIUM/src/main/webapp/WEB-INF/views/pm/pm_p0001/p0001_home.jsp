@@ -12,6 +12,11 @@
 <script src="${contextPath}/resources/ibsheet/ibsheetinfo.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibsheet.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibleaders.js"></script>
+
+ <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/jquery.mtz.monthpicker.js"></script>
 <script language="javascript">
 
 	/*Sheet 기본 설정 */
@@ -54,6 +59,24 @@
 		  
 		mySheet2.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
 		mySheet2.SetSheetHeight(350);
+		
+		/* MonthPicker 옵션 */
+	    options = {
+	        pattern: 'yyyy-mm', // Default is 'mm/yyyy' and separator char is not mandatory
+	        selectedYear: 2019,
+	        startYear: 2008,
+	        finalYear: 2019,
+	        buttonImage: "${contextPath}/resources/image/icons/icon_calendar.png", 
+	        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']
+	    };
+	     
+	    /* MonthPicker Set */
+	    $('#monthpicker').monthpicker(options);
+	     
+	    /* 버튼 클릭시 MonthPicker Show */
+	    $('#btn_monthpicker').bind('click', function () {
+	        $('#monthpicker').monthpicker('show');
+	    });
 	}
 
 	/*Sheet 각종 처리*/
@@ -171,7 +194,7 @@
 
 .left input{
 	height: 22px;
-	width: 40px;
+	width: 100px;
 	border-radius: 3px;
 	border: none;
 	padding-left:5px;
@@ -202,10 +225,11 @@
 	display: inline;
 	float: right;
 }
-<% 
-java.util.Calendar date = java.util.Calendar.getInstance();
-%>
-<%int year=date.get(date.YEAR); %>
+
+.ui-datepicker table{ font-size: 12px; }
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button{ width:40%; font-size: 14px; }
+img {vertical-align: middle; padding: 0px 5px 0px 2px; }
+
 </style>
 </head>
 <body onload="LoadPage()" >
@@ -227,21 +251,11 @@ java.util.Calendar date = java.util.Calendar.getInstance();
 	</div>
 	<div class="left">
 		<form id="searchBar">
-			<span class="yearMonth">귀속연월</span> <input type="text"
-				name="condition" id="condition" placeholder="YYYY"> 년
-				<select id="ymd">
-
-<%int month=date.get(date.MONTH)+1; %>
-<%for(int i=1;i<13; i++){ %>
-<%if(i==month){%>
-	<option selected value="<%=i %>"> <%=i%> </option>
-<%} else{%>
-	<option value="<%=i %>"> <%=i%> </option>	
-<%}%>
-<%}%>
-</select>월
+			<span class="yearMonth">귀속연월</span> 
+			<input id="monthpicker" type="text">
+			<img id="btn_monthpicker" src="${contextPath}/resources/image/icons/icon_calendar.png">
 			<div class="left_rightsearch"><span class="kindofsearch">조회조건</span>
-				<select id="Employee_Select" float=right;>
+				<select id="Employee_Select">
 		    	<option value="" selected>구분</option>
 				<option value="employee_name">사업장</option>
 				<option value="employee_code">부서</option>
