@@ -192,8 +192,9 @@
 
 	   }
 	   function searchCondition(){
-		  var cond =  document.getElementById("condition").value
-		  mySheet.DoSearch('${contextPath}/hm/p0004/searchList.do','condition='+cond);
+		  var cond =  document.getElementById("condition").value;
+		 var cond2= document.getElementById("condition").value;
+		  mySheet.DoSearch('${contextPath}/hm/p0004/searchList.do','condition='+cond+'&command='+cond2);
 	   }
 
 	
