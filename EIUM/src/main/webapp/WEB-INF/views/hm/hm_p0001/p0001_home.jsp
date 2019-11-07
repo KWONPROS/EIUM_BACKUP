@@ -37,10 +37,10 @@
 		initSheet2.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0,MergeSheet:msHeaderOnly};
 		initSheet2.HeaderMode = {Sort:1,ColMove:1,ColResize:10,HeaderCheck:1};
 		initSheet2.Cols = [
-	     	{Header:"상태|상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
-	        {Header:"삭제|삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},	
-			{Header:"직급코드|직급코드",Type:"Text",SaveName:"temp_CODE"},
-	        {Header:"호봉|호봉",Type:"Text",SaveName:"pay_GRADE",MinWidth:50 ,KeyField:1, Align:"Center","UpdateEdit":0},			
+			{Header:"tmp직급코드|직급코드",Type:"Text",SaveName:"temp_POSITION_CODE"},
+			{Header:"tmp호봉코드|호봉코드",Type:"Text",SaveName:"temp_PAY_GRADE_CODE"},
+			{Header:"호봉코드|호봉코드",Type:"Text",SaveName:"pay_GRADE_CODE"},
+	        {Header:"호봉|호봉",Type:"Text",SaveName:"pay_GRADE_NAME",MinWidth:50 ,KeyField:1, Align:"Center","UpdateEdit":0},			
 			{Header:"호봉테이블|기본급",Type:"Int",SaveName:"salary",MinWidth:90 , Align:"Center"},
 			{Header:"합계|합계",Type:"Int",SaveName:"tot_salary",MinWidth:90 , Align:"Center", CalcLogic:"|4|"}
 		];   
@@ -76,7 +76,7 @@
 			case "search": //조회
 				mySheet2.DoSearch("${contextPath}/hm/p0001/searchList2.do","position_CODE="+mySheet.GetCellValue(mySheet.GetSelectRow(),0));
 				alert(mySheet.GetCellValue(mySheet.GetSelectRow(),0));
-				mySheet2.SetCellValue(0, 2, mySheet.GetCellValue(mySheet.GetSelectRow(),0));
+				mySheet2.SetCellValue(0, 0, mySheet.GetCellValue(mySheet.GetSelectRow(),0));
 				break;
 				
 			case "reload": //초기화
@@ -94,15 +94,22 @@
 		}
 	}
 	
-	//로우 클릭시
+	//로우 클릭시 (직급코드 선택시)
 	function mySheet_OnClick(Row) {
 		if(Row!=0){
-			mySheet2.DoSearch("${contextPath}/hm/p0001/searchList2.do", "position_CODE=" + mySheet.GetCellValue(Row, 0));
 			alert(mySheet.GetCellValue(Row, 0));
-			mySheet2.SetCellValue(0, 2, mySheet.GetCellValue(Row,0));
-			/* mySheet3.DoSearch("${contextPath}/hm/p0001/serchList3.do", ) */
+			mySheet2.DoSearch("${contextPath}/hm/p0001/searchList2.do", "position_CODE=" + mySheet.GetCellValue(Row, 0));
+			mySheet2.SetCellValue(0, 0, mySheet.GetCellValue(Row,0));
 		}
 	}  
+	//직급코드 선택후 호봉코드를 선택시(1번째) - 시작연월 종료연월
+	function mySheet2_OnSearchEnd(code,msg){
+		mySheet2.SetCellValue(0, 1, mySheet2.GetCellValue(2, 2));
+		alert(mySheet2.GetCellValue(2, 2));
+		alert(mySheet2.GetCellValue(0, 0));
+		mySheet3.DoSearch("${contextPath}/hm/p0001/searchList3.do", "position_CODE2=" + mySheet2.GetCellValue(0,0) + "&pay_GRADE_CODE=" + mySheet2.GetCellValue(2, 2));
+	}
+
 	
 	// 저장완료 후 처리할 작업
 	// code: 0(저장성공), -1(저장실패)

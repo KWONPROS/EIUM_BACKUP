@@ -49,7 +49,7 @@ public class HM_P0001ControllerImpl implements HM_P0001Controller {
 		List<HM_P0001VO> data = p0001Service.searchList(searchMap);
 
         resultMap.put("Data", data);
-    	System.out.println("resultMap::::"+resultMap);
+    	System.out.println("HM-P0001ControllerImpl-1-resultMap::::"+resultMap);
         return resultMap;
 	}
 	
@@ -62,9 +62,25 @@ public class HM_P0001ControllerImpl implements HM_P0001Controller {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
 		searchMap.put("P_POSITION_CODE", request.getParameter("position_CODE"));
-		List<HM_P0001_01VO> data = p0001Service.searchList2(searchMap);
+		List<HM_P0001VO> data = p0001Service.searchList2(searchMap);
 		resultMap.put("Data", data);
-		System.out.println("HM-P0001ControllerImpl-resultMap::::" + resultMap);
+		System.out.println("HM-P0001ControllerImpl-2-resultMap::::" + resultMap);
+		return resultMap;
+	}
+	
+	@Override
+	@RequestMapping(value = "/hm/p0001/searchList3.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map searchList3(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, String> searchMap = new HashMap<String, String>();
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		searchMap.put("PP_POSITION_CODE", request.getParameter("position_CODE2"));
+		searchMap.put("P_PAY_GRADE_CODE", request.getParameter("pay_GRADE_CODE"));
+		List<HM_P0001VO> data = p0001Service.searchList3(searchMap);
+		resultMap.put("Data", data);
+		System.out.println("HM-P0001ControllerImpl-3-resultMap::::" + resultMap);
 		return resultMap;
 	}
 	

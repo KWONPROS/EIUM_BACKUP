@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.myspring.eium.hm.hm_p0001.dao.HM_P0001DAO;
 import com.myspring.eium.hm.hm_p0001.vo.HM_P0001VO;
-import com.myspring.eium.hm.hm_p0001.vo.HM_P0001_01VO;
 
 
 
@@ -33,11 +32,16 @@ public class HM_P0001ServiceImpl implements HM_P0001Service {
 	}
 	
 	@Override
-	public List<HM_P0001_01VO> searchList2(Map<String, String> searchMap) throws DataAccessException {
-		List<HM_P0001_01VO> list = p0001DAO.searchList2(searchMap);
+	public List<HM_P0001VO> searchList2(Map<String, String> searchMap) throws DataAccessException {
+		List<HM_P0001VO> list = p0001DAO.searchList2(searchMap);
 		return list;
 	}	
 	
+	@Override
+	public List<HM_P0001VO> searchList3(Map<String, String> searchMap) throws DataAccessException {
+		List<HM_P0001VO> list = p0001DAO.searchList3(searchMap);
+		return list;
+	}
 	@Override
 	public void saveData(Map<String, String[]> dataMap, String p_position_CODE)  throws DataAccessException  {
 		String[] status = dataMap.get("STATUS");
