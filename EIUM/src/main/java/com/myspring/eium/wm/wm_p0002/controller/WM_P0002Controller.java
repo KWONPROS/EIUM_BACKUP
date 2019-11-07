@@ -19,5 +19,6 @@ public interface WM_P0002Controller {
 	public Map searchDeptList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView employeeSearch_init(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map employeeSearch_p01(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 }

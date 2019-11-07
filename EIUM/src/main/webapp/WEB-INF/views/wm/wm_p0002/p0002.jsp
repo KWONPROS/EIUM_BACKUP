@@ -12,11 +12,26 @@
 <script src="${contextPath}/resources/ibsheet/ibsheet.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibleaders.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script type="text/javascript">
 	var pageheightoffset = 200; //시트높이 계산용
 
 	//sheet 기본설정
 	function LoadPage() {
+	      $(function() {
+	          $( ".Datepicker" ).datepicker({
+	             dateFormat: "yy-mm-dd",
+	             showOn: "both", 
+	              buttonImage: "${contextPath}/resources/image/icons/icon_calendar.png", 
+	              buttonImageOnly: true , 
+	               dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+	               dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], 
+	               monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+	               monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+	        });
+	      });
 
 		mySheet.RemoveAll();
 		//아이비시트 초기화
@@ -26,25 +41,26 @@
 		initSheet.Cols = [ 
 			               { "Header":"상태","SaveName":"sStatus","Type":"Status","Align":"Center","Width":50 },
 			               { "Header":"삭제","SaveName":"DEL_CHK","Type":"DelCheck" },
+			               { "Header" : "휴가고유코드", "SaveName" : "vacation_CODE", "Type" : "Text", "Width" : 100, "Align" : "Center", "Hidden" : 1 }, 
 			               { "Header" : "사원코드", "SaveName" : "employee_CODE", "Type" : "Popup", "Width" : 100, "Align" : "Center" }, 
 			               { "Header" : "사원명", "SaveName" : "employee_NAME", "Type" : "Text", "Width" : 100, "Align" : "Center" },
 			               { "Header" : "부서명", "SaveName" : "department_NAME", "Type" : "Text", "Width" : 100, "Align" : "Center" },
 			               { "Header" : "직급", "SaveName" : "position_NAME", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "현재 잔여일수", "SaveName" : "vacation_REMAIN_DATE", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "근태종류", "SaveName" : "vacation_TYPE", "Type" : "Combo", "Width" : 100, "Align" : "Center", "ComboText":"연차|특별휴가|경조휴가", "ComboCode":"0|1|2", "UpdateEdit":0 },
+			               { "Header" : "신청 전 잔여일수", "SaveName" : "before_VACATION_REMAIN_DATE", "Type" : "Text", "Width" : 100, "Align" : "Center" },
+			               { "Header" : "근태종류", "SaveName" : "vacation_TYPE", "Type" : "Combo", "Width" : 100, "Align" : "Center", "ComboText":"연차|특별휴가|경조휴가", "ComboCode":"연차|특별휴가|경조휴가", "UpdateEdit":0 },
 			               { "Header" : "시작일", "SaveName" : "vacation_START_DATE", "Type" : "Date", "Width" : 100, "Align" : "Center", "Format":"Ymd" },
 			               { "Header" : "종료일", "SaveName" : "vacation_END_DATE", "Type" : "Date", "Width" : 100, "Align" : "Center", "Format":"Ymd" },
 			               { "Header" : "신청일수", "SaveName" : "vacation_APPLY_DATE", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "신청 후 잔여일수", "SaveName" : "REMAIN_DATE", "Type" : "Text", "Width" : 100, "Align" : "Center", "CalcLogic":"|6|-|10|" } 
+			               { "Header" : "신청 후 잔여일수", "SaveName" : "after_VACATION_REMAIN_DATE", "Type" : "Text", "Width" : 100, "Align" : "Center", "CalcLogic":"|7|-|11|" } 
 		                 ];
 
 		IBS_InitSheet(mySheet, initSheet);
 		mySheet.SetEditableColorDiff(1);
 		mySheet.SetActionMenu("엑셀 파일 저장");
 		mySheet.SetSelectionMode(1);
-		mySheet.SetColEditable(6,0);
-		mySheet.SetColEditable(10,0);
+		mySheet.SetColEditable(7,0);
 		mySheet.SetColEditable(11,0);
+		mySheet.SetColEditable(12,0);
 		
 	}
 
@@ -70,7 +86,7 @@
 		var sd=mySheet.GetCellValue(Row,Col-1);
 	    var ed=mySheet.GetCellValue(Row,Col);
 		
-		if(Col==9){
+		if(Col==10){
 			
 		function x(sd,ed){
 			    var stDate = new Date(sd.substring(0,4),sd.substring(4,6),sd.substring(6,8)) ;
@@ -83,7 +99,7 @@
 		
 		x(sd,ed);
 		
-		mySheet.SetCellValue(Row,Col+1,btDay);
+		mySheet.SetCellValue(Row,Col+1,btDay+1);
 			
 		if(mySheet.GetCellValue(Row,Col+2) < 0) {
 			mySheet.SetCellBackColor(Row, Col+2, "#FF0000"); 
@@ -99,7 +115,7 @@
 		row=Row;
 		col=Col;
 		
-		if(Col=="2"){
+		if(Col=="3"){
 		window.open("${contextPath}/wm/p0002/employeeSearch_Init.do", "a", "width=500, height=700, left=100, top=50");
 		}
 	}
@@ -114,9 +130,14 @@
 		mySheet.SetCellText(row,col+1,employeeName);
 		mySheet.SetCellText(row,col+2,departmentName);
 		mySheet.SetCellText(row,col+3,positionName);	
-		mySheet.SetCellText(row,col+4,vacationremainDate);	
-	}
-
+		mySheet.SetCellText(row,col+4,vacationremainDate);
+		
+		if(vacationremainDate== ""){
+			mySheet.SetCellValue(row,7,"12");
+			}
+		}
+	
+	
 </script>
 
 
@@ -254,8 +275,12 @@ background-color: #2C3E50;
 	position: relative;
 	top: 130px;
 	left: 60px;
-	width: 850px;
+	width: 1000px;
 }
+.ui-datepicker{ font-size: 12px; width: 160px; }
+.ui-datepicker select.ui-datepicker-month{ width:30%; font-size: 11px; }
+.ui-datepicker select.ui-datepicker-year{ width:40%; font-size: 11px; }
+#searchBar img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 	
 	</style>
 
@@ -280,9 +305,8 @@ background-color: #2C3E50;
         
         <div class="left">
         <div id="searchBar">
-            &nbsp;&nbsp; 귀속연월 : <select id="SiteList" onchange="selectDept()">
-			<option value="" selected>전체</option>
-		</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 근태종류 : <select id="vacaTYPE">
+            &nbsp;&nbsp; 귀속연월 : <input type="text"  class="Datepicker">
+		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 근태종류 : <select id="vacaTYPE">
 			<option value="" selected>전체</option>
 			<option value="y" >연차</option>
 			<option value="t" >특별휴가</option>

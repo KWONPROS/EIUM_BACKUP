@@ -70,6 +70,43 @@ public class WM_P0002ControllerImpl implements WM_P0002Controller{
 	}
 	
 	@Override
+	@RequestMapping(value = "/wm/p0002/saveData.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, String[]> dataMap = new HashMap<String, String[]>();
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+	    String x = request.getParameter("x");
+	    
+		Enumeration enu = request.getParameterNames();
+		while (enu.hasMoreElements()) {
+			String name = (String) enu.nextElement();
+			String[] values = request.getParameterValues(name);
+			dataMap.put(name, values);
+		}
+		
+		
+		for(String key : dataMap.keySet()){
+            String[] value = dataMap.get(key);
+        }
+
+		Map<String, String> result = new HashMap<String, String>();
+		/*try {
+			p0006_01ServiceImpl.saveData(dataMap, x);	
+			result.put("Code","0");
+			result.put("Message","����Ǿ����ϴ�");
+		}catch(Exception e) {
+			result.put("Code","-1");
+			result.put("Message","���忡 �����Ͽ����ϴ�");
+			e.printStackTrace();
+		}*/
+		WM_P0002Service.saveData(dataMap, x);	
+		resultMap.put("Result", result);         
+        return resultMap;
+	}
+	
+	@Override
 	@RequestMapping(value = "wm/p0002/employeeSearch_p01.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Map employeeSearch_p01(HttpServletRequest request, HttpServletResponse response) throws Exception {

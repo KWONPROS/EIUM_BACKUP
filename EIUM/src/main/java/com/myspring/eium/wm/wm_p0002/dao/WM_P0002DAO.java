@@ -14,5 +14,8 @@ public interface WM_P0002DAO {
 	public List<WM_P0002VO> searchSiteList(Map<String, Object> searchMap);
 	public List<WM_P0002VO> searchDeptList(Map<String, Object> searchMap);
 	public List<WM_P0002VO> searchEmployeeList(Map<String, Object> searchMap) throws DataAccessException;
+	public void updateData(Map<String, String> row) throws DataAccessException;
+	public void updateData2(Map<String, String> row) throws DataAccessException;
+	public void deleteData(Map<String, String> row) throws DataAccessException;
 
 }

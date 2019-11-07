@@ -12,10 +12,12 @@
 		
 		<result property="POSITION_CODE" column="POSITION_CODE" />
 		<result property="POSITION_NAME" column="POSITION_NAME" />
+		<result property="VACATION_CODE" column="VACATION_CODE" />
 		<result property="VACATION_TYPE" column="VACATION_TYPE" />
 		<result property="VACATION_START_DATE" column="VACATION_START_DATE" />
 		<result property="VACATION_END_DATE" column="VACATION_END_DATE" />
 		<result property="VACATION_APPLY_DATE" column="VACATION_APPLY_DATE" />
+		<result property="BEFORE_VACATION_REMAIN_DATE" column="BEFORE_VACATION_REMAIN_DATE" />
 		<result property="VACATION_REMAIN_DATE" column="VACATION_REMAIN_DATE" />
 		
 	    <result property="SITE_NAME" column="SITE_NAME" />
@@ -26,11 +28,10 @@
 	<select id="searchEmployeeList" resultMap="p0002Result" parameterType="java.util.List">
 	  <![CDATA[
          SELECT e.employee_code, e.employee_name, d.department_name, p.position_name, vr.vacation_remain_date
-         FROM employee e, employee_work ew, department d, position p, vacation_remain vr
-         WHERE ew.employee_code = e.employee_code
-         and ew.department_code = d.department_code
-         and ew.position_code = p.position_code
-         and ew.employee_code = vr.employee_code
+         FROM employee e LEFT OUTER JOIN employee_work ew ON ew.employee_code = e.employee_code
+                         LEFT OUTER JOIN department d ON ew.department_code = d.department_code
+                         LEFT OUTER JOIN position p ON ew.position_code = p.position_code
+                         LEFT OUTER JOIN vacation_remain vr ON ew.employee_code = vr.employee_code
       ]]>
 	</select>
 	
@@ -58,15 +59,53 @@
 
 	<select id="searchList" resultMap="p0002Result" parameterType="java.util.List">
       <![CDATA[
-         SELECT e.employee_code, e.employee_name, d.department_name, p.position_name, vh.vacation_type, vh.VACATION_START_DATE, vh.VACATION_END_DATE, vh.VACATION_APPLY_DATE, vr.VACATION_REMAIN_DATE
+         SELECT vh.vacation_code, e.employee_code, e.employee_name, d.department_name, p.position_name, vh.vacation_type, vh.VACATION_START_DATE, vh.VACATION_END_DATE, vh.VACATION_APPLY_DATE, vh.BEFORE_VACATION_REMAIN_DATE
          FROM employee e, employee_work ew, department d, position p, vacation_remain vr, vacation_change_history vh
          WHERE ew.employee_code = e.employee_code
          and ew.employee_code = vr.employee_code
          and ew.employee_code = vh.employee_code
          and ew.department_code = d.department_code
          and ew.position_code = p.position_code
+         order by vh.VACATION_END_DATE DESC
       ]]>
 	</select>
+	
+	<insert id="insertData" parameterType="java.util.Map">
+		insert into VACATION_CHANGE_HISTORY(VACATION_CODE, EMPLOYEE_CODE, BEFORE_VACATION_REMAIN_DATE, VACATION_TYPE, VACATION_START_DATE, VACATION_END_DATE, VACATION_APPLY_DATE)
+		 values(VACATION_CODE_SEQ.NEXTVAL, #{employee_CODE}, #{before_VACATION_REMAIN_DATE}, #{vacation_TYPE}, #{vacation_START_DATE}, #{vacation_END_DATE}, #{vacation_APPLY_DATE})
+	</insert>
+	
+	<update id="updateData" parameterType="java.util.Map">
+		MERGE INTO VACATION_REMAIN
+            USING DUAL
+            ON (EMPLOYEE_CODE = #{employee_CODE})
+            WHEN MATCHED THEN
+                      UPDATE SET VACATION_REMAIN_DATE = #{after_VACATION_REMAIN_DATE}
+            WHEN NOT MATCHED THEN
+                      insert (EMPLOYEE_CODE, VACATION_REMAIN_DATE)
+                            values(#{employee_CODE}, #{after_VACATION_REMAIN_DATE})
+	</update>
+	
+	<update id="updateData2" parameterType="java.util.Map">
+		update VACATION_CHANGE_HISTORY
+		set BEFORE_VACATION_REMAIN_DATE = #{before_VACATION_REMAIN_DATE, jdbcType=VARCHAR}
+			, VACATION_TYPE = #{vacation_TYPE, jdbcType=VARCHAR}
+			, VACATION_START_DATE = #{vacation_START_DATE, jdbcType=VARCHAR}
+			, VACATION_END_DATE = #{vacation_END_DATE, jdbcType=VARCHAR}
+			, VACATION_APPLY_DATE = #{vacation_APPLY_DATE, jdbcType=VARCHAR}
+		where VACATION_CODE = #{vacation_CODE, jdbcType=VARCHAR}
+	</update>
+	
+	<delete id="deleteData" parameterType="java.util.Map">
+		delete VACATION_CHANGE_HISTORY
+		where VACATION_CODE = #{vacation_CODE}
+	</delete>
+	
+	<update id="updateData3" parameterType="java.util.Map">
+		update VACATION_remain
+		set VACATION_REMAIN_DATE = VACATION_REMAIN_DATE + #{vacation_APPLY_DATE}
+		where employee_code = #{employee_CODE}
+	</update>
 
 
 </mapper>

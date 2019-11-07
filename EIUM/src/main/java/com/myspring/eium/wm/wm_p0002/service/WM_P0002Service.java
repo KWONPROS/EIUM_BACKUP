@@ -12,4 +12,5 @@ public interface WM_P0002Service {
 	 public List<WM_P0002VO> searchSiteList(Map<String, Object> searchMap);
 	 public List<WM_P0002VO> searchDeptList(Map<String, Object> searchMap);
 	 public List<WM_P0002VO> searchEmployeeList(Map<String, Object> searchMap);
+	 public void saveData(Map<String, String[]> dataMap, String x) throws DataAccessException;
 }
