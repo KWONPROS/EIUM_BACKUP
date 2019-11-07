@@ -81,18 +81,22 @@ function setPopupValue(){
 			initSheet2.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 			initSheet2.Cols = [
 					{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
-					{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},
 					{Header:"사원코드",Type:"Text",SaveName:"employee_CODE",MinWidth:80, Align:"Center"},
 					{Header:"사원명",Type:"Text",SaveName:"employee_NAME",MinWidth:170, Align:"Center",InsertEdit:0},			
 					{Header:"부서",Type:"Text",SaveName:"department_NAME",MinWidth:170,InsertEdit:0},			
-					{Header:"직책",Type:"Text",SaveName:"position_NAME",MinWidth:170,InsertEdit:0}	,
-					{Header:"교육코드",Type:"Text",SaveName:"EMPLOYEE_TRAINING_CODE",MinWidth:170,Hidden:1}	
+					{Header:"직책",Type:"Text",SaveName:"position_NAME",MinWidth:170,InsertEdit:0},
+					{Header:"이수여부",Type:"Text",SaveName:"finish_YN",MinWidth:170,InsertEdit:0}	,
+					{Header:"출석점수",Type:"Text",SaveName:"attendence_SCORE",MinWidth:170,InsertEdit:0},
+					{Header:"태도점수",Type:"Text",SaveName:"attitude_SCORE",MinWidth:170,InsertEdit:0},
+					{Header:"평가점수",Type:"Text",SaveName:"score",MinWidth:170,InsertEdit:0}	,
+					{Header:"합계",Type:"Text",SaveName:"total",MinWidth:170,InsertEdit:0},
+					{Header:"교육평가",Type:"Text",SaveName:"assessment_DESC",MinWidth:170,InsertEdit:0},
 
 					];
 				IBS_InitSheet(mySheet2,initSheet2);
 				if($("#eduCode").val()!=""){
 				var param = FormQueryStringEnc(document.frm);
-				mySheet2.DoSearch("${contextPath}/hm/p0018/emplyoeeListSearch.do",param);
+				mySheet2.DoSearch("${contextPath}/hm/p0021/eduScoreSearch.do",param);
 				}
 
 				
@@ -120,14 +124,9 @@ function setPopupValue(){
 
 	
 		
-		case "insert": //신규행 추가
-			var row = mySheet2.DataInsert(-1);
-			break;
-		}
-	
 	
 	}
-	
+	}
 
 	
 	// 조회완료 후 처리할 작업
@@ -246,7 +245,12 @@ border-radius: 2px;
 </head>
 <body onload="LoadPage()">
 
-
+	<div class="title">
+		<header>
+			<i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 등록정보관리 :
+			교육평가
+		</header>
+	</div>
 
 
 	<div class="clear hidden"></div>
@@ -266,7 +270,6 @@ border-radius: 2px;
 
     <div class="rightbuttons">
 	  <a href="javascript:doAction('reload')"  class="IBbutton">초기화</a>
-	  <a href="javascript:doAction('insert')"  class="IBbutton">사원추가</a>
 	  <a href="javascript:doAction('save')" class="IBbutton">저장</a>
 	</div>
   

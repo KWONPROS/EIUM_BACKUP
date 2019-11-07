@@ -19,8 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.eium.hm.hm_p0018.service.HM_P0018Service;
 import com.myspring.eium.hm.hm_p0018.vo.HM_P0018VO;
-import com.myspring.eium.sm.sm_p0001.service.SM_P0001Service;
-import com.myspring.eium.sm.sm_p0001.vo.SM_P0001VO;
+
 
 @Controller
 public class HM_P0018ControllerImpl implements HM_P0018Controller{

@@ -69,8 +69,9 @@
 	</insert>	
 	
 	<delete id="deleteData" parameterType="java.util.Map">
-		delete EMPLOYEE_TRAINING_LIST
-		where EMPLOYEE_CODE = #{employee_CODE}
+	DELETE EMPLOYEE_TRAINING
+	WHERE EMPLOYEE_TRAINING_CODE=#{employee_TRAINING_CODE}
+	
 	</delete>
 
 
@@ -103,8 +104,8 @@
 	</insert>	
 	
 	<delete id="emplyoeeListdeleteData" parameterType="java.util.Map">
-		delete EMPLOYEE_TRAINING
-		where EMPLOYEE_TRAINING_CODE = #{employee_TRAINING_CODE}
+		delete EMPLOYEE_TRAINING_LIST
+		where EMPLOYEE_CODE = #{employee_CODE}
 	</delete>
 	
 	

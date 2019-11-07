@@ -8,7 +8,7 @@
 <style type="text/css">
 .rightbuttons{
    margin-top:40px;
-   margin:10px;
+   margin:-15px;
    position: absolute;
    right: 0px;
 }
@@ -22,6 +22,30 @@
    text-decoration: none;   
 }
 
+.title {
+ 	width:100%;
+	color: #2C3E50;
+	font-weight: bold;
+	font-size: 20px;
+	padding-left : 30px;
+	padding-bottom: 10px;
+	padding-top:20px;
+	border-top: thin solid #5E5E5E;
+	border-bottom: thin dashed #5E5E5E;
+	position: absolute;
+	top: 50px;
+
+}
+.left{
+position: absolute;
+top: 130px;
+left: 40px;
+}
+.right{
+ position: absolute;
+top: 130px;
+left: 330px; 
+}
 </style>
 <meta charset="UTF-8">
 <title>부서등록</title>
@@ -184,12 +208,12 @@ $.ajax({
   
 </head>
 <body onload="LoadPage()">
-<br>
-<br>
-        <div class="main_content">
-            <div class="exp_product">
-           
-            </div>
+
+<div class="title"> 
+<header> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 등록정보관리 : 부서등록</header>
+</div>
+
+     
      <form name='frm'>
      
         사업장: <select id="SiteList">
@@ -197,7 +221,7 @@ $.ajax({
 		</select>
       </form>
         
-        <button onClick="showPopup()">부문등록</button>
+        <button class="right" onClick="showPopup()">부문등록</button>
 		
              <div class="rightbuttons">
                 <a href="javascript:doAction('reload')" class="IBbutton" >초기화</a>
@@ -208,11 +232,9 @@ $.ajax({
             </div>
             
             <div class="clear hidden"></div>  
-<div>
-부서등록
-</div>
+
 <br>
-            <div>
+            <div class="left">
 				<script>
 					createIBSheet("mySheet", "100%", "500px");
 					selectSite();
@@ -220,7 +242,7 @@ $.ajax({
 				</script>
 				
             </div>
-        </div>
+
 	<input type="hidden" id="PsiteCode">
 	<input type="hidden" id="PsiteName">
 	<input type="hidden" id="PsectorCode">
