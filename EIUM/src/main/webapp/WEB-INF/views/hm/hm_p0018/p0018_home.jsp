@@ -122,7 +122,7 @@ console.log(Row,Col);
 			    var stDate = new Date(sd.substring(0,4),sd.substring(4,6),sd.substring(6,8)) ;
 			    var endDate = new Date(ed.substring(0,4),ed.substring(4,6),ed.substring(6,8)) ;
 			    var btMs = endDate.getTime() - stDate.getTime() ;
-			    btDay = btMs / (1000*60*60*24) ;
+			    btDay = btMs / (1000*60*60*24)+1 ;
 			 	return btDay;
 				
 			}
@@ -302,8 +302,8 @@ border-radius: 2px;
 				<td>사내외구분</td>
 				<td></td>
 				<td><select name="employee_TRAINING_IN_OUT"  id="employee_TRAINING_IN_OUT" >
-				<option value="Y" selected>1.사내</option>
-				<option value="N">2.사외</option>
+				<option value="1.사내" selected>1.사내</option>
+				<option value="2.사외">2.사외</option>
 				</select></td>
 			</tr>
 		</table>		

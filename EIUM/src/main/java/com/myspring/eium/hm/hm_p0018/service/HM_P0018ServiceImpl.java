@@ -68,6 +68,7 @@ public class HM_P0018ServiceImpl implements HM_P0018Service {
 		String[] status = dataMap.get("STATUS");
 		int length = status.length; // row수
 		int i = 0;
+		System.out.println("service param%%%%%%%%%%%%%%%%"+param);
 		
 		for(String str : status) {
 			Map<String, String> row = getRow2(dataMap, length, i,param); // 현재 Index의 Row Map

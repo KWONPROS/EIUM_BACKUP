@@ -110,10 +110,22 @@
 	
 	 
 	<select id="employeeSearch" resultMap="P0018resultVO" parameterType="java.util.Map"> 
-    <![CDATA[
+	<choose>
+	<when test="E_id != '' and E_id != null">
+	    <![CDATA[
+	SELECT EMPLOYEE_CODE,EMPLOYEE_NAME
+	FROM EMPLOYEE
+	WHERE EMPLOYEE_NAME=#{E_id}
+			]]>
+	</when>
+	<otherwise>
+	<![CDATA[
 	SELECT EMPLOYEE_CODE,EMPLOYEE_NAME
 	FROM EMPLOYEE
 			]]>
-	</select>
+	
+	</otherwise>
+	</choose>
+    </select>
 	
 </mapper>

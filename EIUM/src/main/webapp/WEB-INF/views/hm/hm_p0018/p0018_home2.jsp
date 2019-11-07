@@ -31,6 +31,14 @@
 	
 	LoadPage();
 };
+function setPopupValue(){
+	
+	 Pname=document.getElementById("Pname").value;
+	 Pcode=document.getElementById("Pcode").value;
+	 mySheet2.SetCellValue(row,col,Pcode);
+	 mySheet2.SetCellValue(row,col+1,Pname);
+	
+};
 
 
 	function LoadPage() {
@@ -109,10 +117,16 @@
 		case "save": //저장
 			var tempStr = mySheet.GetSaveString();
 			alert("서버로 전달되는 문자열 확인 : " + tempStr);
-			var param = mySheet.GetCellValue(1,0);
+			var param ="param="+mySheet.GetCellValue(1,0);
 			alert(param);
 			
-			mySheet2.DoSave("${contextPath}/hm/p0018/emplyoeeListsaveData.do",param);		
+			mySheet2.DoSave("${contextPath}/hm/p0018/emplyoeeListsaveData.do",param);	
+			var param2 = FormQueryStringEnc(document.frm);
+			
+			
+			mySheet2.DoSearch("${contextPath}/hm/p0018/emplyoeeListSearch.do",param2);
+
+
 			break;
 		case "insert": //신규행 추가
 			var row = mySheet2.DataInsert(-1);
@@ -270,6 +284,8 @@ border-radius: 2px;
 	</form>
 	<input type="hidden" id="PeduCode">
 	<input type="hidden" id="PeduName">
+	<input type="hidden" id="Pcode">
+	<input type="hidden" id="Pname">
 
 </body>
 </html>

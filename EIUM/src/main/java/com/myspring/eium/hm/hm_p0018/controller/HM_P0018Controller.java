@@ -29,9 +29,12 @@ public interface HM_P0018Controller {
 
 	Map emplyoeeListSearch(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
-	Map emplyoeeListsaveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 
 	ModelAndView home2PopUP2Init(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 	Map home2_p02Search(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+
+	Map emplyoeeListsaveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

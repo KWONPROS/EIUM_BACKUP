@@ -125,7 +125,8 @@ public class HM_P0018ControllerImpl implements HM_P0018Controller{
 		Map<String, Object> searchMap = new HashMap<String, Object>(); // 검색조건
 		Map<String, Object> resultMap = new HashMap<String, Object>(); // 조회결과
 		
-
+		searchMap.put("E_id", request.getParameter("E_id"));
+		System.out.println(request.getParameter("E_id"));
 		//데이터 조회
 		List<HM_P0018VO> data = hM_P0018Service.employeeSearch(searchMap);
         resultMap.put("Data", data);
@@ -175,7 +176,7 @@ public class HM_P0018ControllerImpl implements HM_P0018Controller{
 		Map<String, String[]> dataMap = new HashMap<String, String[]>(); 
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
 		String param=request.getParameter("param");
-		
+		System.out.println("컨트롤러 param$$$$$$$$$$$$$$$$$$");
 		
 		Enumeration enu = request.getParameterNames();
 		while (enu.hasMoreElements()) {

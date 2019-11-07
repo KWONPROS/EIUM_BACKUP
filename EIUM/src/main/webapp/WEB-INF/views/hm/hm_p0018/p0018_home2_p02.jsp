@@ -115,20 +115,19 @@ function LoadPage(){
 
 function mySheet_OnDblClick(Row,Col,Value){
 	 var selectRowJson = mySheet.GetRowData(Row);
-	 var educode=selectRowJson.employee_TRAINING_CODE;
-	 var eduname=selectRowJson.employee_TRAINING_NAME;
+	 var Ccode=selectRowJson.employee_CODE;
+	 var Cname=selectRowJson.employee_NAME;
 
 	 
-	 console.log(educode);
-		$("#CeduCode").attr("value",educode);
-		$("#CeduName").attr("value",eduname);
-		console.log($("#CeduName").val());
-		 opener.document.getElementById("PeduCode").value=document.getElementById("CeduCode").value;
-		 opener.document.getElementById("PeduName").value=document.getElementById("CeduName").value;
-		 opener.setEdu();
+	 console.log(Ccode);
+		$("#Ccode").attr("value",Ccode);
+		$("#Cname").attr("value",Cname);
+		console.log($("#Cname").val());
+		 opener.document.getElementById("Pcode").value=document.getElementById("Ccode").value;
+		 opener.document.getElementById("Pname").value=document.getElementById("Cname").value;
+		 opener.setPopupValue();
 		    
 			self.close(); 
-			
 			return false; //창을 닫는 경우에는 false를 리턴해 줘야 함. }
 
 }
@@ -136,7 +135,8 @@ function doAction(sAction) {
 	switch(sAction){
 	
 	case "search": //조회
-		mySheet.DoSearch("${contextPath}/hm/p0018/home2Search_p02.do");
+		var param=FormQueryStringEnc(document.frm);
+		mySheet.DoSearch("${contextPath}/hm/p0018/home2Search_p02.do",param);
 
 		break;
 	
@@ -165,7 +165,7 @@ function doAction(sAction) {
 	</div>
 	</div>
 	
-<form id="frm">
+<form name="frm">
 사원명<input type="text" id="E_id">
 </form>
 	
@@ -174,7 +174,7 @@ function doAction(sAction) {
 	  <a href="javascript:doAction('search')"  class="IBbutton">조회</a>
 
 	</div>
-	<input type="hidden" id="ChildCode">
-	<input type="hidden" id="ChildName">
+	<input type="hidden" id="Ccode">
+	<input type="hidden" id="Cname">
 </body>
 </html>
