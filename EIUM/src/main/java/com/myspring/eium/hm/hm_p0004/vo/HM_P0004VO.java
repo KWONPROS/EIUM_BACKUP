@@ -40,7 +40,46 @@ public class HM_P0004VO {
 	private String  mil_TYPE;
 	private String  mil_NUM;
 	
-
+	private String employee_JOIN_DATE;
+	private String employee_RESIGNATION_DATE;
+	private String department_CODE;
+	private String department_NAME;
+	private String position_CODE;
+	private String position_NAME;
+	private String out_REASON_CODE;
+	private String out_REASON_NAME;
+	private String work_GROUP_CODE;
+	private String work_GROUP_NAME;
+	private String job_CLASS_CODE;
+	private String job_CLASS_NAME;
+	private String duty_CODE;
+	private String duty_NAME;
+	private String job_DIS_CODE;
+	private String job_DIS_NAME;
+	private String project_CODE;
+	private String project_NAME;
+	private String work_STATUS;
+	private String probation_YN;
+	private String probation_DATE;
+	private String work_INCLUDE_YN;
+	private String leave_DATE_START;
+	private String leave_DATE_END;
+	private String d_CODE_CODE;
+	private String d_CODE_NAME;
+	private String work_TYPE_CODE;
+	private String work_TYPE_NAME;
+	
+	private String pay_GRADE_CODE;
+	private String pay_GRADE_NAME;
+	private String salary;
+	private String bank_CODE_1;
+	private String bank_NAME_1;
+	private String account_NUMBER_1;
+	private String account_NAME_1;
+	private String bank_CODE_2;
+	private String bank_NAME_2;
+	private String account_NUMBER_2;
+	private String account_NAME_2;
 	public String getEmp_CODE() {
 		return emp_CODE;
 	}
@@ -209,6 +248,242 @@ public class HM_P0004VO {
 	public void setMil_NUM(String mil_NUM) {
 		this.mil_NUM = mil_NUM;
 	}
+	public String getEmployee_JOIN_DATE() {
+		return employee_JOIN_DATE;
+	}
+	public void setEmployee_JOIN_DATE(String employee_JOIN_DATE) {
+		this.employee_JOIN_DATE = employee_JOIN_DATE;
+	}
+	public String getEmployee_RESIGNATION_DATE() {
+		return employee_RESIGNATION_DATE;
+	}
+	public void setEmployee_RESIGNATION_DATE(String employee_RESIGNATION_DATE) {
+		this.employee_RESIGNATION_DATE = employee_RESIGNATION_DATE;
+	}
+	public String getDepartment_CODE() {
+		return department_CODE;
+	}
+	public void setDepartment_CODE(String department_CODE) {
+		this.department_CODE = department_CODE;
+	}
+	public String getDepartment_NAME() {
+		return department_NAME;
+	}
+	public void setDepartment_NAME(String department_NAME) {
+		this.department_NAME = department_NAME;
+	}
+	public String getPosition_CODE() {
+		return position_CODE;
+	}
+	public void setPosition_CODE(String position_CODE) {
+		this.position_CODE = position_CODE;
+	}
+	public String getPosition_NAME() {
+		return position_NAME;
+	}
+	public void setPosition_NAME(String position_NAME) {
+		this.position_NAME = position_NAME;
+	}
+	public String getOut_REASON_CODE() {
+		return out_REASON_CODE;
+	}
+	public void setOut_REASON_CODE(String out_REASON_CODE) {
+		this.out_REASON_CODE = out_REASON_CODE;
+	}
+	public String getOut_REASON_NAME() {
+		return out_REASON_NAME;
+	}
+	public void setOut_REASON_NAME(String out_REASON_NAME) {
+		this.out_REASON_NAME = out_REASON_NAME;
+	}
+	public String getWork_GROUP_CODE() {
+		return work_GROUP_CODE;
+	}
+	public void setWork_GROUP_CODE(String work_GROUP_CODE) {
+		this.work_GROUP_CODE = work_GROUP_CODE;
+	}
+	public String getWork_GROUP_NAME() {
+		return work_GROUP_NAME;
+	}
+	public void setWork_GROUP_NAME(String work_GROUP_NAME) {
+		this.work_GROUP_NAME = work_GROUP_NAME;
+	}
+	public String getJob_CLASS_CODE() {
+		return job_CLASS_CODE;
+	}
+	public void setJob_CLASS_CODE(String job_CLASS_CODE) {
+		this.job_CLASS_CODE = job_CLASS_CODE;
+	}
+	public String getJob_CLASS_NAME() {
+		return job_CLASS_NAME;
+	}
+	public void setJob_CLASS_NAME(String job_CLASS_NAME) {
+		this.job_CLASS_NAME = job_CLASS_NAME;
+	}
+	public String getDuty_CODE() {
+		return duty_CODE;
+	}
+	public void setDuty_CODE(String duty_CODE) {
+		this.duty_CODE = duty_CODE;
+	}
+	public String getDuty_NAME() {
+		return duty_NAME;
+	}
+	public void setDuty_NAME(String duty_NAME) {
+		this.duty_NAME = duty_NAME;
+	}
+	public String getJob_DIS_CODE() {
+		return job_DIS_CODE;
+	}
+	public void setJob_DIS_CODE(String job_DIS_CODE) {
+		this.job_DIS_CODE = job_DIS_CODE;
+	}
+	public String getJob_DIS_NAME() {
+		return job_DIS_NAME;
+	}
+	public void setJob_DIS_NAME(String job_DIS_NAME) {
+		this.job_DIS_NAME = job_DIS_NAME;
+	}
+	public String getProject_CODE() {
+		return project_CODE;
+	}
+	public void setProject_CODE(String project_CODE) {
+		this.project_CODE = project_CODE;
+	}
+	public String getProject_NAME() {
+		return project_NAME;
+	}
+	public void setProject_NAME(String project_NAME) {
+		this.project_NAME = project_NAME;
+	}
+	public String getWork_STATUS() {
+		return work_STATUS;
+	}
+	public void setWork_STATUS(String work_STATUS) {
+		this.work_STATUS = work_STATUS;
+	}
+	public String getProbation_YN() {
+		return probation_YN;
+	}
+	public void setProbation_YN(String probation_YN) {
+		this.probation_YN = probation_YN;
+	}
+	public String getProbation_DATE() {
+		return probation_DATE;
+	}
+	public void setProbation_DATE(String probation_DATE) {
+		this.probation_DATE = probation_DATE;
+	}
+	public String getWork_INCLUDE_YN() {
+		return work_INCLUDE_YN;
+	}
+	public void setWork_INCLUDE_YN(String work_INCLUDE_YN) {
+		this.work_INCLUDE_YN = work_INCLUDE_YN;
+	}
+	public String getLeave_DATE_START() {
+		return leave_DATE_START;
+	}
+	public void setLeave_DATE_START(String leave_DATE_START) {
+		this.leave_DATE_START = leave_DATE_START;
+	}
+	public String getLeave_DATE_END() {
+		return leave_DATE_END;
+	}
+	public void setLeave_DATE_END(String leave_DATE_END) {
+		this.leave_DATE_END = leave_DATE_END;
+	}
+	public String getD_CODE_CODE() {
+		return d_CODE_CODE;
+	}
+	public void setD_CODE_CODE(String d_CODE_CODE) {
+		this.d_CODE_CODE = d_CODE_CODE;
+	}
+	public String getD_CODE_NAME() {
+		return d_CODE_NAME;
+	}
+	public void setD_CODE_NAME(String d_CODE_NAME) {
+		this.d_CODE_NAME = d_CODE_NAME;
+	}
+	public String getWork_TYPE_CODE() {
+		return work_TYPE_CODE;
+	}
+	public void setWork_TYPE_CODE(String work_TYPE_CODE) {
+		this.work_TYPE_CODE = work_TYPE_CODE;
+	}
+	public String getWork_TYPE_NAME() {
+		return work_TYPE_NAME;
+	}
+	public void setWork_TYPE_NAME(String work_TYPE_NAME) {
+		this.work_TYPE_NAME = work_TYPE_NAME;
+	}
+	public String getPay_GRADE_CODE() {
+		return pay_GRADE_CODE;
+	}
+	public void setPay_GRADE_CODE(String pay_GRADE_CODE) {
+		this.pay_GRADE_CODE = pay_GRADE_CODE;
+	}
+	public String getPay_GRADE_NAME() {
+		return pay_GRADE_NAME;
+	}
+	public void setPay_GRADE_NAME(String pay_GRADE_NAME) {
+		this.pay_GRADE_NAME = pay_GRADE_NAME;
+	}
+	public String getSalary() {
+		return salary;
+	}
+	public void setSalary(String salary) {
+		this.salary = salary;
+	}
+	public String getBank_CODE_1() {
+		return bank_CODE_1;
+	}
+	public void setBank_CODE_1(String bank_CODE_1) {
+		this.bank_CODE_1 = bank_CODE_1;
+	}
+	public String getBank_NAME_1() {
+		return bank_NAME_1;
+	}
+	public void setBank_NAME_1(String bank_NAME_1) {
+		this.bank_NAME_1 = bank_NAME_1;
+	}
+	public String getAccount_NUMBER_1() {
+		return account_NUMBER_1;
+	}
+	public void setAccount_NUMBER_1(String account_NUMBER_1) {
+		this.account_NUMBER_1 = account_NUMBER_1;
+	}
+	public String getAccount_NAME_1() {
+		return account_NAME_1;
+	}
+	public void setAccount_NAME_1(String account_NAME_1) {
+		this.account_NAME_1 = account_NAME_1;
+	}
+	public String getBank_CODE_2() {
+		return bank_CODE_2;
+	}
+	public void setBank_CODE_2(String bank_CODE_2) {
+		this.bank_CODE_2 = bank_CODE_2;
+	}
+	public String getBank_NAME_2() {
+		return bank_NAME_2;
+	}
+	public void setBank_NAME_2(String bank_NAME_2) {
+		this.bank_NAME_2 = bank_NAME_2;
+	}
+	public String getAccount_NUMBER_2() {
+		return account_NUMBER_2;
+	}
+	public void setAccount_NUMBER_2(String account_NUMBER_2) {
+		this.account_NUMBER_2 = account_NUMBER_2;
+	}
+	public String getAccount_NAME_2() {
+		return account_NAME_2;
+	}
+	public void setAccount_NAME_2(String account_NAME_2) {
+		this.account_NAME_2 = account_NAME_2;
+	}
+
+	
 	
 	
 	

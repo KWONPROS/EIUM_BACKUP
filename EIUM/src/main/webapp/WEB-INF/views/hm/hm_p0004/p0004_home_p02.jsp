@@ -30,7 +30,11 @@ function LoadPage(){
    mySheet2.SetColEditable(0,0);
    mySheet2.SetColEditable(1,0);
 
-   mySheet2.DoSearch("${contextPath}/hm/p0004/searchList2.do" , "command="+document.getElementById("table").value);
+  
+   
+ 
+	   mySheet2.DoSearch("${contextPath}/hm/p0004/searchList2.do" , "command="+document.getElementById("table").value);
+
 
 }
 function mySheet2_OnDblClick(Row, Col, Value) { 
@@ -41,8 +45,17 @@ function mySheet2_OnDblClick(Row, Col, Value) {
 
        document.getElementById("m_code").setAttribute('value', m_code);
        document.getElementById("m_name").setAttribute('value', m_name);
-       opener.document.getElementById(document.getElementById("table").value+"_CODE").value=document.getElementById("m_code").value;
-       opener.document.getElementById(document.getElementById("table").value+"_NAME").value=document.getElementById("m_name").value;   
+       
+       var index=document.getElementById("index").value;
+       if(index != 'undefined'){
+    	   opener.document.getElementById(document.getElementById("table").value+"_CODE"+index).value=document.getElementById("m_code").value;
+           opener.document.getElementById(document.getElementById("table").value+"_NAME"+index).value=document.getElementById("m_name").value;   
+       }else{
+    	   opener.document.getElementById(document.getElementById("table").value+"_CODE").value=document.getElementById("m_code").value;
+           opener.document.getElementById(document.getElementById("table").value+"_NAME").value=document.getElementById("m_name").value;   
+    	   
+       } 
+    
 	window.close();
    
 	}
@@ -59,5 +72,6 @@ function mySheet2_OnDblClick(Row, Col, Value) {
    <input type="hidden" id="m_code">
    <input type="hidden" id="m_name">
    <input type="hidden" id="table" value="${command}">
+   <input type="hidden" id="index" value="${index}">
 </body>
 </html>

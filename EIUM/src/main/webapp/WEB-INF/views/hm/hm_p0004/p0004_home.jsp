@@ -88,11 +88,26 @@
 			{Header:"분류코드",Type:"Text",SaveName:"d_CODE_CODE", Hidden:1},			
 			{Header:"분류코드명",Type:"Text",SaveName:"d_CODE_NAME", Hidden:1},			
 			{Header:"고용형태코드",Type:"Text",SaveName:"work_TYPE_CODE", Hidden:1},		
-			{Header:"고용형태이름",Type:"Text",SaveName:"work_TYPE_NAME", Hidden:1}		
+			{Header:"고용형태이름",Type:"Text",SaveName:"work_TYPE_NAME", Hidden:1},		
+			{Header:"급여형태코드",Type:"Text",SaveName:"pay_TYPE_CODE", Hidden:1},		
+			{Header:"급여형태이름",Type:"Text",SaveName:"pay_TYPE_NAME", Hidden:1},		
 		
 		
+			//급여정보  
+			{Header:"호봉코드",Type:"Text",SaveName:"pay_GRADE_CODE", Hidden:1},			
+			{Header:"호봉이름",Type:"Text",SaveName:"pay_GRADE_NAME", Hidden:1},			
+			{Header:"기본급",Type:"Text",SaveName:"salary", Hidden:1},			
+			{Header:"은행코드1",Type:"Text",SaveName:"bank_CODE_1", Hidden:1},			
+			{Header:"은행명1",Type:"Text",SaveName:"bank_NAME_1", Hidden:1},			
+			{Header:"계좌번호1",Type:"Text",SaveName:"account_NUMBER_1", Hidden:1},			
+			{Header:"예금주1",Type:"Text",SaveName:"account_NAME_1", Hidden:1},			
+			{Header:"은행코드2",Type:"Text",SaveName:"bank_CODE_2", Hidden:1},			
+			{Header:"은행명2",Type:"Text",SaveName:"bank_NAME_2", Hidden:1},			
+			{Header:"계좌번호2",Type:"Text",SaveName:"account_NUMBER_2", Hidden:1},			
+			{Header:"예금주2",Type:"Text",SaveName:"account_NAME_2", Hidden:1}			
+
 			
-	
+           
 		];   
 		IBS_InitSheet( mySheet , initSheet);
   
@@ -124,6 +139,9 @@
 		    	changeYear: true,
 		    	dateFormat: "yy-mm-dd",
 		    	showOn: "both", 
+		    	yearRange: "-100:+0",
+		    	constrainInput: false,
+		    	showMonthAfterYear: true,
 		        buttonImage: "${contextPath}/resources/image/icons/icon_calendar.png", 
 		        buttonImageOnly: true , 
 		         dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
@@ -209,7 +227,24 @@
 	            mySheet.SetCellValue($('input[name=myRow]').val(),54,$('input[name=d_CODE_NAME]').val()); 
 	            mySheet.SetCellValue($('input[name=myRow]').val(),55,$('input[name=work_TYPE_CODE]').val()); 
 	            mySheet.SetCellValue($('input[name=myRow]').val(),56,$('input[name=work_TYPE_NAME]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),57,$('input[name=pay_TYPE_CODE]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),58,$('input[name=pay_TYPE_NAME]').val()); 
 	    
+	          //급여정보  
+	            mySheet.SetCellValue($('input[name=myRow]').val(),59,$('input[name=pay_GRADE_CODE]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),60,$('input[name=pay_GRADE_NAME]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),61,$('input[name=salary]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),62,$('input[name=bank_CODE_1]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),63,$('input[name=bank_NAME_1]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),64,$('input[name=account_NUMBER_1]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),65,$('input[name=account_NAME_1]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),66,$('input[name=bank_CODE_2]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),67,$('input[name=bank_NAME_2]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),68,$('input[name=account_NUMBER_2]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),69,$('input[name=account_NAME_2]').val()); 
+	 
+	            
+	               
 	            
 	            
 	           
@@ -281,6 +316,21 @@
 		      $('input[name=d_CODE_NAME]').val(mySheet.GetCellValue(Row,54));
 		      $('input[name=work_TYPE_CODE]').val(mySheet.GetCellValue(Row,55));
 		      $('input[name=work_TYPE_NAME]').val(mySheet.GetCellValue(Row,56));
+		      $('input[name=pay_TYPE_CODE]').val(mySheet.GetCellValue(Row,57));
+		      $('input[name=pay_TYPE_NAME]').val(mySheet.GetCellValue(Row,58));
+		      
+		      //급여정보  
+		      $('input[name=pay_GRADE_CODE]').val(mySheet.GetCellValue(Row,59));
+		      $('input[name=pay_GRADE_NAME]').val(mySheet.GetCellValue(Row,60)); 
+		      $('input[name=salary]').val(mySheet.GetCellValue(Row,61)); 
+		      $('input[name=bank_CODE_1]').val(mySheet.GetCellValue(Row,62));
+		      $('input[name=bank_NAME_1]').val(mySheet.GetCellValue(Row,63));
+		      $('input[name=account_NUMBER_1]').val(mySheet.GetCellValue(Row,64));
+		      $('input[name=account_NAME_1]').val(mySheet.GetCellValue(Row,65));
+		      $('input[name=bank_CODE_2]').val(mySheet.GetCellValue(Row,66));
+		      $('input[name=bank_NAME_2]').val(mySheet.GetCellValue(Row,67));
+		      $('input[name=account_NUMBER_2]').val(mySheet.GetCellValue(Row,68));
+		      $('input[name=account_NAME_2]').val(mySheet.GetCellValue(Row,69));
 		 
 		   
 		}
@@ -314,6 +364,10 @@
 	 //분류코드 팝업   
 	   function findPopup(tablename){
 	      var pop = window.open("findPopup.do?command="+tablename,"findPopup","width=342,height=520,resizable = no, scrollbars = no"); 
+
+	   }
+	   function findPopup(tablename, index){
+	      var pop = window.open("findPopup.do?command="+tablename+"&index="+index,"findPopup","width=342,height=520,resizable = no, scrollbars = no"); 
 
 	   }
 	   
@@ -401,11 +455,13 @@
 	top: -560px;
 	left: 500px;
 	height: 700px;
-	width: 1150px;
+	width: 1000px;
 	background: #EBEBEB;
 	border-radius: 5px;
 }
-
+.right a {
+text-decoration: none;
+}
 #searchBar {
 	background: #EBEBEB;
 	padding: 10px 30px;
@@ -431,7 +487,7 @@
 .tg {
 	border-collapse: collapse;
 	border-spacing: 0;
-	width: 70%;
+	width: 90%;
 	
 }
 
@@ -521,12 +577,18 @@
 	</div>
 	<div class="left">
 		<form id="searchBar" action="javascript:searchCondition();">
-			조회기준 
-			<input type="radio"  id="emp_radio"name="emp_radio" onclick="mySheet.DoSearch('${contextPath}/hm/p0004/searchList.do','command=doWork');" value="doWork">재직  
-			<input type="radio" id="emp_radio"name="emp_radio" onclick="mySheet.DoSearch('${contextPath}/hm/p0004/searchList.do','command=noWork');" value="noWork">퇴직  
-			<input type="radio" id="emp_radio"name="emp_radio" onclick="mySheet.DoSearch('${contextPath}/hm/p0004/searchList.do');" checked="checked" > 전체<br> 
-			사원검색   <input type="text" name="condition" id="condition" placeholder="사원번호"> 
-			<input type="submit" value="조회" style="background-color: #5E5E5E; color:white;">
+			조회기준 <input type="radio" id="emp_radio" name="emp_radio"
+				onclick="mySheet.DoSearch('${contextPath}/hm/p0004/searchList.do','command=doWork');"
+				value="doWork">재직 <input type="radio" id="emp_radio"
+				name="emp_radio"
+				onclick="mySheet.DoSearch('${contextPath}/hm/p0004/searchList.do','command=noWork');"
+				value="noWork">퇴직 <input type="radio" id="emp_radio"
+				name="emp_radio"
+				onclick="mySheet.DoSearch('${contextPath}/hm/p0004/searchList.do');"
+				checked="checked"> 전체<br> 사원검색 <input type="text"
+				name="condition" id="condition" placeholder="사원번호"> <input
+				type="submit" value="조회"
+				style="background-color: #5E5E5E; color: white;">
 		</form>
 
 		<script>createIBSheet("mySheet", "100%", "100%");</script>
@@ -558,7 +620,7 @@
 									class="fa fa-address-book" aria-hidden="true"></i><br>개<br>인<br>정<br>보</th>
 								<th class="tg-au0w" rowspan="18"></th>
 								<td class="tg-dm68" rowspan="7"><img alt="사원사진" src=""
-									width="80%" height="80%"></td>
+									width="187px" height="252px"></td>
 								<th class="tg-au0w" rowspan="8"></th>
 
 								<td class="tg-8thm">성명(영문)<input type="hidden" name="myRow"></td>
@@ -591,7 +653,7 @@
 							<tr>
 								<td class="tg-8thm">생년월일</td>
 								<td class="tg-v9i9" colspan="3"><input type="text"
-									name="birthDate" class="Datepicker" style="width: 330px;"></td>
+									name="birthDate" class="Datepicker" style="width: 330px;" readonly></td>
 							</tr>
 							<tr>
 								<td class="tg-8thm">전화번호</td>
@@ -615,8 +677,8 @@
 								<td class="tg-au0w" colspan="7"></td>
 							</tr>
 							<tr>
-								<td class="tg-lu1x" rowspan="9"><i class="fa fa-address-book"
-									aria-hidden="true"></i><br>거<br>주<br>정<br>보</td>
+								<td class="tg-lu1x" rowspan="9"><i
+									class="fa fa-id-card" aria-hidden="true"></i><br>거<br>주<br>정<br>보</td>
 
 								<td class="tg-8thm">주민등록주소</td>
 								<td class="tg-v9i9" rowspan="9"></td>
@@ -628,7 +690,7 @@
 									onclick="javascript:goPopup();" style="width: 380px;"></td>
 							</tr>
 							<tr>
-								<td class="tg-8thm">상세주소</td> 
+								<td class="tg-8thm">상세주소</td>
 								<td class="tg-v9i9" colspan="5"><input type="text"
 									id="addressDetail" name="addressDetail" style="width: 460px;"></td>
 							</tr>
@@ -662,12 +724,12 @@
 							</tr>
 							<tr>
 								<td class="tg-8thm">국적</td>
-								<td class="tg-v9i9" colspan="5"><input type="text"
-									id="COUNTRY_CODE" name="countryCODE" style="width: 50px;"><a
-									href="javascript:findPopup('COUNTRY');"><img
-										src="${contextPath}/resources/image/icons/icon_plus.png"></a>
-									<input type="text" id="COUNTRY_NAME" name="countryNAME"
-									style="width: 380px;"></td>
+								<td class="tg-v9i9" colspan="5"><a
+									href="javascript:findPopup('COUNTRY');"><input type="text"
+									id="COUNTRY_CODE" name="countryCODE" style="width: 50px;"><img
+										src="${contextPath}/resources/image/icons/icon_plus.png"><input type="text" id="COUNTRY_NAME" name="countryNAME"
+									style="width: 380px;"></a>
+									</td>
 							</tr>
 							<tr>
 								<td class="tg-8thm">병역구분</td>
@@ -703,55 +765,61 @@
 
 					<table class="tg">
 						<tr>
-							<th class="tg-lu1x" rowspan="5"><i class="fa fa-address-book"
-									aria-hidden="true"></i><br>입<br>사<br>정<br>보
+							<th class="tg-lu1x" rowspan="5"><i
+								class="fa fa-address-book" aria-hidden="true"></i><br>입<br>사<br>정<br>보
 							</th>
 							<td class="tg-au0w" rowspan="5"></td>
 							<td class="tg-8thm">입사일자</td>
 							<td class="tg-v9i9" rowspan="5"></td>
-							<td class="tg-v9i9"><input type="text" name="employee_JOIN_DATE" class="Datepicker" style="width:230px;"></td>
+							<td class="tg-v9i9"><input type="text"
+								name="employee_JOIN_DATE" class="Datepicker"
+								style="width: 230px;" readonly></td>
 							<td class="tg-8thm">퇴사일자</td>
 							<td class="tg-v9i9" rowspan="5"></td>
-							<td class="tg-v9i9"><input type="text" name="employee_RESIGNATION_DATE" class="Datepicker" style="width:230px;"></td>
+							<td class="tg-v9i9"><input type="text"
+								name="employee_RESIGNATION_DATE" class="Datepicker"
+								style="width: 230px;"readonly></td>
 						</tr>
 						<tr>
 							<td class="tg-8thm">재직구분</td>
-							<td class="tg-v9i9">
-								<select name="work_STATUS" style="width:255px;">
+							<td class="tg-v9i9"><select name="work_STATUS"
+								style="width: 255px;">
 									<option value='재직'>1. 재직</option>
 									<option value='파견'>2. 파견</option>
 									<option value='휴직'>3. 휴직</option>
 									<option value='대기'>4. 대기</option>
 									<option value='퇴직'>5. 퇴직</option>
-								</select>
-							</td>
+							</select></td>
 							<td class="tg-8thm"></td>
 							<td class="tg-v9i9"></td>
 						</tr>
 						<tr>
 							<td class="tg-8thm">수습적용</td>
-							<td class="tg-v9i9">
-								<select name="probation_YN" style="width:255px;">
+							<td class="tg-v9i9"><select name="probation_YN"
+								style="width: 255px;">
 									<option value='N'>미적용</option>
 									<option value='Y'>적용</option>
-								</select>
-							</td>
+							</select></td>
 							<td class="tg-8thm">수습만료일</td>
-							<td class="tg-v9i9"><input type="text" name="probation_DATE" class="Datepicker" style="width:230px;"></td>
+							<td class="tg-v9i9"><input type="text" name="probation_DATE"
+								class="Datepicker" style="width: 230px;"readonly></td>
 						</tr>
 						<tr>
 							<td class="tg-8thm">근속기간포함</td>
-							<td class="tg-v9i9">
-								<select name="work_INCLUDE_YN" style="width:255px;">
+							<td class="tg-v9i9"><select name="work_INCLUDE_YN"
+								style="width: 255px;">
 									<option value='Y'>포함</option>
 									<option value='N'>미포함</option>
-								</select></td>
+							</select></td>
 							<td class="tg-8thm"></td>
 							<td class="tg-v9i9"></td>
 						</tr>
 						<tr>
 							<td class="tg-8thm">휴직기간</td>
-							<td class="tg-v9i9" colspan="2"><input type="text" name="leave_DATE_START" class="Datepicker" style="width:95px;"> ~ <input type="text" name="leave_DATE_END" class="Datepicker" style="width:95px;"></td>
+							<td class="tg-v9i9" colspan="2"><input type="text"
+								name="leave_DATE_START" class="Datepicker" style="width: 95px;" readonly>
+								~ <input type="text" name="leave_DATE_END" class="Datepicker"
+								style="width: 95px;" readonly></td>
 							<td class="tg-v9i9"></td>
 						</tr>
 						<tr>
@@ -759,108 +827,107 @@
 						</tr>
 						<tr>
 							<td class="tg-lu1x" rowspan="11"><i class="fa fa-id-card"
-									aria-hidden="true"></i><br>근<br>무<br>정<br>보
+								aria-hidden="true"></i><br>근<br>무<br>정<br>보
 							</td>
 							<td class="tg-au0w" rowspan="11"></td>
 							<td class="tg-8thm">부서</td>
 							<td class="tg-v9i9" rowspan="11"></td>
-							<td class="tg-v9i9" colspan="4"><input type="text"
-									id="DEPARTMENT_CODE" name="department_CODE" style="width: 50px;"><a
-									href="javascript:findPopup('DEPARTMENT');"><img
-										src="${contextPath}/resources/image/icons/icon_plus.png"></a>
-									<input type="text" id="DEPARTMENT_NAME" name="department_NAME"
-									style="width: 272px;">
-							</td>
+							<td class="tg-v9i9" colspan="4"><a
+								href="javascript:findPopup('DEPARTMENT');"><input type="text"
+								id="DEPARTMENT_CODE" name="department_CODE" style="width: 50px;" readonly><img
+									src="${contextPath}/resources/image/icons/icon_plus.png">
+								<input type="text" id="DEPARTMENT_NAME" name="department_NAME"
+								style="width: 272px;"></a></td>
 						</tr>
 						<tr>
 							<td class="tg-8thm">고용형태</td>
-							<td class="tg-v9i9" colspan="4"><input type="text"
-									id="WORK_TYPE_CODE" name="work_TYPE_CODE" style="width: 50px;"><a
-									href="javascript:findPopup('WORK_TYPE');"><img
-										src="${contextPath}/resources/image/icons/icon_plus.png"></a>
-									<input type="text" id="WORK_TYPE_NAME" name="work_TYPE_NAME"
-									style="width: 272px;"></td>
+							<td class="tg-v9i9" colspan="4"><a
+								href="javascript:findPopup('WORK_TYPE');"><input type="text"
+								id="WORK_TYPE_CODE" name="work_TYPE_CODE" style="width: 50px;" readonly><img
+									src="${contextPath}/resources/image/icons/icon_plus.png">
+								<input type="text" id="WORK_TYPE_NAME" name="work_TYPE_NAME"
+								style="width: 272px;"></a></td>
 						</tr>
 						<tr>
 							<td class="tg-8thm">직종</td>
-							<td class="tg-v9i9" colspan="4"><input type="text"
-									id="JOB_CLASS_CODE" name="job_CLASS_CODE" style="width: 50px;"><a
-									href="javascript:findPopup('JOB_CLASS');"><img
-										src="${contextPath}/resources/image/icons/icon_plus.png"></a>
-									<input type="text" id="JOB_CLASS_NAME" name="job_CLASS_NAME"
-									style="width: 272px;"></td>
+							<td class="tg-v9i9" colspan="4"><a
+								href="javascript:findPopup('JOB_CLASS');"><input type="text"
+								id="JOB_CLASS_CODE" name="job_CLASS_CODE" style="width: 50px;" readonly><img
+									src="${contextPath}/resources/image/icons/icon_plus.png">
+								<input type="text" id="JOB_CLASS_NAME" name="job_CLASS_NAME"
+								style="width: 272px;"></a></td>
 						</tr>
 						<tr>
 							<td class="tg-8thm">급여형태</td>
-							<td class="tg-v9i9" colspan="4"><input type="text"
-									id="PAY_TYPE_CODE" name="pay_TYPE_CODE" style="width: 50px;"><a
-									href="javascript:findPopup('PAY_TYPE');"><img
-										src="${contextPath}/resources/image/icons/icon_plus.png"></a>
-									<input type="text" id="PAY_TYPE_NAME" name="pay_TYPE_NAME"
-									style="width: 272px;"></td>
+							<td class="tg-v9i9" colspan="4"><a
+								href="javascript:findPopup('PAY_TYPE');"><input type="text"
+								id="PAY_TYPE_CODE" name="pay_TYPE_CODE" style="width: 50px;" readonly><img
+									src="${contextPath}/resources/image/icons/icon_plus.png">
+								<input type="text" id="PAY_TYPE_NAME" name="pay_TYPE_NAME"
+								style="width: 272px;"></a></td>
 						</tr>
 						<tr>
 							<td class="tg-8thm">프로젝트</td>
-							<td class="tg-v9i9" colspan="4"><input type="text"
-									id="PROJECT_CODE" name="project_CODE" style="width: 50px;"><a
-									href="javascript:findPopup('PROJECT');"><img
-										src="${contextPath}/resources/image/icons/icon_plus.png"></a>
-									<input type="text" id="PROJECT_NAME" name="project_NAME"
-									style="width: 272px;"></td>
+							<td class="tg-v9i9" colspan="4"><a
+								href="javascript:findPopup('PROJECT');"><input type="text"
+								id="PROJECT_CODE" name="project_CODE" style="width: 50px;" readonly><img
+									src="${contextPath}/resources/image/icons/icon_plus.png">
+								<input type="text" id="PROJECT_NAME" name="project_NAME"
+								style="width: 272px;"></a></td>
 						</tr>
 						<tr>
 							<td class="tg-8thm">근무조</td>
-							<td class="tg-v9i9" colspan="4"><input type="text"
-									id="WORK_GROUP_CODE" name="work_GROUP_CODE" style="width: 50px;"><a
-									href="javascript:findPopup('WORK_GROUP');"><img
-										src="${contextPath}/resources/image/icons/icon_plus.png"></a>
-									<input type="text" id="WORK_GROUP_NAME" name="work_GROUP_NAME"
-									style="width: 272px;"></td>
+							<td class="tg-v9i9" colspan="4"><a
+								href="javascript:findPopup('WORK_GROUP');"><input type="text"
+								id="WORK_GROUP_CODE" name="work_GROUP_CODE" style="width: 50px;" readonly><img
+									src="${contextPath}/resources/image/icons/icon_plus.png">
+								<input type="text" id="WORK_GROUP_NAME" name="work_GROUP_NAME"
+								style="width: 272px;"></a></td>
 						</tr>
 						<tr>
 							<td class="tg-8thm">직급</td>
-							<td class="tg-v9i9" colspan="4"><input type="text"
-									id="POSITION_CODE" name="position_CODE" style="width: 50px;"><a
-									href="javascript:findPopup('POSITION');"><img
-										src="${contextPath}/resources/image/icons/icon_plus.png"></a>
-									<input type="text" id="POSITION_NAME" name="position_NAME"
-									style="width: 272px;"></td>
+							<td class="tg-v9i9" colspan="4"><a
+								href="javascript:findPopup('POSITION');"><input type="text"
+								id="POSITION_CODE" name="position_CODE" style="width: 50px;" readonly><img
+									src="${contextPath}/resources/image/icons/icon_plus.png">
+								<input type="text" id="POSITION_NAME" name="position_NAME"
+								style="width: 272px;"></a></td>
 						</tr>
 						<tr>
 							<td class="tg-8thm">직책</td>
-							<td class="tg-v9i9" colspan="4"><input type="text"
-									id="DUTY_CODE" name="duty_CODE" style="width: 50px;"><a
-									href="javascript:findPopup('DUTY');"><img
-										src="${contextPath}/resources/image/icons/icon_plus.png"></a>
-									<input type="text" id="DUTY_NAME" name="duty_NAME"
-									style="width: 272px;"></td>
+							<td class="tg-v9i9" colspan="4"><a
+								href="javascript:findPopup('DUTY');"><input type="text"
+								id="DUTY_CODE" name="duty_CODE" style="width: 50px;" readonly><img
+									src="${contextPath}/resources/image/icons/icon_plus.png">
+								<input type="text" id="DUTY_NAME" name="duty_NAME"
+								style="width: 272px;"></a></td>
 						</tr>
 						<tr>
 							<td class="tg-8thm">직무</td>
-							<td class="tg-v9i9" colspan="4"><input type="text"
-									id="JOB_DIS_CODE" name="job_DIS_CODE" style="width: 50px;"><a
-									href="javascript:findPopup('JOB_DIS');"><img
-										src="${contextPath}/resources/image/icons/icon_plus.png"></a>
-									<input type="text" id="JOB_DIS_NAME" name="job_DIS_NAME"
-									style="width: 272px;"></td>
+							<td class="tg-v9i9" colspan="4"><a
+								href="javascript:findPopup('JOB_DIS');"><input type="text"
+								id="JOB_DIS_CODE" name="job_DIS_CODE" style="width: 50px;" readonly><img
+									src="${contextPath}/resources/image/icons/icon_plus.png">
+								<input type="text" id="JOB_DIS_NAME" name="job_DIS_NAME"
+								style="width: 272px;"></a></td>
 						</tr>
 						<tr>
 							<td class="tg-8thm">분류코드</td>
-							<td class="tg-v9i9" colspan="4"><input type="text"
-									id="D_CODE_CODE" name="d_CODE_CODE" style="width: 50px;"><a
-									href="javascript:findPopup('D_CODE');"><img
-										src="${contextPath}/resources/image/icons/icon_plus.png"></a>
-									<input type="text" id="D_CODE_NAME" name="d_CODE_NAME"
-									style="width: 272px;"></td>
+							<td class="tg-v9i9" colspan="4"><a
+								href="javascript:findPopup('D_CODE');"><input type="text"
+								id="D_CODE_CODE" name="d_CODE_CODE" style="width: 50px;" readonly><img
+									src="${contextPath}/resources/image/icons/icon_plus.png">
+								<input type="text" id="D_CODE_NAME" name="d_CODE_NAME"
+								style="width: 272px;"></a></td>
 						</tr>
 						<tr>
 							<td class="tg-8thm">퇴직사유</td>
-							<td class="tg-v9i9" colspan="4"><input type="text"
-									id="OUT_REASON_CODE" name="out_REASON_CODE" style="width: 50px;"><a
-									href="javascript:findPopup('OUT_REASON');"><img
-										src="${contextPath}/resources/image/icons/icon_plus.png"></a>
-									<input type="text" id="OUT_REASON_NAME" name="out_REASON_NAME"
-									style="width: 272px;"></td>
+							<td class="tg-v9i9" colspan="4"><a
+								href="javascript:findPopup('OUT_REASON');"><input type="text"
+								id="OUT_REASON_CODE" name="out_REASON_CODE" style="width: 50px;" readonly><img
+									src="${contextPath}/resources/image/icons/icon_plus.png">
+								<input type="text" id="OUT_REASON_NAME" name="out_REASON_NAME"
+								style="width: 272px;"></a></td>
 						</tr>
 					</table>
 
@@ -869,12 +936,71 @@
 			</div>
 			<div class="ib-tab-contents__item">
 				<div id='ib-container3'>
-					
-<form action="${contextPath}/hm/p0004/saveFile.do" method="post"
-						enctype="multipart/form-data">
-						<input type="file" name="file" /> <input type="submit"
-							value="서버전달" />
-					</form>
+
+					<table class="tg">
+						<tr>
+							<th class="tg-lu1x" rowspan="7"><i class="fa fa-id-card"
+								aria-hidden="true"></i><br>급<br>여<br>정<br>보
+							</th>
+							<td class="tg-au0w" rowspan="7"></td>
+							<td class="tg-8thm">호봉</td>
+							<td class="tg-v9i9" rowspan="7"></td>
+							<td class="tg-v9i9"><a
+									href="javascript:findPopup('PAY_GRADE');"><input type="text"
+									id="PAY_GRADE_CODE" name="pay_GRADE_CODE" style="width: 50px;"readonly><img
+										src="${contextPath}/resources/image/icons/icon_plus.png">
+									<input type="text" id="PAY_GRADE_NAME" name="pay_GRADE_NAME"
+									style="width: 170px;"></a></td>
+							<td class="tg-8thm">기본급</td>
+							<td class="tg-v9i9"></td>
+							<td class="tg-v9i9"><input type="text" id="salary" name="salary"
+									style="width: 150px;"> 원</td>
+						</tr>
+						<tr>
+							<td class="tg-v9i9"></td>
+							<td class="tg-v9i9" colspan="4"></td>
+						</tr>
+						<tr>
+							<td class="tg-8thm">급여이체은행</td>
+							<td class="tg-v9i9" colspan="4"><a
+								href="javascript:findPopup('BANK','_1');"><input type="text"
+								id="BANK_CODE_1" name="bank_CODE_1" style="width: 80px;"readonly><img
+									src="${contextPath}/resources/image/icons/icon_plus.png">
+								<input type="text" id="BANK_NAME_1" name="bank_NAME_1"
+								style="width: 470px;" readonly></a></td>
+						</tr>
+						<tr>
+							<td class="tg-8thm">계좌번호</td>
+							<td class="tg-v9i9"><input type="text" id="account_NUMBER_1" name="account_NUMBER_1"
+								style="width: 250px;"></td>
+							<td class="tg-8thm">예금주</td>
+							<td class="tg-v9i9"></td>
+							<td class="tg-v9i9"><input type="text" id="account_NAME_1" name="account_NAME_1"
+								style="width: 150px;"></td>
+						</tr>
+						<tr>
+							<td class="tg-v9i9"></td>
+							<td class="tg-v9i9" colspan="4"></td>
+						</tr>
+						<tr>
+							<td class="tg-8thm">급여이체은행</td>
+							<td class="tg-v9i9" colspan="4"><a
+								href="javascript:findPopup('BANK','_2');"><input type="text"
+								id="BANK_CODE_2" name="bank_CODE_2" style="width: 80px;"readonly><img
+									src="${contextPath}/resources/image/icons/icon_plus.png">
+								<input type="text" id="BANK_NAME_2" name="bank_NAME_2"
+								style="width: 470px;" readonly></a></td>
+						</tr>
+						<tr>
+							<td class="tg-8thm">계좌번호</td>
+							<td class="tg-v9i9"><input type="text" id="account_NUMBER_2" name="account_NUMBER_2"
+								style="width: 250px;"></td>
+							<td class="tg-8thm">예금주</td>
+							<td class="tg-v9i9"></td>
+							<td class="tg-v9i9"><input type="text" id="account_NAME_2" name="account_NAME_2"
+								style="width: 150px;"></td>
+						</tr>
+					</table>
 
 				</div>
 			</div>
