@@ -48,7 +48,14 @@ public class HM_P0018ControllerImpl implements HM_P0018Controller{
 	
 		return mav;
 	}
+	@Override
+	@RequestMapping(value = "hm/p0018/home2_p02.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView home2PopUP2Init(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("hm/hm_p0018/p0018_home2_p02");
 	
+		return mav;
+	}
 	@Override
 	@RequestMapping(value = "hm/p0018/searchInit2.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView EduInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -65,6 +72,16 @@ public class HM_P0018ControllerImpl implements HM_P0018Controller{
 	
 		return mav;
 	} 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	@Override
@@ -84,8 +101,6 @@ public class HM_P0018ControllerImpl implements HM_P0018Controller{
         return resultMap;
 	}
 	
-
-	
 	@Override
 	@RequestMapping(value = "/hm/p0018/home2Search_p01.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
@@ -102,9 +117,88 @@ public class HM_P0018ControllerImpl implements HM_P0018Controller{
         
         return resultMap;
 	}
+	@Override
+	@RequestMapping(value = "/hm/p0018/home2Search_p02.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map home2_p02Search(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>(); // 검색조건
+		Map<String, Object> resultMap = new HashMap<String, Object>(); // 조회결과
+		
+
+		//데이터 조회
+		List<HM_P0018VO> data = hM_P0018Service.employeeSearch(searchMap);
+        resultMap.put("Data", data);
+        
+        
+        return resultMap;
+	}
+		
+	@Override
+	@RequestMapping(value = "/hm/p0018/emplyoeeListSearch.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map emplyoeeListSearch(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>(); // 검색조건
+		Map<String, Object> resultMap = new HashMap<String, Object>(); // 조회결과
+		
+		searchMap.put("eduCode", request.getParameter("eduCode"));
+		System.out.println("컨트롤러######"+request.getParameter("eduCode"));
+		List<HM_P0018VO> data = hM_P0018Service.emplyoeeListSearch(searchMap);
+        resultMap.put("Data", data);
+        
+        
+        return resultMap;
+	}
+	
+
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@Override
+	@RequestMapping(value = "hm/p0018/emplyoeeListsaveData.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map emplyoeeListsaveData(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, String[]> dataMap = new HashMap<String, String[]>(); 
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+		String param=request.getParameter("param");
+		
+		
+		Enumeration enu = request.getParameterNames();
+		while (enu.hasMoreElements()) {
+			String name = (String) enu.nextElement();
+			String[] values = request.getParameterValues(name);
+			dataMap.put(name, values);
+		}
+		
+		Map<String, String> result = new HashMap<String, String>();
+		try {
+			hM_P0018Service.emplyoeeListsaveData(dataMap,param);	
+			result.put("Code","0");
+			result.put("Message","저장성공");
+		}catch(Exception e) {
+			result.put("Code","-1");
+			result.put("Message","저장실패");
+			e.printStackTrace();
+		}
+		
+		resultMap.put("Result", result); 
+		
+        return result;
+	}
 	
 	@Override
 	@RequestMapping(value = "hm/p0018/saveData.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -137,6 +231,7 @@ public class HM_P0018ControllerImpl implements HM_P0018Controller{
 		
         return result;
 	}
+	
 	
 
 }

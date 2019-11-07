@@ -8,7 +8,6 @@
 <meta charset="UTF-8">
 <title>회사등록</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="${contextPath}/resources/css/style.css">
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibsheetinfo.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibsheet.js"></script>
@@ -93,7 +92,7 @@
 	//로우 클릭시
 	function mySheet_OnClick(Row, Col){
 		//alert("row"+Row+"col"+Col);
-
+console.log(Row,Col);
 		if(Row!=0){
 			$('input[name=myRow]').val(Row);
 			$('input[name=employee_TRAINING_DATE_COUNT]').val(mySheet.GetCellValue(Row,6));

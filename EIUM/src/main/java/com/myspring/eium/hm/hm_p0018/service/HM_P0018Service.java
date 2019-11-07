@@ -13,4 +13,11 @@ public interface HM_P0018Service {
 
 	public void saveData(Map<String, String[]> dataMap)throws DataAccessException;
 
+	List<HM_P0018VO> emplyoeeListSearch(Map<String, Object> searchMap) throws DataAccessException;
+	
+	
+	void emplyoeeListsaveData(Map<String, String[]> dataMap, String param) throws DataAccessException;
+
+	public List<HM_P0018VO> employeeSearch(Map<String, Object> searchMap) throws DataAccessException;
+
 }

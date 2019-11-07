@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>교육코드검색팝업</title>
 <script src="${contextPath}/resources/ibsheet/ibsheetinfo.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibsheet.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibleaders.js"></script>
@@ -20,7 +20,7 @@ function LoadPage(){
 	initSheet.Cfg={SearchMode:smLazyLoad,ToolTip:1};
 	initSheet.HeaderMode = {Sort:1,ColMove:1,ColResize:1,HeaderCheck:1};
 	initSheet.Cols=[
-		{Header:"NO",Type:"Text",Width:100,SaveName:"sequance",Align:"Center"},
+		{Header:"NO",Type:"Seq",Width:100,SaveName:"seq",Align:"Center"},
 		{Header:"교육코드",Type:"Text",Width:100,SaveName:"employee_TRAINING_CODE",Align:"Center"},
 		{Header:"교육명",Type:"Text",Width:100,SaveName:"employee_TRAINING_NAME",Align:"Center"},
 		{Header:"시작일",Type:"Text",Width:100,SaveName:"employee_TRAINING_START_DATE",Align:"Center"},

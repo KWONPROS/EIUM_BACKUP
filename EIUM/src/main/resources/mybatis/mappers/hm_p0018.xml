@@ -18,7 +18,10 @@
         <result property="EMPLOYEE_TRAINING_PEOPLE" column="EMPLOYEE_TRAINING_PEOPLE" />
         <result property="EMPLOYEE_TRAINING_IN_OUT" column="EMPLOYEE_TRAINING_IN_OUT" />
 	</resultMap> 
- 
+
+	
+	
+	 
 	<select id="searchList" resultMap="P0018resultVO" parameterType="java.util.Map"> 
 			<choose>
 			<when test= "eduCode != ''  and  eduCode != null">
@@ -39,6 +42,7 @@
 	
 			
 	</select>
+	
 	
 	<update id="updateData" parameterType="java.util.Map">
 		update EMPLOYEE_TRAINING
@@ -65,9 +69,51 @@
 	</insert>	
 	
 	<delete id="deleteData" parameterType="java.util.Map">
-		delete EMPLOYEE_TRAINING
-		where EMPLOYEE_TRAINING_CODE = #{employee_TRAINING_CODE}
+		delete EMPLOYEE_TRAINING_LIST
+		where EMPLOYEE_CODE = #{employee_CODE}
 	</delete>
 
 
+
+ 
+	<select id="emplyoeeListSearch" resultMap="P0018resultVO" parameterType="java.util.Map"> 
+    <![CDATA[
+	select el.EMPLOYEE_CODE ,e.EMPLOYEE_NAME ,d.DEPARTMENT_NAME,p.POSITION_NAME,el.EMPLOYEE_TRAINING_CODE
+	from EMPLOYEE_WORK ew,EMPLOYEE_TRAINING_LIST el,department d,position p,employee e
+	where el.employee_code = e.employee_code
+    and e.employee_code= ew.employee_code
+	and ew.department_code=d.department_code
+	and ew.position_code=p.position_code
+	and EMPLOYEE_TRAINING_CODE=#{eduCode}
+			]]>
+	</select>
+	
+
+	
+	<update id="emplyoeeListupdateData" parameterType="java.util.Map">
+		update EMPLOYEE_TRAINING_LIST
+		set  employee_CODE=#{employee_CODE}
+		where employee_CODE=#{employee_CODE}
+
+	</update>	
+	
+ <insert id="emplyoeeListinsertData" parameterType="java.util.Map">
+		insert into EMPLOYEE_TRAINING_LIST(employee_CODE,EMPLOYEE_TRAINING_CODE,EMPLOYEE_TRAINING_LIST_CODE) 
+		values(#{employee_CODE},#{employee_TRAINING_CODE,jdbcType=VARCHAR},NO_EMPLOYEE_TRAINING_LIST_CODE.NEXTVAL)
+	</insert>	
+	
+	<delete id="emplyoeeListdeleteData" parameterType="java.util.Map">
+		delete EMPLOYEE_TRAINING
+		where EMPLOYEE_TRAINING_CODE = #{employee_TRAINING_CODE}
+	</delete>
+	
+	
+	 
+	<select id="employeeSearch" resultMap="P0018resultVO" parameterType="java.util.Map"> 
+    <![CDATA[
+	SELECT EMPLOYEE_CODE,EMPLOYEE_NAME
+	FROM EMPLOYEE
+			]]>
+	</select>
+	
 </mapper>
