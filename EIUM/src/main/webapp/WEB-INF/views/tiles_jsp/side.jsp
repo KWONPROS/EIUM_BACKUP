@@ -152,7 +152,7 @@ $(document).ready(function(){
 		{
 			widthTabBar: "100%",
 			heightTabBar:"45px",
-			heightContents:"calc(100% - 40px)",
+			heightContents:"100%",
 			 themes: {
 			  tabs: "material_black",
 			  contents: "",

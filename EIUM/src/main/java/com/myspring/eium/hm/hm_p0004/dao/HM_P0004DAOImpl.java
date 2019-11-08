@@ -19,6 +19,9 @@ import com.myspring.eium.hm.hm_p0004.vo.HM_P0004VO;
 public class HM_P0004DAOImpl implements HM_P0004DAO {
 	@Autowired
 	private SqlSession sqlSession;
+	@Autowired
+	HM_P0004VO p0004Vo;
+	
 
 	@Override
 	public List<HM_P0004VO> searchList(Map<String, Object> searchMap) throws DataAccessException {
@@ -39,6 +42,7 @@ public class HM_P0004DAOImpl implements HM_P0004DAO {
 	}
 
 
+
 	@Override
 	public void updateData(Map<String, String> row) throws DataAccessException {
 		sqlSession.update("mapper.hm_p0004.updateData", row);
@@ -50,5 +54,17 @@ public class HM_P0004DAOImpl implements HM_P0004DAO {
 	public void deleteData(Map<String, String> row) throws DataAccessException {
 		sqlSession.update("mapper.hm_p0004.deleteData", row);
 	}
+	
+	@Override
+	public void saveFile(Map<String, Object> dataMap ) throws DataAccessException {
+		
+		sqlSession.update("mapper.hm_p0004.insertFile", dataMap);
+	}
+	@Override
+	public Map<String, Object> getByteImage(Map<String, Object> searchMap) {
+		return sqlSession.selectOne("mapper.hm_p0004.getByteImage" ,searchMap);
+	}
+
+	
 
 }

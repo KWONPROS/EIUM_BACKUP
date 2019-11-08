@@ -25,6 +25,8 @@ public interface HM_P0004Controller {
 	public ModelAndView findAddress(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map searchList2(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView findPopup(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public Map uploadContent(MultipartHttpServletRequest req) throws Exception;
+	public ResponseEntity<byte[]> getByteImage(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 	
 	

@@ -18,6 +18,7 @@ public interface HM_P0004Service {
 	public List<HM_P0004VO> searchList(Map<String, Object> searchMap) throws DataAccessException;
 	public void saveData(Map<String, String[]> dataMap) throws DataAccessException;
 	public List<HM_P0004VO> searchList2(Map<String, Object> searchMap) throws DataAccessException;
+	public void saveFile(Map<String,Object> dataMap);
 	
 
 }
