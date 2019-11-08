@@ -7,9 +7,14 @@
 	<resultMap id="P0001resultVO" type="HM_P0001VO">
 		<result property="position_CODE" column="POSITION_CODE" />
         <result property="position_NAME" column="POSITION_NAME" />
+        <result property="pay_GRADE_CODE" column="PAY_GRADE_CODE"/>
+        <result property="pay_GRADE_NAME" column="PAY_GRADE_NAME" />
+        <result property="start_DATE" column="START_DATE" />
+        <result property="end_DATE" column="END_DATE"/>
+        <result property="salary" column="SALARY" />
 	</resultMap> 
- 
-	<select id="searchList" resultMap="P0001resultVO" parameterType="java.util.Map"> 
+ <!-- //////////////////////////////////////POSITION_SEARCH///////////////////// -->
+	<select id="POSITION_searchList" resultMap="P0001resultVO" parameterType="java.util.Map"> 
       <![CDATA[
          select POSITION_CODE,POSITION_NAME
          from POSITION
@@ -17,22 +22,30 @@
       
 	</select>
 	
-	<!-- ///////////////////////////////////POSITION_CODE_SEARCH////////////// -->
+	<!-- ///////////////////////////////////PAY_GRADE_SEARCH////////////// -->
 	
-	<resultMap id="P0001_01resultVO" type="HM_P0001_01VO" >
-		<result property="position_CODE" column="POSITION_CODE" />
-		<result property="pay_GRADE" column="PAY_GRADE" />
-		<result property="salary" column="SALARY" />
-	</resultMap>
-	
-	<select id="searchList_01" resultMap="P0001_01resultVO">
+	<select id="PAY_GRADE_searchList" resultMap="P0001resultVO" parameterType="java.util.Map">
 	<![CDATA[
-		select PAY_GRADE, SALARY
-		from PAY_GRADE_TABLE
-		where TRIM(position_CODE) = #{P_POSITION_CODE, jdbcType=VARCHAR}
+		select PG.PAY_GRADE_CODE, PG.PAY_GRADE_NAME, PGT.SALARY
+		from POSITION P, PAY_GRADE PG, PAY_GRADE_TABLE PGT
+		where P.position_CODE = PGT.position_CODE 
+		AND PG.pay_GRADE_CODE = PGT.pay_GRADE_CODE 
+		AND TRIM(PGT.position_CODE) = #{P_POSITION_CODE, jdbcType=VARCHAR}
 	]]>
 	</select>
 	
+	<!-- ///////////////////////////////////PAY_GRADE_TABLE_SEARCH////////////// -->
+	
+	<select id="PAY_GRADE_TABLE_searchList" resultMap="P0001resultVO" parameterType="java.util.Map">
+	<![CDATA[
+		select PGT.POSITION_CODE, PGT.PAY_GRADE_CODE, PGT.START_DATE, PGT.END_DATE
+		from POSITION P, PAY_GRADE PG, PAY_GRADE_TABLE PGT
+		where P.position_CODE = PGT.position_CODE 
+		AND PG.pay_GRADE_CODE = PGT.pay_GRADE_CODE
+		AND TRIM(PGT.pay_GRADE_CODE) = #{P_PAY_GRADE_CODE, jdbcType=VARCHAR} 
+		AND TRIM(PGT.position_CODE) = #{PP_POSITION_CODE, jdbcType=VARCHAR}
+	]]>
+	</select>
 	
 	<!-- ///////////////////////////////////PAY_GRADE_TABLE_INSERT_UPDATE_DELETE/////////////////////////////////////////////////-->
 	<update id="updateData" parameterType="java.util.Map">
@@ -40,7 +53,7 @@
 		set  
 		     SALARY = #{salary}
 		   
-		where TRIM(POSITION_CODE) = #{p_position_CODE}
+		where TRIM(PAY_GRADE) = #{pay_GRADE} AND TRIM(POSITION_CODE) = #{p_position_CODE}
 	</update>	
 	
  	<insert id="insertData" parameterType="java.util.Map">

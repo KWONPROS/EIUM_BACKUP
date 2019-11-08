@@ -111,6 +111,7 @@ public class HM_P0004ControllerImpl implements HM_P0004Controller {
 	public ModelAndView findPopup(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView("/hm/hm_p0004/p0004_home_p02");
 		mav.addObject("command", request.getParameter("command"));
+		mav.addObject("index", request.getParameter("index"));
 		return mav;
 	}
 	@Override

@@ -28,7 +28,7 @@
 		IBS_InitSheet( mySheet , initSheet);
   
 		mySheet.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
-		mySheet.SetSheetHeight(400);
+		mySheet.SetSheetHeight(440);
 		
 		
 		//아이비시트2 -----------------------------------------------------------------------------------------------------
@@ -37,17 +37,17 @@
 		initSheet2.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0,MergeSheet:msHeaderOnly};
 		initSheet2.HeaderMode = {Sort:1,ColMove:1,ColResize:10,HeaderCheck:1};
 		initSheet2.Cols = [
-	     	{Header:"상태|상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
-	        {Header:"삭제|삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},	
-			{Header:"직급코드|직급코드",Type:"Text",SaveName:"temp_CODE"},
-	        {Header:"호봉|호봉",Type:"Text",SaveName:"pay_GRADE",MinWidth:50 ,KeyField:1, Align:"Center","UpdateEdit":0},			
+			{Header:"tmp직급코드|직급코드",Type:"Text",SaveName:"temp_POSITION_CODE"},
+			{Header:"tmp호봉코드|호봉코드",Type:"Text",SaveName:"temp_PAY_GRADE_CODE"},
+			{Header:"호봉코드|호봉코드",Type:"Text",SaveName:"pay_GRADE_CODE"},
+	        {Header:"호봉|호봉",Type:"Text",SaveName:"pay_GRADE_NAME",MinWidth:50 ,KeyField:1, Align:"Center","UpdateEdit":0},			
 			{Header:"호봉테이블|기본급",Type:"Int",SaveName:"salary",MinWidth:90 , Align:"Center"},
 			{Header:"합계|합계",Type:"Int",SaveName:"tot_salary",MinWidth:90 , Align:"Center", CalcLogic:"|4|"}
 		];   
 		IBS_InitSheet( mySheet2 , initSheet2);
   
 		mySheet2.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
-		/* mySheet2.SetSheetHeight(400); */
+		mySheet2.SetSheetHeight(330);
 		
 		
 		//아이비시트3 -----------------------------------------------------------------------------------------------------
@@ -76,11 +76,12 @@
 			case "search": //조회
 				mySheet2.DoSearch("${contextPath}/hm/p0001/searchList2.do","position_CODE="+mySheet.GetCellValue(mySheet.GetSelectRow(),0));
 				alert(mySheet.GetCellValue(mySheet.GetSelectRow(),0));
-				mySheet2.SetCellValue(0, 2, mySheet.GetCellValue(mySheet.GetSelectRow(),0));
+				mySheet2.SetCellValue(0, 0, mySheet.GetCellValue(mySheet.GetSelectRow(),0));
 				break;
 				
 			case "reload": //초기화
 				mySheet2.RemoveAll();
+				mySheet3.RemoveAll();
 				break;
 			case "save": // 저장
 				var tempStr = mySheet2.GetSaveString();
@@ -94,15 +95,42 @@
 		}
 	}
 	
-	//로우 클릭시
+	//로우 클릭시 (직급코드 선택시)
 	function mySheet_OnClick(Row) {
 		if(Row!=0){
-			mySheet2.DoSearch("${contextPath}/hm/p0001/searchList2.do", "position_CODE=" + mySheet.GetCellValue(Row, 0));
 			alert(mySheet.GetCellValue(Row, 0));
-			mySheet2.SetCellValue(0, 2, mySheet.GetCellValue(Row,0));
-			/* mySheet3.DoSearch("${contextPath}/hm/p0001/serchList3.do", ) */
+			mySheet2.DoSearch("${contextPath}/hm/p0001/searchList2.do", "position_CODE=" + mySheet.GetCellValue(Row, 0));
+			mySheet2.SetCellValue(0, 0, mySheet.GetCellValue(Row,0));
 		}
 	}  
+	//직급코드 선택후 호봉코드를 선택시(1번째) - 시작연월 종료연월
+	function mySheet2_OnSearchEnd(code,msg){
+		mySheet2.SetCellValue(0, 1, mySheet2.GetCellValue(2, 2));
+		mySheet3.DoSearch("${contextPath}/hm/p0001/searchList3.do", "position_CODE2=" + mySheet2.GetCellValue(0,0) + "&pay_GRADE_CODE=" + mySheet2.GetCellValue(0, 1));
+		
+	}
+	
+	//로우 클릭시 (호봉 선택시)
+	function mySheet2_OnClick(Row){
+		if(Row!=0){
+			alert(mySheet2.GetCellValue(Row,2));
+			mySheet2.SetCellValue(0, 1, mySheet2.GetCellValue(Row, 2));
+			mySheet3.DoSearch("${contextPath}/hm/p0001/searchList3.do", "position_CODE2=" + mySheet2.GetCellValue(0,0) + "&pay_GRADE_CODE=" + mySheet2.GetCellValue(0, 1));
+		}
+		
+		if(mySheet3.GetCellValue(3, 4)=="00000000"){
+			alert("0000000");
+		}
+	}
+	//시작연월 종료연월아래에 insert 띄워주기
+	function mySheet3_OnSearchEnd(code,msg){
+		mySheet3.DataInsert(-1);
+		alert(mySheet3.GetCellValue(2, 3));
+		if(mySheet3.GetCellValue(2,3)=="00000000"){
+			mySheet3.SetCellValue(2, 3, "");
+		}
+	}
+
 	
 	// 저장완료 후 처리할 작업
 	// code: 0(저장성공), -1(저장실패)
@@ -158,19 +186,19 @@
 background-color: #2C3E50;
 }
 .left{
-position: absolute;
+position: relative;
 top: 130px;
 left: 40px;
 }
 .right{
- position: absolute;
-top: 130px;
-left: 300px; 
+ position: relative;
+top: -270px;
+left: 330px; 
 }
 .bottom{
-position: absolute;
-top:  600px;
-left: 40px;
+position: relative;
+top:  -570px;
+left: 800px;
 }
 
 
@@ -196,7 +224,7 @@ left: 40px;
 <div class="title"> 
 <header> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 기초환경설정 : 호봉테이블등록</header>
 </div>
-	<div class="left"><script>createIBSheet("mySheet", "100%", "100%");</script></div>
+	<div class="left"><script>createIBSheet("mySheet", "1000px", "300px");</script></div>
 	<div class="right"><script>createIBSheet("mySheet2", "1500px", "300px");</script></div>
 	<div class="bottom"><script>createIBSheet("mySheet3", "1500px", "300px");</script></div>
 </body>

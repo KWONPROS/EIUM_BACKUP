@@ -19,11 +19,12 @@ public interface SM_P0003DAO {
 
 	public List<SM_P0003VO> searchpopup(Map<String, Object> searchMap) throws DataAccessException;
 
-	public void insertDatapopup(Map<String, String> row);
+	public void insertDatapopup(Map<String, String> row)throws DataAccessException;
 
-	public void updateDatapopup(Map<String, String> row);
+	public void updateDatapopup(Map<String, String> row)throws DataAccessException;
 
-	public void deleteDatapopup(Map<String, String> row); 
+	public void deleteDatapopup(Map<String, String> row)throws DataAccessException; 
+	
 	public List<SM_P0003VO> searchSiteList(Map<String, Object> searchMap)throws DataAccessException;
 
 	

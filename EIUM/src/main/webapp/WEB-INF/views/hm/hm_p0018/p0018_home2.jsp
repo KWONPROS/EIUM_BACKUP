@@ -8,7 +8,6 @@
 <meta charset="UTF-8">
 <title>회사등록</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="${contextPath}/resources/css/style.css">
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibsheetinfo.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibsheet.js"></script>
@@ -31,6 +30,14 @@
 	$("#eduName").val(eduName);
 	
 	LoadPage();
+};
+function setPopupValue(){
+	
+	 Pname=document.getElementById("Pname").value;
+	 Pcode=document.getElementById("Pcode").value;
+	 mySheet2.SetCellValue(row,col,Pcode);
+	 mySheet2.SetCellValue(row,col+1,Pname);
+	
 };
 
 
@@ -75,47 +82,51 @@
 			initSheet2.Cols = [
 					{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
 					{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},
-					{Header:"사원코드",Type:"Text",SaveName:"employee_TRAINING_CODE",MinWidth:80, Align:"Center"},
-					{Header:"사원명",Type:"Text",SaveName:"employee_TRAINING_NAME",MinWidth:170, Align:"Center"},			
-					{Header:"부서",Type:"Text",SaveName:"employee_TRAINING_START_DATE",MinWidth:80, Edit: 1, Align:"Center",Format:"Ymd"},			
-					{Header:"직책",Type:"Text",SaveName:"employee_TRAINING_END_DATE",MinWidth:80,Format:"Ymd"},			
+					{Header:"사원코드",Type:"Text",SaveName:"employee_CODE",MinWidth:80, Align:"Center"},
+					{Header:"사원명",Type:"Text",SaveName:"employee_NAME",MinWidth:170, Align:"Center",InsertEdit:0},			
+					{Header:"부서",Type:"Text",SaveName:"department_NAME",MinWidth:170,InsertEdit:0},			
+					{Header:"직책",Type:"Text",SaveName:"position_NAME",MinWidth:170,InsertEdit:0}	,
+					{Header:"교육코드",Type:"Text",SaveName:"EMPLOYEE_TRAINING_CODE",MinWidth:170,Hidden:1}	
 
 					];
-				IBS_InitSheet(mySheet2, initSheet2);
+				IBS_InitSheet(mySheet2,initSheet2);
+				if($("#eduCode").val()!=""){
+				var param = FormQueryStringEnc(document.frm);
+				mySheet2.DoSearch("${contextPath}/hm/p0018/emplyoeeListSearch.do",param);
+				}
+
 				
-				mySheet.SetEditableColorDiff(1); //편집불가능한 셀 표시 구분
+				mySheet2.SetEditableColorDiff(1); //편집불가능한 셀 표시 구분
 				/* mySheet.SetSheetHeight(1000); */
 		}
+
+
 	
 	/*Sheet 각종 처리*/
 	function doAction(sAction) {
 		switch(sAction){
-		case "search": // 조회
-			var param = FormQueryStringEnc(document.frm);
-			mySheet2.DoSearch("${contextPath}/hm/p0018/searchList.do",param);
-			
-	
-			break;
+
 		case "reload": //초기화
 			//조회 데이터 삭제
+			mySheet.RemoveAll();
 			mySheet2.RemoveAll();
+			$("#eduCode").val("");
+			$("#eduName").val("");
 			break;
 		case "save": //저장
-			var tempStr = mySheet.GetSaveString();
-			alert("서버로 전달되는 문자열 확인 : " + tempStr);
-			mySheet2.DoSave("${contextPath}/hm/p0018/saveData.do");		
-			break;
-		case "save2": //저장 JSON
-		//저장 문자열 추출
-			alert("저장될 문자열:" + JSON.stringify(mySheet.GetSaveJson()));
-			break;
+
+			var param ="param="+mySheet.GetCellValue(1,0);
+			mySheet2.DoSave("${contextPath}/hm/p0018/emplyoeeListsaveData.do",param);	
+
+	
+		
 		case "insert": //신규행 추가
 			var row = mySheet2.DataInsert(-1);
 			break;
 		}
-	}
 	
-
+	
+	}
 	
 
 	
@@ -138,7 +149,21 @@
 	  function showPopup() { window.open("${contextPath}/hm/p0018/home2_p01.do", "a", "width=600, height=500, left=100, top=50");
 	  
 	  }
-	 
+	  
+	function mySheet2_OnDblClick(Row,Col){
+			var status=mySheet2.GetCellValue(Row,0);
+
+			row=Row;
+			col=Col;
+			
+			if(Col=="2"&&status=="I"){
+				
+			window.open("${contextPath}/hm/p0018/home2_p02.do", "a", "width=500, height=700, left=100, top=50"); 
+
+			}
+
+		
+	}
 	
 </script>
 
@@ -241,10 +266,8 @@ border-radius: 2px;
 
     <div class="rightbuttons">
 	  <a href="javascript:doAction('reload')"  class="IBbutton">초기화</a>
-	  <a href="javascript:doAction('insert')"  class="IBbutton">추가</a>
-	  <a href="javascript:doAction('search')" class="IBbutton">조회</a>
+	  <a href="javascript:doAction('insert')"  class="IBbutton">사원추가</a>
 	  <a href="javascript:doAction('save')" class="IBbutton">저장</a>
-	  <a href="javascript:doAction('save2')" class="IBbutton">저장 JSON</a> 
 	</div>
   
 	
@@ -253,6 +276,8 @@ border-radius: 2px;
 	</form>
 	<input type="hidden" id="PeduCode">
 	<input type="hidden" id="PeduName">
+	<input type="hidden" id="Pcode">
+	<input type="hidden" id="Pname">
 
 </body>
 </html>

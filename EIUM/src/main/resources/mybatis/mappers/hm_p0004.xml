@@ -20,8 +20,7 @@
 		<result property="picture" column="PICTURE" />
 		<result property="zip_CODE" column="ZIP_CODE" />
 		<result property="res_ADDRESS" column="RESIST_ADDRESS" />
-		<result property="res_ADDRESS_DETAIL"
-			column="RESIST_ADDRESS_DETAIL" />
+		<result property="res_ADDRESS_DETAIL" column="RESIST_ADDRESS_DETAIL" />
 		<result property="res_ADDRESS_EN" column="RESIST_ADDRESS_EN" />
 		<result property="email" column="EMAIL" />
 		<result property="card_NUM" column="SUCURITY_CARD_NUMBER" />
@@ -33,14 +32,60 @@
 		<result property="hire_NUM" column="HIRE_NUMBER" />
 		<result property="mil_TYPE" column="MILITARY_TYPE" />
 		<result property="mil_NUM" column="MILITARY_NUMBER" />
+		
+		<result property="employee_JOIN_DATE" column="EMPLOYEE_JOIN_DATE" />
+		<result property="employee_RESIGNATION_DATE" column="EMPLOYEE_RESIGNATION_DATE" />
+		<result property="department_CODE" column="DEPARTMENT_CODE" />
+		<result property="department_NAME" column="DEPARTMENT_NAME" />
+		<result property="position_CODE" column="POSITION_CODE" />
+		<result property="position_NAME" column="POSITION_NAME" />
+		<result property="out_REASON_CODE" column="OUT_REASON_CODE" />
+		<result property="out_REASON_NAME" column="OUT_REASON_NAME" />
+		<result property="work_GROUP_CODE" column="WORK_GROUP_CODE" />
+		<result property="work_GROUP_NAME" column="WORK_GROUP_NAME" />
+		<result property="job_CLASS_CODE" column="JOB_CLASS_CODE" />
+		<result property="job_CLASS_NAME" column="JOB_CLASS_NAME" />
+		<result property="duty_CODE" column="DUTY_CODE" />  
+		<result property="duty_NAME" column="DUTY_NAME" />
+		<result property="job_DIS_CODE" column="JOB_DIS_CODE" />
+		<result property="job_DIS_NAME" column="JOB_DIS_NAME" />
+		<result property="project_CODE" column="PROJECT_CODE" />
+		<result property="project_NAME" column="PROJECT_NAME" />
+		<result property="work_STATUS" column="WORK_STATUS" />
+		<result property="probation_YN" column="PROBATION_YN" />
+		<result property="probation_DATE" column="PROBATION_DATE" />
+		<result property="work_INCLUDE_YN" column="WORK_INCLUDE_YN" />
+		<result property="leave_DATE_START" column="LEAVE_DATE_START" />
+		<result property="leave_DATE_END" column="LEAVE_DATE_END" />
+		<result property="d_CODE_CODE" column="D_CODE_CODE" />
+		<result property="d_CODE_NAME" column="D_CODE_NAME" />
+		<result property="work_TYPE_CODE" column="WORK_TYPE_CODE" />
+		<result property="work_TYPE_NAME" column="WORK_TYPE_NAME" />
+		<result property="pay_GRADE_CODE" column="PAY_GRADE_CODE" />
+		<result property="pay_GRADE_NAME" column="PAY_GRADE_NAME" />
+		<result property="pay_TYPE_CODE" column="PAY_TYPE_CODE" />
+		<result property="pay_TYPE_NAME" column="PAY_TYPE_NAME" />
+		
+		<result property="salary" column="SALARY" />
+		<result property="bank_CODE_1" column="BANK_CODE_1" />
+		<result property="bank_NAME_1" column="BANK_NAME_1" />
+		<result property="account_NUMBER_1" column="ACCOUNT_NUMBER_1" />
+		<result property="account_NAME_1" column="ACCOUNT_NAME_1" />
+		<result property="bank_CODE_2" column="BANK_CODE_2" />
+		<result property="bank_NAME_2" column="BANK_NAME_2" />
+		<result property="account_NUMBER_2" column="ACCOUNT_NUMBER_2" />
+		<result property="account_NAME_2" column="ACCOUNT_NAME_2" />
 
 
 	</resultMap>
 	<select id="searchList" resultMap="P0004resultVO"
 		parameterType="java.util.Map"> 
       <![CDATA[
-         select DISTINCT A.EMPLOYEE_CODE,A.EMPLOYEE_NAME,B.DEPARTMENT_NAME
-         ,C.EMPLOYEE_NAME_EN
+        select DISTINCT 
+        A.EMPLOYEE_CODE
+        ,A.EMPLOYEE_NAME
+        ,B.DEPARTMENT_NAME
+        ,C.EMPLOYEE_NAME_EN
 		,C.EMPLOYEE_NAME_HN
 		,C.FOREIGNER_YN
 		,C.RESIDENT_RESISTRATION_NUMBER
@@ -48,7 +93,7 @@
 		,C.BIRTH
 		,C.CONTACT
 		,C.FINAL_EDU_CODE
-		,C.FINAL_EDU_NAME
+		,E.FINAL_EDU_NAME
 		
 		,C.ZIP_CODE
 		,C.RESIST_ADDRESS
@@ -59,29 +104,96 @@
 		,C.HOUSEHOLD_YN
 		,C.HANDICAPPED_YN
 		,C.COUNTRY_CODE
-		,C.COUNTRY_NAME
+		,F.COUNTRY_NAME
 		,C.HIRE_TYPE
 		,C.HIRE_NUMBER
 		,C.MILITARY_TYPE
 		,C.MILITARY_NUMBER
+		
+		,G.EMPLOYEE_JOIN_DATE
+		,G.EMPLOYEE_RESIGNATION_DATE
+		,G.WORK_STATUS
+		,G.PROBATION_YN
+		,G.PROBATION_DATE
+		,G.WORK_INCLUDE_YN
+		,G.LEAVE_DATE_START
+		,G.LEAVE_DATE_END
+		,G.DEPARTMENT_CODE
+		,G.POSITION_CODE
+		,I.POSITION_NAME
+		,G.PAY_GRADE_CODE
+		,J.PAY_GRADE_NAME
+		,G.OUT_REASON_CODE
+		,L.OUT_REASON_NAME
+		,G.WORK_GROUP_CODE
+		,M.WORK_GROUP_NAME
+		,G.JOB_CLASS_CODE
+		,N.JOB_CLASS_NAME
+		,G.DUTY_CODE
+		,O.DUTY_NAME
+		,G.JOB_DIS_CODE
+		,P.JOB_DIS_NAME
+		,G.PROJECT_CODE
+		,Q.PROJECT_NAME
+		,G.D_CODE_CODE
+		,R.D_CODE_NAME
+		,G.WORK_TYPE_CODE
+		,S.WORK_TYPE_NAME
+		,G.PAY_TYPE_CODE
+		,T.PAY_TYPE_NAME
+		
+		,U.ACCOUNT_NUMBER_1
+		,U.ACCOUNT_NUMBER_2
+		,U.BANK_CODE_1
+		,U.BANK_CODE_2
+		,U.BANK_NAME_1
+		,U.BANK_NAME_2
+		,U.ACCOUNT_NAME_1
+		,U.ACCOUNT_NAME_2
+		,X.SALARY
          
-         
-         from EMPLOYEE A, DEPARTMENT B,EMPLOYEE_HR_INFO C
-         WHERE A.DEPARTMENT_CODE = B.DEPARTMENT_CODE
+         from EMPLOYEE A, DEPARTMENT B,EMPLOYEE_HR_INFO C, EMPLOYEE_WORK D, FINAL_EDU E, COUNTRY F, EMPLOYEE_WORK G, EMPLOYEE_SALARY H,POSITION I,
+          PAY_GRADE J, OUT_REASON L, WORK_GROUP M, JOB_CLASS N, DUTY O, JOB_DIS P, PROJECT Q, D_CODE R, WORK_TYPE S, PAY_TYPE T, EMPLOYEE_SALARY U,BANK W,PAY_GRADE_TABLE X
+         WHERE D.DEPARTMENT_CODE = B.DEPARTMENT_CODE
          AND A.EMPLOYEE_CODE = C.EMPLOYEE_CODE
+         AND A.EMPLOYEE_CODE = D.EMPLOYEE_CODE
+         AND A.EMPLOYEE_CODE = G.EMPLOYEE_CODE
+         AND A.EMPLOYEE_CODE = H.EMPLOYEE_CODE
+         AND A.EMPLOYEE_CODE = U.EMPLOYEE_CODE
+         
+         AND E.FINAL_EDU_CODE(+) = C.FINAL_EDU_CODE
+         AND F.COUNTRY_CODE(+) = C.COUNTRY_CODE
+         AND D.POSITION_CODE = I.POSITION_CODE(+)
+         AND D.PAY_GRADE_CODE = J.PAY_GRADE_CODE(+)
+         AND D.OUT_REASON_CODE = L.OUT_REASON_CODE(+)
+         AND D.WORK_GROUP_CODE = M.WORK_GROUP_CODE(+)
+         AND D.JOB_CLASS_CODE = N.JOB_CLASS_CODE(+)
+         AND D.DUTY_CODE = O.DUTY_CODE(+)
+         AND D.JOB_DIS_CODE = P.JOB_DIS_CODE(+)
+         AND D.PROJECT_CODE = Q.PROJECT_CODE(+)
+         AND D.D_CODE_CODE = R.D_CODE_CODE(+)
+         AND D.WORK_TYPE_CODE = S.WORK_TYPE_CODE(+)
+         AND D.PAY_TYPE_CODE = T.PAY_TYPE_CODE(+)
+         AND U.BANK_CODE_1 = W.BANK_CODE(+)
+         AND U.BANK_CODE_2 = W.BANK_CODE(+)
+         AND D.POSITION_CODE = X.POSITION_CODE(+)
+         AND D.PAY_GRADE_CODE = X.PAY_GRADE_CODE(+)
+         
+  
+        
       ]]>
-		<if test="condition != null">
+		<if test="condition != '' and condtion != null">
 			AND A.EMPLOYEE_CODE like '%'|| #{condition} || '%'
 		</if>
 		<choose>
 			<when test="command == 'doWork'">
-				AND A.EMPLOYEE_JOIN_DATE IS NOT null
+				AND D.EMPLOYEE_JOIN_DATE IS NOT null
 				AND
-				A.EMPLOYEE_RESIGNATION_DATE IS null
+				D.EMPLOYEE_RESIGNATION_DATE IS null
 			</when>
 			<when test="command == 'noWork'">
-				AND A.EMPLOYEE_JOIN_DATE IS NOT null
-				AND A.EMPLOYEE_RESIGNATION_DATE IS
+				AND D.EMPLOYEE_JOIN_DATE IS NOT null
+				AND D.EMPLOYEE_RESIGNATION_DATE IS
 				NOT null
 			</when>
 		</choose>
@@ -91,8 +203,9 @@
 	<select id="searchList2" resultType="hashmap"
 		parameterType="java.util.Map">
 
-		select *
-
+		select 
+		${command}_CODE,
+		${command}_NAME
 		from ${command}
 
 	</select>
@@ -109,7 +222,6 @@
 		,CONTACT= #{contact}
 		,FINAL_EDU_CODE=
 		#{final_EDU_CODE}
-		,FINAL_EDU_NAME= #{final_EDU_NAME}
 
 		,ZIP_CODE=
 		#{zip_CODE}
@@ -123,12 +235,54 @@
 		,HOUSEHOLD_YN= #{hh_YN}
 		,HANDICAPPED_YN= #{hc_YN}
 		,COUNTRY_CODE= #{country_CODE}
-		,COUNTRY_NAME=
-		#{country_NAME}
 		,HIRE_TYPE= #{hire_TYPE}
 		,HIRE_NUMBER= #{hire_NUM}
 		,MILITARY_TYPE= #{mil_TYPE}
 		,MILITARY_NUMBER= #{mil_NUM}
+		where
+		TRIM(EMPLOYEE_CODE) = #{emp_CODE}
+	</update>
+	<update id="updateData2" parameterType="java.util.Map">
+		update EMPLOYEE_WORK
+		set
+				
+		EMPLOYEE_JOIN_DATE = #{employee_JOIN_DATE}
+		,EMPLOYEE_RESIGNATION_DATE= #{employee_RESIGNATION_DATE}
+		,DEPARTMENT_CODE= #{department_CODE}
+		,POSITION_CODE= #{position_CODE}
+		,OUT_REASON_CODE= #{out_REASON_CODE}
+		,WORK_GROUP_CODE= #{work_GROUP_CODE}
+		,JOB_CLASS_CODE= #{job_CLASS_CODE}
+		,DUTY_CODE= #{duty_CODE}
+		,JOB_DIS_CODE= #{job_DIS_CODE}
+		,PROJECT_CODE= #{project_CODE}
+		,WORK_STATUS= #{work_STATUS}
+		,PROBATION_YN= #{probation_YN}
+		,PROBATION_DATE= #{probation_DATE}
+		,WORK_INCLUDE_YN= #{work_INCLUDE_YN}
+		,LEAVE_DATE_START= #{leave_DATE_START}
+		,LEAVE_DATE_END= #{leave_DATE_END}
+		,D_CODE_CODE= #{d_CODE_CODE}
+		,WORK_TYPE_CODE= #{work_TYPE_CODE}
+		,PAY_GRADE_CODE= #{pay_GRADE_CODE}
+		,PAY_TYPE_CODE= #{pay_TYPE_CODE}
+
+		where
+		TRIM(EMPLOYEE_CODE) = #{emp_CODE}
+	</update>
+	<update id="updateData3" parameterType="java.util.Map">
+		update EMPLOYEE_SALARY
+		set
+			
+		BANK_CODE_1 = #{bank_CODE_1}
+		,BANK_NAME_1= #{bank_NAME_1}
+		,ACCOUNT_NUMBER_1= #{account_NUMBER_1}
+		,ACCOUNT_NAME_1= #{account_NAME_1}
+		,BANK_CODE_2= #{bank_CODE_2}
+		,BANK_NAME_2= #{bank_NAME_2}
+		,ACCOUNT_NUMBER_2= #{account_NUMBER_2}
+		,ACCOUNT_NAME_2= #{account_NAME_2}
+	
 		where
 		TRIM(EMPLOYEE_CODE) = #{emp_CODE}
 	</update>
@@ -145,7 +299,6 @@
 		,BIRTH
 		,CONTACT
 		,FINAL_EDU_CODE
-		,FINAL_EDU_NAME
 
 		,ZIP_CODE
 		,RESIST_ADDRESS
@@ -163,7 +316,7 @@
 		MILITARY_NUMBER)
 
 		values(
-		#{employee_CODE}
+		#{emp_CODE}
 		,#{emp_NAME_EN}
 		,#{emp_NAME_HN}
 		,#{foreign_YN}
@@ -172,7 +325,6 @@
 		,#{birth}
 		,#{contact}
 		,#{final_EDU_CODE}
-		,#{final_EDU_NAME}
 
 		,#{zip_CODE}
 		,#{res_ADDRESS}
@@ -183,18 +335,85 @@
 		,#{hh_YN}
 		,#{hc_YN}
 		,#{country_CODE}
-		,#{country_NAME}
 		,#{hire_TYPE}
 		,#{hire_NUM}
 		,#{mil_TYPE}
 		,#{mil_NUM})
 	</insert>
+	
+	<insert id="insertData2" parameterType="java.util.Map">					
+		insert into EMPLOYEE_WORK(
+		EMPLOYEE_CODE
+		,EMPLOYEE_JOIN_DATE
+		,EMPLOYEE_RESIGNATION_DATE
+		,DEPARTMENT_CODE
+		,POSITION_CODE
+		,OUT_REASON_CODE
+		,WORK_GROUP_CODE
+		,JOB_CLASS_CODE
+		,DUTY_CODE
+		,JOB_DIS_CODE
+		,PROJECT_CODE
+		,WORK_STATUS
+		,PROBATION_YN
+		,PROBATION_DATE
+		,WORK_INCLUDE_YN
+		,LEAVE_DATE_START
+		,LEAVE_DATE_END
+		,D_CODE_CODE
+		,WORK_TYPE_CODE
+		,PAY_GRADE_CODE
+		,PAY_TYPE_CODE)
 
+		values(
+		#{emp_CODE}
+		,#{employee_JOIN_DATE}
+		,#{employee_RESIGNATION_DATE}
+		,#{department_CODE}
+		,#{position_CODE}
+		,#{out_REASON_CODE}
+		,#{work_GROUP_CODE}
+		,#{job_CLASS_CODE}
+		,#{duty_CODE}
+		,#{job_DIS_CODE}
+		,#{project_CODE}
+		,#{work_STATUS}
+		,#{probation_YN}
+		,#{probation_DATE}
+		,#{work_INCLUDE_YN}
+		,#{leave_DATE_START}
+		,#{leave_DATE_END}
+		,#{d_CODE_CODE}
+		,#{work_TYPE_CODE}
+		,#{pay_GRADE_CODE}
+		,#{pay_TYPE_CODE})
+	</insert>
+	
+	<insert id="insertData3" parameterType="java.util.Map">				
+		insert into EMPLOYEE_SALARY(
+		EMPLOYEE_CODE
+		,BANK_CODE_1
+		,BANK_NAME_1
+		,ACCOUNT_NUMBER_1
+		,ACCOUNT_NAME_1
+		,BANK_CODE_2
+		,BANK_NAME_2
+		,ACCOUNT_NUMBER_2
+		,ACCOUNT_NAME_2)
 
-
-	<delete id="deleteData" parameterType="java.util.Map">
-		delete EMPLOYEE_HR_INFO
+		values(
+		#{emp_CODE}
+		,#{bank_CODE_1}
+		,#{bank_NAME_1}
+		,#{account_NUMBER_1}
+		,#{account_NAME_1}
+		,#{bank_CODE_2}
+		,#{bank_NAME_2}
+		,#{account_NUMBER_2}
+		,#{account_NAME_2})
+	</insert>
+<delete id="deleteData" parameterType="java.util.Map">
+		delete EMPLOYEE
 		where TRIM(EMPLOYEE_CODE) = #{emp_CODE}
 	</delete>
-
 </mapper>

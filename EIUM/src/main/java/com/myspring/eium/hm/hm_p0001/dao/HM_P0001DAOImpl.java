@@ -11,7 +11,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.myspring.eium.hm.hm_p0001.vo.HM_P0001VO;
-import com.myspring.eium.hm.hm_p0001.vo.HM_P0001_01VO;
 
 
 
@@ -24,18 +23,24 @@ public class HM_P0001DAOImpl implements HM_P0001DAO {
 
 	@Override
 	public List<HM_P0001VO> searchList(Map<String, Object> searchMap) throws DataAccessException {
-		System.out.println("searchMAp: "+searchMap);
-		List<HM_P0001VO> list = sqlSession.selectList("mapper.hm_p0001.searchList", searchMap);
+		System.out.println("searchList1 - searchMap: "+searchMap);
+		List<HM_P0001VO> list = sqlSession.selectList("mapper.hm_p0001.POSITION_searchList", searchMap);
 		return list;
 	}
 	
 	@Override
-	public List<HM_P0001_01VO> searchList2(Map<String, String> searchMap) throws DataAccessException {
+	public List<HM_P0001VO> searchList2(Map<String, String> searchMap) throws DataAccessException {
 		System.out.println("searchList2 - searchMap: "+searchMap);
-		List<HM_P0001_01VO> list = sqlSession.selectList("mapper.hm_p0001.searchList_01", searchMap);
+		List<HM_P0001VO> list = sqlSession.selectList("mapper.hm_p0001.PAY_GRADE_searchList", searchMap);
 		return list;
 	}
 	
+	@Override
+	public List<HM_P0001VO> searchList3(Map<String, String> searchMap) throws DataAccessException {
+		System.out.println("searchList3 - searchMap: "+searchMap);
+		List<HM_P0001VO> list = sqlSession.selectList("mapper.hm_p0001.PAY_GRADE_TABLE_searchList", searchMap);
+		return list;
+	}
 	@Override
 	public void insertData(Map<String, String> row) throws DataAccessException {
 		sqlSession.update("mapper.hm_p0001.insertData", row);
@@ -56,7 +61,5 @@ public class HM_P0001DAOImpl implements HM_P0001DAO {
 	public void deleteData(Map<String, String> row) throws DataAccessException {
 		sqlSession.update("mapper.hm_p0001.deleteData", row);
 	}
-
-	
 
 }
