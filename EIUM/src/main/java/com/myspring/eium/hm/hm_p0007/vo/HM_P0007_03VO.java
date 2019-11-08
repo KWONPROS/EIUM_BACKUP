@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class HM_P0007_03VO {
-	private String code;
+	private String career_code;
 	private String employee_code;
 	private String company_name;
 	private String start_date;
@@ -23,8 +23,14 @@ public class HM_P0007_03VO {
 	
 
 
-	public String getCode() {
-		return code;
+
+
+
+
+
+
+	public String getCareer_code() {
+		return career_code;
 	}
 
 
@@ -32,8 +38,8 @@ public class HM_P0007_03VO {
 
 
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setCareer_code(String career_code) {
+		this.career_code = career_code;
 	}
 
 

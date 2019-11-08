@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class HM_P0007_08VO {
-	private String code;
+	private String business_trip_code;
 	private String employee_code;
 	private String country;
 	private String area;
@@ -19,9 +19,12 @@ public class HM_P0007_08VO {
 	private String user;
 
 	
-	
-	public String getCode() {
-		return code;
+
+
+
+
+	public String getBusiness_trip_code() {
+		return business_trip_code;
 	}
 
 
@@ -29,9 +32,12 @@ public class HM_P0007_08VO {
 
 
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setBusiness_trip_code(String business_trip_code) {
+		this.business_trip_code = business_trip_code;
 	}
+
+
+
 
 
 

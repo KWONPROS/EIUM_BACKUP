@@ -47,7 +47,7 @@
 
 
 	<resultMap id="p0007_02resultVO" type="HM_P0007_02VO">
-		<result property="code" column="code" />
+		<result property="education_code" column="education_code" />
 		<result property="employee_code" column="employee_code" />
 		<result property="school_name" column="school_name" />
 		<result property="start_date" column="start_date" />
@@ -64,15 +64,15 @@
 
 	<select id="searchEducation" resultMap="p0007_02resultVO">
       <![CDATA[
-         select code, school_name, start_date, end_date, available, major, minor, graduate_yn
+         select education_code, school_name, start_date, end_date, available, major, minor, graduate_yn
          from employee_education
          where employee_code = #{x}
                ]]>
 	</select>
 	
 	<insert id="insertEducation" parameterType="java.util.Map">
-		insert into employee_education(employee_code,school_name,start_date,end_date,available,major,minor,graduate_yn, int_user_id, int_date) 
-		values(#{x},#{school_name},#{start_date},#{end_date},#{available},#{major},#{minor}, #{graduate_yn}, #{user}, sysdate)
+		insert into employee_education(employee_code,education_code,school_name,start_date,end_date,available,major,minor,graduate_yn, int_user_id, int_date) 
+		values(#{x},education_code_seq.nextval,#{school_name},#{start_date},#{end_date},#{available},#{major},#{minor}, #{graduate_yn}, #{user}, sysdate)
 	</insert>	
 	
 	<update id="updateEducation" parameterType="java.util.Map">
@@ -86,21 +86,21 @@
 		   , graduate_yn = #{graduate_yn}
 		    , upt_user_id = #{user}
 		   , upt_date = sysdate
-		where code = #{code}
+		where education_code = #{education_code}
 	</update>	
 	
  
 	
 	<delete id="deleteEducation" parameterType="java.util.Map">
 		delete employee_education
-		where code = #{code}
+		where education_code = #{education_code}
 	</delete>
 	
 	<!--경력  -->
 
 
 	<resultMap id="p0007_03resultVO" type="HM_P0007_03VO">
-		<result property="code" column="code" />
+		<result property="career_code" column="career_code" />
 		<result property="employee_code" column="employee_code" />
 		<result property="company_name" column="company_name" />
 		<result property="start_date" column="start_date" />
@@ -119,15 +119,15 @@
 
 	<select id="searchCareer" resultMap="p0007_03resultVO">
       <![CDATA[
-         select code, company_name, start_date, end_date, sum_year, role, position, salary, reason, total_work
+         select career_code, company_name, start_date, end_date, sum_year, role, position, salary, reason, total_work
          from employee_career
          where employee_code = #{x}
                ]]>
 	</select>
 	
 	<insert id="insertCareer" parameterType="java.util.Map">
-		insert into employee_career(employee_code,company_name,start_date,end_date,sum_year,role,position,salary, reason, total_work, int_user_id, int_date) 
-		values(#{x},#{company_name},#{start_date},#{end_date},#{sum_year},#{role},#{position}, #{salary}, #{reason}, #{total_work}, #{user}, sysdate)
+		insert into employee_career(employee_code,career_code,company_name,start_date,end_date,sum_year,role,position,salary, reason, total_work, int_user_id, int_date) 
+		values(#{x},carrer_code_seq.nextval,#{company_name},#{start_date},#{end_date},#{sum_year},#{role},#{position}, #{salary}, #{reason}, #{total_work}, #{user}, sysdate)
 	</insert>	
 	
 	<update id="updateCareer" parameterType="java.util.Map">
@@ -143,21 +143,21 @@
 		   , total_work = #{total_work}
 		    , upt_user_id = #{user}
 		   , upt_date = sysdate
-		where code = #{code}
+		where career_code = #{career_code}
 	</update>	
 	
  
 	
 	<delete id="deleteCareer" parameterType="java.util.Map">
 		delete employee_career
-		where code = #{code}
+		where career_code = #{career_code}
 	</delete>
 	
 	<!--면허/자격  -->
 
 
 	<resultMap id="p0007_04resultVO" type="HM_P0007_04VO">
-		<result property="code" column="code" />
+		<result property="license_code" column="license_code" />
 		<result property="employee_code" column="employee_code" />
 		<result property="license_type" column="license_type" />
 		<result property="start_date" column="start_date" />
@@ -173,15 +173,15 @@
 
 	<select id="searchLicense" resultMap="p0007_04resultVO">
       <![CDATA[
-         select code, license_type, start_date, end_date, license_number, institute, bonus
+         select license_code, license_type, start_date, end_date, license_number, institute, bonus
          from employee_license
          where employee_code = #{x}
                ]]>
 	</select>
 	
 	<insert id="insertLicense" parameterType="java.util.Map">
-		insert into employee_license(employee_code,license_type,start_date,end_date,license_number,institute,bonus,int_user_id,int_date) 
-		values(#{x},#{license_type},#{start_date},#{end_date},#{license_number},#{institute},#{bonus},#{user},sysdate)
+		insert into employee_license(employee_code,license_code,license_type,start_date,end_date,license_number,institute,bonus,int_user_id,int_date) 
+		values(#{x},license_code_seq.nextval,#{license_type},#{start_date},#{end_date},#{license_number},#{institute},#{bonus},#{user},sysdate)
 	</insert>	
 	
 	<update id="updateLicense" parameterType="java.util.Map">
@@ -194,14 +194,14 @@
 		   , bonus = #{bonus}
 		   , upt_user_id = #{user}
 		   , upt_date = sysdate
-		where code = #{code}
+		where license_code = #{license_code}
 	</update>	
 	
  
 	
 	<delete id="deleteLicense" parameterType="java.util.Map">
 		delete employee_license
-		where code = #{code}
+		where license_code = #{license_code}
 	</delete>
 	
 <!--인사발령  -->
@@ -256,8 +256,8 @@
 	</select>
 	
 	<insert id="insertAssessment" parameterType="java.util.Map">
-		insert into hr_assessment(employee_code,hr_assessment_name,hr_assessment_test_start_date,hr_assessment_test_end_date,hr_assessment_date,hr_assessment_master,hr_assessment_reflection_pcnt,hr_assessment_score,hr_assessment_grade,int_user_id,int_date) 
-		values(#{x},#{hr_assessment_name},#{hr_assessment_test_start_date},#{hr_assessment_test_end_date},#{hr_assessment_date},#{hr_assessment_master},#{hr_assessment_reflection_pcnt},#{hr_assessment_score},#{hr_assessment_grade},#{user},sysdate)
+		insert into hr_assessment(employee_code,hr_assessment_code,hr_assessment_name,hr_assessment_test_start_date,hr_assessment_test_end_date,hr_assessment_date,hr_assessment_master,hr_assessment_reflection_pcnt,hr_assessment_score,hr_assessment_grade,int_user_id,int_date) 
+		values(#{x},hr_assessment_code_seq.nextval,#{hr_assessment_name},#{hr_assessment_test_start_date},#{hr_assessment_test_end_date},#{hr_assessment_date},#{hr_assessment_master},#{hr_assessment_reflection_pcnt},#{hr_assessment_score},#{hr_assessment_grade},#{user},sysdate)
 	</insert>	
 	
 	<update id="updateAssessment" parameterType="java.util.Map">
@@ -309,7 +309,7 @@
 
 
 	<resultMap id="p0007_08resultVO" type="HM_P0007_08VO">
-		<result property="code" column="code" />
+		<result property="business_trip_code" column="business_trip_code" />
 		<result property="employee_code" column="employee_code" />
 		<result property="country" column="country" />
 		<result property="area" column="area" />
@@ -328,14 +328,14 @@
 
 	<select id="searchBusiness_trip" resultMap="p0007_08resultVO">
       <![CDATA[
-          select code, country, area, start_date, end_date, flight_cost, self_charge_yn, ect_cost, total_cost, purpose
+          select business_trip_code, country, area, start_date, end_date, flight_cost, self_charge_yn, ect_cost, total_cost, purpose
          from employee_business_trip
          where employee_code = #{x}
                ]]>
 	</select>
 	<insert id="insertemployee_business_trip" parameterType="java.util.Map">
-		insert into employee_business_trip(employee_code,country,area,start_date,end_date,flight_cost,self_charge_yn,ect_cost,total_cost,int_user_id,int_date) 
-		values(#{x},#{country},#{area},#{start_date},#{end_date},#{flight_cost},#{self_charge_yn},#{ect_cost},#{total_cost},#{user},sysdate)
+		insert into employee_business_trip(employee_code,business_trip_code,country,area,start_date,end_date,flight_cost,self_charge_yn,ect_cost,total_cost,int_user_id,int_date) 
+		values(#{x},business_trip_code_seq,#{country},#{area},#{start_date},#{end_date},#{flight_cost},#{self_charge_yn},#{ect_cost},#{total_cost},#{user},sysdate)
 	</insert>	
 	
 	<update id="updateemployee_business_trip" parameterType="java.util.Map">
@@ -350,14 +350,14 @@
 		   , total_cost = #{total_cost}
 		   , upt_user_id = #{user}
 		   , upt_date = sysdate
-		where code = #{code}
+		where business_trip_code = #{business_trip_code}
 	</update>	
 	
  
 	
 	<delete id="deleteemployee_business_trip" parameterType="java.util.Map">
 		delete employee_business_trip
-		where code = #{code}
+		where business_trip_code = #{business_trip_code}
 	</delete>
 	
 	<!--상벌관리  -->
@@ -389,8 +389,8 @@
 	</select>
 	
 	<insert id="inserthr_rnp" parameterType="java.util.Map">
-		insert into hr_rnp(employee_code,hr_rnp_index,hr_rnp_name,hr_rnp_date,hr_rnp_history,hr_rnp_institute,hr_rnp_cost,hr_rnp_start_date,hr_rnp_end_date,int_user_id,int_date) 
-		values(#{x},#{hr_rnp_index},#{hr_rnp_name},#{hr_rnp_date},#{hr_rnp_history},#{hr_rnp_institute},#{hr_rnp_cost},#{hr_rnp_start_date},#{hr_rnp_end_date},#{user},sysdate)
+		insert into hr_rnp(employee_code,hr_rnp_code,hr_rnp_index,hr_rnp_name,hr_rnp_date,hr_rnp_history,hr_rnp_institute,hr_rnp_cost,hr_rnp_start_date,hr_rnp_end_date,int_user_id,int_date) 
+		values(#{x},hr_rnp_code_seq,#{hr_rnp_index},#{hr_rnp_name},#{hr_rnp_date},#{hr_rnp_history},#{hr_rnp_institute},#{hr_rnp_cost},#{hr_rnp_start_date},#{hr_rnp_end_date},#{user},sysdate)
 	</insert>	
 	
 	<update id="updatehr_rnp" parameterType="java.util.Map">

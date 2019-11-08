@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class HM_P0007_04VO {
-	private String code;
+	private String license_code;
 	private String employee_code;
 	private String license_type;
 	private String start_date;
@@ -19,8 +19,14 @@ public class HM_P0007_04VO {
 
 
 
-	public String getCode() {
-		return code;
+
+
+
+
+
+
+	public String getLicense_code() {
+		return license_code;
 	}
 
 
@@ -28,8 +34,8 @@ public class HM_P0007_04VO {
 
 
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setLicense_code(String license_code) {
+		this.license_code = license_code;
 	}
 
 

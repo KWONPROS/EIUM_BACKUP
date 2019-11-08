@@ -80,7 +80,7 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
 		  initData.Cols = [
 		  {Header:"상태",SaveName:"sStatus",Type:"Status",align:"Center",width:50},
 		  {Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck"},
-          {Header:"사원학력고유번호",Type:"Text", SaveName:"code",Hidden:1},
+          {Header:"사원학력고유번호",Type:"Text", SaveName:"education_code",Hidden:1},
           {Header:"학교명",Type:"Text", SaveName:"school_name", Width:60, Align:"Center"},
           {Header:"입학일",Type:"Text", SaveName:"start_date", Width:60, Align:"Center"},
           {Header:"졸업일",Type:"Text", SaveName:"end_date", Width:60, Align:"Center"},
@@ -90,15 +90,14 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
           {Header:"학위구분",Type:"Text", SaveName:"graduate_yn", Width:60, Align:"Center"},
       ];
  
-		  createIBSheet2($("#ib-container2")[0],"mySheet2", "100%", "300px");
-          IBS_InitSheet(mySheet2,initData);
-		
-      
-    //mySheet6 //경력
+		createIBSheet2($("#ib-container2")[0],"mySheet2", "100%", "300px");
+        IBS_InitSheet(mySheet2,initData);
+        
+    //mySheet3 //경력
      initData.Cols = [
 		  {Header:"상태",SaveName:"sStatus",Type:"Status",align:"Center",width:50},
 		  {Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck"},
-          {Header:"사원경력고유번호",Type:"Text", SaveName:"code",Hidden:1},
+          {Header:"사원경력고유번호",Type:"Text", SaveName:"career_code",Hidden:1},
           {Header:"직장명",Type:"Text", SaveName:"company_name", Width:60, Align:"Center"},
           {Header:"입사일",Type:"Text", SaveName:"start_date", Width:60, Align:"Center"},
           {Header:"퇴사일",Type:"Text", SaveName:"end_date", Width:60, Align:"Center"},
@@ -109,15 +108,15 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
           {Header:"퇴직사유",Type:"Text", SaveName:"reason", Width:60, Align:"Center"},
           {Header:"근속기간",Type:"Text", SaveName:"total_work", Width:60, Align:"Center"},
       ];
-       
-     createIBSheet2($("#ib-container3")[0],"mySheet3", "100%", "300px");
-     IBS_InitSheet(mySheet3,initData);
+       createIBSheet2($("#ib-container3")[0],"mySheet3", "100%", "300px");
+       IBS_InitSheet(mySheet3,initData);
+
       
-    //mySheet7 //면허
+    //mySheet4 //면허
      initData.Cols = [
 		  {Header:"상태",SaveName:"sStatus",Type:"Status",align:"Center",width:50},
 		  {Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck"},
-          {Header:"사원면허번호",Type:"Text", SaveName:"code",Hidden:1},
+          {Header:"사원면허번호",Type:"Text", SaveName:"license_code",Hidden:1},
           {Header:"자격종류",Type:"Text", SaveName:"license_type", Width:150, Align:"Center"},
           {Header:"취득일",Type:"Text", SaveName:"start_date", Width:60, Align:"Center"},
           {Header:"만료일",Type:"Text", SaveName:"end_date", Width:60, Align:"Center"},
@@ -128,10 +127,11 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
         
      createIBSheet2($("#ib-container4")[0],"mySheet4", "100%", "300px");
      IBS_InitSheet(mySheet4,initData);
+
     
  
 		
-    //mySheet8 //인사발령
+    //mySheet5 //인사발령
      initData.Cols = [
         {Header:"발령호수",Type:"Text", SaveName:"hr_appoint_number", Width:60, Align:"Center",Edit:0,InsertEdit:"0", UpdateEdit:"0"},
         {Header:"발령일자",Type:"Text", SaveName:"hr_appoint_date", Width:60, Align:"Center",Edit:0,InsertEdit:"0", UpdateEdit:"0"},
@@ -145,7 +145,7 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
      createIBSheet2($("#ib-container5")[0],"mySheet5", "100%", "300px");
      IBS_InitSheet(mySheet5,initData);
       
-    //mySheet9 //인사고과
+    //mySheet6 //인사고과
    initData.Cols = [
 		{Header:"상태",SaveName:"sStatus",Type:"Status",align:"Center",width:50},
 		{Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck"},
@@ -162,8 +162,9 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
          
    createIBSheet2($("#ib-container6")[0],"mySheet6", "100%", "300px");
    IBS_InitSheet(mySheet6,initData);
+
  
-		 //mySheet10 //근태
+		 //mySheet7 //근태
 	   initData.Cols = [
 			{Header:"년월|년월|년월",Type:"Text",Width:30,SaveName:"Status",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
 			{Header:"평일근무|정상|일",Type:"Text",Width:30,SaveName:"Delete",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
@@ -185,11 +186,11 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
 	   createIBSheet2($("#ib-container7")[0],"mySheet7", "100%", "300px");
 	      IBS_InitSheet(mySheet7,initData);
     
-    //mySheet10 //출장
+    //mySheet8 //출장
    initData.Cols = [
 			{Header:"상태",SaveName:"sStatus",Type:"Status",align:"Center",width:50},
 			{Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck"},
-			{Header:"출장고유번호",Type:"Text", SaveName:"code",Hidden:1},
+			{Header:"출장고유번호",Type:"Text", SaveName:"business_trip_code",Hidden:1},
 		    {Header:"출장국가",Type:"Text", SaveName:"country", Width:60, Align:"Center"},
    		    {Header:"출장지",Type:"Text", SaveName:"area", Width:60, Align:"Center"},
 		    {Header:"시작일",Type:"Text", SaveName:"start_date", Width:60, Align:"Center"},
@@ -203,8 +204,9 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
          
    createIBSheet2($("#ib-container8")[0],"mySheet8", "100%", "300px");
    IBS_InitSheet(mySheet8,initData);
+
     
-    //mySheet11 //상벌관리
+    //mySheet9 //상벌관리
    initData.Cols = [
 		{Header:"상태",SaveName:"sStatus",Type:"Status",align:"Center",width:50},
 		{Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck"},
@@ -221,10 +223,6 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
          
    createIBSheet2($("#ib-container9")[0],"mySheet9", "100%", "300px");
    IBS_InitSheet(mySheet9,initData);
-		
-    
-
-  
 	
 	}
 	
@@ -235,14 +233,19 @@ function mySheet_OnClick(Row, Col) {
 		  
 		mySheet2.DoSearch("${contextPath}/hm/p0007/searchEducation.do", x);
 		mySheet3.DoSearch("${contextPath}/hm/p0007/searchCareer.do", x);
-		mySheet4.DoSearch("${contextPath}/hm/p0007/searchLicense.do", x);
+	    mySheet4.DoSearch("${contextPath}/hm/p0007/searchLicense.do", x);
 		mySheet5.DoSearch("${contextPath}/hm/p0007/searchAppoint.do", x);
 		mySheet6.DoSearch("${contextPath}/hm/p0007/searchAssessment.do", x);
 		mySheet7.DoSearch("${contextPath}/hm/p0007/searchWorking_status.do", x);
 		mySheet8.DoSearch("${contextPath}/hm/p0007/searchBusiness_trip.do", x);
 		mySheet9.DoSearch("${contextPath}/hm/p0007/searchRnp.do", x);
+/*         doAction("insert2");
+        doAction("insert3");
+        doAction("insert4");
+        doAction("insert6");
+        doAction("insert8");
+        doAction("insert2"); */
 
-		
 		  $('input[name=myRow]').val(Row);
 		  $('input[name=employee_name_hn]').val(mySheet.GetCellValue(Row,3));
 	      $('input[name=hire_type]').val(mySheet.GetCellValue(Row,4));
@@ -257,6 +260,10 @@ function mySheet_OnClick(Row, Col) {
 	      $('input[name=military_number]').val(mySheet.GetCellValue(Row,13));
 	      $('input[name=discharge_yn]').val(mySheet.GetCellValue(Row,14));
 	      $('input[name=residential_division]').val(mySheet.GetCellValue(Row,15));
+	      
+
+	      
+	      
 	    
 /* 	} */
 }
@@ -318,27 +325,27 @@ function mySheet_OnClick(Row, Col) {
 			
 			
 		   case "insert2":
-			      var row = mySheet2.DataInsert();
+			      var row = mySheet2.DataInsert(-1);
 			      break;
 			      
 		   case "insert3":
-			      var row = mySheet3.DataInsert();
+			      var row = mySheet3.DataInsert(-1);
 			      break;
 			      
 		   case "insert4":
-			      var row = mySheet4.DataInsert();
+			      var row = mySheet4.DataInsert(-1);
 			      break;
 			      			      
 		   case "insert6":
-			      var row = mySheet6.DataInsert();
+			      var row = mySheet6.DataInsert(-1);
 			      break;
 			   	      
 		   case "insert8":
-			      var row = mySheet8.DataInsert();
+			      var row = mySheet8.DataInsert(-1);
 			      break;
 			      
 		   case "insert9":
-			      var row = mySheet9.DataInsert();
+			      var row = mySheet9.DataInsert(-1);
 			      break;
 			      
 
@@ -355,6 +362,29 @@ function mySheet_OnClick(Row, Col) {
 			//번호 다시 매기기
 			//mySheet.ReNumberSeq();
 		}
+	}
+	
+	function mySheet2_OnSearchEnd() {
+		mySheet2.DataInsert(-1);
+	}
+	
+	function mySheet3_OnSearchEnd() {
+		mySheet3.DataInsert(-1);
+	}
+	
+	function mySheet4_OnSearchEnd() {
+		mySheet4.DataInsert(-1);
+	}
+	
+	function mySheet6_OnSearchEnd() {
+		mySheet6.DataInsert(-1);
+	}
+	
+	function mySheet8_OnSearchEnd() {
+		mySheet8.DataInsert(-1);
+	}
+	function mySheet9_OnSearchEnd() {
+		mySheet9.DataInsert(-1);
 	}
 	
 	function mySheet2_OnKeyUp(Row, Col, KeyCode, Shift) {
