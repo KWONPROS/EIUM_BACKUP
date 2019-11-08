@@ -131,24 +131,72 @@ function selectDepart(){
 	};
 
    </script>
-  
+<style type="text/css">
+.title {
+	width: 100%;
+	color: #2C3E50;
+	font-weight: bold;
+	font-size: 20px;
+	padding-left: 30px;
+	padding-bottom: 10px;
+	padding-top: 20px;
+	border-top: thin solid #5E5E5E;
+	border-bottom: thin dashed #5E5E5E;
+	position: absolute;
+	top: 50px;
+}
+
+
+
+.leftbuttons {
+	margin-top: 40px;
+	margin: 10px;
+	position: absolute;
+	left: 0px;
+}
+
+.rightbuttons {
+	margin-top: 40px;
+	margin: 10px;
+	position: absolute;
+	right: 0px;
+}
+
+.IBbutton {
+	font-size: 13px;
+	margin-left: 5px;
+	background-color: #2B69A0;
+	color: white;
+	padding: 5px 15px;
+	border-radius: 7px;
+	text-decoration: none;
+}
+
+.IBbutton:hover {
+	background-color: #2C3E50;
+} 
+</style> 
 </head>
 <body onload="LoadPage()">
 
 
-   <form name="frm">
-   
-   <button type="button" onclick="doAction('print')">인쇄</button>
-   <button type="button" onclick="doAction('down')">엑셀</button>
+<!--    <form name="frm"> -->
+  	<div class="leftbuttons">
+		<a href="javascript:doAction('print')" class="IBbutton">인쇄</a> <a
+			href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
+	</div>
+	<div class="rightbuttons">
+		<a href="javascript:doAction('reload')" class="IBbutton">초기화</a> <a
+			href="javascript:doAction('search')" class="IBbutton">조회</a><a
+			href="javascript:doAction('insert')" class="IBbutton">추가</a> <a
+			href="javascript:doAction('save')" class="IBbutton">저장</a>
+	</div>
 
-   <button type="button" onclick="doAction('reset')">초기화</button>
-   <button type="button" onclick="doAction('search')">조회</button>
-   <button type="button" onclick="doAction('insert')">추가</button>
-   <button type="button" onclick="doAction('save')">저장</button>
-   <input type="hidden" name="user" value="${sessionScope.login.employee_name}">
-   <hr>
-   
-   <h2>&nbsp;&nbsp;▶ 사원등록</h2><br>
+	<div class="title">
+		<header>
+			<i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 등록정보관리 : 사원등록
+		</header>
+	</div>
 
 <!--  &nbsp;&nbsp; 사업장 : <select name="sa_Name">
         <option>나의 사업장</option>
@@ -169,7 +217,7 @@ function selectDepart(){
        
        <input type="text" placeholder="내용을 입력해주세요.">  -->
 
-<div style="position:absolute; top:100px; left:20px;">
+<div style="position:absolute; top:150px; left:20px;">
 <script>
        createIBSheet("mySheet", "1500px", "600px");
 </script>
@@ -184,6 +232,6 @@ createIBSheet("mySheet2", "1500px", "600px");
 	<input type="hidden" id="Pdepartment_code">
 	<input type="hidden" id="Pdepartment_name">
 
-   </form>
-</body>
+<!--    </form>
+ --></body>
 </html>

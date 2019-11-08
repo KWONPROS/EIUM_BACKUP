@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
-public interface HM_P0007Controller {
-	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;	
+public interface HM_P0007_09Controller {
+	public Map searchRnp(HttpServletRequest request, HttpServletResponse response) throws Exception;  
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
 }
