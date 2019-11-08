@@ -35,16 +35,16 @@ function LoadPage(){
    initSheet.Cols=[
 	   {Header:"상태",SaveName:"sStatus",Type:"Status",align:"Center",width:50},
 	   {Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck"},
-	   {Header:"사원코드",SaveName:"employee_code",Type:"Text",width:100, UpdateEdit:"0"},
-	   {Header:"사원명",SaveName:"employee_name",Type:"Text",width:100},
-	   {Header:"부서코드", Type:"Text", SaveName:"department_code",Width:100, Align: "Center", InsertEdit:"0", UpdateEdit:"0"},
-	   {Header:"부서명",SaveName:"department_name",type:"Text",width:100, InsertEdit:"0", UpdateEdit:"0"},
-	   {Header:"입사일",SaveName:"employee_join_date",type:"Text",width:100},
-	   {Header:"퇴사일",SaveName:"employee_resignation_date",type:"Text",width:100},
-	   {Header:"사용자여부",SaveName:"employee_available_yn",type:"Text",width:100},
-	   {Header:"아이디",SaveName:"employee_id",type:"Text",width:100, UpdateEdit:"0"},
-	   {Header:"암호",SaveName:"employee_password",type:"Text",width:100},
-	   {Header:"비상연락망",SaveName:"contact",Type:"Text",Width:100}
+	   {Header:"사원코드",SaveName:"employee_code",Type:"Text",width:100, KeyField:1, UpdateEdit:"0"},
+	   {Header:"사원명",SaveName:"employee_name",Type:"Text",width:100, KeyField:1 },
+	   {Header:"부서코드", Type:"Text", SaveName:"department_code",Width:100, Align: "Center", InsertEdit:"0", UpdateEdit:"0", KeyField:1},
+	   {Header:"부서명",SaveName:"department_name",type:"Text",width:100, InsertEdit:"0", UpdateEdit:"0", KeyField:1},
+	   {Header:"입사일",Type:"Date", Align:"Center", SaveName:"employee_start_date", Format:"yyyy-MM-dd", MinWidth:110},
+	   {Header:"퇴사일",Type:"Date", Align:"Center", SaveName:"employee_resignation_date", Format:"yyyy-MM-dd", MinWidth:110},
+	   {Header:"사용자여부",Type:"Combo", MinWidth:70, SaveName:"employee_available_yn", ComboText:"Y|N", ComboCode:"01|02",PopupText:"Y|N"},
+	   {Header:"아이디",SaveName:"employee_id",type:"Text",width:100, KeyField:1, UpdateEdit:"0"},
+	   {Header:"암호",SaveName:"employee_password",type:"Text", KeyField:1, width:100},
+	   {Header:"전화번호",Type:"Text", Align:"Center", SaveName:"contact", Format:"PhoneNo", MinWidth:120},
 	      ];
    
   
@@ -73,7 +73,7 @@ function doAction(sAction){
    case "search":
       mySheet.DoSearch("${contextPath}/sm/p0004search.do");
       break;
-   case "reset":
+   case "reload":
       mySheet.RemoveAll();
       break;
    case "save":
@@ -181,22 +181,21 @@ function selectDepart(){
 
 
 <!--    <form name="frm"> -->
-  	<div class="leftbuttons">
-		<a href="javascript:doAction('print')" class="IBbutton">인쇄</a> <a
-			href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
-	</div>
-	<div class="rightbuttons">
-		<a href="javascript:doAction('reload')" class="IBbutton">초기화</a> <a
-			href="javascript:doAction('search')" class="IBbutton">조회</a><a
-			href="javascript:doAction('insert')" class="IBbutton">추가</a> <a
-			href="javascript:doAction('save')" class="IBbutton">저장</a>
-	</div>
+  <div class="leftbuttons">
+      <a href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
+   </div> 
 
-	<div class="title">
-		<header>
-			<i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 등록정보관리 : 사원등록
-		</header>
-	</div>
+
+   <div class="rightbuttons">
+      <a href="javascript:doAction('reload')" class="IBbutton">초기화</a> <a
+         href="javascript:doAction('insert')" class="IBbutton">추가</a> <a
+         href="javascript:doAction('search')" class="IBbutton">조회</a> <a
+         href="javascript:doAction('save')" class="IBbutton">저장</a>
+   </div>
+
+<div class="title"> 
+<header> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 등록정보관리 : 사원등록</header>
+</div>
 
 <!--  &nbsp;&nbsp; 사업장 : <select name="sa_Name">
         <option>나의 사업장</option>

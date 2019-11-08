@@ -20,13 +20,6 @@
         <result property="military_number" column="military_number" />
         <result property="discharge_yn" column="discharge_yn" />
         <result property="residential_division" column="residential_division" />
-        <result property="hr_appoint_number" column="hr_appoint_number" />
-        <result property="hr_appoint_date" column="hr_appoint_date" />
-        <result property="hr_appoint_title" column="hr_appoint_title" />
-        <result property="hr_appoint_history" column="hr_appoint_history" />
-        <result property="hr_appoint_before_info" column="hr_appoint_before_info" />
-        <result property="hr_appoint_current_info" column="hr_appoint_current_info" />
-        <result property="hr_appoint_after_info" column="hr_appoint_after_info" />
         <result property="int_user_id" column="int_user_id" />
         <result property="int_date" column="int_date" />
         <result property="upt_user_id" column="upt_user_id" />
@@ -40,8 +33,71 @@
          where e.employee_code = eh.employee_code
          order by e.employee_code
       ]]>
-<!-- , hr_appoint ha , ha.hr_appoint_number, ha.hr_appoint_date, ha.hr_appoint_title, ha.hr_appoint_history, ha.hr_appoint_before_info, ha.hr_appoint_current_info, ha.hr_appoint_after_info      
- -->	</select>
+      
+      
+	</select>
+ 
+ <update id="updateHr_info" parameterType="java.util.Map">
+		update employee_education
+		set school_name = #{school_name}
+		   , start_date = #{start_date}
+		   , end_date = #{end_date}
+		   , available = #{available}
+		   , major = #{major}
+		   , minor = #{minor}
+		   , graduate_yn = #{graduate_yn}
+		    , upt_user_id = #{user}
+		   , upt_date = sysdate
+		where education_code = #{education_code}
+	</update>
+ 
+ 
+<!--  <resultMap id="p0007_01resultVO" type="HM_P0007_01VO">
+		<result property="employee_name_hn" column="employee_name_hn" />
+		<result property="hire_type" column="hire_type" />
+		<result property="hire_number" column="hire_number" />
+		<result property="current_address" column="current_address" />
+		<result property="current_address_detail" column="current_address_detail" />
+		<result property="resist_address" column="resist_address" />
+		<result property="resist_address_detail" column="resist_address_detail" />
+		<result property="marriage_yn" column="marriage_yn" />
+		<result property="religion" column="religion" />
+		<result property="residential_division" column="residential_division" />
+        <result property="military_type" column="military_type" />
+        <result property="military_number" column="military_number" />
+        <result property="discharge_yn" column="discharge_yn" />
+        <result property="int_user_id" column="int_user_id" />
+        <result property="int_date" column="int_date" />
+        <result property="upt_user_id" column="upt_user_id" />
+        <result property="upt_date" column="upt_date" />
+	</resultMap>
+
+	<select id="searchHr_info" resultMap="p0007_02resultVO">
+      <![CDATA[
+         select employee_name_hn, school_name, start_date, end_date, available, major, minor, graduate_yn
+         from employee_education
+         where employee_code = #{x}
+               ]]>
+	</select>
+	
+	<insert id="insertHr_info" parameterType="java.util.Map">
+		insert into employee_education(employee_code,education_code,school_name,start_date,end_date,available,major,minor,graduate_yn, int_user_id, int_date) 
+		values(#{x},education_code_seq.nextval,#{school_name},#{start_date},#{end_date},#{available},#{major},#{minor}, #{graduate_yn}, #{user}, sysdate)
+	</insert>	
+	
+	<update id="updateHr_info" parameterType="java.util.Map">
+		update employee_education
+		set school_name = #{school_name}
+		   , start_date = #{start_date}
+		   , end_date = #{end_date}
+		   , available = #{available}
+		   , major = #{major}
+		   , minor = #{minor}
+		   , graduate_yn = #{graduate_yn}
+		    , upt_user_id = #{user}
+		   , upt_date = sysdate
+		where education_code = #{education_code}
+	</update> -->
 	
 	<!--학력  -->
 

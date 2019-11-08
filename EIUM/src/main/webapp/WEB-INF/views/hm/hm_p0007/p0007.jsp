@@ -247,19 +247,19 @@ function mySheet_OnClick(Row, Col) {
         doAction("insert2"); */
 
 		  $('input[name=myRow]').val(Row);
-		  $('input[name=employee_name_hn]').val(mySheet.GetCellValue(Row,3));
-	      $('input[name=hire_type]').val(mySheet.GetCellValue(Row,4));
-	      $('input[name=hire_number]').val(mySheet.GetCellValue(Row,5)); 
-	      $('input[name=current_address]').val(mySheet.GetCellValue(Row,6));
-	      $('input[name=current_address_detail]').val(mySheet.GetCellValue(Row,7));
-	      $('input[name=resist_address]').val(mySheet.GetCellValue(Row,8));
-	      $('input[name=resist_address_detail]').val(mySheet.GetCellValue(Row,9));
-	      $('input[name=marriage_yn]').val(mySheet.GetCellValue(Row,10));
-	      $('input[name=religion]').val(mySheet.GetCellValue(Row,11));
-	      $('input[name=military_type]').val(mySheet.GetCellValue(Row,12));
-	      $('input[name=military_number]').val(mySheet.GetCellValue(Row,13));
-	      $('input[name=discharge_yn]').val(mySheet.GetCellValue(Row,14));
-	      $('input[name=residential_division]').val(mySheet.GetCellValue(Row,15));
+		  $('input[name=employee_name_hn]').val(mySheet.GetCellValue(Row,2));
+	      $('input[name=hire_type]').val(mySheet.GetCellValue(Row,3));
+	      $('input[name=hire_number]').val(mySheet.GetCellValue(Row,4)); 
+	      $('input[name=current_address]').val(mySheet.GetCellValue(Row,5));
+	      $('input[name=current_address_detail]').val(mySheet.GetCellValue(Row,6));
+	      $('input[name=resist_address]').val(mySheet.GetCellValue(Row,7));
+	      $('input[name=resist_address_detail]').val(mySheet.GetCellValue(Row,8));
+	      $('input[name=marriage_yn]').val(mySheet.GetCellValue(Row,9));
+	      $('input[name=religion]').val(mySheet.GetCellValue(Row,10));
+	      $('input[name=military_type]').val(mySheet.GetCellValue(Row,11));
+	      $('input[name=military_number]').val(mySheet.GetCellValue(Row,12));
+	      $('input[name=discharge_yn]').val(mySheet.GetCellValue(Row,13));
+	      $('input[name=residential_division]').val(mySheet.GetCellValue(Row,14));
 	      
 
 	      
@@ -286,19 +286,19 @@ function mySheet_OnClick(Row, Col) {
 			mySheet8.RemoveAll();
 			mySheet9.RemoveAll();
 			 $('input[name=myRow]').val(Row);
-			  $('input[name=employee_name_hn]').val(mySheet.GetCellValue(Row,3));
-		      $('input[name=hire_type]').val(mySheet.GetCellValue(Row,4));
-		      $('input[name=hire_number]').val(mySheet.GetCellValue(Row,5)); 
-		      $('input[name=current_address]').val(mySheet.GetCellValue(Row,6));
-		      $('input[name=current_address_detail]').val(mySheet.GetCellValue(Row,7));
-		      $('input[name=resist_address]').val(mySheet.GetCellValue(Row,8));
-		      $('input[name=resist_address_detail]').val(mySheet.GetCellValue(Row,9));
-		      $('input[name=marriage_yn]').val(mySheet.GetCellValue(Row,10));
-		      $('input[name=religion]').val(mySheet.GetCellValue(Row,11));
-		      $('input[name=military_type]').val(mySheet.GetCellValue(Row,12));
-		      $('input[name=military_number]').val(mySheet.GetCellValue(Row,13));
-		      $('input[name=discharge_yn]').val(mySheet.GetCellValue(Row,14));
-		      $('input[name=residential_division]').val(mySheet.GetCellValue(Row,15));
+			  $('input[name=employee_name_hn]').val(mySheet.GetCellValue(Row,2));
+		      $('input[name=hire_type]').val(mySheet.GetCellValue(Row,3));
+		      $('input[name=hire_number]').val(mySheet.GetCellValue(Row,4)); 
+		      $('input[name=current_address]').val(mySheet.GetCellValue(Row,5));
+		      $('input[name=current_address_detail]').val(mySheet.GetCellValue(Row,6));
+		      $('input[name=resist_address]').val(mySheet.GetCellValue(Row,7));
+		      $('input[name=resist_address_detail]').val(mySheet.GetCellValue(Row,8));
+		      $('input[name=marriage_yn]').val(mySheet.GetCellValue(Row,9));
+		      $('input[name=religion]').val(mySheet.GetCellValue(Row,10));
+		      $('input[name=military_type]').val(mySheet.GetCellValue(Row,11));
+		      $('input[name=military_number]').val(mySheet.GetCellValue(Row,12));
+		      $('input[name=discharge_yn]').val(mySheet.GetCellValue(Row,13));
+		      $('input[name=residential_division]').val(mySheet.GetCellValue(Row,14));
 			
 			break;
 			
@@ -593,13 +593,11 @@ border : none;
 </head>
 <body onload="LoadPage()" style="overflow-x: hidden">
 	<div class="leftbuttons">
-		<a href="javascript:doAction('print')" class="IBbutton">인쇄</a> <a
-			href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
+		<a href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
 	</div>
 	<div class="rightbuttons">
 		<a href="javascript:doAction('reload')" class="IBbutton">초기화</a> <a
-			href="javascript:doAction('search')" class="IBbutton">조회</a><a
-			href="javascript:doAction('insert')" class="IBbutton">추가</a> <a
+			href="javascript:doAction('search')" class="IBbutton">조회</a> <a
 			href="javascript:doAction('save')" class="IBbutton">저장</a>
 	</div>
 
