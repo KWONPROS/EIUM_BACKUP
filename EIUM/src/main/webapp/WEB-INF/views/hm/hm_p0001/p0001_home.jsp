@@ -58,8 +58,8 @@
 		initSheet3.Cols = [
 	     	{Header:"상태|상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
 	        {Header:"삭제|삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},	
-			{Header:"호봉이력|적용시작연월",Type:"Text",SaveName:"start_DATE",MinWidth:50, Align:"Center"},
-	        {Header:"호봉이력|적용종료연월",Type:"Text",SaveName:"end_DATE",MinWidth:50, Align:"Center"}			
+			{Header:"호봉이력|적용시작연월",Type:"Date",SaveName:"start_DATE",MinWidth:80, Align:"Center", Format:"Ym"},
+	        {Header:"호봉이력|적용종료연월",Type:"Date",SaveName:"end_DATE",MinWidth:80, Align:"Center", Edit:"0"}			
 		];   
 		IBS_InitSheet( mySheet3 , initSheet3);
   
@@ -84,13 +84,19 @@
 				mySheet3.RemoveAll();
 				break;
 			case "save": // 저장
-				var tempStr = mySheet2.GetSaveString();
-				tempStr = tempStr + "&p_position_CODE="+mySheet2.GetCellValue(0,2);
-				alert("서버로 전달되는 문자열 확인 :"+tempStr);
-				mySheet2.DoSave("${contextPath}/hm/p0001/saveData.do",tempStr);
+				//
+				
+				mySheet3.SetCellValue(Row, 3, mySheet3.GetCellValue(Row,2)-1);
+				alert(mySheet3.GetCellValue(Row,3));
+				mySheet3.DoSave("${contextPath}/hm/p0001/saveData.do", "p_position_CODE=" + mySheet2.GetCellValue(0,0));
+				
+				//확인!!!
+				var tempStr = mySheet3.GetSaveString();
+				tempStr = tempStr + "&p_position_CODE="+mySheet2.GetCellValue(0,0);
+				alert("서버로 전달되는 문자열 확인 :"+tempStr); 
 				break;					
 			case "insert": //신규행 추가
-				var row = mySheet2.DataInsert();
+				var row = mySheet3.DataInsert();
 				break;
 		}
 	}
@@ -98,38 +104,41 @@
 	//로우 클릭시 (직급코드 선택시)
 	function mySheet_OnClick(Row) {
 		if(Row!=0){
-			alert(mySheet.GetCellValue(Row, 0));
 			mySheet2.DoSearch("${contextPath}/hm/p0001/searchList2.do", "position_CODE=" + mySheet.GetCellValue(Row, 0));
 			mySheet2.SetCellValue(0, 0, mySheet.GetCellValue(Row,0));
+			mySheet3.SetWaitImageVisible(0);
 		}
 	}  
 	//직급코드 선택후 호봉코드를 선택시(1번째) - 시작연월 종료연월
 	function mySheet2_OnSearchEnd(code,msg){
 		mySheet2.SetCellValue(0, 1, mySheet2.GetCellValue(2, 2));
 		mySheet3.DoSearch("${contextPath}/hm/p0001/searchList3.do", "position_CODE2=" + mySheet2.GetCellValue(0,0) + "&pay_GRADE_CODE=" + mySheet2.GetCellValue(0, 1));
-		
 	}
 	
 	//로우 클릭시 (호봉 선택시)
 	function mySheet2_OnClick(Row){
 		if(Row!=0){
-			alert(mySheet2.GetCellValue(Row,2));
 			mySheet2.SetCellValue(0, 1, mySheet2.GetCellValue(Row, 2));
 			mySheet3.DoSearch("${contextPath}/hm/p0001/searchList3.do", "position_CODE2=" + mySheet2.GetCellValue(0,0) + "&pay_GRADE_CODE=" + mySheet2.GetCellValue(0, 1));
 		}
-		
-		if(mySheet3.GetCellValue(3, 4)=="00000000"){
-			alert("0000000");
-		}
 	}
+	
 	//시작연월 종료연월아래에 insert 띄워주기
 	function mySheet3_OnSearchEnd(code,msg){
 		mySheet3.DataInsert(-1);
-		alert(mySheet3.GetCellValue(2, 3));
-		if(mySheet3.GetCellValue(2,3)=="00000000"){
+		if(mySheet3.GetCellValue(2,3)==""){
 			mySheet3.SetCellValue(2, 3, "");
+		}else{
+			/* mySheet2.RemoveAll(); */ //주석 풀어주어야 함
 		}
 	}
+	
+	function mySheet3_OnChange(Row) {
+		if(Row!=0){
+	    	alert(mySheet3.GetCellValue(Row,2)-1);
+		}
+	}
+
 
 	
 	// 저장완료 후 처리할 작업
@@ -209,15 +218,12 @@ left: 800px;
 
 
  <div class="leftbuttons">
-		<a href="javascript:doAction('print')" class="IBbutton">인쇄</a> <a
-			href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
+  <a href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
 	</div> 
 
 
 	<div class="rightbuttons">  
 		<a href="javascript:doAction('reload')" class="IBbutton">초기화</a> <a
-			href="javascript:doAction('insert')" class="IBbutton">추가</a> <a
-			href="javascript:doAction('search')" class="IBbutton">조회</a> <a
 			href="javascript:doAction('save')" class="IBbutton">저장</a>
 	</div>
 

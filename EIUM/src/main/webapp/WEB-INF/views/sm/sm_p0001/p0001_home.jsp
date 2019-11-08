@@ -16,6 +16,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
 <script language="javascript">
+	//주민등록번호 FORMAT형식 맞추기!!!
 	/*Sheet 기본 설정 */
 	function LoadPage() {
 		mySheet.RemoveAll();
@@ -109,7 +110,7 @@
 			alert("저장될 문자열:" + JSON.stringify(mySheet.GetSaveJson()));
 			break;
 		case "insert": //신규행 추가
-			var row = mySheet.DataInsert();
+			var row = mySheet.DataInsert(-1);
 			break;
 		}
 			
@@ -328,8 +329,7 @@ width: 80%;
 </head>
 <body onload="LoadPage()" style="overflow-x: hidden">
  <div class="leftbuttons">
-      <a href="javascript:doAction('print')" class="IBbutton">인쇄</a> <a
-         href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
+ 		<a href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
    </div> 
 
 

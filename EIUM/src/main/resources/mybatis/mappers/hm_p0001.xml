@@ -56,9 +56,13 @@
 		where TRIM(PAY_GRADE) = #{pay_GRADE} AND TRIM(POSITION_CODE) = #{p_position_CODE}
 	</update>	
 	
+	
+	<!--INSERT 문(호봉테이블 이력 입력) -->
  	<insert id="insertData" parameterType="java.util.Map">
-		insert into PAY_GRADE_TABLE(POSITION_CODE, PAY_GRADE, SALARY) 
-		values(#{p_position_CODE}, #{pay_GRADE}, #{salary})
+		insert into PAY_GRADE_TABLE(POSITION_CODE, PAY_GRADE_CODE, START_DATE, END_DATE) 
+		select P.POSITION_CODE, PG.PAY_GRADE_CODE, #{start_DATE} AS START_DATE, #{start_DATE} AS END_DATE
+		from POSITION P, PAY_GRADE PG
+		where TRIM(P.POSITION_CODE) = #{p_position_CODE};
 	</insert>	
 	
 	<delete id="deleteData" parameterType="java.util.Map">
