@@ -61,6 +61,7 @@ public class HM_P0001ControllerImpl implements HM_P0001Controller {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 
 		searchMap.put("P_POSITION_CODE", request.getParameter("position_CODE"));
+		searchMap.put("P_START_DATE", request.getParameter("start_DATE"));
 		List<HM_P0001VO> data = p0001Service.searchList2(searchMap);
 		resultMap.put("Data", data);
 		System.out.println("HM-P0001ControllerImpl-2-resultMap::::" + resultMap);
