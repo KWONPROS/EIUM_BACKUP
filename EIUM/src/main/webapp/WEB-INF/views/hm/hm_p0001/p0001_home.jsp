@@ -36,12 +36,14 @@
 		initSheet2.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0,MergeSheet:msHeaderOnly};
 		initSheet2.HeaderMode = {Sort:1,ColMove:1,ColResize:10,HeaderCheck:1};
 		initSheet2.Cols = [
-			{Header:"tmp직급코드|직급코드",Type:"Text",SaveName:"temp_POSITION_CODE"},
-			{Header:"tmp호봉코드|호봉코드",Type:"Text",SaveName:"temp_PAY_GRADE_CODE"},
-			{Header:"호봉코드|호봉코드",Type:"Text",SaveName:"pay_GRADE_CODE"},
+			{Header:"tmp직급코드|직급코드",Type:"Text",SaveName:"temp_POSITION_CODE", Hidden: 1},
+			{Header:"tmp호봉코드|호봉코드",Type:"Text",SaveName:"temp_PAY_GRADE_CODE", Hidden: 1},
+			{Header:"호봉코드|호봉코드",Type:"Text",SaveName:"pay_GRADE_CODE", Hidden: 1},
 	        {Header:"호봉|호봉",Type:"Text",SaveName:"pay_GRADE_NAME",MinWidth:50 ,KeyField:1, Align:"Center","UpdateEdit":0},			
 			{Header:"호봉테이블|기본급",Type:"Int",SaveName:"salary",MinWidth:90 , Align:"Center"},
-			{Header:"합계|합계",Type:"Int",SaveName:"tot_salary",MinWidth:90 , Align:"Center", CalcLogic:"|4|"}
+			{Header:"합계|합계",Type:"Int",SaveName:"tot_salary",MinWidth:90 , Align:"Center", CalcLogic:"|4|"},
+			{Header:"상태|상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center", Hidden: 1},
+	        {Header:"삭제|삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50, Hidden: 1}
 		];   
 		IBS_InitSheet( mySheet2 , initSheet2);
   
@@ -73,7 +75,6 @@
 		switch(sAction) {
 			case "search": //조회
 				mySheet2.DoSearch("${contextPath}/hm/p0001/searchList2.do","position_CODE="+mySheet.GetCellValue(mySheet.GetSelectRow(),0));
-				alert(mySheet.GetCellValue(mySheet.GetSelectRow(),0));
 				mySheet2.SetCellValue(0, 0, mySheet.GetCellValue(mySheet.GetSelectRow(),0));
 				break;
 				
@@ -82,17 +83,13 @@
 				mySheet3.RemoveAll();
 				break;
 			case "save": // 저장
-				//
-				
-				/* mySheet3.SetCellValue(Row, 3, mySheet3.GetCellValue(Row,2)-1);
-				alert(mySheet3.GetCellValue(Row,3)); */
-				mySheet3.DoSave("${contextPath}/hm/p0001/saveData.do", "p_position_CODE=" + mySheet2.GetCellValue(0,0)); //호봉이력 연월 저장
-				mySheet2.DoSearch("${contextPath}/hm/p0001/searchList2.do","position_CODE="+mySheet.GetCellValue(mySheet.GetSelectRow(),0)); // 호봉 코드 입력된 2번째 sheet 조회
 				//확인!!!
-				var tempStr = mySheet3.GetSaveString();
-				tempStr = tempStr + "&p_position_CODE="+mySheet2.GetCellValue(0,0);
-				alert("서버로 전달되는 문자열 확인 :"+tempStr); 
-				break;					
+				/* var tempStr = mySheet3.GetSaveString();
+				/* tempStr = tempStr + "&p_position_CODE="+mySheet2.GetCellValue(0,0); */
+				//alert("서버로 전달되는 문자열 확인 :"+tempStr);  */
+				mySheet3.DoSave("${contextPath}/hm/p0001/DATE_deleteData.do", "p_position_CODE=" + mySheet2.GetCellValue(0,0)); 
+				break;
+				
 			case "insert": //신규행 추가
 				var row = mySheet3.DataInsert();
 				break;
@@ -105,7 +102,7 @@
 			
 			mySheet2.SetCellValue(0, 0, mySheet.GetCellValue(Row,0)); // 두번째 시트의 0, 0의 값을 해당 직급코드로 변경
 			mySheet2.SetCellValue(0, 1, "C01"); //두번째 시트의 0, 1의 값을 기본 C01로 변경
-			/* mySheet3.SetWaitImageVisible(0); */ //mySheet3 조회 이미지 보여지는 것을 X
+			mySheet3.SetWaitImageVisible(0); //mySheet3 조회 이미지 보여지는 것을 X
 			
 			mySheet3.DoSearch("${contextPath}/hm/p0001/searchList3.do", "position_CODE2=" + mySheet2.GetCellValue(0,0) + "&pay_GRADE_CODE=" + mySheet2.GetCellValue(0, 1));
 			//해당 직급과 C01에 해당하는 이력의 연월을 조회 - 
@@ -113,26 +110,51 @@
 			//그 후 그 값으로 mySheet2 조회
 		}
 	}  
-	
+	//로우 클릭시 (호봉이력 클릭시)
+	function mySheet3_OnClick(Row) {
+		if(Row!=0){
+			mySheet3.SetWaitImageVisible(0);
+			if(mySheet3.GetDataLastRow() == mySheet3.GetSelectRow()){ //시작연월이 없는 mySheet3의 row를 클릭시 호봉테이블 보이지 X
+				mySheet2.RemoveAll();
+			}else{
+				mySheet2.DoSearch("${contextPath}/hm/p0001/searchList2.do", "position_CODE=" + mySheet.GetCellValue(mySheet.GetSelectRow(), 0) + "&start_DATE=" + mySheet3.GetCellValue(mySheet3.GetSelectRow(), 2));
+			}
+		}
+	}
+	function mySheet2_OnSearchEnd(Row, Col, code, msg){
+		if(mySheet3.GetDataLastRow() - mySheet3.GetSelectRow()  < 2){
+			mySheet2.SetColEditable(4,1);
+		}else{
+			mySheet2.SetColEditable(4,0);
+		}
+		
+	}
 	//mySheet3 조회가 끝난 후
 	function mySheet3_OnSearchEnd(Row, Col, code,msg){
 		
-		if(mySheet3.GetSelectRow() == 2){ // mySheet3의 선택한 Row가 2일경우 
-			alert(mySheet3.GetCellValue(mySheet3.GetDataLastRow(), 2)+" ==2 ,"+mySheet3.GetCellValue(mySheet3.GetDataLastRow(), 3));
+		if(mySheet3.GetSelectRow() >= 2){ // mySheet3의 선택한 Row가 2일경우 
+			
 			// mySheet3의 마지막 Row의 시작연월 값과 종료연월 값 출력
-			/* alert(Row); */ //0
-			/* alert(mySheet.GetCellValue(mySheet.GetSelectRow(), 0)); */ //200
 			mySheet2.DoSearch("${contextPath}/hm/p0001/searchList2.do", "position_CODE=" + mySheet.GetCellValue(mySheet.GetSelectRow(), 0) + "&start_DATE=" + mySheet3.GetCellValue(mySheet3.GetDataLastRow(), 2));
 			//mySheet2의 조회로 마지막 Row의 시작연월 값을 파라미터 값을 넘김
+			/* mySheet3.SetCellValue(mySheet3.GetSelectRow(),3,""); */
 			
-			mySheet3.SetCellValue(mySheet3.GetSelectRow(),3,"");
-
+			//조회시 최신 시작연월은 삭제블록을 클릭가능하지만 나머지는 Row를 아예 선택 못하도록 설정
+			var Maskingcell = mySheet3.GetDataLastRow();
+			for(let i=Maskingcell; i >= 2 ; i--){
+				if(i == Maskingcell){ //최상단일 경우
+					mySheet3.SetCellEditable(i, 2, 0); // 최상단의 시작연월 edit 불가
+					mySheet3.SetColEditable(1, 0); //삭제 칸 모두 불가능하도록
+					
+					mySheet3.SetCellEditable(i, 1, 1); //최상단의 시작연월 edit만 삭제 칸 클릭 가능
+				}else if(i != Maskingcell){
+					mySheet3.SetRowEditable(i, 0); //나머지 row를 다 수정 불가능하도록 설정
+					
+				}
+			}
+			//가장 상단의 삭제도 클릭못하게 막기
 			
-			//alert(GetCellValue(mySheet3.GetSelectRow(),3));
 		}else if(mySheet3.GetSelectRow() == -1){ // mySheet3의 선택한 Row가 -1일 경우 (조회한 이력 연월이 없을 때)
-			alert(">2 ,"+mySheet3.GetSelectRow());
-			alert(">2 ,"+mySheet3.GetCellValue(mySheet3.GetSelectRow(), 3));
-			alert(mySheet3.GetDataLastRow());
 			mySheet3.SetCellValue(mySheet3.GetSelectRow()-1, 3, mySheet3.GetCellValue(mySheet3.GetSelectRow(), 3));
 			mySheet2.RemoveAll();
 		}
@@ -153,10 +175,10 @@
 	/* function mySheet2_OnSearchEnd(code,msg){
 		
 		mySheet3.DoSearch("${contextPath}/hm/p0001/searchList3.do", "position_CODE2=" + mySheet2.GetCellValue(0,0) + "&pay_GRADE_CODE=" + mySheet2.GetCellValue(0, 1));
-	}
+	} */
 	
 	//로우 클릭시 (호봉 선택시)
-	function mySheet2_OnClick(Row){
+	/* function mySheet2_OnClick(Row){
 		if(Row!=0){
 			mySheet2.SetCellValue(0, 1, mySheet2.GetCellValue(Row, 2));
 			mySheet3.DoSearch("${contextPath}/hm/p0001/searchList3.do", "position_CODE2=" + mySheet2.GetCellValue(0,0) + "&pay_GRADE_CODE=" + mySheet2.GetCellValue(0, 1));
@@ -167,15 +189,10 @@
 	
 	
 	function mySheet3_OnChange(Row, Col) {
-			if(Row == 2){
-				alert(mySheet3.GetSelectRow());
-				alert(mySheet3.GetCellValue(Row, 2));
-				mySheet3.SetRowEditable(mySheet3.GetSelectRow(),0);//저장된 cell의 row edit 0 설정
+			if(Row == 2){ //시작 연월 클릭시 적용시작연월이 처음 입력일 경우
 				
-			}else if(Row >2){
-				alert(mySheet3.GetSelectRow());
-				alert(Row);
-				alert(mySheet3.GetCellValue(Row, 2));
+			}else if(Row >2){//시작 연월 클릭시 적용시작연월이 처음이 아닐경우
+
 			}
 			
 	}
@@ -184,33 +201,55 @@
 	// code: 0(저장성공), -1(저장실패)
 	function mySheet3_OnSaveEnd(code,msg){
 		
-		if(msg != ""){
-			alert(msg);	
+		if(code == 0){
+			alert("저장성공!!");	
 			mySheet3.DataInsert(-1);
 			mySheet3.SetEditEnterBehavior("down");
-			
+
+			mySheet3.DoSearch("${contextPath}/hm/p0001/searchList3.do", "position_CODE2=" + mySheet2.GetCellValue(0,0) + "&pay_GRADE_CODE=" + mySheet2.GetCellValue(0, 1));
 			/* alert(mySheet3.GetDataLastRow()); */
 			/* mySheet3.SetRowEditable(1,0); */
 			//번호 다시 매기기
             //mySheet.ReNumberSeq();
-		}	
+		}else if(code == -1){
+			alert(msg, "저장실패!!!");	
+		}
 	}
-	function mySheet3_OnBeforeEdit(Row, Col) {
+	function mySheet2_OnSaveEnd(code, msg){
+		if(code == 0){
+			alert("저장성공!!");
+			mySheet2.SetEditEnterBehavior("down");
+			mySheet2.SetWaitImageVisible(0);
+		}else if(code == -1){
+			alert(msg, "저장실패!!!");	
+		}
+	}
+	
+	function mySheet3_OnBeforeEdit(Row, Col) { //Enter를 입력시 cell의 값을 변경하기 바로 직전
 		
-	    alert("입력을 시작합니다.");
-	    mySheet3.DoSave("${contextPath}/hm/p0001/saveData.do", "p_position_CODE=" + mySheet2.GetCellValue(0,0)); //호봉이력 연월 저장
-		mySheet2.DoSearch("${contextPath}/hm/p0001/searchList2.do","position_CODE="+mySheet.GetCellValue(mySheet.GetSelectRow(),0)); // 호봉 코드 입력된 2번째 sheet 조회 
-	   
+		if(Row == 2){ //처음 시작연월을 저장시
+		    mySheet3.DoSave("${contextPath}/hm/p0001/saveData.do", "p_position_CODE=" + mySheet2.GetCellValue(0,0)); //호봉이력 연월 저장
+			mySheet2.DoSearch("${contextPath}/hm/p0001/searchList2.do","position_CODE="+mySheet.GetCellValue(mySheet.GetSelectRow(),0)); // 호봉 코드 입력된 2번째 sheet 조회 
+		}else if(Row > 2){ //처음 시작연월을 저장이 아닐 시
+			mySheet3.SetCellValue(mySheet3.GetSelectRow()-1, 3, mySheet3.GetCellValue(mySheet3.GetSelectRow(), 2));
+		   	mySheet3.DoSave("${contextPath}/hm/p0001/saveData.do", "p_position_CODE=" + mySheet2.GetCellValue(0,0) + "&PP_START_DATE=" + mySheet3.GetCellValue(mySheet3.GetSelectRow(), 2)); //호봉이력 연월 저장
+		   	/* mySheet3.SetCellValue(mySheet3.GetSelectRow()-1, 3, mySheet3.GetCellValue(Row, 2)); */
+		   	/* mySheet2.DoSearch("${contextPath}/hm/p0001/searchList2.do","position_CODE="+mySheet.GetCellValue(mySheet.GetSelectRow(),0)); // 호봉 코드 입력된 2번째 sheet 조회  */
+		}
 	} 
-
-	/* function mySheet3_OnAfterEdit(Row, Col) {
-		alert("입력을 마칩니다."); 
+	
+	//호봉테이블의 기본급을 update하려할때 
+	function mySheet2_OnBeforeEdit(Row, Col) {
+		mySheet2.SetEditEnterBehavior("down");
+	}
+	
+	function mySheet2_OnAfterEdit(Row, Col) {
+		mySheet2.DoSave("${contextPath}/hm/p0001/SALARY_saveData.do", "p_position_CODE=" + mySheet2.GetCellValue(0,0) + "&PP_START_DATE=" + mySheet3.GetCellValue(mySheet3.GetSelectRow()-1, 2)); //호봉이력 연월 저장
+		/* var tempStr2 = mySheet2.GetSaveString();
+		tempStr2 = tempStr2 + "&p_position_CODE="+mySheet2.GetCellValue(0,0) + "&PP_START_DATE=" + mySheet3.GetCellValue(mySheet3.GetSelectRow(), 2);
+		alert("서버로 전달되는 문자열 확인 :"+tempStr2);  */
 		
-	}  */
-	
-	
-
-
+	} 
 	
 </script>
 <style type="text/css">
@@ -258,13 +297,13 @@ left: 40px;
 }
 .right{
  position: relative;
-top: -270px;
+top: -330px;
 left: 330px; 
 }
 .bottom{
 position: relative;
-top:  -570px;
-left: 800px;
+top:  -310px;
+left: 320px;
 }
 </style>
 </head>

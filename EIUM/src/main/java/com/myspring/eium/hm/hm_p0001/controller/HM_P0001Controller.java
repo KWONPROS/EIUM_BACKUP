@@ -13,4 +13,6 @@ public interface HM_P0001Controller {
 	public Map searchList2(HttpServletRequest request, HttpServletResponse response) throws Exception; 
 	public Map searchList3(HttpServletRequest request, HttpServletResponse response) throws Exception; 
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public Map SALARY_saveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public Map DATE_deleteData(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

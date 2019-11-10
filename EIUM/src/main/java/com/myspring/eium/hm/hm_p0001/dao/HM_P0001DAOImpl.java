@@ -58,8 +58,44 @@ public class HM_P0001DAOImpl implements HM_P0001DAO {
 	}
 
 	@Override
-	public void deleteData(Map<String, String> row) throws DataAccessException {
-		sqlSession.update("mapper.hm_p0001.deleteData", row);
+	public void DATE_updateData(Map<String, String> row) throws DataAccessException {
+		sqlSession.update("mapper.hm_p0001.DATE_updateData", row);
+		for ( String key : row.keySet() ) {
+		    System.out.println("방법1) key : " + key +" / value : " + row.get(key));
+		}
+		System.out.println("=======================");
+		
 	}
+	@Override
+	public void SALARY_updateData(Map<String, String> row) throws DataAccessException {
+		sqlSession.update("mapper.hm_p0001.SALARY_updateData", row);
+		for ( String key : row.keySet() ) {
+		    System.out.println("방법1) key : " + key +" / value : " + row.get(key));
+		}
+		System.out.println("=======================");
+		
+	}
+	@Override
+	public void DATE_deleteData(Map<String, String> row) throws DataAccessException {
+		sqlSession.update("mapper.hm_p0001.DATE_deleteData", row);
+		for ( String key : row.keySet() ) {
+		    System.out.println("방법1) key : " + key +" / value : " + row.get(key));
+		}
+		System.out.println("=======================");
+	}
+
+	@Override
+	public void BACKDATE_updateData(Map<String, String> row) throws DataAccessException {
+		sqlSession.update("mapper.hm_p0001.BACKDATE_updateData", row);
+		for ( String key : row.keySet() ) {
+		    System.out.println("방법1) key : " + key +" / value : " + row.get(key));
+		}
+		System.out.println("=======================");
+		
+	}
+
+	
+
+	
 
 }

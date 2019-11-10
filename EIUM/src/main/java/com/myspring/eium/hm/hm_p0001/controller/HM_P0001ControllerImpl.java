@@ -88,15 +88,15 @@ public class HM_P0001ControllerImpl implements HM_P0001Controller {
 	@RequestMapping(value = "/hm/p0001/saveData.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("SAVADATA-------");
 		request.setCharacterEncoding("utf-8");
 		Map<String, String[]> dataMap = new HashMap<String, String[]>();
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 
 		String p_position_CODE = request.getParameter("p_position_CODE");
-
 		System.out.println("p_position_CODE : " + p_position_CODE);
-
+		String PP_START_DATE = request.getParameter("PP_START_DATE");
+		System.out.println("PP_START_DATE : " + PP_START_DATE);
+		
 		Enumeration enu = request.getParameterNames();
 		while (enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
@@ -107,7 +107,80 @@ public class HM_P0001ControllerImpl implements HM_P0001Controller {
 		Map<String, String> result = new HashMap<String, String>();
 
 		try {
-			p0001Service.saveData(dataMap, p_position_CODE);
+			p0001Service.saveData(dataMap, p_position_CODE, PP_START_DATE);
+			result.put("Code", "0");
+			result.put("Message", "저장성공");
+		} catch (Exception e) {
+			result.put("Code", "-1");
+			result.put("Message", "저장실패");
+			e.printStackTrace();
+		}
+
+		resultMap.put("Result", result);
+		return resultMap;
+	}
+	
+	@Override
+	@RequestMapping(value = "/hm/p0001/SALARY_saveData.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map SALARY_saveData(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("SAVADATA-------");
+		request.setCharacterEncoding("utf-8");
+		Map<String, String[]> dataMap = new HashMap<String, String[]>();
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+
+		String p_position_CODE = request.getParameter("p_position_CODE");
+		System.out.println("p_position_CODE : " + p_position_CODE);
+		String PP_START_DATE = request.getParameter("PP_START_DATE");
+		System.out.println("PP_START_DATE : " + PP_START_DATE);
+		
+		Enumeration enu = request.getParameterNames();
+		while (enu.hasMoreElements()) {
+			String name = (String) enu.nextElement();
+			String[] values = request.getParameterValues(name);
+			dataMap.put(name, values);
+		}
+
+		Map<String, String> result = new HashMap<String, String>();
+
+		try {
+			p0001Service.SALARY_saveData(dataMap, p_position_CODE, PP_START_DATE);
+			result.put("Code", "0");
+			result.put("Message", "저장성공");
+		} catch (Exception e) {
+			result.put("Code", "-1");
+			result.put("Message", "저장실패");
+			e.printStackTrace();
+		}
+
+		resultMap.put("Result", result);
+		return resultMap;
+	}
+
+	@Override
+	@RequestMapping(value = "/hm/p0001/DATE_deleteData.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map DATE_deleteData(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, String[]> dataMap = new HashMap<String, String[]>();
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+
+		String p_position_CODE = request.getParameter("p_position_CODE");
+		System.out.println("p_position_CODE : " + p_position_CODE);
+		String PP_START_DATE = request.getParameter("PP_START_DATE");
+		System.out.println("PP_START_DATE : " + PP_START_DATE);
+		
+		Enumeration enu = request.getParameterNames();
+		while (enu.hasMoreElements()) {
+			String name = (String) enu.nextElement();
+			String[] values = request.getParameterValues(name);
+			dataMap.put(name, values);
+		}
+
+		Map<String, String> result = new HashMap<String, String>();
+
+		try {
+			p0001Service.DATE_deleteData(dataMap, p_position_CODE, PP_START_DATE);
 			result.put("Code", "0");
 			result.put("Message", "저장성공");
 		} catch (Exception e) {
