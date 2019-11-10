@@ -126,6 +126,8 @@
 			//mySheet2의 조회로 마지막 Row의 시작연월 값을 파라미터 값을 넘김
 			
 			mySheet3.SetCellValue(mySheet3.GetSelectRow(),3,"");
+
+			
 			//alert(GetCellValue(mySheet3.GetSelectRow(),3));
 		}else if(mySheet3.GetSelectRow() == -1){ // mySheet3의 선택한 Row가 -1일 경우 (조회한 이력 연월이 없을 때)
 			alert(">2 ,"+mySheet3.GetSelectRow());
@@ -200,12 +202,15 @@
 		mySheet2.DoSearch("${contextPath}/hm/p0001/searchList2.do","position_CODE="+mySheet.GetCellValue(mySheet.GetSelectRow(),0)); // 호봉 코드 입력된 2번째 sheet 조회 
 	   
 	} 
+
 	/* function mySheet3_OnAfterEdit(Row, Col) {
 		alert("입력을 마칩니다."); 
 		
 	}  */
 	
 	
+
+
 	
 </script>
 <style type="text/css">
