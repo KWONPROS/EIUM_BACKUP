@@ -12,7 +12,6 @@
 <script src="${contextPath}/resources/ibsheet/ibsheet.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibleaders.js"></script>
 <script language="javascript">
-
 	/*Sheet 기본 설정 */
 	function LoadPage() {
 		
@@ -59,13 +58,12 @@
 	     	{Header:"상태|상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
 	        {Header:"삭제|삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},	
 			{Header:"호봉이력|적용시작연월",Type:"Date",SaveName:"start_DATE",MinWidth:80, Align:"Center", Format:"Ym"},
-	        {Header:"호봉이력|적용종료연월",Type:"Date",SaveName:"end_DATE",MinWidth:80, Align:"Center", Edit:"0"}			
+	        {Header:"호봉이력|적용종료연월",Type:"Date",SaveName:"end_DATE",MinWidth:80, Align:"Center", Format:"Ym", Edit:"0"}			
 		];   
 		IBS_InitSheet( mySheet3 , initSheet3);
   
 		mySheet3.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
 		mySheet3.SetSheetHeight(200);
-		
 		
 		mySheet.DoSearch("${contextPath}/hm/p0001/searchList.do");
 	}
@@ -86,10 +84,10 @@
 			case "save": // 저장
 				//
 				
-				mySheet3.SetCellValue(Row, 3, mySheet3.GetCellValue(Row,2)-1);
-				alert(mySheet3.GetCellValue(Row,3));
-				mySheet3.DoSave("${contextPath}/hm/p0001/saveData.do", "p_position_CODE=" + mySheet2.GetCellValue(0,0));
-				
+				/* mySheet3.SetCellValue(Row, 3, mySheet3.GetCellValue(Row,2)-1);
+				alert(mySheet3.GetCellValue(Row,3)); */
+				mySheet3.DoSave("${contextPath}/hm/p0001/saveData.do", "p_position_CODE=" + mySheet2.GetCellValue(0,0)); //호봉이력 연월 저장
+				mySheet2.DoSearch("${contextPath}/hm/p0001/searchList2.do","position_CODE="+mySheet.GetCellValue(mySheet.GetSelectRow(),0)); // 호봉 코드 입력된 2번째 sheet 조회
 				//확인!!!
 				var tempStr = mySheet3.GetSaveString();
 				tempStr = tempStr + "&p_position_CODE="+mySheet2.GetCellValue(0,0);
@@ -104,14 +102,54 @@
 	//로우 클릭시 (직급코드 선택시)
 	function mySheet_OnClick(Row) {
 		if(Row!=0){
-			mySheet2.DoSearch("${contextPath}/hm/p0001/searchList2.do", "position_CODE=" + mySheet.GetCellValue(Row, 0));
-			mySheet2.SetCellValue(0, 0, mySheet.GetCellValue(Row,0));
-			mySheet3.SetWaitImageVisible(0);
+			
+			mySheet2.SetCellValue(0, 0, mySheet.GetCellValue(Row,0)); // 두번째 시트의 0, 0의 값을 해당 직급코드로 변경
+			mySheet2.SetCellValue(0, 1, "C01"); //두번째 시트의 0, 1의 값을 기본 C01로 변경
+			/* mySheet3.SetWaitImageVisible(0); */ //mySheet3 조회 이미지 보여지는 것을 X
+			
+			mySheet3.DoSearch("${contextPath}/hm/p0001/searchList3.do", "position_CODE2=" + mySheet2.GetCellValue(0,0) + "&pay_GRADE_CODE=" + mySheet2.GetCellValue(0, 1));
+			//해당 직급과 C01에 해당하는 이력의 연월을 조회 - 
+			//mySheet3 조회가 끝난후 가장 끝 Row로 해당하는 연월의 값을 가져옴
+			//그 후 그 값으로 mySheet2 조회
 		}
 	}  
+	
+	//mySheet3 조회가 끝난 후
+	function mySheet3_OnSearchEnd(Row, Col, code,msg){
+		
+		if(mySheet3.GetSelectRow() == 2){ // mySheet3의 선택한 Row가 2일경우 
+			alert(mySheet3.GetCellValue(mySheet3.GetDataLastRow(), 2)+" ==2 ,"+mySheet3.GetCellValue(mySheet3.GetDataLastRow(), 3));
+			// mySheet3의 마지막 Row의 시작연월 값과 종료연월 값 출력
+			/* alert(Row); */ //0
+			/* alert(mySheet.GetCellValue(mySheet.GetSelectRow(), 0)); */ //200
+			mySheet2.DoSearch("${contextPath}/hm/p0001/searchList2.do", "position_CODE=" + mySheet.GetCellValue(mySheet.GetSelectRow(), 0) + "&start_DATE=" + mySheet3.GetCellValue(mySheet3.GetDataLastRow(), 2));
+			//mySheet2의 조회로 마지막 Row의 시작연월 값을 파라미터 값을 넘김
+			
+			mySheet3.SetCellValue(mySheet3.GetSelectRow(),3,"");
+			//alert(GetCellValue(mySheet3.GetSelectRow(),3));
+		}else if(mySheet3.GetSelectRow() == -1){ // mySheet3의 선택한 Row가 -1일 경우 (조회한 이력 연월이 없을 때)
+			alert(">2 ,"+mySheet3.GetSelectRow());
+			alert(">2 ,"+mySheet3.GetCellValue(mySheet3.GetSelectRow(), 3));
+			alert(mySheet3.GetDataLastRow());
+			mySheet3.SetCellValue(mySheet3.GetSelectRow()-1, 3, mySheet3.GetCellValue(mySheet3.GetSelectRow(), 3));
+			mySheet2.RemoveAll();
+		}
+		
+		
+		mySheet3.DataInsert(-1);
+		/* if(Row == 2){
+			alert(Row);
+			alert(mySheet3.GetCellValue(Row, Col+1));
+		}else if(Row >2){
+			alert(mySheet3.GetSelectRow());
+			alert(Row);
+			alert(mySheet3.GetCellValue(Row, Col+1));
+		}*/
+	}
+	
 	//직급코드 선택후 호봉코드를 선택시(1번째) - 시작연월 종료연월
-	function mySheet2_OnSearchEnd(code,msg){
-		mySheet2.SetCellValue(0, 1, mySheet2.GetCellValue(2, 2));
+	/* function mySheet2_OnSearchEnd(code,msg){
+		
 		mySheet3.DoSearch("${contextPath}/hm/p0001/searchList3.do", "position_CODE2=" + mySheet2.GetCellValue(0,0) + "&pay_GRADE_CODE=" + mySheet2.GetCellValue(0, 1));
 	}
 	
@@ -121,40 +159,56 @@
 			mySheet2.SetCellValue(0, 1, mySheet2.GetCellValue(Row, 2));
 			mySheet3.DoSearch("${contextPath}/hm/p0001/searchList3.do", "position_CODE2=" + mySheet2.GetCellValue(0,0) + "&pay_GRADE_CODE=" + mySheet2.GetCellValue(0, 1));
 		}
-	}
+	} */
 	
 	//시작연월 종료연월아래에 insert 띄워주기
-	function mySheet3_OnSearchEnd(code,msg){
-		mySheet3.DataInsert(-1);
-		if(mySheet3.GetCellValue(2,3)==""){
-			mySheet3.SetCellValue(2, 3, "");
-		}else{
-			/* mySheet2.RemoveAll(); */ //주석 풀어주어야 함
-		}
-	}
 	
-	function mySheet3_OnChange(Row) {
-		if(Row!=0){
-	    	alert(mySheet3.GetCellValue(Row,2)-1);
-		}
+	
+	function mySheet3_OnChange(Row, Col) {
+			if(Row == 2){
+				alert(mySheet3.GetSelectRow());
+				alert(mySheet3.GetCellValue(Row, 2));
+				mySheet3.SetRowEditable(mySheet3.GetSelectRow(),0);//저장된 cell의 row edit 0 설정
+				
+			}else if(Row >2){
+				alert(mySheet3.GetSelectRow());
+				alert(Row);
+				alert(mySheet3.GetCellValue(Row, 2));
+			}
+			
 	}
-
-
 	
 	// 저장완료 후 처리할 작업
 	// code: 0(저장성공), -1(저장실패)
-	function mySheet_OnSaveEnd(code,msg){
+	function mySheet3_OnSaveEnd(code,msg){
+		
 		if(msg != ""){
 			alert(msg);	
+			mySheet3.DataInsert(-1);
+			mySheet3.SetEditEnterBehavior("down");
+			
+			/* alert(mySheet3.GetDataLastRow()); */
+			/* mySheet3.SetRowEditable(1,0); */
 			//번호 다시 매기기
             //mySheet.ReNumberSeq();
 		}	
 	}
+	function mySheet3_OnBeforeEdit(Row, Col) {
+		
+	    alert("입력을 시작합니다.");
+	    mySheet3.DoSave("${contextPath}/hm/p0001/saveData.do", "p_position_CODE=" + mySheet2.GetCellValue(0,0)); //호봉이력 연월 저장
+		mySheet2.DoSearch("${contextPath}/hm/p0001/searchList2.do","position_CODE="+mySheet.GetCellValue(mySheet.GetSelectRow(),0)); // 호봉 코드 입력된 2번째 sheet 조회 
+	   
+	} 
+	/* function mySheet3_OnAfterEdit(Row, Col) {
+		alert("입력을 마칩니다."); 
+		
+	}  */
+	
 	
 	
 </script>
 <style type="text/css">
-
 .title {
  	width:100%;
 	color: #2C3E50;
@@ -167,7 +221,6 @@
 	border-bottom: thin dashed #5E5E5E;
 	position: absolute;
 	top: 50px;
-
 }
 .leftbuttons{
 	margin-top:40px;
@@ -190,7 +243,6 @@
 	border-radius: 7px;
 	text-decoration: none;	
 }
-
 .IBbutton:hover {
 background-color: #2C3E50;
 }
@@ -209,8 +261,6 @@ position: relative;
 top:  -570px;
 left: 800px;
 }
-
-
 </style>
 </head>
 <body onload="LoadPage()" style="overflow-x: hidden">

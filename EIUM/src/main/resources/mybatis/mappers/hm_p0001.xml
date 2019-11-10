@@ -32,6 +32,14 @@
 		AND PG.pay_GRADE_CODE = PGT.pay_GRADE_CODE 
 		AND TRIM(PGT.position_CODE) = #{P_POSITION_CODE, jdbcType=VARCHAR}
 	]]>
+		<choose>
+			<when test="P_START_DATE != '' and P_START_DATE != null">
+				AND TRIM(PGT.start_DATE) = #{P_START_DATE}
+			</when>
+			<otherwise>
+				AND 1 = 1
+			</otherwise>
+		</choose>
 	</select>
 	
 	<!-- ///////////////////////////////////PAY_GRADE_TABLE_SEARCH////////////// -->
@@ -60,9 +68,9 @@
 	<!--INSERT 문(호봉테이블 이력 입력) -->
  	<insert id="insertData" parameterType="java.util.Map">
 		insert into PAY_GRADE_TABLE(POSITION_CODE, PAY_GRADE_CODE, START_DATE, END_DATE) 
-		select P.POSITION_CODE, PG.PAY_GRADE_CODE, #{start_DATE} AS START_DATE, #{start_DATE} AS END_DATE
+		select P.POSITION_CODE, PG.PAY_GRADE_CODE, #{start_DATE} AS START_DATE, TO_CHAR(ADD_MONTHS(TO_DATE(#{start_DATE}, 'YYYYMM'),-1), 'YYYYMM')  AS END_DATE
 		from POSITION P, PAY_GRADE PG
-		where TRIM(P.POSITION_CODE) = #{p_position_CODE};
+		where TRIM(P.POSITION_CODE) = #{p_position_CODE}
 	</insert>	
 	
 	<delete id="deleteData" parameterType="java.util.Map">
