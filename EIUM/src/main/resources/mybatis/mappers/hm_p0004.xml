@@ -81,7 +81,7 @@
 	<select id="searchList" resultMap="P0004resultVO"
 		parameterType="java.util.Map"> 
       <![CDATA[
-        select 
+       select 
         A.EMPLOYEE_CODE
         ,A.EMPLOYEE_NAME
         ,B.DEPARTMENT_NAME
@@ -153,7 +153,10 @@
 		,X.SALARY
          
          from EMPLOYEE A, DEPARTMENT B,EMPLOYEE_HR_INFO C, EMPLOYEE_WORK D, FINAL_EDU E, COUNTRY F, EMPLOYEE_WORK G, EMPLOYEE_SALARY H,POSITION I,
-          PAY_GRADE J, OUT_REASON L, WORK_GROUP M, JOB_CLASS N, DUTY O, JOB_DIS P, PROJECT Q, D_CODE R, WORK_TYPE S, PAY_TYPE T, EMPLOYEE_SALARY U,BANK W,PAY_GRADE_TABLE X
+          PAY_GRADE J, OUT_REASON L, WORK_GROUP M, JOB_CLASS N, DUTY O, JOB_DIS P, PROJECT Q, D_CODE R, WORK_TYPE S, PAY_TYPE T, EMPLOYEE_SALARY U,BANK W,(SELECT *
+                                                                                                                                                            FROM PAY_GRADE_TABLE X
+                                                                                                                                                            WHERE X.START_DATE < to_char( sysdate, 'yyyymmdd')
+                                                                                                                                                            AND X.END_DATE > to_char( sysdate, 'yyyymmdd') )X
          WHERE D.DEPARTMENT_CODE = B.DEPARTMENT_CODE
          AND A.EMPLOYEE_CODE = C.EMPLOYEE_CODE
          AND A.EMPLOYEE_CODE = D.EMPLOYEE_CODE
@@ -413,7 +416,7 @@
 	</insert>
 
 	<resultMap id="clobMap" type="java.util.HashMap">
-		<result property="PICTURE" column="PICTURE" javaType="[B"
+		<result property="picture" column="PICTURE" javaType="[B"
 			jdbcType="BLOB" />
 	</resultMap>
 

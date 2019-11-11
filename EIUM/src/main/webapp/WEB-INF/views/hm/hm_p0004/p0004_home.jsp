@@ -16,7 +16,7 @@
 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script language="javascript">
 
 	/*Sheet 기본 설정 */
@@ -245,7 +245,7 @@
 	 
 	            
 	               
-	            
+	            sendData();
 	            
 	           
 	            var tempStr = mySheet.GetSaveString();
@@ -271,8 +271,7 @@
 		      $('input[name=contactNum]').val(mySheet.GetCellValue(Row,11));
 		      $('input[name=finalEduCode]').val(mySheet.GetCellValue(Row,12));
 		      $('input[name=finalEduName]').val(mySheet.GetCellValue(Row,13));
-		      $('#picture').attr('src',"${contextPath}/hm/p0004/getByteImage.do?empCode="+mySheet.GetCellValue(Row,2));	
-		      $('#inputempCode').val(Row);	
+		      $('#uploadedImg').attr('src',"${contextPath}/hm/p0004/getByteImage.do?empCode="+mySheet.GetCellValue(Row,2));	
 		      $('input[name=zipcode]').val(mySheet.GetCellValue(Row,15));
 		      $('input[name=address]').val(mySheet.GetCellValue(Row,16));
 		      $('input[name=addressDetail]').val(mySheet.GetCellValue(Row,17));
@@ -372,8 +371,45 @@
 
 	   }
 	  
-	  
 
+	//사진전송
+	function sendData() {	
+		var data = new FormData();
+		data.append("emp_CODE", mySheet.GetCellValue($('input[name=myRow]').val(),2))
+		data.append("picture", $('#inpicture')[0].files[0])
+		$.ajax({
+			url : "${contextPath}/hm/p0004/saveFile.do",
+			type : "POST",
+			dataType : 'json',
+			data : data,
+			processData : false,
+			contentType : false,
+			type : 'POST',
+			success : function(data) {
+			}
+		});
+	}
+	function selectPicture() {
+		$("#inpicture").click();
+		var ext = $("#inpicture").val().split(".").pop().toLowerCase();
+		if (ext.length > 0) {
+			if ($.inArray(ext, [ "gif", "png", "jpg", "jpeg" ]) == -1) {
+				alert("gif,png,jpg 파일만 업로드 할수 있습니다.");
+				return false;
+			}
+		}
+		$("#inpicture").val().toLowerCase();
+	}
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$('#uploadedImg').attr('src', e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+	
 </script>
 <style type="text/css">
 .ui-datepicker{ font-size: 12px; width: 210px; }
@@ -620,7 +656,7 @@ text-decoration: none;
 								<th class="tg-lu1x" rowspan="8"><i
 									class="fa fa-address-book" aria-hidden="true"></i><br>개<br>인<br>정<br>보</th>
 								<th class="tg-au0w" rowspan="18"></th>
-								<td class="tg-dm68" rowspan="7"><img id=picture alt="" src="" 
+								<td class="tg-dm68" rowspan="7"><img id=uploadedImg alt="" src="" 
 									></td>
 										
 								<th class="tg-au0w" rowspan="8"></th>
@@ -663,8 +699,8 @@ text-decoration: none;
 									id="contactNum" name="contactNum" style="width: 350px;"></td>
 							</tr>
 							<tr>
-								<td class="tg-dm68"><a href="javascript:changePic();"
-									id="pictureUpload" class="pictureUpload">사진등록</a></td>
+								<td class="tg-dm68"><a id="pictureUpload" class="pictureUpload"href=javascript:selectPicture()>사진등록</a>
+								<input type="file" name="picture" id="inpicture" onchange="readURL(this);" style="width:0;height:0;"/></td>
 
 								<td class="tg-8thm">최종학력</td>
 								<td class="tg-v9i9" colspan="3"><input type="text"
@@ -1004,11 +1040,6 @@ text-decoration: none;
 						</tr>
 					</table>
 
-
-<form action="${contextPath}/hm/p0004/saveFile.do" enctype="multipart/form-data" method="post">
-    <input type="file" name="imgFile" />
-    <input type="hidden" id="inputempCode"name="empCode" value="">
-    <input type="submit" value="이미지저장"/></form>
 				</div>
 			</div>
 		</div>
