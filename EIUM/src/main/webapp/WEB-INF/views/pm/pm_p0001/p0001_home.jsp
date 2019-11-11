@@ -28,15 +28,16 @@
 		initSheet.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0};
 		initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 		initSheet.Cols = [		
-			
-	        {Header:"사원코드",Type:"Text",SaveName:"emp_CODE",KeyField:1},	
-			{Header:"사원명",Type:"Text",SaveName:"emp_NAME",MinWidth:120, Align:"Center"},			
-			{Header:"부서명",Type:"Text",SaveName:"dep_NAME",MinWidth:170}						
+		
+	        {Header:"사원코드",Type:"Text",SaveName:"employee_CODE",KeyField:1, Edit: 0},	
+			{Header:"사원명",Type:"Text",SaveName:"employee_NAME",MinWidth:120, Align:"Center", Edit: 0},			
+			{Header:"부서명",Type:"Text",SaveName:"department_NAME",MinWidth:170, Edit: 0},
+			{Header:"부서코드", Type:"Text", SaveName:"department_CODE", Align:"Center", Edit: 0}
 		];   
 		IBS_InitSheet( mySheet , initSheet);
   
 		mySheet.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
-		mySheet.SetSheetHeight(350);
+		mySheet.SetSheetHeight(200);
 		
 		//아이비시트2------------------------------------------------------
 		mySheet2.RemoveAll();
@@ -44,7 +45,6 @@
 		initSheet2.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:0};
 		initSheet2.HeaderMode = {Sort:1, ColMove:0, ColResize:0, HeaderCheck:1};
 		initSheet2.Cols = [
-			
 			{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
 	        {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},	
 	        {Header:"NO",Type:"Text",SaveName:"NUMBER",MinWidth:50, Align:"Center" },	
@@ -58,7 +58,7 @@
 		IBS_InitSheet( mySheet2 , initSheet2);
 		  
 		mySheet2.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
-		mySheet2.SetSheetHeight(350);
+		mySheet2.SetSheetHeight(250);
 		
 		/* MonthPicker 옵션 */
 	    options = {
@@ -77,18 +77,22 @@
 	    $('#btn_monthpicker').bind('click', function () {
 	        $('#monthpicker').monthpicker('show');
 	    });
+	    
+	    mySheet.DoSearch("${contextPath}/pm/p0001/EMP_searchList.do");
 	}
 
 	/*Sheet 각종 처리*/
 	function doAction(sAction) {
 		switch (sAction) {
 		case "search": //조회
-			mySheet.DoSearch("${contextPath}/hm/p0004/searchList.do");
-		console.log(mySheet2.GetRowData(1));
+			mySheet.DoSearch("${contextPath}/pm/p0001/searchList.do");
+			console.log(mySheet2.GetRowData(1));
 			$('input[name=engName]').val(mySheet2.GetCellValue(1,3));
+			//조회조건에 맞도록 조회하기
 			break;
 
 		case "reload": //초기화
+			mySheet.RemoveAll();
 			mySheet2.RemoveAll();
 			break;
 		case "save": // 저장
@@ -96,7 +100,7 @@
 			var tempStr = mySheet2.GetSaveString();
 			tempStr = tempStr + "&table_NAME=" + mySheet2.GetCellValue(0, 2);
 			alert("서버로 전달되는 문자열 확인 :" + tempStr);
-			mySheet.DoSave("${contextPath}/hm/p0004/saveData.do", tempStr);
+			mySheet.DoSave("${contextPath}/pm/p0001/saveData.do", tempStr);
 			break;
 
 		}
@@ -105,12 +109,7 @@
 	//로우 클릭시
 	function mySheet_OnClick(Row, Col) {
 		if (Row != 0) {
-			mySheet2.DoSearch("${contextPath}/hm/p0004/searchList2.do", "emp_CODE=" + mySheet.GetCellValue(Row, 2));
-			
-			
-			
-			
-			
+			mySheet2.DoSearch("${contextPath}/pm/p0001/searchList2.do", "employee_CODE=" + mySheet.GetCellValue(Row, 2));
 			
 		}
 
@@ -172,14 +171,14 @@
 
 .left{
 	position: relative;
-	top: 130px;
+	top: 110px;
 	left: 60px;
 	width: 1053px;
 }
 
 .right{
 	position: relative;
-	top: -220px;
+	top: -90px;
 	left: 500px;
 	width: 750px;
 	
@@ -234,8 +233,7 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 </head>
 <body onload="LoadPage()" >
 	<div class="leftbuttons">
-		<a href="javascript:doAction('print')" class="IBbutton">인쇄</a> <a
-			href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
+		<a href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
 	</div>
 	<div class="rightbuttons">
 		<a href="javascript:doAction('reload')" class="IBbutton">초기화</a> 

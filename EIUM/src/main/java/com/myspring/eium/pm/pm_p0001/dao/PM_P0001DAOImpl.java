@@ -16,15 +16,15 @@ import com.myspring.eium.pm.pm_p0001.vo.PM_P0001VO;
 
 
 
-@Repository("s0002DAO")
+@Repository
 public class PM_P0001DAOImpl implements PM_P0001DAO {
 	@Autowired
 	private SqlSession sqlSession;
 
 	@Override
-	public List<PM_P0001VO> searchList(Map<String, Object> searchMap) throws DataAccessException {
-		System.out.println("searchMAp: "+searchMap);
-		List<PM_P0001VO> list = sqlSession.selectList("hm.s0002.searchList", searchMap);
+	public List<PM_P0001VO> EMP_searchList(Map<String, Object> searchMap) throws DataAccessException {
+		System.out.println("EMP_searchList - searchMAp: "+searchMap);
+		List<PM_P0001VO> list = sqlSession.selectList("mapper.pm_p0001.EMP_searchList", searchMap);
 		return list;
 	}
 

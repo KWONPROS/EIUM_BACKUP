@@ -1,7 +1,5 @@
 package com.myspring.eium.pm.pm_p0001.service;
 
-
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,18 +14,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.myspring.eium.pm.pm_p0001.dao.PM_P0001DAO;
 import com.myspring.eium.pm.pm_p0001.vo.PM_P0001VO;
 
-
-
-
-@Service("s0002Service")
+@Service
 @Transactional(propagation = Propagation.REQUIRED)
 public class PM_P0001ServiceImpl implements PM_P0001Service {
 	@Autowired
-	private PM_P0001DAO s0002DAO;
+	private PM_P0001DAO p0001DAO;
 
 	@Override
-	public List<PM_P0001VO> searchList(Map<String, Object> searchMap) throws DataAccessException {
-		List<PM_P0001VO> list =  s0002DAO.searchList(searchMap); 
+	public List<PM_P0001VO> EMP_searchList(Map<String, Object> searchMap) throws DataAccessException {
+		List<PM_P0001VO> list =  p0001DAO.EMP_searchList(searchMap); 
 		return list;
 	}
 
@@ -40,11 +35,11 @@ public class PM_P0001ServiceImpl implements PM_P0001Service {
 		for(String str : status) {
 			Map<String, String> row = getRow(dataMap, length, i); // ���� Index�� Row Map
 			if("I".equals(str)) { // �߰�
-				s0002DAO.insertData(row);
+				p0001DAO.insertData(row);
 			}else if("U".equals(str)) { // ����
-				s0002DAO.updateData(row);
+				p0001DAO.updateData(row);
 			}else if("D".equals(str)) { // ����
-				s0002DAO.deleteData(row);
+				p0001DAO.deleteData(row);
 			}
 			i++;
 		}

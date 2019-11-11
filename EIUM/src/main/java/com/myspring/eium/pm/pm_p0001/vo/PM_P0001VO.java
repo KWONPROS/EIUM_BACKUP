@@ -1,72 +1,97 @@
 package com.myspring.eium.pm.pm_p0001.vo;
 import org.springframework.stereotype.Component;
 
-@Component("s0002VO")
+@Component
 public class PM_P0001VO {
 	
-	private String cust_id="";
-	private String cust_name="";
-	private String cust_address="";
-	private String cust_city="";
-	private String cust_state="";
-	private String cust_zip="";
-	private String cust_country="";
-	private String cust_contact="";
-	private String cust_email="";
+	//사원 테이블
+	private String employee_CODE="";
+	private String employee_NAME="";
 	
-	public String getCust_id() {
-		return cust_id;
+	
+	public String getEmployee_CODE() {
+		return employee_CODE;
 	}
-	public void setCust_id(String cust_id) {
-		this.cust_id = cust_id;
+	public void setEmployee_CODE(String employee_CODE) {
+		this.employee_CODE = employee_CODE;
 	}
-	public String getCust_name() {
-		return cust_name;
+	public String getEmployee_NAME() {
+		return employee_NAME;
 	}
-	public void setCust_name(String cust_name) {
-		this.cust_name = cust_name;
+	public void setEmployee_NAME(String employee_NAME) {
+		this.employee_NAME = employee_NAME;
 	}
-	public String getCust_address() {
-		return cust_address;
+	
+	//부서 테이블
+	private String department_CODE="";
+	private String department_NAME="";
+	
+	public String getDepartment_CODE() {
+		return department_CODE;
 	}
-	public void setCust_address(String cust_address) {
-		this.cust_address = cust_address;
+	public void setDepartment_CODE(String department_CODE) {
+		this.department_CODE = department_CODE;
 	}
-	public String getCust_city() {
-		return cust_city;
+	public String getDepartment_NAME() {
+		return department_NAME;
 	}
-	public void setCust_city(String cust_city) {
-		this.cust_city = cust_city;
-	}
-	public String getCust_state() {
-		return cust_state;
-	}
-	public void setCust_state(String cust_state) {
-		this.cust_state = cust_state;
-	}
-	public String getCust_zip() {
-		return cust_zip;
-	}
-	public void setCust_zip(String cust_zip) {
-		this.cust_zip = cust_zip;
-	}
-	public String getCust_country() {
-		return cust_country;
-	}
-	public void setCust_country(String cust_country) {
-		this.cust_country = cust_country;
-	}
-	public String getCust_contact() {
-		return cust_contact;
-	}
-	public void setCust_contact(String cust_contact) {
-		this.cust_contact = cust_contact;
-	}
-	public String getCust_email() {
-		return cust_email;
-	}
-	public void setCust_email(String cust_email) {
-		this.cust_email = cust_email;
+	public void setDepartment_NAME(String department_NAME) {
+		this.department_NAME = department_NAME;
 	}
 
+	//WORKING_STATUS 근태 상태
+	private String working_STATUS_CODE="";
+	private String working_STATUS_MONTH="";
+	private String working_STATUS_DATE="";
+	private String working_STATUS_START_TIME="";
+	private String working_STATUS_END_TIME="";
+	private String working_STATUS_TOTAL_TIME="";
+	private String working_STATUS_DESC="";
+
+
+	public String getWorking_STATUS_CODE() {
+		return working_STATUS_CODE;
+	}
+	public void setWorking_STATUS_CODE(String working_STATUS_CODE) {
+		this.working_STATUS_CODE = working_STATUS_CODE;
+	}
+	public String getWorking_STATUS_MONTH() {
+		return working_STATUS_MONTH;
+	}
+	public void setWorking_STATUS_MONTH(String working_STATUS_MONTH) {
+		this.working_STATUS_MONTH = working_STATUS_MONTH;
+	}
+	public String getWorking_STATUS_DATE() {
+		return working_STATUS_DATE;
+	}
+	public void setWorking_STATUS_DATE(String working_STATUS_DATE) {
+		this.working_STATUS_DATE = working_STATUS_DATE;
+	}
+	public String getWorking_STATUS_START_TIME() {
+		return working_STATUS_START_TIME;
+	}
+	public void setWorking_STATUS_START_TIME(String working_STATUS_START_TIME) {
+		this.working_STATUS_START_TIME = working_STATUS_START_TIME;
+	}
+	public String getWorking_STATUS_END_TIME() {
+		return working_STATUS_END_TIME;
+	}
+	public void setWorking_STATUS_END_TIME(String working_STATUS_END_TIME) {
+		this.working_STATUS_END_TIME = working_STATUS_END_TIME;
+	}
+	public String getWorking_STATUS_TOTAL_TIME() {
+		return working_STATUS_TOTAL_TIME;
+	}
+	public void setWorking_STATUS_TOTAL_TIME(String working_STATUS_TOTAL_TIME) {
+		this.working_STATUS_TOTAL_TIME = working_STATUS_TOTAL_TIME;
+	}
+	public String getWorking_STATUS_DESC() {
+		return working_STATUS_DESC;
+	}
+	public void setWorking_STATUS_DESC(String working_STATUS_DESC) {
+		this.working_STATUS_DESC = working_STATUS_DESC;
+	}
+	
+	
+	
 }

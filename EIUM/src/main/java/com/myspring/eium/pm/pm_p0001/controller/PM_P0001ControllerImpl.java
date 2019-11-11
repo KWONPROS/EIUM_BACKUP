@@ -54,18 +54,18 @@ public class PM_P0001ControllerImpl implements PM_P0001Controller {
 	} 
 	
 	@Override
-	@RequestMapping(value = "/pm/p0001/searchList.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/pm/p0001/EMP_searchList.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
-	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public Map EMP_searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		Map<String, Object> searchMap = new HashMap<String, Object>(); 
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
 		
 		//데이터 조회
-		List<PM_P0001VO> data = pM_P0001Service.searchList(searchMap);
+		List<PM_P0001VO> data = pM_P0001Service.EMP_searchList(searchMap);
 		
         resultMap.put("Data", data);
-    	System.out.println("resultMap::::"+resultMap);
+    	System.out.println("PM-P0001ControllerImpl-1-resultMap::::" + resultMap);
         return resultMap;
 	}
 	
@@ -90,7 +90,7 @@ public class PM_P0001ControllerImpl implements PM_P0001Controller {
 			pM_P0001Service.saveData(dataMap);	
 			result.put("Code","0");
 			result.put("Message","저장되었습니다");
-		}catch(Exception e) {
+		}catch(Exception e) {                                                               
 			result.put("Code","-1");
 			result.put("Message","저장에 실패하였습니다");
 			e.printStackTrace();
