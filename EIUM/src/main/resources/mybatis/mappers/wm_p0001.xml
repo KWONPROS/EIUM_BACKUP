@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mapper.pm_p0001">
-	<resultMap id="P0001resultVO" type="PM_P0001VO">
+<mapper namespace="mapper.wm_p0001">
+	<resultMap id="P0001resultVO" type="WM_P0001VO">
 		<result property="employee_CODE" column="EMPLOYEE_CODE" />
 		<result property="employee_NAME" column="EMPLOYEE_NAME" />
 		<result property="department_CODE" column="DEPARTMENT_CODE" />

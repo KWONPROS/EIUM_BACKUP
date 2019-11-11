@@ -1,4 +1,4 @@
-package com.myspring.eium.pm.pm_p0001.controller;
+package com.myspring.eium.wm.wm_p0001.controller;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-public interface PM_P0001Controller {
+public interface WM_P0001Controller {
 	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map EMP_searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map WS_searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;

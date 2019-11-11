@@ -1,34 +1,33 @@
-package com.myspring.eium.pm.pm_p0001.service;
+package com.myspring.eium.wm.wm_p0001.service;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.myspring.eium.pm.pm_p0001.dao.PM_P0001DAO;
-import com.myspring.eium.pm.pm_p0001.vo.PM_P0001VO;
+import com.myspring.eium.wm.wm_p0001.dao.WM_P0001DAO;
+import com.myspring.eium.wm.wm_p0001.vo.WM_P0001VO;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
-public class PM_P0001ServiceImpl implements PM_P0001Service {
+public class WM_P0001ServiceImpl implements WM_P0001Service {
 	@Autowired
-	private PM_P0001DAO p0001DAO;
+	private WM_P0001DAO p0001DAO;
 
 	@Override
-	public List<PM_P0001VO> EMP_searchList(Map<String, Object> searchMap) throws DataAccessException {
-		List<PM_P0001VO> list =  p0001DAO.EMP_searchList(searchMap); 
+	public List<WM_P0001VO> EMP_searchList(Map<String, Object> searchMap) throws DataAccessException {
+		List<WM_P0001VO> list =  p0001DAO.EMP_searchList(searchMap); 
 		return list;
 	}
 	
 	@Override
-	public List<PM_P0001VO> WS_searchList(Map<String, String> searchMap) throws DataAccessException {
-		List<PM_P0001VO> list = p0001DAO.WS_searchList(searchMap);
+	public List<WM_P0001VO> WS_searchList(Map<String, String> searchMap) throws DataAccessException {
+		List<WM_P0001VO> list = p0001DAO.WS_searchList(searchMap);
 		return list;
 	}	
 

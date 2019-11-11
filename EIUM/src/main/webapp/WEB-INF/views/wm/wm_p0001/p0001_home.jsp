@@ -78,14 +78,14 @@
 	        $('#monthpicker').monthpicker('show');
 	    });
 	    
-	    mySheet.DoSearch("${contextPath}/pm/p0001/EMP_searchList.do");
+	    mySheet.DoSearch("${contextPath}/wm/p0001/EMP_searchList.do");
 	}
 
 	/*Sheet 각종 처리*/
 	function doAction(sAction) {
 		switch (sAction) {
 		case "search": //조회
-			mySheet.DoSearch("${contextPath}/pm/p0001/searchList.do");
+			mySheet.DoSearch("${contextPath}/wm/p0001/searchList.do");
 			console.log(mySheet2.GetRowData(1));
 			$('input[name=engName]').val(mySheet2.GetCellValue(1,3));
 			//조회조건에 맞도록 조회하기
@@ -100,7 +100,7 @@
 			var tempStr = mySheet2.GetSaveString();
 			tempStr = tempStr + "&table_NAME=" + mySheet2.GetCellValue(0, 2);
 			alert("서버로 전달되는 문자열 확인 :" + tempStr);
-			mySheet.DoSave("${contextPath}/pm/p0001/saveData.do", tempStr);
+			mySheet.DoSave("${contextPath}/wm/p0001/saveData.do", tempStr);
 			break;
 
 		}
@@ -109,7 +109,7 @@
 	//로우 클릭시
 	function mySheet_OnClick(Row, Col) {
 		if (Row != 0) {
-			mySheet2.DoSearch("${contextPath}/pm/p0001/WS_searchList.do", "P_EMP_CODE=" + mySheet.GetCellValue(Row, 0));
+			mySheet2.DoSearch("${contextPath}/wm/p0001/WS_searchList.do", "P_EMP_CODE=" + mySheet.GetCellValue(Row, 0));
 		}
 	}
 

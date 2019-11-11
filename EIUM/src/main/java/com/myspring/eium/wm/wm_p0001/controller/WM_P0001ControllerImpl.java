@@ -1,59 +1,50 @@
-package com.myspring.eium.pm.pm_p0001.controller;
+package com.myspring.eium.wm.wm_p0001.controller;
 
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myspring.eium.wm.wm_p0001.service.WM_P0001Service;
+import com.myspring.eium.wm.wm_p0001.vo.WM_P0001VO;
 
-import com.myspring.eium.pm.pm_p0001.service.PM_P0001Service;
-import com.myspring.eium.pm.pm_p0001.vo.PM_P0001VO;
+
+
 
 
 
 
 @Controller
-public class PM_P0001ControllerImpl implements PM_P0001Controller {
-	private static final Logger logger = LoggerFactory.getLogger(PM_P0001ControllerImpl.class);
+public class WM_P0001ControllerImpl implements WM_P0001Controller {
+	private static final Logger logger = LoggerFactory.getLogger(WM_P0001ControllerImpl.class);
 	
 	@Autowired
-	PM_P0001Service p0001Service;
+	WM_P0001Service p0001Service;
 	
 	@Override
-	@RequestMapping(value = "/pm/p0001/searchInit.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/wm/p0001/searchInit.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("pm/pm_p0001/p0001_home");
+		ModelAndView mav = new ModelAndView("wm/wm_p0001/p0001_home");
 	
 		return mav;
 	} 
 	
 	@Override
-	@RequestMapping(value = "/pm/p0001/EMP_searchList.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/wm/p0001/EMP_searchList.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Map EMP_searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
@@ -61,7 +52,7 @@ public class PM_P0001ControllerImpl implements PM_P0001Controller {
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
 		
 		//데이터 조회
-		List<PM_P0001VO> data = p0001Service.EMP_searchList(searchMap);
+		List<WM_P0001VO> data = p0001Service.EMP_searchList(searchMap);
 		
         resultMap.put("Data", data);
     	System.out.println("WM-P0001ControllerImpl-1-resultMap::::" + resultMap);
@@ -69,7 +60,7 @@ public class PM_P0001ControllerImpl implements PM_P0001Controller {
 	}
 
 	@Override
-	@RequestMapping(value = "/pm/p0001/WS_searchList.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/wm/p0001/WS_searchList.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Map WS_searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
@@ -80,7 +71,7 @@ public class PM_P0001ControllerImpl implements PM_P0001Controller {
 		
 		searchMap.put("P_EMP_CODE", request.getParameter("P_EMP_CODE"));
 		//데이터 조회
-		List<PM_P0001VO> data = p0001Service.WS_searchList(searchMap);
+		List<WM_P0001VO> data = p0001Service.WS_searchList(searchMap);
 		
         resultMap.put("Data", data);
     	System.out.println("WM-P0001ControllerImpl-2-resultMap::::" + resultMap);
@@ -88,7 +79,7 @@ public class PM_P0001ControllerImpl implements PM_P0001Controller {
 	}
 	
 	@Override
-	@RequestMapping(value = "/pm/p0001/saveData.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/wm/p0001/saveData.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
