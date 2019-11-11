@@ -57,10 +57,7 @@ public class WM_P0002ControllerImpl implements WM_P0002Controller{
 		request.setCharacterEncoding("utf-8");
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-System.out.println("==========" + request.getParameter("date"));
-System.out.println("==========" + request.getParameter("vacaTYPE"));
-System.out.println("==========" + request.getParameter("Select"));
-System.out.println("==========" + request.getParameter("p_text"));
+		
 		searchMap.put("date", request.getParameter("date"));
 		searchMap.put("vacaTYPE", request.getParameter("vacaTYPE"));
 		searchMap.put("Select", request.getParameter("Select"));
