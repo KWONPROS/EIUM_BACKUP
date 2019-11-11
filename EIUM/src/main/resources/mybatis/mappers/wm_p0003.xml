@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.wm_p0003">
+	<resultMap id="p0003Result" type="WM_P0003VO">
+	    <result property="EMPLOYEE_NAME" column="EMPLOYEE_NAME" />
+		<result property="EMPLOYEE_CODE" column="EMPLOYEE_CODE" />
+		<result property="DEPARTMENT_NAME" column="DEPARTMENT_NAME" />
+	    <result property="DEPARTMENT_CODE" column="DEPARTMENT_CODE" />
+		
+		<result property="POSITION_CODE" column="POSITION_CODE" />
+		<result property="POSITION_NAME" column="POSITION_NAME" />
+		<result property="VACATION_CODE" column="VACATION_CODE" />
+		<result property="VACATION_TYPE" column="VACATION_TYPE" />
+		<result property="VACATION_START_DATE" column="VACATION_START_DATE" />
+		<result property="VACATION_END_DATE" column="VACATION_END_DATE" />
+		<result property="VACATION_APPLY_DATE" column="VACATION_APPLY_DATE" />
+		<result property="BEFORE_VACATION_REMAIN_DATE" column="BEFORE_VACATION_REMAIN_DATE" />
+		<result property="VACATION_REMAIN_DATE" column="VACATION_REMAIN_DATE" />
+		
+	    <result property="SITE_NAME" column="SITE_NAME" />
+	    <result property="SITE_CODE" column="SITE_CODE" />
+		
+		
+	</resultMap>
+	<select id="searchList" resultMap="p0003Result" parameterType="java.util.List">
+      <![CDATA[
+         SELECT vh.vacation_code, e.employee_code, e.employee_name, d.department_name, p.position_name, vh.vacation_type, vh.VACATION_START_DATE, vh.VACATION_END_DATE, vh.VACATION_APPLY_DATE, vh.BEFORE_VACATION_REMAIN_DATE
+         FROM employee e, employee_work ew, department d, position p, vacation_remain vr, vacation_change_history vh, site s
+         WHERE ew.employee_code = e.employee_code
+         and ew.employee_code = vr.employee_code
+         and ew.employee_code = vh.employee_code
+         and ew.department_code = d.department_code
+         and ew.position_code = p.position_code
+         and d.site_code = s.site_code
+      ]]>
+      <choose>
+             <when test= " Select.equals('사원명') and p_text != '' and p_text != null and date != ''  and  date != null and date2 != '' and date2 != null ">
+			    and TO_DATE(VACATION_START_DATE, 'YYYY-MM-DD') <![CDATA[>=]]> #{date}
+                and TO_DATE(VACATION_END_DATE, 'YYYY-MM-DD') <![CDATA[<=]]> #{date2}
+				and e.employee_name = #{p_text}
+				order by vh.VACATION_END_DATE DESC 
+			</when> <!-- date date2 사원명 -->
+      
+             <when test= " Select.equals('부서') and p_text != '' and p_text != null and date != ''  and  date != null and date2 != '' and date2 != null ">
+				and TO_DATE(VACATION_START_DATE, 'YYYY-MM-DD') <![CDATA[>=]]> #{date}
+                and TO_DATE(VACATION_END_DATE, 'YYYY-MM-DD') <![CDATA[<=]]> #{date2}
+				and d.department_name = #{p_text}
+				order by vh.VACATION_END_DATE DESC
+			</when> <!-- date date2 부서 -->
+            
+            
+            
+            
+			<when test= " Select.equals('사원명') and p_text != '' and p_text != null and date != ''  and  date != null "> 
+				and TO_DATE(VACATION_START_DATE, 'YYYY-MM-DD') <![CDATA[>=]]> #{date}
+				and e.employee_name = #{p_text}
+				order by vh.VACATION_END_DATE DESC 
+			</when> <!-- date null 사원명 -->
+			
+			<when test= " Select.equals('부서') and p_text != '' and p_text != null and date != ''  and  date != null "> 
+                and TO_DATE(VACATION_START_DATE, 'YYYY-MM-DD') <![CDATA[>=]]> #{date}
+				and d.department_name = #{p_text}
+				order by vh.VACATION_END_DATE DESC
+			</when> <!-- date null 부서 -->
+			
+			<when test= " Select.equals('사원명') and p_text != '' and p_text != null and date2 != '' and date2 != null "> 
+				and TO_DATE(VACATION_END_DATE, 'YYYY-MM-DD') <![CDATA[<=]]> #{date2}
+				and e.employee_name = #{p_text}
+				order by vh.VACATION_END_DATE DESC
+			</when> <!-- null date2 사원명 -->
+			
+			<when test= " Select.equals('부서') and p_text != '' and p_text != null and date2 != '' and date2 != null"> 
+				and TO_DATE(VACATION_END_DATE, 'YYYY-MM-DD') <![CDATA[<=]]> #{date2}
+				and d.department_name = #{p_text}
+				order by vh.VACATION_END_DATE DESC
+			</when> <!-- null date2 부서 -->
+			
+			<when test= " date != ''  and  date != null and date2 != '' and date2 != null "> 
+				and TO_DATE(VACATION_START_DATE, 'YYYY-MM-DD') <![CDATA[>=]]> #{date}
+                and TO_DATE(VACATION_END_DATE, 'YYYY-MM-DD') <![CDATA[<=]]> #{date2}
+				order by vh.VACATION_END_DATE DESC 
+			</when> <!-- date date2 null -->
+			
+            <when test= " date2 != '' and date2 != null "> 
+				and TO_DATE(VACATION_END_DATE, 'YYYY-MM-DD') <![CDATA[<=]]> #{date2}
+				order by vh.VACATION_END_DATE DESC 
+			</when> <!-- null date2 null -->
+			
+			<when test= " date != ''  and  date != null "> 
+				and TO_DATE(VACATION_START_DATE, 'YYYY-MM-DD') <![CDATA[>=]]> #{date}
+				order by vh.VACATION_END_DATE DESC 
+			</when> <!-- date null null -->
+
+            <when test= " Select.equals('사원명') and p_text != '' and p_text != null "> 
+				and e.employee_name = #{p_text}
+				order by vh.VACATION_END_DATE DESC 
+			</when> <!-- null null 사원명 -->
+			
+			<when test= " Select.equals('부서') and p_text != '' and p_text != null "> 
+	     		and d.department_name = #{p_text}
+				order by vh.VACATION_END_DATE DESC 
+			</when> <!-- null null 부서 -->
+		
+			<otherwise>
+			    order by vh.VACATION_END_DATE DESC
+			</otherwise> <!-- 조건x(전체조회) -->
+	   </choose>
+	</select>
+
+
+</mapper>

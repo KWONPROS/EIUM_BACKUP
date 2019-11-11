@@ -42,7 +42,6 @@ function LoadPage(){
 		{"Header":"추가","SaveName":"access_INSERT","Type":"CheckBox","Width":100,"ColMerge":0},
 		{"Header":"수정","SaveName":"access_UPDATE","Type":"CheckBox","Width":100,"ColMerge":0},
 		{"Header":"삭제","SaveName":"access_DELETE","Type":"CheckBox","Width":100,"ColMerge":0},
-		{"Header":"출력","SaveName":"access_PRINT","Type":"CheckBox","Width":100,"ColMerge":0} 
       ];
    IBS_InitSheet(mySheet,initSheet);
    IBS_InitSheet(mySheet2,initSheet2);
