@@ -27,20 +27,6 @@ public class WM_P0002ServiceImpl implements WM_P0002Service {
 		return list;
 	}
 
-	@Override
-	public List<WM_P0002VO> searchSiteList(Map<String, Object> searchMap) {
-		List<WM_P0002VO> list=WM_P0002DAO.searchSiteList(searchMap);
-
-		return list;
-	}
-
-	@Override
-	public List<WM_P0002VO> searchDeptList(Map<String, Object> searchMap) {
-		List<WM_P0002VO> list=WM_P0002DAO.searchDeptList(searchMap);
-
-		return list;
-	}
-
 	public List<WM_P0002VO> searchEmployeeList(Map<String, Object> searchMap) {
 		List<WM_P0002VO> list=WM_P0002DAO.searchEmployeeList(searchMap);
 
