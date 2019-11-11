@@ -26,7 +26,7 @@
       select: function(start, end, allDay) {
     	    alert(start);
     	    var title = prompt('일정을 입력하세요.');
-    	    
+    	      
     	   
     	      
     	    },	  
