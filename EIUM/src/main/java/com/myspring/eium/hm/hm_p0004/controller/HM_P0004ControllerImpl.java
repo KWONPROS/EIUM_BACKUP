@@ -149,26 +149,16 @@ public class HM_P0004ControllerImpl implements HM_P0004Controller {
     @RequestMapping(value="/hm/p0004/saveFile.do", method = { RequestMethod.GET, RequestMethod.POST })
     public void saveFile(HM_P0004VO VO, ModelAndView mav, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		Map<String, Object> dataMap = new HashMap<String, Object>(); 
-		Map<String, Object> resultMap = new HashMap<String, Object>(); 
-       
+		
         dataMap.put("emp_CODE",VO.getEmp_CODE());
         dataMap.put("picture",VO.getPicture().getBytes());
         
-        Map<String, String> result = new HashMap<String, String>();
 		try {
 			p0004Service.saveFile(dataMap);
-			result.put("Code","0");
-			result.put("Message","저장성공");
 		}catch(Exception e) {
-			result.put("Code","-1");
-			result.put("Message","저장실패");
 			e.printStackTrace();
 		}
-		
-		resultMap.put("Result", result);       
-		mav.addObject(resultMap);
-        
-            
+	
     }
 	
 	@Override
