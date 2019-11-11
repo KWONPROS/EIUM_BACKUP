@@ -175,7 +175,7 @@ $(document).ready(function(){
 				}],
 				contents:[{
 					type:"iframe",	
-					contents:""
+					contents:"cm/main.do"
 				}],
 				customZone:{
 					width:"0px"

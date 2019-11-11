@@ -45,6 +45,10 @@ public class HomeController {
 	public String Login( Locale locale,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		return "common/cm_login";
 	}
+	@RequestMapping(value = "/cm/main.do", method =  RequestMethod.GET)
+	public String main( Locale locale,HttpServletRequest request, HttpServletResponse response) throws Exception {
+		return "common/cm_main";
+	}
 	
 	
 	@RequestMapping(value = "/findIdNPwd.do", method = RequestMethod.GET)
