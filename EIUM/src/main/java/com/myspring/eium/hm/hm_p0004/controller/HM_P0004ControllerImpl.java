@@ -35,6 +35,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -145,14 +146,13 @@ public class HM_P0004ControllerImpl implements HM_P0004Controller {
 	}
 	
 	@Override
-    @RequestMapping(value="/hm/p0004/saveFile.do", method = RequestMethod.POST, produces="text/plain;Charset=UTF-8")
-    @ResponseBody
-    public Map uploadContent(MultipartHttpServletRequest request) throws Exception{
+    @RequestMapping(value="/hm/p0004/saveFile.do", method = { RequestMethod.GET, RequestMethod.POST })
+    public void saveFile(HM_P0004VO VO, ModelAndView mav, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		Map<String, Object> dataMap = new HashMap<String, Object>(); 
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
-        List<MultipartFile> mf = request.getFiles("imgFile");
-        dataMap.put("emp_CODE",request.getParameter("empCode"));
-        dataMap.put("picture", mf.get(0).getBytes());
+       
+        dataMap.put("emp_CODE",VO.getEmp_CODE());
+        dataMap.put("picture",VO.getPicture().getBytes());
         
         Map<String, String> result = new HashMap<String, String>();
 		try {
@@ -165,8 +165,9 @@ public class HM_P0004ControllerImpl implements HM_P0004Controller {
 			e.printStackTrace();
 		}
 		
-		resultMap.put("Result", result);         
-        return resultMap;
+		resultMap.put("Result", result);       
+		mav.addObject(resultMap);
+        
             
     }
 	
@@ -180,7 +181,7 @@ public class HM_P0004ControllerImpl implements HM_P0004Controller {
 		
 		Map<String, Object> map = p0004dao.getByteImage(searchMap);
 		
-		byte[] imageContent = (byte[]) map.get("PICTURE");
+		byte[] imageContent = (byte[]) map.get("picture");
 
 		final HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.IMAGE_PNG);
