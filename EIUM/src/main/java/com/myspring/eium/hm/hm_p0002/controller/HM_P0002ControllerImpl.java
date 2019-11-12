@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -21,6 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.eium.hm.hm_p0002.service.HM_P0002Service;
 import com.myspring.eium.hm.hm_p0002.vo.HM_P0002VO;
+import com.myspring.eium.hm.hm_p0007.vo.HM_P0007VO;
+import com.myspring.eium.login.vo.LoginVO;
 
 
 
@@ -34,17 +37,77 @@ public class HM_P0002ControllerImpl implements HM_P0002Controller{
 	private HM_P0002Service hM_P0002Service;
 	
 	@Autowired
-	HM_P0002VO hM_P0003VO;
+	HM_P0002VO hM_P0002VO;
 	
 	
 	@Override
-	@RequestMapping(value = "hm/p0002/searchInit.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView paymentInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "/hm/p0002/searchInit.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("/hm/hm_p0002/p0002_home");
+		ModelAndView mav = new ModelAndView("hm/hm_p0002/p0002");
 	
 		return mav;
 	} 
+	
+	@Override
+	@RequestMapping(value = "/hm/p0002/searchList.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+					//testetstettt
+		
+		
+		List<HM_P0002VO> data = hM_P0002Service.searchList(searchMap);
+
+        resultMap.put("Data", data);
+    	System.out.println("resultMap::::"+resultMap);
+        return resultMap;
+	}
+	
+	@Override
+	@RequestMapping(value = "/hm/p0002/saveHr_info.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, String[]> dataMap = new HashMap<String, String[]>(); 
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+		
+		HttpSession session = request.getSession(); LoginVO loginvo = new LoginVO();
+		loginvo = (LoginVO)session.getAttribute("login"); 
+		String user= (loginvo.getEmployee_name());
+		 String x =request.getParameter("x");
+
+		  
+		Map<String, Object> searchMap = new HashMap<String, Object>(); // 
+		searchMap.put("tempStr", request.getParameter("tempStr"));
+	
+		Enumeration enu = request.getParameterNames();
+		while (enu.hasMoreElements()) {
+			String name = (String) enu.nextElement();
+			String[] values = request.getParameterValues(name);
+			dataMap.put(name, values);
+		}
+		
+		Map<String, String> result = new HashMap<String, String>();
+		try {
+			hM_P0002Service.saveData(dataMap, user, x);	
+			result.put("Code","0");
+			result.put("Message","저장성공");
+		}catch(Exception e) {
+			result.put("Code","-1");
+			result.put("Message","저장실패");
+			e.printStackTrace();
+		}
+		
+		resultMap.put("Result", result);         
+        return resultMap;
+	}
+	
+
+	
+	
 	
 
 	
