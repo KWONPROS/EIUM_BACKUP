@@ -22,16 +22,34 @@
 	/*Sheet 기본 설정 */
 	function LoadPage() {
 		
+		/* MonthPicker 옵션 */
+	    options = {
+	        pattern: 'yyyy-mm', // Default is 'mm/yyyy' and separator char is not mandatory
+	        selectedYear: 2019,
+	        startYear: 2000,
+	        finalYear: 3000,
+	        buttonImage: "${contextPath}/resources/image/icons/icon_calendar.png", 
+	        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']
+	    };
+	     
+	    /* MonthPicker Set */
+	    $('#monthpicker').monthpicker(options);
+	     
+	    /* 버튼 클릭시 MonthPicker Show */
+	    $('#btn_monthpicker').bind('click', function () {
+	        $('#monthpicker').monthpicker('show');
+	    });
+	    
 		//아이비시트1 
 		mySheet.RemoveAll();
 		var initSheet = {};
 		initSheet.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0};
-		initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
+		initSheet.HeaderMode = {Sort:1,ColMove:1,ColResize:1,HeaderCheck:1};
 		initSheet.Cols = [		
 		
-	        {Header:"사원코드",Type:"Text",SaveName:"employee_CODE",KeyField:1, Edit: 0},	
+	        {Header:"사원코드",Type:"Text",SaveName:"employee_CODE", Width:80, KeyField:1, Align:"Center", Edit: 0},	
 			{Header:"사원명",Type:"Text",SaveName:"employee_NAME",MinWidth:120, Align:"Center", Edit: 0},			
-			{Header:"부서명",Type:"Text",SaveName:"department_NAME",MinWidth:170, Edit: 0},
+			{Header:"부서명",Type:"Text",SaveName:"department_NAME",MinWidth:150, Align:"Center", Edit: 0},
 			{Header:"부서코드", Type:"Text", SaveName:"department_CODE", Align:"Center", Edit: 0}
 		];   
 		IBS_InitSheet( mySheet , initSheet);
@@ -49,34 +67,21 @@
 	        {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},	
 	        {Header:"NO",Type:"Seq",SaveName:"NUMBER",MinWidth:50, Align:"Center" },	
 			{Header:"출근일자",Type:"Date",SaveName:"working_STATUS_DATE",MinWidth:120,KeyField:1, Align:"Center", Format: "Ymd"},			
-			{Header:"출근시간",Type:"Date",SaveName:"working_STATUS_START_TIME",MinWidth:100, Align:"Center", Format: "Hm"},
-			{Header:"퇴근시간",Type:"Date",SaveName:"working_STATUS_END_TIME",MinWidth:100, Align:"Center", Format: "Hm"},
-			{Header:"총시간",Type:"Text",SaveName:"working_STATUS_TOTAL_TIME",MinWidth:50, Align:"Center", Format: "Hm"},
-			{Header:"비고",Type:"Text",SaveName:"working_STATUS_DESC",MinWidth:100, Align:"Center"}
+			{Header:"출근시간",Type:"Date",SaveName:"working_STATUS_START_TIME",MinWidth:100, Align:"Center", Format: "HH:mm"},
+			{Header:"퇴근시간",Type:"Date",SaveName:"working_STATUS_END_TIME",MinWidth:100, Align:"Center", Format: "HH:mm"},
+			{Header:"temp_시간",Type:"Date",SaveName:"temp_TIME",MinWidth:100, Align:"Center", Format: "HH:mm", DefaultValue :"0000"},
+			{Header:"근무총시간",Type:"Date",SaveName:"working_STATUS_TOTAL_TIME",MinWidth:50, Align:"Center", Format: "HH:mm", CalcLogic:"|5|+|6|-|4|"},
+			{Header:"퇴근-출근시간",Type:"Date",SaveName:"working_STATUS_TOTAL_TIME_CALC",MinWidth:50, Align:"Center",Format:"HH:mm", CalcLogic:"|5|+|6|-|4|"},
+			{Header:"비고",Type:"Text",SaveName:"working_STATUS_DESC",MinWidth:100, Align:"Center", "ComboText":"연차|특별휴가|경조휴가"}
 		];
 		
 		IBS_InitSheet( mySheet2 , initSheet2);
-		  
+		
 		mySheet2.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
 		mySheet2.SetSheetHeight(250);
-		
-		/* MonthPicker 옵션 */
-	    options = {
-	        pattern: 'yyyy-mm', // Default is 'mm/yyyy' and separator char is not mandatory
-	        selectedYear: 2019,
-	        startYear: 2008,
-	        finalYear: 2019,
-	        buttonImage: "${contextPath}/resources/image/icons/icon_calendar.png", 
-	        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']
-	    };
-	     
-	    /* MonthPicker Set */
-	    $('#monthpicker').monthpicker(options);
-	     
-	    /* 버튼 클릭시 MonthPicker Show */
-	    $('#btn_monthpicker').bind('click', function () {
-	        $('#monthpicker').monthpicker('show');
-	    });
+		/* GetDataLastRow() == mySheet3.GetSelectRow() */
+		/* var info = [{StdCol:1 , SumCols:"0|1"}]; 
+		mySheet.ShowSubSum (info);  */
 	    
 	    mySheet.DoSearch("${contextPath}/wm/p0001/EMP_searchList.do");
 	}
@@ -85,9 +90,11 @@
 	function doAction(sAction) {
 		switch (sAction) {
 		case "search": //조회
-			mySheet.DoSearch("${contextPath}/wm/p0001/searchList.do");
+			mySheet.DoSearch("${contextPath}/wm/p0001/EMP_searchList.do");
+			/* alert(mySheet2.GetCellValue(mySheet2.GetSelectRow(), 6)); */
 			console.log(mySheet2.GetRowData(1));
-			$('input[name=engName]').val(mySheet2.GetCellValue(1,3));
+			$('input[name=temp_TIME]').val(mySheet2.GetCellValue(1,3));
+			
 			//조회조건에 맞도록 조회하기
 			break;
 
@@ -102,7 +109,14 @@
 			alert("서버로 전달되는 문자열 확인 :" + tempStr);
 			mySheet.DoSave("${contextPath}/wm/p0001/saveData.do", tempStr);
 			break;
-
+		case "insert":
+			var row = mySheet2.DataInsert(-1);
+			/* mySheet2.SaveNameCol("temp_TIME") */mySheet2.GetSelectRow()
+			alert(mySheet2.GetSelectRow());
+			alert(mySheet2.SaveNameCol("temp_TIME"));
+			/* alert(mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("temp_TIME"), 0000)); */
+			alert(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("temp_TIME")));
+			break;
 		}
 	}
 
@@ -110,9 +124,14 @@
 	function mySheet_OnClick(Row, Col) {
 		if (Row != 0) {
 			mySheet2.DoSearch("${contextPath}/wm/p0001/WS_searchList.do", "P_EMP_CODE=" + mySheet.GetCellValue(Row, 0));
+			if(mySheet2.GetCellValue(Row, 6) == "" || mySheet2.GetCellValue(Row, 6) == null){
+				mySheet2.SetCellValue(Row, 6, "0000");
+			}
 		}
 	}
-
+	function mySheet2_OnSearchEnd(Code, Msg){
+		
+	}
 	// 저장완료 후 처리할 작업
 	// code: 0(저장성공), -1(저장실패)
 	function mySheet_OnSaveEnd(code, msg) {
