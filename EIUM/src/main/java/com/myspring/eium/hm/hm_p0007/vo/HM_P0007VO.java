@@ -28,6 +28,7 @@ public class HM_P0007VO {
 	private String hr_appoint_before_info;
 	
 	
+	
 	public String getHr_appoint_number() {
 		return hr_appoint_number;
 	}

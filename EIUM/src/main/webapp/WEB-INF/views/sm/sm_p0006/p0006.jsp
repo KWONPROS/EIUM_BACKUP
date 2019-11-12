@@ -109,6 +109,12 @@
 		case "reset":
 			mySheet.RemoveAll();
 			mySheet2.RemoveAll();
+			$("select#SiteList option[name='1']").remove();
+			$("select#DeptList option[class='1']").remove();
+			$('#SiteList').val(selectSite());
+			$('#Employee_Select').val('');
+			$('#p_text').val('');
+			$('#p_text').attr('placeholder', "내용을 입력해주세요.");
 			break;
 		case "save":
 			mySheet2.DoSave("${contextPath}/sm/p0006_01/saveData.do", x);
@@ -139,7 +145,7 @@
 							
 							
 
-							var option = "<option value='" + data['Data'][i].site_NAME + "'>"
+							var option = "<option name='1' value='" + data['Data'][i].site_NAME + "'>"
 									+ data['Data'][i].site_NAME + "</option>";
 
 							//대상 콤보박스에 추가

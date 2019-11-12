@@ -6,6 +6,8 @@ package com.myspring.eium.hm.hm_p0004.vo;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import oracle.sql.BLOB;
+
 @Component
 public class HM_P0004VO {
 	
@@ -22,7 +24,9 @@ public class HM_P0004VO {
 	private String  contact;
 	private String  final_EDU_CODE;
 	private String  final_EDU_NAME;
-	/* private MultipartFile picture; */
+	
+	 private MultipartFile picture;
+	 
 	private String  zip_CODE;
 	private String  res_ADDRESS;
 	private String  res_ADDRESS_DETAIL;
@@ -151,6 +155,12 @@ public class HM_P0004VO {
 	}
 	public void setFinal_EDU_NAME(String final_EDU_NAME) {
 		this.final_EDU_NAME = final_EDU_NAME;
+	}
+	public MultipartFile getPicture() {
+		return picture;
+	}
+	public void setPicture(MultipartFile picture) {
+		this.picture = picture;
 	}
 	public String getZip_CODE() {
 		return zip_CODE;
@@ -482,6 +492,8 @@ public class HM_P0004VO {
 	public void setAccount_NAME_2(String account_NAME_2) {
 		this.account_NAME_2 = account_NAME_2;
 	}
+	
+
 
 	
 	

@@ -150,13 +150,12 @@
         <result property="ACCESS_INSERT" column="ACCESS_INSERT" />
         <result property="ACCESS_UPDATE" column="ACCESS_UPDATE" />
         <result property="ACCESS_DELETE" column="ACCESS_DELETE" />
-        <result property="ACCESS_PRINT" column="ACCESS_PRINT" />
      
 	</resultMap> 
 
 	<select id="searchList_01" resultMap="p0005_01Result">
       <![CDATA[
-         select ACCESS_GRANT, MENU_NAME, ACCESS_RANGE, ACCESS_INSERT, ACCESS_UPDATE, ACCESS_DELETE, ACCESS_PRINT 
+         select ACCESS_GRANT, MENU_NAME, ACCESS_RANGE, ACCESS_INSERT, ACCESS_UPDATE, ACCESS_DELETE
          from MENU_BY_AUTHORITY where TRIM(AUTHORITY_CODE) = #{x, jdbcType=VARCHAR} order by MENU_CODE
       ]]>
 	</select>
@@ -168,7 +167,6 @@
 			, ACCESS_INSERT = #{access_INSERT, jdbcType=VARCHAR}
 			, ACCESS_UPDATE = #{access_UPDATE, jdbcType=VARCHAR}
 			, ACCESS_DELETE = #{access_DELETE, jdbcType=VARCHAR}
-			, ACCESS_PRINT = #{access_PRINT, jdbcType=VARCHAR}
 		where AUTHORITY_CODE = #{x, jdbcType=VARCHAR} and MENU_NAME = #{menu_NAME}
 	</update>
 	

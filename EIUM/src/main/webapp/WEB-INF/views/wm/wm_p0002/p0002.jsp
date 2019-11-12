@@ -15,23 +15,32 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/jquery.mtz.monthpicker.js"></script>
 <script type="text/javascript">
 	var pageheightoffset = 200; //시트높이 계산용
 
 	//sheet 기본설정
 	function LoadPage() {
-	      $(function() {
-	          $( ".Datepicker" ).datepicker({
-	             dateFormat: "yy-mm-dd",
-	             showOn: "both", 
-	              buttonImage: "${contextPath}/resources/image/icons/icon_calendar.png", 
-	              buttonImageOnly: true , 
-	               dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
-	               dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], 
-	               monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
-	               monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
-	        });
-	      });
+		
+		/* MonthPicker 옵션 */
+	    options = {
+	        pattern: 'yy/mm', // Default is 'mm/yyyy' and separator char is not mandatory
+	        selectedYear: 2019,
+	        startYear: 2000,
+	        finalYear: 3000,
+	        buttonImage: "${contextPath}/resources/image/icons/icon_calendar.png", 
+	        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']
+	    };
+	    /* MonthPicker Set */
+	    $('#date').monthpicker(options);
+	     
+	    /* 버튼 클릭시 MonthPicker Show */
+	    $('#btn_monthpicker').bind('click', function () {
+	        $('#date').monthpicker('show');
+	
+	    });
+	    
+
 
 		mySheet.RemoveAll();
 		//아이비시트 초기화
@@ -72,6 +81,11 @@
 			break;
 		case "reset":
 			mySheet.RemoveAll();
+		    $('#date').attr('value', "");
+		    $('#vacaTYPE').attr('value', "");
+		    $('#Select').attr('value', "");
+		    $('#p_text').attr('value', "");
+		    $('#p_text').attr('placeholder', "내용을 입력해주세요.");
 			break;
 		case "save":
 			mySheet.DoSave("${contextPath}/wm/p0002/saveData.do");
@@ -89,8 +103,8 @@
 		if(Col==10){
 			
 		function x(sd,ed){
-			    var stDate = new Date(sd.substring(0,4),sd.substring(4,6),sd.substring(6,8)) ;
-			    var endDate = new Date(ed.substring(0,4),ed.substring(4,6),ed.substring(6,8)) ;
+			    var stDate = new Date(sd.substring(0,4),sd.substring(4,6)-1,sd.substring(6,8)) ;
+			    var endDate = new Date(ed.substring(0,4),ed.substring(4,6)-1,ed.substring(6,8)) ;
 			    var btMs = endDate.getTime() - stDate.getTime() ;
 			    btDay = btMs / (1000*60*60*24) ;
 			 	return btDay;
@@ -138,89 +152,6 @@
 		}
 	
 	
-</script>
-
-
-<script>
-	function selectSite() {
-
-		$.ajax({
-
-					url : "${contextPath}/sm/p0006/SiteList.do",//목록을 조회 할 url
-
-					type : "POST",
-
-					dataType : "JSON",
-
-					success : function(data) {
-
-						for (var i = 0; i < data['Data'].length; i++) {
-							
-							
-
-							var option = "<option value='" + data['Data'][i].site_NAME + "'>"
-									+ data['Data'][i].site_NAME + "</option>";
-
-							//대상 콤보박스에 추가
-
-							$('#SiteList').append(option);
-
-						}
-
-					},
-
-					error : function(jqxhr, status, error) {
-
-						alert("에러");
-
-					}
-
-				});
-
-	};
-
-	function selectDept() {
-
-		var SiteList = $('#SiteList').val();
-
-		$
-				.ajax({
-
-					url : "${contextPath}/sm/p0006/DeptList.do",//목록을 조회 할 url
-
-					type : "POST",
-
-					data : {
-						"SiteList" : SiteList
-					},
-
-					dataType : "JSON",
-
-					success : function(data) {
-						$(".1").remove();
-
-						for (var i = 0; i < data['Data'].length; i++) {
-
-							var option = "<option class='1' value='" + data['Data'][i].department_NAME + "'>"
-									+ data['Data'][i].department_NAME
-									+ "</option>";
-
-							//대상 콤보박스에 추가
-							$('#DeptList').append(option);
-
-						}
-
-					},
-
-					error : function(jqxhr, status, error) {
-
-						alert("에러");
-
-					}
-
-				});
-
-	};
 </script>
 
 <style type="text/css">
@@ -300,21 +231,21 @@ background-color: #2C3E50;
 		</div>
 
 		<div class="title"> 
-        <header> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 휴가관리</header>
+        <header> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 근태관리 : 휴가관리</header>
         </div>
         
         <div class="left">
         <div id="searchBar">
-            &nbsp;&nbsp; 귀속연월 : <input type="text"  class="Datepicker">
+            &nbsp;&nbsp; 귀속연월 : <input type="text" id="date"><img id="btn_monthpicker" src="${contextPath}/resources/image/icons/icon_calendar.png">
 		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 근태종류 : <select id="vacaTYPE">
 			<option value="" selected>전체</option>
-			<option value="y" >연차</option>
-			<option value="t" >특별휴가</option>
-			<option value="k" >경조휴가</option>
+			<option value="연차" >연차</option>
+			<option value="특별휴가" >특별휴가</option>
+			<option value="경조휴가" >경조휴가</option>
 		</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 조회조건 : <select id="Select">
 		    <option value="" selected>구분</option>
-			<option value="s">사업장</option>
-			<option value="b">부서</option>
+			<option value="사업장">사업장</option>
+			<option value="부서">부서</option>
 		</select>
 		<input type="text" id="p_text" placeholder="내용을 입력해주세요.">
         </div>
@@ -323,7 +254,6 @@ background-color: #2C3E50;
 		<div style="position: absolute; top: 220px; left: 70px;">
 			<script type="text/javascript">
 				createIBSheet("mySheet", "1500px", "600px");
-				selectSite();
 			</script>
 		</div>
     <input type="hidden" id="PemployeeCode">

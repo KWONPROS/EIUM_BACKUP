@@ -18,6 +18,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.myspring.eium.hm.hm_p0004.vo.HM_P0004VO;
+
 public interface HM_P0004Controller {
 	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;	
@@ -25,6 +27,10 @@ public interface HM_P0004Controller {
 	public ModelAndView findAddress(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map searchList2(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView findPopup(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ResponseEntity<byte[]> getByteImage(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	public void saveFile(HM_P0004VO VO, ModelAndView mav, HttpServletRequest request, HttpServletResponse response)
+			throws Exception;
 
 	
 	

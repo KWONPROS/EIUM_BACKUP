@@ -57,10 +57,10 @@ public class WM_P0002ControllerImpl implements WM_P0002Controller{
 		request.setCharacterEncoding("utf-8");
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-
-		searchMap.put("SiteList", request.getParameter("SiteList"));
-		searchMap.put("DeptList", request.getParameter("DeptList"));
-		searchMap.put("Employee_Select", request.getParameter("Employee_Select"));
+		
+		searchMap.put("date", request.getParameter("date"));
+		searchMap.put("vacaTYPE", request.getParameter("vacaTYPE"));
+		searchMap.put("Select", request.getParameter("Select"));
 		searchMap.put("p_text", request.getParameter("p_text"));
 		
 		List<WM_P0002VO> data = WM_P0002Service.searchList(searchMap);
@@ -119,42 +119,6 @@ public class WM_P0002ControllerImpl implements WM_P0002Controller{
 		
 		//������ ��ȸ
 		List<WM_P0002VO> data = WM_P0002Service.searchEmployeeList(searchMap);
-        resultMap.put("Data", data);
-       
-        return resultMap;
-	}
-
-	@Override
-	@RequestMapping(value = "wm/p0002/SiteList.do", method = { RequestMethod.GET, RequestMethod.POST })
-	@ResponseBody
-	public Map searchSiteList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-		Map<String, Object> searchMap = new HashMap<String, Object>(); // �˻�����
-		Map<String, Object> resultMap = new HashMap<String, Object>(); // ��ȸ���
-		
-		// �˻����Ǽ���
-		searchMap.put("p_id", request.getParameter("p_id"));
-		
-		//������ ��ȸ
-		List<WM_P0002VO> data = WM_P0002Service.searchSiteList(searchMap);
-        resultMap.put("Data", data);
-       
-        return resultMap;
-	}
-	
-	@Override
-	@RequestMapping(value = "wm/p0002/DeptList.do", method = { RequestMethod.GET, RequestMethod.POST })
-	@ResponseBody
-	public Map searchDeptList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-		Map<String, Object> searchMap = new HashMap<String, Object>(); // �˻�����
-		Map<String, Object> resultMap = new HashMap<String, Object>(); // ��ȸ���
-		
-		// �˻����Ǽ���
-		searchMap.put("SiteList", request.getParameter("SiteList"));
-		
-		//������ ��ȸ
-		List<WM_P0002VO> data = WM_P0002Service.searchDeptList(searchMap);
         resultMap.put("Data", data);
        
         return resultMap;

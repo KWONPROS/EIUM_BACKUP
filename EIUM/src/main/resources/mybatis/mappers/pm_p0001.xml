@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.pm_p0001">
+	<resultMap id="P0001resultVO" type="PM_P0001VO">
+		<result property="employee_CODE" column="EMPLOYEE_CODE" />
+		<result property="employee_NAME" column="EMPLOYEE_NAME" />
+		<result property="department_CODE" column="DEPARTMENT_CODE" />
+		<result property="department_NAME" column="DEPARTMENT_NAME" />
+		
+		<result property="working_STATUS_CODE" column="WORKING_STATUS_CODE" />
+		<result property="working_STATUS_MONTH" column="WORKING_STATUS_MONTH" />
+		<result property="working_STATUS_DATE" column="WORKING_STATUS_DATE" />
+		<result property="working_STATUS_START_TIME" column="WORKING_STATUS_START_TIME" />
+		<result property="working_STATUS_END_TIME" column="WORKING_STATUS_END_TIME" />
+		<result property="working_STATUS_TOTAL_TIME" column="WORKING_STATUS_TOTAL_TIME" />
+		<result property="working_STATUS_DESC" column="WORKING_STATUS_DESC" />
+	</resultMap>
+	
+	<!-- /////////////////////////////////////EMP_SEARCHLIST ////////////////////////////////////////-->
+	<select id = "EMP_searchList" resultMap="P0001resultVO" parameterType="java.util.Map">
+	<![CDATA[
+		select E.EMPLOYEE_CODE, E.EMPLOYEE_NAME, D.DEPARTMENT_NAME, D.DEPARTMENT_CODE  
+		from EMPLOYEE E, EMPLOYEE_WORK EW, DEPARTMENT D
+		where E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE
+		AND D.DEPARTMENT_CODE = EW.DEPARTMENT_CODE
+		ORDER BY E.EMPLOYEE_CODE ASC
+	]]> 
+	</select>
+	
+	<!-- //////////////////////////////////////WORKING_STATUS_SEARCHLIST ///////////////////////////////-->
+	<select id = "WS_searchList" resultMap="P0001resultVO" parameterType="java.util.Map">
+	<![CDATA[
+		select WS.WORKING_STATUS_DATE, WS.WORKING_STATUS_START_TIME, WS.WORKING_STATUS_END_TIME, WS.WORKING_STATUS_TOTAL_TIME, WS.WORKING_STATUS_DESC
+		from WORKING_STATUS WS
+		where WS.EMPLOYEE_CODE = #{P_EMP_CODE}
+	]]>
+	</select>
+</mapper>

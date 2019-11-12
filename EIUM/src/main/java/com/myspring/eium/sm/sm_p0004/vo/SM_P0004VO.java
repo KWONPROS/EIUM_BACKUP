@@ -17,32 +17,6 @@ public class SM_P0004VO {
 	private String user;
 
 	
-	
-
-
-
-	
-
-
-
-	public SM_P0004VO(String employee_code, String employee_name, String employee_id, String department_code,
-			String department_name, String employee_join_date, String employee_resignation_date,
-			String employee_available_yn, String employee_password, String access_range, String user,
-			String contact) {
-		super();
-		this.employee_code = employee_code;
-		this.employee_name = employee_name;
-		this.employee_id = employee_id;
-		this.department_code = department_code;
-		this.department_name = department_name;
-		this.employee_join_date = employee_join_date;
-		this.employee_resignation_date = employee_resignation_date;
-		this.employee_available_yn = employee_available_yn;
-		this.employee_password = employee_password;
-		this.access_range = access_range;
-		this.user = user;
-		this.contact = contact;
-	}
 
 
 
@@ -103,21 +77,30 @@ public class SM_P0004VO {
 		this.department_name = department_name;
 	}
 
+
 	public String getEmployee_join_date() {
 		return employee_join_date;
 	}
+
+
 
 	public void setEmployee_join_date(String employee_join_date) {
 		this.employee_join_date = employee_join_date;
 	}
 
+
+
 	public String getEmployee_resignation_date() {
 		return employee_resignation_date;
 	}
 
+
+
 	public void setEmployee_resignation_date(String employee_resignation_date) {
 		this.employee_resignation_date = employee_resignation_date;
 	}
+
+
 
 	public String getEmployee_available_yn() {
 		return employee_available_yn;

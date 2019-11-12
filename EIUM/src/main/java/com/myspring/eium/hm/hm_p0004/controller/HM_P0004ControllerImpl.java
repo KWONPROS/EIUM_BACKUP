@@ -2,8 +2,14 @@ package com.myspring.eium.hm.hm_p0004.controller;
 
 
 
+import java.awt.image.BufferedImage;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -11,6 +17,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
+import javax.imageio.stream.FileImageOutputStream;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,16 +31,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myspring.eium.hm.hm_p0004.dao.HM_P0004DAO;
 import com.myspring.eium.hm.hm_p0004.service.HM_P0004Service;
 import com.myspring.eium.hm.hm_p0004.vo.HM_P0004VO;
 
@@ -42,6 +54,9 @@ public class HM_P0004ControllerImpl implements HM_P0004Controller {
 
 	@Autowired
 	HM_P0004Service p0004Service;
+	@Autowired
+	HM_P0004DAO p0004dao;
+
 	
 	
 	@Override
@@ -65,6 +80,7 @@ public class HM_P0004ControllerImpl implements HM_P0004Controller {
 		List<HM_P0004VO> data = p0004Service.searchList(searchMap);
         resultMap.put("Data", data);
     	System.out.println("resultMap::::"+resultMap);
+    	
         return resultMap;
 	}
 		
@@ -127,6 +143,39 @@ public class HM_P0004ControllerImpl implements HM_P0004Controller {
         resultMap.put("Data", data);
     	System.out.println("resultMap::::"+resultMap);
         return resultMap;
+	}
+	
+	@Override
+    @RequestMapping(value="/hm/p0004/saveFile.do", method = { RequestMethod.GET, RequestMethod.POST })
+    public void saveFile(HM_P0004VO VO, ModelAndView mav, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		Map<String, Object> dataMap = new HashMap<String, Object>(); 
+		
+        dataMap.put("emp_CODE",VO.getEmp_CODE());
+        dataMap.put("picture",VO.getPicture().getBytes());
+        
+		try {
+			p0004Service.saveFile(dataMap);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	
+    }
+	
+	@Override
+	@RequestMapping(value = "/hm/p0004/getByteImage.do")
+	@ResponseBody
+	public ResponseEntity<byte[]> getByteImage(HttpServletRequest request, HttpServletResponse response)throws Exception {
+		
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("emp_CODE",request.getParameter("empCode"));
+		
+		Map<String, Object> map = p0004dao.getByteImage(searchMap);
+		
+		byte[] imageContent = (byte[]) map.get("picture");
+
+		final HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.IMAGE_PNG);
+		return new ResponseEntity<byte[]>(imageContent, headers, HttpStatus.OK);
 	}
 	
 }

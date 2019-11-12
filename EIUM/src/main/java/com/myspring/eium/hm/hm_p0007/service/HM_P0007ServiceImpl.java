@@ -32,13 +32,14 @@ public class HM_P0007ServiceImpl implements HM_P0007Service {
 	}
 
 	@Override
-	public void saveData(Map<String, String[]> dataMap)  throws DataAccessException  {
-		String[] status = dataMap.get("STATUS");
+	public void saveData(Map<String, String[]> dataMap, String u, String x)  throws DataAccessException  {
+		String[] status = dataMap.get("sStatus");
 		int length = status.length; 
 		int i = 0;
+
 		
 		for(String str : status) {
-			Map<String, String> row = getRow(dataMap, length, i); 
+			Map<String, String> row = getRow(dataMap, length, i, u, x); 
 			if("I".equals(str)) { 
 				p0007DAO.insertData(row);
 			}else if("U".equals(str)) { 
@@ -50,12 +51,16 @@ public class HM_P0007ServiceImpl implements HM_P0007Service {
 		}
 	}
 	
-	private Map<String, String> getRow(Map<String, String[]> dataMap, int length, int index) {
+	private Map<String, String> getRow(Map<String, String[]> dataMap, int length, int index, String u, String x) {
 		Map<String, String> row = new HashMap<String, String>();
 		for(String name : dataMap.keySet()) {
 			String[] data = dataMap.get(name);
 			if(length == data.length) {
 				row.put(name, data[index]);
+				row.put("user", u);
+				row.put("x", x);
+
+
 			}
 		}		
 		return row;

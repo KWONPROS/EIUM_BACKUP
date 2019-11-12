@@ -43,34 +43,69 @@ public class HM_P0001ServiceImpl implements HM_P0001Service {
 		return list;
 	}
 	@Override
-	public void saveData(Map<String, String[]> dataMap, String p_position_CODE)  throws DataAccessException  {
+	public void saveData(Map<String, String[]> dataMap, String p_position_CODE, String PP_START_DATE)  throws DataAccessException  {
 		String[] status = dataMap.get("STATUS");
 		int length = status.length; 
 		int i = 0;
 		
 		for(String str : status) {
-			Map<String, String> row = getRow(dataMap, length, i, p_position_CODE); 
+			Map<String, String> row = getRow(dataMap, length, i, p_position_CODE, PP_START_DATE); 
 			if("I".equals(str)) { 
 				p0001DAO.insertData(row);
 			}else if("U".equals(str)) { 
-				p0001DAO.updateData(row);
+				p0001DAO.DATE_updateData(row);
 			}else if("D".equals(str)) { 
-				p0001DAO.deleteData(row);
+				p0001DAO.DATE_deleteData(row);
 			}
 			i++;
 		}
 	}
 	
-	private Map<String, String> getRow(Map<String, String[]> dataMap, int length, int index, String p_position_CODE) {
+	@Override
+	public void SALARY_saveData(Map<String, String[]> dataMap, String p_position_CODE, String PP_START_DATE) throws DataAccessException  {
+		String[] status = dataMap.get("STATUS");
+		int length = status.length; 
+		int i = 0;
+		
+		for(String str : status) {
+			Map<String, String> row = getRow(dataMap, length, i, p_position_CODE, PP_START_DATE); 
+			if("U".equals(str)) { 
+				p0001DAO.SALARY_updateData(row);
+			}
+			i++;
+		}
+	}
+	@Override
+	public void DATE_deleteData(Map<String, String[]> dataMap, String p_position_CODE, String PP_START_DATE) throws DataAccessException {
+		String[] status = dataMap.get("STATUS");
+		int length = status.length; 
+		int i = 0;
+		
+		for(String str : status) {
+			Map<String, String> row = getRow(dataMap, length, i, p_position_CODE, PP_START_DATE); 
+			if("D".equals(str)) { 
+				p0001DAO.DATE_deleteData(row);
+				p0001DAO.BACKDATE_updateData(row);
+			}
+			i++;
+		}
+		
+	}
+	
+	private Map<String, String> getRow(Map<String, String[]> dataMap, int length, int index, String p_position_CODE, String PP_START_DATE) {
 		Map<String, String> row = new HashMap<String, String>();
 		for(String name : dataMap.keySet()) {
 			String[] data = dataMap.get(name);
 			if(length == data.length) {
 				row.put(name, data[index]);
 				row.put("p_position_CODE", p_position_CODE);
-
+				row.put("PP_START_DATE", PP_START_DATE);
 			}
 		}		
 		return row;
 	}
+
+	
+
+	
 }

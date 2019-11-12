@@ -32,17 +32,18 @@
 
 	<select id="selectAllp0004List" resultMap="p0004Result">
       <![CDATA[
-         select e.employee_code, e.employee_name, e.department_code, d.department_name, e.employee_join_date, e.employee_resignation_date, e.employee_available_yn, ac.employee_id , ac.employee_password, ei.contact
-         from employee e, account ac, department d, employee_hr_info ei
-         where e.department_code = d.department_code
+         select e.employee_code, e.employee_name, ew.department_code, d.department_name, ew.employee_join_date, ew.employee_resignation_date, e.employee_available_yn, ac.employee_id , ac.employee_password, ei.contact
+         from employee e, account ac, department d, employee_hr_info ei, employee_work ew
+         where ew.department_code = d.department_code
          and e.employee_code = ei.employee_code
          and e.employee_code = ac.employee_code
+         and e.employee_code = ew.employee_code
       ]]>
 	</select>
 	
  	<insert id="insertData1" parameterType="java.util.Map">
 
-		insert into employee(employee_code, employee_name, department_code, employee_join_date, employee_resignation_date, employee_available_yn, int_user_id, int_date) values(#{employee_code}, #{employee_name}, #{department_code}, #{employee_join_date}, #{employee_resignation_date}, #{employee_available_yn}, #{user}, sysdate)
+		insert into employee(employee_code, employee_name, employee_available_yn, int_user_id, int_date) values(#{employee_code}, #{employee_name},  #{employee_available_yn}, #{user}, sysdate)
 			
 	</insert>
 	
@@ -59,7 +60,11 @@
 		 	<insert id="insertData4" parameterType="java.util.Map">
 
 		insert into employee_salary(employee_code, int_user_id, int_date) values(#{employee_code}, #{user}, sysdate)	
-	</insert>			
+	</insert>	
+			<insert id="insertData5" parameterType="java.util.Map">
+
+		insert into employee_work(employee_code, employee_join_date, employee_resignation_date, department_code, int_user_id, int_date) values(#{employee_code}, #{employee_join_date}, #{employee_resignation_date}, #{department_code}, #{user}, sysdate)	
+	</insert>				
 
 <!--	insert into employee_hr_info(employee_code, contact) values(#{employee_code}, #{contact})	
 	 insert into department(deplartment_code, department_name) values(#{department_code}, #{department_name}),
@@ -69,8 +74,6 @@
 	<update id="updateData1" parameterType="java.util.Map">
 		update employee
 		set employee_name = #{employee_name, jdbcType=VARCHAR}
-			, employee_join_date = #{employee_join_date, jdbcType=VARCHAR}
-			, employee_resignation_date = #{employee_resignation_date, jdbcType=VARCHAR}
 			, employee_available_yn = #{employee_available_yn, jdbcType=VARCHAR}
 			, upt_user_id = #{user, jdbcType=VARCHAR}
 			, upt_date = sysdate
@@ -93,6 +96,16 @@
 			, upt_date = sysdate
 		where employee_code = #{employee_code, jdbcType=VARCHAR}
 	</update>
+	
+		<update id="updateData4" parameterType="java.util.Map">
+		update employee_work
+		set employee_join_date = #{employee_join_date, jdbcType=VARCHAR}
+			, employee_resignation_date = #{employee_resignation_date, jdbcType=VARCHAR}
+			, upt_user_id = #{user, jdbcType=VARCHAR}
+			, upt_date = sysdate
+		where employee_code = #{employee_code, jdbcType=VARCHAR}
+	</update>
+	
 	
 	
 	<delete id="deleteData1" parameterType="java.util.Map">
@@ -188,6 +201,11 @@
 	
 	<delete id="deleteData19" parameterType="java.util.Map">
 		delete total_working_status
+		where employee_code = #{employee_code}
+	</delete>
+	
+		<delete id="deleteData20" parameterType="java.util.Map">
+		delete employee_work
 		where employee_code = #{employee_code}
 	</delete>	
 </mapper>

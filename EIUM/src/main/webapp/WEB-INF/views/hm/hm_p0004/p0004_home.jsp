@@ -16,7 +16,7 @@
 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script language="javascript">
 
 	/*Sheet 기본 설정 */
@@ -44,7 +44,7 @@
 			{Header:"전화번호",Type:"Text",SaveName:"contact", Hidden:1},			
 			{Header:"최종학력코드",Type:"Text",SaveName:"final_EDU_CODE", Hidden:1},			
 			{Header:"최종학력이름",Type:"Text",SaveName:"final_EDU_NAME", Hidden:1},			
-			{Header:"사진",Type:"Image",SaveName:"picture",  Hidden:1 },			
+			{Header:"사진",Type:"Image",SaveName:"picture",   Hidden:1  },			
 			{Header:"우편번호",Type:"Text",SaveName:"zip_CODE", Hidden:1},			
 			{Header:"주민등록주소",Type:"Text",SaveName:"res_ADDRESS", Hidden:1},			
 			{Header:"상세주소",Type:"Text",SaveName:"res_ADDRESS_DETAIL", Hidden:1},			
@@ -157,8 +157,8 @@
 	//사원검색 조건
 	function searchCondition(){
 		 var cond =document.getElementById("condition").value;
-		 var cond2=$('input[name="emp_radio"]:checked').val();
-		 mySheet.DoSearch('${contextPath}/hm/p0004/searchList.do','condition='+cond+'&command='+cond2);
+		 
+		 mySheet.DoSearch('${contextPath}/hm/p0004/searchList.do','condition='+cond);
 	   }
 	
 	/*Sheet 각종 처리*/
@@ -245,7 +245,7 @@
 	 
 	            
 	               
-	            
+	            sendData();
 	            
 	           
 	            var tempStr = mySheet.GetSaveString();
@@ -271,7 +271,7 @@
 		      $('input[name=contactNum]').val(mySheet.GetCellValue(Row,11));
 		      $('input[name=finalEduCode]').val(mySheet.GetCellValue(Row,12));
 		      $('input[name=finalEduName]').val(mySheet.GetCellValue(Row,13));
-		     /*  $('input[id=pictureUpload]').val(mySheet.GetCellValue(Row,14)); */
+		      $('#uploadedImg').attr('src',"${contextPath}/hm/p0004/getByteImage.do?empCode="+mySheet.GetCellValue(Row,2));	
 		      $('input[name=zipcode]').val(mySheet.GetCellValue(Row,15));
 		      $('input[name=address]').val(mySheet.GetCellValue(Row,16));
 		      $('input[name=addressDetail]').val(mySheet.GetCellValue(Row,17));
@@ -370,8 +370,45 @@
 	      var pop = window.open("findPopup.do?command="+tablename+"&index="+index,"findPopup","width=342,height=520,resizable = no, scrollbars = no"); 
 
 	   }
-	   
+	  
 
+	//사진전송
+	function sendData() {	
+		var data = new FormData();
+		data.append("emp_CODE", mySheet.GetCellValue($('input[name=myRow]').val(),2))
+		data.append("picture", $('#inpicture')[0].files[0])
+		$.ajax({
+			url : "${contextPath}/hm/p0004/saveFile.do",
+			type : "POST",
+			dataType : 'json',
+			data : data,
+			processData : false,
+			contentType : false,
+			type : 'POST',
+			success : function(data) {
+			}
+		});
+	}
+	function selectPicture() {
+		$("#inpicture").click();
+		var ext = $("#inpicture").val().split(".").pop().toLowerCase();
+		if (ext.length > 0) {
+			if ($.inArray(ext, [ "gif", "png", "jpg", "jpeg" ]) == -1) {
+				alert("gif,png,jpg 파일만 업로드 할수 있습니다.");
+				return false;
+			}
+		}
+		$("#inpicture").val().toLowerCase();
+	}
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$('#uploadedImg').attr('src', e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
 	
 </script>
 <style type="text/css">
@@ -558,7 +595,7 @@ text-decoration: none;
 }
 </style>
 </head>
-<body onload="LoadPage()" style="overflow-x: hidden">
+<body onload="LoadPage()">
 	<div class="leftbuttons">
 		<a href="javascript:doAction('print')" class="IBbutton">인쇄</a> <a
 			href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
@@ -619,8 +656,9 @@ text-decoration: none;
 								<th class="tg-lu1x" rowspan="8"><i
 									class="fa fa-address-book" aria-hidden="true"></i><br>개<br>인<br>정<br>보</th>
 								<th class="tg-au0w" rowspan="18"></th>
-								<td class="tg-dm68" rowspan="7"><img alt="사원사진" src=""
-									width="187px" height="252px"></td>
+								<td class="tg-dm68" rowspan="7"><img id=uploadedImg alt="" src="" 
+									></td>
+										
 								<th class="tg-au0w" rowspan="8"></th>
 
 								<td class="tg-8thm">성명(영문)<input type="hidden" name="myRow"></td>
@@ -642,7 +680,7 @@ text-decoration: none;
 							<tr>
 								<td class="tg-8thm">주민등록번호</td>
 								<td class="tg-v9i9" colspan="3"><input type="text"
-									id="rrNumber" name="rrNumber" style="width: 350px;"></td>
+									id="rrNumber" name="rrNumber" style="width: 350px;" placeholder="______-_______"></td>
 							</tr>
 							<tr>
 								<td class="tg-8thm">성별</td>
@@ -653,7 +691,7 @@ text-decoration: none;
 							<tr>
 								<td class="tg-8thm">생년월일</td>
 								<td class="tg-v9i9" colspan="3"><input type="text"
-									name="birthDate" class="Datepicker" style="width: 330px;" readonly></td>
+									name="birthDate" class="Datepicker"  style="width: 330px;"  placeholder="____-__-__" readonly></td>
 							</tr>
 							<tr>
 								<td class="tg-8thm">전화번호</td>
@@ -661,8 +699,8 @@ text-decoration: none;
 									id="contactNum" name="contactNum" style="width: 350px;"></td>
 							</tr>
 							<tr>
-								<td class="tg-dm68"><a href="javascript:"
-									id="pictureUpload" class="pictureUpload">사진등록</a></td>
+								<td class="tg-dm68"><a id="pictureUpload" class="pictureUpload"href=javascript:selectPicture()>사진등록</a>
+								<input type="file" name="picture" id="inpicture" onchange="readURL(this);" style="width:0;height:0;"/></td>
 
 								<td class="tg-8thm">최종학력</td>
 								<td class="tg-v9i9" colspan="3"><input type="text"
@@ -742,7 +780,7 @@ text-decoration: none;
 								<td class="tg-8thm">군번</td>
 								<td class="tg-v9i9"></td>
 								<td class="tg-v9i9"><input type="text" id="milNum"
-									name="milNum" style="width: 265px;"></td>
+									name="milNum" style="width: 230px;"></td>
 							</tr>
 							<tr>
 								<td class="tg-8thm">채용구분</td>
@@ -753,7 +791,7 @@ text-decoration: none;
 								<td class="tg-8thm">기수</td>
 								<td class="tg-v9i9"></td>
 								<td class="tg-v9i9"><input type="text" id="hireNum"
-									name="hireNum" style="width: 265px;"></td>
+									name="hireNum" style="width: 230px;"></td>
 							</tr>
 						</table>
 					</form>
@@ -773,12 +811,12 @@ text-decoration: none;
 							<td class="tg-v9i9" rowspan="5"></td>
 							<td class="tg-v9i9"><input type="text"
 								name="employee_JOIN_DATE" class="Datepicker"
-								style="width: 230px;" readonly></td>
+								style="width: 230px;" readonly placeholder="____-__-__"></td>
 							<td class="tg-8thm">퇴사일자</td>
 							<td class="tg-v9i9" rowspan="5"></td>
 							<td class="tg-v9i9"><input type="text"
 								name="employee_RESIGNATION_DATE" class="Datepicker"
-								style="width: 230px;"readonly></td>
+								style="width: 230px;"readonly placeholder="____-__-__"></td>
 						</tr>
 						<tr>
 							<td class="tg-8thm">재직구분</td>
@@ -802,7 +840,7 @@ text-decoration: none;
 							</select></td>
 							<td class="tg-8thm">수습만료일</td>
 							<td class="tg-v9i9"><input type="text" name="probation_DATE"
-								class="Datepicker" style="width: 230px;"readonly></td>
+								class="Datepicker" style="width: 230px;"readonly placeholder="____-__-__"></td>
 						</tr>
 						<tr>
 							<td class="tg-8thm">근속기간포함</td>
@@ -817,9 +855,9 @@ text-decoration: none;
 						<tr>
 							<td class="tg-8thm">휴직기간</td>
 							<td class="tg-v9i9" colspan="2"><input type="text"
-								name="leave_DATE_START" class="Datepicker" style="width: 95px;" readonly>
+								name="leave_DATE_START" class="Datepicker" style="width: 95px;" readonly placeholder="____-__-__">
 								~ <input type="text" name="leave_DATE_END" class="Datepicker"
-								style="width: 95px;" readonly></td>
+								style="width: 95px;" readonly placeholder="____-__-__"></td>
 							<td class="tg-v9i9"></td>
 						</tr>
 						<tr>

@@ -21,18 +21,6 @@ public class WM_P0002DAOImpl implements WM_P0002DAO {
 		List<WM_P0002VO> list = sqlSession.selectList("mapper.wm_p0002.searchList", searchMap);
 		return list;
 	}
-
-	@Override
-	public List<WM_P0002VO> searchSiteList(Map<String, Object> searchMap) {
-		List<WM_P0002VO> list = sqlSession.selectList("mapper.wm_p0002.searchSiteList", searchMap);
-		return list;
-	}
-
-	@Override
-	public List<WM_P0002VO> searchDeptList(Map<String, Object> searchMap) {
-		List<WM_P0002VO> list = sqlSession.selectList("mapper.wm_p0002.searchDeptList", searchMap);
-		return list;
-	}
 	
 	@Override
 	public List<WM_P0002VO> searchEmployeeList(Map<String, Object> searchMap) throws DataAccessException {

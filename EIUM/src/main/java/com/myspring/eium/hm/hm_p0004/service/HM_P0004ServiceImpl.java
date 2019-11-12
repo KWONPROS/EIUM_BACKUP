@@ -59,6 +59,10 @@ public class HM_P0004ServiceImpl implements HM_P0004Service {
 			i++;
 		}
 	}
+	@Override
+	public void saveFile(Map<String,Object> dataMap)  throws DataAccessException  {
+		p0004DAO.saveFile(dataMap);
+	}
 
 	
 	private Map<String, String> getRow(Map<String, String[]> dataMap, int length, int index) {

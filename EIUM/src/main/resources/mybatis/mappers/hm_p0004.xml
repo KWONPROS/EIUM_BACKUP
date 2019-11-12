@@ -81,7 +81,7 @@
 	<select id="searchList" resultMap="P0004resultVO"
 		parameterType="java.util.Map"> 
       <![CDATA[
-        select DISTINCT 
+       select 
         A.EMPLOYEE_CODE
         ,A.EMPLOYEE_NAME
         ,B.DEPARTMENT_NAME
@@ -94,7 +94,7 @@
 		,C.CONTACT
 		,C.FINAL_EDU_CODE
 		,E.FINAL_EDU_NAME
-		
+		,C.PICTURE
 		,C.ZIP_CODE
 		,C.RESIST_ADDRESS
 		,C.RESIST_ADDRESS_DETAIL
@@ -153,7 +153,10 @@
 		,X.SALARY
          
          from EMPLOYEE A, DEPARTMENT B,EMPLOYEE_HR_INFO C, EMPLOYEE_WORK D, FINAL_EDU E, COUNTRY F, EMPLOYEE_WORK G, EMPLOYEE_SALARY H,POSITION I,
-          PAY_GRADE J, OUT_REASON L, WORK_GROUP M, JOB_CLASS N, DUTY O, JOB_DIS P, PROJECT Q, D_CODE R, WORK_TYPE S, PAY_TYPE T, EMPLOYEE_SALARY U,BANK W,PAY_GRADE_TABLE X
+          PAY_GRADE J, OUT_REASON L, WORK_GROUP M, JOB_CLASS N, DUTY O, JOB_DIS P, PROJECT Q, D_CODE R, WORK_TYPE S, PAY_TYPE T, EMPLOYEE_SALARY U,BANK W,(SELECT *
+                                                                                                                                                            FROM PAY_GRADE_TABLE X
+                                                                                                                                                            WHERE X.START_DATE < to_char( sysdate, 'yyyymmdd')
+                                                                                                                                                            AND X.END_DATE > to_char( sysdate, 'yyyymmdd') )X
          WHERE D.DEPARTMENT_CODE = B.DEPARTMENT_CODE
          AND A.EMPLOYEE_CODE = C.EMPLOYEE_CODE
          AND A.EMPLOYEE_CODE = D.EMPLOYEE_CODE
@@ -178,11 +181,10 @@
          AND U.BANK_CODE_2 = W.BANK_CODE(+)
          AND D.POSITION_CODE = X.POSITION_CODE(+)
          AND D.PAY_GRADE_CODE = X.PAY_GRADE_CODE(+)
-         
-  
-        
+           
       ]]>
-		<if test="condition != '' and condtion != null">
+      
+		<if test="condition != '' and condition != null">
 			AND A.EMPLOYEE_CODE like '%'|| #{condition} || '%'
 		</if>
 		<choose>
@@ -412,8 +414,31 @@
 		,#{account_NUMBER_2}
 		,#{account_NAME_2})
 	</insert>
-<delete id="deleteData" parameterType="java.util.Map">
+
+	<resultMap id="clobMap" type="java.util.HashMap">
+		<result property="picture" column="PICTURE" javaType="[B"
+			jdbcType="BLOB" />
+	</resultMap>
+
+
+	<update id="insertFile" parameterType="java.util.Map">
+		update EMPLOYEE_HR_INFO
+		set
+		PICTURE = #{picture}
+		where
+		TRIM(EMPLOYEE_CODE) = #{emp_CODE}
+	</update>
+	<select id="getByteImage" parameterType="java.util.Map" resultMap="clobMap">
+		SELECT PICTURE
+		FROM
+		EMPLOYEE_HR_INFO
+		where
+		TRIM(EMPLOYEE_CODE) =  #{emp_CODE}
+	</select>
+
+	<delete id="deleteData" parameterType="java.util.Map">
 		delete EMPLOYEE
-		where TRIM(EMPLOYEE_CODE) = #{emp_CODE}
+		where
+		TRIM(EMPLOYEE_CODE) = #{emp_CODE}
 	</delete>
 </mapper>

@@ -12,32 +12,35 @@
 #container {
 	width: 100%;
 	text-align: left;
-	
 }
+
 #header {
 	width: calc(100% - 190px);
-	height: 30px;                   
-	position : absolute;
+	height: 30px;
+	position: absolute;
 	top: 5px;
 	left: 190px;
-
 }
+
 #sidebar-left {
 	width: 190px;
 	height: 100%;
 	background-color: #212121;
-
 }
+
 #footer {
-	width: 100%;      
-	position: relative;        
-	padding:0.5px;      
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	background: #ccc;
+	padding: 0.5px;
 	border: 0px solid #bcbcbc;
 	color: white;
 	background-color: #212121;
 }
 body {
-	overflow-x: hidden
+	overflow-x: hidden;
+	overflow-Y: hidden;
 }
 </style>
     <title><tiles:insertAttribute name="title" /></title>

@@ -15,8 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public interface WM_P0002Controller {
 	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public Map searchSiteList(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public Map searchDeptList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView employeeSearch_init(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map employeeSearch_p01(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
