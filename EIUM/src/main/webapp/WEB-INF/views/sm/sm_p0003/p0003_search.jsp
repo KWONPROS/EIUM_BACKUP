@@ -90,9 +90,7 @@ function LoadPage(){
 		{Header:"사업장이름",Type:"Text",Width:120,SaveName:"site_NAME",Align:"Center",InsertEdit:0}, 
 		{Header:"부문코드",Type:"Text",Width:60,SaveName:"sector_CODE",Align:"Center",InsertEdit:0}, 
 		{Header:"부문명",Type:"Text",Width:150,SaveName:"sector_NAME",Align:"Center",InsertEdit:0},
-		{Header:"사용기간",Type:"Text",Width:120,SaveName:"department_TERM",Align:"Center"},
-	
-
+		{Header:"사용기간",Type:"Date",Width:120,SaveName:"department_TERM",Align:"Center"},
 		];
 	IBS_InitSheet(mySheet,initSheet);
 	mySheet.SetEditableColorDiff(1);

@@ -25,15 +25,15 @@
 		mySheet.RemoveAll();
 		//아이비시트 초기화
 		var initSheet = {};
-		initSheet.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:0}
+		initSheet.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:3}
 		initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 		initSheet.Cols = [
-				{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
-				{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},
-				{Header:"교육코드",Type:"Text",SaveName:"employee_TRAINING_CODE",MinWidth:80, Align:"Center"},
-				{Header:"교육명",Type:"Text",SaveName:"employee_TRAINING_NAME",MinWidth:170, Align:"Center"},			
-				{Header:"시작일",Type:"Text",SaveName:"employee_TRAINING_START_DATE",MinWidth:80, Edit: 1, Align:"Center",Format:"Ymd"},			
-				{Header:"종료일",Type:"Text",SaveName:"employee_TRAINING_END_DATE",MinWidth:80,Format:"Ymd"},			
+				{Header:"상태",Type:"Status",SaveName:"STATUS", Align:"Center"},
+				{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK"},
+				{Header:"교육코드",Type:"Text",SaveName:"employee_TRAINING_CODE", Align:"Center",Width:100},
+				{Header:"교육명",Type:"Text",SaveName:"employee_TRAINING_NAME", Align:"Center",Width:100},			
+				{Header:"시작일",Type:"Date",SaveName:"employee_TRAINING_START_DATE", Edit: 1, Align:"Center",Format:"Ymd",Width:100},			
+				{Header:"종료일",Type:"Date",SaveName:"employee_TRAINING_END_DATE",Format:"Ymd",Width:100},			
 				{Header:"교육일수",Type:"Text",SaveName:"employee_TRAINING_DATE_COUNT",  Hidden:1},
 				{Header:"교육목적",Type:"Text",SaveName:"employee_TRAINING_GOAL",Hidden:1},
 				{Header:"교육장소",Type:"Text",SaveName:"employee_TRAINING_LOCATION",Hidden:1},			
@@ -119,13 +119,15 @@ console.log(Row,Col);
 		if(Col==5){
 			
 		function x(sd,ed){
-			    var stDate = new Date(sd.substring(0,4),sd.substring(4,6),sd.substring(6,8)) ;
-			    var endDate = new Date(ed.substring(0,4),ed.substring(4,6),ed.substring(6,8)) ;
+			    var stDate = new Date(sd.substring(0,4),sd.substring(4,6)-1,sd.substring(6,8)) ;
+			    var endDate = new Date(ed.substring(0,4),ed.substring(4,6)-1,ed.substring(6,8)) ;
 			    var btMs = endDate.getTime() - stDate.getTime() ;
-			    btDay = btMs / (1000*60*60*24)+1 ;
+			    btDay = btMs / (1000*60*60*24)+1;
+
 			 	return btDay;
 				
 			}
+
 		
 		x(sd,ed);
 		

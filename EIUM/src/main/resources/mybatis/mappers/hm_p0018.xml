@@ -99,8 +99,8 @@
 	</update>	
 	
  <insert id="emplyoeeListinsertData" parameterType="java.util.Map">
-		insert into EMPLOYEE_TRAINING_LIST(employee_CODE,EMPLOYEE_TRAINING_CODE,EMPLOYEE_TRAINING_LIST_CODE) 
-		values(#{employee_CODE},#{employee_TRAINING_CODE,jdbcType=VARCHAR},NO_EMPLOYEE_TRAINING_LIST_CODE.NEXTVAL)
+		insert into EMPLOYEE_TRAINING_LIST(employee_CODE,EMPLOYEE_TRAINING_CODE,CODE) 
+		values(#{employee_CODE},#{employee_TRAINING_CODE,jdbcType=VARCHAR},EMPLOYEE_TRAINING_LIST_CODE.NEXTVAL)
 	</insert>	
 	
 	<delete id="emplyoeeListdeleteData" parameterType="java.util.Map">

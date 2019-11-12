@@ -14,4 +14,9 @@ public interface HM_P0021DAO {
 
 	List<HM_P0021VO> eduScoreSearch(Map<String, Object> searchMap)throws DataAccessException;
 
+
+	void updateData(Map<String, String> row)throws DataAccessException;
+
+	void deleteData(Map<String, String> row)throws DataAccessException;
+
 }

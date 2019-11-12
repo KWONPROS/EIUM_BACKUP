@@ -13,8 +13,8 @@
 		<result property="SITE_NAME" column="SITE_NAME" />
 		<result property="SECTOR_CODE" column="SECTOR_CODE" />
 		<result property="SECTOR_NAME" column="SECTOR_NAME" />
-		
-	</resultMap>
+		<result property="DEPARTMENT_TERM" column="department_TERM"	/>
+		</resultMap>
 	
 	<resultMap id="Result02" type="SM_P0003VO">
 
@@ -68,8 +68,7 @@ from department d , sector s , site si
 		set DEPARTMENT_CODE=#{department_CODE}
 		   , DEPARTMENT_NAME=#{department_NAME}
 		   , SECTOR_CODE=#{sector_CODE}
-		   , SECTOR_NAME=#{sector_NAME}
-		   , SECTOR_TERM=#{sector_TERM}
+		   , DEPARTMENT_TERM=#{department_TERM}
 		   , SITE_CODE=#{site_CODE}
 
 		where DEPARTMENT_CODE = #{department_CODE}

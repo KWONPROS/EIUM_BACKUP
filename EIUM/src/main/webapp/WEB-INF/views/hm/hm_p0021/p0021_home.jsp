@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회사등록</title>
+<title>교육평가</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibsheetinfo.js"></script>
@@ -45,14 +45,14 @@ function setPopupValue(){
 		mySheet.RemoveAll();
 		//아이비시트 초기화
 		var initSheet = {};
-		initSheet.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:0}
+		initSheet.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:3}
 		initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 		initSheet.Cols = [
 
-				{Header:"교육코드",Type:"Text",SaveName:"employee_TRAINING_CODE",MinWidth:80, Align:"Center"},
-				{Header:"교육명",Type:"Text",SaveName:"employee_TRAINING_NAME",MinWidth:170, Align:"Center"},			
-				{Header:"시작일",Type:"Text",SaveName:"employee_TRAINING_START_DATE",MinWidth:80, Edit: 1, Align:"Center",Format:"Ymd"},			
-				{Header:"종료일",Type:"Text",SaveName:"employee_TRAINING_END_DATE",MinWidth:80,Format:"Ymd"},			
+				{Header:"교육코드",Type:"Text",SaveName:"employee_TRAINING_CODE", Align:"Center"},
+				{Header:"교육명",Type:"Text",SaveName:"employee_TRAINING_NAME",Align:"Center"},			
+				{Header:"시작일",Type:"Text",SaveName:"employee_TRAINING_START_DATE", Edit: 1, Align:"Center",Format:"Ymd"},			
+				{Header:"종료일",Type:"Text",SaveName:"employee_TRAINING_END_DATE",Format:"Ymd"},			
 				{Header:"교육일수",Type:"Text",SaveName:"employee_TRAINING_DATE_COUNT"},
 				{Header:"교육목적",Type:"Text",SaveName:"employee_TRAINING_GOAL"},
 				{Header:"교육장소",Type:"Text",SaveName:"employee_TRAINING_LOCATION"},			
@@ -77,20 +77,20 @@ function setPopupValue(){
 			mySheet2.RemoveAll();
 			//아이비시트 초기화
 			var initSheet2 = {};
-			initSheet2.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:0}
+			initSheet2.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:3}
 			initSheet2.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 			initSheet2.Cols = [
-					{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
-					{Header:"사원코드",Type:"Text",SaveName:"employee_CODE",MinWidth:80, Align:"Center"},
-					{Header:"사원명",Type:"Text",SaveName:"employee_NAME",MinWidth:170, Align:"Center",InsertEdit:0},			
-					{Header:"부서",Type:"Text",SaveName:"department_NAME",MinWidth:170,InsertEdit:0},			
-					{Header:"직책",Type:"Text",SaveName:"position_NAME",MinWidth:170,InsertEdit:0},
-					{Header:"이수여부",Type:"Text",SaveName:"finish_YN",MinWidth:170,InsertEdit:0}	,
-					{Header:"출석점수",Type:"Text",SaveName:"attendence_SCORE",MinWidth:170,InsertEdit:0},
-					{Header:"태도점수",Type:"Text",SaveName:"attitude_SCORE",MinWidth:170,InsertEdit:0},
-					{Header:"평가점수",Type:"Text",SaveName:"score",MinWidth:170,InsertEdit:0}	,
-					{Header:"합계",Type:"Text",SaveName:"total",MinWidth:170,InsertEdit:0},
-					{Header:"교육평가",Type:"Text",SaveName:"assessment_DESC",MinWidth:170,InsertEdit:0},
+					{Header:"상태",Type:"Status",SaveName:"STATUS", Align:"Center"},
+					{Header:"사원코드",Type:"Text",SaveName:"employee_CODE", Align:"Center"},
+					{Header:"사원명",Type:"Text",SaveName:"employee_NAME", Align:"Center",InsertEdit:0},			
+					{Header:"부서",Type:"Text",SaveName:"department_NAME",InsertEdit:0},			
+					{Header:"직책",Type:"Text",SaveName:"position_NAME",InsertEdit:0},
+					{Header:"이수여부",Type:"Combo",SaveName:"finish_YN",InsertEdit:0,"ComboText":"Y|N", "ComboCode":"Y|N"},
+					{Header:"출석점수",Type:"Text",SaveName:"attendence_SCORE",InsertEdit:0},
+					{Header:"태도점수",Type:"Text",SaveName:"attitude_SCORE",InsertEdit:0},
+					{Header:"평가점수",Type:"Text",SaveName:"score",InsertEdit:0}	,
+					{Header:"합계",Type:"Text",SaveName:"total",InsertEdit:0,CalcLogic:"|6|+|7|+|8|"},
+					{Header:"교육평가",Type:"Text",SaveName:"assessment_DESC",InsertEdit:0},
 
 					];
 				IBS_InitSheet(mySheet2,initSheet2);
@@ -99,7 +99,7 @@ function setPopupValue(){
 				mySheet2.DoSearch("${contextPath}/hm/p0021/eduScoreSearch.do",param);
 				}
 
-				
+				mySheet2.FitColWidth();
 				mySheet2.SetEditableColorDiff(1); //편집불가능한 셀 표시 구분
 				/* mySheet.SetSheetHeight(1000); */
 		}
@@ -119,8 +119,8 @@ function setPopupValue(){
 			break;
 		case "save": //저장
 
-			var param ="param="+mySheet.GetCellValue(1,0);
-			mySheet2.DoSave("${contextPath}/hm/p0018/emplyoeeListsaveData.do",param);	
+			
+			mySheet2.DoSave("${contextPath}/hm/p0021/saveData.do");	
 
 	
 		
@@ -189,7 +189,7 @@ left: 50px;
 
 .rightbuttons {
 	margin-top: 50px;
-	margin: 20px;
+	margin: 11px;
 	position: absolute;
 	right: 30px;
 }
@@ -255,16 +255,14 @@ border-radius: 2px;
 
 	<div class="clear hidden"></div>
 	<div class="left">
-	<div class="ib_product">
 		<script>
 			//IBSheet 객체 생성 (객체 id, 너비, 높이)
-			createIBSheet("mySheet", "100%", "304px");
-			createIBSheet("mySheet2", "100%", "304px");
+			createIBSheet("mySheet", "100%", "200px");
+			createIBSheet("mySheet2", "100%", "200px");
 			
 		</script>
 	</div>
-	</div>
-	
+
 
 
 

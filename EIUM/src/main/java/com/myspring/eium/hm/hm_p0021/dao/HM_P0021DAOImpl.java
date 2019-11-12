@@ -31,6 +31,22 @@ public class HM_P0021DAOImpl implements HM_P0021DAO{
 		System.out.println("dao searcmap 에듀코드############"+searchMap.get("eduCode"));
 		return list;
 	}
+
+
+
+	@Override
+	public void updateData(Map<String, String> row) {
+		sqlSession.update("mapper.hm_p0021.eduScoreUpdate", row);
+		
+	}
+
+	@Override
+	public void deleteData(Map<String, String> row) {
+		sqlSession.update("mapper.hm_p0021.deleteData", row);
+		
+	}
+
+
 	
 	
 }
