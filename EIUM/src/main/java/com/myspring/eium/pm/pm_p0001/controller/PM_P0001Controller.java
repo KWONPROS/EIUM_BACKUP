@@ -13,7 +13,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 public interface PM_P0001Controller {
 	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public Map EMP_searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public Map WS_searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
