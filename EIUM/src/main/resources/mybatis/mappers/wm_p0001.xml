@@ -37,4 +37,27 @@
 		where WS.EMPLOYEE_CODE = #{P_EMP_CODE}
 	]]>
 	</select>
+	<!-- //////////////////////////////////////WORKING_STATUS_INSERT//////////////////////////////// -->
+	<insert id="insertData" parameterType="java.util.Map">
+		insert into WORKING_STATUS (WORKING_STATUS_CODE, EMPLOYEE_CODE, WORKING_STATUS_MONTH, WORKING_STATUS_DATE, WORKING_STATUS_START_TIME, WORKING_STATUS_END_TIME, WORKING_STATUS_TOTAL_TIME, WORKING_STATUS_DESC)
+		values (WORKING_STATUS_CODE_SEQ.NEXTVAL, #{P_EMPLOYEE_CODE, jdbcType=VARCHAR}, #{working_STATUS_MONTH, jdbcType=VARCHAR}, #{working_STATUS_DATE, jdbcType=VARCHAR}, #{working_STATUS_START_TIME, jdbcType=VARCHAR}, #{working_STATUS_END_TIME, jdbcType=VARCHAR}, #{working_STATUS_TOTAL_TIME, jdbcType=VARCHAR}, #{working_STATUS_DESC, jdbcType=VARCHAR})
+	</insert>
+	
+	<!-- ///////////////////////////////////////WORKING_STATUS_UPDATE////////////////////////////// -->
+	<update id="updateData" parameterType="java.util.Map">
+		update WORKING_STATUS
+		set WORKING_STATUS_MONTH = #{working_STATUS_MONTH, jdbcType=VARCHAR}
+		, WORKING_STATUS_DATE = #{working_STATUS_DATE, jdbcType=VARCHAR}
+		, WORKING_STATUS_START_TIME = #{working_STATUS_START_TIME, jdbcType=VARCHAR}
+		, WORKING_STATUS_END_TIME = #{working_STATUS_END_TIME, jdbcType=VARCHAR}
+		, WORKING_STATUS_TOTAL_TIME = #{working_STATUS_TOTAL_TIME, jdbcType=VARCHAR}
+		, WORKING_STATUS_DESC = #{working_STATUS_DESC, jdbcType=VARCHAR}
+		where WORKING_STATUS_CODE = #{working_STATUS_CODE, jdbcType=VARCHAR}
+	</update>
+	
+	<!--///////////////////////////////////////////WORKING_STATUS_DELETE -->
+	<delete id="deleteData" parameterType="java.util.Map">
+		delete WORKING_STATUS
+		where WORKING_STATUS_CODE = #{working_STATUS_CODE}
+	</delete>
 </mapper>

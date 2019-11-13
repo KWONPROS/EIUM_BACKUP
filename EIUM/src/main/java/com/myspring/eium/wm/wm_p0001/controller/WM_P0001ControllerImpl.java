@@ -86,6 +86,9 @@ public class WM_P0001ControllerImpl implements WM_P0001Controller {
 		Map<String, String[]> dataMap = new HashMap<String, String[]>(); // 占쏙옙占쏙옙占쏙옙Data
 		Map<String, Object> resultMap = new HashMap<String, Object>(); // 처占쏙옙占쏙옙占�
 		
+		String P_EMPLOYEE_CODE = request.getParameter("p_emp_code");
+		System.out.println("P_EMPLOYEE_CODE : " + P_EMPLOYEE_CODE);
+		
 		// 저장 Data 추출하기
 		Enumeration enu = request.getParameterNames();
 		while (enu.hasMoreElements()) {
@@ -96,7 +99,7 @@ public class WM_P0001ControllerImpl implements WM_P0001Controller {
 		
 		Map<String, String> result = new HashMap<String, String>();
 		try {
-			p0001Service.saveData(dataMap);	
+			p0001Service.saveData(dataMap, P_EMPLOYEE_CODE);	
 			result.put("Code","0");
 			result.put("Message","저장되었습니다");
 		}catch(Exception e) {                                                               
@@ -105,7 +108,8 @@ public class WM_P0001ControllerImpl implements WM_P0001Controller {
 			e.printStackTrace();
 		}
 		
-		resultMap.put("Result", result);         
+		resultMap.put("Result", result);     
+		System.out.println("WM-P0001ControllerImpl-saveData1-resultMap::::" + resultMap);
         return resultMap;
 	}
 
