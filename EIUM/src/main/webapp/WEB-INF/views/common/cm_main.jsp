@@ -259,7 +259,7 @@ border-bottom: 2px solid;
 			<div class="divboard">
 				<table class="boardtable" id="noticetable">
 
-					<tr>
+					<tr> 
 					
 						<td class="context">글제목</td>
 						<td class="uploaddate">입력날짜</td>
