@@ -15,4 +15,6 @@ public interface HM_P0021Controller {
 
 	Map eduScoreSearch(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
+	Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
 }

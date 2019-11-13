@@ -12,7 +12,8 @@ public class HM_P0007_08VO {
 	private String start_date;
 	private String end_date;
 	private String flight_cost;
-	private String self_charge_yn;
+	private String self_burden;
+	private String company_burden;
 	private String ect_cost;
 	private String total_cost;
 	private String purpose;
@@ -174,8 +175,9 @@ public class HM_P0007_08VO {
 
 
 
-	public String getSelf_charge_yn() {
-		return self_charge_yn;
+
+	public String getSelf_burden() {
+		return self_burden;
 	}
 
 
@@ -183,8 +185,26 @@ public class HM_P0007_08VO {
 
 
 
-	public void setSelf_charge_yn(String self_charge_yn) {
-		this.self_charge_yn = self_charge_yn;
+	public void setSelf_burden(String self_burden) {
+		this.self_burden = self_burden;
+	}
+
+
+
+
+
+
+	public String getCompany_burden() {
+		return company_burden;
+	}
+
+
+
+
+
+
+	public void setCompany_burden(String company_burden) {
+		this.company_burden = company_burden;
 	}
 
 

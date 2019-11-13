@@ -13,4 +13,6 @@ public interface HM_P0021Service {
 
 	List<HM_P0021VO> eduScoreSearch(Map<String, Object> searchMap)throws DataAccessException;
 
+	void saveData(Map<String, String[]> dataMap) throws DataAccessException;
+
 }

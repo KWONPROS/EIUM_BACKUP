@@ -51,22 +51,24 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
 		initSheet.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0};
 		initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 		initSheet.Cols = [
+			{Header:"상태",SaveName:"sStatus",Type:"Status",align:"Center",width:50},
+			{Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck"},
 	        {Header:"사원코드",Type:"Text",SaveName:"employee_code",KeyField:1,Align:"Center",Edit:0},	
 			{Header:"사원명",Type:"Text",SaveName:"employee_name",MinWidth:120, Align:"Center",Edit:0},
-	         {Header:"사원명(한자)",Type:"Text",SaveName:"employee_name_hn",Hidden:1},         
-	         {Header:"채용구분",Type:"Text",SaveName:"hire_type",Hidden:1},         
-	         {Header:"기수",Type:"Text",SaveName:"hire_number",Hidden:1 },         
-	         {Header:"현주소",Type:"Text",SaveName:"current_address",Hidden:1},         
-	         {Header:"현주소상세",Type:"Text",SaveName:"current_address_detail",Hidden:1},         
-	         {Header:"주민등록주소",Type:"Text",SaveName:"resist_address",Hidden:1},         
-	         {Header:"주민등록주소상세",Type:"Text",SaveName:"resist_address_detail",Hidden:1},         
-	         {Header:"결혼여부",Type:"Text",SaveName:"marriage_yn",Hidden:1},         
-	         {Header:"종교",Type:"Text",SaveName:"religion",Hidden:1},         
-	         {Header:"병역구분",Type:"Text",SaveName:"military_type",Hidden:1},         
-	         {Header:"군번",Type:"Text",SaveName:"military_number",Hidden:1},
-	         {Header:"제대구분",Type:"Text",SaveName:"discharge_yn",Hidden:1},
-	         {Header:"거주구분",Type:"Text",SaveName:"residential_division",Hidden:1}
-		];   
+	        {Header:"사원명(한자)",Type:"Text",SaveName:"employee_name_hn",Hidden:1},         
+	        {Header:"채용구분",Type:"Text",SaveName:"hire_type",Hidden:1},         
+	        {Header:"기수",Type:"Text",SaveName:"hire_number",Hidden:1 },         
+	        {Header:"현주소",Type:"Text",SaveName:"current_address",Hidden:1},         
+	        {Header:"현주소상세",Type:"Text",SaveName:"current_address_detail",Hidden:1},         
+	        {Header:"주민등록주소",Type:"Text",SaveName:"resist_address",Hidden:1},         
+	        {Header:"주민등록주소상세",Type:"Text",SaveName:"resist_address_detail",Hidden:1},         
+	        {Header:"결혼여부",Type:"Text",SaveName:"marriage_yn",Hidden:1},         
+	        {Header:"종교",Type:"Text",SaveName:"religion",Hidden:1},
+	        {Header:"거주구분",Type:"Text",SaveName:"residential_division",Hidden:1},
+	        {Header:"병역구분",Type:"Text",SaveName:"military_type",Hidden:1},         
+	        {Header:"군번",Type:"Text",SaveName:"military_number",Hidden:1},
+	        {Header:"제대구분",Type:"Text",SaveName:"discharge_yn",Hidden:1}
+		];  
 		IBS_InitSheet(mySheet , initSheet);
   
 		mySheet.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
@@ -188,18 +190,17 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
     
     //mySheet8 //출장
    initData.Cols = [
-			{Header:"상태",SaveName:"sStatus",Type:"Status",align:"Center",width:50},
-			{Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck"},
 			{Header:"출장고유번호",Type:"Text", SaveName:"business_trip_code",Hidden:1},
-		    {Header:"출장국가",Type:"Text", SaveName:"country", Width:60, Align:"Center"},
-   		    {Header:"출장지",Type:"Text", SaveName:"area", Width:60, Align:"Center"},
-		    {Header:"시작일",Type:"Text", SaveName:"start_date", Width:60, Align:"Center"},
-	        {Header:"종료일",Type:"Text", SaveName:"end_date", Width:60, Align:"Center"},
-	        {Header:"항공료",Type:"Text", SaveName:"flight_cost", Width:60, Align:"Center"},
-	        {Header:"본인부담",Type:"Text", SaveName:"self_charge_yn", Width:60, Align:"Center"},
-		    {Header:"기타비용",Type:"Text", SaveName:"ect_cost", Width:60, Align:"Center"},
-		    {Header:"총비용",Type:"Text", SaveName:"total_cost", Width:60, Align:"Center"},
-		    {Header:"목적",Type:"Text", SaveName:"purpose", Width:60, Align:"Center"},
+		    {Header:"출장국가",Type:"Text", SaveName:"country", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+   		    {Header:"출장지",Type:"Text", SaveName:"area", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+		    {Header:"시작일",Type:"Text", SaveName:"start_date", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+	        {Header:"종료일",Type:"Text", SaveName:"end_date", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+	        {Header:"항공료",Type:"Text", SaveName:"flight_cost", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+	        {Header:"본인부담",Type:"Text", SaveName:"self_burden", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+	        {Header:"회사부담",Type:"Text", SaveName:"company_burden", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+		    {Header:"기타비용",Type:"Text", SaveName:"ect_cost", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+		    {Header:"총비용",Type:"Text", SaveName:"total_cost", Width:60, Align:"Center",CalcLogic:"|6|+|7|+|8|",InsertEdit:"0", UpdateEdit:"0"},
+		    {Header:"목적",Type:"Text", SaveName:"purpose", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"}
     ];
          
    createIBSheet2($("#ib-container8")[0],"mySheet8", "100%", "300px");
@@ -223,13 +224,46 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
          
    createIBSheet2($("#ib-container9")[0],"mySheet9", "100%", "300px");
    IBS_InitSheet(mySheet9,initData);
+   
+   //mySheet10 //어학시험
+   initData.Cols = [
+	   {Header:"상태",SaveName:"sStatus",Type:"Status",align:"Center",width:50},
+		{Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck"},
+		{Header:"어학시험고유번호",Type:"Text", SaveName:"language_code",Hidden:1},
+		{Header:"시험명",Type:"Text", SaveName:"name", Width:60, Align:"Center"},
+		{Header:"유효기간시작일",Type:"Text", SaveName:"start_date", Width:100, Align:"Center"},
+		{Header:"유효기간종료일",Type:"Text", SaveName:"end_date", Width:100, Align:"Center"},
+		{Header:"점수",Type:"Text", SaveName:"grade", Width:100, Align:"Center"},
+		{Header:"주관기관",Type:"Text", SaveName:"institute", Width:60, Align:"Center"},
+		];
+	  
+        
+  createIBSheet2($("#ib-container10")[0],"mySheet10", "100%", "300px");
+  IBS_InitSheet(mySheet10,initData);
+  
+  //mySheet11 //교육관리
+  initData.Cols = [
+     {Header:"교육명",Type:"Text", SaveName:"employee_training_name", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+     {Header:"시작일",Type:"Text", SaveName:"employee_training_start_date", Width:100, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+     {Header:"종료일",Type:"Text", SaveName:"employee_training_end_date", Width:100, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+     {Header:"교육시간",Type:"Text", SaveName:"employee_training_time", Width:100, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+     {Header:"교육일수",Type:"Text", SaveName:"employee_training_date_count", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+     {Header:"이수여부",Type:"Text", SaveName:"finish_yn", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+     {Header:"출석점수",Type:"Text", SaveName:"attendence_score", Width:100, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+     {Header:"태도점수",Type:"Text", SaveName:"attitude_score", Width:100, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+     {Header:"평가점수",Type:"Text", SaveName:"score", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+     {Header:"합계",Type:"Text", SaveName:"total", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0",CalcLogic:"|6|+|7|+|8|"},
+     {Header:"교육평가",Type:"Text", SaveName:"assessment_desc", Width:100, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+		];       
+ createIBSheet2($("#ib-container11")[0],"mySheet11", "100%", "300px");
+ IBS_InitSheet(mySheet11,initData);
 	
 	}
 	
 //로우 클릭시
 function mySheet_OnClick(Row, Col) {
 	/* if (Row != 0) {	 */		
-		  x = "x=" + mySheet.GetCellValue(Row, 0);
+		  x = "x=" + mySheet.GetCellValue(Row, 2);
 		  
 		mySheet2.DoSearch("${contextPath}/hm/p0007/searchEducation.do", x);
 		mySheet3.DoSearch("${contextPath}/hm/p0007/searchCareer.do", x);
@@ -239,27 +273,24 @@ function mySheet_OnClick(Row, Col) {
 		mySheet7.DoSearch("${contextPath}/hm/p0007/searchWorking_status.do", x);
 		mySheet8.DoSearch("${contextPath}/hm/p0007/searchBusiness_trip.do", x);
 		mySheet9.DoSearch("${contextPath}/hm/p0007/searchRnp.do", x);
-/*         doAction("insert2");
-        doAction("insert3");
-        doAction("insert4");
-        doAction("insert6");
-        doAction("insert8");
-        doAction("insert2"); */
+		mySheet10.DoSearch("${contextPath}/hm/p0007/searchEmployee_language.do", x);
+		mySheet11.DoSearch("${contextPath}/hm/p0007/searchTraining_assessment.do", x);
+
 
 		  $('input[name=myRow]').val(Row);
-		  $('input[name=employee_name_hn]').val(mySheet.GetCellValue(Row,2));
-	      $('input[name=hire_type]').val(mySheet.GetCellValue(Row,3));
-	      $('input[name=hire_number]').val(mySheet.GetCellValue(Row,4)); 
-	      $('input[name=current_address]').val(mySheet.GetCellValue(Row,5));
-	      $('input[name=current_address_detail]').val(mySheet.GetCellValue(Row,6));
-	      $('input[name=resist_address]').val(mySheet.GetCellValue(Row,7));
-	      $('input[name=resist_address_detail]').val(mySheet.GetCellValue(Row,8));
-	      $('input[name=marriage_yn]').val(mySheet.GetCellValue(Row,9));
-	      $('input[name=religion]').val(mySheet.GetCellValue(Row,10));
-	      $('input[name=military_type]').val(mySheet.GetCellValue(Row,11));
-	      $('input[name=military_number]').val(mySheet.GetCellValue(Row,12));
-	      $('input[name=discharge_yn]').val(mySheet.GetCellValue(Row,13));
-	      $('input[name=residential_division]').val(mySheet.GetCellValue(Row,14));
+		  $('input[name=employee_name_hn]').val(mySheet.GetCellValue(Row,4));
+	      $('select[name=hire_type]').val(mySheet.GetCellValue(Row,5));
+	      $('input[name=hire_number]').val(mySheet.GetCellValue(Row,6)); 
+	      $('input[name=current_address]').val(mySheet.GetCellValue(Row,7));
+	      $('input[name=current_address_detail]').val(mySheet.GetCellValue(Row,8));
+	      $('input[name=resist_address]').val(mySheet.GetCellValue(Row,9));
+	      $('input[name=resist_address_detail]').val(mySheet.GetCellValue(Row,10));
+	      $('select[name=marriage_yn]').val(mySheet.GetCellValue(Row,11));
+	      $('select[name=religion]').val(mySheet.GetCellValue(Row,12));
+	      $('select[name=residential_division]').val(mySheet.GetCellValue(Row,13));
+	      $('select[name=military_type]').val(mySheet.GetCellValue(Row,14));
+	      $('input[name=military_number]').val(mySheet.GetCellValue(Row,15));
+	      $('select[name=discharge_yn]').val(mySheet.GetCellValue(Row,16));
 	      
 
 	      
@@ -285,46 +316,52 @@ function mySheet_OnClick(Row, Col) {
 			mySheet7.RemoveAll();
 			mySheet8.RemoveAll();
 			mySheet9.RemoveAll();
-			 $('input[name=myRow]').val(Row);
-			  $('input[name=employee_name_hn]').val(mySheet.GetCellValue(Row,2));
-		      $('input[name=hire_type]').val(mySheet.GetCellValue(Row,3));
-		      $('input[name=hire_number]').val(mySheet.GetCellValue(Row,4)); 
-		      $('input[name=current_address]').val(mySheet.GetCellValue(Row,5));
-		      $('input[name=current_address_detail]').val(mySheet.GetCellValue(Row,6));
-		      $('input[name=resist_address]').val(mySheet.GetCellValue(Row,7));
-		      $('input[name=resist_address_detail]').val(mySheet.GetCellValue(Row,8));
-		      $('input[name=marriage_yn]').val(mySheet.GetCellValue(Row,9));
-		      $('input[name=religion]').val(mySheet.GetCellValue(Row,10));
-		      $('input[name=military_type]').val(mySheet.GetCellValue(Row,11));
-		      $('input[name=military_number]').val(mySheet.GetCellValue(Row,12));
-		      $('input[name=discharge_yn]').val(mySheet.GetCellValue(Row,13));
-		      $('input[name=residential_division]').val(mySheet.GetCellValue(Row,14));
+			mySheet10.RemoveAll();
+			mySheet11.RemoveAll();
+			  $('input[name=employee_name_hn]').val(mySheet.GetCellValue(Row,4));
+		      $('input[name=hire_type]').val(mySheet.GetCellValue(Row,5));
+		      $('input[name=hire_number]').val(mySheet.GetCellValue(Row,6)); 
+		      $('input[name=current_address]').val(mySheet.GetCellValue(Row,7));
+		      $('input[name=current_address_detail]').val(mySheet.GetCellValue(Row,8));
+		      $('input[name=resist_address]').val(mySheet.GetCellValue(Row,9));
+		      $('input[name=resist_address_detail]').val(mySheet.GetCellValue(Row,10));
+		      $('input[name=marriage_yn]').val(mySheet.GetCellValue(Row,11));
+		      $('input[name=religion]').val(mySheet.GetCellValue(Row,12));
+		      $('input[name=military_type]').val(mySheet.GetCellValue(Row,13));
+		      $('input[name=military_number]').val(mySheet.GetCellValue(Row,14));
+		      $('input[name=discharge_yn]').val(mySheet.GetCellValue(Row,15));
+		      $('input[name=residential_division]').val(mySheet.GetCellValue(Row,16));
 			
 			break;
 			
 		case "save": // 저장
-			 mySheet.SetCellValue($('input[name=myRow]').val(),3,$('input[name=employee_name_hn]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),4,$('input[name=hire_type]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),5,$('input[name=hire_number]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),6,$('input[name=current_address]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),7,$('input[name=current_address_detail]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),8,$('input[name=resist_address]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),9,$('input[name=resist_address_detail]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),10,$('input[name=marriage_yn]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),11,$('input[name=religion]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),12,$('input[name=military_type]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),13,$('input[name=military_number]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),14,$('input[name=discharge_yn]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),15,$('input[name=residential_division]').val()); 
+			 mySheet.SetCellValue($('input[name=myRow]').val(),4,$('input[name=employee_name_hn]').val());
+	         mySheet.SetCellValue($('input[name=myRow]').val(),5,$('select[name=hire_type]').val());
+	         mySheet.SetCellValue($('input[name=myRow]').val(),6,$('input[name=hire_number]').val());
+	         mySheet.SetCellValue($('input[name=myRow]').val(),7,$('input[name=current_address]').val());
+	         mySheet.SetCellValue($('input[name=myRow]').val(),8,$('input[name=current_address_detail]').val());
+	         mySheet.SetCellValue($('input[name=myRow]').val(),9,$('input[name=resist_address]').val());
+	         mySheet.SetCellValue($('input[name=myRow]').val(),10,$('input[name=resist_address_detail]').val());
+	         mySheet.SetCellValue($('input[name=myRow]').val(),11,$('select[name=marriage_yn]').val());
+	         mySheet.SetCellValue($('input[name=myRow]').val(),12,$('select[name=religion]').val());
+	         mySheet.SetCellValue($('input[name=myRow]').val(),13,$('select[name=residential_division]').val());
+	         mySheet.SetCellValue($('input[name=myRow]').val(),14,$('select[name=military_type]').val());
+	         mySheet.SetCellValue($('input[name=myRow]').val(),15,$('input[name=military_number]').val());
+	         mySheet.SetCellValue($('input[name=myRow]').val(),16,$('select[name=discharge_yn]').val());
+	          
 
-/* 			var tempStr = mySheet2.GetSaveString();
-			tempStr = tempStr + "&table_NAME=" + mySheet2.GetCellValue(0, 2);
-			alert("서버로 전달되는 문자열 확인 :" + tempStr); */
-			mySheet2.DoSave("${contextPath}/hm/p0007/saveEducation.do", x);
+		var tempStr = mySheet.GetSaveString();
+		mySheet.DoSave("${contextPath}/hm/p0007/saveHr_info.do", x);
+ 		mySheet2.DoSave("${contextPath}/hm/p0007/saveEducation.do", x);
+		mySheet3.DoSave("${contextPath}/hm/p0007/saveCareer.do", x);
+		mySheet4.DoSave("${contextPath}/hm/p0007/saveLicense.do", x);
+		mySheet6.DoSave("${contextPath}/hm/p0007/saveAssessment.do", x);
+		mySheet9.DoSave("${contextPath}/hm/p0007/saveRnp.do", x);
+		mySheet10.DoSave("${contextPath}/hm/p0007/saveEmployee_language.do", x);
 			break;
 			
 			
-		   case "insert2":
+		 /*   case "insert2":
 			      var row = mySheet2.DataInsert(-1);
 			      break;
 			      
@@ -348,6 +385,14 @@ function mySheet_OnClick(Row, Col) {
 			      var row = mySheet9.DataInsert(-1);
 			      break;
 			      
+		   case "insert10":
+			      var row = mySheet10.DataInsert(-1);
+			      break;
+			      
+		   case "insert11":
+			      var row = mySheet11.DataInsert(-1);
+			      break;
+			       */
 
 		}
 	}
@@ -379,13 +424,13 @@ function mySheet_OnClick(Row, Col) {
 	function mySheet6_OnSearchEnd() {
 		mySheet6.DataInsert(-1);
 	}
-	
-	function mySheet8_OnSearchEnd() {
-		mySheet8.DataInsert(-1);
-	}
 	function mySheet9_OnSearchEnd() {
 		mySheet9.DataInsert(-1);
 	}
+	function mySheet10_OnSearchEnd() {
+		mySheet10.DataInsert(-1);
+	}
+
 	
 	function mySheet2_OnKeyUp(Row, Col, KeyCode, Shift) {
 		//if (Modify == 1) { 인사코드 부분 - 수정 가능일시이니까 / 인사기록카드에서는 상관x
@@ -435,29 +480,7 @@ function mySheet_OnClick(Row, Col) {
 		         
 					}
 			}
-	function mySheet7_OnKeyUp(Row, Col, KeyCode, Shift) {
-				//if (Modify == 1) { 인사코드 부분 - 수정 가능일시이니까 / 인사기록카드에서는 상관x
-			         //console.log("keycode: "+KeyCode+"&col:"+mySheet2.LastCol()+"&row:"+mySheet2.RowCount());
-			         /* console.log("keycode: " + KeyCode);
-			         console.log("col:" + Col + "lastcol:" + mySheet2.LastCol());
-			         console.log("row:" + Row + "row갯수:" + mySheet2.RowCount()); */
-			         if ( KeyCode == 13 &&  Col == mySheet7.LastCol()
-			               && Row == mySheet7.RowCount()) { // 엔터를 누르고 / col이 마지막 col이고 / row가 마지막 열일경우
-			            doAction("insert7");
-			         }
-				}
-					
-	function mySheet8_OnKeyUp(Row, Col, KeyCode, Shift) {
-					//if (Modify == 1) { 인사코드 부분 - 수정 가능일시이니까 / 인사기록카드에서는 상관x
-				         //console.log("keycode: "+KeyCode+"&col:"+mySheet2.LastCol()+"&row:"+mySheet2.RowCount());
-				         /* console.log("keycode: " + KeyCode);
-				         console.log("col:" + Col + "lastcol:" + mySheet2.LastCol());
-				         console.log("row:" + Row + "row갯수:" + mySheet2.RowCount()); */
-				         if ( KeyCode == 13 &&  Col == mySheet8.LastCol()
-				               && Row == mySheet8.RowCount()) { // 엔터를 누르고 / col이 마지막 col이고 / row가 마지막 열일경우
-				            doAction("insert8");
-				         }
-					}
+	
 					
 	function mySheet9_OnKeyUp(Row, Col, KeyCode, Shift) {
 						//if (Modify == 1) { 인사코드 부분 - 수정 가능일시이니까 / 인사기록카드에서는 상관x
@@ -470,6 +493,41 @@ function mySheet_OnClick(Row, Col) {
 					            doAction("insert9");
 					         }
 				}
+	
+	function mySheet10_OnKeyUp(Row, Col, KeyCode, Shift) {
+					//if (Modify == 1) { 인사코드 부분 - 수정 가능일시이니까 / 인사기록카드에서는 상관x
+				         //console.log("keycode: "+KeyCode+"&col:"+mySheet2.LastCol()+"&row:"+mySheet2.RowCount());
+				         /* console.log("keycode: " + KeyCode);
+				         console.log("col:" + Col + "lastcol:" + mySheet2.LastCol());
+				         console.log("row:" + Row + "row갯수:" + mySheet2.RowCount()); */
+				         if ( KeyCode == 13 &&  Col == mySheet10.LastCol()
+				               && Row == mySheet10.RowCount()) { // 엔터를 누르고 / col이 마지막 col이고 / row가 마지막 열일경우
+				            doAction("insert10");
+				         }
+					}
+	
+	
+						
+	function goPopup(){
+		var pop = window.open("findAddress.do","addressPopup","width=570,height=420, scrollbars=yes, resizable=yes"); 
+	}
+
+	function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
+
+		document.form.current_address.value = roadAddrPart1;	
+		document.form.current_address_detail.value = addrDetail;	
+	}		
+	
+	function goPopup2(){
+		var pop = window.open("findAddress2.do","addressPopup","width=570,height=420, scrollbars=yes, resizable=yes"); 
+	}
+
+	function jusoCallBack2(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
+
+		document.form.resist_address.value = roadAddrPart1;	
+		document.form.resist_address_detail.value = addrDetail;	
+	}	
+						
 	        
 	// }
 </script>
@@ -626,11 +684,16 @@ border : none;
 				<a class="ib-tab-tabs-item__link"><span class="ib-tab-tabs-item__title">학력</span></a>
 				<a class="ib-tab-tabs-item__link"><span class="ib-tab-tabs-item__title">경력</span></a>
 				<a class="ib-tab-tabs-item__link"><span class="ib-tab-tabs-item__title">면허자격</span></a>
+				<a class="ib-tab-tabs-item__link"><span class="ib-tab-tabs-item__title">어학시험</span></a>
+				
 			</div>
 		</div>
 
 		<div id="tab_contents" class="ib-tab-contents" >
+		
 			<div class="ib-tab-contents__item" style="background: none;">
+					    <form name="form" id="form" method="post">
+			
 				<div id='ib-container1'>
 
 					
@@ -639,48 +702,50 @@ border : none;
 <table class="tg">
   <tr>
     <th class="tg-lu1x" rowspan="5"><i class="fa fa-address-book" aria-hidden="true"></i><br>개<br>인<br>정<br>보</th>
-    <td class="tg-8thm">한자이름</td><td class="tg-v9i9"><input type="text" id="employee_name_hn" name="employee_name_hn"></td>
-    <td class="tg-8thm">채용구분</td><td class="tg-v9i9"><select name="hire_type"><option value='Y' selected>공개채용</option><option value='N'>수시채용</option></select></td>
+    <td class="tg-8thm">한자이름</td><td class="tg-v9i9"><input type="text" id="employee_name_hn" name="employee_name_hn"><input type="hidden" name="myRow"></td>
+    <td class="tg-8thm">채용구분</td><td class="tg-v9i9"><select name="hire_type"><option value='공개채용' selected>공개채용</option><option value='수시채용'>수시채용</option></select></td>
     <td class="tg-8thm">기수</td><td class="tg-v9i9" colspan="1"><input type="text" id="hire_number" name="hire_number"></td>
   </tr>
   <tr>
   <td class="tg-8thm">현주소</td>
-    <td class="tg-v9i9" colspan="11"><input type="text" id="current_address" name="current_address">+up <input type="text" id="current_address_detail" name="current_address_detail"></td>
+    <td class="tg-v9i9" colspan="11"><input type="text" id="current_address" name="current_address"><a href="javascript:goPopup();" ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a><input type="text" id="current_address_detail" name="current_address_detail"></td>
   </tr>  
  <tr>
 <td class="tg-8thm">등록기준지</td>
-    <td class="tg-v9i9" colspan="11"><input type="text" id="resist_address" name="resist_address">+up <input type="text" id="resist_address_detail" name="resist_address_detail"></td>
+    <td class="tg-v9i9" colspan="11"><input type="text" id="resist_address" name="resist_address"><a href="javascript:goPopup2();" ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a><input type="text" id="resist_address_detail" name="resist_address_detail"></td>
  </tr>  
   <tr>
-<td class="tg-8thm">결혼구분</td><td class="tg-v9i9" colspan="1"><select name="marriage_yn"><option value='Y' selected>기혼</option><option value='N'>미혼</option></select></td>
+<td class="tg-8thm">결혼구분</td><td class="tg-v9i9" colspan="1"><select name="marriage_yn"><option value='기혼' selected>기혼</option><option value='미혼'>미혼</option></select></td>
     <td class="tg-8thm">종교</td>
-    <td class="tg-v9i9"><select name="religion"><option value='기독교'>기독교</option>
+    <td class="tg-v9i9"><select name="religion"><option value='기독교' selected>기독교</option>
 									<option value='천주교'>천주교</option>
-									<option value='불교' selected>불교</option>
-									<option value='무교' selected>무교</option></select>
+									<option value='불교'>불교</option>
+									<option value='무교'>무교</option></select>
 	</td>
 	<td class="tg-8thm">주거구분</td><td class="tg-v9i9"><select name="residential_division">
-									<option value='자가'>자가</option>
-									<option value='전세' selected>전세</option>
-									<option value='월세' selected>월세</option></select>
+									<option value='자가' selected>자가</option>
+									<option value='전세'>전세</option>
+									<option value='월세'>월세</option></select>
 	</td>
 									
   </tr>
   <tr>
 <td class="tg-8thm">병역구분</td><td class="tg-v9i9" colspan="1"><select name="military_type">
-									<option value='현역'>현역</option>
-									<option value='단기사병' selected>단기사병</option>
-									<option value='면제' selected>면제</option></select></td>
+									<option value='현역' selected>현역</option>
+									<option value='단기사병' >단기사병</option>
+									<option value='면제'>면제</option></select></td>
     <td class="tg-8thm">군번</td><td class="tg-v9i9" colspan="1"><input type="text" id="military_number" name="military_number"></td>
 	<td class="tg-8thm">제대구분</td><td class="tg-v9i9"><select name="discharge_yn">
-									<option value='만기'>만기</option>
-									<option value='단기' selected>단기</option>
-									<option value='의가' selected>의가</option></select>
+									<option value='만기' selected>만기</option>
+									<option value='단기'>단기</option>
+									<option value='의가'>의가</option></select>
 	</td>
 									
   </tr>
 </table>
 				</div>
+				    </form>
+				
 			</div>
 			<div class="ib-tab-contents__item">
                   <div id='ib-container2'></div>
@@ -690,6 +755,9 @@ border : none;
                </div>
 			<div class="ib-tab-contents__item">
                   <div id='ib-container4'></div>
+               </div>
+            <div class="ib-tab-contents__item">
+                  <div id='ib-container10'></div>
                </div>
 			
 		</div>
@@ -703,6 +771,8 @@ border : none;
 				<a class="ib-tab-tabs-item__link"><span class="ib-tab-tabs-item__title">근태</span></a>
 				<a class="ib-tab-tabs-item__link"><span class="ib-tab-tabs-item__title">출장</span></a>
 				<a class="ib-tab-tabs-item__link"><span class="ib-tab-tabs-item__title">상벌관리</span></a>
+				<a class="ib-tab-tabs-item__link"><span class="ib-tab-tabs-item__title">교육관리</span></a>
+				
 			</div>
 		</div>
 
@@ -721,6 +791,9 @@ border : none;
                </div>
 			 <div class="ib-tab-contents__item"> 
                   <div id='ib-container9'></div> 
+               </div>
+             <div class="ib-tab-contents__item"> 
+                  <div id='ib-container11'></div> 
                </div>
 
 		</div>

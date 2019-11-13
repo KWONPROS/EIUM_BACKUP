@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.eium.hm.hm_p0007.service.HM_P0007Service;
 import com.myspring.eium.hm.hm_p0007.vo.HM_P0007VO;
+import com.myspring.eium.login.vo.LoginVO;
 
 
 
@@ -60,13 +62,21 @@ public class HM_P0007ControllerImpl implements HM_P0007Controller {
 	
 
 	@Override
-	@RequestMapping(value = "/hm/p0007/saveData.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/hm/p0007/saveHr_info.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		Map<String, String[]> dataMap = new HashMap<String, String[]>(); 
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
 		
+		HttpSession session = request.getSession(); LoginVO loginvo = new LoginVO();
+		loginvo = (LoginVO)session.getAttribute("login"); 
+		String user= (loginvo.getEmployee_name());
+		 String x =request.getParameter("x");
+
+		  
+		Map<String, Object> searchMap = new HashMap<String, Object>(); // 
+		searchMap.put("tempStr", request.getParameter("tempStr"));
 	
 		Enumeration enu = request.getParameterNames();
 		while (enu.hasMoreElements()) {
@@ -77,7 +87,7 @@ public class HM_P0007ControllerImpl implements HM_P0007Controller {
 		
 		Map<String, String> result = new HashMap<String, String>();
 		try {
-			hM_P0007Service.saveData(dataMap);	
+			hM_P0007Service.saveData(dataMap, user, x);	
 			result.put("Code","0");
 			result.put("Message","저장성공");
 		}catch(Exception e) {
@@ -88,6 +98,22 @@ public class HM_P0007ControllerImpl implements HM_P0007Controller {
 		
 		resultMap.put("Result", result);         
         return resultMap;
+	}
+	
+	@Override
+	@RequestMapping(value = "/hm/p0007/findAddress.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView findAddress(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView("/hm/hm_p0007/p0007Address");
+		return mav;
+
+	}
+	
+	@Override
+	@RequestMapping(value = "/hm/p0007/findAddress2.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView findAddress2(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView("/hm/hm_p0007/p0007Address2");
+		return mav;
+
 	}
 
 

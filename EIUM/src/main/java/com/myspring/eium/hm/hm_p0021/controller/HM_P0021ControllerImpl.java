@@ -1,5 +1,6 @@
 package com.myspring.eium.hm.hm_p0021.controller;
 
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -73,7 +74,44 @@ public class HM_P0021ControllerImpl implements HM_P0021Controller{
         
         
         return resultMap;
+        
 	}
+	
+	
+	
+	
+	@Override
+	@RequestMapping(value = "hm/p0021/saveData.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, String[]> dataMap = new HashMap<String, String[]>(); 
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+
+		
+		Enumeration enu = request.getParameterNames();
+		while (enu.hasMoreElements()) {
+			String name = (String) enu.nextElement();
+			String[] values = request.getParameterValues(name);
+			dataMap.put(name, values);
+		}
+		
+		Map<String, String> result = new HashMap<String, String>();
+		try {
+			hM_P0021Service.saveData(dataMap);	
+			result.put("Code","0");
+			result.put("Message","저장성공");
+		}catch(Exception e) {
+			result.put("Code","-1");
+			result.put("Message","저장실패");
+			e.printStackTrace();
+		}
+		
+		resultMap.put("Result", result); 
+		
+        return result;
+	}
+	
 	
 	
 }

@@ -6,31 +6,47 @@
 <mapper namespace="mapper.hm_p0021">
 	<resultMap id="P0021resultVO" type="HM_P0021VO">
 		<result property="EMPLOYEE_TRAINING_CODE" column="EMPLOYEE_TRAINING_CODE" />
-        <result property="EMPLOYEE_CODE" column="EMPLOYEE_TRAINING_NAME" />
-        <result property="FINISH_YN" column="EMPLOYEE_TRAINING_START_DATE" />
-        <result property="ATTENDENCE_SCORE" column="EMPLOYEE_TRAINING_END_DATE" />
-        <result property="ATTITUDE_SCORE" column="EMPLOYEE_TRAINING_DATE_COUNT" />
-        <result property="SCORE" column="EMPLOYEE_TRAINING_GOAL" />
-        <result property="ASSESSMENT_DESC" column="EMPLOYEE_TRAINING_LOCATION" />
-        <result property="EMPLOYEE_NAME" column="EMPLOYEE_TRAINING_TEACHER" />
-        <result property="DEPARTMENT_NAME" column="EMPLOYEE_TRAINING_INSITUTION" />
-        <result property="POSITION_NAME" column="EMPLOYEE_TRAINING_TIME" />
+        <result property="EMPLOYEE_CODE" column="EMPLOYEE_CODE" />
+        <result property="FINISH_YN" column="FINISH_YN" />
+        <result property="ATTENDENCE_SCORE" column="ATTENDENCE_SCORE" />
+        <result property="ATTITUDE_SCORE" column="ATTITUDE_SCORE" />
+        <result property="SCORE" column="SCORE" />
+        <result property="TOTAL" column="TOTAL"/>
+        <result property="ASSESSMENT_DESC" column="ASSESSMENT_DESC" />
+        <result property="EMPLOYEE_NAME" column="EMPLOYEE_NAME" />
+        <result property="DEPARTMENT_NAME" column="DEPARTMENT_NAME" />
+        <result property="POSITION_NAME" column="POSITION_NAME" />
 	</resultMap> 
 
 	<select  id="eduScoreSearch" resultMap="P0021resultVO" parameterType="java.util.Map">
 	    <![CDATA[
-SELECT eta.total,eta.employee_code ,eta.finish_yn,eta.attendence_score,eta.attitude_score,eta.score,eta.assessment_desc,e.employee_name,d.department_name,p.position_name
-FROM EMPLOYEE_TRAINING_ASSESSMENT eta,DEPARTMENT d,POSITION p,employee e, employee_work ew,EMPLOYEE_TRAINING_LIST etl
-WHERE eta.employee_code=etl.employee_code
-AND eta.employee_code=e.employee_code
-AND eta.employee_code=ew.employee_code
+SELECT etl.total,etl.employee_code ,etl.finish_yn,etl.attendence_score,etl.attitude_score,etl.score,etl.assessment_desc,e.employee_name,d.department_name,p.position_name
+FROM EMPLOYEE_TRAINING_LIST etl,DEPARTMENT d,POSITION p,employee e, employee_work ew
+WHERE etl.employee_code=e.employee_code
+AND etl.employee_code=ew.employee_code
 AND ew.position_code=p.position_code
-AND eta.EMPLOYEE_TRAINING_CODE=etl.employee_training_code
 AND ew.department_code=d.department_code
-AND eta.employee_training_code=#{eduCode}
+AND etl.employee_training_code=#{eduCode}
 			]]>
 	</select>
 	
-	 
+	<update id="eduScoreUpdate" parameterType="java.util.Map">
+		update EMPLOYEE_TRAINING_LIST
+		
+		set FINISH_YN=#{finish_YN},
+		ATTENDENCE_SCORE=#{attendence_SCORE},
+		ATTITUDE_SCORE=#{attitude_SCORE},
+		SCORE=#{score},
+		TOTAL=#{total},
+		ASSESSMENT_DESC=#{assessment_DESC}
+
+		
+		
+		where employee_CODE=#{employee_CODE}
+
+	</update>	
+		
+
+	
 	
 </mapper>

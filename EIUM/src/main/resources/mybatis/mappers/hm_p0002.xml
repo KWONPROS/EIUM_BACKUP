@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.hm_p0002">
+	<resultMap id="P0002resultVO" type="HM_P0002VO">
+		<result property="payment_code" column="payment_code" />
+		<result property="payment_des_code" column="payment_des_code" />
+		<result property="payment_date" column="payment_date" />
+		<result property="start_date" column="start_date" />
+		<result property="end_date" column="end_date" />
+		<result property="int_user_id" column="int_user_id" />
+		<result property="int_date" column="int_date" />
+		<result property="upt_user_id" column="upt_user_id" />
+		<result property="upt_date" column="upt_date" />
+   
+	</resultMap> 
+	<select id="searchList" resultMap="P0002resultVO" parameterType="java.util.Map"> 
+      <![CDATA[
+         select payment_code, payment_date, payment_des_code           
+         from payment
+         where 
+      ]]>
+	</select>
+	
+	<!-- /////////////////////////////POSITION///////////////////////////////////// -->	
+	
+<insert id="insertpayment" parameterType="java.util.Map">
+		insert into employee_career(employee_code,career_code,company_name,start_date,end_date,sum_year,role,position,salary, reason, total_work, int_user_id, int_date) 
+		values(#{x},carrer_code_seq.nextval,#{company_name},#{start_date},#{end_date},#{sum_year},#{role},#{position}, #{salary}, #{reason}, #{total_work}, #{user}, sysdate)
+	</insert>	
+	
+	<update id="updatepayment" parameterType="java.util.Map">
+		update employee_career
+		set company_name = #{company_name}
+		   , start_date = #{start_date}
+		   , end_date = #{end_date}
+		   , sum_year = #{sum_year}
+		   , role = #{role}
+		   , position = #{position}
+		   , salary = #{salary}
+		   , reason = #{reason}
+		   , total_work = #{total_work}
+		    , upt_user_id = #{user}
+		   , upt_date = sysdate
+		where career_code = #{career_code}
+	</update>	
+	
+ 
+	
+	<delete id="deletepayment" parameterType="java.util.Map">
+		delete payment
+		where payment_code = #{payment_code}
+	</delete>
+
+
+</mapper>

@@ -99,7 +99,7 @@
 	
 		<update id="updateData4" parameterType="java.util.Map">
 		update employee_work
-		set , employee_join_date = #{employee_join_date, jdbcType=VARCHAR}
+		set employee_join_date = #{employee_join_date, jdbcType=VARCHAR}
 			, employee_resignation_date = #{employee_resignation_date, jdbcType=VARCHAR}
 			, upt_user_id = #{user, jdbcType=VARCHAR}
 			, upt_date = sysdate

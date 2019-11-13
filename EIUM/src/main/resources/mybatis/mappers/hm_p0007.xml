@@ -38,67 +38,26 @@
 	</select>
  
  <update id="updateHr_info" parameterType="java.util.Map">
-		update employee_education
-		set school_name = #{school_name}
-		   , start_date = #{start_date}
-		   , end_date = #{end_date}
-		   , available = #{available}
-		   , major = #{major}
-		   , minor = #{minor}
-		   , graduate_yn = #{graduate_yn}
-		    , upt_user_id = #{user}
+		update employee_hr_info
+		set employee_name_hn = #{employee_name_hn}
+		   , hire_type = #{hire_type}
+		   , hire_number = #{hire_number}
+		   , current_address = #{current_address}
+		   , current_address_detail = #{current_address_detail}
+		   , resist_address = #{resist_address}
+		   , resist_address_detail = #{resist_address_detail}
+		   , marriage_yn = #{marriage_yn}
+		   , religion = #{religion}
+		   , residential_division = #{residential_division}
+		   , military_type = #{military_type}
+		   , military_number = #{military_number}
+		   , discharge_yn = #{discharge_yn}
+		   , upt_user_id = #{user}
 		   , upt_date = sysdate
-		where education_code = #{education_code}
+		where employee_code = #{employee_code}
 	</update>
  
  
-<!--  <resultMap id="p0007_01resultVO" type="HM_P0007_01VO">
-		<result property="employee_name_hn" column="employee_name_hn" />
-		<result property="hire_type" column="hire_type" />
-		<result property="hire_number" column="hire_number" />
-		<result property="current_address" column="current_address" />
-		<result property="current_address_detail" column="current_address_detail" />
-		<result property="resist_address" column="resist_address" />
-		<result property="resist_address_detail" column="resist_address_detail" />
-		<result property="marriage_yn" column="marriage_yn" />
-		<result property="religion" column="religion" />
-		<result property="residential_division" column="residential_division" />
-        <result property="military_type" column="military_type" />
-        <result property="military_number" column="military_number" />
-        <result property="discharge_yn" column="discharge_yn" />
-        <result property="int_user_id" column="int_user_id" />
-        <result property="int_date" column="int_date" />
-        <result property="upt_user_id" column="upt_user_id" />
-        <result property="upt_date" column="upt_date" />
-	</resultMap>
-
-	<select id="searchHr_info" resultMap="p0007_02resultVO">
-      <![CDATA[
-         select employee_name_hn, school_name, start_date, end_date, available, major, minor, graduate_yn
-         from employee_education
-         where employee_code = #{x}
-               ]]>
-	</select>
-	
-	<insert id="insertHr_info" parameterType="java.util.Map">
-		insert into employee_education(employee_code,education_code,school_name,start_date,end_date,available,major,minor,graduate_yn, int_user_id, int_date) 
-		values(#{x},education_code_seq.nextval,#{school_name},#{start_date},#{end_date},#{available},#{major},#{minor}, #{graduate_yn}, #{user}, sysdate)
-	</insert>	
-	
-	<update id="updateHr_info" parameterType="java.util.Map">
-		update employee_education
-		set school_name = #{school_name}
-		   , start_date = #{start_date}
-		   , end_date = #{end_date}
-		   , available = #{available}
-		   , major = #{major}
-		   , minor = #{minor}
-		   , graduate_yn = #{graduate_yn}
-		    , upt_user_id = #{user}
-		   , upt_date = sysdate
-		where education_code = #{education_code}
-	</update> -->
-	
 	<!--학력  -->
 
 
@@ -372,7 +331,8 @@
 		<result property="start_date" column="start_date" />
 		<result property="end_date" column="end_date" />
 		<result property="flight_cost" column="flight_cost" />
-		<result property="self_charge_yn" column="self_charge_yn" />
+		<result property="self_burden" column="self_burden" />
+		<result property="company_burden" column="company_burden" />
 		<result property="ect_cost" column="ect_cost" />
 		<result property="total_cost" column="total_cost" />
 		<result property="purpose" column="purpose" />
@@ -384,14 +344,14 @@
 
 	<select id="searchBusiness_trip" resultMap="p0007_08resultVO">
       <![CDATA[
-          select business_trip_code, country, area, start_date, end_date, flight_cost, self_charge_yn, ect_cost, total_cost, purpose
+          select business_trip_code, country, area, start_date, end_date, flight_cost, self_burden, company_burden, ect_cost, total_cost, purpose
          from employee_business_trip
          where employee_code = #{x}
                ]]>
 	</select>
 	<insert id="insertemployee_business_trip" parameterType="java.util.Map">
-		insert into employee_business_trip(employee_code,business_trip_code,country,area,start_date,end_date,flight_cost,self_charge_yn,ect_cost,total_cost,int_user_id,int_date) 
-		values(#{x},business_trip_code_seq,#{country},#{area},#{start_date},#{end_date},#{flight_cost},#{self_charge_yn},#{ect_cost},#{total_cost},#{user},sysdate)
+		insert into employee_business_trip(employee_code,business_trip_code,country,area,start_date,end_date,flight_cost,self_burden, company_burden, ect_cost,total_cost,int_user_id,int_date) 
+		values(#{x},business_trip_code_seq,#{country},#{area},#{start_date},#{end_date},#{flight_cost},#{self_burden},#{company_burden},#{ect_cost},#{total_cost},#{user},sysdate)
 	</insert>	
 	
 	<update id="updateemployee_business_trip" parameterType="java.util.Map">
@@ -401,7 +361,8 @@
 		   , start_date = #{start_date}
 		   , end_date = #{end_date}
 		   , flight_cost = #{flight_cost}
-		   , self_charge_yn = #{self_charge_yn}
+		   , self_burden = #{self_burden}
+		   , company_burden = #{company_burden}
 		   , ect_cost = #{ect_cost}
 		   , total_cost = #{total_cost}
 		   , upt_user_id = #{user}
@@ -470,7 +431,82 @@
 		delete hr_rnp
 		where hr_rnp_code = #{hr_rnp_code}
 	</delete>
+	
+	<!--출장  -->
 
 
+	<resultMap id="p0007_10resultVO" type="HM_P0007_10VO">
+		<result property="language_code" column="language_code" />
+		<result property="employee_code" column="employee_code" />
+		<result property="name" column="name" />
+		<result property="start_date" column="start_date" />
+		<result property="end_date" column="end_date" />
+		<result property="grade" column="grade" />
+		<result property="institute" column="institute" />
+		<result property="int_user_id" column="int_user_id" />
+        <result property="int_date" column="int_date" />
+        <result property="upt_user_id" column="upt_user_id" />
+        <result property="upt_date" column="upt_date" />
+	</resultMap>
+
+	<select id="searchEmployee_language" resultMap="p0007_10resultVO">
+      <![CDATA[
+          select language_code, employee_code, name, start_date, end_date, grade, institute
+         from employee_language
+         where employee_code = #{x}
+               ]]>
+	</select>
+	<insert id="insertEmployee_language" parameterType="java.util.Map">
+		insert into employee_language(employee_code,language_code,name,start_date,end_date,grade,institute,int_user_id,int_date) 
+		values(#{x},language_code_seq,#{name},#{start_date},#{end_date},#{grade},#{institute},#{user},sysdate)
+	</insert>	
+	
+	<update id="updateEmployee_language" parameterType="java.util.Map">
+		update employee_language
+		set name = #{name}
+		   , start_date = #{start_date}
+		   , end_date = #{end_date}
+		   , grade = #{grade}
+		   , institute = #{institute}
+		   , upt_user_id = #{user}
+		   , upt_date = sysdate
+		where language_code = #{language_code}
+	</update>	
+	
+ 
+	
+	<delete id="deleteEmployee_language" parameterType="java.util.Map">
+		delete employee_language
+		where language_code = #{language_code}
+	</delete>
+	
+	<!--상벌관리  -->
+
+
+	<resultMap id="p0007_11resultVO" type="HM_P0007_11VO">
+		<result property="employee_code" column="employee_code" />
+		<result property="employee_training_name" column="employee_training_name" />
+		<result property="employee_training_start_date" column="employee_training_start_date" />
+		<result property="employee_training_end_date" column="employee_training_end_date" />
+		<result property="employee_training_time" column="employee_training_time" />
+		<result property="employee_training_date_count" column="employee_training_date_count" />
+		<result property="finish_yn" column="finish_yn" />
+		<result property="attendence_score" column="attendence_score" />
+		<result property="attitude_score" column="attitude_score" />
+		<result property="score" column="score" />
+		<result property="total" column="total" />	
+		<result property="assessment_desc" column="assessment_desc" />
+        <result property="int_date" column="int_date" />
+        <result property="upt_user_id" column="upt_user_id" />
+        <result property="upt_date" column="upt_date" />
+	</resultMap>
+
+	<select id="searchTraining_assessment" resultMap="p0007_11resultVO">
+      <![CDATA[
+         select et.employee_training_name, et.employee_training_start_date, et.employee_training_end_date, et.employee_training_time, et.employee_training_date_count, ta.finish_yn, ta.attendence_score, ta.attitude_score, ta.score
+         from employee_training_assessment ta, employee_training et
+         where ta.employee_code = #{x}
+               ]]>
+	</select>
 
 </mapper>

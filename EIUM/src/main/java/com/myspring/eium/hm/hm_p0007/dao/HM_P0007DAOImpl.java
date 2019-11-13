@@ -34,7 +34,7 @@ public class HM_P0007DAOImpl implements HM_P0007DAO {
 
 	@Override
 	public void updateData(Map<String, String> row) throws DataAccessException {
-		sqlSession.update("mapper.hm_p0007.updateData", row);
+		sqlSession.update("mapper.hm_p0007.updateHr_info", row);
 	}
 
 	@Override

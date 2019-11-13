@@ -46,21 +46,21 @@ function setPopupValue(){
 		//아이비시트 초기화
 		var initSheet = {};
 		initSheet.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:0}
-		initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
+		initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:1,HeaderCheck:1};
 		initSheet.Cols = [
 
-				{Header:"교육코드",Type:"Text",SaveName:"employee_TRAINING_CODE",MinWidth:80, Align:"Center"},
-				{Header:"교육명",Type:"Text",SaveName:"employee_TRAINING_NAME",MinWidth:170, Align:"Center"},			
-				{Header:"시작일",Type:"Text",SaveName:"employee_TRAINING_START_DATE",MinWidth:80, Edit: 1, Align:"Center",Format:"Ymd"},			
-				{Header:"종료일",Type:"Text",SaveName:"employee_TRAINING_END_DATE",MinWidth:80,Format:"Ymd"},			
-				{Header:"교육일수",Type:"Text",SaveName:"employee_TRAINING_DATE_COUNT"},
-				{Header:"교육목적",Type:"Text",SaveName:"employee_TRAINING_GOAL"},
-				{Header:"교육장소",Type:"Text",SaveName:"employee_TRAINING_LOCATION"},			
-				{Header:"담당강사",Type:"Text",SaveName:"employee_TRAINING_TEACHER"},			
-				{Header:"교육기관",Type:"Text",SaveName:"employee_TRAINING_INSITUTION" },			
-				{Header:"교육시간",Type:"Text",SaveName:"employee_TRAINING_TIME"},			
-				{Header:"대상인원",Type:"Text",SaveName:"employee_TRAINING_PEOPLE"},			
-				{Header:"사내외구분",Type:"Text",SaveName:"employee_TRAINING_IN_OUT"},			
+				{Header:"교육코드",Type:"Text",SaveName:"employee_TRAINING_CODE", Align:"Center",Width:100},
+				{Header:"교육명",Type:"Text",SaveName:"employee_TRAINING_NAME", Align:"Center",Width:100},			
+				{Header:"시작일",Type:"Date",SaveName:"employee_TRAINING_START_DATE", Edit: 1, Align:"Center",Format:"Ymd",Width:100},			
+				{Header:"종료일",Type:"Date",SaveName:"employee_TRAINING_END_DATE",Format:"Ymd",Width:100},			
+				{Header:"교육일수",Type:"Text",SaveName:"employee_TRAINING_DATE_COUNT",Width:100},
+				{Header:"교육목적",Type:"Text",SaveName:"employee_TRAINING_GOAL",Width:100},
+				{Header:"교육장소",Type:"Text",SaveName:"employee_TRAINING_LOCATION",Width:100},			
+				{Header:"담당강사",Type:"Text",SaveName:"employee_TRAINING_TEACHER",Width:100},			
+				{Header:"교육기관",Type:"Text",SaveName:"employee_TRAINING_INSITUTION",Width:100 },			
+				{Header:"교육시간",Type:"Text",SaveName:"employee_TRAINING_TIME",Width:100},			
+				{Header:"대상인원",Type:"Text",SaveName:"employee_TRAINING_PEOPLE",Width:100},			
+				{Header:"사내외구분",Type:"Text",SaveName:"employee_TRAINING_IN_OUT",Width:100},			
 
 				];
 			IBS_InitSheet(mySheet, initSheet);
@@ -77,16 +77,16 @@ function setPopupValue(){
 			mySheet2.RemoveAll();
 			//아이비시트 초기화
 			var initSheet2 = {};
-			initSheet2.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:0}
+			initSheet2.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:3}
 			initSheet2.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 			initSheet2.Cols = [
-					{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
-					{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},
-					{Header:"사원코드",Type:"Text",SaveName:"employee_CODE",MinWidth:80, Align:"Center"},
-					{Header:"사원명",Type:"Text",SaveName:"employee_NAME",MinWidth:170, Align:"Center",InsertEdit:0},			
-					{Header:"부서",Type:"Text",SaveName:"department_NAME",MinWidth:170,InsertEdit:0},			
-					{Header:"직책",Type:"Text",SaveName:"position_NAME",MinWidth:170,InsertEdit:0}	,
-					{Header:"교육코드",Type:"Text",SaveName:"EMPLOYEE_TRAINING_CODE",MinWidth:170,Hidden:1}	
+					{Header:"상태",Type:"Status",SaveName:"STATUS", Align:"Center"},
+					{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK"},
+					{Header:"사원코드",Type:"Text",SaveName:"employee_CODE",Align:"Center",Width:100},
+					{Header:"사원명",Type:"Text",SaveName:"employee_NAME",Align:"Center",InsertEdit:0,Width:100},			
+					{Header:"부서",Type:"Text",SaveName:"department_NAME",InsertEdit:0,Width:100},			
+					{Header:"직책",Type:"Text",SaveName:"position_NAME",InsertEdit:0,Width:100}	,
+					{Header:"교육코드",Type:"Text",SaveName:"EMPLOYEE_TRAINING_CODE",Hidden:1}	
 
 					];
 				IBS_InitSheet(mySheet2,initSheet2);
@@ -118,7 +118,7 @@ function setPopupValue(){
 			var param ="param="+mySheet.GetCellValue(1,0);
 			mySheet2.DoSave("${contextPath}/hm/p0018/emplyoeeListsaveData.do",param);	
 
-	
+			break;
 		
 		case "insert": //신규행 추가
 			var row = mySheet2.DataInsert(-1);
@@ -249,18 +249,17 @@ border-radius: 2px;
 
 
 
-	<div class="clear hidden"></div>
+
 	<div class="left">
-	<div class="ib_product">
 		<script>
 			//IBSheet 객체 생성 (객체 id, 너비, 높이)
-			createIBSheet("mySheet", "100%", "304px");
-			createIBSheet("mySheet2", "100%", "304px");
+			createIBSheet("mySheet", "1500px", "304px");
+			createIBSheet("mySheet2", "1000px", "304px");
 			
 		</script>
 	</div>
-	</div>
-	
+
+
 
 
 

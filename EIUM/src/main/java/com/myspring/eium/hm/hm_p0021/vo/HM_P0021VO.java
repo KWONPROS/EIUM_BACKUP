@@ -63,6 +63,13 @@ String ASSESSMENT_DESC;
 String EMPLOYEE_NAME;
 String DEPARTMENT_NAME;
 String POSITION_NAME;
+String TOTAL;
+public String getTOTAL() {
+	return TOTAL;
+}
+public void setTOTAL(String tOTAL) {
+	TOTAL = tOTAL;
+}
 public String getEMPLOYEE_NAME() {
 	return EMPLOYEE_NAME;
 }

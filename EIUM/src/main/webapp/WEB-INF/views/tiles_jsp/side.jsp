@@ -95,7 +95,7 @@ var data = {Data:[
 	{menuCode:"m12",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0007/searchInit.do", TITLE:"인사기록카드"},
 	{menuCode:"m13",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0018/searchInit.do", TITLE:"교육관리"},
 	{menuCode:"m14",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0021/searchInit.do", TITLE:"교육평가"},
-	{menuCode:"m15",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"인사발령등록"},
+	{menuCode:"m15",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0022/searchInit.do", TITLE:"인사발령등록"},
 	{menuCode:"m16",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"인사발령"},
 	{menuCode:"m17",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"인사발령공고"},
 	{menuCode:"m18",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"인사발령리포트"},
@@ -106,14 +106,14 @@ var data = {Data:[
 	{menuCode:"m23",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"근속년수현황"},
 	{menuCode:"m24",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"교육현황"},
 	{menuCode:"m25",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"급여관리"},
-	{menuCode:"m26",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"급여입력및계산"},
+	{menuCode:"m26",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"pm/p0001/searchInit.do", TITLE:"급여입력및계산"},
 	{menuCode:"m27",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"급여대장"},
 	{menuCode:"m28",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"급여명세"},
 	{menuCode:"m29",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"급상여이체현황"},
 	{menuCode:"m30",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"월별지급현황"},
 	{menuCode:"m31",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"사원임금통계"},
 	{menuCode:"m32",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"근태관리"},
-	{menuCode:"m33",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"pm/p0001/searchInit.do", TITLE:"근태입력"},
+	{menuCode:"m33",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"wm/p0001/searchInit.do", TITLE:"근태입력"},
 	{menuCode:"m34",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"wm/p0002/searchInit.do", TITLE:"휴가관리"},
 	{menuCode:"m35",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"wm/p0003/searchInit.do", TITLE:"휴가내역"},
 	{menuCode:"m36",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"wm/p0004/searchInit.do", TITLE:"출장관리"},
@@ -175,7 +175,7 @@ $(document).ready(function(){
 				}],
 				contents:[{
 					type:"iframe",	
-					contents:""
+					contents:"cm/main.do"
 				}],
 				customZone:{
 					width:"0px"
