@@ -36,19 +36,20 @@ public class HM_P0003ServiceImpl implements HM_P0003Service {
 	}
 
 	@Override
-	public void saveData(Map<String, String[]> dataMap,String table_NAME)  throws DataAccessException  {
+	public void saveData(Map<String, String[]> dataMap,String t_name)  throws DataAccessException  {
 		String[] status = dataMap.get("STATUS");
 		int length = status.length; 
 		int i = 0;
 		
 		for(String str : status) {
 			Map<String, String> row = getRow(dataMap, length, i); 
+			row.put("temp_NAME", t_name);
 			if("I".equals(str)) { 
-				p0003DAO.insertData(row,table_NAME);
+				p0003DAO.insertData(row);
 			}else if("U".equals(str)) { 
-				p0003DAO.updateData(row,table_NAME);
+				p0003DAO.updateData(row);
 			}else if("D".equals(str)) { 
-				p0003DAO.deleteData(row,table_NAME);
+				p0003DAO.deleteData(row);
 			}
 			i++;
 		}

@@ -24,7 +24,7 @@
 		initSheet.Cols = [		
 			{Header:"코드",Type:"Text",SaveName:"admin_CODE",MinWidth:80,KeyField:1, Align:"Center"},
 			{Header:"관리항목명",Type:"Text",SaveName:"admin_NAME",MinWidth:170,KeyField:1, Align:"Center"},			
-			{Header:"테이블물리명",Type:"Text",SaveName:"admin_LIST_NAME",Hidden:1}			
+			{Header:"테이블물리명",Type:"Text",SaveName:"admin_LIST_NAME" ,Hidden:1}			
 		];   
 		IBS_InitSheet( mySheet , initSheet);
   
@@ -41,8 +41,8 @@
 			
 	     	{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
 	        {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},	
-	        {Header:"테이블물리명",Type:"Text",SaveName:"temp_NAME" ,Hidden:1},	
-			{Header:"코드",Type:"Text",SaveName:"admin_LIST_CODE",MinWidth:120,KeyField:1, Align:"Center"},			
+	        {Header:"테이블물리명",Type:"Text",SaveName:"t_NAME"   ,Hidden:1 } ,	
+			{Header:"코드",Type:"Text",SaveName:"admin_LIST_CODE",MinWidth:120,KeyField:1, Align:"Center",Edit:0},			
 			{Header:"관리내역명",Type:"Text",SaveName:"admin_LIST_NAME",MinWidth:170}					
 
 			
@@ -77,31 +77,31 @@
 				break;			
 			case "insert": //신규행 추가
 				var row = mySheet2.DataInsert();
+				mySheet2.SetCellEditable(row, 3, 1);
 				break;
 		}
 	}
 	
 	//로우 클릭시
 	function mySheet_OnClick(Row, Col) {
-		if(Row!=0){	
-		mySheet2.DoSearch("${contextPath}/hm/p0003/searchList2.do","admin_LIST_NAME="+mySheet.GetCellValue(Row,2));
-		mySheet2.SetCellValue(0,2,mySheet.GetCellValue(Row,2));
-		
+		if (Row != 0) {
+			mySheet2.DoSearch("${contextPath}/hm/p0003/searchList2.do",
+					"admin_LIST_NAME=" + mySheet.GetCellValue(Row, 2));
+			mySheet2.SetCellValue(0, 2, mySheet.GetCellValue(Row, 2));
+
 		}
-	} 
-	
+	}
+
+
 	// 저장완료 후 처리할 작업
 	// code: 0(저장성공), -1(저장실패)
-	function mySheet_OnSaveEnd(code,msg){
-		if(msg != ""){
-			alert(msg);	
+	function mySheet_OnSaveEnd(code, msg) {
+		if (msg != "") {
+			alert(msg);
 			//번호 다시 매기기
-            //mySheet.ReNumberSeq();
-		}	
+			//mySheet.ReNumberSeq();
+		}
 	}
-	
-	
-	
 </script>
 <style type="text/css">
 

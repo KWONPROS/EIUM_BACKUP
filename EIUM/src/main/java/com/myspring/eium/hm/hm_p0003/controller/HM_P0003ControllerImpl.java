@@ -87,9 +87,7 @@ public class HM_P0003ControllerImpl implements HM_P0003Controller {
 		request.setCharacterEncoding("utf-8");
 		Map<String, String[]> dataMap = new HashMap<String, String[]>(); 
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
-
-		String table_NAME = request.getParameter("table_NAME");
-		
+		String t_name = request.getParameter("table_NAME");
 		Enumeration enu = request.getParameterNames();
 		while (enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
@@ -99,7 +97,7 @@ public class HM_P0003ControllerImpl implements HM_P0003Controller {
 		
 		Map<String, String> result = new HashMap<String, String>();
 		try {
-			p0003Service.saveData(dataMap,table_NAME);	
+			p0003Service.saveData(dataMap,t_name);	
 			result.put("Code","0");
 			result.put("Message","저장성공");
 		}catch(Exception e) {
