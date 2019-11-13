@@ -116,7 +116,7 @@ var data = {Data:[
 	{menuCode:"m33",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"wm/p0001/searchInit.do", TITLE:"근태입력"},
 	{menuCode:"m34",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"wm/p0002/searchInit.do", TITLE:"휴가관리"},
 	{menuCode:"m35",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"wm/p0003/searchInit.do", TITLE:"휴가내역"},
-	{menuCode:"m36",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"출장관리"},
+	{menuCode:"m36",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"wm/p0004/searchInit.do", TITLE:"출장관리"},
 	{menuCode:"m37",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"출장조회"},
 	{menuCode:"m38",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"출장조회(사원별)"},
 	]};
