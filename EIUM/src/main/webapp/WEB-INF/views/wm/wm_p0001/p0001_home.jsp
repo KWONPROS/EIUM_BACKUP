@@ -65,13 +65,15 @@
 		initSheet2.Cols = [
 			{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
 	        {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},	
-	        {Header:"NO",Type:"Seq",SaveName:"NUMBER",MinWidth:50, Align:"Center" },	
-			{Header:"출근일자",Type:"Date",SaveName:"working_STATUS_DATE",MinWidth:120,KeyField:1, Align:"Center", Format: "Ymd"},			
+	        {Header:"NO",Type:"Seq",SaveName:"NUMBER",MinWidth:50, Align:"Center"},
+	        {Header:"고유번호", Type:"Text",SaveName:"working_STATUS_CODE", Width:50, Align:"Center"},
+	        {Header:"귀속연월", Type:"Text",SaveName:"working_STATUS_MONTH", Width:50, Align:"Center", Format: "MM-dd", CalcLogic:"|5|"},
+	        {Header:"출근일자",Type:"Date",SaveName:"working_STATUS_DATE",MinWidth:120,KeyField:1, Align:"Center", Format: "Ymd"},			
 			{Header:"출근시간",Type:"Date",SaveName:"working_STATUS_START_TIME",MinWidth:100, Align:"Center", Format: "HH:mm"},
 			{Header:"퇴근시간",Type:"Date",SaveName:"working_STATUS_END_TIME",MinWidth:100, Align:"Center", Format: "HH:mm"},
-			{Header:"temp_시간",Type:"Date",SaveName:"temp_TIME",MinWidth:100, Align:"Center", Format: "HH:mm", DefaultValue :"0000"},
-			{Header:"근무총시간",Type:"Date",SaveName:"working_STATUS_TOTAL_TIME",MinWidth:50, Align:"Center", Format: "HH:mm", CalcLogic:"|5|+|6|-|4|"},
-			{Header:"퇴근-출근시간",Type:"Date",SaveName:"working_STATUS_TOTAL_TIME_CALC",MinWidth:50, Align:"Center",Format:"HH:mm", CalcLogic:"|5|+|6|-|4|"},
+			{Header:"temp_시간",Type:"Date",SaveName:"temp_TIME",MinWidth:100, Align:"Center", Format: "00:00", DefaultValue :"0000"},
+			{Header:"근무총시간",Type:"Date",SaveName:"working_STATUS_TOTAL_TIME",MinWidth:50, Align:"Center", Format: "HH:mm", CalcLogic:"|7|+|8|-|6|"},
+			{Header:"퇴근-출근시간",Type:"Date",SaveName:"working_STATUS_TOTAL_TIME_CALC",MinWidth:50, Align:"Center",Format:"HH:mm", CalcLogic:"|7|+|8|-|6|"},
 			{Header:"비고",Type:"Text",SaveName:"working_STATUS_DESC",MinWidth:100, Align:"Center", "ComboText":"연차|특별휴가|경조휴가"}
 		];
 		
@@ -82,7 +84,7 @@
 		/* GetDataLastRow() == mySheet3.GetSelectRow() */
 		/* var info = [{StdCol:1 , SumCols:"0|1"}]; 
 		mySheet.ShowSubSum (info);  */
-	    
+		alert(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("temp_TIME")));
 	    mySheet.DoSearch("${contextPath}/wm/p0001/EMP_searchList.do");
 	}
 
@@ -103,17 +105,13 @@
 			mySheet2.RemoveAll();
 			break;
 		case "save": // 저장
-
 			var tempStr = mySheet2.GetSaveString();
-			tempStr = tempStr + "&table_NAME=" + mySheet2.GetCellValue(0, 2);
 			alert("서버로 전달되는 문자열 확인 :" + tempStr);
-			mySheet.DoSave("${contextPath}/wm/p0001/saveData.do", tempStr);
+			mySheet2.DoSave("${contextPath}/wm/p0001/saveData.do", "p_emp_code=" + mySheet.GetCellValue(mySheet.GetSelectRow(),0));
 			break;
 		case "insert":
 			var row = mySheet2.DataInsert(-1);
 			/* mySheet2.SaveNameCol("temp_TIME") */mySheet2.GetSelectRow()
-			alert(mySheet2.GetSelectRow());
-			alert(mySheet2.SaveNameCol("temp_TIME"));
 			/* alert(mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("temp_TIME"), 0000)); */
 			alert(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("temp_TIME")));
 			break;
@@ -128,9 +126,14 @@
 				mySheet2.SetCellValue(Row, 6, "0000");
 			}
 		}
-	}
-	function mySheet2_OnSearchEnd(Code, Msg){
 		
+	}
+	function mySheet2_OnSearchEnd(Code, Msg){ //mySheet2 근태 정보 검색하기 전
+		var Maskingcell = mySheet2.GetDataLastRow();
+		/* for(let i = Maskingcell; i >= 1; i--){ // savename: temp_시간의 col에 00:00 masking 값 입력
+			mySheet2.SetCellValue(i, 8, "0000");
+			/* alert(mySheet2.GetCellValue(i, 8)); */ //값 확인 완료
+		//} 
 	}
 	// 저장완료 후 처리할 작업
 	// code: 0(저장성공), -1(저장실패)
@@ -189,14 +192,14 @@
 .left{
 	position: relative;
 	top: 110px;
-	left: 60px;
+	left: 30px;
 	width: 1053px;
 }
 
 .right{
 	position: relative;
 	top: -90px;
-	left: 500px;
+	left: 470px;
 	width: 750px;
 	
 }

@@ -37,17 +37,31 @@ public class WM_P0001DAOImpl implements WM_P0001DAO {
 
 	@Override
 	public void insertData(Map<String, String> row) throws DataAccessException {
-		sqlSession.update("wm.p0001.insertData", row);
+		sqlSession.update("mapper.wm_p0001.insertData", row);
+		
+		
+		  for ( String key : row.keySet() ) { System.out.println("방법1) key : " + key
+		  +" / value : " + row.get(key)); }
+		  System.out.println("=======================");
+		 
 	}
 
 	@Override
 	public void updateData(Map<String, String> row) throws DataAccessException {
-		sqlSession.update("wm.p0001.updateData", row);
+		sqlSession.update("mapper.wm_p0001.updateData", row);
+		
+		for ( String key : row.keySet() ) { System.out.println("방법1) key : " + key
+				  +" / value : " + row.get(key)); }
+				  System.out.println("=======================");
 	}
 
 	@Override
 	public void deleteData(Map<String, String> row) throws DataAccessException {
-		sqlSession.update("wm.p0001.deleteData", row);
+		sqlSession.update("mapper.wm_p0001.deleteData", row);
+		
+		for ( String key : row.keySet() ) { System.out.println("방법1) key : " + key
+				  +" / value : " + row.get(key)); }
+				  System.out.println("=======================");
 	}
 
 	
