@@ -45,6 +45,7 @@
 				<typeAlias type="com.myspring.eium.wm.wm_p0002.vo.WM_P0002VO" alias="WM_P0002VO" />
 				<typeAlias type="com.myspring.eium.wm.wm_p0003.vo.WM_P0003VO" alias="WM_P0003VO" />
 				<typeAlias type="com.myspring.eium.wm.wm_p0004.vo.WM_P0004VO" alias="WM_P0004VO" />
+				<typeAlias type="com.myspring.eium.wm.wm_p0005.vo.WM_P0005VO" alias="WM_P0005VO" />
 				
 	</typeAliases>
 </configuration>
