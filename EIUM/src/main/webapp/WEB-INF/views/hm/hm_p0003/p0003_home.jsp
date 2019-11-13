@@ -66,7 +66,7 @@
 				break;
 				
 			case "reload": //초기화
-				mySheet2.RemoveAll();
+				mySheet2.RemoveAll(); 
 				break;
 			case "save": // 저장
 		
