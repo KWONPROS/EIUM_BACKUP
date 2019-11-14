@@ -149,7 +149,7 @@
 .vacation {
 	width: 33.3%;
 	height: 100%;
-	background: #212121; 
+	background: #212121;  
 }
 
 .business {
