@@ -134,7 +134,7 @@
 .notice {
 	width: 50%;
 	height: 100%;
-	background: #212121;
+	background: #212121 ;
 }
 
 .todo {
@@ -149,7 +149,7 @@
 .vacation {
 	width: 33.3%;
 	height: 100%;
-	background: #212121;
+	background: #212121;  
 }
 
 .business {
@@ -203,6 +203,25 @@ left:5%;
 font-size: 15px;
 
 }
+.bottomleft .plusbutton{
+float:right;
+position:relative;
+margin :25px;
+margin-right:35px;
+font-size: 30px;
+font-weight: bold;
+z-index: 100;
+text-decoration: none;
+}
+.bottomleft .notice .plusbutton{
+color: white;
+}
+.bottomleft .todo .plusbutton{
+color: #212121;
+}
+.bottomleft .plusbutton:hover{
+color: #4A4949;
+}
 .squarecontent .number{
 position:relative;
 top:30%;
@@ -211,8 +230,6 @@ font-size: 25px;
 font-weight:bold; 
 }
 .divboard{
-position:relative;
-top:10%;
 width: 90%;
 margin: 5%;
 height:70%;
@@ -255,12 +272,13 @@ border-bottom: 2px solid;
 
 	<div id='bottomleft' class="bottomleft">
 		<div id='notice' class="notice" style="color: white;">
+			<a class="plusbutton" href="doSearch()">+</a>
 			<div class="boardtitle" style="border-bottom-color: white;">Notice</div>
 			<div class="divboard">
 				<table class="boardtable" id="noticetable">
 
-					<tr> 
-					
+					<tr>
+
 						<td class="context">글제목</td>
 						<td class="uploaddate">입력날짜</td>
 					</tr>
@@ -332,7 +350,10 @@ border-bottom: 2px solid;
 
 		</div>
 		<div id='todo' class="todo" style="color: #212121;">
-			<div class="boardtitle" style="border-bottom-color: #212121;">To Do</div>
+			<a class="plusbutton" href="doSearch()">+</a>
+			<div class="boardtitle" style="border-bottom-color: #212121;">To
+				Do</div>
+
 			<div class="divboard">
 				<table class="boardtable" id="noticetable">
 
@@ -344,11 +365,11 @@ border-bottom: 2px solid;
 						<td class="context">글제목</td>
 						<td class="uploaddate">입력날짜</td>
 					</tr>
-					
+
 				</table>
 
 			</div>
-			
+
 		</div>
 	</div>
 
