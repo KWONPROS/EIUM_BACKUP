@@ -32,30 +32,31 @@ public class WM_P0001ServiceImpl implements WM_P0001Service {
 	}	
 
 	@Override
-	public void saveData(Map<String, String[]> dataMap)  throws DataAccessException  {
+	public void saveData(Map<String, String[]> dataMap, String P_EMPLOYEE_CODE)  throws DataAccessException  {
 		String[] status = dataMap.get("STATUS");
-		int length = status.length; // row��
+		int length = status.length; // row수
 		int i = 0;
 		
 		for(String str : status) {
-			Map<String, String> row = getRow(dataMap, length, i); // ���� Index�� Row Map
-			if("I".equals(str)) { // �߰�
+			Map<String, String> row = getRow(dataMap, length, i, P_EMPLOYEE_CODE); 
+			if("I".equals(str)) { // 추가
 				p0001DAO.insertData(row);
-			}else if("U".equals(str)) { // ����
+			}else if("U".equals(str)) { // 수정
 				p0001DAO.updateData(row);
-			}else if("D".equals(str)) { // ����
+			}else if("D".equals(str)) { // 삭제
 				p0001DAO.deleteData(row);
 			}
 			i++;
 		}
 	}
 	
-	private Map<String, String> getRow(Map<String, String[]> dataMap, int length, int index) {
+	private Map<String, String> getRow(Map<String, String[]> dataMap, int length, int index, String P_EMPLOYEE_CODE) {
 		Map<String, String> row = new HashMap<String, String>();
 		for(String name : dataMap.keySet()) {
 			String[] data = dataMap.get(name);
 			if(length == data.length) {
 				row.put(name, data[index]);
+				row.put("P_EMPLOYEE_CODE", P_EMPLOYEE_CODE);
 			}
 		}		
 		return row;

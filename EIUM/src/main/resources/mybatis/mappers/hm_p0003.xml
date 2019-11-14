@@ -16,68 +16,64 @@
          from ADMIN
       ]]>
 	</select>
-	
-	<!-- /////////////////////////////POSITION///////////////////////////////////// -->
-	
-	<resultMap id="POSITION_P0003resultVO" type="HM_P0003VO">
-		<result property="admin_LIST_CODE" column="POSITION_CODE" />
-		<result property="admin_LIST_NAME" column="POSITION_NAME" />
-	</resultMap>
- 
-	
-	<select id="POSITION_searchList" resultMap="POSITION_P0003resultVO" parameterType="java.util.Map"> 
-         select POSITION_CODE,POSITION_NAME         
-         from POSITION
-	</select>
-	
-	<update id="POSITION_updateData" parameterType="java.util.Map">
-		update POSITION
-		set  
-		     POSITION_NAME = #{admin_LIST_NAME}
-		where TRIM(POSITION_CODE) = #{admin_LIST_CODE}
-	</update>	
-	
- <insert id="POSITION_insertData" parameterType="java.util.Map">
-		insert into POSITION(POSITION_CODE,POSITION_NAME) 
-		values(#{admin_LIST_CODE},#{admin_LIST_NAME})
-	</insert>	
-	
-	<delete id="POSITION_deleteData" parameterType="java.util.Map">
-		delete POSITION
-		where TRIM(POSITION_CODE) = #{admin_LIST_CODE}
-	</delete>
-	
-	
-	
-	<!-- /////////////////////////////////PAYMENT_DES/////////////////////////////////////// -->
-	
-	<resultMap id="PAYMENT_DES_P0003resultVO" type="HM_P0003VO">
-		<result property="admin_LIST_CODE" column="PAYMENT_DES_CODE" />
-		<result property="admin_LIST_NAME" column="PAYMENT_DES_NAME" />
-	</resultMap>
- 
-	
-	<select id="PAYMENT_DES_searchList" resultMap="PAYMENT_DES_P0003resultVO" parameterType="java.util.Map"> 
-         select PAYMENT_DES_CODE,PAYMENT_DES_NAME         
-         from PAYMENT_DES
-	</select>
-	
-	<update id="PAYMENT_DES_updateData" parameterType="java.util.Map">
-		update PAYMENT_DES
-		set  
-		     PAYMENT_DES_NAME = #{admin_LIST_NAME}
-		where TRIM(PAYMENT_DES_CODE) = #{admin_LIST_CODE}
-	</update>	
-	
- <insert id="PAYMENT_DES_insertData" parameterType="java.util.Map">
-		insert into PAYMENT_DES(PAYMENT_DES_CODE,PAYMENT_DES_NAME) 
-		values(#{admin_LIST_CODE},#{admin_LIST_NAME})
-	</insert>	
-	
-	<delete id="PAYMENT_DES_deleteData" parameterType="java.util.Map">
-		delete PAYMENT_DES
-		where TRIM(PAYMENT_DES_CODE) = #{admin_LIST_CODE}
-	</delete>
 
+	<resultMap type="map" id="selectMapList">
+		<result column="POSITION_CODE" property="admin_LIST_CODE" />
+		<result column="POSITION_NAME" property="admin_LIST_NAME" />
+		<result column="PAYMENT_DES_CODE" property="admin_LIST_CODE" />
+		<result column="PAYMENT_DES_NAME" property="admin_LIST_NAME" />
+		<result column="BANK_CODE" property="admin_LIST_CODE" />
+		<result column="BANK_NAME" property="admin_LIST_NAME" />
+		<result column="D_CODE_CODE" property="admin_LIST_CODE" />
+		<result column="D_CODE_NAME" property="admin_LIST_NAME" />
+		<result column="WORK_TYPE_CODE" property="admin_LIST_CODE" />
+		<result column="WORK_TYPE_NAME" property="admin_LIST_NAME" />
+		<result column="WORK_GROUP_CODE" property="admin_LIST_CODE" />
+		<result column="WORK_GROUP_NAME" property="admin_LIST_NAME" />
+		<result column="JOB_DIS_CODE" property="admin_LIST_CODE" />
+		<result column="JOB_DIS_NAME" property="admin_LIST_NAME" />
+		<result column="JOB_CLASS_CODE" property="admin_LIST_CODE" />
+		<result column="JOB_CLASS_NAME" property="admin_LIST_NAME" />
+		<result column="DUTY_CODE" property="admin_LIST_CODE" />
+		<result column="DUTY_NAME" property="admin_LIST_NAME" />
+		<result column="FINAL_EDU_CODE" property="admin_LIST_CODE" />
+		<result column="FINAL_EDU_NAME" property="admin_LIST_NAME" />
+		<result column="OUT_REASON_CODE" property="admin_LIST_CODE" />
+		<result column="OUT_REASON_NAME" property="admin_LIST_NAME" />
+
+	</resultMap>
+
+	<select id="searchList2" resultMap="selectMapList"
+		parameterType="java.util.Map">
+
+		select
+		${TABLE_NAME}_CODE,
+		${TABLE_NAME}_NAME
+		from ${TABLE_NAME}
+
+	</select>
+
+
+	<insert id="insertData" parameterType="java.util.Map">
+		insert into
+		${temp_NAME}(${temp_NAME}_CODE,${temp_NAME}_NAME)
+		values(#{admin_LIST_CODE},#{admin_LIST_NAME})
+	</insert>
+
+	<update id="updateData" parameterType="java.util.Map">
+		update ${temp_NAME}
+		set
+		${temp_NAME}_NAME = #{admin_LIST_NAME}
+		where TRIM(${temp_NAME}_CODE) =
+		#{admin_LIST_CODE}
+	</update>
+
+	<delete id="deleteData" parameterType="java.util.Map">
+		delete ${temp_NAME}
+		where
+		TRIM(${temp_NAME}_CODE) = #{admin_LIST_CODE}
+	</delete>
+	
+	
 
 </mapper>

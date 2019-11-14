@@ -42,7 +42,6 @@
 				{Header:"교육시간",Type:"Text",SaveName:"employee_TRAINING_TIME",Hidden:1},			
 				{Header:"대상인원",Type:"Text",SaveName:"employee_TRAINING_PEOPLE", Hidden:1},			
 				{Header:"사내외구분",Type:"Text",SaveName:"employee_TRAINING_IN_OUT" ,Hidden:1,},			
-
 				];
 			IBS_InitSheet(mySheet, initSheet);
 			
@@ -50,7 +49,6 @@
 			/* mySheet.SetSheetHeight(1000); */
 			
 			//탭
-
 		}
 	
 	/*Sheet 각종 처리*/
@@ -74,7 +72,6 @@
 			mySheet.SetCellValue($('input[name=myRow]').val(),11,$('input[name=employee_TRAINING_TIME]').val());
 			mySheet.SetCellValue($('input[name=myRow]').val(),12,$('input[name=employee_TRAINING_PEOPLE]').val());
 			mySheet.SetCellValue($('input[name=myRow]').val(),13,$('select[name=employee_TRAINING_IN_OUT]').val());
-
 			var tempStr = mySheet.GetSaveString();
 			alert("서버로 전달되는 문자열 확인 : " + tempStr);
 			mySheet.DoSave("${contextPath}/hm/p0018/saveData.do");		
@@ -106,9 +103,6 @@ console.log(Row,Col);
 		
 		    sd=mySheet.GetCellValue(Row,4);
 		    ed=mySheet.GetCellValue(Row,5);
-
-
-
 	}
 	}
 	
@@ -159,7 +153,6 @@ console.log(Row,Col);
 </script>
 
 <style type="text/css">
-
 .IBbutton {
 	font-size: 13px;
 	margin-left: 5px;
@@ -172,13 +165,11 @@ console.log(Row,Col);
 .IBbutton:hover {
 	background-color: #2C3E50;
 }
-
 .left{
 position: absolute;
 top: 145px;
 left: 50px;
 }
-
 .rightbuttons {
 	margin-top: 50px;
 	margin: 20px;
@@ -193,7 +184,6 @@ width: 700px;
 background: #EDF0F5;
 border-radius: 10px;
 }
-
 .right table{
 font-size:13px;
 font-weight:bold;
@@ -230,8 +220,6 @@ border-radius: 2px;
 	position: absolute;
 	top: 50px;
 }
-
-
 </style>
 
 </head>
