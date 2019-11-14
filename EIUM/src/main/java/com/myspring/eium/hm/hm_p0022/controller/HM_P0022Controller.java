@@ -29,4 +29,6 @@ public interface HM_P0022Controller {
 
 	ModelAndView home_p03Init(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
+	Map saveData2(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
 }

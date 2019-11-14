@@ -25,4 +25,10 @@ public interface HM_P0022DAO {
 
 	List<HM_P0022VO> homeSearch_p03(Map<String, Object> searchMap) throws DataAccessException;
 
+	void insertData2(Map<String, String> row) throws DataAccessException;
+
+	void updateData2(Map<String, String> row) throws DataAccessException;
+
+	void deleteData2(Map<String, String> row) throws DataAccessException;
+
 }

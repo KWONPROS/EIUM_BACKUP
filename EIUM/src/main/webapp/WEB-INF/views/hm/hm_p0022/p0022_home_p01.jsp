@@ -42,11 +42,8 @@ function mySheet_OnDblClick(Row, Col, Value) {
  	 var Ccode=selectRowJson.hr_APPOINT_INDEX_CODE;
 	 var Cname=selectRowJson.hr_APPOINT_INDEX_NAME;
 
-		 document.getElementById("Ccode").setAttribute('value', Ccode);
-		 document.getElementById("Cname").setAttribute('value', Cname);
-		 opener.document.getElementById("Pcode").value=document.getElementById("Ccode").value;
-		 opener.document.getElementById("Pname").value=document.getElementById("Cname").value;
-		 opener.setAppoint();
+		 
+		 opener.setAppoint(Ccode,Cname);
 
 
 	    

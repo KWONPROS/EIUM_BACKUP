@@ -70,6 +70,26 @@ public class HM_P0022ServiceImpl implements HM_P0022Service{
 		}
 	}
 	
+	@Override
+	public void saveData2(Map<String, String[]> dataMap) throws DataAccessException {
+		String[] status = dataMap.get("Status");
+		int length = status.length; // row수
+		int i = 0;
+		
+		for(String str : status) {
+			Map<String, String> row = getRow(dataMap, length, i); // 현재 Index의 Row Map
+			if("I".equals(str)) { // 추가
+				hM_P0022DAO.insertData2(row);
+			}else if("U".equals(str)) { // 수정
+				hM_P0022DAO.updateData2(row);
+			}else if("D".equals(str)) { // 삭제
+				hM_P0022DAO.deleteData2(row);
+			}
+			i++;
+		}
+	}
+	
+	
 	private Map getRow(Map<String, String[]> dataMap, int length, int index) {
 		Map<String, String> row = new HashMap<String, String>();
 		for(String name : dataMap.keySet()) {
