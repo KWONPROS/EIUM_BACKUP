@@ -191,7 +191,6 @@ $(document).ready(function(){
 	var obj = tabMenu.findTabId(leftMenu.GetCellValue(r,"menuCode"));
 	//없으면 undefined가 리턴됨.
 
-	
 	if(obj){
 		tabMenu.goToTab(obj.getIndex());
 		return;
