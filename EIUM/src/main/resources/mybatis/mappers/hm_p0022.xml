@@ -121,30 +121,39 @@
 
 
 	<insert id="insertData" parameterType="java.util.Map">
-	insert into DEPARTMENT(DEPARTMENT_CODE,DEPARTMENT_NAME,DEPARTMENT_TERM,SITE_CODE,SECTOR_CODE)
-	values(#{department_CODE}, #{department_NAME}, #{department_TERM},#{site_CODE},#{sector_CODE})
+	insert into HR_APPOINT(HR_APPOINT_NUMBER,HR_APPOINT_TITLE,HR_APPOINT_INDEX_CODE,HR_APPOINT_DATE,HR_APPOINT_MASTER_CODE,HR_APPOINT_CODE)
+	values(#{hr_APPOINT_NUMBER}, #{hr_APPOINT_TITLE}, #{hr_APPOINT_INDEX_CODE},#{hr_APPOINT_DATE},#{hr_APPOINT_MASTER_CODE},HR_APPOINT_CODE_SEQ.NEXTVAL)
 	</insert>	
 	
 	
 
 	<update id="updateData" parameterType="java.util.Map">
-		update DEPARTMENT
-		set DEPARTMENT_CODE=#{department_CODE}
-		   , DEPARTMENT_NAME=#{department_NAME}
-		   , SECTOR_CODE=#{sector_CODE}
-		   , DEPARTMENT_TERM=#{department_TERM}
-		   , SITE_CODE=#{site_CODE}
-
-		where DEPARTMENT_CODE = #{department_CODE}
+		update HR_APPOINT
+		set  HR_APPOINT_TITLE=#{hr_APPOINT_TITLE}
+		   , HR_APPOINT_DATE=#{hr_APPOINT_DATE}
+		   , HR_APPOINT_MASTER_CODE=#{hr_APPOINT_MASTER_CODE}
+		where HR_APPOINT_NUMBER = #{hr_APPOINT_NUMBER}
 	</update>	
 	
 	
 	<delete id="deleteData" parameterType="java.util.Map">
-		delete DEPARTMENT
-		where DEPARTMENT_CODE = #{department_CODE}
-			
+		delete HR_APPOINT
+		where HR_APPOINT_NUMBER = #{hr_APPOINT_NUMBER}
 	</delete>	
 	
+	
+		<insert id="insertData2" parameterType="java.util.Map">
+	insert into HR_APPOINT(EMPLOYEE_CODE)
+	values(#{employee_code})
+	</insert>	
+	
+	
+	
+	
+	<delete id="deleteData2" parameterType="java.util.Map">
+		delete HR_APPOINT
+		where EMPLOYEE_CODE = #{employee_code}
+	</delete>	
 	
 	
 	

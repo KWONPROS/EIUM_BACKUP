@@ -100,9 +100,9 @@ function LoadPage(){
 	initSheet.Cfg={SearchMode:smLazyLoad,ToolTip:1};
 	initSheet.HeaderMode = {Sort:1,ColMove:1,ColResize:1,HeaderCheck:1};
 	initSheet.Cols=[
-		{Header:"상태",Type:"Status",SaveName:"Status", Align:"Center"},
-		{Header:"",Type:"CheckBox",Width:70,SaveName:"CheckBox",Align:"Center"},
 		{Header:"NO",Type:"Seq",Width:70,SaveName:"seq",Align:"Center"},
+		{Header:"",Type:"CheckBox",Width:70,SaveName:"CheckBox",Align:"Center"},
+		{Header:"상태",Type:"Status",SaveName:"Status", Align:"Center",Hidden:1},
 		{Header:"사원코드",Type:"Text",Width:70,SaveName:"employee_CODE",Align:"Center"},
 		{Header:"사원명",Type:"Text",Width:70,SaveName:"employee_NAME",Align:"Center"},
 		{Header:"부서명",Type:"Text",Width:70,SaveName:"department_NAME",Align:"Center",Hidden:1},
@@ -117,23 +117,10 @@ function LoadPage(){
 
 
 
-/* function mySheet_OnClick(Row,Col,Value){
-	 var selectRowJson = mySheet.GetRowData(Row);
-
-	 
-	 if (selectRowJson.CheckBox == '1'){
-	
-	var rowData=mySheet.GetRowData(Row);
-	 
-	 window.opener.set_p03value(rowData);
-	 
-
-		return false; //창을 닫는 경우에는 false를 리턴해 줘야 함. }
-	 } */
 	
 	
 	 function CheckedRowDataSend(){
-		var x = function mySheet_OnChange(){
+	
 		var checkRow = mySheet.FindCheckedRow("CheckBox");
 		var checkedRowNumber = checkRow.split('|');
 		var rowData = new Array();
@@ -142,16 +129,12 @@ function LoadPage(){
 		for(i=0; i<checkedRowNumber.length; i++){
 			var selectRowJson=mySheet.GetRowData(checkedRowNumber[i]);
 			rowData.push(selectRowJson);
-		
 		}
-		}
-			
+		}	
 		 window.opener.popupValue(rowData);
 		}
-		
-		x();
+
 	 
-	 }
 	
 	 
  
@@ -173,7 +156,7 @@ function doAction(sAction) {
 		mySheet.RemoveAll();
 		break;
 		
-	case "send": //초기화
+	case "send": //적용
 		CheckedRowDataSend();
 		window.close();
 	    
@@ -198,16 +181,13 @@ function doAction(sAction) {
 	</div>
 	
 <form name="frm">
-사원명<input type="text" id="E_id">
-조회조건<select></select>
-부서<select></select>
-입사일자 <input type="text">~<input type="text">
+사원명<input type="text" id="E_id"  onKeypress="if(event.keyCode==13) {doAction('search'); return false;}">
 </form>
 	
     <div class="rightbuttons">
 	  <a href="javascript:doAction('reload')"  class="IBbutton">초기화</a>
 	  <a href="javascript:doAction('search')"  class="IBbutton">조회</a>
-	   <a href="javascript:doAction('send')"  class="IBbutton">적용</a>
+	  <a href="javascript:doAction('send')"  class="IBbutton">적용</a>
 	</div>
 
 	

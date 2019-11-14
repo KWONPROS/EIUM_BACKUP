@@ -3,6 +3,10 @@
 	"http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+	<settings>
+ 	  <setting name="jdbcTypeForNull" value="VARCHAR" />
+	</settings>
+	
 	<typeAliases>
 	
 				<!-- common -->
@@ -48,4 +52,6 @@
 				<typeAlias type="com.myspring.eium.wm.wm_p0005.vo.WM_P0005VO" alias="WM_P0005VO" />
 				
 	</typeAliases>
+	
+
 </configuration>

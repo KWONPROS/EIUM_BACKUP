@@ -122,13 +122,10 @@ border-radius: 2px;
 	}
 	
 	
-	function setAppoint(){
-		
-		 Pname=document.getElementById("Pname").value;
-		 Pcode=document.getElementById("Pcode").value;
-		mySheet.SetCellText(row,col,Pname);
-		mySheet.SetCellText(row,col-1,Pcode);
-	
+	function setAppoint(Pcode,Pname){
+
+	mySheet.SetCellValue(mySheet.GetSelectRow(),5,Pcode);
+	mySheet.SetCellValue(mySheet.GetSelectRow(),6,Pname);
 		
 	};
 
@@ -154,8 +151,8 @@ border-radius: 2px;
 				{Header:"발령자이름",Type:"Text",SaveName:"employee_NAME",Align:"Center",Hidden:1},
 				{Header:"발신사업장",Type:"Text",SaveName:"site_NAME",Align:"Center",Hidden:1},
 				{Header:"발신부서",Type:"Text",SaveName:"department_NAME",Align:"Center",Hidden:1},
-			
-
+				{Header:"인사발령고유번호",Type:"Text",SaveName:"HR_APPOINT_CODE",Align:"Center",Hidden:1},
+				
 				];
 			IBS_InitSheet(mySheet, initSheet);
 			mySheet.SetEditableColorDiff(1); //편집불가능한 셀 표시 구분
@@ -172,7 +169,7 @@ border-radius: 2px;
 			initSheet2.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:3}
 			initSheet2.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 			initSheet2.Cols = [
-					{Header:"상태",Type:"Status",SaveName:"STATUS", Align:"Center"},
+					{Header:"상태",Type:"Status",SaveName:"Status", Align:"Center"},
 					{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK"},
 					{Header:"사원코드",Type:"Popup",SaveName:"employee_CODE",Align:"Center",Width:100},
 					{Header:"사원명",Type:"Text",SaveName:"employee_NAME",Align:"Center",InsertEdit:0,Width:100},			
@@ -213,7 +210,7 @@ border-radius: 2px;
 		mySheet.SetCellValue($('input[name=myRow]').val(),11,$('input[name=department_NAME]').val());
 
 		mySheet.DoSave("${contextPath}/hm/p0022/saveData.do")
-
+		mySheet2.DoSave("${contextPath}/hm/p0022/saveData2.do")
 		break;
 			
 	case "insert1":
