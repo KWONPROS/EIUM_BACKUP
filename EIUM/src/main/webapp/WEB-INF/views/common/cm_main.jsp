@@ -11,14 +11,18 @@
 <script src='${contextPath}/resources/fullcalendar/interaction/main.js'></script>
 <script src='${contextPath}/resources/fullcalendar/daygrid/main.js'></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
 
 <script>
 
 
-
-   document.addEventListener('DOMContentLoaded', function() {
+ //달력
+   document.addEventListener('DOMContentLoaded', function() {  
     
 	  var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -58,27 +62,7 @@
           start: '2019-08-11',
           end: '2019-08-13'
         },
-        {
-          title: 'Meeting',
-          start: '2019-08-12T10:30:00',
-          end: '2019-08-12T12:30:00'
-        },
-        {
-          title: 'Lunch',
-          start: '2019-08-12T12:00:00'
-        },
-        {
-          title: 'Meeting',
-          start: '2019-08-12T14:30:00'
-        },
-        {
-          title: 'Happy Hour',
-          start: '2019-08-12T17:30:00'
-        },
-        {
-          title: 'Dinner',
-          start: '2019-08-12T20:00:00'
-        },
+        
         {
           title: 'Birthday Party',
           start: '2019-08-13T07:00:00'
@@ -95,10 +79,105 @@
     });
 
     calendar.render();
-  }); 
+    
+    
 
-   
+	// 현재인원 그래프
+		Highcharts.chart('circlegraph', {
+			chart : {
+				plotBackgroundColor : null,
+				plotBorderWidth : null,
+				plotShadow : false,
+				type : 'pie'
+			},
+			title : {
+				text : '현재 인원',
+				style : {
+					color : '#111820',
+					fontFamily : 'san-serif',
+					fontWeight : 'bold',
+					fontSize : '21px'
+				}
+			},
 
+			plotOptions : {
+				pie : {
+					allowPointSelect : true,
+					cursor : 'pointer',
+					colors : pieColors,
+					dataLabels : {
+						enabled : false,
+					},
+					showInLegend : {
+						enabled : true
+					}
+
+				}
+
+			},
+			series : [ {
+				name : '인원',
+				colorByPoint : true,
+				data : [ {
+					name : '출근',
+					y : 45
+				}, {
+					name : '휴가',
+					y : 5
+				}, {
+					name : '병가',
+					y : 1
+				}, {
+					name : '출장',
+					y : 3
+				}, {
+					name : '기타',
+					y : 4
+				}, ]
+			}, {
+				name : '인원',
+				colors : [ '#FFFFFF' ],
+				size : '50%',
+				center : [ '50%', '50%' ],
+				dataLabels : {
+					enabled : true,
+					style : {
+						textOutline : false,
+						textShadow : false,
+				 		fontWeight : 'bold',
+						fontFamily : 'san-serif',
+						fontSize : '25px'
+					},
+					distance : -65,
+					format : '{point.y}'
+				},
+				showInLegend : false,
+				data : [ [ '전체', 58 ] ]
+			} ]
+		});
+
+	
+		
+	
+	
+	});
+	//컬러 fnction
+	var pieColors = (function() {
+		var colors = [], base = Highcharts.getOptions().colors[0], i;
+
+		for (i = 0; i < 10; i += 1) {
+			// Start out with a darkened base color (negative brighten), and end
+			// up with a much brighter color
+			colors.push(Highcharts.Color(base).brighten((i - 3) / 7).get());
+		}
+		return colors;
+	}());
+	
+	function createTab(r,c,v){
+		parent.leftMenu_OnClick(r,c,v);
+	}
+	
+	
 </script>
 <style>
 #calendar {
@@ -106,15 +185,15 @@
 	max-width: 700px;
 	font-size: 12px;
 }
-
 .topright {
-	width: 800px;
-	height: 420px;
+	width: 700px;
+	height: 370px;
+	margin:25px;
+	margin-left:50px;
 	position: relative;
 	left: 780px;
 	top: -400px;
 }
-
 .bottomleft {
 	width: 750px;
 	height: 390px;
@@ -122,21 +201,21 @@
 	left: 10px;
 	top: -390px;
 }
-
 .bottomright {
 	width: 800px;
 	height: 360px;
 	position: relative;
 	left: 780px;
-	top: -750px;
+	top: -770px;
 }
-
 .notice {
+	position: relative;
+	top: 0%;
+	left: 0%;
 	width: 50%;
 	height: 100%;
 	background: #212121 ;
 }
-
 .todo {
 	width: 50%;
 	height: 100%;
@@ -145,37 +224,38 @@
 	top: -100%;
 	left: 50%;
 }
-
 .vacation {
+position: relative;
+	top: 0%;
+	left: 0%;
 	width: 33.3%;
 	height: 100%;
-	background: #212121;  
+	background: #111820 ;  
+	
 }
-
 .business {
 	width: 33.3%;
 	height: 100%;
-	background: #D4D4D4;
+	background: #2C3E50;
 	position: relative;
 	top: -100%;
 	left: 33.3%;
-}
 
+}
 .events {
 	width: 33.3%;
 	height: 100%;
-	background: #EBEBEB;
+	background: #e9ebed;
 	position: relative;
 	top: -200%;
 	left: 66%;
-}
 
+}
 .circlegraph {
 	width: 40%;
 	height: 100%;
 	background: #212121;
 }
-
 .squaregraph {
 	padding:3%;
 	width: 60%;
@@ -184,42 +264,40 @@
 	top: -100%;
 	left: 40%;
 }
-
 .squarecontent{
 color:white;
 margin:5px;
  width: 100px;
  height:100px;
- background: #212121;
+ background: #111820;
  float: left;
 }
 .squarecontent:hover{
- background: #4A4949;
+ background: #233140;
 }
 .squarecontent .teamname{
 position:relative;
 top:5%;
 left:5%;
 font-size: 15px;
-
 }
-.bottomleft .plusbutton{
-float:right;
-position:relative;
-margin :25px;
-margin-right:35px;
+ .plusbutton{
+position:absolute;
+top:2%;
+right:10%;
 font-size: 30px;
 font-weight: bold;
-z-index: 100;
+z-index:100;
 text-decoration: none;
 }
-.bottomleft .notice .plusbutton{
+
+ .notice .plusbutton,.vacation .plusbutton,.business .plusbutton {
 color: white;
 }
-.bottomleft .todo .plusbutton{
+.todo .plusbutton,.events .plusbutton{
 color: #212121;
 }
-.bottomleft .plusbutton:hover{
+ .plusbutton:hover{
 color: #4A4949;
 }
 .squarecontent .number{
@@ -231,8 +309,8 @@ font-weight:bold;
 }
 .divboard{
 width: 90%;
-margin: 5%;
-height:70%;
+margin: 10% 5% 5% 5%;
+height:80%;
 display: block;
 overflow-y: auto;
 }
@@ -242,34 +320,108 @@ font-size: 13px;
 }
 .boardtitle{
 position:relative;
-top:10%;
+top:5%;
 left:10%;
 width:80%;
 font-size: 20px;
 font-weight: bold;
 border-bottom: 2px solid;
 }
-.boardtable .uploaddate{
-	text-align: right;
+.boardtable td{
+padding-top: 5px;
 }
-.bottomleft ::-webkit-scrollbar {width: 12px; height: 12px;  }
-.bottomleft ::-webkit-scrollbar-button:start:decrement, 
-.bottomleft ::-webkit-scrollbar-button:end:increment {display: block; width: 12px;height: 12px; background: url() rgba(0,0,0,.05);}
-.bottomleft ::-webkit-scrollbar-track {     background: rgba(0,0,0,.05); }
-.bottomleft ::-webkit-scrollbar-thumb {  background: rgba(0,0,0,.1);  }
+.boardtable td:last-child,.boardtable td:nth-child(2) {
+	text-align: right;
+	font-size:10px;
+}
+body ::-webkit-scrollbar {width: 12px; height: 12px;  }
+body ::-webkit-scrollbar-button:start:decrement, 
+body ::-webkit-scrollbar-button:end:increment {display: block; width: 12px;height: 12px; background: url() rgba(0,0,0,.05);}
+body ::-webkit-scrollbar-track {     background: rgba(0,0,0,.05); }
+body ::-webkit-scrollbar-thumb {  background: rgba(0,0,0,.1);  }
 
 </style>
 </head>
 <body>
-
+ 	 <jsp:include page="cm_main_p01.jsp" /> 
 	<div id='calendar' class="calendar"></div>
 
 	<div id='topright' class="topright">
-		<div id='vacation' class="vacation"></div>
-		<div id='business' class="business"></div>
-		<div id='events' class="events"></div>
-	</div>
+		<div id='vacation' class="vacation" style="color: white;">
+			<a class="plusbutton" href="javascript:createTab(36,0,'휴가관리');">+</a>
+			<div class="boardtitle" style="border-bottom-color: white;">휴가</div>
+			<div class="divboard">
+				<table class="boardtable" id="noticetable">
 
+					<tr>
+						<td class="context">송재원</td>
+						<td class="reason">휴가</td>
+						<td class="uploaddate">YYYY.MM.DD <br> YYYY.MM.DD
+						</td>
+					</tr>
+					<tr>
+						<td class="context">송재원</td>
+						<td class="reason">병가</td>
+						<td class="uploaddate">YYYY.MM.DD <br> YYYY.MM.DD
+						</td>
+					</tr>
+
+
+				</table>
+
+			</div>
+
+
+		</div>
+		<div id='business' class="business" style="color: white;">
+			<a class="plusbutton" href="javascript:createTab(38,0,'출장관리');">+</a>
+			<div class="boardtitle" style="border-bottom-color: white;">출장</div>
+			<div class="divboard">
+				<table class="boardtable" id="noticetable">
+
+					<tr>
+						<td class="context">이현세</td>
+						<td class="reason">미국출장</td>
+						<td class="uploaddate">YYYY.MM.DD <br> YYYY.MM.DD</td>
+					</tr>
+					<tr>
+						<td class="context">글제목</td>
+						<td class="uploaddate">입력날짜</td>
+					</tr>
+
+				</table>
+
+			</div>
+			
+			
+		</div>
+		<div id='events' class="events" style="color: #111820;">
+			<a class="plusbutton" href="doSearch()">+</a>
+			<div class="boardtitle" style="border-bottom-color: #111820;">경조사</div>
+			<div class="divboard">
+				<table class="boardtable" id="noticetable">
+
+					<tr>
+						<td class="context">박정렬</td>
+						<td class="reason">생일</td>
+						<td class="uploaddate">YYYY.MM.DD</td>
+					</tr>
+					<tr>
+						<td class="context">박정렬</td>
+						<td class="reason">생일</td>
+						<td class="uploaddate">YYYY.MM.DD</td>
+					</tr>
+					<tr>
+						<td class="context">글제목</td>
+						<td class="uploaddate">입력날짜</td>
+					</tr>
+
+				</table>
+
+			</div>
+			
+		</div>
+	</div>
 	<div id='bottomleft' class="bottomleft">
 		<div id='notice' class="notice" style="color: white;">
 			<a class="plusbutton" href="doSearch()">+</a>
@@ -278,70 +430,26 @@ border-bottom: 2px solid;
 				<table class="boardtable" id="noticetable">
 
 					<tr>
-
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
+						<td class="context">2019년 11월 정기발령 공고</td>
+						<td class="uploaddate">YYYY.MM.DD</td>
 					</tr>
 					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
+						<td class="context">2019년 10월 정기발령 공고</td>
+						<td class="uploaddate">YYYY.MM.DD</td>
 					</tr>
 					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
+						<td class="context">2019년 9월 정기발령 공고</td>
+						<td class="uploaddate">YYYY.MM.DD</td>
 					</tr>
 					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
+						<td class="context">2019년 8월 정기발령 공고</td>
+						<td class="uploaddate">YYYY.MM.DD</td>
 					</tr>
 					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
+						<td class="context">2019년 7월 정기발령 공고</td>
+						<td class="uploaddate">YYYY.MM.DD</td>
 					</tr>
-					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
-					</tr>
-					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
-					</tr>
-					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
-					</tr>
-					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
-					</tr>
-					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
-					</tr>
-					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
-					</tr>
-					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
-					</tr>
-					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
-					</tr>
-					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
-					</tr>
-					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
-					</tr>
-					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
-					</tr>
+					
 				</table>
 
 			</div>
@@ -358,12 +466,12 @@ border-bottom: 2px solid;
 				<table class="boardtable" id="noticetable">
 
 					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
+						<td class="context">사무용품 주문</td>
+						<td class="uploaddate">YYYY.MM.DD</td>
 					</tr>
 					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
+						<td class="context">출장 승인</td>
+						<td class="uploaddate">YYYY.MM.DD</td>
 					</tr>
 
 				</table>
@@ -375,58 +483,58 @@ border-bottom: 2px solid;
 
 	<div id='bottomright' class="bottomright">
 		<div id='circlegraph' class="circlegraph">
-		
-	
-		
+
 		</div>
 		<div id='squaregraph' class="squaregraph">
 
 			<div id='squarecontent' class="squarecontent">
-				<span class="teamname">인사
+				<span class="teamname">인사<br>
 				 </span>
-				<span class="number">00/20
-				 </span>
-			</div>
-			<div id='squarecontent' class="squarecontent">
-				<span class="teamname">재무
-				 </span>
-				<span class="number">00/20
+				<span class="number">4/5
 				 </span>
 			</div>
 			<div id='squarecontent' class="squarecontent">
-				<span class="teamname">영업
+				<span class="teamname">재무<br>
 				 </span>
-				<span class="number">00/20
-				 </span>
-			</div>
-			<div id='squarecontent' class="squarecontent">
-				<span class="teamname">마케팅
-				 </span>
-				<span class="number">00/20
+				<span class="number">12/13
 				 </span>
 			</div>
 			<div id='squarecontent' class="squarecontent">
-				<span class="teamname">총무
+				<span class="teamname">영업<br>
 				 </span>
-				<span class="number">00/20
-				 </span>
-			</div>
-			<div id='squarecontent' class="squarecontent">
-				<span class="teamname">제조
-				 </span>
-				<span class="number">00/20
+				<span class="number">20/23
 				 </span>
 			</div>
 			<div id='squarecontent' class="squarecontent">
-				<span class="teamname">기타
+				<span class="teamname">마케팅<br>
 				 </span>
-				<span class="number">00/20
+				<span class="number">5/6
 				 </span>
 			</div>
+			<div id='squarecontent' class="squarecontent">
+				<span class="teamname">총무<br>
+				 </span>
+				<span class="number">3/3
+				 </span>
+			</div>
+			<div id='squarecontent' class="squarecontent">
+				<span class="teamname">제조<br>
+				 </span>
+				<span class="number">46/51
+				 </span>
+			</div>
+			<div id='squarecontent' class="squarecontent">
+				<span class="teamname">기타<br>
+				 </span>
+				<span class="number">3/3
+				 </span>
+			</div>
+			
 
 		</div>
 		 
+		 	 
 	</div>
-
+	
 </body>
 </html>

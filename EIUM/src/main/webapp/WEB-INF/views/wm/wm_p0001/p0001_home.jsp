@@ -55,7 +55,7 @@
 		IBS_InitSheet( mySheet , initSheet);
   
 		mySheet.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
-		mySheet.SetSheetHeight(200);
+		mySheet.SetSheetHeight(300);
 		
 		//아이비시트2------------------------------------------------------
 		mySheet2.RemoveAll();
@@ -74,13 +74,22 @@
 			{Header:"temp_시간",Type:"Date",SaveName:"temp_TIME",MinWidth:100, Align:"Center", Format: "00:00", DefaultValue :"0000", Hidden:1},
 			{Header:"근무총시간",Type:"Date",SaveName:"working_STATUS_TOTAL_TIME",MinWidth:50, Align:"Center", Format: "HH:mm", CalcLogic:"|7|+|8|-|6|", Hidden:1},
 			{Header:"퇴근-출근시간",Type:"Date",SaveName:"working_STATUS_TOTAL_TIME_CALC",MinWidth:50, Align:"Center",Format:"HH:mm", CalcLogic:"|7|+|8|-|6|"},
-			{Header:"비고",Type:"Combo",SaveName:"working_STATUS_DESC",MinWidth:120, Align:"Center", "ComboText":"평일정상근무시간|평일연장근무시간|평일야간근무시간|휴일정상근무시간|휴일연장근무시간|휴일야간근무시간", "ComboCode":"평일정상근무시간|평일연장근무시간|평일야간근무시간|휴일정상근무시간|휴일연장근무시간|휴일야간근무시간", "UpdateEdit":0}
+			{Header:"비고",Type:"Combo",SaveName:"working_STATUS_DESC",MinWidth:120, Align:"Center", "ComboText":"평일정상근무시간|평일연장근무시간|평일야간근무시간|휴일정상근무시간|휴일연장근무시간|휴일야간근무시간", "ComboCode":"00|01|02|03|04|05"},
+			//평일(table)
+			{Header:"평일정상근무시간",Type:"Text",SaveName:"weekday_NORMAL_WORK_TIME", Width:50, Align:"Center"},	
+			{Header:"평일연장근무시간",Type:"Text",SaveName:"weekday_EXTENSION_WORK_TIME", Width:50, Align:"Center"},			
+			{Header:"평일야간근무시간",Type:"Text",SaveName:"weekday_NIGHT_WORK_TIME", Width:50, Align:"Center"},
+			
+			//휴일(table)
+			{Header:"휴일정상근무시간",Type:"Text",SaveName:"holiday_NORMAL_WORK_TIME", Width:50, Align:"Center"},	
+			{Header:"휴일연장근무시간",Type:"Text",SaveName:"holiday_EXTENSION_WORK_TIME", Width:50, Align:"Center"},			
+			{Header:"휴일야간근무시간",Type:"Text",SaveName:"holiday_NIGHT_WORK_TIME", Width:50, Align:"Center"}
 		];
 		
 		IBS_InitSheet( mySheet2 , initSheet2);
 		
 		mySheet2.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
-		mySheet2.SetSheetHeight(200);
+		mySheet2.SetSheetHeight(300);
 		/* GetDataLastRow() == mySheet3.GetSelectRow() */
 		/* var info = [{StdCol:1 , SumCols:"0|1"}]; 
 		mySheet.ShowSubSum (info);  */
@@ -111,9 +120,14 @@
 		
 		IBS_InitSheet(mySheet3, initSheet3);
 		mySheet3.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
-		mySheet3.SetSheetHeight(71);
+		mySheet3.SetAutoRowHeight(0);
+		mySheet3.SetSheetHeight(75);
+		mySheet3.SetDataRowHeight(34); //데이터 row의 높이 조절
+		mySheet3.SetHeaderRowHeight(37);  //헤더 행의 높이 조절 
+		/* mySheet3.SetSelectionMode(1); */
 		
-		mySheet3.SetSelectionMode(1);
+
+		mySheet3.SetRowHeight(1, 80); 
 		mySheet3.SetColEditable(2,0);
 		mySheet3.SetColEditable(3,0);
 		mySheet3.SetColEditable(4,0);
@@ -126,6 +140,8 @@
 		mySheet3.SetColEditable(9,0);
 		mySheet3.SetColEditable(10,0);
 		mySheet3.SetColEditable(11,0);
+		
+		
 		
 		
 		mySheet.DoSearch("${contextPath}/wm/p0001/EMP_searchList.do");
@@ -155,9 +171,9 @@
 			break;
 		case "insert":
 			var row = mySheet2.DataInsert(-1);
-			/* mySheet2.SaveNameCol("temp_TIME") */mySheet2.GetSelectRow()
+			/* mySheet2.SaveNameCol("temp_TIME") */ //mySheet2.GetSelectRow()
 			/* alert(mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("temp_TIME"), 0000)); */
-			alert(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("temp_TIME")));
+			/* alert(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("temp_TIME"))); */ //0000
 			break;
 			
 		case "deadline": //마감
@@ -168,12 +184,54 @@
 			/* mySheet3.SetSheetHeight(50);
 			alert(mySheet3.GetSheetHeight()); */
 			/* mySheet3.SetDataRowHeight(39); */
-			mySheet3.DeferredHScroll(3);
-			
+			/* if(mySheet2.) */
+			var Sum3 = mySheet2.ComputeSum("|11|"); // 비고 입력창의 총 합계
+			alert(Sum3); 
+			var temp_count = "근태코드";
+			var count_array = new Array();
+			for(var j=0;j<6;j++){ //배열 초기화
+			    count_array[j]=0;
+			}
+			for(let i =1; i <= mySheet2.GetDataLastRow(); i++){
+				temp_count = mySheet2.GetCellValue(i,mySheet2.SaveNameCol("working_STATUS_DESC"));
+				alert(temp_count);
+				switch(temp_count){
+					case '00':
+						count_array[0]++;
+					break;
+					
+					case '01':
+						count_array[1]++;
+					break;
+					
+					case '02':
+						count_array[2]++;
+					break;
+					
+					case '03':
+						count_array[3]++;
+					break;
+					
+					case '04':
+						count_array[4]++;
+					break;
+					
+					case '05':
+						count_array[5]++;
+					break;
+				}
+			} 
+			for(j=0; j<6; j++){
+				alert("@@@@@"+count_array[j]);
+			} 
 			break;
 		}
 	}
 
+	//출근일자나 비고 로 combobox 클릭시
+	function mySheet2_OnChange(Row, Col){
+		
+	}
 	//로우 클릭시
 	function mySheet_OnClick(Row, Col) {
 		if (Row != 0) {
@@ -200,6 +258,25 @@
 			//mySheet.ReNumberSeq();
 		}
 	}
+	
+		//Formating
+	   $(document).ready(function () {
+		 //근무시간 
+		   $(function () { 
+		         $('.WORK_TIME').keydown(function (event) {
+		        var key = event.charCode || event.keyCode || 0;
+		        $text = $(this);
+		        if (key !== 8 && key !== 9) {
+		        	if ($text.val().length === 3) {
+                        $text.val($text.val() + ':');
+                    }
+		        }
+		        return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
+		    })
+		   }); 
+		 
+		      
+		});//document.ready
 </script>
 <style type="text/css">
 
@@ -258,19 +335,47 @@
 	left: 30px;
 	width: 1053px;
 }
-
-.right{
+.center{
 	position: relative;
-	top: -90px;
-	left: 470px;
-	width: 750px;
+	top: -190px;
+	left: 460px;
+	width: 670px;
 }
+.right_end{
+position: relative;
+top: -495px;
+left: 1150px;
+width: 350px;
+background: #EDF0F5;
+border-radius: 10px;
+}
+.right_end table{
+font-size:13px;
+font-weight:bold;
+padding: 20px;
+}
+.right_end table tr td:nth-child(1){
+text-align:right;
+}
+.right_end table tr td:nth-child(2){
+width: 20px;
+height: 25px;
+}
+
+.right_end table tr td:nth-child(3) input{
+width: 130px;
+height: 20px;
+padding-left: 10px;
+margin-right:10px;
+box-sizing: border-box;
+border: 1px solid #CCCCCC;
+border-radius: 2px;
+} 
 
 .bottom{
 position: relative;
-top:  -60px;
+top:  -300px;
 left: 30px;
-border: 6px;
 }
 
 #searchBar {
@@ -361,12 +466,66 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 		<script>createIBSheet("mySheet", "100%", "100%");</script>
 	</div>
 	
-	<div class="right">
+	<div class="center">
 		<script>createIBSheet("mySheet2", "100%", "100%");</script>
 	</div>
 	
+	<div class="right_end">
+		<table>
+			<tr>
+				<td>평일정상근무시간</td>
+				<td><input type="hidden" name="myRow"></td>
+				<td><input type="text" name="weekday_NORMAL_WORK_TIME" maxlength="6" class="WORK_TIME"  placeholder="___:__" >시간</td>
+			</tr>
+			<tr>
+				<td>평일연장근무시간</td>
+				<td></td>
+				<td><input type="text" name="weekday_EXTENSION_WORK_TIME" maxlength="6" class="WORK_TIME"  placeholder="___:__" >시간</td>
+			</tr>
+			<tr>
+				<td>평일야간근무시간</td>
+				<td></td>
+				<td><input type="text" name="weekday_NIGHT_WORK_TIME" maxlength="6" class="WORK_TIME"  placeholder="___:__" >시간</td>
+			</tr>
+			<tr>
+				<td>휴일정상근무시간</td>
+				<td></td>
+				<td><input type="text" name="holiday_NORMAL_WORK_TIME" maxlength="6" class="WORK_TIME"  placeholder="___:__" >시간</td>
+			</tr>
+			<tr>
+				<td>휴일연장근무시간</td>
+				<td></td>
+				<td><input type="text" name="holiday_EXTENSION_WORK_TIME" maxlength="6" class="WORK_TIME" placeholder="___:__" >시간</td>
+			</tr>
+			<tr>
+				<td>휴일야간근무시간</td>
+				<td></td>
+				<td><input type="text" name="holiday_NIGHT_WORK_TIME" maxlength="6" class="WORK_TIME" placeholder="___:__" >시간</td>
+			</tr>
+			<!-- <tr>
+				<td>평일</td>
+				<td></td>
+				<td><input type="text" name="weekday" maxlength="2" class="WORK_TIME" placeholder="__" >일</td>
+			</tr>
+			<tr>
+				<td>휴일</td>
+				<td></td>
+				<td><input type="text" name="holiday" maxlength="2" class="WORK_TIME" placeholder="__" >일</td>
+			</tr>
+			<tr>
+				<td>총정상근무일</td>
+				<td></td>
+				<td><input type="text" name="normal_WORK_DAY" maxlength="2" class="WORK_TIME" placeholder="__" >일</td>
+			</tr>
+			<tr>
+				<td>총연장근무일</td>
+				<td></td>
+				<td><input type="text" name="extension_WORK_DAY" maxlength="2" class="WORK_TIME" placeholder="__" >일</td>
+			</tr> -->
+		</table>
+	</div>
 	<div class="bottom">
-		<script>createIBSheet("mySheet3", "100%", "200px");</script>
+		<script>createIBSheet("mySheet3", "100%", "100%");</script>
 	</div>
 
 </body>
