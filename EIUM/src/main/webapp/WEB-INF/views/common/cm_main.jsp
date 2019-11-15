@@ -12,6 +12,12 @@
 <script src='${contextPath}/resources/fullcalendar/daygrid/main.js'></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
 <script>
 
 
@@ -321,8 +327,12 @@ font-size: 20px;
 font-weight: bold;
 border-bottom: 2px solid;
 }
-.boardtable td:nth-child(2){
+.boardtable td{
+padding-top: 5px;
+}
+.boardtable td:last-child,.boardtable td:nth-child(2) {
 	text-align: right;
+	font-size:10px;
 }
 body ::-webkit-scrollbar {width: 12px; height: 12px;  }
 body ::-webkit-scrollbar-button:start:decrement, 
@@ -333,7 +343,7 @@ body ::-webkit-scrollbar-thumb {  background: rgba(0,0,0,.1);  }
 </style>
 </head>
 <body>
-
+ 	 <jsp:include page="cm_main_p01.jsp" /> 
 	<div id='calendar' class="calendar"></div>
 
 	<div id='topright' class="topright">
@@ -344,13 +354,18 @@ body ::-webkit-scrollbar-thumb {  background: rgba(0,0,0,.1);  }
 				<table class="boardtable" id="noticetable">
 
 					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
+						<td class="context">송재원</td>
+						<td class="reason">휴가</td>
+						<td class="uploaddate">YYYY.MM.DD <br> YYYY.MM.DD
+						</td>
 					</tr>
 					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
+						<td class="context">송재원</td>
+						<td class="reason">병가</td>
+						<td class="uploaddate">YYYY.MM.DD <br> YYYY.MM.DD
+						</td>
 					</tr>
+
 
 				</table>
 
@@ -365,8 +380,9 @@ body ::-webkit-scrollbar-thumb {  background: rgba(0,0,0,.1);  }
 				<table class="boardtable" id="noticetable">
 
 					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
+						<td class="context">이현세</td>
+						<td class="reason">미국출장</td>
+						<td class="uploaddate">YYYY.MM.DD <br> YYYY.MM.DD</td>
 					</tr>
 					<tr>
 						<td class="context">글제목</td>
@@ -386,8 +402,14 @@ body ::-webkit-scrollbar-thumb {  background: rgba(0,0,0,.1);  }
 				<table class="boardtable" id="noticetable">
 
 					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
+						<td class="context">박정렬</td>
+						<td class="reason">생일</td>
+						<td class="uploaddate">YYYY.MM.DD</td>
+					</tr>
+					<tr>
+						<td class="context">박정렬</td>
+						<td class="reason">생일</td>
+						<td class="uploaddate">YYYY.MM.DD</td>
 					</tr>
 					<tr>
 						<td class="context">글제목</td>
@@ -408,70 +430,26 @@ body ::-webkit-scrollbar-thumb {  background: rgba(0,0,0,.1);  }
 				<table class="boardtable" id="noticetable">
 
 					<tr>
-
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
+						<td class="context">2019년 11월 정기발령 공고</td>
+						<td class="uploaddate">YYYY.MM.DD</td>
 					</tr>
 					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
+						<td class="context">2019년 10월 정기발령 공고</td>
+						<td class="uploaddate">YYYY.MM.DD</td>
 					</tr>
 					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
+						<td class="context">2019년 9월 정기발령 공고</td>
+						<td class="uploaddate">YYYY.MM.DD</td>
 					</tr>
 					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
+						<td class="context">2019년 8월 정기발령 공고</td>
+						<td class="uploaddate">YYYY.MM.DD</td>
 					</tr>
 					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
+						<td class="context">2019년 7월 정기발령 공고</td>
+						<td class="uploaddate">YYYY.MM.DD</td>
 					</tr>
-					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
-					</tr>
-					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
-					</tr>
-					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
-					</tr>
-					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
-					</tr>
-					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
-					</tr>
-					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
-					</tr>
-					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
-					</tr>
-					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
-					</tr>
-					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
-					</tr>
-					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
-					</tr>
-					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
-					</tr>
+					
 				</table>
 
 			</div>
@@ -488,12 +466,12 @@ body ::-webkit-scrollbar-thumb {  background: rgba(0,0,0,.1);  }
 				<table class="boardtable" id="noticetable">
 
 					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
+						<td class="context">사무용품 주문</td>
+						<td class="uploaddate">YYYY.MM.DD</td>
 					</tr>
 					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
+						<td class="context">출장 승인</td>
+						<td class="uploaddate">YYYY.MM.DD</td>
 					</tr>
 
 				</table>
@@ -551,13 +529,12 @@ body ::-webkit-scrollbar-thumb {  background: rgba(0,0,0,.1);  }
 				<span class="number">3/3
 				 </span>
 			</div>
+			
 
 		</div>
 		 
-		 
-		
-		 
+		 	 
 	</div>
-
+	
 </body>
 </html>
