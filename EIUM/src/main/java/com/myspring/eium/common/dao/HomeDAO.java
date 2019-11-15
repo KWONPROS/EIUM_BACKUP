@@ -1,5 +1,6 @@
 package com.myspring.eium.common.dao;
 
+import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ public class HomeDAO{
 	@Autowired
 	HomeVO homeVO;
 	
-	
 
 	public HomeVO findId(Map<String, Object> searchMap) {
 		homeVO = sqlSession.selectOne("mapper.common.findId",searchMap);
@@ -24,5 +24,9 @@ public class HomeDAO{
 		return homeVO;
 	}
 	
-
+	public List<HomeVO> findAll(){
+		List<HomeVO> list = sqlSession.selectList("mapper.common.findAll");
+		return list;
+	}
+	
 }

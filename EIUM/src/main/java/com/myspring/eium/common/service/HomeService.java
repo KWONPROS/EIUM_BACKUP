@@ -1,5 +1,6 @@
 package com.myspring.eium.common.service;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -83,5 +84,7 @@ public class HomeService {
 		Transport.send(mimeMessage); //javax.mail.Transport.send() 이용 }
 	}
 	
-	
+	public List<HomeVO> findAll() {
+		return HomeDAO.findAll();
+	}
 }

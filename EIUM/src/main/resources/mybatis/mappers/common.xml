@@ -9,6 +9,13 @@
         <result property="id" column="EMPLOYEE_ID" />
         <result property="pwd" column="EMPLOYEE_PASSWORD" />
         <result property="email" column="EMAIL" />
+        <result property="board_DES" column="BOARD_DES" />
+        <result property="board_DES_DES" column="BOARD_DES_DES" />
+        <result property="board_TITLE" column="BOARD_TITLE" />
+        <result property="board_START_DATE" column="BOARD_START_DATE" />
+        <result property="board_END_DATE" column="BOARD_END_DATE" />
+        <result property="board_CONTENT" column="BOARD_CONTENT" />
+        <result property="board_CODE" column="BOARD_CODE" />
 
 	</resultMap> 
 
@@ -34,7 +41,13 @@
         and b.EMAIL = #{EMAIL}
       ]]>
 	 </select>
-	
+	 
+	<select id="findAll"  resultMap="resultVO" parameterType="java.util.HashMap"> 
+      <![CDATA[
+         select *
+         from BOARD
+      ]]>
+	 </select>
 
 
 </mapper>
