@@ -13,21 +13,16 @@ public interface HM_P0022Controller {
 
 	Map appointList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
-	ModelAndView home_p01Init(HttpServletRequest request, HttpServletResponse response) throws Exception;
-
 	Map appointSearch_p01(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 	Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 	Map masterEmployee_p02(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
-	ModelAndView home_p02Init(HttpServletRequest request, HttpServletResponse response) throws Exception;
-
 	Map homeEmployeeSearch(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 	Map homeSearch_p03(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
-	ModelAndView home_p03Init(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 	Map saveData2(HttpServletRequest request, HttpServletResponse response) throws Exception;
 

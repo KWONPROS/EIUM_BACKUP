@@ -5,20 +5,29 @@
 
 <mapper namespace="mapper.hm_p0022">
 	<resultMap id="P0022resultVO" type="HM_P0022VO">
-		<result property="HR_APPOINT_NUMBER" column="HR_APPOINT_NUMBER" />
-        <result property="HR_APPOINT_TITLE" column="HR_APPOINT_TITLE" />
-        <result property="HR_APPOINT_INDEX_CODE" column="HR_APPOINT_INDEX_CODE" />
-        <result property="HR_APPOINT_DATE" column="HR_APPOINT_DATE" />
-        <result property="DUTY_NAME" column="DUTY_NAME" />
-        <result property="HR_APPOINT_INDEX_NAME" column="HR_APPOINT_INDEX_NAME" />
-        <result property="EMPLOYEE_NAME" column="EMPLOYEE_NAME" />
-        <result property="SITE_NAME" column="SITE_NAME" />
-   	    <result property="DEPARTMENT_NAME" column="DEPARTMENT_NAME" />
-        <result property="HR_APPOINT_MASTER_CODE" column="HR_APPOINT_MASTER_CODE" />
-        <result property="EMPLOYEE_CODE" column="EMPLOYEE_CODE" />
-                          
-
-
+		<result property="appoint_DATE" column="appoint_DATE" />
+        <result property="appoint_CODE" column="appoint_CODE" />
+        <result property="appoint_TITLE" column="appoint_TITLE" />
+        <result property="appoint_YN" column="appoint_YN" />
+        <result property="masterEmployee_CODE" column="masterEmployee_CODE" />
+        <result property="masterEmployee_NAME" column="masterEmployee_NAME" />
+        <result property="appoint_HISTORY_CODE" column="appoint_HISTORY_CODE" />
+        <result property="employee_CODE" column="employee_CODE" />
+        <result property="employee_NAME" column="employee_NAME" />
+        <result property="hr_APPOINT_INDEX_NAME" column="hr_APPOINT_INDEX_NAME" />
+        <result property="appoint_INDEX_NAME" column="appoint_INDEX_NAME" />
+        <result property="work_STATE" column="work_STATE" />
+        <result property="join_DATE" column="join_DATE" />
+        <result property="site_NAME" column="site_NAME" />
+        <result property="department_NAME" column="department_NAME" />
+        <result property="job_CLASS_NAME" column="job_CLASS_NAME" />
+ 	    <result property="position_NAME" column="position_NAME" />	              
+ 		<result property="duty_NAME" column="duty_NAME" />
+	    <result property="job_DIS_NAME" column="job_DIS_NAME" />
+	    <result property="pay_TYPE_NAME" column="pay_TYPE_NAME" />
+	    <result property="pay_GRADE_NAME" column="pay_GRADE_NAME" />
+	    <result property="out_REASON_NAME" column="out_REASON_NAME" />
+	    
 	</resultMap> 
 
 	<select  id="appointList" resultMap="P0022resultVO" parameterType="java.util.Map">

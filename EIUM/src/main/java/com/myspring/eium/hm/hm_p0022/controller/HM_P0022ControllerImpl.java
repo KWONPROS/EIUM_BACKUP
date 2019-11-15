@@ -34,33 +34,8 @@ public class HM_P0022ControllerImpl implements HM_P0022Controller{
 		ModelAndView mav = new ModelAndView("hm/hm_p0022/p0022_home");
 	
 		return mav;
-	}
 	
 	
-	@Override
-	@RequestMapping(value = "hm/p0022/appointCodeList_p01.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView home_p01Init(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("hm/hm_p0022/p0022_home_p01");
-	
-		return mav;
-	}
-	
-	@Override
-	@RequestMapping(value = "/hm/p0022/home_p02Init.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView home_p02Init(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("hm/hm_p0022/p0022_home_p02");
-	
-		return mav;
-	}
-	@Override
-	@RequestMapping(value = "/hm/p0022/home_p03Init.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView home_p03Init(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("hm/hm_p0022/p0022_home_p03");
-	
-		return mav;
 	}
 	
 	
@@ -76,6 +51,12 @@ public class HM_P0022ControllerImpl implements HM_P0022Controller{
 		request.setCharacterEncoding("utf-8");
 		Map<String, Object> searchMap = new HashMap<String, Object>(); // 검색조건
 		Map<String, Object> resultMap = new HashMap<String, Object>(); // 조회결과
+		searchMap.put("date", request.getParameter("date"));
+		searchMap.put("date2", request.getParameter("date2"));
+		searchMap.put("title", request.getParameter("title"));
+		searchMap.put("masterEmpl", request.getParameter("masterEmpl"));
+		searchMap.put("emply", request.getParameter("emplyCode"));
+		searchMap.put("emply", request.getParameter("emply"));
 		
 		List<HM_P0022VO> data = hM_P0022Service.appointList(searchMap);
         resultMap.put("Data", data);
