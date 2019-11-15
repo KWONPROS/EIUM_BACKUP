@@ -412,8 +412,16 @@ body ::-webkit-scrollbar-thumb {  background: rgba(0,0,0,.1);  }
 
 					<c:forEach var="board" items="${boardList}">
 						<c:if test="${board.board_DES == 'EVENT'}">
-							<tr id="tr${board.board_CODE}">
-								<td>${board.board_TITLE}</td>
+							<tr id="${board.board_CODE}">
+								<td>${board.board_TITLE}
+								<input type="hidden" value="${board.board_CONTENT}" class="board_CONTENT">
+								<input type="hidden" value="${board.id}" class="id">
+								<input type="hidden" value="${board.board_DES}" class="board_DES">
+								<input type="hidden" value="${board.board_DES_DES}" class="board_DES_DES">
+								<input type="hidden" value="${board.board_TITLE}" class="board_TITLE">
+								<input type="hidden" value="${board.board_END_DATE}" class="board_END_DATE">
+								<input type="hidden" value="${board.empNAME}" class="empNAME">
+								</td>
 								<td>${board.board_START_DATE}
 								<c:if test="${!empty board.board_END_DATE}">
 									<br>${board.board_END_DATE}
@@ -422,7 +430,6 @@ body ::-webkit-scrollbar-thumb {  background: rgba(0,0,0,.1);  }
 							</tr>
 						</c:if>
 					</c:forEach>
-
 				</table>
 
 			</div>
@@ -438,8 +445,16 @@ body ::-webkit-scrollbar-thumb {  background: rgba(0,0,0,.1);  }
 				
 					<c:forEach var="board" items="${boardList}">
 						<c:if test="${board.board_DES == 'NOTICE'}">
-							<tr id="tr${board.board_CODE}">
-								<td>${board.board_TITLE}</td>
+							<tr id="${board.board_CODE}">
+								<td>${board.board_TITLE}
+								<input type="hidden" value="${board.board_CONTENT}" class="board_CONTENT">
+								<input type="hidden" value="${board.id}" class="id">
+								<input type="hidden" value="${board.board_DES}" class="board_DES">
+								<input type="hidden" value="${board.board_DES_DES}" class="board_DES_DES">
+								<input type="hidden" value="${board.board_TITLE}" class="board_TITLE">
+								<input type="hidden" value="${board.board_END_DATE}" class="board_END_DATE">
+								<input type="hidden" value="${board.empNAME}" class="empNAME">
+								</td>
 								<td>${board.board_START_DATE}
 								<c:if test="${!empty board.board_END_DATE}">
 									<br>${board.board_END_DATE}
@@ -466,8 +481,16 @@ body ::-webkit-scrollbar-thumb {  background: rgba(0,0,0,.1);  }
 
 						<c:forEach var="board" items="${boardList}">
 						<c:if test="${board.board_DES == 'TODO'}">
-							<tr id="tr${board.board_CODE}">
-								<td>${board.board_TITLE}</td>
+							<tr id="${board.board_CODE}">
+								<td>${board.board_TITLE}
+								<input type="hidden" value="${board.board_CONTENT}" class="board_CONTENT">
+								<input type="hidden" value="${board.id}" class="id">
+								<input type="hidden" value="${board.board_DES}" class="board_DES">
+								<input type="hidden" value="${board.board_DES_DES}" class="board_DES_DES">
+								<input type="hidden" value="${board.board_TITLE}" class="board_TITLE">
+								<input type="hidden" value="${board.board_END_DATE}" class="board_END_DATE">
+								<input type="hidden" value="${board.empNAME}" class="empNAME">
+								</td>
 								<td>${board.board_START_DATE}
 								<c:if test="${!empty board.board_END_DATE}">
 									<br>${board.board_END_DATE}

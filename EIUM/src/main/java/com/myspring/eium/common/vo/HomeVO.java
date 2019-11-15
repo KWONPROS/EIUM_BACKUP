@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class HomeVO {
 	private String empCode;
+	private String empNAME;
 	private String id;
 	private String pwd;
 	private String email;
@@ -16,6 +17,12 @@ public class HomeVO {
 	private String board_CODE;
 
 
+	public String getEmpNAME() {
+		return empNAME;
+	}
+	public void setEmpNAME(String empNAME) {
+		this.empNAME = empNAME;
+	}
 	public String getBoard_DES() {
 		return board_DES;
 	}

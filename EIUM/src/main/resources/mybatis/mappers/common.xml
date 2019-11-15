@@ -6,6 +6,7 @@
 <mapper namespace="mapper.common">
 	<resultMap id="resultVO" type="HomeVO">
 		<result property="empCode" column="EMPLOYEE_CODE" />
+		<result property="empNAME" column="EMPLOYEE_NAME" />
         <result property="id" column="EMPLOYEE_ID" />
         <result property="pwd" column="EMPLOYEE_PASSWORD" />
         <result property="email" column="EMAIL" />
@@ -41,13 +42,25 @@
         and b.EMAIL = #{EMAIL}
       ]]>
 	 </select>
-	 
-	<select id="findAll"  resultMap="resultVO" parameterType="java.util.HashMap"> 
+
+	<select id="findAll" resultMap="resultVO"
+		parameterType="java.util.HashMap"> 
       <![CDATA[
-         select *
-         from BOARD
+         select 
+         	A.BOARD_DES,
+			A.BOARD_DES_DES,
+			A.BOARD_TITLE,
+			A.BOARD_CONTENT,
+			A.BOARD_START_DATE,
+			A.BOARD_END_DATE,
+			A.EMPLOYEE_CODE,
+			B.EMPLOYEE_NAME,
+			A.BOARD_CODE
+         
+         from BOARD A, EMPLOYEE B
+         where A.EMPLOYEE_CODE = B.EMPLOYEE_CODE
       ]]>
-	 </select>
+	</select>
 
 
 </mapper>
