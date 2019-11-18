@@ -60,7 +60,7 @@
 		//아이비시트2------------------------------------------------------
 		mySheet2.RemoveAll();
 		var initSheet2 = {};
-		initSheet2.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:0};
+		initSheet2.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:0, ComboEditValidation:1};
 		initSheet2.HeaderMode = {Sort:1, ColMove:0, ColResize:0, HeaderCheck:1};
 		initSheet2.Cols = [
 			{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
@@ -74,7 +74,7 @@
 			{Header:"temp_시간",Type:"Date",SaveName:"temp_TIME",MinWidth:100, Align:"Center", Format: "00:00", DefaultValue :"0000", Hidden:1},
 			{Header:"근무총시간",Type:"Date",SaveName:"working_STATUS_TOTAL_TIME",MinWidth:50, Align:"Center", Format: "HH:mm", CalcLogic:"|7|+|8|-|6|", Hidden:1},
 			{Header:"퇴근-출근시간",Type:"Date",SaveName:"working_STATUS_TOTAL_TIME_CALC",MinWidth:50, Align:"Center",Format:"HH:mm", CalcLogic:"|7|+|8|-|6|"},
-			{Header:"비고",Type:"Combo",SaveName:"working_STATUS_DESC",MinWidth:120, Align:"Center", "ComboText":"평일정상근무시간|평일연장근무시간|평일야간근무시간|휴일정상근무시간|휴일연장근무시간|휴일야간근무시간", "ComboCode":"00|01|02|03|04|05"},
+			{Header:"비고",Type:"Combo",SaveName:"working_STATUS_DESC",MinWidth:80, Align:"Center", "ComboText":"출근|지각|조퇴|외출", "ComboCode":"00|01|02|03"},
 			//평일(table)
 			{Header:"평일정상근무시간",Type:"Text",SaveName:"weekday_NORMAL_WORK_TIME", Width:50, Align:"Center"},	
 			{Header:"평일연장근무시간",Type:"Text",SaveName:"weekday_EXTENSION_WORK_TIME", Width:50, Align:"Center"},			
@@ -174,6 +174,7 @@
 			/* mySheet2.SaveNameCol("temp_TIME") */ //mySheet2.GetSelectRow()
 			/* alert(mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("temp_TIME"), 0000)); */
 			/* alert(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("temp_TIME"))); */ //0000
+			
 			break;
 			
 		case "deadline": //마감
@@ -227,20 +228,41 @@
 			break;
 		}
 	}
+	
+	 
+	 
+	
+
 
 	//출근일자나 비고 로 combobox 클릭시
 	function mySheet2_OnChange(Row, Col){
+		if(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_START_TIME"))=="0900" && mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_END_TIME"))>="1800"){ //정상출근
+			//alert(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC")));
+			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "00");
+			//alert(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC")));
+		}else if(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_START_TIME"))=="0900" & mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_END_TIME"))<"1800"){ //조퇴
+			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "02");
+		}else if(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_START_TIME"))>"0900"){ //지각
+			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "01");
+		}
+		/* alert(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_START_TIME")));
+		alert(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_END_TIME")));
+		alert(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"))); */
 		
 	}
-	//로우 클릭시
+	//mySheet(사원)로우 클릭시
 	function mySheet_OnClick(Row, Col) {
+		//defualt로 숨겨진 0000을 입력
 		if (Row != 0) {
 			mySheet2.DoSearch("${contextPath}/wm/p0001/WS_searchList.do", "P_EMP_CODE=" + mySheet.GetCellValue(Row, 0));
-			if(mySheet2.GetCellValue(Row, 6) == "" || mySheet2.GetCellValue(Row, 6) == null){
+			/* if(mySheet2.GetCellValue(Row, 6) == "" || mySheet2.GetCellValue(Row, 6) == null){
 				mySheet2.SetCellValue(Row, 6, "0000");
-			}
+			} */
 		}
-		
+	}
+	//mySheet2(출근시간, 퇴근시간 클릭시)로우 클릭시
+	function mySheet2_OnClick(Row, Col){
+		//오른쪽 근무시간에 아이비시트에서 계산된 것을 뿌려줌
 	}
 	function mySheet2_OnSearchEnd(Code, Msg){ //mySheet2 근태 정보 검색하기 전
 		var Maskingcell = mySheet2.GetDataLastRow();
@@ -248,6 +270,30 @@
 			mySheet2.SetCellValue(i, 8, "0000");
 			/* alert(mySheet2.GetCellValue(i, 8)); */ //값 확인 완료
 		//} 
+		alert(mySheet2.GetCellValue(1, 5));
+		getTodayLabel(mySheet2.GetCellValue(1,5));
+		/* alert(getTodayLabel(mySheet2.GetCellValue(1, 5))); */
+	}
+	function mySheet2_OnBeforeEdit(Row, Col) {
+		//출근, 조퇴, 외출 프로세스
+		if(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_START_TIME"))=="0900" && mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_END_TIME"))>="1800"){ //정상출근
+			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "00");
+		}else if(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_START_TIME"))=="0900" & mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_END_TIME"))<"1800"){ //조퇴
+			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "02");
+		}else if(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_START_TIME"))>"0900"){ //지각
+			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "01");
+		}
+	}
+	function mySheet2_OnAfterEdit(Row, Col){
+		if(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_START_TIME"))=="0900" && mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_END_TIME"))>="1800"){ //정상출근
+			//alert(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC")));
+			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "00");
+			//alert(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC")));
+		}else if(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_START_TIME"))=="0900" & mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_END_TIME"))<"1800"){ //조퇴
+			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "02");
+		}else if(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_START_TIME"))>"0900"){ //지각
+			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "01");
+		}
 	}
 	// 저장완료 후 처리할 작업
 	// code: 0(저장성공), -1(저장실패)
@@ -257,6 +303,22 @@
 			//번호 다시 매기기
 			//mySheet.ReNumberSeq();
 		}
+	}
+	
+	//평일인지 주말인지 구할 메소드 //토일 0, 6 평일(월,화,수,목,금)1,2,3,4,5
+	function getTodayLabel(day) {
+	    
+		var week = ['일', '월', '화', '수', '목', '금', '토'];
+		alert(day);
+		var year = day.substring(0,4); //2013
+		var month = day.substring(4,6); //11
+		var d_day = day.substring(6,8); //04
+		day = year + "-" + month + "-" + d_day;
+		alert(day);
+		var dayOfWeek = week[new Date(day).getDay()];
+		alert(dayOfWeek);
+		return dayOfWeek;
+
 	}
 	
 		//Formating
@@ -277,6 +339,8 @@
 		 
 		      
 		});//document.ready
+		
+		
 </script>
 <style type="text/css">
 
@@ -345,7 +409,7 @@
 position: relative;
 top: -495px;
 left: 1150px;
-width: 350px;
+width: 300px;
 background: #EDF0F5;
 border-radius: 10px;
 }
@@ -363,7 +427,7 @@ height: 25px;
 }
 
 .right_end table tr td:nth-child(3) input{
-width: 130px;
+width: 80px;
 height: 20px;
 padding-left: 10px;
 margin-right:10px;

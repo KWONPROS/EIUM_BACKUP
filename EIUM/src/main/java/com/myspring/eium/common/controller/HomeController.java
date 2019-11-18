@@ -1,5 +1,6 @@
 package com.myspring.eium.common.controller;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -39,17 +40,20 @@ public class HomeController {
 		return "main";
 	}
 
-
-
 	@RequestMapping(value = "/login.do", method =  RequestMethod.GET)
 	public String Login( Locale locale,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		return "common/cm_login";
 	}
-	@RequestMapping(value = "/cm/main.do", method =  RequestMethod.GET)
-	public String main( Locale locale,HttpServletRequest request, HttpServletResponse response) throws Exception {
-		return "common/cm_main";
-	}
 	
+	
+	@RequestMapping(value = "/cm/main.do", method =  RequestMethod.GET)
+	public ModelAndView main( Locale locale,HttpServletRequest request, HttpServletResponse response) throws Exception {
+		List<HomeVO> boardList = homeService.findAll();
+		ModelAndView main = new ModelAndView("common/cm_main");
+		System.out.println(boardList);
+		main.addObject("boardList", boardList);
+		return main;
+	}
 	
 	@RequestMapping(value = "/findIdNPwd.do", method = RequestMethod.GET)
 	public ModelAndView findInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
