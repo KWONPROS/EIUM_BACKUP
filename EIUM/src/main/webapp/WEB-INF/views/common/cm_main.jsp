@@ -408,7 +408,7 @@ body ::-webkit-scrollbar-thumb {  background: rgba(0,0,0,.1);  }
 			<a class="goModal" href=""id="hrefevent">+</a>
 			<div class="boardtitle" style="border-bottom-color: #111820;">경조사</div>
 			<div class="divboard">
-				<table class="boardtable" id="noticetable">
+				<table class="boardtable" id="eventtable">
 
 					<c:forEach var="board" items="${boardList}">
 						<c:if test="${board.board_DES == 'EVENT'}">
@@ -477,7 +477,7 @@ body ::-webkit-scrollbar-thumb {  background: rgba(0,0,0,.1);  }
 				Do</div>
 
 			<div class="divboard">
-				<table class="boardtable" id="noticetable">
+				<table class="boardtable" id="todotable">
 
 						<c:forEach var="board" items="${boardList}">
 						<c:if test="${board.board_DES == 'TODO'}">
