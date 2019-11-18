@@ -199,12 +199,20 @@ textarea {
 					</tr>
 					<tr>
 						<td>분류</td>
-						<td><input type="hidden" id="board_DES"><input class="form-control" id="board_DES_DES" type="text"></td>
+						<td><input type="hidden" id="board_DES"><select
+							class="form-control" id="board_DES_DES" >
+							<!-- 	<option disabled selected>분류 선택</option>
+								<option value="1">One</option>
+								<option value="2">Two</option>
+								<option value="3">Three</option>
+								 -->
+								</select>
+								</td>
 					</tr>
 					<tr>
 						<td>날짜</td>
 						<td>
-							<div class='col-md-5' style="padding-left:0;">
+							<div class='col-md-5' style="padding-left: 0;">
 								<div class="form-group">
 									<div class='input-group date' id='startDate'>
 										<input type='text' class="form-control" /> <span
@@ -213,11 +221,9 @@ textarea {
 										</span>
 									</div>
 								</div>
-								</div>
-							<div class='col-md-5' >
-									<div class="form-group" id="endinput">
-									
-								</div>
+							</div>
+							<div class='col-md-5'>
+								<div class="form-group" id="endinput"></div>
 							</div>
 						</td>
 					</tr>
