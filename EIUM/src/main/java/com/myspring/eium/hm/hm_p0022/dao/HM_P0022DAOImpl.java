@@ -23,8 +23,8 @@ public class HM_P0022DAOImpl implements HM_P0022DAO{
 	}
 	
 	@Override
-	public List<HM_P0022VO> appointSearch_p01(Map<String, Object> searchMap) throws DataAccessException {
-		List<HM_P0022VO> list = sqlSession.selectList("mapper.hm_p0022.appointSearch_p01", searchMap);
+	public List<HM_P0022VO> appointList2(Map<String, Object> searchMap) throws DataAccessException {
+		List<HM_P0022VO> list = sqlSession.selectList("mapper.hm_p0022.appointList2", searchMap);
 	
 		return list;
 	}
@@ -49,20 +49,20 @@ public class HM_P0022DAOImpl implements HM_P0022DAO{
 		return list;
 	}
 	@Override
-	public void insertData(Map<String, String> row) throws DataAccessException {
-		sqlSession.update("mapper.hm_p0022.insertData", row);
+	public void insertData1(Map<String, String> row) throws DataAccessException {
+		sqlSession.update("mapper.hm_p0022.insertData1", row);
 		
 	}
 
 	@Override
-	public void updateData(Map<String, String> row) throws DataAccessException {
-		sqlSession.update("mapper.hm_p0022.updateData", row);
+	public void updateData1(Map<String, String> row) throws DataAccessException {
+		sqlSession.update("mapper.hm_p0022.updateData1", row);
 		
 	}
 
 	@Override
-	public void deleteData(Map<String, String> row) throws DataAccessException {
-		sqlSession.update("mapper.hm_p0022.deleteData", row);
+	public void deleteData1(Map<String, String> row) throws DataAccessException {
+		sqlSession.update("mapper.hm_p0022.deleteData1", row);
 		
 	}
 	

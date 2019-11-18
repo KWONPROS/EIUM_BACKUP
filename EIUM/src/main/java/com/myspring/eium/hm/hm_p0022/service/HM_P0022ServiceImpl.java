@@ -29,8 +29,8 @@ public class HM_P0022ServiceImpl implements HM_P0022Service{
 	
 	
 	@Override
-	public List<HM_P0022VO> appointSearch_p01(Map<String, Object> searchMap) throws DataAccessException {
-		List<HM_P0022VO> list =  hM_P0022DAO.appointSearch_p01(searchMap); 
+	public List<HM_P0022VO> appointList2(Map<String, Object> searchMap) throws DataAccessException {
+		List<HM_P0022VO> list =  hM_P0022DAO.appointList2(searchMap); 
 		return list;
 	}
 	
@@ -52,7 +52,7 @@ public class HM_P0022ServiceImpl implements HM_P0022Service{
 	
 
 	@Override
-	public void saveData(Map<String, String[]> dataMap) throws DataAccessException {
+	public void saveData1(Map<String, String[]> dataMap) throws DataAccessException {
 		String[] status = dataMap.get("Status");
 		int length = status.length; // row수
 		int i = 0;
@@ -60,11 +60,11 @@ public class HM_P0022ServiceImpl implements HM_P0022Service{
 		for(String str : status) {
 			Map<String, String> row = getRow(dataMap, length, i); // 현재 Index의 Row Map
 			if("I".equals(str)) { // 추가
-				hM_P0022DAO.insertData(row);
+				hM_P0022DAO.insertData1(row);
 			}else if("U".equals(str)) { // 수정
-				hM_P0022DAO.updateData(row);
+				hM_P0022DAO.updateData1(row);
 			}else if("D".equals(str)) { // 삭제
-				hM_P0022DAO.deleteData(row);
+				hM_P0022DAO.deleteData1(row);
 			}
 			i++;
 		}

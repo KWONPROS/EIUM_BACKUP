@@ -11,9 +11,9 @@ public interface HM_P0022Service {
 
 	List<HM_P0022VO> appointList(Map<String, Object> searchMap) throws DataAccessException;
 
-	List<HM_P0022VO> appointSearch_p01(Map<String, Object> searchMap) throws DataAccessException;
+	List<HM_P0022VO> appointList2(Map<String, Object> searchMap) throws DataAccessException;
 
-	void saveData(Map<String, String[]> dataMap) throws DataAccessException;
+	void saveData1(Map<String, String[]> dataMap) throws DataAccessException;
 
 	List<HM_P0022VO> masterEmployee_p02(Map<String, Object> searchMap) throws DataAccessException;
 

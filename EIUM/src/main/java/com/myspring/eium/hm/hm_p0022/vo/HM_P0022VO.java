@@ -47,12 +47,7 @@ public String getAppoint_HISTORY_CODE() {
 public void setAppoint_HISTORY_CODE(String appoint_HISTORY_CODE) {
 	this.appoint_HISTORY_CODE = appoint_HISTORY_CODE;
 }
-public String getEmployee_CODE() {
-	return employee_CODE;
-}
-public void setEmployee_CODE(String employee_CODE) {
-	this.employee_CODE = employee_CODE;
-}
+
 public String getEmployee_NAME() {
 	return employee_NAME;
 }
@@ -143,7 +138,13 @@ String appoint_YN;
 String masterEmployee_CODE;
 String masterEmployee_NAME;
 String appoint_HISTORY_CODE;
-String employee_CODE;
+String appoint_employee_CODE;
+public String getAppoint_employee_CODE() {
+	return appoint_employee_CODE;
+}
+public void setAppoint_employee_CODE(String appoint_employee_CODE) {
+	this.appoint_employee_CODE = appoint_employee_CODE;
+}
 String employee_NAME;
 String hr_APPOINT_INDEX_NAME;
 String appoint_INDEX_NAME;
@@ -158,6 +159,27 @@ String job_DIS_NAME;
 String pay_TYPE_NAME;
 String pay_GRADE_NAME;
 String out_REASON_NAME;
+String employee_CODE;
+String START_DATE;
+String END_DATE;
+public String getSTART_DATE() {
+	return START_DATE;
+}
+public void setSTART_DATE(String sTART_DATE) {
+	START_DATE = sTART_DATE;
+}
+public String getEND_DATE() {
+	return END_DATE;
+}
+public void setEND_DATE(String eND_DATE) {
+	END_DATE = eND_DATE;
+}
+public String getEmployee_CODE() {
+	return employee_CODE;
+}
+public void setEmployee_CODE(String employee_CODE) {
+	this.employee_CODE = employee_CODE;
+}
 
 
 

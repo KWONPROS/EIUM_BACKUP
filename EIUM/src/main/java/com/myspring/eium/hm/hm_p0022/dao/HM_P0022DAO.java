@@ -11,13 +11,13 @@ public interface HM_P0022DAO {
 
 	List<HM_P0022VO> appointList(Map<String, Object> searchMap) throws DataAccessException;
 
-	List<HM_P0022VO> appointSearch_p01(Map<String, Object> searchMap) throws DataAccessException;
+	List<HM_P0022VO> appointList2(Map<String, Object> searchMap) throws DataAccessException;
 
-	void insertData(Map<String, String> row) throws DataAccessException ;
+	void insertData1(Map<String, String> row) throws DataAccessException ;
 
-	void updateData(Map<String, String> row) throws DataAccessException;
+	void updateData1(Map<String, String> row) throws DataAccessException;
 
-	void deleteData(Map<String, String> row) throws DataAccessException;
+	void deleteData1(Map<String, String> row) throws DataAccessException;
 
 	List<HM_P0022VO> masterEmployee_p02(Map<String, Object> searchMap) throws DataAccessException;
 

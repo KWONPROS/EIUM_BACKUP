@@ -38,9 +38,27 @@ public class HM_P0022ControllerImpl implements HM_P0022Controller{
 	
 	}
 	
+	@Override
+	@RequestMapping(value = "hm/p0022/homeInit_p01.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView homeInit_p01(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("hm/hm_p0022/p0022_home_p03");
+	
+		return mav;
 	
 	
+	}
+	@Override
+	@RequestMapping(value = "hm/p0022/homeInit_p02.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView homeInit_p02(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("hm/hm_p0022/p0022_home_p01");
 	
+		return mav;
+	
+	
+	}
+
 	
 	//search
 	
@@ -55,8 +73,7 @@ public class HM_P0022ControllerImpl implements HM_P0022Controller{
 		searchMap.put("date2", request.getParameter("date2"));
 		searchMap.put("title", request.getParameter("title"));
 		searchMap.put("masterEmpl", request.getParameter("masterEmpl"));
-		searchMap.put("emply", request.getParameter("emplyCode"));
-		searchMap.put("emply", request.getParameter("emply"));
+		searchMap.put("masterEmplCode", request.getParameter("masterEmplCode"));
 		
 		List<HM_P0022VO> data = hM_P0022Service.appointList(searchMap);
         resultMap.put("Data", data);
@@ -66,14 +83,15 @@ public class HM_P0022ControllerImpl implements HM_P0022Controller{
 	}
 	
 	@Override
-	@RequestMapping(value = "/hm/p0022/appointCodeSearch_p01.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/hm/p0022/appointList2.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Map appointSearch_p01(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		Map<String, Object> searchMap = new HashMap<String, Object>(); // 검색조건
 		Map<String, Object> resultMap = new HashMap<String, Object>(); // 조회결과
-		
-			List<HM_P0022VO> data = hM_P0022Service.appointSearch_p01(searchMap);
+		searchMap.put("appointCode", request.getParameter("appointCode"));
+		System.out.println("어포인트코드"+request.getParameter("appointCode"));
+			List<HM_P0022VO> data = hM_P0022Service.appointList2(searchMap);
         resultMap.put("Data", data);
         
         
@@ -141,9 +159,9 @@ public class HM_P0022ControllerImpl implements HM_P0022Controller{
 	//save
 	
 	@Override
-	@RequestMapping(value = "hm/p0022/saveData.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "hm/p0022/saveData1.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
-	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public Map saveData1(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		Map<String, String[]> dataMap = new HashMap<String, String[]>(); 
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
@@ -158,7 +176,7 @@ public class HM_P0022ControllerImpl implements HM_P0022Controller{
 		
 		Map<String, String> result = new HashMap<String, String>();
 		try {
-			hM_P0022Service.saveData(dataMap);	
+			hM_P0022Service.saveData1(dataMap);	
 			result.put("Code","0");
 			result.put("Message","저장성공");
 		}catch(Exception e) {
