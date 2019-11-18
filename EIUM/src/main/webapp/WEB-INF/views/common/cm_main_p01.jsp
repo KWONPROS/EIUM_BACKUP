@@ -158,7 +158,7 @@ textarea {
 		});
 
 		// 삭제하기 버튼 클릭
-		$("#modalDelete").click(function() {
+		$(document).on("click","#modalDelete",function() {
 			
 			$.ajax({
 				url : '${contextPath}/cm/board.do?board_CODE='+ board_CODE,
@@ -170,7 +170,7 @@ textarea {
 		})
 
 		// Modal의 Submit 버튼 클릭
-		$("#modalSubmit").click(function() {
+		$(document).on("click","#modalSubmit",function(){
 
 			if (action == 'create') {
 				url = 'board.do';
