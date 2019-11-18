@@ -20,12 +20,12 @@ textarea {
 	var type = '';
 	var board_CODE = 0;
 	var hrefId = "";
+	var endinput = "<div class='input-group date' id='endDate'><input type='text' class='form-control' /> <span class='input-group-addon'> <span class='glyphicon glyphicon-calendar'></span></span></div>";
 
 	$(document).ready(function() {
 
-		
 		//달력
-		$(function () {
+		function initCalendar() {
 	        $('#startDate').datetimepicker({
 	        	 viewMode: 'days',
 	             format: 'YYYY-MM-DD'
@@ -33,7 +33,7 @@ textarea {
 	        $('#endDate').datetimepicker({
 	        	viewMode: 'days',
 	             format: 'YYYY-MM-DD',
-	            useCurrent: false //Important! See issue #1075
+	            useCurrent: false
 	        });
 	        $("#startDate").on("dp.change", function (e) {
 	            $('#endDate').data("DateTimePicker").minDate(e.date);
@@ -41,12 +41,13 @@ textarea {
 	        $("#endDate").on("dp.change", function (e) {
 	            $('#startDate').data("DateTimePicker").maxDate(e.date);
 	        });
-	    });
+	    }
 		
 		//Modal 초기화
 		$('#myModal').on('hidden.bs.modal', function () {
 		    $(this).find("input,textarea,select").val('').end();
 		});
+		
 		
 		// 새 글 쓰기 버튼 클릭
 		$(".goModal").click(function() {
@@ -59,14 +60,20 @@ textarea {
 				switch (hrefId){
 			    case 'hrefnotice':
 			    	$("#modal-title").text("Notice");
+			    	$("#board_DES").val("NOTICE");
 			        break;
 			    case 'hreftodo' :
 			    	$("#modal-title").text("To Do");
+			    	$("#board_DES").val("TODO");
 			        break;
 			    case 'hrefevent' :
 			    	$("#modal-title").text("Event");
+			    	$("#board_DES").val("EVENT");
 			        break;
 				}
+			$("#empNAME").val('${sessionScope.login.employee_name}');
+			$("#endinput").html(endinput);
+			initCalendar();
 			$("#myModal").modal();
 		});
 		
@@ -103,59 +110,69 @@ textarea {
 		    	$("#modal-title").text("Event");
 		        break;
 			}
-			
-	
+			if(board_END_DATE.length == 10){
+				 $("#endinput").html(endinput); 
+			}else{
+				$("#endinput").empty();
+			}
 			
 			$("#title").val(board_TITLE);
+			$("#empNAME").val(empNAME);
 			$("#contents").val(board_CONTENT);
 			$("#startDate").children().val(board_START_DATE);
 			$("#endDate").children().val(board_END_DATE);
 			$("#id").children().val(id);
+			$("#board_DES").val(board_DES);
 			$("#board_DES_DES").val(board_DES_DES);
 			$("#empNAME").val(empNAME);
-
-
+			initCalendar();
 			$("#myModal").modal();
 		});
 
 		// 삭제하기 버튼 클릭
-		$("button[name='delete']").click(function() {
-			board_CODE = this.value;
+		$("#modalDelete").click(function() {
+			
 			$.ajax({
-				url : '/board/' + board_CODE,
-				type : 'DELETE',
+				url : '${contextPath}/cm/board.do?board_CODE='+ board_CODE,
+				type : 'GET',
 			});
+			alert("게시글이 삭제되었습니다.");
 			location.reload();
+			
 		})
 
 		// Modal의 Submit 버튼 클릭
 		$("#modalSubmit").click(function() {
 
 			if (action == 'create') {
-				board_CODE = 0;
-				url = '/board';
+				url = 'board.do';
 			} else if (action == 'modify') {
-				url = '/board';
+				url = 'board.do';
 			}
 
 			var data = {
+				
 				"board_CODE" : board_CODE,
-				"userName" : $("#userName").val(),
-				"contents" : $("#contents").val()
+				"board_CONTENT" : $("#contents").val(),
+				"board_START_DATE" : $("#startDate").children().val(),
+				"board_END_DATE" : $("#endDate").children().val(),
+				"board_DES" : $("#board_DES").val(),
+				"board_DES_DES" : $("#board_DES_DES").val(),
+				"board_TITLE" : $("#title").val()
+				
 			};
 
 			$.ajax({
 				url : url,
+				contentType: 'application/json',
 				type : type,
-				data : data
+				data : JSON.stringify(data)
+				
 			})
-
-			location.reload();
+				alert("저장되었습니다.");
+			 location.reload(); 
 		});
 
-		
-			
-		
 	});
 	
 </script>
@@ -174,7 +191,7 @@ textarea {
 				<table class="table">
 					<tr>
 						<td>제목</td>
-						<td><input class="form-control" id="title" type="text"></td>
+						<td><input class="form-control" id="title" name="title"type="text"></td>
 					</tr>
 					<tr>
 						<td>작성자</td>
@@ -182,7 +199,7 @@ textarea {
 					</tr>
 					<tr>
 						<td>분류</td>
-						<td><input class="form-control" id="board_DES_DES" type="text"></td>
+						<td><input type="hidden" id="board_DES"><input class="form-control" id="board_DES_DES" type="text"></td>
 					</tr>
 					<tr>
 						<td>날짜</td>
@@ -197,17 +214,11 @@ textarea {
 									</div>
 								</div>
 								</div>
-							<div class='col-md-5'>	
-								<div class="form-group">
-									<div class='input-group date' id='endDate'>
-										<input type='text' class="form-control" /> <span
-											class="input-group-addon"> <span
-											class="glyphicon glyphicon-calendar"></span>
-										</span>
-									</div>
+							<div class='col-md-5' >
+									<div class="form-group" id="endinput">
+									
 								</div>
 							</div>
-						
 						</td>
 					</tr>
 					<tr>

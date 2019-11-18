@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.myspring.eium.common.dao.HomeDAO;
 import com.myspring.eium.common.vo.HomeVO;
 
+
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
 public class HomeService {
@@ -86,5 +87,23 @@ public class HomeService {
 	
 	public List<HomeVO> findAll() {
 		return HomeDAO.findAll();
+	}
+
+
+	public void boardInsert(Map<String, Object> map) {
+		HomeDAO.boardInsert(map);
+		
+	}
+
+
+	public void boardUpdate(Map<String, Object> map) {
+		HomeDAO.boardUpdate(map);
+		
+	}
+
+
+	public void boardDelete(Integer board_CODE) {
+		HomeDAO.boardDelete(board_CODE);
+		
 	}
 }

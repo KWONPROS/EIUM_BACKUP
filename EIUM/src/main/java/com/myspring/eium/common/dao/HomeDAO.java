@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 import com.myspring.eium.common.vo.HomeVO;
+
 
 @Repository("HomeDAO")
 public class HomeDAO{
@@ -28,5 +30,18 @@ public class HomeDAO{
 		List<HomeVO> list = sqlSession.selectList("mapper.common.findAll");
 		return list;
 	}
+	public void boardInsert(Map<String, Object> map) {
+		sqlSession.update("mapper.common.insertData", map);
+		
+	}
+	public void boardUpdate(Map<String, Object> map) {
+		sqlSession.update("mapper.common.updateData", map);
+		
+	}
+	public void boardDelete(Integer board_CODE) {
+		sqlSession.update("mapper.common.deleteData", board_CODE);
+		
+	}
 	
+
 }

@@ -7,21 +7,22 @@
 	<resultMap id="resultVO" type="HomeVO">
 		<result property="empCode" column="EMPLOYEE_CODE" />
 		<result property="empNAME" column="EMPLOYEE_NAME" />
-        <result property="id" column="EMPLOYEE_ID" />
-        <result property="pwd" column="EMPLOYEE_PASSWORD" />
-        <result property="email" column="EMAIL" />
-        <result property="board_DES" column="BOARD_DES" />
-        <result property="board_DES_DES" column="BOARD_DES_DES" />
-        <result property="board_TITLE" column="BOARD_TITLE" />
-        <result property="board_START_DATE" column="BOARD_START_DATE" />
-        <result property="board_END_DATE" column="BOARD_END_DATE" />
-        <result property="board_CONTENT" column="BOARD_CONTENT" />
-        <result property="board_CODE" column="BOARD_CODE" />
+		<result property="id" column="EMPLOYEE_ID" />
+		<result property="pwd" column="EMPLOYEE_PASSWORD" />
+		<result property="email" column="EMAIL" />
+		<result property="board_DES" column="BOARD_DES" />
+		<result property="board_DES_DES" column="BOARD_DES_DES" />
+		<result property="board_TITLE" column="BOARD_TITLE" />
+		<result property="board_START_DATE" column="BOARD_START_DATE" />
+		<result property="board_END_DATE" column="BOARD_END_DATE" />
+		<result property="board_CONTENT" column="BOARD_CONTENT" />
+		<result property="board_CODE" column="BOARD_CODE" />
 
-	</resultMap> 
+	</resultMap>
 
 
-	<select id="findId"   resultMap="resultVO" parameterType="java.util.HashMap"> 
+	<select id="findId" resultMap="resultVO"
+		parameterType="java.util.HashMap"> 
       <![CDATA[
          select a.EMPLOYEE_CODE , a.EMPLOYEE_ID , b.EMAIL
          from ACCOUNT a, EMPLOYEE_HR_INFO b
@@ -29,10 +30,11 @@
        	 and a.EMPLOYEE_CODE = #{EMPLOYEE_CODE}
          and b.EMAIL = #{EMAIL}
       ]]>
-       </select>
-      
+	</select>
 
-	<select id="findPwd"  resultMap="resultVO" parameterType="java.util.HashMap"> 
+
+	<select id="findPwd" resultMap="resultVO"
+		parameterType="java.util.HashMap"> 
       <![CDATA[
          select a.EMPLOYEE_CODE , a.EMPLOYEE_ID, a.EMPLOYEE_PASSWORD , b.EMAIL 
          from ACCOUNT a, EMPLOYEE_HR_INFO b
@@ -41,7 +43,7 @@
          and a.EMPLOYEE_ID = #{EMPLOYEE_ID}
         and b.EMAIL = #{EMAIL}
       ]]>
-	 </select>
+	</select>
 
 	<select id="findAll" resultMap="resultVO"
 		parameterType="java.util.HashMap"> 
@@ -53,14 +55,64 @@
 			A.BOARD_CONTENT,
 			A.BOARD_START_DATE,
 			A.BOARD_END_DATE,
-			A.EMPLOYEE_CODE,
+			A.EMPLOYEE_ID,
 			B.EMPLOYEE_NAME,
 			A.BOARD_CODE
          
-         from BOARD A, EMPLOYEE B
-         where A.EMPLOYEE_CODE = B.EMPLOYEE_CODE
+         from BOARD A, EMPLOYEE B, ACCOUNT C
+         where C.EMPLOYEE_CODE = B.EMPLOYEE_CODE
+         AND C.EMPLOYEE_ID = A.EMPLOYEE_ID 
       ]]>
 	</select>
 
+	<insert id="insertData" parameterType="java.util.Map">
+	   <selectKey resultType="string" keyProperty="id" order="BEFORE">
+       SELECT SEQ_BOARD.NEXTVAL AS ID FROM DUAL
+   </selectKey>
+
+		insert into BOARD(
+		EMPLOYEE_ID,
+		BOARD_DES,
+		BOARD_DES_DES,
+		BOARD_TITLE,
+		BOARD_START_DATE,
+		BOARD_END_DATE,
+		BOARD_CONTENT,
+		BOARD_CODE
+		)
+		values(
+		#{employee_id},
+		#{board_DES},
+		#{board_DES_DES},
+		#{board_TITLE},
+		#{board_START_DATE},
+		#{board_END_DATE},
+		#{board_CONTENT},
+		#{id}
+		)
+	</insert>
+	<update id="updateData" parameterType="java.util.Map">
+		update BOARD
+		set
+		BOARD_DES=#{board_DES},
+		BOARD_DES_DES=#{board_DES_DES},
+		BOARD_TITLE=#{board_TITLE},
+		BOARD_START_DATE=REPLACE(#{board_START_DATE},' ',''),
+		BOARD_CONTENT=#{board_CONTENT}
+		
+		<if test="board_END_DATE!=null and !board_END_DATE.equals('')">
+		,BOARD_END_DATE=REPLACE(#{board_END_DATE},' ','')
+		</if>
+		
+		where
+		BOARD_CODE=#{board_CODE}  
+
+
+	</update>
+	<delete id="deleteData" parameterType="java.util.Map">
+		delete BOARD
+		where
+		TRIM(BOARD_CODE) = #{board_CODE}
+	</delete>
 
 </mapper>
