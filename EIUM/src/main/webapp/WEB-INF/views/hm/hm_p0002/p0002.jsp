@@ -18,7 +18,26 @@
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script type="text/javascript" src="${contextPath}/resources/js/jquery.mtz.monthpicker.js"></script>
 <script language="javascript">
+function setSite(){
+	
+	 site_code=document.getElementById("Psite_code").value;
+	 site_name=document.getElementById("Psite_name").value;
+	mySheet2.SetCellText(row,col-1,site_code);
+	mySheet2.SetCellText(row,col,site_name);
 
+
+	
+};
+function setJob_class(){
+	
+	job_class_code=document.getElementById("Pjob_class_code").value;
+	job_class_name=document.getElementById("Pjob_class_name").value;
+	mySheet2.SetCellText(row,col-1,job_class_code);
+	mySheet2.SetCellText(row,col,job_class_name);
+
+
+	
+}; 
 	/*Sheet 기본 설정 */
 	function LoadPage() {
 		
@@ -30,45 +49,40 @@
 		initSheet.Cols = [
 		{Header:"상태|상태",Type:"Status",Width:70,SaveName:"Status",Align:"Center"},
 		{Header:"삭제|삭제",Type:"DelCheck",Width:70,SaveName:"Delete",Align:"Center"},
-		{Header:"NO|NO",Type:"Text",Width:50,SaveName:"department_CODE",Align:"Center"},
-		{Header:"지급회수|지급일자",Type:"Text",Width:120,SaveName:"payment_date",Align:"Center"}, 
-		{Header:"지급회수|지급분류",Type:"Text",Width:120,SaveName:"payment_des_name",Align:"Center"}, 
+		{Header:"지급고유번호",Type:"Text",Width:120,SaveName:"payment_code",Align:"Center",Hidden:"1"}, 
+		{Header:"지급회수|지급일자",Type:"Date", Align:"Center", Width:120, SaveName:"payment_date",Align:"Center", Format:"yyyy-MM-dd"}, 
+		{Header:"지급회수|지급분류",Type:"Combo",Width:120,SaveName:"payment_des_name", ComboText:"급여|상여|동시", ComboCode:"100|200|300",PopupText:"급여|상여|동시"}
 		];
-		IBS_InitSheet( mySheet , initSheet);
+		IBS_InitSheet(mySheet, initSheet);
   
-		mySheet.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
 		mySheet.SetSheetHeight(200);
 		mySheet.SetSheetWidth(700); 
 		
-		//아이비시트2------------------------------------------------------
-		mySheet2.RemoveAll();
+		mySheet.RemoveAll();
 		var initSheet2 = {};
-		initSheet2.Cfg={SearchMode:smLazyLoad,ToolTip:1,MergeSheet:msHeaderOnly};
-	initSheet2.HeaderMode = {Sort:1,ColResize:1,HeaderCheck:1};
-	initSheet2.Cols=[
-		{Header:"상태|상태|상태",Type:"Status",Width:70,SaveName:"Status",Align:"Center"},
-		{Header:"삭제|삭제|삭제",Type:"DelCheck",Width:70,SaveName:"Delete",Align:"Center"},
-		{Header:"NO|NO|NO",Type:"Text",Width:50,SaveName:"department_CODE",Align:"Center"},
-		{Header:"직급직종및급여형태|사업장|사업장",Type:"Text",Width:120,SaveName:"site_CODE",Align:"Center"}, 
-		{Header:"직급직종및급여형태|직종|직종",Type:"Text",Width:120,SaveName:"site_NAME",Align:"Center"}, 
-		{Header:"직급직종및급여형태|급여형태|급여형태",Type:"Text",Width:120,SaveName:"sector_CODE",Align:"Center"}
+		initSheet2.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0, MergeSheet:msHeaderOnly};
+		initSheet2.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
+		initSheet2.Cols = [
+		{Header:"상태|상태",Type:"Status",Width:70,SaveName:"Status",Align:"Center"},
+		{Header:"삭제|삭제",Type:"DelCheck",Width:70,SaveName:"Delete",Align:"Center"},
+		{Header:"지급선정고유번호",Type:"Text",Width:120,SaveName:"selection_of_payment_code", Align:"Center",Hidden:"1"}, 
+		{Header:"직급직종및급여형태|사업장코드",Type:"Text",Width:120,SaveName:"site_code", Align:"Center"}, 
+		{Header:"직급직종및급여형태|사업장",Type:"Text",Width:120,SaveName:"site_name", Align:"Center",InsertEdit:"0", UpdateEdit:"0"}, 
+		{Header:"직급직종및급여형태|직종코드",Type:"Text",Width:120,SaveName:"job_class_code", Align:"Center"}, 
+		{Header:"직급직종및급여형태|직종",Type:"Text",Width:120,SaveName:"job_class_name" , Align:"Center",InsertEdit:"0", UpdateEdit:"0"}
 		];
-	IBS_InitSheet(mySheet2,initSheet2);
-		  
-		mySheet2.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
+		IBS_InitSheet(mySheet2, initSheet2);
+  
 		mySheet2.SetSheetHeight(200);
 		mySheet2.SetSheetWidth(700); 
-
-
-	//아이비시트3 
-	
+		
 
 		/* MonthPicker 옵션 */
 	    options = {
-	        pattern: 'yyyy-mm', // Default is 'mm/yyyy' and separator char is not mandatory
+		    pattern: 'yy/mm', // Default is 'mm/yyyy' and separator char is not mandatory
 	        selectedYear: 2019,
 	        startYear: 2008,
-	        finalYear: 2019,
+	        finalYear: 2100,
 	        buttonImage: "${contextPath}/resources/image/icons/icon_calendar.png", 
 	        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']
 	    };
@@ -86,39 +100,79 @@
 	function doAction(sAction) {
 		switch (sAction) {
 		case "search": //조회
-			mySheet.DoSearch("${contextPath}/hm/p0002/searchList.do");
-		console.log(mySheet2.GetRowData(1));
-			$('input[name=engName]').val(mySheet.GetCellValue(1,3));
+			var param = FormQueryStringEnc(document.frm);
+			mySheet.DoSearch("${contextPath}/hm/p0002/searchList.do", param);
 			break;
 
 		case "reload": //초기화
-			mySheet2.RemoveAll();
+			mySheet.RemoveAll();
 			break;
 		case "save": // 저장
-
-			var tempStr = mySheet2.GetSaveString();
-			tempStr = tempStr + "&table_NAME=" + mySheet.GetCellValue(0, 2);
-			alert("서버로 전달되는 문자열 확인 :" + tempStr);
+			var tempStr = mySheet.GetSaveString();
+			alert(tempStr);
 			mySheet.DoSave("${contextPath}/hm/p0002/saveData.do", tempStr);
 			break;
-
+			
+		case "save2": // 저장
+			var tempStr2 = mySheet2.GetSaveString();
+			alert(tempStr2);
+			mySheet2.DoSave("${contextPath}/hm/p0002/saveSelect.do", tempStr2);
+			break;
+			
+		case "insert":
+		      var row = mySheet.DataInsert(-1);
+		      break;
+		      
+				
+		case "insert2":
+		      var row = mySheet2.DataInsert(-1);
+		      break;      
+	  
 		}
 	}
-
-	//로우 클릭시
+	
+	function mySheet2_OnSearchEnd() {
+		mySheet2.DataInsert(-1);
+	}
+	
 	function mySheet_OnClick(Row, Col) {
-		if (Row != 0) {
-			mySheet2.DoSearch("${contextPath}/hm/p0002/searchList2.do", "emp_CODE=" + mySheet.GetCellValue(Row, 2));
+			  x = "x=" + mySheet.GetCellValue(Row, 2);			  
+			mySheet2.DoSearch("${contextPath}/hm/p0002/searchSelect.do", x);
 			
-			
-			
-			
-			
-			
+	}
+	
+	function mySheet2_OnKeyUp(Row, Col, KeyCode, Shift) {
+		//if (Modify == 1) { 인사코드 부분 - 수정 가능일시이니까 / 인사기록카드에서는 상관x
+	         //console.log("keycode: "+KeyCode+"&col:"+mySheet2.LastCol()+"&row:"+mySheet2.RowCount());
+	         /* console.log("keycode: " + KeyCode);*/
+	         console.log("col:" + Col + "lastcol:" + mySheet2.LastCol());
+	         console.log("row:" + Row + "row갯수:" + mySheet2.RowCount()); 
+	         console.log("mySheet2:" +mySheet2.RowCount());
+	         if ( KeyCode == 13 &&  Col == mySheet2.LastCol()
+	               && Row-1 == mySheet2.RowCount()) { // 엔터를 누르고 / col이 마지막 col이고 / row가 마지막 열일경우
+	            doAction("insert2");
+	         }
 		}
 
+	
+	
+	function mySheet2_OnDblClick(Row,Col,Value){
+		row=Row;
+		col=Col;
+		
+		if(Col=="4"){
+			
+		window.open("${contextPath}/hm/p0002/site_Search.do", "a", "width=500, height=700, left=100, top=50"); 
+		}
+		
+		if(Col=="6"){
+			
+		window.open("${contextPath}/hm/p0002/jobclass_Search.do", "a", "width=500, height=700, left=100, top=50"); 
+		}
 	}
-
+	
+	
+	
 	// 저장완료 후 처리할 작업
 	// code: 0(저장성공), -1(저장실패)
 	function mySheet_OnSaveEnd(code, msg) {
@@ -128,6 +182,17 @@
 			//mySheet.ReNumberSeq();
 		}
 	}
+	
+	
+	
+
+
+
+	
+	
+			
+			
+
 </script>
 <style type="text/css">
 
@@ -183,11 +248,9 @@
 .right{
 	position: relative;
 	top: -90px;
-	left: 525px;
+	left: 500px;
 	width: 750px;
-	
 }
-
 
 #searchBar {
 	background: #EBEBEB;
@@ -239,15 +302,17 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 </style>
 </head>
 <body onload="LoadPage()" >
+<form name="frm">
 	<div class="leftbuttons">
-		<a href="javascript:doAction('print')" class="IBbutton">인쇄</a> <a
-			href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
+		<a	href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
 	</div>
 	<div class="rightbuttons">
 		<a href="javascript:doAction('reload')" class="IBbutton">초기화</a> 
 		<a href="javascript:doAction('insert')" class="IBbutton">추가</a>
-		<a href="javascript:doAction('search')" class="IBbutton">조회</a> <a
-			href="javascript:doAction('save')" class="IBbutton">저장</a>
+		<a href="javascript:doAction('search')" class="IBbutton">조회</a> 
+		<a href="javascript:doAction('save')" class="IBbutton">지급 저장</a>
+		<a href="javascript:doAction('save2')" class="IBbutton">지급구분 저장</a>
+		
 	</div>
 
 	<div class="title">
@@ -256,21 +321,24 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 		</header>
 	</div>
 	<div class="left">
-		<form id="searchBar" action="javascript:searchCondition();">
 			<span class="yearMonth">귀속연월</span> 
 			<input id="monthpicker" type="text">
 			<img id="btn_monthpicker"  src="${contextPath}/resources/image/icons/icon_calendar.png">
-			<input type="submit" value="조회"  style="background-color:  #5E5E5E; width:50px; height :26px; color: white; border-radius: 5px; margin: 0px 0px 3px 0px ;">
-		</form>  
 
 		<script>createIBSheet("mySheet", "100%", "100%");</script>
 	</div>
 	
 	<div class="right">
-		<script>createIBSheet("mySheet2", "100%", "100%");</script>
+			<script>createIBSheet("mySheet2", "100%", "100%");</script>
+	
 	</div>
 	
+	
 
-
+</form>
+<input type="hidden" id="Psite_code">
+<input type="hidden" id="Psite_name">
+<input type="hidden" id="Pjob_class_code">
+<input type="hidden" id="Pjob_class_name">
 </body>
 </html>

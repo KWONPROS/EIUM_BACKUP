@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import com.myspring.eium.hm.hm_p0002.vo.HM_P0002VO;
 import com.myspring.eium.pm.pm_p0001.service.PM_P0001Service;
 import com.myspring.eium.pm.pm_p0001.vo.PM_P0001VO;
 
@@ -39,7 +39,7 @@ import com.myspring.eium.pm.pm_p0001.vo.PM_P0001VO;
 @Controller
 public class PM_P0001ControllerImpl implements PM_P0001Controller {
 	private static final Logger logger = LoggerFactory.getLogger(PM_P0001ControllerImpl.class);
-	
+	Map<String, Object> dateMap = new HashMap<String, Object>();
 	@Autowired
 	PM_P0001Service p0001Service;
 	
@@ -53,37 +53,75 @@ public class PM_P0001ControllerImpl implements PM_P0001Controller {
 	} 
 	
 	@Override
-	@RequestMapping(value = "/pm/p0001/EMP_searchList.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/pm/p0001/searchPaymentdate.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView paymentdateSerch_init(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		dateMap.put("date", request.getParameter("monthpicker"));
+		System.out.println("1");
+		System.out.println(request.getParameter("monthpicker"));
+		
+		ModelAndView mav = new ModelAndView("pm/pm_p0001/p0001_Payment_date");
+		
+		mav.addObject("monthpicker",request.getParameter("monthpicker"));
+	
+		return mav;
+	} 
+	
+	@Override
+	@RequestMapping(value = "/pm/p0001/searchList.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
-	public Map EMP_searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		Map<String, Object> searchMap = new HashMap<String, Object>(); 
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
-		
-		//데이터 조회
-		List<PM_P0001VO> data = p0001Service.EMP_searchList(searchMap);
+
+		searchMap.put("Ppayment_date", request.getParameter("Ppayment_date"));
+		searchMap.put("searchTYPE", request.getParameter("searchTYPE"));
+		searchMap.put("searchDetail", request.getParameter("searchDetail"));
+
+
+		System.out.println(request.getParameter("Ppayment_date"));
+		System.out.println(request.getParameter("searchTYPE"));
+		System.out.println(request.getParameter("searchDetail"));
+
+		List<PM_P0001VO> data = p0001Service.searchList(searchMap);
 		
         resultMap.put("Data", data);
-    	System.out.println("WM-P0001ControllerImpl-1-resultMap::::" + resultMap);
+        return resultMap;
+	}
+	
+
+	
+	@Override
+	@RequestMapping(value = "/pm/p0001/searchPaymentdateList.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map payment_searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>(); 
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+
+		searchMap= dateMap;
+		List<PM_P0001VO> data = p0001Service.paydate_searchList(searchMap);
+		
+        resultMap.put("Data", data);
         return resultMap;
 	}
 
 	@Override
-	@RequestMapping(value = "/pm/p0001/WS_searchList.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "pm/p0001/TypeList.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
-	public Map WS_searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public Map searchTypeList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		Map<String, String> searchMap = new HashMap<String, String>();
-		Map<String, Object> resultMap = new HashMap<String, Object>(); 
-		String P_EMP_CODE = request.getParameter("P_EMP_CODE");
-		System.out.println("P_EMP_CODE = " + P_EMP_CODE);
+		Map<String, Object> searchMap = new HashMap<String, Object>(); // ???????
+		Map<String, Object> resultMap = new HashMap<String, Object>(); // ??????
 		
-		searchMap.put("P_EMP_CODE", request.getParameter("P_EMP_CODE"));
-		//데이터 조회
-		List<PM_P0001VO> data = p0001Service.WS_searchList(searchMap);
-		
+		// ??????????
+		searchMap.put("searchTYPE", request.getParameter("searchTYPE"));
+		System.out.println(request.getParameter("searchTYPE"));
+		//?????? ???
+		List<PM_P0001VO> data = p0001Service.searchTypeList(searchMap);
         resultMap.put("Data", data);
-    	System.out.println("WM-P0001ControllerImpl-2-resultMap::::" + resultMap);
+       
         return resultMap;
 	}
 	

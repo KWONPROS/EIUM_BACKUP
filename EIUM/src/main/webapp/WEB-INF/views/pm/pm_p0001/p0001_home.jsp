@@ -19,6 +19,17 @@
 <script type="text/javascript" src="${contextPath}/resources/js/jquery.mtz.monthpicker.js"></script>
 <script language="javascript">
 
+
+function setPayment(){
+	payment_code=document.getElementById("Ppayment_code").value;
+	payment_date=document.getElementById("Ppayment_date").value;
+	payment_des_name=document.getElementById("Ppayment_des_name").value;
+
+/* 	mySheet.SetCellText(row,3,payment_date);
+	mySheet.SetCellText(row,4,payment_des_name); */
+	
+};
+
 	/*Sheet 기본 설정 */
 	function LoadPage() {
 		
@@ -28,11 +39,9 @@
 		initSheet.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0};
 		initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 		initSheet.Cols = [		
-		
-	        {Header:"사원코드",Type:"Text",SaveName:"employee_CODE",KeyField:1, Edit: 0},	
-			{Header:"사원명",Type:"Text",SaveName:"employee_NAME",MinWidth:120, Align:"Center", Edit: 0},			
-			{Header:"부서명",Type:"Text",SaveName:"department_NAME",MinWidth:170, Edit: 0},
-			{Header:"부서코드", Type:"Text", SaveName:"department_CODE", Align:"Center", Edit: 0}
+	        {Header:"NO",Type:"Seq",SaveName:"NUMBER",MinWidth:50, Align:"Center" },	
+	        {Header:"사원코드",Type:"Text",SaveName:"employee_code", MinWidth:50,  Align:"Center", KeyField:1, Edit: 0},	
+			{Header:"사원명",Type:"Text",SaveName:"employee_name", MinWidth:120, Align:"Center", Edit: 0},
 		];   
 		IBS_InitSheet( mySheet , initSheet);
   
@@ -47,12 +56,8 @@
 		initSheet2.Cols = [
 			{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
 	        {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},	
-	        {Header:"NO",Type:"Seq",SaveName:"NUMBER",MinWidth:50, Align:"Center" },	
-			{Header:"출근일자",Type:"Date",SaveName:"working_STATUS_DATE",MinWidth:120,KeyField:1, Align:"Center", Format: "Ymd"},			
-			{Header:"출근시간",Type:"Date",SaveName:"working_STATUS_START_TIME",MinWidth:100, Align:"Center", Format: "Hm"},
-			{Header:"퇴근시간",Type:"Date",SaveName:"working_STATUS_END_TIME",MinWidth:100, Align:"Center", Format: "Hm"},
-			{Header:"총시간",Type:"Text",SaveName:"working_STATUS_TOTAL_TIME",MinWidth:50, Align:"Center", Format: "Hm"},
-			{Header:"비고",Type:"Text",SaveName:"working_STATUS_DESC",MinWidth:100, Align:"Center"}
+			{Header:"지급항목",Type:"Date",SaveName:"working_STATUS_DATE",MinWidth:120,KeyField:1, Align:"Center", Format: "Ymd"},			
+			{Header:"금액",Type:"Date",SaveName:"working_STATUS_START_TIME",MinWidth:100, Align:"Center", Format: "Hm"},
 		];
 		
 		IBS_InitSheet( mySheet2 , initSheet2);
@@ -62,7 +67,7 @@
 		
 		/* MonthPicker 옵션 */
 	    options = {
-	        pattern: 'yyyy-mm', // Default is 'mm/yyyy' and separator char is not mandatory
+	        pattern: 'yy/mm', // Default is 'mm/yyyy' and separator char is not mandatory
 	        selectedYear: 2019,
 	        startYear: 2008,
 	        finalYear: 2019,
@@ -78,16 +83,14 @@
 	        $('#monthpicker').monthpicker('show');
 	    });
 	    
-	    mySheet.DoSearch("${contextPath}/pm/p0001/EMP_searchList.do");
 	}
 
 	/*Sheet 각종 처리*/
 	function doAction(sAction) {
 		switch (sAction) {
 		case "search": //조회
-			mySheet.DoSearch("${contextPath}/pm/p0001/searchList.do");
-			console.log(mySheet2.GetRowData(1));
-			$('input[name=engName]').val(mySheet2.GetCellValue(1,3));
+			var param = FormQueryStringEnc(document.frm);
+			mySheet.DoSearch("${contextPath}/pm/p0001/searchList.do", param);
 			//조회조건에 맞도록 조회하기
 			break;
 
@@ -97,12 +100,12 @@
 			break;
 		case "save": // 저장
 
-			var tempStr = mySheet2.GetSaveString();
+			/* var tempStr = mySheet2.GetSaveString();
 			tempStr = tempStr + "&table_NAME=" + mySheet2.GetCellValue(0, 2);
 			alert("서버로 전달되는 문자열 확인 :" + tempStr);
 			mySheet.DoSave("${contextPath}/pm/p0001/saveData.do", tempStr);
 			break;
-
+ */
 		}
 	}
 
@@ -112,6 +115,17 @@
 			mySheet2.DoSearch("${contextPath}/pm/p0001/WS_searchList.do", "P_EMP_CODE=" + mySheet.GetCellValue(Row, 0));
 		}
 	}
+	
+	 function showPopup() {
+		 var monthpicker = $('#monthpicker').val();
+		 var url = '${contextPath}/pm/p0001/searchPaymentdate.do?monthpicker='+monthpicker;
+
+		 window.open(url, "a", "width=600, height=500, left=100, top=50");
+	  
+	  }
+	 
+	
+	 
 
 	// 저장완료 후 처리할 작업
 	// code: 0(저장성공), -1(저장실패)
@@ -122,6 +136,128 @@
 			//mySheet.ReNumberSeq();
 		}
 	}
+	  
+	function selectSite() {
+
+		$.ajax({
+
+					url : "${contextPath}/sm/p0006/SiteList.do",//목록을 조회 할 url
+
+					type : "POST",
+
+					dataType : "JSON",
+
+					success : function(data) {
+
+						for (var i = 0; i < data['Data'].length; i++) {
+							
+							
+
+							var option = "<option name='1' value='" + data['Data'][i].site_NAME + "'>"
+									+ data['Data'][i].site_NAME + "</option>";
+
+							//대상 콤보박스에 추가
+
+							$('#searchSite').append(option);
+
+						}
+
+					},
+
+					error : function(jqxhr, status, error) {
+
+						alert("에러");
+
+					}
+
+				});
+
+	};
+	  
+	function selectType() {
+
+		var searchTYPE = $('#searchTYPE').val();
+		console.log(searchTYPE);
+
+		$
+				.ajax({
+
+					url : "${contextPath}/pm/p0001/TypeList.do",//목록을 조회 할 url
+
+					type : "POST",
+
+					data : {
+						"searchTYPE" : searchTYPE
+					},
+
+					dataType : "JSON",
+
+					success : function(data) {
+						$(".1").remove();
+						
+						if(data['Data'][0].site_name!= null && data['Data'][0].site_name!= ''){
+						for (var i = 0; i < data['Data'].length; i++) {
+
+							var option = "<option class='1' value='" + data['Data'][i].site_name + "'>"
+									+ data['Data'][i].site_name
+									+ "</option>";
+
+							//대상 콤보박스에 추가
+							$('#searchDetail').append(option);
+
+						}
+						}
+						
+						if(data['Data'][0].department_name!= null && data['Data'][0].department_name!= ''){
+						for (var i = 0; i < data['Data'].length; i++) {
+
+							var option = "<option class='1' value='" + data['Data'][i].department_name + "'>"
+									+ data['Data'][i].department_name
+									+ "</option>";
+
+							//대상 콤보박스에 추가
+							$('#searchDetail').append(option);
+
+						}
+						}
+						
+						if(data['Data'][0].work_group_name!= null && data['Data'][0].work_group_name!= ''){
+						for (var i = 0; i < data['Data'].length; i++) {
+
+							var option = "<option class='1' value='" + data['Data'][i].work_group_name + "'>"
+									+ data['Data'][i].work_group_name
+									+ "</option>";
+
+							//대상 콤보박스에 추가
+							$('#searchDetail').append(option);
+
+						}
+						}
+						
+						if(data['Data'][0].project_name!= null && data['Data'][0].project_name!= ''){
+						for (var i = 0; i < data['Data'].length; i++) {
+
+							var option = "<option class='1' value='" + data['Data'][i].project_name + "'>"
+									+ data['Data'][i].project_name
+									+ "</option>";
+
+							//대상 콤보박스에 추가
+							$('#searchDetail').append(option);
+
+						}
+						}
+
+					},
+
+					error : function(jqxhr, status, error) {
+
+						alert("에러");
+
+					}
+
+				});
+
+	};
 </script>
 <style type="text/css">
 
@@ -230,6 +366,8 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 </style>
 </head>
 <body onload="LoadPage()" >
+<form name="frm">
+
 	<div class="leftbuttons">
 		<a href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
 	</div>
@@ -242,30 +380,43 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 
 	<div class="title">
 		<header>
-			<i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 근태관리 : 근태입력
+			<i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 급여관리 : 급여입력및계산
 		</header>
 	</div>
 	<div class="left">
-		<form id="searchBar">
-			<span class="yearMonth">귀속연월</span> 
-			<input id="monthpicker" type="text">
-			<img id="btn_monthpicker" src="${contextPath}/resources/image/icons/icon_calendar.png">
-			<div class="left_rightsearch"><span class="kindofsearch">조회조건</span>
-				<select id="Employee_Select">
-		    	<option value="" selected>구분</option>
-				<option value="employee_name">사업장</option>
-				<option value="employee_code">부서</option>
-			</select>
-			<input type="text" id="p_text" placeholder="사업장  or 부서">
+	     <div id="searchBar">
+            귀속연월 : <input id="monthpicker" type="text">
+			<img id="btn_monthpicker"  src="${contextPath}/resources/image/icons/icon_calendar.png">
+		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+		  지급일: <a href="javascript:showPopup();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a><input type="text" id="Ppayment_date"><br><br>
+		 사업장구분: <select id="searchSite" onchange="selectSite()">
+			<option value="all" selected>전체</option>
+			</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		  조회조건: <select id="searchTYPE" onchange="selectType()">
+		  	<option value="all" selected>전체</option>
+			<option value="department">부서</option>
+			<option value="work_group">근무조</option>
+			<option value="project">프로젝트</option>
+		</select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		구분 :<select id="searchDetail" >
+		<option value="alldetail" selected>전체</option>
+		</select>
 		</div>
-		</form>
+		
 
-		<script>createIBSheet("mySheet", "100%", "100%");</script>
+		<script>
+		createIBSheet("mySheet", "100%", "100%");
+		selectSite();
+		</script>
 	</div>
 	
 	<div class="right">
 		<script>createIBSheet("mySheet2", "100%", "100%");</script>
 	</div>
+	<input type="hidden" id="payment_code">
+</form>
+<input type="hidden" id="payment_des_name">
+
 
 </body>
 </html>

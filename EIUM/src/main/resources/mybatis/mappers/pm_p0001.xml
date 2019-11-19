@@ -4,37 +4,163 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.pm_p0001">
 	<resultMap id="P0001resultVO" type="PM_P0001VO">
-		<result property="employee_CODE" column="EMPLOYEE_CODE" />
-		<result property="employee_NAME" column="EMPLOYEE_NAME" />
-		<result property="department_CODE" column="DEPARTMENT_CODE" />
-		<result property="department_NAME" column="DEPARTMENT_NAME" />
-		
-		<result property="working_STATUS_CODE" column="WORKING_STATUS_CODE" />
-		<result property="working_STATUS_MONTH" column="WORKING_STATUS_MONTH" />
-		<result property="working_STATUS_DATE" column="WORKING_STATUS_DATE" />
-		<result property="working_STATUS_START_TIME" column="WORKING_STATUS_START_TIME" />
-		<result property="working_STATUS_END_TIME" column="WORKING_STATUS_END_TIME" />
-		<result property="working_STATUS_TOTAL_TIME" column="WORKING_STATUS_TOTAL_TIME" />
-		<result property="working_STATUS_DESC" column="WORKING_STATUS_DESC" />
+		<result property="employee_code" column="employee_code" />
+		<result property="employee_name" column="employee_name" />
+		<result property="payment_code" column="payment_code" />
+		<result property="payment_date" column="payment_date" />
+		<result property="payment_des_name" column="payment_des_name" />
+		<result property="site_name" column="site_name" />
+		<result property="department_name" column="department_name" />
+		<result property="work_group_name" column="work_group_name" />
+		<result property="project_name" column="project_name" />
 	</resultMap>
 	
 	<!-- /////////////////////////////////////EMP_SEARCHLIST ////////////////////////////////////////-->
-	<select id = "EMP_searchList" resultMap="P0001resultVO" parameterType="java.util.Map">
+	<select id = "typeList" resultMap="P0001resultVO" parameterType="java.util.Map">
+	 <choose>
+			<when test= " searchTYPE == 'department'  and  searchTYPE != null">
+			select department_name
+			from department
+			</when>
+			
+			<when test= " searchTYPE == 'work_group'  and  searchTYPE != null">
+			select work_group_name
+			from work_group
+			</when>
+			
+			<when test= " searchTYPE == 'project'  and  searchTYPE != null">
+			select project_name
+			from project
+			</when>
+			
+			<when test= " searchTYPE == 'all'  and  searchTYPE != null">
+			select department_name
+			from department
+			union
+			select work_group_name
+			from work_group
+			union
+			select project_name
+			from project
+			</when>
+			</choose> 
+	</select>
+	
+
+	<select id = "paydate_searchList" resultMap="P0001resultVO" parameterType="java.util.Map">
 	<![CDATA[
-		select E.EMPLOYEE_CODE, E.EMPLOYEE_NAME, D.DEPARTMENT_NAME, D.DEPARTMENT_CODE  
-		from EMPLOYEE E, EMPLOYEE_WORK EW, DEPARTMENT D
-		where E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE
-		AND D.DEPARTMENT_CODE = EW.DEPARTMENT_CODE
-		ORDER BY E.EMPLOYEE_CODE ASC
+		select p.payment_code, p.payment_date, pd.payment_des_name
+		from payment p, payment_des pd
+		where p.payment_des_code = pd.payment_des_code 
+        and SUBSTR(TO_DATE(SUBSTR(p.payment_date,1,6), 'YYYY-MM'),1,5) = #{date,jdbcType=VARCHAR}
 	]]> 
 	</select>
 	
-	<!-- //////////////////////////////////////WORKING_STATUS_SEARCHLIST ///////////////////////////////-->
-	<select id = "WS_searchList" resultMap="P0001resultVO" parameterType="java.util.Map">
-	<![CDATA[
-		select WS.WORKING_STATUS_DATE, WS.WORKING_STATUS_START_TIME, WS.WORKING_STATUS_END_TIME, WS.WORKING_STATUS_TOTAL_TIME, WS.WORKING_STATUS_DESC
-		from WORKING_STATUS WS
-		where WS.EMPLOYEE_CODE = #{P_EMP_CODE}
-	]]>
+	<select id = "searchList" resultMap="P0001resultVO" parameterType="java.util.Map">
+	<choose>			
+			<when test= " searchTYPE == 'department'  and  searchTYPE != null">
+			select ew.employee_code, e.employee_name
+			from employee_work ew, employee e, payment p, department d, site s
+			where ew.employee_code = e.employee_code
+            and p.site_code = d.site_code
+            and d.site_code = s.site_code
+            and d.department_code = ew.department_code
+            and p.job_class_code = ew.job_class_code
+   		    and p.payment_code = #{Ppayment_code}  <!-- 코드 -->
+   		    and s.site_name = #{searchSite}	
+   		    and d.depart_name = #{searchDetail,jdbcType=VARCHAR}
+			</when>
+			
+			<when test= " searchTYPE == 'work_group'  and  searchTYPE != null" >
+			select ew.employee_code, e.employee_name
+			from employee_work ew, employee e, payment p, work_group w, site s 
+			where ew.employee_code = e.employee_code
+            and p.site_code = w.site_code
+            and w.site_code = s.site_code
+            and w.work_group_code = ew.work_group_code
+            and p.job_class_code = ew.job_class_code
+   		    and p.payment_code = #{Ppayment_code}  <!-- 코드 -->
+   		    and s.site_name = #{searchSite}	
+   		    and w.work_group_name = #{searchDetail,jdbcType=VARCHAR}
+			</when>
+			
+			<when test= " searchTYPE == 'projuect'  and  searchTYPE != null">
+			select ew.employee_code, e.employee_name
+			from employee_work ew, employee e, payment p, prject pj, site s 
+			where ew.employee_code = e.employee_code
+            and p.site_code = w.site_code
+            and pj.site_code = s.site_code
+            and pj.project_code = ew.project_code
+            and p.job_class_code = ew.job_class_code
+   		    and p.payment_code = #{Ppayment_code}  <!-- 코드 -->
+   		    and s.site_name = #{searchSite}	
+   		    and pj.project_name = #{searchDetail,jdbcType=VARCHAR}
+			</when>
+				
+			<!--각각 선택후 전체/ 전체-전체  -->
+			<when test= " searchTYPE == 'department'  and  searchTYPE != null and  searchTYPE == 'all'">
+			select ew.employee_code, e.employee_name
+			from employee_work ew, employee e, payment p, department d, site s
+			where ew.employee_code = e.employee_code
+            and p.site_code = d.site_code
+            and d.site_code = s.site_code
+            and d.department_code = ew.department_code
+            and p.job_class_code = ew.job_class_code
+   		    and p.payment_code = #{Ppayment_code}  <!-- 코드 -->
+   		    and s.site_name = #{searchSite}	
+   		    and d.depart_name is not null
+			</when>
+			
+			<when test= " searchTYPE == 'work_group'  and  searchTYPE != null and  searchTYPE == 'all'" >
+			select ew.employee_code, e.employee_name
+			from employee_work ew, employee e, payment p, work_group w, site s 
+			where ew.employee_code = e.employee_code
+            and p.site_code = w.site_code
+            and w.site_code = s.site_code
+            and w.work_group_code = ew.work_group_code
+            and p.job_class_code = ew.job_class_code
+   		    and p.payment_date = #{Ppayment_code}
+   		    and s.site_name = #{searchSite}	
+   		    and w.work_group_name is not null
+			</when>
+			
+			<when test= " searchTYPE == 'projuect'  and  searchTYPE != null and  searchTYPE == 'all'">
+			select ew.employee_code, e.employee_name
+			from employee_work ew, employee e, payment p, prject pj, site s 
+			where ew.employee_code = e.employee_code
+            and p.site_code = w.site_code
+            and pj.site_code = s.site_code
+            and pj.project_code = ew.project_code
+            and p.job_class_code = ew.job_class_code
+   		    and p.payment_code = #{Ppayment_code}  <!-- 코드 -->
+   		    and s.site_name = #{searchSite}	
+   		    and pj.project_name is not null
+			</when>
+			
+			<when test= " searchTYPE == 'all'  and  searchTYPE != null">
+			select ew.employee_code, e.employee_name
+			from employee_work ew, employee e, payment p, prject pj, site s 
+			where ew.employee_code = e.employee_code
+            and p.site_code = w.site_code
+            and pj.site_code = s.site_code
+            and pj.project_code = ew.project_code
+            and p.job_class_code = ew.job_class_code
+   		    and p.payment_code = #{Ppayment_code}  <!-- 코드 -->
+   		    and s.site_name = #{searchSite}	
+   		    and pj.project_name is not null
+			</when>
+			
+			<when test= " searchTYPE == 'all'  and  searchTYPE != null and  searchTYPE == 'all'">
+			select ew.employee_code, e.employee_name
+			from employee_work ew, employee e, payment p, prject pj, site s 
+			where ew.employee_code = e.employee_code
+            and p.site_code = w.site_code
+            and pj.site_code = s.site_code
+            and pj.project_code = ew.project_code
+            and p.job_class_code = ew.job_class_code
+   		    and p.payment_code = #{Ppayment_code}  <!-- 코드 -->
+			</when>
+			
+			</choose> 
 	</select>
 </mapper>
