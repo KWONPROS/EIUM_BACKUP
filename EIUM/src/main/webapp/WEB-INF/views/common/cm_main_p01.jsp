@@ -4,15 +4,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <style>
-.modal-content{
-width: 150%;
-height: 200%;
+.modal-content {
+	width: 150%;
+	height: 200%;
 }
+
 textarea {
 	resize: none;
 }
 </style>
-	
+
 
 <script>
 	var action = '';

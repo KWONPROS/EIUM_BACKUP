@@ -17,6 +17,18 @@
 		<result property="board_END_DATE" column="BOARD_END_DATE" />
 		<result property="board_CONTENT" column="BOARD_CONTENT" />
 		<result property="board_CODE" column="BOARD_CODE" />
+		
+		
+		<result property="vacation_CODE" column="VACATION_CODE" />
+		<result property="vacation_TYPE" column="VACATION_TYPE" />
+		<result property="vacation_END_DATE" column="VACATION_END_DATE" />
+		<result property="vacation_START_DATE" column="VACATION_START_DATE" />
+		
+		<result property="business_TRIP_CODE" column="BUSINESS_TRIP_CODE" />
+		<result property="purpose" column="PURPOSE" />
+		<result property="end_DATE" column="END_DATE" />
+		<result property="start_DATE" column="START_DATE" />
+
 
 	</resultMap>
 
@@ -45,7 +57,44 @@
       ]]>
 	</select>
 
-	<select id="findAll" resultMap="resultVO"
+<select id="findvacation" resultMap="resultVO"
+		parameterType="java.util.HashMap"> 
+      <![CDATA[
+         select 
+         B.EMPLOYEE_NAME,
+         A.VACATION_CODE,
+         A.VACATION_TYPE,
+         to_char(to_date(A.VACATION_START_DATE,'YYYYmmdd'),'YYYY-mm-dd') AS VACATION_START_DATE,
+         to_char(to_date(A.VACATION_END_DATE,'YYYYmmdd'),'YYYY-mm-dd') AS VACATION_END_DATE
+         
+         from  VACATION_CHANGE_HISTORY A, EMPLOYEE B
+         where A.EMPLOYEE_CODE = B.EMPLOYEE_CODE
+      
+         
+      ]]>
+	</select>
+	
+<select id="findbusiness" resultMap="resultVO"
+		parameterType="java.util.HashMap"> 
+      <![CDATA[
+         select 
+         A.BUSINESS_TRIP_CODE,
+         B.EMPLOYEE_NAME,
+         A.PURPOSE,
+         to_char(to_date(A.START_DATE,'YYYYmmdd'),'YYYY-mm-dd') AS START_DATE,
+         to_char(to_date(A.END_DATE,'YYYYmmdd'),'YYYY-mm-dd') AS END_DATE
+
+         from  EMPLOYEE_BUSINESS_TRIP A, EMPLOYEE B
+         where A.EMPLOYEE_CODE = B.EMPLOYEE_CODE
+      
+         
+      ]]>
+	</select>
+
+
+
+
+	<select id="findboard" resultMap="resultVO"
 		parameterType="java.util.HashMap"> 
       <![CDATA[
          select 
@@ -59,17 +108,58 @@
 			B.EMPLOYEE_NAME,
 			A.BOARD_CODE
          
-         from BOARD A, EMPLOYEE B, ACCOUNT C
+         from  (select BOARD_DES,
+			BOARD_DES_DES,
+			BOARD_TITLE,
+            BOARD_CONTENT,
+			BOARD_START_DATE,
+			BOARD_END_DATE,
+			EMPLOYEE_ID,
+			BOARD_CODE
+            from board 
+            WHERE BOARD_DES='TODO'
+            AND EMPLOYEE_ID=#{emp_id}
+            
+            UNION
+            select BOARD_DES,
+			BOARD_DES_DES,
+			BOARD_TITLE,
+            BOARD_CONTENT,
+			BOARD_START_DATE,
+			BOARD_END_DATE,
+			EMPLOYEE_ID,
+			BOARD_CODE
+            from board 
+            WHERE BOARD_DES='EVENT'
+            
+            UNION
+            select BOARD_DES,
+			BOARD_DES_DES,
+			BOARD_TITLE,
+            BOARD_CONTENT,
+			BOARD_START_DATE,
+			BOARD_END_DATE,
+			EMPLOYEE_ID,
+			BOARD_CODE
+            from board 
+            WHERE BOARD_DES='NOTICE'
+            )A
+         
+         
+         , EMPLOYEE B, ACCOUNT C
          where C.EMPLOYEE_CODE = B.EMPLOYEE_CODE
-         AND C.EMPLOYEE_ID = A.EMPLOYEE_ID 
+         AND C.EMPLOYEE_ID = A.EMPLOYEE_ID
+ 
+         
       ]]>
 	</select>
 
 	<insert id="insertData" parameterType="java.util.Map">
-	   <selectKey resultType="string" keyProperty="id" order="BEFORE">
-       SELECT SEQ_BOARD.NEXTVAL AS ID FROM DUAL
-   </selectKey>
-
+		<selectKey resultType="string" keyProperty="id"
+			order="BEFORE">
+			SELECT SEQ_BOARD.NEXTVAL AS ID FROM DUAL
+		</selectKey>
+  <![CDATA[
 		insert into BOARD(
 		EMPLOYEE_ID,
 		BOARD_DES,
@@ -90,8 +180,10 @@
 		#{board_CONTENT},
 		#{id}
 		)
+		 ]]>
 	</insert>
 	<update id="updateData" parameterType="java.util.Map">
+	  <![CDATA[
 		update BOARD
 		set
 		BOARD_DES=#{board_DES},
@@ -107,12 +199,17 @@
 		where
 		BOARD_CODE=#{board_CODE}  
 
-
+]]>
 	</update>
 	<delete id="deleteData" parameterType="java.util.Map">
+		  <![CDATA[
 		delete BOARD
 		where
 		TRIM(BOARD_CODE) = #{board_CODE}
+		]]>
 	</delete>
+
+
+
 
 </mapper>

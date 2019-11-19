@@ -85,8 +85,14 @@ public class HomeService {
 		Transport.send(mimeMessage); //javax.mail.Transport.send() 이용 }
 	}
 	
-	public List<HomeVO> findAll() {
-		return HomeDAO.findAll();
+	public List<HomeVO> findvacation(String emp_id) {
+		return HomeDAO.findvacation(emp_id);
+	}
+	public List<HomeVO> findbusiness(String emp_id) {
+		return HomeDAO.findbusiness(emp_id);
+	}
+	public List<HomeVO> findboard(String emp_id) {
+		return HomeDAO.findboard(emp_id);
 	}
 
 
