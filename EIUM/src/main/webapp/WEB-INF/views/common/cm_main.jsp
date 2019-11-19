@@ -317,7 +317,7 @@ body ::-webkit-scrollbar-thumb {  background: rgba(0,0,0,.1);  }
 
 	<div id='topright' class="topright">
 		<div id='vacation' class="vacation" style="color: white;">
-			<a class="plusbutton" href="javascript:createTab(36,0,'휴가관리');">+</a>
+			<a class="plusbutton" href="javascript:createTab(34,0,'휴가관리');">+</a>
 			<div class="boardtitle" style="border-bottom-color: white;">휴가</div>
 			<div class="divboard">
 
@@ -341,7 +341,7 @@ body ::-webkit-scrollbar-thumb {  background: rgba(0,0,0,.1);  }
 
 		</div>
 		<div id='business' class="business" style="color: white;">
-			<a class="plusbutton" href="javascript:createTab(38,0,'출장관리');">+</a>
+			<a class="plusbutton" href="javascript:createTab(36,0,'출장관리');">+</a>
 			<div class="boardtitle" style="border-bottom-color: white;">출장</div>
 			<div class="divboard">
 				<table class="boardtable" id="noticetable">
