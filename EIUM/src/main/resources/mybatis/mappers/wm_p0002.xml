@@ -19,6 +19,7 @@
 		<result property="VACATION_APPLY_DATE" column="VACATION_APPLY_DATE" />
 		<result property="BEFORE_VACATION_REMAIN_DATE" column="BEFORE_VACATION_REMAIN_DATE" />
 		<result property="VACATION_REMAIN_DATE" column="VACATION_REMAIN_DATE" />
+		<result property="AFTER_VACATION_REMAIN_DATE" column="AFTER_VACATION_REMAIN_DATE" />
 		
 	    <result property="SITE_NAME" column="SITE_NAME" />
 	    <result property="SITE_CODE" column="SITE_CODE" />
@@ -37,7 +38,7 @@
 
 	<select id="searchList" resultMap="p0002Result" parameterType="java.util.List">
       <![CDATA[
-         SELECT vh.vacation_code, e.employee_code, e.employee_name, d.department_name, p.position_name, vh.vacation_type, vh.VACATION_START_DATE, vh.VACATION_END_DATE, vh.VACATION_APPLY_DATE, vh.BEFORE_VACATION_REMAIN_DATE
+         SELECT vh.vacation_code, e.employee_code, e.employee_name, d.department_name, p.position_name, vh.vacation_type, vh.VACATION_START_DATE, vh.VACATION_END_DATE, vh.VACATION_APPLY_DATE, vh.BEFORE_VACATION_REMAIN_DATE, vh.AFTER_VACATION_REMAIN_DATE
          FROM employee e, employee_work ew, department d, position p, vacation_remain vr, vacation_change_history vh, site s
          WHERE ew.employee_code = e.employee_code
          and ew.employee_code = vr.employee_code
@@ -124,8 +125,8 @@
 	</select>
 	
 	<insert id="insertData" parameterType="java.util.Map">
-		insert into VACATION_CHANGE_HISTORY(VACATION_CODE, EMPLOYEE_CODE, BEFORE_VACATION_REMAIN_DATE, VACATION_TYPE, VACATION_START_DATE, VACATION_END_DATE, VACATION_APPLY_DATE)
-		 values(VACATION_CODE_SEQ.NEXTVAL, #{employee_CODE}, #{before_VACATION_REMAIN_DATE}, #{vacation_TYPE}, #{vacation_START_DATE}, #{vacation_END_DATE}, #{vacation_APPLY_DATE})
+		insert into VACATION_CHANGE_HISTORY(VACATION_CODE, EMPLOYEE_CODE, BEFORE_VACATION_REMAIN_DATE, VACATION_TYPE, VACATION_START_DATE, VACATION_END_DATE, VACATION_APPLY_DATE, AFTER_VACATION_REMAIN_DATE)
+		 values(VACATION_CODE_SEQ.NEXTVAL, #{employee_CODE}, #{before_VACATION_REMAIN_DATE}, #{vacation_TYPE}, #{vacation_START_DATE}, #{vacation_END_DATE}, #{vacation_APPLY_DATE}, #{after_VACATION_REMAIN_DATE})
 	</insert>
 	
 	<update id="updateData" parameterType="java.util.Map">
