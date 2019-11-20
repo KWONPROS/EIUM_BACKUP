@@ -40,4 +40,9 @@ public interface HM_P0022Controller {
 
 	Map homeSearch_p05(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
+	Map saveData3(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	Map saveData4(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+
 }

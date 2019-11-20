@@ -66,6 +66,7 @@ public class HM_P0022DAOImpl implements HM_P0022DAO{
 	
 		return list;
 	}
+
 	@Override
 	public void insertData1(Map<String, String> row) throws DataAccessException {
 		sqlSession.update("mapper.hm_p0022.insertData1", row);
@@ -101,7 +102,21 @@ public class HM_P0022DAOImpl implements HM_P0022DAO{
 		sqlSession.update("mapper.hm_p0022.deleteData2", row);
 		
 	}
-	
+
+
+	@Override
+	public void updateData3(Map<String, String> row) throws DataAccessException {
+		sqlSession.update("mapper.hm_p0022.updateData3", row);
+		
+	}
+
+	@Override
+	public void updateData4(Map<String, String> row) throws DataAccessException {
+		sqlSession.update("mapper.hm_p0022.updateData4", row);
+		
+	}
+
+
 	
 	
 }

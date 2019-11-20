@@ -64,6 +64,8 @@ public class HM_P0022ServiceImpl implements HM_P0022Service{
 		List<HM_P0022VO> list =  hM_P0022DAO.homeEmployeeSearch(searchMap); 
 		return list;
 	}
+
+
 	
 
 	@Override
@@ -103,6 +105,37 @@ public class HM_P0022ServiceImpl implements HM_P0022Service{
 			i++;
 		}
 	}
+	@Override
+	public void saveData3(Map<String, String[]> dataMap) throws DataAccessException {
+		String[] status = dataMap.get("Status");
+		int length = status.length; // row수
+		int i = 0;
+		
+		for(String str : status) {
+			Map<String, String> row = getRow(dataMap, length, i); // 현재 Index의 Row Map
+				if("U".equals(str)) { // 수정
+				hM_P0022DAO.updateData3(row);
+			}
+			i++;
+		}
+	}
+	
+	@Override
+	public void saveData4(Map<String, String[]> dataMap) throws DataAccessException {
+		String[] status = dataMap.get("Status");
+		int length = status.length; // row수
+		int i = 0;
+		System.out.println("############난서비스######"+dataMap.get("Status"));
+		
+		for(String str : status) {
+			Map<String, String> row = getRow(dataMap, length, i); // 현재 Index의 Row Map
+				if("R".equals(str)) { // 수정
+				hM_P0022DAO.updateData4(row);
+			}
+			i++;
+		}
+	}
+	
 	
 	
 	private Map getRow(Map<String, String[]> dataMap, int length, int index) {
@@ -115,6 +148,10 @@ public class HM_P0022ServiceImpl implements HM_P0022Service{
 		}		
 		return row;
 	}
+
+
+	
+
 	
 	
 }

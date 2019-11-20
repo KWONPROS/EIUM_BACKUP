@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -194,8 +195,8 @@ public class HM_P0022ControllerImpl implements HM_P0022Controller{
 		Map<String, Object> resultMap = new HashMap<String, Object>(); // 조회결과
 		
 		
-		searchMap.put("E_id", request.getParameter("E_id"));
-		System.out.println(request.getParameter("E_id"));
+		searchMap.put("SiteList", request.getParameter("SiteList"));
+		System.out.println(request.getParameter("SiteList"));
 		List<HM_P0022VO> data = hM_P0022Service.homeSearch_p05(searchMap);
         resultMap.put("Data", data);
         
@@ -289,6 +290,72 @@ public class HM_P0022ControllerImpl implements HM_P0022Controller{
 		
         return result;
 	}
+	@Override
+	@RequestMapping(value = "hm/p0022/saveData3.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map saveData3(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, String[]> dataMap = new HashMap<String, String[]>(); 
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+
+		
+		Enumeration enu = request.getParameterNames();
+		while (enu.hasMoreElements()) {
+			String name = (String) enu.nextElement();
+			String[] values = request.getParameterValues(name);
+			dataMap.put(name, values);
+		}
+		
+		Map<String, String> result = new HashMap<String, String>();
+		try {
+			hM_P0022Service.saveData3(dataMap);	
+			result.put("Code","0");
+			result.put("Message","저장성공");
+		}catch(Exception e) {
+			result.put("Code","-1");
+			result.put("Message","저장실패");
+			e.printStackTrace();
+		}
+		
+		resultMap.put("Result", result); 
+		
+        return result;
+	}
 	
+	@Override
+	@RequestMapping(value = "hm/p0022/saveData4.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map saveData4(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, String[]> dataMap = new HashMap<String, String[]>(); 
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+		System.out.println("나는컨트롤러4");
+		
+		Enumeration enu = request.getParameterNames();
+		while (enu.hasMoreElements()) {
+			String name = (String) enu.nextElement();
+			String[] values = request.getParameterValues(name);
+			dataMap.put(name, values);
+		}
+		
+		Map<String, String> result = new HashMap<String, String>();
+		try {
+			hM_P0022Service.saveData4(dataMap);	
+			result.put("Code","0");
+			result.put("Message","저장성공");
+		}catch(Exception e) {
+			result.put("Code","-1");
+			result.put("Message","저장실패");
+			e.printStackTrace();
+		}
+		
+		resultMap.put("Result", result); 
+		
+        return result;
+	}
+	
+	
+
+
 	
 }
