@@ -169,10 +169,9 @@ function popupValue5(rowData){
 	mySheet2.SetRowData(mySheet2.GetSelectRow(),rowData);
 	
 }
-function mySheet1_OnButtonClick(Row,Col){
-	var result = confirm('')
+
 	
-}
+
 function mySheet2_OnPopupClick(Row,Col) {  	
 	
 	if(Col==4){
@@ -191,7 +190,15 @@ function mySheet1_OnPopupClick(Row,Col){
 	}
 }
 function mySheet1_OnButtonClick(Row,Col){
-	alert("현세찡");
+	
+	var result = confirm('마감하시겠습니까?')
+	if(result){
+		
+		alert('마감되었습니다');
+	}
+	else{
+		alert('마감취소되었습니다');
+	}
 	
 }
 
