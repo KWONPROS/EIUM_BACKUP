@@ -51,14 +51,14 @@ public class HM_P0002ServiceImpl implements HM_P0002Service {
 	}
 
 	@Override
-	public void saveData(Map<String, String[]> dataMap, String u)  throws DataAccessException  {
+	public void saveData(Map<String, String[]> dataMap, String user)  throws DataAccessException  {
 		String[] status = dataMap.get("Status");
 		int length = status.length; 
 		int i = 0;
 
 		
 		for(String str : status) {
-			Map<String, String> row = getRow(dataMap, length, i, u); 
+			Map<String, String> row = getRow(dataMap, length, i, user); 
 			if("I".equals(str)) { 
 				p0002DAO.insertData(row);
 			}else if("U".equals(str)) { 
@@ -70,36 +70,13 @@ public class HM_P0002ServiceImpl implements HM_P0002Service {
 		}
 	}
 	
-	@Override
-	public void saveSelect(Map<String, String[]> dataMap, String u, String x)  throws DataAccessException  {
-		String[] status = dataMap.get("Status");
-		int length = status.length; 
-		int i = 0;
-
-		
-		for(String str : status) {
-			Map<String, String> row = getRow2(dataMap, length, i, u, x); 
-			if("I".equals(str)) { 
-				p0002DAO.insertData2(row);
-			}else if("U".equals(str)) { 
-				p0002DAO.updateData2(row);
-			}else if("D".equals(str)) { 
-				p0002DAO.deleteData2(row);
-			}
-			i++;
-		}
-	}
-
-	
-	
-	
-	private Map<String, String> getRow(Map<String, String[]> dataMap, int length, int index, String u) {
+	private Map<String, String> getRow(Map<String, String[]> dataMap, int length, int index, String user) {
 		Map<String, String> row = new HashMap<String, String>();
 		for(String name : dataMap.keySet()) {
 			String[] data = dataMap.get(name);
 			if(length == data.length) {
 				row.put(name, data[index]);
-				row.put("user", u);
+				row.put("user", user);
 
 
 			}
@@ -107,13 +84,35 @@ public class HM_P0002ServiceImpl implements HM_P0002Service {
 		return row;
 	}	
 	
-	private Map<String, String> getRow2(Map<String, String[]> dataMap, int length, int index, String u, String x) {
+	@Override
+	public void saveSelect(Map<String, String[]> dataMap2, String user2, String x2)  throws DataAccessException  {
+		String[] status = dataMap2.get("Status");
+
+		int length = status.length; 
+		int i = 0;
+
+		
+		for(String str : status) {
+			Map<String, String> row2 = getRow2(dataMap2, length, i, user2, x2); 
+			if("I".equals(str)) { 
+				p0002DAO.insertselect(row2);
+			}else if("U".equals(str)) { 
+				p0002DAO.updateselect(row2);
+			}else if("D".equals(str)) { 
+				p0002DAO.deleteselect(row2);
+			}
+			i++;
+		}
+	}
+
+
+	private Map<String, String> getRow2(Map<String, String[]> dataMap, int length, int index, String user, String x) {
 		Map<String, String> row = new HashMap<String, String>();
 		for(String name : dataMap.keySet()) {
 			String[] data = dataMap.get(name);
 			if(length == data.length) {
 				row.put(name, data[index]);
-				row.put("user", u);
+				row.put("user", user);
 				row.put("x", x);
 
 

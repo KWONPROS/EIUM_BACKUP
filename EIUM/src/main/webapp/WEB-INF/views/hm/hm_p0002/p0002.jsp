@@ -51,14 +51,14 @@ function setJob_class(){
 		{Header:"삭제|삭제",Type:"DelCheck",Width:70,SaveName:"Delete",Align:"Center"},
 		{Header:"지급고유번호",Type:"Text",Width:120,SaveName:"payment_code",Align:"Center",Hidden:"1"}, 
 		{Header:"지급회수|지급일자",Type:"Date", Align:"Center", Width:120, SaveName:"payment_date",Align:"Center", Format:"yyyy-MM-dd"}, 
-		{Header:"지급회수|지급분류",Type:"Combo",Width:120,SaveName:"payment_des_name", ComboText:"급여|상여|동시", ComboCode:"100|200|300",PopupText:"급여|상여|동시"}
+		{Header:"지급회수|지급분류",Type:"Combo",Width:120,SaveName:"payment_des_name", ComboText:"동시|급여|상여", ComboCode:"300|100|200",PopupText:"동시|급여|상여"}
 		];
 		IBS_InitSheet(mySheet, initSheet);
   
 		mySheet.SetSheetHeight(200);
 		mySheet.SetSheetWidth(700); 
 		
-		mySheet.RemoveAll();
+		mySheet2.RemoveAll();
 		var initSheet2 = {};
 		initSheet2.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0, MergeSheet:msHeaderOnly};
 		initSheet2.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
@@ -66,9 +66,9 @@ function setJob_class(){
 		{Header:"상태|상태",Type:"Status",Width:70,SaveName:"Status",Align:"Center"},
 		{Header:"삭제|삭제",Type:"DelCheck",Width:70,SaveName:"Delete",Align:"Center"},
 		{Header:"지급선정고유번호",Type:"Text",Width:120,SaveName:"selection_of_payment_code", Align:"Center",Hidden:"1"}, 
-		{Header:"직급직종및급여형태|사업장코드",Type:"Text",Width:120,SaveName:"site_code", Align:"Center"}, 
+		{Header:"직급직종및급여형태|사업장코드",Type:"Text",Width:120,SaveName:"site_code", Align:"Center", Hidden:"1"}, 
 		{Header:"직급직종및급여형태|사업장",Type:"Text",Width:120,SaveName:"site_name", Align:"Center",InsertEdit:"0", UpdateEdit:"0"}, 
-		{Header:"직급직종및급여형태|직종코드",Type:"Text",Width:120,SaveName:"job_class_code", Align:"Center"}, 
+		{Header:"직급직종및급여형태|직종코드",Type:"Text",Width:120,SaveName:"job_class_code", Align:"Center", Hidden:"1"}, 
 		{Header:"직급직종및급여형태|직종",Type:"Text",Width:120,SaveName:"job_class_name" , Align:"Center",InsertEdit:"0", UpdateEdit:"0"}
 		];
 		IBS_InitSheet(mySheet2, initSheet2);
@@ -109,14 +109,12 @@ function setJob_class(){
 			break;
 		case "save": // 저장
 			var tempStr = mySheet.GetSaveString();
-			alert(tempStr);
-			mySheet.DoSave("${contextPath}/hm/p0002/saveData.do", tempStr);
+			mySheet.DoSave("${contextPath}/hm/p0002/saveData.do");
 			break;
 			
 		case "save2": // 저장
 			var tempStr2 = mySheet2.GetSaveString();
-			alert(tempStr2);
-			mySheet2.DoSave("${contextPath}/hm/p0002/saveSelect.do", tempStr2);
+			mySheet2.DoSave("${contextPath}/hm/p0002/saveSelect.do");
 			break;
 			
 		case "insert":
@@ -176,6 +174,14 @@ function setJob_class(){
 	// 저장완료 후 처리할 작업
 	// code: 0(저장성공), -1(저장실패)
 	function mySheet_OnSaveEnd(code, msg) {
+		if (msg != "") {
+			alert(msg);
+			//번호 다시 매기기
+			//mySheet.ReNumberSeq();
+		}
+	}
+	
+	function mySheet2_OnSaveEnd(code, msg) {
 		if (msg != "") {
 			alert(msg);
 			//번호 다시 매기기

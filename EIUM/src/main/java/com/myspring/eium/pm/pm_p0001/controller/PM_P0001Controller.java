@@ -11,6 +11,9 @@ public interface PM_P0001Controller {
 	public Map payment_searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map searchTypeList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public Map searchReceipt(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
 	public ModelAndView paymentdateSerch_init(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
 }

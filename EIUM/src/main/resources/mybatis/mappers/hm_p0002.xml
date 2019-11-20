@@ -18,9 +18,8 @@
 		<result property="int_date" column="int_date" />
 		<result property="upt_user_id" column="upt_user_id" />
 		<result property="upt_date" column="upt_date" />
-		
-   
 	</resultMap> 
+	
 	<select id="searchList" resultMap="P0002resultVO" parameterType="java.util.Map"> 
       <![CDATA[
          select p.payment_code, p.payment_date, pd.payment_des_name
@@ -30,6 +29,8 @@
          order by p.payment_date
       ]]>
 	</select>
+	
+	
 	
 	<select id="searchSelect" resultMap="P0002resultVO" parameterType="java.util.Map"> 
       <![CDATA[
@@ -76,12 +77,17 @@
 		where payment_code = #{payment_code}
 	</delete>
 	
-	<insert id="insertData2" parameterType="java.util.Map">
+		<delete id="deleteData2" parameterType="java.util.Map">
+		delete selection_of_payment
+		where payment_code = #{payment_code}
+	</delete>
+	
+	<insert id="insertselect" parameterType="java.util.Map">
 		insert into selection_of_payment(selection_of_payment_code, payment_code, site_code, job_class_code, int_user_id, int_date) 
 		values(selection_of_payment_code_seq.nextval,  #{x}, #{site_code}, #{job_class_code}, #{user}, sysdate)
 	</insert>	
 	
-	<update id="updateData2" parameterType="java.util.Map">
+	<update id="updateselect" parameterType="java.util.Map">
 		update selection_of_payment
 		set site_code = #{site_code}
 		   , job_class_code = #{job_class_code}
@@ -90,7 +96,7 @@
 		where selection_of_payment_code = #{selection_of_payment_code}
 	</update>	
 	
-	<delete id="deleteData2" parameterType="java.util.Map">
+	<delete id="deleteselect" parameterType="java.util.Map">
 		delete selection_of_payment
 		where selection_of_payment_code = #{selection_of_payment_code}
 	</delete>

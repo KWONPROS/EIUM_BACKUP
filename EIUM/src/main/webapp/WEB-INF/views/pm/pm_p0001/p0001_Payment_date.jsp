@@ -20,15 +20,17 @@ function LoadPage(){
 	initSheet.Cfg={SearchMode:smLazyLoad,ToolTip:1};
 	initSheet.HeaderMode = {Sort:1,ColMove:1,ColResize:1,HeaderCheck:1};
 	initSheet.Cols=[
-		{Header:"지급코드",Type:"text", Align:"Center", Width:120, SaveName:"payment_code", Align:"Center", Hidden:"1"}, 
-		{Header:"지급일자",Type:"Date", Align:"Center", Width:120, SaveName:"payment_date", Align:"Center", Format:"yyyy-MM-dd", edit:"0"}, 
-		{Header:"지급분류",Type:"text", Width:120, SaveName:"payment_des_name" , edit:"0"}
+		{Header:"지급코드",Type:"Text", Align:"Center", Width:120, SaveName:"payment_code", Hidden:"1"}, 
+		{Header:"지급일자",Type:"Date", Align:"Center", Width:120, SaveName:"payment_date", Format:"yyyy-MM-dd"}, 
+		{Header:"지급분류",Type:"Text", Align:"Center", Width:120, SaveName:"payment_des_name"}
 		];
 	IBS_InitSheet(mySheet2,initSheet);
 	
 	mySheet2.SetEditableColorDiff(1);
 	mySheet2.SetColEditable(0,0);
 	mySheet2.SetColEditable(1,0);
+	mySheet2.SetColEditable(2,0);
+
 	
 	var monthpicker =${monthpicker};
 	mySheet2.DoSearch("${contextPath}/pm/p0001/searchPaymentdateList.do",monthpicker)
@@ -46,6 +48,7 @@ function mySheet2_OnDblClick(Row, Col, Value) {
 		 document.getElementById("Cpayment_code").setAttribute('value', payment_code);
 		 document.getElementById("Cpayment_date").setAttribute('value', payment_date);
 		 document.getElementById("Cpayment_des_name").setAttribute('value', payment_des_name);
+		 
 		 opener.document.getElementById("Ppayment_code").value=document.getElementById("Cpayment_code").value;
 		 opener.document.getElementById("Ppayment_date").value=document.getElementById("Cpayment_date").value;
 		 opener.document.getElementById("Ppayment_des_name").value=document.getElementById("Cpayment_des_name").value;

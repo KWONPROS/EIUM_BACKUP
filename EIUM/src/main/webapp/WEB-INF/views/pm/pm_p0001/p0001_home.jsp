@@ -24,10 +24,6 @@ function setPayment(){
 	payment_code=document.getElementById("Ppayment_code").value;
 	payment_date=document.getElementById("Ppayment_date").value;
 	payment_des_name=document.getElementById("Ppayment_des_name").value;
-
-/* 	mySheet.SetCellText(row,3,payment_date);
-	mySheet.SetCellText(row,4,payment_des_name); */
-	
 };
 
 	/*Sheet 기본 설정 */
@@ -42,6 +38,8 @@ function setPayment(){
 	        {Header:"NO",Type:"Seq",SaveName:"NUMBER",MinWidth:50, Align:"Center" },	
 	        {Header:"사원코드",Type:"Text",SaveName:"employee_code", MinWidth:50,  Align:"Center", KeyField:1, Edit: 0},	
 			{Header:"사원명",Type:"Text",SaveName:"employee_name", MinWidth:120, Align:"Center", Edit: 0},
+			{Header:"지급고유번호",Type:"Text",SaveName:"payment_code", MinWidth:120, Align:"Center", Hidden:"1"}
+
 		];   
 		IBS_InitSheet( mySheet , initSheet);
   
@@ -56,8 +54,11 @@ function setPayment(){
 		initSheet2.Cols = [
 			{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
 	        {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},	
-			{Header:"지급항목",Type:"Date",SaveName:"working_STATUS_DATE",MinWidth:120,KeyField:1, Align:"Center", Format: "Ymd"},			
-			{Header:"금액",Type:"Date",SaveName:"working_STATUS_START_TIME",MinWidth:100, Align:"Center", Format: "Hm"},
+       		{Header:"지급항목",Type:"Text", MinWidth:70, SaveName:"payment_receipt_item", DefaultValue :"기본급" , InsertEdit:"0", UpdateEdit:"0"},
+			{Header:"금액",Type:"Text",SaveName:"payment_receipt_price",MinWidth:70, Align:"Center"},
+       		{Header:"급여계산서고유번호",Type:"Text",SaveName:"payment_receipt_code",MinWidth:70, Align:"Center"},
+       		{Header:"사원고유번호",Type:"Text",SaveName:"employee_code",MinWidth:70, Align:"Center"},
+       		{Header:"지급고유번호",Type:"Text",SaveName:"payment_code",MinWidth:70, Align:"Center"}
 		];
 		
 		IBS_InitSheet( mySheet2 , initSheet2);
@@ -98,22 +99,45 @@ function setPayment(){
 			mySheet.RemoveAll();
 			mySheet2.RemoveAll();
 			break;
-		case "save": // 저장
-
-			/* var tempStr = mySheet2.GetSaveString();
-			tempStr = tempStr + "&table_NAME=" + mySheet2.GetCellValue(0, 2);
-			alert("서버로 전달되는 문자열 확인 :" + tempStr);
-			mySheet.DoSave("${contextPath}/pm/p0001/saveData.do", tempStr);
+			
+		case "insert":
+		      var row = mySheet.DataInsert(-1);
+		      break;
+		      
+				
+		case "insert2":
+		      var row = mySheet2.DataInsert(-1);
+		      break;      
+		     case "save":
+		    	 var tempStr = mySheet2.GetSaveString();
+		    	 mySheet2.DoSave("${contextPath}/pm/p0001/saveData.do");
 			break;
- */
+
 		}
 	}
+	
+	function mySheet2_OnSearchEnd() {
+		mySheet2.DataInsert(-1);
+	}
+	
+	function mySheet2_OnKeyUp(Row, Col, KeyCode, Shift) {
+		//if (Modify == 1) { 인사코드 부분 - 수정 가능일시이니까 / 인사기록카드에서는 상관x
+	         //console.log("keycode: "+KeyCode+"&col:"+mySheet2.LastCol()+"&row:"+mySheet2.RowCount());
+	         /* console.log("keycode: " + KeyCode);*/
+	         console.log("col:" + Col + "lastcol:" + mySheet2.LastCol());
+	         console.log("row:" + Row + "row갯수:" + mySheet2.RowCount()); 
+	         console.log("mySheet2:" +mySheet2.RowCount());
+	         if ( KeyCode == 13 &&  Col == mySheet2.LastCol()
+	               && Row == mySheet2.RowCount()) { // 엔터를 누르고 / col이 마지막 col이고 / row가 마지막 열일경우
+	            doAction("insert2");
+	         }
+		}
 
 	//로우 클릭시
-	function mySheet_OnClick(Row, Col) {
-		if (Row != 0) {
-			mySheet2.DoSearch("${contextPath}/pm/p0001/WS_searchList.do", "P_EMP_CODE=" + mySheet.GetCellValue(Row, 0));
-		}
+function mySheet_OnClick(Row, Col) { 
+		var param = "x="+mySheet.GetCellValue(Row, 1)+"&y="+mySheet.GetCellValue(Row, 3);
+			mySheet2.DoSearch("${contextPath}/pm/p0001/searchReceipt.do", param);
+			
 	}
 	
 	 function showPopup() {
@@ -401,6 +425,8 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 		구분 :<select id="searchDetail" >
 		<option value="alldetail" selected>전체</option>
 		</select>
+		<input type="hidden" id="Ppayment_code">
+		<input type="hidden" id="Ppayment_des_name">
 		</div>
 		
 
@@ -413,9 +439,9 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 	<div class="right">
 		<script>createIBSheet("mySheet2", "100%", "100%");</script>
 	</div>
-	<input type="hidden" id="payment_code">
+	
 </form>
-<input type="hidden" id="payment_des_name">
+
 
 
 </body>

@@ -14,9 +14,9 @@ public interface HM_P0002DAO {
 	public void insertData(Map<String, String> row) throws DataAccessException;
 	public void updateData(Map<String, String> row) throws DataAccessException;
 	public void deleteData(Map<String, String> row) throws DataAccessException;
-	public void insertData2(Map<String, String> row) throws DataAccessException;
-	public void updateData2(Map<String, String> row) throws DataAccessException;
-	public void deleteData2(Map<String, String> row) throws DataAccessException;
+	public void insertselect(Map<String, String> row2) throws DataAccessException;
+	public void updateselect(Map<String, String> row2) throws DataAccessException;
+	public void deleteselect(Map<String, String> row2) throws DataAccessException;
 	public List<HM_P0002VO> searchSiteList(Map<String, Object> searchMap) throws DataAccessException;
 	public List<HM_P0002VO> searchJobclassList(Map<String, Object> searchMap) throws DataAccessException;
 	public List<HM_P0002VO> searchSelect(Map<String, Object> searchMap)throws DataAccessException;
