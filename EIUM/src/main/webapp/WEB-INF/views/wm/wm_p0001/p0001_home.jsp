@@ -2512,6 +2512,107 @@
 		}
 	}
 	
+	function selectSite(){
+		$.ajax({
+			url : "${contextPath}/sm/p0006/SiteList.do", //목록을 조회할 url
+			
+			type : "POST",
+			
+			dataType : "JSON",
+			
+			success : function(data){
+				for(var i = 0; i< data['Data'].length; i++){
+					var option = "<option name='1' value='" + data['Data'][i].site_NAME + "'>'"
+						+ DATA['Data'][i].site_NAME + "</option">;
+						
+				//대상 콤보박스에 추가
+				
+				$('#searchSite').append(option);
+				
+				}
+			},
+			
+			error : function(jqxhr, status, error){
+				alert("에러");
+			}
+		});
+		
+	};
+	function selectType(){
+		var searchTYPE = $('#searchTYPE').val();
+		console.log(searchTYPE);
+		
+		$.ajax({
+			url : "${contextPath}/pm/p0001/TypeList.do", //목록을 조회할 url
+			type : "POST",
+			data : {
+				"searchTYPE" : searchTYPE
+			},
+			
+			dataType : "JSON",
+			
+			success : function(data){
+				$(".1").remove();
+				
+				if(data['Data'][0].site_name!= null && data['Data'][0].site_name!= ''){
+					for(var i = 0; i < data['Data'].length; i++){
+						var option = "<option class='1' value='" + data['Data'][i].site_name + "'>"
+							+data['Data'][i].site_name
+							+"</option>";
+							
+					//대상 콤보박스에 추가
+					$('#searchDetail').append(option);
+					}
+				}
+				if(data['Data'][0].department_name != null && data['Data'][0].department_name != ''){
+					for(var i = 0; i < data['Data'].lenth; i++){
+						
+						var option = "<option class='1' value='" + data['Data'][i].department_name + "'>"
+						+data['Data'][i].department_name
+						+ "</option>";
+						
+						//대상 콤보박스에 추가
+						$('#searchDetail').append(option);
+					}
+				}
+				
+				if(data['Data'][0].work_group_name!= null && data['Data'][0].work_group_name!= ''){
+					for (var i = 0; i < data['Data'].length; i++) {
+
+						var option = "<option class='1' value='" + data['Data'][i].work_group_name + "'>"
+								+ data['Data'][i].work_group_name
+								+ "</option>";
+
+						//대상 콤보박스에 추가
+						$('#searchDetail').append(option);
+
+					}
+				}
+					
+					if(data['Data'][0].project_name!= null && data['Data'][0].project_name!= ''){
+					for (var i = 0; i < data['Data'].length; i++) {
+
+						var option = "<option class='1' value='" + data['Data'][i].project_name + "'>"
+								+ data['Data'][i].project_name
+								+ "</option>";
+
+						//대상 콤보박스에 추가
+						$('#searchDetail').append(option);
+
+					}
+				}
+
+				},
+
+				error : function(jqxhr, status, error) {
+
+					alert("에러");
+
+				}
+
+			});
+
+};
 	
 		
 		
@@ -2693,16 +2794,26 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 			<span class="yearMonth">귀속연월</span> 
 			<input id="monthpicker" type="text">
 			<img id="btn_monthpicker" src="${contextPath}/resources/image/icons/icon_calendar.png">
-			<div class="left_rightsearch"><span class="kindofsearch">조회조건</span>
-				<select id="Employee_Select">
-		    	<option value="" selected>구분</option>
-				<option value="employee_name">사업장</option>
-				<option value="employee_code">부서</option>
+			<div class="left_rightsearch">
+			<span class="kindofsearch">사업장구분:</span>
+				<select id="searchSite" onchange="selectSite()">
+					<option value="all" selected>전체</option>
+				</select>
+			<span class="kindofsearch">조회조건</span>
+				<select id="searchTYPE" onchange="selectType()">
+		    		<option value="all" selected>전체</option>
+					<option value="department">부서</option>
+					<option value="employee_code">근무조</option>
+					<option value="project">프로젝트</option>
+				</select>
+			<span class="kindofsearch">구분</span>
+			<select id="searchDetail" >
+				<option value="alldetail" selected>전체</option>
 			</select>
-			<input type="text" id="p_text" placeholder="사업장  or 부서">
+			<input type="hidden" id="Ppayment_code">
+			<input type="hidden" id="Ppayment_des_name">
 		</div>
 		</form>
-
 		<script>createIBSheet("mySheet", "100%", "100%");</script>
 	</div>
 	
