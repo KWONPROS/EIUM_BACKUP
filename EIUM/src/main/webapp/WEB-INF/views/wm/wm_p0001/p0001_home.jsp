@@ -25,7 +25,7 @@
 		
 		/* MonthPicker 옵션 */
 	    options = {
-	        pattern: 'yyyy-mm', // Default is 'mm/yyyy' and separator char is not mandatory
+	        pattern: 'yy/mm', // Default is 'mm/yyyy' and separator char is not mandatory
 	        selectedYear: 2019,
 	        startYear: 2000,
 	        finalYear: 3000,
@@ -51,7 +51,7 @@
 	        {Header:"사원코드",Type:"Text",SaveName:"employee_CODE", Width:80, KeyField:1, Align:"Center", Edit: 0},	
 			{Header:"사원명",Type:"Text",SaveName:"employee_NAME",MinWidth:120, Align:"Center", Edit: 0},			
 			{Header:"부서명",Type:"Text",SaveName:"department_NAME",MinWidth:150, Align:"Center", Edit: 0},
-			{Header:"부서코드", Type:"Text", SaveName:"department_CODE", Align:"Center", Edit: 0}
+			{Header:"부서코드", Type:"Text", SaveName:"department_CODE", Align:"Center", Edit: 0, Hidden: 1}
 		];   
 		IBS_InitSheet( mySheet , initSheet);
   
@@ -144,7 +144,6 @@
 		
 		
 		
-		mySheet.DoSearch("${contextPath}/wm/p0001/EMP_searchList.do");
 		mySheet3.DataInsert(-1);
 	}
 
@@ -185,17 +184,17 @@
 	function doAction(sAction) {
 		switch (sAction) {
 		case "search": //조회
-			mySheet.DoSearch("${contextPath}/wm/p0001/EMP_searchList.do");
+			var param = FormQueryStringEnc(document.frm);
+			mySheet.DoSearch("${contextPath}/wm/p0001/EMP_searchList.do", param);
 			/* alert(mySheet2.GetCellValue(mySheet2.GetSelectRow(), 6)); */
-			console.log(mySheet2.GetRowData(1));
-			$('input[name=temp_TIME]').val(mySheet2.GetCellValue(1,3));
-			
 			//조회조건에 맞도록 조회하기
+			
 			break;
 
 		case "reload": //초기화
 			mySheet.RemoveAll();
 			mySheet2.RemoveAll();
+			mySheet3.RemoveAll();
 			break;
 		case "save": // 저장
 			var tempStr = mySheet2.GetSaveString();
@@ -661,7 +660,6 @@
 					}
 					week_NI_TIME = week_NI_TIME + 800;
 					var temp_EX	= week_EX_TIME % 100;
-					alert(temp_EX);
 					if(temp_EX/10 == 6){
 						week_EX_TIME = week_EX_TIME + 40;
 						
@@ -1014,7 +1012,6 @@
 					}
 					holi_NI_TIME = holi_NI_TIME + 800;
 					var temp_EX	= holi_EX_TIME % 100;
-					alert(temp_EX);
 					if(temp_EX/10 == 6){
 						holi_EX_TIME = holi_EX_TIME + 40;
 						
@@ -1389,7 +1386,6 @@
 					}
 					week_NI_TIME = week_NI_TIME + 800;
 					var temp_EX	= week_EX_TIME % 100;
-					alert(temp_EX);
 					if(temp_EX/10 == 6){
 						week_EX_TIME = week_EX_TIME + 40;
 						
@@ -1742,7 +1738,6 @@
 					}
 					holi_NI_TIME = holi_NI_TIME + 800;
 					var temp_EX	= holi_EX_TIME % 100;
-					alert(temp_EX);
 					if(temp_EX/10 == 6){
 						holi_EX_TIME = holi_EX_TIME + 40;
 						
@@ -2522,8 +2517,8 @@
 			
 			success : function(data){
 				for(var i = 0; i< data['Data'].length; i++){
-					var option = "<option name='1' value='" + data['Data'][i].site_NAME + "'>'"
-						+ DATA['Data'][i].site_NAME + "</option">;
+					var option = "<option name='1' value='" + data['Data'][i].site_NAME + "'>"
+						+ data['Data'][i].site_NAME + "</option>";
 						
 				//대상 콤보박스에 추가
 				
@@ -2565,7 +2560,7 @@
 					}
 				}
 				if(data['Data'][0].department_name != null && data['Data'][0].department_name != ''){
-					for(var i = 0; i < data['Data'].lenth; i++){
+					for(var i = 0; i < data['Data'].length; i++){
 						
 						var option = "<option class='1' value='" + data['Data'][i].department_name + "'>"
 						+data['Data'][i].department_name
@@ -2585,7 +2580,6 @@
 
 						//대상 콤보박스에 추가
 						$('#searchDetail').append(option);
-
 					}
 				}
 					
@@ -2598,7 +2592,6 @@
 
 						//대상 콤보박스에 추가
 						$('#searchDetail').append(option);
-
 					}
 				}
 
@@ -2721,10 +2714,11 @@ left: 30px;
 
 #searchBar {
 	background: #EBEBEB;
-	padding: 15px 225px;
+	padding: 15px 185px;
 	margin-bottom: 30px;
 	border-radius: 5px;
 	font-size: 12px;
+	/*여기서 중간 텀띄우기*/
 }
 
 .left input{
@@ -2795,15 +2789,15 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 			<input id="monthpicker" type="text">
 			<img id="btn_monthpicker" src="${contextPath}/resources/image/icons/icon_calendar.png">
 			<div class="left_rightsearch">
-			<span class="kindofsearch">사업장구분:</span>
-				<select id="searchSite" onchange="selectSite()">
+			<span class="kindofsearch">사업장구분</span>
+				<select id="searchSite" onchange="">
 					<option value="all" selected>전체</option>
 				</select>
 			<span class="kindofsearch">조회조건</span>
 				<select id="searchTYPE" onchange="selectType()">
 		    		<option value="all" selected>전체</option>
 					<option value="department">부서</option>
-					<option value="employee_code">근무조</option>
+					<option value="work_group">근무조</option>
 					<option value="project">프로젝트</option>
 				</select>
 			<span class="kindofsearch">구분</span>
@@ -2814,11 +2808,13 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 			<input type="hidden" id="Ppayment_des_name">
 		</div>
 		</form>
-		<script>createIBSheet("mySheet", "100%", "100%");</script>
+		<script>createIBSheet("mySheet", "100%", "100%");
+		selectSite();
+		</script>
 	</div>
-	
 	<div class="center">
 		<script>createIBSheet("mySheet2", "100%", "100%");</script>
+		
 	</div>
 	
 	<div class="right_end">
