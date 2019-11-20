@@ -109,14 +109,8 @@
 		 	return btDay;
 		}
 		x(sd,ed);
-
 		
-		console.log("sd==="+sd);
-		
-		if(sd != '' && ed !='' && mySheet.GetCellValue(Row,8) == '연차'){
-			console.log("===================================연차========" + mySheet.GetCellValue(Row,8));
-
-		
+		if(sd != '' && ed !='' && mySheet.GetCellValue(Row,8) == '연차'){	
 		mySheet.SetCellValue(Row,11,btDay+1);
 		mySheet.SetCellValue(Row,12,mySheet.GetCellValue(Row,7)-mySheet.GetCellValue(Row,11));
 			
@@ -129,12 +123,7 @@
 		}
 		
 		if(sd != '' && ed !='' && mySheet.GetCellValue(Row,8) == '특별휴가'){
-			console.log("======================================특별일수=====" + mySheet.GetCellValue(Row,8));
-			
-
 			mySheet.SetCellValue(Row,11,btDay+1);
-			console.log("특별휴가 안에 btday ===="+btDay);
-			console.log("종료일수가 어쩌고 col="+Col);
 			mySheet.SetCellValue(Row,12,mySheet.GetCellValue(Row,7));
 				
 			if(mySheet.GetCellValue(Row,12) < 0) {
@@ -145,11 +134,7 @@
 			
 			}
 		
-		if(sd != '' && ed !='' && mySheet.GetCellValue(Row,8) == '경조휴가'){
-			console.log("=====================================경조휴가======" + mySheet.GetCellValue(Row,8));
-			
-
-			
+		if(sd != '' && ed !='' && mySheet.GetCellValue(Row,8) == '경조휴가'){	
 			mySheet.SetCellValue(Row,11,btDay+1);
 			mySheet.SetCellValue(Row,12,mySheet.GetCellValue(Row,7));
 
@@ -161,10 +146,6 @@
 			}
 		
 		if(sd != '' && ed !='' && mySheet.GetCellValue(Row,8) == ''){
-			console.log("=====================================  ======" + mySheet.GetCellValue(Row,8));
-			
-
-			
 			mySheet.SetCellValue(Row,11,btDay+1);
 			mySheet.SetCellValue(Row,12,'');
 

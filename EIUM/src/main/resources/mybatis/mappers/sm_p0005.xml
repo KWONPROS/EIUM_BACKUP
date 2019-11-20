@@ -46,82 +46,76 @@
 		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M008', '지급일등록' )
 	</insert>
 	<insert id="insertData9" parameterType="java.util.Map">
-		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M009', '인사정보등록' )
+		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M009', '인사기초코드등록' )
 	</insert>
 	<insert id="insertData10" parameterType="java.util.Map">
-		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M010', '인사기록카드' )
+		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M010', '인사정보등록' )
 	</insert>
 	<insert id="insertData11" parameterType="java.util.Map">
-		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M011', '교육관리' )
+		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M011', '인사기록카드' )
 	</insert>
 	<insert id="insertData12" parameterType="java.util.Map">
-		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M012', '교육평가' )
+		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M012', '교육관리' )
 	</insert>
 	<insert id="insertData13" parameterType="java.util.Map">
-		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M013', '인사발령등록' )
+		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M013', '교육평가' )
 	</insert>
 	<insert id="insertData14" parameterType="java.util.Map">
 		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M014', '인사발령' )
 	</insert>
 	<insert id="insertData15" parameterType="java.util.Map">
-		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M015', '인사발령공고' )
+		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M015', '인사발령조회' )
 	</insert>
 	<insert id="insertData16" parameterType="java.util.Map">
-		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M016', '인사발령리포트' )
+		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M016', '사원정보현황' )
 	</insert>
 	<insert id="insertData17" parameterType="java.util.Map">
-		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M017', '사원정보현황' )
+		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M017', '인사고과/상벌현황' )
 	</insert>
 	<insert id="insertData18" parameterType="java.util.Map">
-		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M018', '인사고과/상벌현황' )
+		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M018', '사원입퇴사현황' )
 	</insert>
 	<insert id="insertData19" parameterType="java.util.Map">
-		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M019', '사원입퇴사현황' )
+		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M019', '책정임금현황' )
 	</insert>
 	<insert id="insertData20" parameterType="java.util.Map">
-		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M020', '책정임금현황' )
+		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M020', '근속년수현황' )
 	</insert>
 	<insert id="insertData21" parameterType="java.util.Map">
-		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M021', '근속년수현황' )
+		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M021', '교육현황' )
 	</insert>
 	<insert id="insertData22" parameterType="java.util.Map">
-		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M022', '교육현황' )
+		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M022', '급여입력및계산' )
 	</insert>
 	<insert id="insertData23" parameterType="java.util.Map">
-		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M023', '급여입력및계산' )
+		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M023', '급여대장' )
 	</insert>
 	<insert id="insertData24" parameterType="java.util.Map">
-		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M024', '급여대장' )
+		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M024', '급여명세' )
 	</insert>
 	<insert id="insertData25" parameterType="java.util.Map">
-		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M025', '급여명세' )
+		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M025', '급상여이체현황' )
 	</insert>
 	<insert id="insertData26" parameterType="java.util.Map">
-		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M026', '급상여이체현황' )
+		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M026', '월별지급현황' )
 	</insert>
 	<insert id="insertData27" parameterType="java.util.Map">
-		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M027', '월별지급현황' )
+		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M027', '사원임금통계' )
 	</insert>
 	<insert id="insertData28" parameterType="java.util.Map">
-		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M028', '사원임금통계' )
+		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M028', '근태입력' )
 	</insert>
 	<insert id="insertData29" parameterType="java.util.Map">
-		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M029', '근태입력' )
+		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M029', '휴가관리' )
 	</insert>
 	<insert id="insertData30" parameterType="java.util.Map">
-		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M030', '휴가관리' )
+		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M030', '휴가내역' )
 	</insert>
 	<insert id="insertData31" parameterType="java.util.Map">
-		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M031', '휴가내역' )
+		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M031', '출장관리' )
 	</insert>
 	<insert id="insertData32" parameterType="java.util.Map">
-		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M032', '출장관리' )
-	</insert>
-	<insert id="insertData33" parameterType="java.util.Map">
-		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M033', '출장조회' )
-	</insert>
-	<insert id="insertData34" parameterType="java.util.Map">
-		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M034', '출장조회(사원별)' )
+		insert into MENU_BY_AUTHORITY( AUTHORITY_CODE, MENU_CODE, MENU_NAME ) values( #{authority_CODE}, 'M032', '출장조회' )
 	</insert>
 
 	
