@@ -32,7 +32,7 @@
 
 	<select  id="appointList" resultMap="P0022resultVO" parameterType="java.util.Map">
 	 <![CDATA[
-    SELECT appoint_code,ha.appoint_title,ha.appoint_date,ha.masterEmployee_code,e.Employee_name,s.site_name,d.department_name,dt.duty_name
+    SELECT appoint_code,ha.appoint_title,ha.appoint_yn,ha.appoint_date,ha.masterEmployee_code,e.Employee_name,s.site_name,d.department_name,dt.duty_name
 	FROM hr_appoint ha,employee e,employee_work ew,department d,site s,duty dt
     WHERE ha.masteremployee_code=e.employee_code(+)
     AND e.employee_code=ew.employee_code(+)
@@ -60,9 +60,7 @@
 	<when test="masterEmpl !='' and masterEmpl != null ">
 	AND e.employee_name=#{masterEmpl}
 	</when>
-
 	</choose>
-
 	</select>
 
 	<select  id="appointList2" resultMap="P0022resultVO" parameterType="java.util.Map">

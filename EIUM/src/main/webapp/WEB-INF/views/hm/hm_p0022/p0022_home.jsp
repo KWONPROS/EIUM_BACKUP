@@ -49,8 +49,8 @@ initSheet.Cols = [
       {Header:"발령일자|발령일자",Type:"Date",SaveName:"appoint_DATE",Align:"Center",Width:100},
       {Header:"발령번호|발령번호",Type:"Text",SaveName:"appoint_CODE",Align:"Center",Width:100},   
       {Header:"제목|제목",Type:"Text",SaveName:"appoint_TITLE",Align:"Center",Width:100},         
-      {Header:"마감/취소|마감/취소",Type:"Button",SaveName:"appoint_YN",Align:"Center",Width:100},         
-      {Header:"작성자|직원번호",Type:"Popup",SaveName:"masterEmployee_CODE",Width:100},
+      {Header:"마감/취소|마감/취소",Type:"Button",SaveName:"appoint_YN",Align:"Center",Width:100,},         
+      {Header:"작성자|직원번호",Type:"Popup",SaveName:"masterEmployee_CODE",Align:"Center",Width:100},
       {Header:"작성자|작성자명",Type:"Text",SaveName:"employee_NAME",Align:"Center",Width:100,InsertEdit:0},
       {Header:"작성자|사업장",Type:"Text",SaveName:"site_NAME",Align:"Center",Width:100,InsertEdit:0},
       {Header:"작성자|부서",Type:"Text",SaveName:"department_NAME",Align:"Center",Width:100,InsertEdit:0},
@@ -96,7 +96,7 @@ initSheet.Cols = [
 
 function mySheet1_OnClick(Row,Col){
 	var status=mySheet1.GetCellValue(Row,0);
-	if(status!="I"){
+	if(status!="I" && Col!=5){
 
 	appointCode ="appointCode="+mySheet1.GetCellValue(Row,3);
 	mySheet2.DoSearch("${contextPath}/hm/p0022/appointList2.do",appointCode)
@@ -170,7 +170,7 @@ function popupValue5(rowData){
 	
 }
 function mySheet1_OnButtonClick(Row,Col){
-	alert('현세찡');
+	var result = confirm('')
 	
 }
 function mySheet2_OnPopupClick(Row,Col) {  	
