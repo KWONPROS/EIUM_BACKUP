@@ -480,7 +480,7 @@
 		where language_code = #{language_code}
 	</delete>
 	
-	<!--상벌관리  -->
+	<!--교육관리  -->
 
 
 	<resultMap id="p0007_11resultVO" type="HM_P0007_11VO">
@@ -503,8 +503,8 @@
 
 	<select id="searchTraining_assessment" resultMap="p0007_11resultVO">
       <![CDATA[
-         select et.employee_training_name, et.employee_training_start_date, et.employee_training_end_date, et.employee_training_time, et.employee_training_date_count, ta.finish_yn, ta.attendence_score, ta.attitude_score, ta.score
-         from employee_training_assessment ta, employee_training et
+         select et.employee_training_name, et.employee_training_start_date, et.employee_training_end_date, et.employee_training_time, et.employee_training_date_count, ta.finish_yn, ta.attendence_score, ta.attitude_score, ta.score, ta.total
+         from employee_training_list ta, employee_training et
          where ta.employee_code = #{x}
                ]]>
 	</select>

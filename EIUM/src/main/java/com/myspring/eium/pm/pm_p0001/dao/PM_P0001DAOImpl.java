@@ -22,18 +22,27 @@ public class PM_P0001DAOImpl implements PM_P0001DAO {
 	private SqlSession sqlSession;
 
 	@Override
-	public List<PM_P0001VO> EMP_searchList(Map<String, Object> searchMap) throws DataAccessException {
-		System.out.println("EMP_searchList - searchMAp: "+searchMap);
-		List<PM_P0001VO> list = sqlSession.selectList("mapper.pm_p0001.EMP_searchList", searchMap);
+	public List<PM_P0001VO> typeList(Map<String, Object> searchMap) throws DataAccessException {
+		List<PM_P0001VO> list = sqlSession.selectList("mapper.pm_p0001.typeList", searchMap);
 		return list;
 	}
 	
+	
+	
 	@Override
-	public List<PM_P0001VO> WS_searchList(Map<String, String> searchMap) throws DataAccessException {
-		System.out.println("WS_searchList - searchMAp: "+searchMap);
-		List<PM_P0001VO> list = sqlSession.selectList("mapper.pm_p0001.WS_searchList", searchMap);
+	public List<PM_P0001VO> paydate_searchList(Map<String, Object> searchMap) throws DataAccessException {
+		List<PM_P0001VO> list = sqlSession.selectList("mapper.pm_p0001.paydate_searchList", searchMap);
 		return list;
 	}
+	
+	
+	@Override
+	public List<PM_P0001VO> searchList(Map<String, Object> searchMap) throws DataAccessException {
+		List<PM_P0001VO> list = sqlSession.selectList("mapper.pm_p0001.searchList", searchMap);
+		return list;
+	}
+	
+
 
 	@Override
 	public void insertData(Map<String, String> row) throws DataAccessException {

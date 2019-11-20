@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.hm_p0023">
+	<resultMap id="P0023resultVO" type="HM_P0023VO">
+		<result property="appoint_DATE" column="appoint_DATE" />
+        <result property="appoint_CODE" column="appoint_CODE" />
+        <result property="appoint_TITLE" column="appoint_TITLE" />
+        <result property="appoint_YN" column="appoint_YN" />
+        <result property="masterEmployee_CODE" column="masterEmployee_CODE" />
+        <result property="masterEmployee_NAME" column="masterEmployee_NAME" />
+        <result property="appoint_HISTORY_CODE" column="appoint_HISTORY_CODE" />
+        <result property="employee_CODE" column="employee_CODE" />
+        <result property="employee_NAME" column="employee_NAME" />
+        <result property="hr_APPOINT_INDEX_NAME" column="hr_APPOINT_INDEX_NAME" />
+        <result property="appoint_INDEX_NAME" column="appoint_INDEX_NAME" />
+        <result property="work_STATE" column="work_STATE" />
+        <result property="join_DATE" column="join_DATE" />
+        <result property="site_NAME" column="site_NAME" />
+        <result property="department_NAME" column="department_NAME" />
+        <result property="job_CLASS_NAME" column="job_CLASS_NAME" />
+ 	    <result property="position_NAME" column="position_NAME" />	              
+ 		<result property="duty_NAME" column="duty_NAME" />
+	    <result property="job_DIS_NAME" column="job_DIS_NAME" />
+	    <result property="pay_TYPE_NAME" column="pay_TYPE_NAME" />
+	    <result property="pay_GRADE_NAME" column="pay_GRADE_NAME" />
+	    <result property="out_REASON_NAME" column="out_REASON_NAME" />
+	    
+	</resultMap> 
+
+	<select  id="appointList" resultMap="P0023resultVO" parameterType="java.util.Map">
+	    <![CDATA[
+	SELECT hr_appoint_number,hr_appoint_title,hai.hr_appoint_index_name,hr_appoint_date,ha.hr_appoint_master_code,e.employee_name,s.site_name,d.department_name
+	FROM hr_appoint ha,employee e,employee_work ew,department d,hr_appoint_index hai,site s
+    WHERE ha.hr_appoint_index_code=e.employee_code
+    AND e.employee_code=ew.employee_code
+    AND ew.department_code=d.department_code
+    AND ha.hr_appoint_index_code=hai.hr_appoint_index_code
+    AND d.site_code=s.site_code
+    
+			]]>
+	</select>
+
+	<select  id="appointSearch_p01" resultMap="P0023resultVO" parameterType="java.util.Map">
+	    <![CDATA[
+	SELECT HR_APPOINT_INDEX_CODE,HR_APPOINT_INDEX_NAME
+	FROM HR_APPOINT_INDEX
+    
+			]]>
+	</select>
+	
+	
+	<select  id="masterEmployee_p02" resultMap="P0023resultVO" parameterType="java.util.Map">
+	<choose>
+	<when test="E_id != '' and E_id != null">
+	    <![CDATA[
+    SELECT E.EMPLOYEE_CODE,E.EMPLOYEE_NAME,D.DEPARTMENT_NAME,S.SITE_NAME,DT.DUTY_NAME
+	FROM EMPLOYEE E, EMPLOYEE_WORK EW,DEPARTMENT D,SITE S,DUTY DT
+	WHERE EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE
+	AND D.SITE_CODE=S.SITE_CODE
+	AND E.EMPLOYEE_CODE= EW.EMPLOYEE_CODE
+	AND EW.DUTY_CODE=DT.DUTY_CODE
+	AND E.EMPLOYEE_NAME =  #{E_id jdbcType=VARCHAR}
+    
+			]]>
+			
+	</when>
+	<otherwise>
+		    <![CDATA[
+    SELECT E.EMPLOYEE_CODE,E.EMPLOYEE_NAME,D.DEPARTMENT_NAME,S.SITE_NAME,DT.DUTY_NAME
+	FROM EMPLOYEE E, EMPLOYEE_WORK EW,DEPARTMENT D,SITE S,DUTY DT
+	WHERE EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE
+	AND D.SITE_CODE=S.SITE_CODE
+	AND E.EMPLOYEE_CODE= EW.EMPLOYEE_CODE
+	AND EW.DUTY_CODE=DT.DUTY_CODE
+    
+			]]>
+	</otherwise>
+	</choose>
+	</select>
+
+
+
+	<select  id="homeSearch_p03" resultMap="P0023resultVO" parameterType="java.util.Map">
+	<choose>
+	<when test="E_id != '' and E_id != null">
+	    <![CDATA[
+    SELECT E.EMPLOYEE_CODE,E.EMPLOYEE_NAME,D.DEPARTMENT_NAME,S.SITE_NAME,DT.DUTY_NAME
+	FROM EMPLOYEE E, EMPLOYEE_WORK EW,DEPARTMENT D,SITE S,DUTY DT
+	WHERE EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE
+	AND D.SITE_CODE=S.SITE_CODE
+	AND E.EMPLOYEE_CODE= EW.EMPLOYEE_CODE
+	AND EW.DUTY_CODE=DT.DUTY_CODE
+	AND E.EMPLOYEE_NAME =  #{E_id jdbcType=VARCHAR}
+    
+			]]>
+			
+	</when>
+	<otherwise>
+		    <![CDATA[
+    SELECT E.EMPLOYEE_CODE,E.EMPLOYEE_NAME,D.DEPARTMENT_NAME,S.SITE_NAME,DT.DUTY_NAME
+	FROM EMPLOYEE E, EMPLOYEE_WORK EW,DEPARTMENT D,SITE S,DUTY DT
+	WHERE EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE
+	AND D.SITE_CODE=S.SITE_CODE
+	AND E.EMPLOYEE_CODE= EW.EMPLOYEE_CODE
+	AND EW.DUTY_CODE=DT.DUTY_CODE
+    
+			]]>
+	</otherwise>
+	</choose>
+	</select>
+
+
+
+
+	<select  id="homeEmployeeSearch" resultMap="P0023resultVO" parameterType="java.util.Map">
+	    <![CDATA[
+	SELECT HA.EMPLOYEE_CODE,E.EMPLOYEE_NAME,D.DEPARTMENT_NAME,DT.DUTY_NAME
+	FROM EMPLOYEE E , HR_APPOINT HA , DUTY DT , DEPARTMENT D,EMPLOYEE_WORK EW
+	WHERE HA.EMPLOYEE_CODE=E.EMPLOYEE_CODE
+	AND HA.EMPLOYEE_CODE=EW.EMPLOYEE_CODE
+	AND EW.DEPARTMENT_CODE=D.DEPARTMENT_CODE
+	AND EW.DUTY_CODE=DT.DUTY_CODE
+	AND HA.HR_APPOINT_NUMBER=#{param}
+	    
+			]]>
+	</select>
+
+
+	<insert id="insertData" parameterType="java.util.Map">
+	insert into HR_APPOINT(HR_APPOINT_NUMBER,HR_APPOINT_TITLE,HR_APPOINT_INDEX_CODE,HR_APPOINT_DATE,HR_APPOINT_MASTER_CODE,HR_APPOINT_CODE)
+	values(#{hr_APPOINT_NUMBER}, #{hr_APPOINT_TITLE}, #{hr_APPOINT_INDEX_CODE},#{hr_APPOINT_DATE},#{hr_APPOINT_MASTER_CODE},HR_APPOINT_CODE_SEQ.NEXTVAL)
+	</insert>	
+	
+	
+
+	<update id="updateData" parameterType="java.util.Map">
+		update HR_APPOINT
+		set  HR_APPOINT_TITLE=#{hr_APPOINT_TITLE}
+		   , HR_APPOINT_DATE=#{hr_APPOINT_DATE}
+		   , HR_APPOINT_MASTER_CODE=#{hr_APPOINT_MASTER_CODE}
+		where HR_APPOINT_NUMBER = #{hr_APPOINT_NUMBER}
+	</update>	
+	
+	
+	<delete id="deleteData" parameterType="java.util.Map">
+		delete HR_APPOINT
+		where HR_APPOINT_NUMBER = #{hr_APPOINT_NUMBER}
+	</delete>	
+	
+	
+		<insert id="insertData2" parameterType="java.util.Map">
+	insert into HR_APPOINT(EMPLOYEE_CODE)
+	values(#{employee_code})
+	</insert>	
+	
+	
+	
+	
+	<delete id="deleteData2" parameterType="java.util.Map">
+		delete HR_APPOINT
+		where EMPLOYEE_CODE = #{employee_code}
+	</delete>	
+	
+	
+	
+</mapper>

@@ -29,67 +29,27 @@
 <script>
 
 
+
  //달력
    document.addEventListener('DOMContentLoaded', function() {  
     
+	   
 	  var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
-      plugins: [ 'interaction',  'dayGrid', 'list' ],
+      plugins: [  'dayGrid', 'list' ],
       locale:'ko',
       height:400,
-      editable: true,
-      selectable: true,
-      eventLimit: true, // allow "more" link when too many events
-      select: function(start, end, allDay) {
-    	    alert(start);
-    	    var title = prompt('일정을 입력하세요.');
-    	           
-    	    },	  
-      events: [
-        {
-          title: 'All Day Event',
-          start: '2019-08-01'
-        },
-        {
-          title: 'Long Event',
-          start: '2019-08-07',
-          end: '2019-08-10'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2019-08-09T16:00:00'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2019-08-16T16:00:00'
-        },
-        {
-          title: 'Conference',
-          start: '2019-08-11',
-          end: '2019-08-13'
-        },
-        
-        {
-          title: 'Birthday Party',
-          start: '2019-08-13T07:00:00'
-        	  , color : "#FF0000"
-                  , textColor : "#FFFF00"
-        },
-        {
-          title: 'Click for Google',
-          url: 'http://google.com/',
-          
-          start: '2019-08-28'
-        }
-      ]
+      editable: false,
+      selectable: false,
+      eventLimit: true, 
+      events: ${jsonArray}
     });
 
     calendar.render();
     
-    
 
+  
+  
 	// 현재인원 그래프
 		Highcharts.chart('circlegraph', {
 			chart : {
@@ -186,8 +146,8 @@
 <style>
 #calendar {
 	margin: 20px 0 0 20px;
-	max-width: 700px;
-	font-size: 12px;
+	max-width: 800px;
+	font-size: 10px;
 }
 .topright {
 	width: 700px;
@@ -195,7 +155,7 @@
 	margin:25px;
 	margin-left:50px;
 	position: relative;
-	left: 780px;
+	left: 820px;
 	top: -400px;
 }
 .bottomleft {
@@ -206,7 +166,7 @@
 	top: -390px;
 }
 .bottomright {
-	width: 800px;
+	width: 820px;
 	height: 360px;
 	position: relative;
 	left: 780px;
@@ -357,25 +317,23 @@ body ::-webkit-scrollbar-thumb {  background: rgba(0,0,0,.1);  }
 
 	<div id='topright' class="topright">
 		<div id='vacation' class="vacation" style="color: white;">
-			<a class="plusbutton" href="javascript:createTab(36,0,'휴가관리');">+</a>
+			<a class="plusbutton" href="javascript:createTab(34,0,'휴가관리');">+</a>
 			<div class="boardtitle" style="border-bottom-color: white;">휴가</div>
 			<div class="divboard">
+
 				<table class="boardtable" id="vacationtable">
+					<c:forEach var="vacation" items="${vacationList}">
 
-					<tr>
-						<td class="context">송재원</td>
-						<td class="reason">휴가</td>
-						<td class="uploaddate">YYYY.MM.DD <br> YYYY.MM.DD
-						</td>
-					</tr>
-					<tr>
-						<td class="context">송재원</td>
-						<td class="reason">병가</td>
-						<td class="uploaddate">YYYY.MM.DD <br> YYYY.MM.DD
-						</td>
-					</tr>
-
-
+						<tr id="${vacation.vacation_CODE}">
+							<td>${vacation.empNAME}</td>
+							<td>${vacation.vacation_TYPE}</td>
+							<td>${vacation.vacation_START_DATE}<c:if
+									test="${!empty vacation.vacation_END_DATE}">
+									<br>${vacation.vacation_END_DATE}
+								</c:if>
+							</td>
+						</tr>
+					</c:forEach>
 				</table>
 
 			</div>
@@ -383,32 +341,33 @@ body ::-webkit-scrollbar-thumb {  background: rgba(0,0,0,.1);  }
 
 		</div>
 		<div id='business' class="business" style="color: white;">
-			<a class="plusbutton" href="javascript:createTab(38,0,'출장관리');">+</a>
+			<a class="plusbutton" href="javascript:createTab(36,0,'출장관리');">+</a>
 			<div class="boardtitle" style="border-bottom-color: white;">출장</div>
 			<div class="divboard">
 				<table class="boardtable" id="noticetable">
+					<c:forEach var="business" items="${businessList}">
 
-					<tr>
-						<td class="context">이현세</td>
-						<td class="reason">미국출장</td>
-						<td class="uploaddate">YYYY.MM.DD <br> YYYY.MM.DD</td>
-					</tr>
-					<tr>
-						<td class="context">글제목</td>
-						<td class="uploaddate">입력날짜</td>
-					</tr>
-
+						<tr id="${business.business_TRIP_CODE}">
+							<td>${business.empNAME}</td>
+							<td>${business.purpose}</td>
+							<td>${business.start_DATE}<c:if
+									test="${!empty business.end_DATE}">
+									<br>${business.end_DATE}
+								</c:if>
+							</td>
+						</tr>
+					</c:forEach>
 				</table>
 
 			</div>
-			
-			
+
+
 		</div>
 		<div id='events' class="events" style="color: #111820;">
 			<a class="goModal" href=""id="hrefevent">+</a>
 			<div class="boardtitle" style="border-bottom-color: #111820;">경조사</div>
 			<div class="divboard">
-				<table class="boardtable" id="noticetable">
+				<table class="boardtable" id="eventtable">
 
 					<c:forEach var="board" items="${boardList}">
 						<c:if test="${board.board_DES == 'EVENT'}">
@@ -477,7 +436,7 @@ body ::-webkit-scrollbar-thumb {  background: rgba(0,0,0,.1);  }
 				Do</div>
 
 			<div class="divboard">
-				<table class="boardtable" id="noticetable">
+				<table class="boardtable" id="todotable">
 
 						<c:forEach var="board" items="${boardList}">
 						<c:if test="${board.board_DES == 'TODO'}">

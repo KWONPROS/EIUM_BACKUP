@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,9 +82,54 @@ public class HomeController {
 	
 	@RequestMapping(value = "/cm/main.do", method =  RequestMethod.GET)
 	public ModelAndView main( Locale locale,HttpServletRequest request, HttpServletResponse response) throws Exception {
-		List<HomeVO> boardList = homeService.findAll();
+		HttpSession session = request.getSession();
+		LoginVO vo = (LoginVO)session.getAttribute("login");
+		String emp_id = vo.getEmployee_id();
+		List<HomeVO> boardList = homeService.findboard(emp_id);
+		List<HomeVO> vacationList = homeService.findvacation(emp_id);
+		List<HomeVO> businessList = homeService.findbusiness(emp_id);
+
+		JSONArray jsonArray = new JSONArray();		
+		for (int i = 0; i < boardList.size(); i++) {
+			homeVO = (HomeVO) boardList.get(i);
+			JSONObject obj = new JSONObject();
+			obj.put("title", homeVO.getBoard_TITLE());
+			obj.put("start", homeVO.getBoard_START_DATE());
+			obj.put("end", homeVO.getBoard_END_DATE());
+			if(homeVO.getBoard_DES().equals("NOTICE")) {
+				obj.put("color", "#4D638C");
+			}else if(homeVO.getBoard_DES().equals("TODO")) {
+				obj.put("color", "#74C0FC");
+			}else if(homeVO.getBoard_DES().equals("EVENT")){
+				obj.put("color", "#F06595");
+			}
+			jsonArray.put(obj);
+		}
+		for (int i = 0; i < vacationList.size(); i++) {
+			homeVO = (HomeVO) vacationList.get(i);
+			JSONObject obj = new JSONObject();
+			obj.put("title", homeVO.getEmpNAME()+"-"+homeVO.getVacation_TYPE());
+			obj.put("start", homeVO.getVacation_START_DATE());
+			obj.put("end", homeVO.getVacation_END_DATE());
+			obj.put("color", "#9775FA");
+			jsonArray.put(obj);
+		}
+		for (int i = 0; i < businessList.size(); i++) {
+			homeVO = (HomeVO) businessList.get(i);
+			JSONObject obj = new JSONObject();
+			obj.put("title", homeVO.getEmpNAME()+"-"+homeVO.getPurpose());
+			obj.put("start", homeVO.getStart_DATE());
+			obj.put("end", homeVO.getEnd_DATE());
+			obj.put("color", "#A9E34B");
+			jsonArray.put(obj);
+		}
+		
 		ModelAndView main = new ModelAndView("common/cm_main");
+		main.addObject("jsonArray", jsonArray);
 		main.addObject("boardList", boardList);
+		main.addObject("vacationList", vacationList);
+		main.addObject("businessList", businessList);
+		
 		return main;
 	}
 	

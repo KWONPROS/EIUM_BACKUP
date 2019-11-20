@@ -26,8 +26,16 @@ public class HomeDAO{
 		return homeVO;
 	}
 	
-	public List<HomeVO> findAll(){
-		List<HomeVO> list = sqlSession.selectList("mapper.common.findAll");
+	public List<HomeVO> findvacation(String emp_id){
+		List<HomeVO> list = sqlSession.selectList("mapper.common.findvacation",emp_id);
+		return list;
+	}
+	public List<HomeVO> findbusiness(String emp_id){
+		List<HomeVO> list = sqlSession.selectList("mapper.common.findbusiness",emp_id);
+		return list;
+	}
+	public List<HomeVO> findboard(String emp_id){
+		List<HomeVO> list = sqlSession.selectList("mapper.common.findboard",emp_id);
 		return list;
 	}
 	public void boardInsert(Map<String, Object> map) {

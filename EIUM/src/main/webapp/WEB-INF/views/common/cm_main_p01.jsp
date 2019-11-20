@@ -4,15 +4,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <style>
-.modal-content{
-width: 150%;
-height: 200%;
+.modal-content {
+	width: 150%;
+	height: 200%;
 }
+
 textarea {
 	resize: none;
 }
 </style>
-	
+
 
 <script>
 	var action = '';
@@ -21,7 +22,14 @@ textarea {
 	var board_CODE = 0;
 	var hrefId = "";
 	var endinput = "<div class='input-group date' id='endDate'><input type='text' class='form-control' /> <span class='input-group-addon'> <span class='glyphicon glyphicon-calendar'></span></span></div>";
+	var option1 = '<option disabled selected>분류 선택</option>	<option value="인사발령">인사발령</option><option value="교육">교육</option><option value="기타">기타</option>'
+	var option2 = '<option disabled selected>분류 선택</option>	<option value="개인">개인</option><option value="팀">팀</option><option value="기타">기타</option>'
+	var option3 = '<option disabled selected>분류 선택</option>	<option value="생일">생일</option><option value="결혼">결혼</option><option value="조사">조사</option>'
+	var btnEdit = '<button id="modalDelete" type="button" class="btn btn-danger">삭제</button><button id="modalSubmit" type="button" class="btn btn-primary">저장</button>';
+    var btnClose = '<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>';
 
+	
+	
 	$(document).ready(function() {
 
 		//달력
@@ -46,6 +54,9 @@ textarea {
 		//Modal 초기화
 		$('#myModal').on('hidden.bs.modal', function () {
 		    $(this).find("input,textarea,select").val('').end();
+		    $("#myModal").find("input,textarea,select").attr('readonly', false);		
+		    $("#board_DES_DES").empty();
+		    $('.modal-footer').empty();
 		});
 		
 		
@@ -61,19 +72,24 @@ textarea {
 			    case 'hrefnotice':
 			    	$("#modal-title").text("Notice");
 			    	$("#board_DES").val("NOTICE");
+			    	$("#board_DES_DES").html(option1);
 			        break;
 			    case 'hreftodo' :
 			    	$("#modal-title").text("To Do");
 			    	$("#board_DES").val("TODO");
+			    	$("#board_DES_DES").html(option2);
 			        break;
 			    case 'hrefevent' :
 			    	$("#modal-title").text("Event");
 			    	$("#board_DES").val("EVENT");
+			    	$("#board_DES_DES").html(option3);
 			        break;
 				}
 			$("#empNAME").val('${sessionScope.login.employee_name}');
+			$('.modal-footer').html(btnEdit+btnClose);
 			$("#endinput").html(endinput);
 			initCalendar();
+			
 			$("#myModal").modal();
 		});
 		
@@ -102,12 +118,15 @@ textarea {
 			switch (title){
 		    case 'noticetable':
 		    	$("#modal-title").text("Notice");
+		    	$("#board_DES_DES").html(option1);
 		        break;
 		    case 'todotable' :
 		    	$("#modal-title").text("To Do");
+		    	$("#board_DES_DES").html(option2);
 		        break;
 		    case 'eventtable' :
 		    	$("#modal-title").text("Event");
+		    	$("#board_DES_DES").html(option3);
 		        break;
 			}
 			if(board_END_DATE.length == 10){
@@ -126,11 +145,21 @@ textarea {
 			$("#board_DES_DES").val(board_DES_DES);
 			$("#empNAME").val(empNAME);
 			initCalendar();
+			
+			
+			if('${sessionScope.login.employee_id}'!= id){
+			$("#myModal").find("input,textarea,select").attr('readonly', true);		
+			$('.modal-footer').html(btnClose);
+			}else{
+				$('.modal-footer').html(btnEdit+btnClose);
+			}
+
+
 			$("#myModal").modal();
 		});
 
 		// 삭제하기 버튼 클릭
-		$("#modalDelete").click(function() {
+		$(document).on("click","#modalDelete",function() {
 			
 			$.ajax({
 				url : '${contextPath}/cm/board.do?board_CODE='+ board_CODE,
@@ -142,7 +171,7 @@ textarea {
 		})
 
 		// Modal의 Submit 버튼 클릭
-		$("#modalSubmit").click(function() {
+		$(document).on("click","#modalSubmit",function(){
 
 			if (action == 'create') {
 				url = 'board.do';
@@ -201,11 +230,7 @@ textarea {
 						<td>분류</td>
 						<td><input type="hidden" id="board_DES"><select
 							class="form-control" id="board_DES_DES" >
-							<!-- 	<option disabled selected>분류 선택</option>
-								<option value="1">One</option>
-								<option value="2">Two</option>
-								<option value="3">Three</option>
-								 -->
+		
 								</select>
 								</td>
 					</tr>
@@ -235,9 +260,8 @@ textarea {
 				</table>
 			</div>
 			<div class="modal-footer">
-				<button id="modalDelete" type="button" class="btn btn-danger">삭제</button>
-				<button id="modalSubmit" type="button" class="btn btn-primary">저장</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+	
+				
 			</div>
 		</div>
 	</div>

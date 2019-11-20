@@ -252,7 +252,7 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
      {Header:"출석점수",Type:"Text", SaveName:"attendence_score", Width:100, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
      {Header:"태도점수",Type:"Text", SaveName:"attitude_score", Width:100, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
      {Header:"평가점수",Type:"Text", SaveName:"score", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
-     {Header:"합계",Type:"Text", SaveName:"total", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0",CalcLogic:"|6|+|7|+|8|"},
+     {Header:"합계",Type:"Text", SaveName:"total", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
      {Header:"교육평가",Type:"Text", SaveName:"assessment_desc", Width:100, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
 		];       
  createIBSheet2($("#ib-container11")[0],"mySheet11", "100%", "300px");
@@ -361,7 +361,7 @@ function mySheet_OnClick(Row, Col) {
 			break;
 			
 			
-		 /*   case "insert2":
+		 case "insert2":
 			      var row = mySheet2.DataInsert(-1);
 			      break;
 			      
@@ -392,7 +392,7 @@ function mySheet_OnClick(Row, Col) {
 		   case "insert11":
 			      var row = mySheet11.DataInsert(-1);
 			      break;
-			       */
+			       
 
 		}
 	}
@@ -439,7 +439,7 @@ function mySheet_OnClick(Row, Col) {
 	         console.log("col:" + Col + "lastcol:" + mySheet2.LastCol());
 	         console.log("row:" + Row + "row갯수:" + mySheet2.RowCount()); */
 	         if ( KeyCode == 13 &&  Col == mySheet2.LastCol()
-	               && Row == mySheet2.RowCount()) { // 엔터를 누르고 / col이 마지막 col이고 / row가 마지막 열일경우
+	               && Row < mySheet2.RowCount()) { // 엔터를 누르고 / col이 마지막 col이고 / row가 마지막 열일경우
 	            doAction("insert2");
 	         }
 		}
@@ -451,7 +451,7 @@ function mySheet_OnClick(Row, Col) {
 		         console.log("col:" + Col + "lastcol:" + mySheet2.LastCol());
 		         console.log("row:" + Row + "row갯수:" + mySheet2.RowCount()); */
 		         if ( KeyCode == 13 &&  Col == mySheet3.LastCol()
-		               && Row == mySheet3.RowCount()) { // 엔터를 누르고 / col이 마지막 col이고 / row가 마지막 열일경우
+		               && Row < mySheet3.RowCount()) { // 엔터를 누르고 / col이 마지막 col이고 / row가 마지막 열일경우
 		            doAction("insert3");
 		         }
 			}
@@ -463,7 +463,7 @@ function mySheet_OnClick(Row, Col) {
 			         console.log("col:" + Col + "lastcol:" + mySheet2.LastCol());
 			         console.log("row:" + Row + "row갯수:" + mySheet2.RowCount()); */
 			         if ( KeyCode == 13 &&  Col == mySheet4.LastCol()
-			               && Row == mySheet4.RowCount()) { // 엔터를 누르고 / col이 마지막 col이고 / row가 마지막 열일경우
+			               && Row < mySheet4.RowCount()) { // 엔터를 누르고 / col이 마지막 col이고 / row가 마지막 열일경우
 			            doAction("insert4");
 			         }
 				}
@@ -475,7 +475,7 @@ function mySheet_OnClick(Row, Col) {
 				         console.log("col:" + Col + "lastcol:" + mySheet2.LastCol());
 				         console.log("row:" + Row + "row갯수:" + mySheet2.RowCount()); */
 				         if ( KeyCode == 13 &&  Col == mySheet6.LastCol()
-				               && Row == mySheet6.RowCount()) { // 엔터를 누르고 / col이 마지막 col이고 / row가 마지막 열일경우
+				               && Row < mySheet6.RowCount()) { // 엔터를 누르고 / col이 마지막 col이고 / row가 마지막 열일경우
 				            doAction("insert6");
 		         
 					}
@@ -489,7 +489,7 @@ function mySheet_OnClick(Row, Col) {
 					         console.log("col:" + Col + "lastcol:" + mySheet2.LastCol());
 					         console.log("row:" + Row + "row갯수:" + mySheet2.RowCount()); */
 					         if ( KeyCode == 13 &&  Col == mySheet9.LastCol()
-					               && Row == mySheet9.RowCount()) { // 엔터를 누르고 / col이 마지막 col이고 / row가 마지막 열일경우
+					               && Row < mySheet9.RowCount()) { // 엔터를 누르고 / col이 마지막 col이고 / row가 마지막 열일경우
 					            doAction("insert9");
 					         }
 				}
@@ -501,7 +501,7 @@ function mySheet_OnClick(Row, Col) {
 				         console.log("col:" + Col + "lastcol:" + mySheet2.LastCol());
 				         console.log("row:" + Row + "row갯수:" + mySheet2.RowCount()); */
 				         if ( KeyCode == 13 &&  Col == mySheet10.LastCol()
-				               && Row == mySheet10.RowCount()) { // 엔터를 누르고 / col이 마지막 col이고 / row가 마지막 열일경우
+				               && Row < mySheet10.RowCount()) { // 엔터를 누르고 / col이 마지막 col이고 / row가 마지막 열일경우
 				            doAction("insert10");
 				         }
 					}

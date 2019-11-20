@@ -54,8 +54,12 @@ public class WM_P0002DAOImpl implements WM_P0002DAO {
 	
 	@Override
 	public void deleteData(Map<String, String> row) throws DataAccessException {
+		if(row.get("vacation_TYPE").equals("연차")) {
 		sqlSession.update("mapper.wm_p0002.deleteData", row);
 		sqlSession.update("mapper.wm_p0002.updateData3", row);
+		} else {
+			sqlSession.update("mapper.wm_p0002.deleteData", row);
+		}
 	}
 
 }

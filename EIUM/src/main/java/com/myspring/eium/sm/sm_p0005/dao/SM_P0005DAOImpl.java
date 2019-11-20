@@ -56,8 +56,6 @@ public class SM_P0005DAOImpl implements SM_P0005DAO {
 		sqlSession.update("mapper.sm_p0005.insertData30", row);
 		sqlSession.update("mapper.sm_p0005.insertData31", row);
 		sqlSession.update("mapper.sm_p0005.insertData32", row);
-		sqlSession.update("mapper.sm_p0005.insertData33", row);
-		sqlSession.update("mapper.sm_p0005.insertData34", row);
 		
 	}
 

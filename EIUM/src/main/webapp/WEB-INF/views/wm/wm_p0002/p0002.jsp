@@ -56,11 +56,11 @@
 			               { "Header" : "부서명", "SaveName" : "department_NAME", "Type" : "Text", "Width" : 100, "Align" : "Center" },
 			               { "Header" : "직급", "SaveName" : "position_NAME", "Type" : "Text", "Width" : 100, "Align" : "Center" },
 			               { "Header" : "신청 전 잔여일수", "SaveName" : "before_VACATION_REMAIN_DATE", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "근태종류", "SaveName" : "vacation_TYPE", "Type" : "Combo", "Width" : 100, "Align" : "Center", "ComboText":"연차|특별휴가|경조휴가", "ComboCode":"연차|특별휴가|경조휴가", "UpdateEdit":0 },
+			               { "Header" : "근태종류", "SaveName" : "vacation_TYPE", "Type" : "Combo", "Width" : 100, "Align" : "Center", "ComboText":"|연차|특별휴가|경조휴가", "ComboCode":"|연차|특별휴가|경조휴가", "UpdateEdit":0 },
 			               { "Header" : "시작일", "SaveName" : "vacation_START_DATE", "Type" : "Date", "Width" : 100, "Align" : "Center", "Format":"Ymd" },
 			               { "Header" : "종료일", "SaveName" : "vacation_END_DATE", "Type" : "Date", "Width" : 100, "Align" : "Center", "Format":"Ymd" },
 			               { "Header" : "신청일수", "SaveName" : "vacation_APPLY_DATE", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "신청 후 잔여일수", "SaveName" : "after_VACATION_REMAIN_DATE", "Type" : "Text", "Width" : 100, "Align" : "Center", "CalcLogic":"|7|-|11|" } 
+			               { "Header" : "신청 후 잔여일수", "SaveName" : "after_VACATION_REMAIN_DATE", "Type" : "Text", "Width" : 100, "Align" : "Center" } 
 		                 ];
 
 		IBS_InitSheet(mySheet, initSheet);
@@ -97,33 +97,69 @@
 	}
 	
 	function mySheet_OnChange(Row,Col){
-		var sd=mySheet.GetCellValue(Row,Col-1);
-	    var ed=mySheet.GetCellValue(Row,Col);
-		
-		if(Col==10){
-			
+		console.log(Col);
+		var sd=mySheet.GetCellValue(Row,9);
+	    var ed=mySheet.GetCellValue(Row,10);
+	
 		function x(sd,ed){
-			    var stDate = new Date(sd.substring(0,4),sd.substring(4,6)-1,sd.substring(6,8)) ;
-			    var endDate = new Date(ed.substring(0,4),ed.substring(4,6)-1,ed.substring(6,8)) ;
-			    var btMs = endDate.getTime() - stDate.getTime() ;
-			    btDay = btMs / (1000*60*60*24) ;
-			 	return btDay;
-				
-			}
-		
+		    var stDate = new Date(sd.substring(0,4),sd.substring(4,6)-1,sd.substring(6,8));
+		    var endDate = new Date(ed.substring(0,4),ed.substring(4,6)-1,ed.substring(6,8));
+		    var btMs = endDate.getTime() - stDate.getTime() ;
+		    btDay = btMs / (1000*60*60*24) ;
+		 	return btDay;
+		}
 		x(sd,ed);
 		
-		mySheet.SetCellValue(Row,Col+1,btDay+1);
+		if(sd != '' && ed !='' && mySheet.GetCellValue(Row,8) == '연차'){	
+		mySheet.SetCellValue(Row,11,btDay+1);
+		mySheet.SetCellValue(Row,12,mySheet.GetCellValue(Row,7)-mySheet.GetCellValue(Row,11));
 			
-		if(mySheet.GetCellValue(Row,Col+2) < 0) {
-			mySheet.SetCellBackColor(Row, Col+2, "#FF0000"); 
+		if(mySheet.GetCellValue(Row,12) < 0) {
+			mySheet.SetCellBackColor(Row, 12, "#FF0000"); 
 		} else {
-			mySheet.SetCellBackColor(Row, Col+2, "yellow"); 
+			mySheet.SetCellBackColor(Row, 12, "yellow"); 
 		}
 		
 		}
+		
+		if(sd != '' && ed !='' && mySheet.GetCellValue(Row,8) == '특별휴가'){
+			mySheet.SetCellValue(Row,11,btDay+1);
+			mySheet.SetCellValue(Row,12,mySheet.GetCellValue(Row,7));
+				
+			if(mySheet.GetCellValue(Row,12) < 0) {
+				mySheet.SetCellBackColor(Row, 12, "#FF0000"); 
+			} else {
+				mySheet.SetCellBackColor(Row, 12, "yellow"); 
+			}
+			
+			}
+		
+		if(sd != '' && ed !='' && mySheet.GetCellValue(Row,8) == '경조휴가'){	
+			mySheet.SetCellValue(Row,11,btDay+1);
+			mySheet.SetCellValue(Row,12,mySheet.GetCellValue(Row,7));
+
+			if(mySheet.GetCellValue(Row,12) < 0) {
+				mySheet.SetCellBackColor(Row, 12, "#FF0000"); 
+			} else {
+				mySheet.SetCellBackColor(Row, 12, "yellow"); 
+			}			
+			}
+		
+		if(sd != '' && ed !='' && mySheet.GetCellValue(Row,8) == ''){
+			mySheet.SetCellValue(Row,11,btDay+1);
+			mySheet.SetCellValue(Row,12,'');
+
+			if(mySheet.GetCellValue(Row,12) < 0) {
+				mySheet.SetCellBackColor(Row, 12, "#FF0000"); 
+			} else {
+				mySheet.SetCellBackColor(Row, 12, "yellow"); 
+			}			
+			}
 		
 	}
+	
+
+
 	
 	function mySheet_OnPopupClick(Row,Col) {
 		row=Row;

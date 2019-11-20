@@ -21,16 +21,24 @@ public class PM_P0001ServiceImpl implements PM_P0001Service {
 	private PM_P0001DAO p0001DAO;
 
 	@Override
-	public List<PM_P0001VO> EMP_searchList(Map<String, Object> searchMap) throws DataAccessException {
-		List<PM_P0001VO> list =  p0001DAO.EMP_searchList(searchMap); 
+	public List<PM_P0001VO> searchTypeList(Map<String, Object> searchMap) throws DataAccessException {
+		List<PM_P0001VO> list =  p0001DAO.typeList(searchMap); 
+		return list;
+	}
+	
+	
+	
+	@Override
+	public List<PM_P0001VO> paydate_searchList(Map<String, Object> searchMap) throws DataAccessException {
+		List<PM_P0001VO> list =  p0001DAO.paydate_searchList(searchMap); 
 		return list;
 	}
 	
 	@Override
-	public List<PM_P0001VO> WS_searchList(Map<String, String> searchMap) throws DataAccessException {
-		List<PM_P0001VO> list = p0001DAO.WS_searchList(searchMap);
+	public List<PM_P0001VO> searchList(Map<String, Object> searchMap) throws DataAccessException {
+		List<PM_P0001VO> list =  p0001DAO.searchList(searchMap); 
 		return list;
-	}	
+	}
 
 	@Override
 	public void saveData(Map<String, String[]> dataMap)  throws DataAccessException  {
