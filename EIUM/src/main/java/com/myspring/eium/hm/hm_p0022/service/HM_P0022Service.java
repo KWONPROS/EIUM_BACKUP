@@ -29,4 +29,8 @@ public interface HM_P0022Service {
 
 	List<HM_P0022VO> homeSearch_p05(Map<String, Object> searchMap) throws DataAccessException;
 
+	void saveData3(Map<String, String[]> dataMap) throws DataAccessException;
+
+	void saveData4(Map<String, String[]> dataMap) throws DataAccessException;
+
 }

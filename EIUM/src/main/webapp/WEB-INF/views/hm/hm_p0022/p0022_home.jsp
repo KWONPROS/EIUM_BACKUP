@@ -44,12 +44,12 @@ var initSheet = {};
 initSheet.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:3, MergeSheet:msHeaderOnly,MouseHoverMode:2}
 initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 initSheet.Cols = [
-      {Header:"상태|상태",Type:"Status",SaveName:"Status", Align:"Center"},
-      {Header:"삭제|삭제",Type:"DelCheck",SaveName:"DEL_CHK"},
+      {Header:"상태|상태",Type:"Status",SaveName:"Status", Align:"Center",Hidden:1},
+      {Header:"삭제|삭제",Type:"DelCheck",SaveName:"DEL_CHK",Hidden:1},
       {Header:"발령일자|발령일자",Type:"Date",SaveName:"appoint_DATE",Align:"Center",Width:100},
       {Header:"발령번호|발령번호",Type:"Text",SaveName:"appoint_CODE",Align:"Center",Width:100},   
       {Header:"제목|제목",Type:"Text",SaveName:"appoint_TITLE",Align:"Center",Width:100},         
-      {Header:"마감/취소|마감/취소",Type:"Button",SaveName:"appoint_YN",Align:"Center",Width:100,},         
+      {Header:"마감|마감",Type:"Button",SaveName:"appoint_YN",Align:"Center",Width:100},         
       {Header:"작성자|직원번호",Type:"Popup",SaveName:"masterEmployee_CODE",Align:"Center",Width:100},
       {Header:"작성자|작성자명",Type:"Text",SaveName:"employee_NAME",Align:"Center",Width:100,InsertEdit:0},
       {Header:"작성자|사업장",Type:"Text",SaveName:"site_NAME",Align:"Center",Width:100,InsertEdit:0},
@@ -96,13 +96,41 @@ initSheet.Cols = [
 
 function mySheet1_OnClick(Row,Col){
 	var status=mySheet1.GetCellValue(Row,0);
-	if(status!="I" && Col!=5){
+	if(status!="I"&& Col!=5){
 
 	appointCode ="appointCode="+mySheet1.GetCellValue(Row,3);
-	mySheet2.DoSearch("${contextPath}/hm/p0022/appointList2.do",appointCode)
+	mySheet2.DoSearch("${contextPath}/hm/p0022/appointList2.do",appointCode);
+	
+	
 	}
 	
 }
+	
+	function mySheet1_OnButtonClick(Row,Col){
+		 var appointCode ="appointCode="+mySheet1.GetCellValue(Row,3);
+
+		
+		if(mySheet1.GetCellValue(Row,Col)=="마감"){
+	  
+		var result = confirm('마감하시겠습니까?');
+		if(result){
+		mySheet1.SetCellValue(Row,Col,"마감완료");
+		mySheet1.DoSave("${contextPath}/hm/p0022/saveData3.do",{Quest:0});
+		magam(appointCode);
+			alert('작업이 완료되었습니다');
+		}
+		}else{
+			alert("이미 마감되었습니다.");
+		}
+		
+	}
+	
+	function magam(appointCode){
+		mySheet2.DoSearch("${contextPath}/hm/p0022/appointList2.do",appointCode);
+		mySheet2.DoAllSave("${contextPath}/hm/p0022/saveData4.do",{Quest:0});
+		console.log("난마감");
+		
+	}
 
 
 function doAction(sAction) {
@@ -188,18 +216,6 @@ function mySheet1_OnPopupClick(Row,Col){
 	if(Col==6){
 	window.open("${contextPath}/hm/p0022/homeInit_p02.do", "a", "width=500, height=700, left=100, top=50 location=no")
 	}
-}
-function mySheet1_OnButtonClick(Row,Col){
-	
-	var result = confirm('마감하시겠습니까?')
-	if(result){
-		
-		alert('마감되었습니다');
-	}
-	else{
-		alert('마감취소되었습니다');
-	}
-	
 }
 
 </script>

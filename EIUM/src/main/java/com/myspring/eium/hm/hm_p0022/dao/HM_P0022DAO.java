@@ -37,4 +37,10 @@ public interface HM_P0022DAO {
 
 	List<HM_P0022VO> homeSearch_p05(Map<String, Object> searchMap) throws DataAccessException;
 
+	void updateData3(Map<String, String> row) throws DataAccessException;
+
+	void updateData4(Map<String, String> row) throws DataAccessException;
+
+
+
 }

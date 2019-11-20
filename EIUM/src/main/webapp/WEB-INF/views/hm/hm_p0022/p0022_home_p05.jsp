@@ -140,6 +140,44 @@ function mySheet_OnDblClick(Row,Col){
 	self.close();
 }
 
+function selectSite() {
+
+	$.ajax({
+
+				url : "${contextPath}/sm/p0006/SiteList.do",//목록을 조회 할 url
+
+				type : "POST",
+
+				dataType : "JSON",
+
+				success : function(data) {
+
+					for (var i = 0; i < data['Data'].length; i++) {
+						
+						
+
+						var option = "<option name='1' value='" + data['Data'][i].site_NAME + "'>"
+								+ data['Data'][i].site_NAME + "</option>";
+
+						//대상 콤보박스에 추가
+
+						$('#SiteList').append(option);
+
+					}
+
+				},
+
+				error : function(jqxhr, status, error) {
+
+					alert("에러");
+
+				}
+
+			});
+
+};
+
+
 </script>
 
 </head>
@@ -149,12 +187,19 @@ function mySheet_OnDblClick(Row,Col){
 	<div class="ib_product">
 	<script>
 		createIBSheet("mySheet", "100%", "500px");
+		selectSite();
 	</script>
 	</div>
 	</div>
 	
 <form name="frm">
-부서명<input type="text" id="E_id"  onKeypress="if(event.keyCode==13) {doAction('search'); return false;}">
+  <div id="searchBar">
+            &nbsp;&nbsp; 사업장 : <select id="SiteList" >
+			<option value="" selected>전체</option>
+		</select>
+		</div>
+		
+			
 </form>
 	
     <div class="rightbuttons">
