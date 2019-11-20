@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.eium.hm.hm_p0002.vo.HM_P0002VO;
+import com.myspring.eium.login.vo.LoginVO;
 import com.myspring.eium.pm.pm_p0001.service.PM_P0001Service;
 import com.myspring.eium.pm.pm_p0001.vo.PM_P0001VO;
 
@@ -75,12 +76,14 @@ public class PM_P0001ControllerImpl implements PM_P0001Controller {
 		Map<String, Object> searchMap = new HashMap<String, Object>(); 
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
 
-		searchMap.put("Ppayment_date", request.getParameter("Ppayment_date"));
+		searchMap.put("Ppayment_code", request.getParameter("Ppayment_code"));
+		searchMap.put("searchSite", request.getParameter("searchSite"));
 		searchMap.put("searchTYPE", request.getParameter("searchTYPE"));
 		searchMap.put("searchDetail", request.getParameter("searchDetail"));
 
 
-		System.out.println(request.getParameter("Ppayment_date"));
+		System.out.println(request.getParameter("Ppayment_code"));
+		System.out.println(request.getParameter("searchSite"));
 		System.out.println(request.getParameter("searchTYPE"));
 		System.out.println(request.getParameter("searchDetail"));
 
@@ -125,13 +128,38 @@ public class PM_P0001ControllerImpl implements PM_P0001Controller {
         return resultMap;
 	}
 	
+	
+	@Override
+	@RequestMapping(value = "/pm/p0001/searchReceipt.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map searchReceipt(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>(); 
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+
+
+		searchMap.put("x", request.getParameter("x"));
+		System.out.println(request.getParameter("x"));
+		searchMap.put("y", request.getParameter("y"));
+		System.out.println(request.getParameter("y"));
+
+		List<PM_P0001VO> data = p0001Service.searchReceipt(searchMap);
+		
+        resultMap.put("Data", data);
+        return resultMap;
+	}
 	@Override
 	@RequestMapping(value = "/pm/p0001/saveData.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		Map<String, String[]> dataMap = new HashMap<String, String[]>(); // 占쏙옙占쏙옙占쏙옙Data
-		Map<String, Object> resultMap = new HashMap<String, Object>(); // 처占쏙옙占쏙옙占�
+		Map<String, String[]> dataMap = new HashMap<String, String[]>(); 
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		HttpSession session = request.getSession(); 
+		LoginVO loginvo = new LoginVO();
+		loginvo = (LoginVO)session.getAttribute("login"); 
+		String user= (loginvo.getEmployee_name());
 		
 		// 저장 Data 추출하기
 		Enumeration enu = request.getParameterNames();
@@ -143,7 +171,7 @@ public class PM_P0001ControllerImpl implements PM_P0001Controller {
 		
 		Map<String, String> result = new HashMap<String, String>();
 		try {
-			p0001Service.saveData(dataMap);	
+			p0001Service.saveData(dataMap, user);	
 			result.put("Code","0");
 			result.put("Message","저장되었습니다");
 		}catch(Exception e) {                                                               

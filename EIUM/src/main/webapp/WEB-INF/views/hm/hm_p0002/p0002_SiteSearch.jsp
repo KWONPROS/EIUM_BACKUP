@@ -14,7 +14,7 @@
 <script type="text/javascript">
 
 function LoadPage(){
-	mySheet2.RemoveAll();
+	mySheet3.RemoveAll();
 	//아이비시트 초기화
 	var initSheet = {};
 	initSheet.Cfg={SearchMode:smLazyLoad,ToolTip:1};
@@ -24,19 +24,19 @@ function LoadPage(){
 		{Header:"사업장코드",Type:"Text",Width:100,SaveName:"site_code",Align:"Center"},
 		{Header:"사업장명",Type:"Text",Width:100,SaveName:"site_name",Align:"Center"},
 		];
-	IBS_InitSheet(mySheet2,initSheet);
-	mySheet2.SetEditableColorDiff(1);
-	mySheet2.SetColEditable(0,0);
-	mySheet2.SetColEditable(1,0);
+	IBS_InitSheet(mySheet3,initSheet);
+	mySheet3.SetEditableColorDiff(1);
+	mySheet3.SetColEditable(0,0);
+	mySheet3.SetColEditable(1,0);
 
-	mySheet2.DoSearch("${contextPath}/hm/p0002/site_Search1.do")
+	mySheet3.DoSearch("${contextPath}/hm/p0002/site_Search1.do")
 
 
 }
 
-function mySheet2_OnDblClick(Row, Col, Value) { 
+function mySheet3_OnDblClick(Row, Col, Value) { 
 
-	 var selectRowJson = mySheet2.GetRowData(Row);
+	 var selectRowJson = mySheet3.GetRowData(Row);
 	 var site_code=selectRowJson.site_code;
 	 var site_name=selectRowJson.site_name;
 
@@ -58,7 +58,7 @@ function mySheet2_OnDblClick(Row, Col, Value) {
 </head>
 <body onload="LoadPage()">
 				<script>
-					createIBSheet("mySheet2", "100%", "500px");
+					createIBSheet("mySheet3", "100%", "500px");
 			
 				</script>
 	<input type="hidden" id="Csite_code">

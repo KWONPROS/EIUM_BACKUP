@@ -7,6 +7,9 @@ public class PM_P0001VO {
 	//사원 테이블
 	private String employee_code;
 	private String employee_name;
+	private String payment_receipt_code;
+	private String payment_receipt_item;
+	private String payment_receipt_price;
 	private String payment_code;
 	private String payment_date;
 	private String payment_des_name;
@@ -17,6 +20,24 @@ public class PM_P0001VO {
 	
 	
 
+	public String getPayment_receipt_code() {
+		return payment_receipt_code;
+	}
+	public void setPayment_receipt_code(String payment_receipt_code) {
+		this.payment_receipt_code = payment_receipt_code;
+	}
+	public String getPayment_receipt_item() {
+		return payment_receipt_item;
+	}
+	public void setPayment_receipt_item(String payment_receipt_item) {
+		this.payment_receipt_item = payment_receipt_item;
+	}
+	public String getPayment_receipt_price() {
+		return payment_receipt_price;
+	}
+	public void setPayment_receipt_price(String payment_receipt_price) {
+		this.payment_receipt_price = payment_receipt_price;
+	}
 	public String getPayment_code() {
 		return payment_code;
 	}

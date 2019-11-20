@@ -12,9 +12,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.myspring.eium.pm.pm_p0001.vo.PM_P0001VO;
 
 public interface PM_P0001Service {
-	public void saveData(Map<String, String[]> dataMap)  throws DataAccessException ;
+	public void saveData(Map<String, String[]> dataMap, String user)  throws DataAccessException ;
 	public List<PM_P0001VO> paydate_searchList(Map<String, Object> searchMap) throws DataAccessException;
 	public List<PM_P0001VO> searchTypeList(Map<String, Object> searchMap) throws DataAccessException;
 	public List<PM_P0001VO> searchList(Map<String, Object> searchMap) throws DataAccessException;
+	public List<PM_P0001VO> searchReceipt(Map<String, Object> searchMap)throws DataAccessException;
 
 }

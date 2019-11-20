@@ -22,6 +22,7 @@ public interface PM_P0001DAO {
 	public void updateData(Map<String, String> row) throws DataAccessException;
 
 	public void deleteData(Map<String, String> row) throws DataAccessException;
+	public List<PM_P0001VO> searchReceipt(Map<String, Object> searchMap)throws DataAccessException;
 
 	
 	 

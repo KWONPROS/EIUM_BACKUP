@@ -42,21 +42,27 @@ public class PM_P0001DAOImpl implements PM_P0001DAO {
 		return list;
 	}
 	
+	@Override
+	public List<PM_P0001VO> searchReceipt(Map<String, Object> searchMap) throws DataAccessException {
+		List<PM_P0001VO> list = sqlSession.selectList("mapper.pm_p0001.searchReceipt", searchMap);
+		return list;
+	}
+	
 
 
 	@Override
 	public void insertData(Map<String, String> row) throws DataAccessException {
-		sqlSession.update("hm.s0002.insertData", row);
+		sqlSession.update("mapper.pm_p0001.insertData", row);
 	}
 
 	@Override
 	public void updateData(Map<String, String> row) throws DataAccessException {
-		sqlSession.update("hm.s0002.updateData", row);
+		sqlSession.update("mapper.pm_p0001.updateData", row);
 	}
 
 	@Override
 	public void deleteData(Map<String, String> row) throws DataAccessException {
-		sqlSession.update("hm.s0002.deleteData", row);
+		sqlSession.update("mapper.pm_p0001.deleteData", row);
 	}
 
 	

@@ -64,25 +64,25 @@ public class HM_P0002DAOImpl implements HM_P0002DAO {
 	@Override
 	public void deleteData(Map<String, String> row) throws DataAccessException {
 		sqlSession.update("mapper.hm_p0002.deleteData", row);
+		sqlSession.update("mapper.hm_p0002.deleteData2", row);
+
 	}
-	
-	
-	
-	
+		
 	@Override
-	public void insertData2(Map<String, String> row) throws DataAccessException {
-		sqlSession.update("mapper.hm_p0002.insertData2", row);
+	public void insertselect(Map<String, String> row2) throws DataAccessException {
+		System.out.println("호출");
+		sqlSession.update("mapper.hm_p0002.insertselect", row2);
 		
 	}
 
 	@Override
-	public void updateData2(Map<String, String> row) throws DataAccessException {
-		sqlSession.update("mapper.hm_p0002.updateData2", row);
+	public void updateselect(Map<String, String> row2) throws DataAccessException {
+		sqlSession.update("mapper.hm_p0002.updateselect", row2);
 	}
 
 	@Override
-	public void deleteData2(Map<String, String> row) throws DataAccessException {
-		sqlSession.update("mapper.hm_p0002.deleteData2", row);
+	public void deleteselect(Map<String, String> row2) throws DataAccessException {
+		sqlSession.update("mapper.hm_p0002.deleteselect", row2);
 	}
 	
 	
