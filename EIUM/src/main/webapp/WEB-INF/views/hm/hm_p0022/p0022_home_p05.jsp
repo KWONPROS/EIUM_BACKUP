@@ -83,7 +83,7 @@ border-radius: 2px;
 </style>
 
 <meta charset="UTF-8">
-<title>사원검색팝업</title>
+<title>부서검색팝업</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibsheetinfo.js"></script>
@@ -101,22 +101,8 @@ function LoadPage(){
 	initSheet.HeaderMode = {Sort:1,ColMove:1,ColResize:1,HeaderCheck:1};
 	initSheet.Cols=[
 		{Header:"NO",Type:"Seq",Width:70,SaveName:"seq",Align:"Center"},
-		{Header:"사원코드",Type:"Text",Width:70,SaveName:"employee_CODE",Align:"Center"},
-		{Header:"사원명",Type:"Text",Width:70,SaveName:"employee_NAME",Align:"Center"},
-		{Header:"재직상태",Type:"Text",Width:70,SaveName:"work_STATUS",Align:"Center",Hidden:1},
-		{Header:"입사일",Type:"Text",Width:70,SaveName:"employee_JOIN_DATE",Align:"Center",Hidden:1},
-		{Header:"사업장명",Type:"Text",Width:70,SaveName:"site_NAME",Align:"Center",Hidden:1},
-		{Header:"사업장명",Type:"Text",Width:70,SaveName:"site_CODE",Align:"Center",Hidden:1},
-		{Header:"부서명",Type:"Text",Width:70,SaveName:"department_NAME",Align:"Center",Hidden:1},
-		{Header:"부서명",Type:"Text",Width:70,SaveName:"department_CODE",Align:"Center",Hidden:1},
-		{Header:"직종",Type:"Text",Width:70,SaveName:"job_CLASS_NAME",Align:"Center",Hidden:1},
-		{Header:"직급",Type:"Text",Width:70,SaveName:"position_NAME",Align:"Center",Hidden:1},
-		{Header:"직책",Type:"Text",Width:70,SaveName:"duty_NAME",Align:"Center",Hidden:1},
-		{Header:"직무",Type:"Text",Width:70,SaveName:"job_DIS_NAME",Align:"Center",Hidden:1},
-		{Header:"급여형태",Type:"Text",Width:70,SaveName:"pay_TYPE_NAME",Align:"Center",Hidden:1},
-		{Header:"호봉",Type:"Text",Width:70,SaveName:"pay_GRADE_NAME",Align:"Center",Hidden:1},
-		{Header:"퇴직사유",Type:"Text",Width:70,SaveName:"out_REASON_NAME",Align:"Center",Hidden:1},
-		
+		{Header:"부서코드",Type:"Text",Width:70,SaveName:"department_CODE",Align:"Center"},
+		{Header:"부서명",Type:"Text",Width:70,SaveName:"department_NAME",Align:"Center"},
 		];
 	IBS_InitSheet(mySheet,initSheet);
 	mySheet.SetEditableColorDiff(1);
@@ -129,12 +115,13 @@ function LoadPage(){
 
 
 
+
 function doAction(sAction) {
 	switch(sAction){
 	
 	case "search": //조회
 		var param=FormQueryStringEnc(document.frm);
-		mySheet.DoSearch("${contextPath}/hm/p0022/homeSearch_p03.do",param);
+		mySheet.DoSearch("${contextPath}/hm/p0022/homeSearch_p05.do",param);
 		break;
 	
 	case "reload": //초기화
@@ -147,9 +134,9 @@ function doAction(sAction) {
 
 
 function mySheet_OnDblClick(Row,Col){
-var rowData = mySheet.GetRowData(Row);
-window.opener.popupValue2(rowData);
-
+ 	var rowData=mySheet.GetRowData(Row);
+	
+	 window.opener.popupValue5(rowData);
 	self.close();
 }
 
@@ -167,7 +154,7 @@ window.opener.popupValue2(rowData);
 	</div>
 	
 <form name="frm">
-사원명<input type="text" id="E_id"  onKeypress="if(event.keyCode==13) {doAction('search'); return false;}">
+부서명<input type="text" id="E_id"  onKeypress="if(event.keyCode==13) {doAction('search'); return false;}">
 </form>
 	
     <div class="rightbuttons">

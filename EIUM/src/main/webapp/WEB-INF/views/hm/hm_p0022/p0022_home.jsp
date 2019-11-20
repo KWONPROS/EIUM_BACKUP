@@ -41,7 +41,7 @@ $(function() {
 mySheet1.RemoveAll();
 //아이비시트 초기화
 var initSheet = {};
-initSheet.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:3, MergeSheet:msHeaderOnly}
+initSheet.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:3, MergeSheet:msHeaderOnly,MouseHoverMode:2}
 initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 initSheet.Cols = [
       {Header:"상태|상태",Type:"Status",SaveName:"Status", Align:"Center"},
@@ -49,8 +49,8 @@ initSheet.Cols = [
       {Header:"발령일자|발령일자",Type:"Date",SaveName:"appoint_DATE",Align:"Center",Width:100},
       {Header:"발령번호|발령번호",Type:"Text",SaveName:"appoint_CODE",Align:"Center",Width:100},   
       {Header:"제목|제목",Type:"Text",SaveName:"appoint_TITLE",Align:"Center",Width:100},         
-      {Header:"마감/취소|마감/취소",Type:"Text",SaveName:"appoint_YN",Align:"Center",Width:100},         
-      {Header:"작성자|직원번호",Type:"Text",SaveName:"masterEmployee_CODE",Width:100},
+      {Header:"마감/취소|마감/취소",Type:"Button",SaveName:"appoint_YN",Align:"Center",Width:100},         
+      {Header:"작성자|직원번호",Type:"Popup",SaveName:"masterEmployee_CODE",Width:100},
       {Header:"작성자|작성자명",Type:"Text",SaveName:"employee_NAME",Align:"Center",Width:100,InsertEdit:0},
       {Header:"작성자|사업장",Type:"Text",SaveName:"site_NAME",Align:"Center",Width:100,InsertEdit:0},
       {Header:"작성자|부서",Type:"Text",SaveName:"department_NAME",Align:"Center",Width:100,InsertEdit:0},
@@ -63,36 +63,47 @@ initSheet.Cols = [
    mySheet2.RemoveAll();
    //아이비시트 초기화
    var initSheet2 = {};
-   initSheet2.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:3, FrozenCol:5}
+   initSheet2.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:3, FrozenCol:5,MouseHoverMode:2}
    initSheet2.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
    initSheet2.Cols = [
          {Header:"상태",Type:"Status",SaveName:"Status", Align:"Center"},
          {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK"},
          {Header:"인사발령내역고유번호",Type:"Text",SaveName:"appoint_HISTORY_CODE",Align:"Center",Width:100,"Hidden":1},   
-         {Header:"사원코드",Type:"Text",SaveName:"appoint_employee_CODE",Align:"Center",Width:100},
+         {Header:"사원코드",Type:"Text",SaveName:"employee_CODE",Align:"Center",Width:100},
          {Header:"사원명",Type:"Popup",SaveName:"employee_NAME",Align:"Center",Width:100},         
-         {Header:"시작일자",Type:"Text",SaveName:"start_DATE",Align:"Center",Width:100},         
-         {Header:"종료일자",Type:"Text",SaveName:"end_DATE",Align:"Center",Width:100},
-         {Header:"발령유형",Type:"Text",SaveName:"hr_APPOINT_INDEX_NAME",Align:"Center",Width:100},
-         {Header:"발령구분",Type:"Text",SaveName:"appoint_INDEX_NAME",Align:"Center",Width:100},
-         {Header:"재직상태",Type:"Text",SaveName:"work_STATE",Align:"Center",Width:100},
-         {Header:"입사일자",Type:"Text",SaveName:"join_DATE",Align:"Center",Width:100},
-         {Header:"사업장",Type:"Text",SaveName:"site_NAME",Align:"Center",Width:100},
-         {Header:"부서",Type:"Text",SaveName:"department_NAME",Align:"Center",Width:100},
-         {Header:"직종",Type:"Text",SaveName:"job_CLASS_NAME",Align:"Center",Width:100},
-         {Header:"직급",Type:"Text",SaveName:"position_NAME",Align:"Center",Width:100},
-         {Header:"직책",Type:"Text",SaveName:"duty_NAME",Align:"Center",Width:100},
-         {Header:"직무",Type:"Text",SaveName:"job_DIS_NAME",Align:"Center",Width:100},
-         {Header:"급여유형",Type:"Text",SaveName:"pay_TYPE_NAME",Align:"Center",Width:100},
-         {Header:"급여호봉",Type:"Text",SaveName:"pay_GRADE_NAME",Align:"Center",Width:100},
-         {Header:"퇴직사유",Type:"Text",SaveName:"out_REASON_NAME",Align:"Center",Width:100}
-         ];
+         {Header:"시작일자",Type:"Date",SaveName:"start_DATE",Align:"Center",Width:100,Format:"Ymd"},         
+         {Header:"종료일자",Type:"Date",SaveName:"end_DATE",Align:"Center",Width:100,Format:"Ymd"},
+         {Header:"발령구분",Type:"Combo",SaveName:"hr_APPOINT_INDEX_NAME",Align:"Center",Width:100,"ComboText":"|승진|이동|파견|파견복귀|휴직|복직|퇴직|보직|보직해제|조직개편|계약연장|정직|정직해제", "ComboCode":"|1|2|3|4|5|6|7|8|9|10|11|12|13"},
+         {Header:"재직상태",Type:"Combo",SaveName:"work_STATUS",Align:"Center",Width:100,"ComboText":"|재직|휴직|정직|퇴직", "ComboCode":"|재직|휴직|정직|퇴직"},
+         {Header:"입사일자",Type:"Text",SaveName:"employee_JOIN_DATE",Align:"Center",Width:100,Format:"Ymd"},
+         {Header:"사업장",Type:"Popup",SaveName:"site_NAME",Align:"Center",Width:100},
+         {Header:"사업장코드",Type:"Text",SaveName:"site_CODE",Align:"Center",Width:100,Hidden:1},
+         {Header:"부서",Type:"Popup",SaveName:"department_NAME",Align:"Center",Width:100},
+         {Header:"부서코드",Type:"Text",SaveName:"department_CODE",Align:"Center",Width:100,Hidden:1},
+         {Header:"직종",Type:"Combo",SaveName:"job_CLASS_NAME",Align:"Center",Width:100,"ComboText":"|서비스|제조", "ComboCode":"|100|200"},
+         {Header:"직급",Type:"Combo",SaveName:"position_NAME",Align:"Center",Width:100,"ComboText":"|대표이사|부사장|전무|상무|이사|부장|차장|과장|생산계장|대리|주임|사원|생산사원|계약직", "ComboCode":"|100|120|150|200|300|400|500|600|650|700|800|900|910|990"},
+         {Header:"직책",Type:"Combo",SaveName:"duty_NAME",Align:"Center",Width:100,"ComboText":"|생산부장|생산과장", "ComboCode":"|100|200"},
+         {Header:"직무",Type:"Combo",SaveName:"job_DIS_NAME",Align:"Center",Width:100,"ComboText":"|CEO|CTO", "ComboCode":"|100|200"},
+         {Header:"급여유형",Type:"Combo",SaveName:"pay_TYPE_NAME",Align:"Center",Width:100},
+         {Header:"급여호봉",Type:"Combo",SaveName:"pay_GRADE_NAME",Align:"Center",Width:100,"ComboText":"|1호봉|2호봉|3호봉|4호봉|5호봉|6호봉|7호봉|8호봉|9호봉|10호봉", "ComboCode":"|C01|C02|C03|C04|C05|C06|C07|C08|C09|C10"},
+         {Header:"퇴직사유",Type:"Combo",SaveName:"out_REASON_NAME",Align:"Center",Width:100,"ComboText":"|해고|병가", "ComboCode":"|100|200"}         ];
       IBS_InitSheet(mySheet2,initSheet2);
       mySheet2.SetEditableColorDiff(1); //편집불가능한 셀 표시 구분
 
 
 
 }
+
+function mySheet1_OnClick(Row,Col){
+	var status=mySheet1.GetCellValue(Row,0);
+	if(status!="I"){
+
+	appointCode ="appointCode="+mySheet1.GetCellValue(Row,3);
+	mySheet2.DoSearch("${contextPath}/hm/p0022/appointList2.do",appointCode)
+	}
+	
+}
+
 
 function doAction(sAction) {
 	switch (sAction) {
@@ -117,35 +128,72 @@ function doAction(sAction) {
 	case "save1": //저장
 		mySheet1.DoSave("${contextPath}/hm/p0022/saveData1.do");		
 		break;
+	case "save2": //저장
+		console.log(appointCode);
+		mySheet2.DoSave("${contextPath}/hm/p0022/saveData2.do",appointCode);		
+		break;
 	}
 }
 
 
-function mySheet1_OnClick(Row,Col){
-	var status=mySheet1.GetCellValue(Row,0);
-	if(status!="I"){
 
-	var appointCode ="appointCode="+mySheet1.GetCellValue(Row,3);
-	mySheet2.DoSearch("${contextPath}/hm/p0022/appointList2.do",appointCode)
-	}
-	
-}
 function goPopup(){
-	window.open("${contextPath}/hm/p0022/homeInit_p01.do", "a", "width=500, height=700, left=100, top=50 location=0");
+	window.open("${contextPath}/hm/p0022/homeInit_p03.do", "a", "width=500, height=700, left=100, top=50 location=0");
 }
+
 function popupValue(emplyCode,emplyName){
 	$("#masterEmpl").val(emplyName);
 	$("#masterEmplCode").val(emplyCode);
-	alert("home="+$("#masterEmplCode").val());
+	
 	
 	
 }
-function mySheet2_OnPopupClick(Row,Col) {    
+function popupValue2(rowData){
+
+	
+	mySheet2.SetRowData(mySheet2.GetSelectRow(),rowData);
+	
+}
+function popupValue3(rowData){
+	
+	mySheet1.SetRowData(mySheet1.GetSelectRow(),rowData);
+	
+}
+function popupValue4(rowData){
+	
+	mySheet2.SetRowData(mySheet2.GetSelectRow(),rowData);
+	
+}
+function popupValue5(rowData){
+	
+	mySheet2.SetRowData(mySheet2.GetSelectRow(),rowData);
+	
+}
+function mySheet1_OnButtonClick(Row,Col){
+	alert('현세찡');
+	
+}
+function mySheet2_OnPopupClick(Row,Col) {  	
+	
 	if(Col==4){
 		window.open("${contextPath}/hm/p0022/homeInit_p01.do", "a", "width=500, height=700, left=100, top=50 location=no");
 	}
+	 if(Col==10){
+		 window.open("${contextPath}/hm/p0022/homeInit_p04.do", "a", "width=500, height=700, left=100, top=50 location=no");
+	 }
+	 if(Col==12){
+		 window.open("${contextPath}/hm/p0022/homeInit_p05.do", "a", "width=500, height=700, left=100, top=50 location=no");
+	 }
+}
+function mySheet1_OnPopupClick(Row,Col){
+	if(Col==6){
+	window.open("${contextPath}/hm/p0022/homeInit_p02.do", "a", "width=500, height=700, left=100, top=50 location=no")
 	}
-
+}
+function mySheet1_OnButtonClick(Row,Col){
+	alert("현세찡");
+	
+}
 
 </script>
 <meta charset="UTF-8">
@@ -192,7 +240,7 @@ createIBSheet("mySheet1","100%","30%");
 발령후내역
 
 <a href="javascript:doAction('insert2')" class="IBbutton">입력</a>
-<a href="" class="IBbutton">저장</a>
+<a href="javascript:doAction('save2')" class="IBbutton">저장</a>
 
 
 <script type="text/javascript">

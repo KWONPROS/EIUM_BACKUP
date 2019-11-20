@@ -30,4 +30,14 @@ public interface HM_P0022Controller {
 
 	ModelAndView homeInit_p02(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
+	ModelAndView homeInit_p03(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	ModelAndView homeInit_p04(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	Map homeSearch_p04(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	ModelAndView homeInit_p05(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	Map homeSearch_p05(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
 }

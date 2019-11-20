@@ -40,8 +40,23 @@ public class HM_P0022ServiceImpl implements HM_P0022Service{
 		return list;
 	}
 	@Override
+	public List<HM_P0022VO> homeSearch_p02(Map<String, Object> searchMap) throws DataAccessException {
+		List<HM_P0022VO> list =  hM_P0022DAO.homeSearch_p02(searchMap); 
+		return list;
+	}
+	@Override
 	public List<HM_P0022VO> homeSearch_p03(Map<String, Object> searchMap) throws DataAccessException {
 		List<HM_P0022VO> list =  hM_P0022DAO.homeSearch_p03(searchMap); 
+		return list;
+	}
+	@Override
+	public List<HM_P0022VO> homeSearch_p04(Map<String, Object> searchMap) throws DataAccessException {
+		List<HM_P0022VO> list =  hM_P0022DAO.homeSearch_p04(searchMap); 
+		return list;
+	}
+	@Override
+	public List<HM_P0022VO> homeSearch_p05(Map<String, Object> searchMap) throws DataAccessException {
+		List<HM_P0022VO> list =  hM_P0022DAO.homeSearch_p05(searchMap); 
 		return list;
 	}
 	@Override

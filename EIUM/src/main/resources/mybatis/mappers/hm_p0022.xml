@@ -16,7 +16,7 @@
         <result property="employee_NAME" column="employee_NAME" />
         <result property="hr_APPOINT_INDEX_NAME" column="hr_APPOINT_INDEX_NAME" />
         <result property="appoint_INDEX_NAME" column="appoint_INDEX_NAME" />
-        <result property="work_STATE" column="work_STATE" />
+        <result property="work_STATUS" column="work_STATUS" />
         <result property="join_DATE" column="join_DATE" />
         <result property="site_NAME" column="site_NAME" />
         <result property="department_NAME" column="department_NAME" />
@@ -67,7 +67,7 @@
 
 	<select  id="appointList2" resultMap="P0022resultVO" parameterType="java.util.Map">
 	    <![CDATA[
-       SELECT HAH.APPOINT_EMPLOYEE_CODE,
+       SELECT HAH.APPOINT_EMPLOYEE_CODE AS EMPLOYEE_CODE,
 E.EMPLOYEE_NAME,
 HAH.APPOINT_CODE,
 HAH.START_DATE,
@@ -99,9 +99,11 @@ FROM HR_APPOINT_HISTORY HAH,
     JOB_DIS JD,
     PAY_TYPE PT,
     PAY_GRADE PG,
-    OUT_REASON ORN  
+    OUT_REASON ORN
+
 
 WHERE HAH.APPOINT_EMPLOYEE_CODE = E.EMPLOYEE_CODE(+)
+AND HAH.appoint_index_code = AI.hr_appoint_index_code(+)
 AND HAH.APPOINT_EMPLOYEE_CODE=EW.EMPLOYEE_CODE(+)
 AND D.SITE_CODE = S.SITE_CODE(+)
 AND EW.DEPARTMENT_CODE=D.DEPARTMENT_CODE(+)
@@ -146,39 +148,129 @@ AND HAH.APPOINT_CODE = #{appointCode}
 	</otherwise>
 	</choose>
 	</select>
+	
+	<select  id="homeSearch_p02" resultMap="P0022resultVO" parameterType="java.util.Map">
+	
 
+	    <![CDATA[
+	    SELECT e.employee_code AS masterEmployee_CODE, e.employee_name,s.site_name,d.department_name ,dt.duty_name
+	    FROM employee e , employee_work ew , site s , duty dt, department d
+	    WHERE e.employee_code = ew.employee_code
+	    AND ew.department_code= d.department_code
+		AND d.site_code = s.site_code 
+	    AND ew.duty_code = dt.duty_code
 
-
-	<select  id="homeSearch_p03" resultMap="P0022resultVO" parameterType="java.util.Map">
+		]]>
 	<choose>
 	<when test="E_id != '' and E_id != null">
-	    <![CDATA[
-    SELECT E.EMPLOYEE_CODE,E.EMPLOYEE_NAME,D.DEPARTMENT_NAME,S.SITE_NAME,DT.DUTY_NAME
-	FROM EMPLOYEE E, EMPLOYEE_WORK EW,DEPARTMENT D,SITE S,DUTY DT
-	WHERE EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE(+)
-	AND D.SITE_CODE=S.SITE_CODE(+)
-	AND E.EMPLOYEE_CODE= EW.EMPLOYEE_CODE(+)
-	AND EW.DUTY_CODE=DT.DUTY_CODE(+)
-	AND E.EMPLOYEE_NAME =  #{E_id jdbcType=VARCHAR}
+AND e.employee_name = #{E_id jdbcType=VARCHAR}
     
-			]]>
+	
 			
 	</when>
-	<otherwise>
-		    <![CDATA[
-    SELECT E.EMPLOYEE_CODE,E.EMPLOYEE_NAME,D.DEPARTMENT_NAME,S.SITE_NAME,DT.DUTY_NAME
-	FROM EMPLOYEE E, EMPLOYEE_WORK EW,DEPARTMENT D,SITE S,DUTY DT
-	WHERE EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE(+)
-	AND D.SITE_CODE=S.SITE_CODE(+)
-	AND E.EMPLOYEE_CODE= EW.EMPLOYEE_CODE(+)
-	AND EW.DUTY_CODE=DT.DUTY_CODE(+)
-    
-			]]>
-	</otherwise>
 	</choose>
 	</select>
 
 
+
+	<select  id="homeSearch_p03" resultMap="P0022resultVO" parameterType="java.util.Map">
+	
+
+	    <![CDATA[
+       SELECT
+EW.EMPLOYEE_CODE,
+E.EMPLOYEE_NAME,
+EW.WORK_STATUS,
+EW.EMPLOYEE_JOIN_DATE,
+S.SITE_NAME,
+S.SITE_CODE,
+D.DEPARTMENT_NAME,
+D.DEPARTMENT_CODE,
+JC.JOB_CLASS_NAME,
+JC.JOB_CLASS_CODE,
+P.POSITION_NAME,
+P.POSITION_CODE,
+DT.DUTY_NAME,
+DT.DUTY_CODE,
+JD.JOB_DIS_NAME,
+JD.JOB_DIS_CODE,
+PT.PAY_TYPE_NAME,
+PT.PAY_TYPE_CODE,
+PG.PAY_GRADE_NAME,
+PG.PAY_GRADE_CODE,
+ORN.OUT_REASON_NAME,
+ORN.OUT_REASON_CODE
+
+
+FROM EMPLOYEE_WORK EW,
+    EMPLOYEE E,
+    SITE S,
+    DEPARTMENT D,
+    JOB_CLASS JC,
+    POSITION P,
+    DUTY DT,
+    JOB_DIS JD,
+    PAY_TYPE PT,
+    PAY_GRADE PG,
+    OUT_REASON ORN  
+
+WHERE EW.EMPLOYEE_CODE = E.EMPLOYEE_CODE(+)
+AND D.SITE_CODE = S.SITE_CODE(+)
+AND EW.DEPARTMENT_CODE=D.DEPARTMENT_CODE(+)
+AND EW.JOB_CLASS_CODE=JC.JOB_CLASS_CODE(+)
+AND EW.POSITION_CODE=P.POSITION_CODE(+)
+AND EW.DUTY_CODE=DT.DUTY_CODE(+)
+AND EW.JOB_DIS_CODE = JD.JOB_DIS_CODE(+)
+AND EW.PAY_TYPE_CODE = PT.PAY_TYPE_CODE(+)
+AND EW.PAY_GRADE_CODE = PG.PAY_GRADE_CODE(+)
+AND EW.OUT_REASON_CODE = ORN.OUT_REASON_CODE(+)
+		]]>
+	<choose>
+	<when test="E_id != '' and E_id != null">
+AND e.employee_name = #{E_id jdbcType=VARCHAR}
+    
+	
+			
+	</when>
+	</choose>
+	</select>
+
+<select  id="homeSearch_p04" resultMap="P0022resultVO" parameterType="java.util.Map">
+	
+
+	    <![CDATA[
+	    SELECT site_code , site_name
+	    FROM site
+
+		]]>
+	<choose>
+	<when test="E_id != '' and E_id != null">
+AND site_name = #{E_id jdbcType=VARCHAR}
+    
+	
+			
+	</when>
+	</choose>
+	</select>
+	
+	<select  id="homeSearch_p05" resultMap="P0022resultVO" parameterType="java.util.Map">
+	
+
+	    <![CDATA[
+	    SELECT department_code , department_name
+	    FROM department
+
+		]]>
+	<choose>
+	<when test="E_id != '' and E_id != null">
+AND department_name = #{E_id jdbcType=VARCHAR}
+    
+	
+			
+	</when>
+	</choose>
+	</select>
+	
 
 
 	<select  id="homeEmployeeSearch" resultMap="P0022resultVO" parameterType="java.util.Map">
@@ -217,10 +309,13 @@ AND HAH.APPOINT_CODE = #{appointCode}
 	</delete>	
 	
 	
-		<insert id="insertData2" parameterType="java.util.Map">
-	insert into HR_APPOINT(EMPLOYEE_CODE)
-	values(#{employee_code})
-	</insert>	
+	
+	<insert id="insertData2" parameterType="java.util.Map">
+
+	insert into hr_appoint_history(appoint_history_code, appoint_index_code , appoint_employee_code , appoint_code , start_date , end_date , work_status ,join_date , site_code , department_code , job_class_code , position_code , duty_code , job_dis_code , pay_type_code , pay_grade_code , out_reason_code )
+	values (APPOINT_HISTORY_CODE_SEQ.nextval , #{hr_APPOINT_INDEX_NAME,jdbcType=VARCHAR} ,#{employee_CODE,jdbcType=VARCHAR},#{appointCode,jdbcType=VARCHAR},#{start_DATE,jdbcType=VARCHAR},#{end_DATE,jdbcType=VARCHAR},#{work_STATUS,jdbcType=VARCHAR},#{employee_JOIN_DATE,jdbcType=VARCHAR} ,#{site_CODE,jdbcType=VARCHAR} , #{department_NAME,jdbcType=VARCHAR} ,#{job_CLASS_NAME,jdbcType=VARCHAR} ,#{position_NAME,jdbcType=VARCHAR}, #{duty_NAME,jdbcType=VARCHAR} , #{job_DIS_NAME,jdbcType=VARCHAR} ,#{pay_TYPE_NAME,jdbcType=VARCHAR} , #{pay_GRADE_NAME,jdbcType=VARCHAR},#{out_REASON_NAME,jdbcType=VARCHAR})
+ 
+	 </insert>	
 	
 	
 	

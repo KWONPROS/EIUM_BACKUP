@@ -66,12 +66,7 @@ public String getAppoint_INDEX_NAME() {
 public void setAppoint_INDEX_NAME(String appoint_INDEX_NAME) {
 	this.appoint_INDEX_NAME = appoint_INDEX_NAME;
 }
-public String getWork_STATE() {
-	return work_STATE;
-}
-public void setWork_STATE(String work_STATE) {
-	this.work_STATE = work_STATE;
-}
+
 public String getJoin_DATE() {
 	return join_DATE;
 }
@@ -138,18 +133,48 @@ String appoint_YN;
 String masterEmployee_CODE;
 String masterEmployee_NAME;
 String appoint_HISTORY_CODE;
-String appoint_employee_CODE;
-public String getAppoint_employee_CODE() {
-	return appoint_employee_CODE;
+public String getDepartment_CODE() {
+	return department_CODE;
 }
-public void setAppoint_employee_CODE(String appoint_employee_CODE) {
-	this.appoint_employee_CODE = appoint_employee_CODE;
+public void setDepartment_CODE(String department_CODE) {
+	this.department_CODE = department_CODE;
+}
+String appoint_EMPLOYEE_CODE;
+String department_CODE;
+
+public String getAppoint_EMPLOYEE_CODE() {
+	return appoint_EMPLOYEE_CODE;
+}
+public void setAppoint_EMPLOYEE_CODE(String appoint_EMPLOYEE_CODE) {
+	this.appoint_EMPLOYEE_CODE = appoint_EMPLOYEE_CODE;
 }
 String employee_NAME;
 String hr_APPOINT_INDEX_NAME;
 String appoint_INDEX_NAME;
-String work_STATE;
+String work_STATUS;
 String join_DATE;
+String employee_JOIN_DATE;
+String site_CODE;
+
+
+public String getSite_CODE() {
+	return site_CODE;
+}
+public void setSite_CODE(String site_CODE) {
+	this.site_CODE = site_CODE;
+}
+public String getWork_STATUS() {
+	return work_STATUS;
+}
+public void setWork_STATUS(String work_STATUS) {
+	this.work_STATUS = work_STATUS;
+}
+public String getEmployee_JOIN_DATE() {
+	return employee_JOIN_DATE;
+}
+public void setEmployee_JOIN_DATE(String employee_JOIN_DATE) {
+	this.employee_JOIN_DATE = employee_JOIN_DATE;
+}
 String site_NAME;
 String department_NAME;
 String job_CLASS_NAME;

@@ -39,7 +39,7 @@ public class HM_P0022ControllerImpl implements HM_P0022Controller{
 	}
 	
 	@Override
-	@RequestMapping(value = "hm/p0022/homeInit_p01.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "hm/p0022/homeInit_p03.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView homeInit_p01(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		ModelAndView mav = new ModelAndView("hm/hm_p0022/p0022_home_p03");
@@ -49,8 +49,8 @@ public class HM_P0022ControllerImpl implements HM_P0022Controller{
 	
 	}
 	@Override
-	@RequestMapping(value = "hm/p0022/homeInit_p02.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView homeInit_p02(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "hm/p0022/homeInit_p01.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView homeInit_p03(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		ModelAndView mav = new ModelAndView("hm/hm_p0022/p0022_home_p01");
 	
@@ -58,7 +58,41 @@ public class HM_P0022ControllerImpl implements HM_P0022Controller{
 	
 	
 	}
+	@Override
+	@RequestMapping(value = "hm/p0022/homeInit_p02.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView homeInit_p02(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("hm/hm_p0022/p0022_home_p02");
+	
+		return mav;
+	
+	
+	}
 
+	@Override
+	@RequestMapping(value = "hm/p0022/homeInit_p04.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView homeInit_p04(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("hm/hm_p0022/p0022_home_p04");
+	
+		return mav;
+	
+	
+	}
+
+	@Override
+	@RequestMapping(value = "hm/p0022/homeInit_p05.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView homeInit_p05(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("hm/hm_p0022/p0022_home_p05");
+	
+		return mav;
+	
+	
+	}
+
+	
+	
 	
 	//search
 	
@@ -110,7 +144,7 @@ public class HM_P0022ControllerImpl implements HM_P0022Controller{
 		
 		searchMap.put("E_id", request.getParameter("E_id"));
 		System.out.println(request.getParameter("E_id"));
-		List<HM_P0022VO> data = hM_P0022Service.masterEmployee_p02(searchMap);
+		List<HM_P0022VO> data = hM_P0022Service.homeSearch_p02(searchMap);
         resultMap.put("Data", data);
         
         
@@ -134,6 +168,41 @@ public class HM_P0022ControllerImpl implements HM_P0022Controller{
         
         return resultMap;
 	}
+	@Override
+	@RequestMapping(value = "/hm/p0022/homeSearch_p04.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map homeSearch_p04(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>(); // 검색조건
+		Map<String, Object> resultMap = new HashMap<String, Object>(); // 조회결과
+		
+		
+		searchMap.put("E_id", request.getParameter("E_id"));
+		System.out.println(request.getParameter("E_id"));
+		List<HM_P0022VO> data = hM_P0022Service.homeSearch_p04(searchMap);
+        resultMap.put("Data", data);
+        
+        
+        return resultMap;
+	}
+	@Override
+	@RequestMapping(value = "/hm/p0022/homeSearch_p05.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map homeSearch_p05(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>(); // 검색조건
+		Map<String, Object> resultMap = new HashMap<String, Object>(); // 조회결과
+		
+		
+		searchMap.put("E_id", request.getParameter("E_id"));
+		System.out.println(request.getParameter("E_id"));
+		List<HM_P0022VO> data = hM_P0022Service.homeSearch_p05(searchMap);
+        resultMap.put("Data", data);
+        
+        
+        return resultMap;
+	}
+
 
 	
 	@Override
