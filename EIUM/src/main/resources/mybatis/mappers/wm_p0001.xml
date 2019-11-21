@@ -20,13 +20,93 @@
 	
 	<!-- /////////////////////////////////////EMP_SEARCHLIST ////////////////////////////////////////-->
 	<select id = "EMP_searchList" resultMap="P0001resultVO" parameterType="java.util.Map">
-	<![CDATA[
-		select E.EMPLOYEE_CODE, E.EMPLOYEE_NAME, D.DEPARTMENT_NAME, D.DEPARTMENT_CODE  
-		from EMPLOYEE E, EMPLOYEE_WORK EW, DEPARTMENT D
-		where E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE
-		AND D.DEPARTMENT_CODE = EW.DEPARTMENT_CODE
-		ORDER BY E.EMPLOYEE_CODE ASC
-	]]> 
+		<choose>
+			<!-- 전체 전체 전체 0 0 0 수정중-->
+			<when test= "searchSite=='all' and searchTYPE == 'all'  and searchDetail =='alldetail'">
+				select DISTINCT(E.EMPLOYEE_CODE), E.EMPLOYEE_NAME, D.DEPARTMENT_NAME, D.DEPARTMENT_CODE  
+				from EMPLOYEE E, EMPLOYEE_WORK EW, DEPARTMENT D, SITE S, WORKING_STATUS WS
+				where E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE
+       			AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE
+        		AND EW.EMPLOYEE_CODE = WS.EMPLOYEE_CODE
+				AND D.DEPARTMENT_CODE = EW.DEPARTMENT_CODE
+        		AND D.SITE_CODE = S.SITE_CODE
+        		AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
+				ORDER BY E.EMPLOYEE_CODE ASC
+			</when>
+			<!-- 전체 전체 전체아니고 0 0 1-->
+			<when test= " searchSite=='all' and searchTYPE == 'all'  and  searchDetail !='alldetail'">
+				select DISTINCT(E.EMPLOYEE_CODE), E.EMPLOYEE_NAME, D.DEPARTMENT_NAME, D.DEPARTMENT_CODE  
+				from EMPLOYEE E, EMPLOYEE_WORK EW, DEPARTMENT D, SITE S, WORKING_STATUS WS
+				where E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE
+       			AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE
+        		AND EW.EMPLOYEE_CODE = WS.EMPLOYEE_CODE
+				AND D.DEPARTMENT_CODE = EW.DEPARTMENT_CODE
+        		AND D.SITE_CODE = S.SITE_CODE
+				AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
+				AND S.site_name = #{searchSite}
+				ORDER BY E.EMPLOYEE_CODE ASC
+			</when>
+			
+			<!-- 전체아니고 부서 전체 1 1 O-->
+			<when test= " searchSite!='all' and searchTYPE == 'department'  and  searchDetail=='alldetail'">
+				select DISTINCT(E.EMPLOYEE_CODE), E.EMPLOYEE_NAME, D.DEPARTMENT_NAME, D.DEPARTMENT_CODE  
+				from EMPLOYEE E, EMPLOYEE_WORK EW, DEPARTMENT D, SITE S, WORKING_STATUS WS
+				where E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE
+       			AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE
+        		AND EW.EMPLOYEE_CODE = WS.EMPLOYEE_CODE
+				AND D.DEPARTMENT_CODE = EW.DEPARTMENT_CODE
+        		AND D.SITE_CODE = S.SITE_CODE
+				AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
+				AND S.site_name = #{searchSite}
+				and EW.depart_code is not null
+				ORDER BY E.EMPLOYEE_CODE ASC
+			</when>
+			
+			<!-- 전체아니고 부서 전체아니고 -->
+			<when test= " searchSite!='all' and searchTYPE == 'department'  and  searchDetail !='alldetail'">
+				select DISTINCT(E.EMPLOYEE_CODE), E.EMPLOYEE_NAME, D.DEPARTMENT_NAME, D.DEPARTMENT_CODE  
+				from EMPLOYEE E, EMPLOYEE_WORK EW, DEPARTMENT D, SITE S, WORKING_STATUS WS
+				where E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE
+       			AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE
+        		AND EW.EMPLOYEE_CODE = WS.EMPLOYEE_CODE
+				AND D.DEPARTMENT_CODE = EW.DEPARTMENT_CODE
+        		AND D.SITE_CODE = S.SITE_CODE
+				AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
+				AND S.site_name = #{searchSite}
+				and D.depart_name = #{searchDetail,jdbcType=VARCHAR}
+				ORDER BY E.EMPLOYEE_CODE ASC
+			</when>
+			
+			<!-- 전체아니고  근무조 전체-->
+			<when test= " searchSite!='all' and searchTYPE == 'work_group'  and  searchDetail=='alldetail'">
+				select DISTINCT(E.EMPLOYEE_CODE), E.EMPLOYEE_NAME, D.DEPARTMENT_NAME, D.DEPARTMENT_CODE  
+				from EMPLOYEE E, EMPLOYEE_WORK EW, DEPARTMENT D, SITE S, WORKING_STATUS WS
+				where E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE
+       			AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE
+        		AND EW.EMPLOYEE_CODE = WS.EMPLOYEE_CODE
+				AND D.DEPARTMENT_CODE = EW.DEPARTMENT_CODE
+        		AND D.SITE_CODE = S.SITE_CODE
+				AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
+				AND S.site_name = #{searchSite}
+				and EW.work_group_code is not null
+				ORDER BY E.EMPLOYEE_CODE ASC
+			</when>
+			
+			<!-- 전체 아니고 근무조 전체아니고 -->
+			<when test= "searchSite!='all' and searchTYPE == 'work_group'  and  searchDetail !='alldetail'" >
+				select DISTINCT(E.EMPLOYEE_CODE), E.EMPLOYEE_NAME, D.DEPARTMENT_NAME, D.DEPARTMENT_CODE  
+				from EMPLOYEE E, EMPLOYEE_WORK EW, DEPARTMENT D, SITE S, WORKING_STATUS WS, WORK_GROUP W
+				where E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE
+       			AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE
+        		AND EW.EMPLOYEE_CODE = WS.EMPLOYEE_CODE
+				AND D.DEPARTMENT_CODE = EW.DEPARTMENT_CODE
+        		AND D.SITE_CODE = S.SITE_CODE
+				AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
+				AND S.site_name = #{searchSite}
+				and W.work_group_name = #{searchDetail,jdbcType=VARCHAR}
+				ORDER BY E.EMPLOYEE_CODE ASC
+			</when>
+		</choose>
 	</select>
 	
 	<!-- //////////////////////////////////////WORKING_STATUS_SEARCHLIST ///////////////////////////////-->
@@ -35,6 +115,7 @@
 		select WS.WORKING_STATUS_CODE,WS.WORKING_STATUS_DATE,WS.WORKING_STATUS_START_TIME, WS.WORKING_STATUS_END_TIME, WS.WORKING_STATUS_TOTAL_TIME, WS.WORKING_STATUS_DESC
 		from WORKING_STATUS WS
 		where WS.EMPLOYEE_CODE = #{P_EMP_CODE}
+		AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
 		ORDER BY WS.WORKING_STATUS_DATE ASC
 	]]>
 	</select>

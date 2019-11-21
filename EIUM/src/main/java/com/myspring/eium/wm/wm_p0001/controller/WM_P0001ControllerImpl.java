@@ -51,6 +51,15 @@ public class WM_P0001ControllerImpl implements WM_P0001Controller {
 		Map<String, Object> searchMap = new HashMap<String, Object>(); 
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
 		
+		searchMap.put("P_WS_MONTH", request.getParameter("monthpicker"));
+		searchMap.put("searchSite", request.getParameter("searchSite"));
+		searchMap.put("searchTYPE", request.getParameter("searchTYPE"));
+		searchMap.put("searchDetail", request.getParameter("searchDetail"));
+		
+		System.out.println(request.getParameter("monthpicker"));
+		System.out.println(request.getParameter("searchSite"));
+		System.out.println(request.getParameter("searchTYPE"));
+		System.out.println(request.getParameter("searchDetail"));
 		//데이터 조회
 		List<WM_P0001VO> data = p0001Service.EMP_searchList(searchMap);
 		
@@ -69,7 +78,11 @@ public class WM_P0001ControllerImpl implements WM_P0001Controller {
 		String P_EMP_CODE = request.getParameter("P_EMP_CODE");
 		System.out.println("P_EMP_CODE = " + P_EMP_CODE);
 		
+		String P_WS_MONTH = request.getParameter("monthpicker");
+		System.out.println("P_WS_MONTH = " + P_WS_MONTH);
+		
 		searchMap.put("P_EMP_CODE", request.getParameter("P_EMP_CODE"));
+		searchMap.put("P_WS_MONTH", P_WS_MONTH);
 		//데이터 조회
 		List<WM_P0001VO> data = p0001Service.WS_searchList(searchMap);
 		
