@@ -17,4 +17,5 @@ public interface WM_P0001Controller {
 	public Map WS_searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public Map TWS_saveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

@@ -16,6 +16,22 @@
 		<result property="working_STATUS_END_TIME" column="WORKING_STATUS_END_TIME" />
 		<result property="working_STATUS_TOTAL_TIME" column="WORKING_STATUS_TOTAL_TIME" />
 		<result property="working_STATUS_DESC" column="WORKING_STATUS_DESC" />
+		
+		<result property="weekday" column="WEEKDAY" />
+		<result property="holiday" column="HOLIDAY" />
+		<result property="normal_WORK_DAY" column="NORMAL_WORK_DAY" />
+		<result property="extension_WORK_DAY" column="EXTENSION_WORK_DAY" />
+		
+		<result property="weekday_NORMAL_WORK_TIME" column="WEEKDAY_NORMAL_WORK_TIME" />
+		<result property="weekday_EXTENSION_WORK_TIME" column="WEEKDAY_EXTENSION_WORK_TIME" />
+		<result property="weekday_NIGHT_WORK_TIME" column="WEEKDAY_NIGHT_WORK_TIME" />
+		
+		<result property="holiday_NORMAL_WORK_TIME" column="HOLIDAY_NORMAL_WORK_TIME" />
+		<result property="holiday_EXTENSION_WORK_TIME" column="HOLIDAY_EXTENSION_WORK_TIME" />
+		<result property="holiday_NIGHT_WORK_TIME" column="HOLIDAY_NIGHT_WORK_TIME" />
+		
+		<result property="payment_DATE" column="PAYMENT_DATE" />
+		<result property="payment_CODE" column="PAYMENT_CODE" />
 	</resultMap>
 	
 	<!-- /////////////////////////////////////EMP_SEARCHLIST ////////////////////////////////////////-->
@@ -142,4 +158,12 @@
 		delete WORKING_STATUS
 		where WORKING_STATUS_CODE = #{working_STATUS_CODE}
 	</delete>
+	
+	<!-- //////////////////////////////////////////TOTAL_WORKING_STATUS_INSERT////////////////////////////// -->
+	<insert id="TWS_insertData" parameterType="java.util.Map">
+		insert into TOTAL_WORKING_STATUS(TOTAL_WORKING_STATUS_CODE, EMPLOYEE_CODE, PAYMENT_CODE, WEEKDAY, HOLIDAY, NORMAL_WORK_DAY, EXTENSION_WORK_DAY, WEEKDAY_NORMAL_WORK_TIME, WEEKDAY_EXTENSION_WORK_TIME, WEEKDAY_NIGHT_WORK_TIME, HOLIDAY_NORMAL_WORK_TIME, HOLIDAY_EXTENSION_WORK_TIME, HOLIDAY_NIGHT_WORK_TIME)
+			select TOTAL_WORKING_STATUS_CODE_SEQ.NEXTVAL, #{PP_EMPLOYEE_CODE, jdbcType=VARCHAR}, PAYMENT_CODE, #{weekday, jdbcType=VARCHAR}, #{holiday, jdbcType=VARCHAR}, #{normal_WORK_DAY, jdbcType=VARCHAR},#{extension_WORK_DAY, jdbcType=VARCHAR}, #{weekday_NORMAL_WORK_TIME, jdbcType=VARCHAR}, #{weekday_EXTENSION_WORK_TIME, jdbcType=VARCHAR}, #{weekday_NIGHT_WORK_TIME, jdbcType=VARCHAR}, #{holiday_NORMAL_WORK_TIME, jdbcType=VARCHAR}, #{holiday_EXTENSION_WORK_TIME, jdbcType=VARCHAR}, #{holiday_NIGHT_WORK_TIME, jdbcType=VARCHAR}
+			from PAYMENT P
+			where SUBSTR(PAYMENT_DATE, 1, 6) = #{P_PAYMENT_CODE}
+	</insert>
 </mapper>

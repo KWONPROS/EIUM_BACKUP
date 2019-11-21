@@ -126,5 +126,42 @@ public class WM_P0001ControllerImpl implements WM_P0001Controller {
         return resultMap;
 	}
 
+	@Override
+	@RequestMapping(value = "/wm/p0001/TWS_saveData.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map TWS_saveData(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, String[]> dataMap = new HashMap<String, String[]>(); // 占쏙옙占쏙옙占쏙옙Data
+		Map<String, Object> resultMap = new HashMap<String, Object>(); // 처占쏙옙占쏙옙占�
+		
+		String PP_EMPLOYEE_CODE = request.getParameter("PP_EMP_CODE");
+		System.out.println("PP_EMPLOYEE_CODE : " + PP_EMPLOYEE_CODE);
+		
+		String P_PAYMENT_CODE = request.getParameter("P_PAYMENT_CODE");
+		System.out.println("P_PAYMENT_CODE : " + P_PAYMENT_CODE);
+		
+		// 저장 Data 추출하기
+		Enumeration enu = request.getParameterNames();
+		while (enu.hasMoreElements()) {
+			String name = (String) enu.nextElement();
+			String[] values = request.getParameterValues(name);
+			dataMap.put(name, values);
+		}
+		
+		Map<String, String> result = new HashMap<String, String>();
+		try {
+			p0001Service.TWS_saveData(dataMap, PP_EMPLOYEE_CODE, P_PAYMENT_CODE);	
+			result.put("Code","0");
+			result.put("Message","저장되었습니다");
+		}catch(Exception e) {                                                               
+			result.put("Code","-1");
+			result.put("Message","저장에 실패하였습니다");
+			e.printStackTrace();
+		}
+		
+		resultMap.put("Result", result);     
+		System.out.println("WM-P0001ControllerImpl-TWS_saveData-resultMap::::" + resultMap);
+        return resultMap;
+	}
 
 }

@@ -197,8 +197,6 @@
 			mySheet3.RemoveAll();
 			break;
 		case "save": // 저장
-			var tempStr = mySheet2.GetSaveString();
-			alert("서버로 전달되는 문자열 확인 :" + tempStr);
 			mySheet2.DoSave("${contextPath}/wm/p0001/saveData.do", "p_emp_code=" + mySheet.GetCellValue(mySheet.GetSelectRow(),0));
 			
 			break;
@@ -211,6 +209,12 @@
 			break;
 			
 		case "deadline": //마감
+			var tempStr = mySheet2.GetSaveString();
+			alert("서버로 전달되는 문자열 확인 :" + tempStr);	
+			mySheet3.DoSave("${contextPath}/wm/p0001/TWS_saveData.do", "PP_EMP_CODE=" + mySheet.GetCellValue(mySheet.GetSelectRow(),0) + "&P_PAYMENT_CODE=" +$('#monthpicker').val());
+			//마감저장이 성공하면 그후엔 그 저장한 사원의 그 달 SHEET와 전체 작동 불가
+			//마감 버튼은 마감취소 버튼으로 변경
+			
 			break;
 		
 		
@@ -249,20 +253,13 @@
 			var T_holi_NI_TIME = mySheet2.ComputeSum("|17|"); //총 휴일 야간 근무시간
 			
 			var T_week_count = 0, T_holi_count = 0, T_week_NO_DAY = 0, T_week_EX_DAY = 0, T_holi_NO_DAY = 0, T_holi_EX_DAY = 0, T_NO_COUNT = 0, T_EX_COUNT = 0;
-			/* alert(T_week_NO_TIME);
-			alert(T_week_EX_TIME);
-			alert(T_week_NI_TIME);
-			alert(T_holi_NO_TIME);
-			alert(T_holi_EX_TIME);
-			alert(T_holi_NI_TIME);
-			 */
-			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("weekday_NORMAL_WORK_TIME"), T_week_NO_TIME);
-			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("weekday_EXTENSION_WORK_TIME"), T_week_EX_TIME);
-			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("weekday_NIGHT_WORK_TIME"), T_week_NI_TIME);
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("weekday_NORMAL_WORK_TIME"), textWithtimeFormat(T_week_NO_TIME));
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("weekday_EXTENSION_WORK_TIME"), textWithtimeFormat(T_week_EX_TIME));
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("weekday_NIGHT_WORK_TIME"), textWithtimeFormat(T_week_NI_TIME));
 			 
-			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("holiday_NORMAL_WORK_TIME"), T_holi_NO_TIME);
-			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("holiday_EXTENSION_WORK_TIME"), T_holi_EX_TIME);
-			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("holiday_NIGHT_WORK_TIME"), T_holi_NI_TIME);
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("holiday_NORMAL_WORK_TIME"), textWithtimeFormat(T_holi_NO_TIME));
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("holiday_EXTENSION_WORK_TIME"), textWithtimeFormat(T_holi_EX_TIME));
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("holiday_NIGHT_WORK_TIME"), textWithtimeFormat(T_holi_NI_TIME));
 			
 			//평일//휴일 분류
 			var T_Maskingcell = mySheet2.GetDataLastRow();
@@ -1113,8 +1110,6 @@
 	function mySheet2_OnClick(Row, Col){
 		//오른쪽 근무시간에 아이비시트에서 계산된 것을 뿌려줌
 		
-		
-		
 		if(Row!=0){
 			$('input[name=myRow]').val(Row);
 			var abcde = $('input[name=weekday_NORMAL_WORK_TIME]').val(textWithtimeFormat(mySheet2.GetCellValue(Row, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"))));
@@ -1130,7 +1125,10 @@
 		}
 	}
 	function textWithtimeFormat(x) {
-		if(x >= 1000){
+		if(x > 10000){
+			var temp_x = x.toString().replace(/\B(?=(\d{2})+(?!\d))/g, ":");
+			return temp_x.replace(':','');
+		}else if(x < 10000&& x >= 1000){
 			return x.toString().replace(/\B(?=(\d{2})+(?!\d))/g, ":");
 		}else if(x < 1000 && x >= 100){
 			return  "0"+ x.toString().replace(/\B(?=(\d{2})+(?!\d))/g, ":");
