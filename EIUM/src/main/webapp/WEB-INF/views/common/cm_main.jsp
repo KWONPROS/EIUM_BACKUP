@@ -126,7 +126,6 @@
 		
 	
 
-	});
 	//컬러 fnction
 	var pieColors = (function() {
 		var colors = [], base = Highcharts.getOptions().colors[0], i;
