@@ -29,6 +29,13 @@ public class HM_P0022DAOImpl implements HM_P0022DAO{
 		return list;
 	}
 	
+	@Override
+	public List<HM_P0022VO> appointList3(Map<String, Object> searchMap) throws DataAccessException {
+		List<HM_P0022VO> list = sqlSession.selectList("mapper.hm_p0022.appointList3", searchMap);
+	
+		return list;
+	}
+	
 
 	@Override
 	public List<HM_P0022VO> masterEmployee_p02(Map<String, Object> searchMap) throws DataAccessException {
@@ -109,12 +116,22 @@ public class HM_P0022DAOImpl implements HM_P0022DAO{
 		sqlSession.update("mapper.hm_p0022.updateData3", row);
 		
 	}
-
 	@Override
 	public void updateData4(Map<String, String> row) throws DataAccessException {
+	       for(String key : row.keySet()){
+	    	   
+	            String value = row.get(key);
+	 
+	            System.out.println("잉잉dao"+key+" : "+value);
+	 
+	        }
 		sqlSession.update("mapper.hm_p0022.updateData4", row);
 		
+
 	}
+
+
+
 
 
 	

@@ -45,7 +45,7 @@ initSheet.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:3, MergeSheet:msHead
 initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 initSheet.Cols = [
       {Header:"상태|상태",Type:"Status",SaveName:"Status", Align:"Center",Hidden:1},
-      {Header:"삭제|삭제",Type:"DelCheck",SaveName:"DEL_CHK",Hidden:1},
+      {Header:"삭제|삭제",Type:"DelCheck",SaveName:"DEL_CHK"},
       {Header:"발령일자|발령일자",Type:"Date",SaveName:"appoint_DATE",Align:"Center",Width:100},
       {Header:"발령번호|발령번호",Type:"Text",SaveName:"appoint_CODE",Align:"Center",Width:100},   
       {Header:"제목|제목",Type:"Text",SaveName:"appoint_TITLE",Align:"Center",Width:100},         
@@ -69,11 +69,11 @@ initSheet.Cols = [
          {Header:"상태",Type:"Status",SaveName:"Status", Align:"Center"},
          {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK"},
          {Header:"인사발령내역고유번호",Type:"Text",SaveName:"appoint_HISTORY_CODE",Align:"Center",Width:100,"Hidden":1},   
-         {Header:"사원코드",Type:"Text",SaveName:"employee_CODE",Align:"Center",Width:100},
+         {Header:"사원코드",Type:"Text",SaveName:"employee_CODE",Align:"Center",Width:100,InsertEdit:0},
          {Header:"사원명",Type:"Popup",SaveName:"employee_NAME",Align:"Center",Width:100},         
          {Header:"시작일자",Type:"Date",SaveName:"start_DATE",Align:"Center",Width:100,Format:"Ymd"},         
          {Header:"종료일자",Type:"Date",SaveName:"end_DATE",Align:"Center",Width:100,Format:"Ymd"},
-         {Header:"발령구분",Type:"Combo",SaveName:"hr_APPOINT_INDEX_NAME",Align:"Center",Width:100,"ComboText":"|승진|이동|파견|파견복귀|휴직|복직|퇴직|보직|보직해제|조직개편|계약연장|정직|정직해제", "ComboCode":"|1|2|3|4|5|6|7|8|9|10|11|12|13"},
+         {Header:"발령구분",Type:"Combo",SaveName:"hr_APPOINT_INDEX_NAME",Align:"Center",Width:100,"ComboText":"|채용|승진|이동|파견|파견복귀|휴직|복직|퇴직|보직|보직해제|조직개편|계약연장|정직|정직해제", "ComboCode":"|100|1|2|3|4|5|6|7|8|9|10|11|12|13"},
          {Header:"재직상태",Type:"Combo",SaveName:"work_STATUS",Align:"Center",Width:100,"ComboText":"|재직|휴직|정직|퇴직", "ComboCode":"|재직|휴직|정직|퇴직"},
          {Header:"입사일자",Type:"Text",SaveName:"employee_JOIN_DATE",Align:"Center",Width:100,Format:"Ymd"},
          {Header:"사업장",Type:"Popup",SaveName:"site_NAME",Align:"Center",Width:100},
@@ -116,6 +116,7 @@ function mySheet1_OnClick(Row,Col){
 		if(result){
 		mySheet1.SetCellValue(Row,Col,"마감완료");
 		mySheet1.DoSave("${contextPath}/hm/p0022/saveData3.do",{Quest:0});
+		
 		magam(appointCode);
 			alert('작업이 완료되었습니다');
 		}
@@ -126,10 +127,32 @@ function mySheet1_OnClick(Row,Col){
 	}
 	
 	function magam(appointCode){
-		mySheet2.DoSearch("${contextPath}/hm/p0022/appointList2.do",appointCode);
-		mySheet2.DoAllSave("${contextPath}/hm/p0022/saveData4.do",{Quest:0});
-		console.log("난마감");
+	
+		var dataMap = JSON.parse(mySheet2.GetSearchData("${contextPath}/hm/p0022/appointList3.do",appointCode));
 		
+		console.log(dataMap);
+		console.log(dataMap.Data[0].employee_CODE);
+		for(var i in dataMap.Data){
+			var send = {"Status":"U","employee_JOIN_DATE":dataMap.Data[i].employee_JOIN_DATE,"department_CODE":dataMap.Data[i].department_CODE,"job_CLASS_CODE":dataMap.Data[i].job_CLASS_CODE,"position_CODE":dataMap.Data[i].position_CODE,"duty_CODE":dataMap.Data[i].duty_CODE,"job_DIS_CODE":dataMap.Data[i].job_DIS_CODE,"pay_TYPE_CODE":dataMap.Data[i].pay_TYPE_CODE,"pay_GRADE_CODE":dataMap.Data[i].pay_GRADE_CODE,"out_REASON_CODE":dataMap.Data[i].out_REASON_CODE,"employee_CODE":dataMap.Data[i].employee_CODE,"work_STATUS":dataMap.Data[i].work_STATUS}
+
+			$.ajax({
+			    url:'${contextPath}/hm/p0022/saveData4.do', //request 보낼 서버의 경로
+			    type:'post', // 메소드(get, post, put 등)
+			    data:send, //보낼 데이터
+			    success: function(data) {
+			        //서버로부터 정상적으로 응답이 왔을 때 실행
+			    },
+			    error: function(err) {
+			        //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
+			    }
+			});
+
+		}
+		var send="";
+			
+
+
+
 	}
 
 
@@ -209,13 +232,19 @@ function mySheet2_OnPopupClick(Row,Col) {
 		 window.open("${contextPath}/hm/p0022/homeInit_p04.do", "a", "width=500, height=700, left=100, top=50 location=no");
 	 }
 	 if(Col==12){
-		 window.open("${contextPath}/hm/p0022/homeInit_p05.do", "a", "width=500, height=700, left=100, top=50 location=no");
+		var x=mySheet2.GetCellValue(Row,10);
+		window.open("${contextPath}/hm/p0022/homeInit_p05.do?name="+x, "a", "width=500, height=700, left=100, top=50 location=no");
 	 }
 }
 function mySheet1_OnPopupClick(Row,Col){
 	if(Col==6){
 	window.open("${contextPath}/hm/p0022/homeInit_p02.do", "a", "width=500, height=700, left=100, top=50 location=no")
 	}
+}
+function mySheet1_OnSaveEnd(){
+	var param = FormQueryStringEnc(document.frm);
+    mySheet1.DoSearch("${contextPath}/hm/p0022/appointList.do", param);
+    mySheet2.RemoveAll();
 }
 
 </script>
@@ -269,7 +298,6 @@ createIBSheet("mySheet1","100%","30%");
 <script type="text/javascript">
 createIBSheet("mySheet2","100%","40%");
 </script>
-
 
 
 
