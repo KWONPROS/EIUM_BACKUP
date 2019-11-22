@@ -16,6 +16,7 @@
 		<result property="working_STATUS_END_TIME" column="WORKING_STATUS_END_TIME" />
 		<result property="working_STATUS_TOTAL_TIME" column="WORKING_STATUS_TOTAL_TIME" />
 		<result property="working_STATUS_DESC" column="WORKING_STATUS_DESC" />
+		<result property="working_STATUS_YN" column="WORKING_STATUS_YN" />
 		
 		<result property="weekday" column="WEEKDAY" />
 		<result property="holiday" column="HOLIDAY" />
@@ -128,7 +129,7 @@
 	<!-- //////////////////////////////////////WORKING_STATUS_SEARCHLIST ///////////////////////////////-->
 	<select id = "WS_searchList" resultMap="P0001resultVO" parameterType="java.util.Map">
 	<![CDATA[
-		select WS.WORKING_STATUS_CODE,WS.WORKING_STATUS_DATE,WS.WORKING_STATUS_START_TIME, WS.WORKING_STATUS_END_TIME, WS.WORKING_STATUS_TOTAL_TIME, WS.WORKING_STATUS_DESC
+		select WS.WORKING_STATUS_CODE,WS.WORKING_STATUS_DATE,WS.WORKING_STATUS_START_TIME, WS.WORKING_STATUS_END_TIME, WS.WORKING_STATUS_TOTAL_TIME, WS.WORKING_STATUS_DESC, WS.WORKING_STATUS_YN
 		from WORKING_STATUS WS
 		where WS.EMPLOYEE_CODE = #{P_EMP_CODE}
 		AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
@@ -137,8 +138,8 @@
 	</select>
 	<!-- //////////////////////////////////////WORKING_STATUS_INSERT//////////////////////////////// -->
 	<insert id="insertData" parameterType="java.util.Map">
-		insert into WORKING_STATUS (WORKING_STATUS_CODE, EMPLOYEE_CODE, WORKING_STATUS_MONTH, WORKING_STATUS_DATE, WORKING_STATUS_START_TIME, WORKING_STATUS_END_TIME, WORKING_STATUS_TOTAL_TIME, WORKING_STATUS_DESC)
-		values (WORKING_STATUS_CODE_SEQ.NEXTVAL, #{P_EMPLOYEE_CODE, jdbcType=VARCHAR}, #{working_STATUS_MONTH, jdbcType=VARCHAR}, #{working_STATUS_DATE, jdbcType=VARCHAR}, #{working_STATUS_START_TIME, jdbcType=VARCHAR}, #{working_STATUS_END_TIME, jdbcType=VARCHAR}, #{working_STATUS_TOTAL_TIME, jdbcType=VARCHAR}, #{working_STATUS_DESC, jdbcType=VARCHAR})
+		insert into WORKING_STATUS (WORKING_STATUS_CODE, EMPLOYEE_CODE, WORKING_STATUS_MONTH, WORKING_STATUS_DATE, WORKING_STATUS_START_TIME, WORKING_STATUS_END_TIME, WORKING_STATUS_TOTAL_TIME, WORKING_STATUS_DESC, WORKINIG_STATUS_YN)
+		values (WORKING_STATUS_CODE_SEQ.NEXTVAL, #{P_EMPLOYEE_CODE, jdbcType=VARCHAR}, #{working_STATUS_MONTH, jdbcType=VARCHAR}, #{working_STATUS_DATE, jdbcType=VARCHAR}, #{working_STATUS_START_TIME, jdbcType=VARCHAR}, #{working_STATUS_END_TIME, jdbcType=VARCHAR}, #{working_STATUS_TOTAL_TIME, jdbcType=VARCHAR}, #{working_STATUS_DESC, jdbcType=VARCHAR}, 'N')
 	</insert>
 	
 	<!-- ///////////////////////////////////////WORKING_STATUS_UPDATE////////////////////////////// -->
@@ -161,9 +162,19 @@
 	
 	<!-- //////////////////////////////////////////TOTAL_WORKING_STATUS_INSERT////////////////////////////// -->
 	<insert id="TWS_insertData" parameterType="java.util.Map">
-		insert into TOTAL_WORKING_STATUS(TOTAL_WORKING_STATUS_CODE, EMPLOYEE_CODE, PAYMENT_CODE, WEEKDAY, HOLIDAY, NORMAL_WORK_DAY, EXTENSION_WORK_DAY, WEEKDAY_NORMAL_WORK_TIME, WEEKDAY_EXTENSION_WORK_TIME, WEEKDAY_NIGHT_WORK_TIME, HOLIDAY_NORMAL_WORK_TIME, HOLIDAY_EXTENSION_WORK_TIME, HOLIDAY_NIGHT_WORK_TIME)
-			select TOTAL_WORKING_STATUS_CODE_SEQ.NEXTVAL, #{PP_EMPLOYEE_CODE, jdbcType=VARCHAR}, PAYMENT_CODE, #{weekday, jdbcType=VARCHAR}, #{holiday, jdbcType=VARCHAR}, #{normal_WORK_DAY, jdbcType=VARCHAR},#{extension_WORK_DAY, jdbcType=VARCHAR}, #{weekday_NORMAL_WORK_TIME, jdbcType=VARCHAR}, #{weekday_EXTENSION_WORK_TIME, jdbcType=VARCHAR}, #{weekday_NIGHT_WORK_TIME, jdbcType=VARCHAR}, #{holiday_NORMAL_WORK_TIME, jdbcType=VARCHAR}, #{holiday_EXTENSION_WORK_TIME, jdbcType=VARCHAR}, #{holiday_NIGHT_WORK_TIME, jdbcType=VARCHAR}
-			from PAYMENT P
-			where SUBSTR(PAYMENT_DATE, 1, 6) = #{P_PAYMENT_CODE}
+		insert into TOTAL_WORKING_STATUS(TOTAL_WORKING_STATUS_CODE, EMPLOYEE_CODE, WEEKDAY, HOLIDAY, NORMAL_WORK_DAY, EXTENSION_WORK_DAY, WEEKDAY_NORMAL_WORK_TIME, WEEKDAY_EXTENSION_WORK_TIME, WEEKDAY_NIGHT_WORK_TIME, HOLIDAY_NORMAL_WORK_TIME, HOLIDAY_EXTENSION_WORK_TIME, HOLIDAY_NIGHT_WORK_TIME)
+			values (TOTAL_WORKING_STATUS_CODE_SEQ.NEXTVAL, #{PP_EMPLOYEE_CODE, jdbcType=VARCHAR}, #{weekday, jdbcType=VARCHAR}, #{holiday, jdbcType=VARCHAR}, #{normal_WORK_DAY, jdbcType=VARCHAR},#{extension_WORK_DAY, jdbcType=VARCHAR}, #{weekday_NORMAL_WORK_TIME, jdbcType=VARCHAR}, #{weekday_EXTENSION_WORK_TIME, jdbcType=VARCHAR}, #{weekday_NIGHT_WORK_TIME, jdbcType=VARCHAR}, #{holiday_NORMAL_WORK_TIME, jdbcType=VARCHAR}, #{holiday_EXTENSION_WORK_TIME, jdbcType=VARCHAR}, #{holiday_NIGHT_WORK_TIME, jdbcType=VARCHAR})
 	</insert>
+	
+	<!-- ///////////////////////////////////////////WORKING_STATUS_YN_UPDATE ///////////////////////////-->
+	<update id="WS_YN_updateData" parameterType="java.util.Map">
+		update
+    		(select WS.WORKING_STATUS_YN
+    		from WORKING_STATUS WS
+    		where WS.EMPLOYEE_CODE = #{PP_EMPLOYEE_CODE, jdbcType=VARCHAR} 
+    		AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)) 
+		SET WORKING_STATUS_YN = 'Y'
+		WHERE WORKING_STATUS_YN = 'N'
+	</update>
+	
 </mapper>

@@ -76,5 +76,28 @@ public class WM_P0001DAOImpl implements WM_P0001DAO {
 	}
 
 	
+	@Override
+	public void WS_YN_updateData(Map<String, String> row) throws DataAccessException {
+		sqlSession.update("mapper.wm_p0001.WS_YN_updateData", row);
+		
+		
+		  for ( String key : row.keySet() ) { System.out.println("방법1) key : " + key
+		  +" / value : " + row.get(key)); }
+		  System.out.println("=======================");
+		
+	}
+	
+	/*
+	 * @Override public void WS_YN_updateData(String yN_EMP_CODE, String
+	 * yN_WS_MONTH) throws DataAccessException { System.out.println(yN_EMP_CODE
+	 * +" ///////" + yN_WS_MONTH);
+	 * sqlSession.update("mapper.wm_p0001.TWS_YN_updateData", yN_EMP_CODE,
+	 * yN_WS_MONTH);
+	 * 
+	 * 
+	 * }
+	 */
+
+	
 
 }

@@ -40,7 +40,7 @@ public class WM_P0001ServiceImpl implements WM_P0001Service {
 		for(String str : status) {
 			Map<String, String> row = getRow(dataMap, length, i, P_EMPLOYEE_CODE); 
 			if("I".equals(str)) { // 추가
-				p0001DAO.TWS_insertData(row);
+				p0001DAO.insertData(row);
 			}else if("U".equals(str)) { // 수정
 				p0001DAO.updateData(row);
 			}else if("D".equals(str)) { // 삭제
@@ -51,17 +51,19 @@ public class WM_P0001ServiceImpl implements WM_P0001Service {
 	}
 	
 	@Override
-	public void TWS_saveData(Map<String, String[]> dataMap, String PP_EMPLOYEE_CODE, String P_PAYMENT_CODE)  throws DataAccessException  {
+	public void TWS_saveData(Map<String, String[]> dataMap, String PP_EMPLOYEE_CODE, String P_WS_MONTH)  throws DataAccessException  {
 		String[] status = dataMap.get("STATUS");
 		int length = status.length; // row수
 		int i = 0;
 		
 		for(String str : status) {
-			Map<String, String> row = TWS_getRow(dataMap, length, i, PP_EMPLOYEE_CODE, P_PAYMENT_CODE); 
-			if("I".equals(str)) { // 추가
+			Map<String, String> row = getRow_sheet3(dataMap, length, i, PP_EMPLOYEE_CODE, P_WS_MONTH); 
+			if("I".equals(str)) { // sheet3 총 근태 결과 추가
 				p0001DAO.TWS_insertData(row);
+				p0001DAO.WS_YN_updateData(row);
 			}
 			i++;
+			//수정해야할듯
 		}
 	}
 	
@@ -72,23 +74,33 @@ public class WM_P0001ServiceImpl implements WM_P0001Service {
 			if(length == data.length) {
 				row.put(name, data[index]);
 				row.put("P_EMPLOYEE_CODE", P_EMPLOYEE_CODE);
+				row.put("PP_EMPLOYEE_CODE", P_EMPLOYEE_CODE);
 			}
 		}		
 		return row;
 	}
 	
-	private Map<String, String> TWS_getRow(Map<String, String[]> dataMap, int length, int index, String PP_EMPLOYEE_CODE, String P_PAYMENT_CODE) {
+	private Map<String, String> getRow_sheet3(Map<String, String[]> dataMap, int length, int index, String P_EMPLOYEE_CODE, String P_WS_MONTH) {
 		Map<String, String> row = new HashMap<String, String>();
 		for(String name : dataMap.keySet()) {
 			String[] data = dataMap.get(name);
 			if(length == data.length) {
 				row.put(name, data[index]);
-				row.put("PP_EMPLOYEE_CODE", PP_EMPLOYEE_CODE);
-				row.put("P_PAYMENT_CODE", P_PAYMENT_CODE);
+				row.put("P_EMPLOYEE_CODE", P_EMPLOYEE_CODE);
+				row.put("PP_EMPLOYEE_CODE", P_EMPLOYEE_CODE);
+				row.put("P_WS_MONTH", P_WS_MONTH);
 			}
 		}		
 		return row;
 	}
 
+	/*
+	 * @Override public void WS_YN_updateData(String YN_EMP_CODE, String
+	 * YN_WS_MONTH) throws DataAccessException {
+	 * 
+	 * p0001DAO.WS_YN_updateData(YN_EMP_CODE, YN_WS_MONTH); }
+	 */
+	
+	
 	
 }
