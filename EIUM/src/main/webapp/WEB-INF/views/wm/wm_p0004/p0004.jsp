@@ -107,17 +107,9 @@
 		}
 	}
 	
-	function setEmployee(){
-		employeeCode=document.getElementById("PemployeeCode").value;
-		employeeName=document.getElementById("PemployeeName").value;
-		departmentName=document.getElementById("PdepartmentName").value;
-		positionName=document.getElementById("PpositionName").value;
-
-		mySheet.SetCellText(row,col,employeeCode);
-		mySheet.SetCellText(row,col+1,employeeName);
-		mySheet.SetCellText(row,col+2,departmentName);
-		mySheet.SetCellText(row,col+3,positionName);
-		}
+	function GetData(x){
+		mySheet.SetRowData(mySheet.GetSelectRow(),x);
+	}
 	
 	
 </script>
@@ -216,10 +208,5 @@ background-color: #2C3E50;
 				createIBSheet("mySheet", "1600px", "600px");
 			</script>
 		</div>
-    <input type="hidden" id="PemployeeCode">
-	<input type="hidden" id="PemployeeName">
-	<input type="hidden" id="PdepartmentName">
-	<input type="hidden" id="PpositionName">
-
 	</form>
 </body>
