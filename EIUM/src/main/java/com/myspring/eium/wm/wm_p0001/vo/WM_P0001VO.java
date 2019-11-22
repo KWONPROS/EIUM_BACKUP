@@ -92,6 +92,93 @@ public class WM_P0001VO {
 		this.working_STATUS_DESC = working_STATUS_DESC;
 	}
 	
+	//총근태결과
+	private String payment_CODE="";
 	
+	private String weekday="";
+	private String holiday="";
+	
+	private String normal_WORK_DAY="";
+	private String extension_WORK_DAY="";
+	
+	private String weekday_NORMAL_WORK_TIME="";
+	private String weekday_EXTENSION_WORK_TIME="";
+	private String weekday_NIGHT_WORK_TIME="";
+	
+	private String holiday_NORMAL_WORK_TIME="";
+	private String holiday_EXTENSION_WORK_TIME="";
+	private String holiday_NIGHT_WORK_TIME="";
+
+
+	public String getPayment_CODE() {
+		return payment_CODE;
+	}
+	public void setPayment_CODE(String payment_CODE) {
+		this.payment_CODE = payment_CODE;
+	}
+	
+	public String getWeekday() {
+		return weekday;
+	}
+	public void setWeekday(String weekday) {
+		this.weekday = weekday;
+	}
+	public String getHoliday() {
+		return holiday;
+	}
+	public void setHoliday(String holiday) {
+		this.holiday = holiday;
+	}
+	public String getNormal_WORK_DAY() {
+		return normal_WORK_DAY;
+	}
+	public void setNormal_WORK_DAY(String normal_WORK_DAY) {
+		this.normal_WORK_DAY = normal_WORK_DAY;
+	}
+	public String getExtension_WORK_DAY() {
+		return extension_WORK_DAY;
+	}
+	public void setExtension_WORK_DAY(String extension_WORK_DAY) {
+		this.extension_WORK_DAY = extension_WORK_DAY;
+	}
+	public String getWeekday_NORMAL_WORK_TIME() {
+		return weekday_NORMAL_WORK_TIME;
+	}
+	public void setWeekday_NORMAL_WORK_TIME(String weekday_NORMAL_WORK_TIME) {
+		this.weekday_NORMAL_WORK_TIME = weekday_NORMAL_WORK_TIME;
+	}
+	public String getWeekday_EXTENSION_WORK_TIME() {
+		return weekday_EXTENSION_WORK_TIME;
+	}
+	public void setWeekday_EXTENSION_WORK_TIME(String weekday_EXTENSION_WORK_TIME) {
+		this.weekday_EXTENSION_WORK_TIME = weekday_EXTENSION_WORK_TIME;
+	}
+	public String getWeekday_NIGHT_WORK_TIME() {
+		return weekday_NIGHT_WORK_TIME;
+	}
+	public void setWeekday_NIGHT_WORK_TIME(String weekday_NIGHT_WORK_TIME) {
+		this.weekday_NIGHT_WORK_TIME = weekday_NIGHT_WORK_TIME;
+	}
+	public String getHoliday_NORMAL_WORK_TIME() {
+		return holiday_NORMAL_WORK_TIME;
+	}
+	public void setHoliday_NORMAL_WORK_TIME(String holiday_NORMAL_WORK_TIME) {
+		this.holiday_NORMAL_WORK_TIME = holiday_NORMAL_WORK_TIME;
+	}
+	public String getHoliday_EXTENSION_WORK_TIME() {
+		return holiday_EXTENSION_WORK_TIME;
+	}
+	public void setHoliday_EXTENSION_WORK_TIME(String holiday_EXTENSION_WORK_TIME) {
+		this.holiday_EXTENSION_WORK_TIME = holiday_EXTENSION_WORK_TIME;
+	}
+	public String getHoliday_NIGHT_WORK_TIME() {
+		return holiday_NIGHT_WORK_TIME;
+	}
+	public void setHoliday_NIGHT_WORK_TIME(String holiday_NIGHT_WORK_TIME) {
+		this.holiday_NIGHT_WORK_TIME = holiday_NIGHT_WORK_TIME;
+	}
+
+	
+ 
 	
 }

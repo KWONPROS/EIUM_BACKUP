@@ -108,7 +108,7 @@ var data = {Data:[
 	{menuCode:"m27",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"급여대장"},
 	{menuCode:"m28",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"급여명세"},
 	{menuCode:"m29",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"급상여이체현황"},
-	{menuCode:"m30",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"월별지급현황"},
+	{menuCode:"m30",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"pm/p0009/searchInit.do", TITLE:"월별지급현황"},
 	{menuCode:"m31",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"사원임금통계"},
 	{menuCode:"m32",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"근태관리"},
 	{menuCode:"m33",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"wm/p0001/searchInit.do", TITLE:"근태입력"},

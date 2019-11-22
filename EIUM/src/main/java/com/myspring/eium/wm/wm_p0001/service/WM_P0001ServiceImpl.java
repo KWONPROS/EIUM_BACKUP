@@ -40,11 +40,26 @@ public class WM_P0001ServiceImpl implements WM_P0001Service {
 		for(String str : status) {
 			Map<String, String> row = getRow(dataMap, length, i, P_EMPLOYEE_CODE); 
 			if("I".equals(str)) { // 추가
-				p0001DAO.insertData(row);
+				p0001DAO.TWS_insertData(row);
 			}else if("U".equals(str)) { // 수정
 				p0001DAO.updateData(row);
 			}else if("D".equals(str)) { // 삭제
 				p0001DAO.deleteData(row);
+			}
+			i++;
+		}
+	}
+	
+	@Override
+	public void TWS_saveData(Map<String, String[]> dataMap, String PP_EMPLOYEE_CODE, String P_PAYMENT_CODE)  throws DataAccessException  {
+		String[] status = dataMap.get("STATUS");
+		int length = status.length; // row수
+		int i = 0;
+		
+		for(String str : status) {
+			Map<String, String> row = TWS_getRow(dataMap, length, i, PP_EMPLOYEE_CODE, P_PAYMENT_CODE); 
+			if("I".equals(str)) { // 추가
+				p0001DAO.TWS_insertData(row);
 			}
 			i++;
 		}
@@ -57,6 +72,19 @@ public class WM_P0001ServiceImpl implements WM_P0001Service {
 			if(length == data.length) {
 				row.put(name, data[index]);
 				row.put("P_EMPLOYEE_CODE", P_EMPLOYEE_CODE);
+			}
+		}		
+		return row;
+	}
+	
+	private Map<String, String> TWS_getRow(Map<String, String[]> dataMap, int length, int index, String PP_EMPLOYEE_CODE, String P_PAYMENT_CODE) {
+		Map<String, String> row = new HashMap<String, String>();
+		for(String name : dataMap.keySet()) {
+			String[] data = dataMap.get(name);
+			if(length == data.length) {
+				row.put(name, data[index]);
+				row.put("PP_EMPLOYEE_CODE", PP_EMPLOYEE_CODE);
+				row.put("P_PAYMENT_CODE", P_PAYMENT_CODE);
 			}
 		}		
 		return row;

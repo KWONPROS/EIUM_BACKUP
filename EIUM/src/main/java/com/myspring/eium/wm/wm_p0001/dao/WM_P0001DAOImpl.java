@@ -64,6 +64,17 @@ public class WM_P0001DAOImpl implements WM_P0001DAO {
 				  System.out.println("=======================");
 	}
 
+	@Override
+	public void TWS_insertData(Map<String, String> row) throws DataAccessException {
+		sqlSession.update("mapper.wm_p0001.TWS_insertData", row);
+		
+		
+		  for ( String key : row.keySet() ) { System.out.println("방법1) key : " + key
+		  +" / value : " + row.get(key)); }
+		  System.out.println("=======================");
+		
+	}
+
 	
 
 }

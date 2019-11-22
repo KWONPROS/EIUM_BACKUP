@@ -51,12 +51,12 @@
 	        {Header:"사원코드",Type:"Text",SaveName:"employee_CODE", Width:80, KeyField:1, Align:"Center", Edit: 0},	
 			{Header:"사원명",Type:"Text",SaveName:"employee_NAME",MinWidth:120, Align:"Center", Edit: 0},			
 			{Header:"부서명",Type:"Text",SaveName:"department_NAME",MinWidth:150, Align:"Center", Edit: 0},
-			{Header:"부서코드", Type:"Text", SaveName:"department_CODE", Align:"Center", Edit: 0}
+			{Header:"부서코드", Type:"Text", SaveName:"department_CODE", Align:"Center", Edit: 0, Hidden: 1}
 		];   
 		IBS_InitSheet( mySheet , initSheet);
   
 		mySheet.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
-		mySheet.SetSheetHeight(300);
+		mySheet.SetSheetHeight(500);
 		//아이비시트2------------------------------------------------------
 		mySheet2.RemoveAll();
 		var initSheet2 = {};
@@ -67,7 +67,7 @@
 	        {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},	
 	        {Header:"NO",Type:"Seq",SaveName:"NUMBER",MinWidth:50, Align:"Center"},
 	        {Header:"근태입력고유번호", Type:"Text",SaveName:"working_STATUS_CODE", Width:50, Height:50, Align:"Center", Hidden:1},
-	        {Header:"귀속연월", Type:"Text",SaveName:"working_STATUS_MONTH", Width:50, Align:"Center", Format: "MM-dd", CalcLogic:"|5|", Hidden:1},
+	        {Header:"귀속연월", Type:"Text",SaveName:"working_STATUS_MONTH", Width:50, Align:"Center", Format: "Ym", CalcLogic:"|5|", Hidden:1},
 	        {Header:"출근일자",Type:"Date",SaveName:"working_STATUS_DATE",MinWidth:120,KeyField:1, Align:"Center", Format: "Ymd"},			
 			{Header:"출근시간",Type:"Date",SaveName:"working_STATUS_START_TIME",MinWidth:100, Align:"Center", Format: "HH:mm"},
 			{Header:"퇴근시간",Type:"Date",SaveName:"working_STATUS_END_TIME",MinWidth:100, Align:"Center", Format: "HH:mm"},
@@ -76,20 +76,20 @@
 			{Header:"퇴근-출근시간",Type:"Date",SaveName:"working_STATUS_TOTAL_TIME_CALC",MinWidth:50, Align:"Center",Format:"HH:mm", CalcLogic:"|7|+|8|-|6|"},
 			{Header:"비고",Type:"Combo",SaveName:"working_STATUS_DESC",MinWidth:80, Align:"Center", "ComboText":"출근|지각|조퇴|외출", "ComboCode":"00|01|02|03"},
 			//평일(table)
-			{Header:"평일정상근무시간",Type:"Text",SaveName:"weekday_NORMAL_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:""},	
-			{Header:"평일연장근무시간",Type:"Text",SaveName:"weekday_EXTENSION_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:""},			
-			{Header:"평일야간근무시간",Type:"Text",SaveName:"weekday_NIGHT_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:""},
+			{Header:"평일정상근무시간",Type:"Text",SaveName:"weekday_NORMAL_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:"", Hidden:1},	
+			{Header:"평일연장근무시간",Type:"Text",SaveName:"weekday_EXTENSION_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:"", Hidden:1},			
+			{Header:"평일야간근무시간",Type:"Text",SaveName:"weekday_NIGHT_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:"", Hidden:1},
 			
 			//휴일(table)
-			{Header:"휴일정상근무시간",Type:"Text",SaveName:"holiday_NORMAL_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:""},	
-			{Header:"휴일연장근무시간",Type:"Text",SaveName:"holiday_EXTENSION_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:""},			
-			{Header:"휴일야간근무시간",Type:"Text",SaveName:"holiday_NIGHT_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:""}
+			{Header:"휴일정상근무시간",Type:"Text",SaveName:"holiday_NORMAL_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:"", Hidden:1},	
+			{Header:"휴일연장근무시간",Type:"Text",SaveName:"holiday_EXTENSION_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:"", Hidden:1},			
+			{Header:"휴일야간근무시간",Type:"Text",SaveName:"holiday_NIGHT_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:"", Hidden:1}
 		];
 		
 		IBS_InitSheet( mySheet2 , initSheet2);
 		
 		mySheet2.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
-		mySheet2.SetSheetHeight(700);
+		mySheet2.SetSheetHeight(500);
 		/* GetDataLastRow() == mySheet3.GetSelectRow() */
 		/* var info = [{StdCol:1 , SumCols:"0|1"}]; 
 		mySheet.ShowSubSum (info);  */
@@ -103,19 +103,19 @@
 			{Header:"상태", Type:"Status", SaveName:"STATUS", Hidden:1},
 			{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK", Hidden:1},
 			//평일
-			{Header:"평일정상근무시간",Type:"Text",SaveName:"weekday_NORMAL_WORK_TIME", Width:130,Edit:0,Align:"Center"},	
-			{Header:"평일연장근무시간",Type:"Text",SaveName:"weekday_EXTENSION_WORK_TIME", Width:130,Edit:0,Align:"Center"},			
-			{Header:"평일야간근무시간",Type:"Text",SaveName:"weekday_NIGHT_WORK_TIME", Width:130,Edit:0,Align:"Center"},
+			{Header:"평일정상근무시간(시간)",Type:"Text",SaveName:"weekday_NORMAL_WORK_TIME", Width:160,Edit:0,Align:"Center"},	
+			{Header:"평일연장근무시간(시간)",Type:"Text",SaveName:"weekday_EXTENSION_WORK_TIME", Width:160,Edit:0,Align:"Center"},			
+			{Header:"평일야간근무시간(시간)",Type:"Text",SaveName:"weekday_NIGHT_WORK_TIME", Width:160,Edit:0,Align:"Center"},
 			
 			//휴일
-			{Header:"휴일정상근무시간",Type:"Text",SaveName:"holiday_NORMAL_WORK_TIME", Width:130,Edit:0,Align:"Center"},	
-			{Header:"휴일연장근무시간",Type:"Text",SaveName:"holiday_EXTENSION_WORK_TIME", Width:130,Edit:0,Align:"Center"},			
-			{Header:"휴일야간근무시간",Type:"Text",SaveName:"holiday_NIGHT_WORK_TIME", Width:130,Edit:0,Align:"Center"},
+			{Header:"휴일정상근무시간(시간)",Type:"Text",SaveName:"holiday_NORMAL_WORK_TIME", Width:160,Edit:0,Align:"Center"},	
+			{Header:"휴일연장근무시간(시간)",Type:"Text",SaveName:"holiday_EXTENSION_WORK_TIME", Width:160,Edit:0,Align:"Center"},			
+			{Header:"휴일야간근무시간(시간)",Type:"Text",SaveName:"holiday_NIGHT_WORK_TIME", Width:160,Edit:0,Align:"Center"},
 			//etc
-			{Header:"평일",Type:"Text",SaveName:"weekday",Edit:0, Width:65,Align:"Center"},	
-			{Header:"휴일",Type:"Text",SaveName:"holiday",Edit:0, Width:65,Align:"Center"},			
-			{Header:"총정상근무일",Type:"Text",SaveName:"normal_WORK_DAY", Width:110,Edit:0,Align:"Center"},
-			{Header:"총연장근무일",Type:"Text",SaveName:"extension_WORK_DAY", Width:110,Edit:0,Align:"Center"}
+			{Header:"평일(일)",Type:"Text",SaveName:"weekday",Edit:0, Width:95,Align:"Center"},	
+			{Header:"휴일(일)",Type:"Text",SaveName:"holiday",Edit:0, Width:95,Align:"Center"},			
+			{Header:"총정상근무일(일)",Type:"Text",SaveName:"normal_WORK_DAY", Width:140,Edit:0,Align:"Center"},
+			{Header:"총연장근무일(일)",Type:"Text",SaveName:"extension_WORK_DAY", Width:140,Edit:0,Align:"Center"}
 		];
 		
 		IBS_InitSheet(mySheet3, initSheet3);
@@ -142,9 +142,8 @@
 		mySheet3.SetColEditable(11,0);
 		
 		
+		/* mySheet.DoSearch("${contextPath}/wm/p0001/EMP_searchList.do"); */
 		
-		
-		mySheet.DoSearch("${contextPath}/wm/p0001/EMP_searchList.do");
 		mySheet3.DataInsert(-1);
 	}
 
@@ -185,22 +184,21 @@
 	function doAction(sAction) {
 		switch (sAction) {
 		case "search": //조회
-			mySheet.DoSearch("${contextPath}/wm/p0001/EMP_searchList.do");
+			var param = FormQueryStringEnc(document.searchBar);
+			mySheet.DoSearch("${contextPath}/wm/p0001/EMP_searchList.do", param);
 			/* alert(mySheet2.GetCellValue(mySheet2.GetSelectRow(), 6)); */
-			console.log(mySheet2.GetRowData(1));
-			$('input[name=temp_TIME]').val(mySheet2.GetCellValue(1,3));
-			
 			//조회조건에 맞도록 조회하기
+			
 			break;
 
 		case "reload": //초기화
 			mySheet.RemoveAll();
 			mySheet2.RemoveAll();
+			mySheet3.RemoveAll();
 			break;
 		case "save": // 저장
-			var tempStr = mySheet2.GetSaveString();
-			alert("서버로 전달되는 문자열 확인 :" + tempStr);
 			mySheet2.DoSave("${contextPath}/wm/p0001/saveData.do", "p_emp_code=" + mySheet.GetCellValue(mySheet.GetSelectRow(),0));
+			
 			break;
 		case "insert":
 			var row = mySheet2.DataInsert(-1);
@@ -211,15 +209,104 @@
 			break;
 			
 		case "deadline": //마감
+			var tempStr = mySheet2.GetSaveString();
+			alert("서버로 전달되는 문자열 확인 :" + tempStr);	
+			mySheet3.DoSave("${contextPath}/wm/p0001/TWS_saveData.do", "PP_EMP_CODE=" + mySheet.GetCellValue(mySheet.GetSelectRow(),0) + "&P_PAYMENT_CODE=" +$('#monthpicker').val());
+			//마감저장이 성공하면 그후엔 그 저장한 사원의 그 달 SHEET와 전체 작동 불가
+			//마감 버튼은 마감취소 버튼으로 변경
+			
 			break;
 		
+		
 		case "calculate": //정산
+			//평일정상근무시간 : week_NO_TIME
+			//평일연장근무시간 : week_EX_TIME
+			//평일야간근무시간 : week_NI_TIME
+			//휴일정상근무시간 : holi_NO_TIME
+			//휴일연장근무시간 : holi_EX_TIME
+			//휴일야간근무시간 : holi_NI_TIME
+			
+			//총 평일 정상 근무시간 : T_week_NO_TIME
+			//총 평일 연장 근무시간 : T_week_EX_TIME
+			//총 평일 야간 근무시간 : T_week_NI_TIME
+			//총 휴일 정상 근무시간 : T_holi_NO_TIME
+			//총 휴일 연장 근무시간 : T_holi_EX_TIME
+			//총 휴일 야간 근무시간 : T_holi_NI_TIME
+			
+			//총 평일 일 수 : T_week_count
+			//총 휴일 일 수 : T_holi_count
+			
+			//총 평일 정상 근무일 : T_week_NO_DAY
+			//총 평일 연장 근무일 : T_week_EX_DAY
+			
+			//총 휴일 정상 근무일 : T_holi_NO_DAY
+			//총 휴일 연장 근무일 : T_holi_EX_DAY
+			
+			//총 정상 근무일 : T_NO_COUNT
+			//총 연장 근무일 : T_EX_COUNT
+			var T_week_NO_TIME = mySheet2.ComputeSum("|12|"); //총 평일 정상 근무시간
+			var T_week_EX_TIME = mySheet2.ComputeSum("|13|"); //총 평일 연장 근무시간
+			var T_week_NI_TIME = mySheet2.ComputeSum("|14|"); //총 평일 야간 근무시간
+			
+			var T_holi_NO_TIME = mySheet2.ComputeSum("|15|"); //총 휴일 정상 근무시간
+			var T_holi_EX_TIME = mySheet2.ComputeSum("|16|"); //총 휴일 연장 근무시간
+			var T_holi_NI_TIME = mySheet2.ComputeSum("|17|"); //총 휴일 야간 근무시간
+			
+			var T_week_count = 0, T_holi_count = 0, T_week_NO_DAY = 0, T_week_EX_DAY = 0, T_holi_NO_DAY = 0, T_holi_EX_DAY = 0, T_NO_COUNT = 0, T_EX_COUNT = 0;
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("weekday_NORMAL_WORK_TIME"), textWithtimeFormat(T_week_NO_TIME));
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("weekday_EXTENSION_WORK_TIME"), textWithtimeFormat(T_week_EX_TIME));
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("weekday_NIGHT_WORK_TIME"), textWithtimeFormat(T_week_NI_TIME));
+			 
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("holiday_NORMAL_WORK_TIME"), textWithtimeFormat(T_holi_NO_TIME));
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("holiday_EXTENSION_WORK_TIME"), textWithtimeFormat(T_holi_EX_TIME));
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("holiday_NIGHT_WORK_TIME"), textWithtimeFormat(T_holi_NI_TIME));
+			
+			//평일//휴일 분류
+			var T_Maskingcell = mySheet2.GetDataLastRow();
+			for(let i = 1; i <= T_Maskingcell; i++){
+				
+				if(getTodayLabel(mySheet2.GetCellValue(i, 5)) >=1 & getTodayLabel(mySheet2.GetCellValue(i, 5)) <= 5){ //평일 일 때
+					T_week_count = T_week_count + 1;
+					if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME")) == "900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME")) >= 0){
+						//총 연장 근무 = 연장 + 정상	
+						T_week_EX_DAY = T_week_EX_DAY + 1;
+					} 
+					if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")) == "0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) == "1800"){
+						T_week_NO_DAY = T_week_NO_DAY + 1;
+					}
+				}else if(getTodayLabel(mySheet2.GetCellValue(i, 5)) == 0 || getTodayLabel(mySheet2.GetCellValue(i, 5)) == 6){ // 주말일 때
+					
+					T_holi_count = T_holi_count + 1;
+					/* alert(T_holi_count);
+					if() */
+					if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME")) == "900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME")) >= 0){
+						//총 연장 근무 = 연장 + 정상	
+						T_holi_EX_DAY = T_holi_EX_DAY + 1;
+					}
+					if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")) == "0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) == "1800"){
+						T_holi_NO_DAY = T_holi_NO_DAY + 1;
+						/* alert(T_holi_NO_DAY); */
+					}
+				}
+				//평일 총 정상근무일 + 휴일 총 정상 근무일
+				T_NO_COUNT = T_holi_NO_DAY + T_week_NO_DAY;
+				//평일 총 연장 근무일 + 휴일 총 연장 근무일  = (평일 연장 근무일 - 평일 정상 근무일) + (휴일 연장 근무일 - 평일 정상 근무일) 
+				T_EX_COUNT = (T_week_EX_DAY - T_week_NO_DAY) + (T_holi_EX_DAY - T_holi_NO_DAY);
+			}
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("weekday"), T_week_count);
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("holiday"), T_holi_count);
+			
+			//총 정상 근무일
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("normal_WORK_DAY"), T_NO_COUNT);
+			// 총연장 근무일
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("extension_WORK_DAY"), T_EX_COUNT);
+			
 			//mySheet2의 비고에 따라서 퇴근-출근 시간을 계산하여 총 근태 결과에 출력
 			/* mySheet3.SetSheetHeight(50);
 			alert(mySheet3.GetSheetHeight()); */
 			/* mySheet3.SetDataRowHeight(39); */
 			/* if(mySheet2.) */
-			var Sum3 = mySheet2.ComputeSum("|11|"); // 비고 입력창의 총 합계
+			/* var Sum3 = mySheet2.ComputeSum("|11|"); // 비고 입력창의 총 합계
 			alert(Sum3); 
 			var temp_count = "근태코드";
 			var count_array = new Array();
@@ -258,7 +345,7 @@
 			for(j=0; j<6; j++){
 				alert("@@@@@"+count_array[j]);
 			} 
-			break;
+			break; */
 		}
 	}
 	
@@ -268,7 +355,7 @@
 
 
 	//출근일자나 비고 로 combobox 클릭시
-	function mySheet2_OnChange(Row, Col){
+	/* function mySheet2_OnChange(Row, Col){
 		if(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_START_TIME"))=="0900" && mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_END_TIME"))>="1800"){ //정상출근
 			//alert(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC")));
 			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "00");
@@ -282,12 +369,12 @@
 		alert(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_END_TIME")));
 		alert(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"))); */
 		
-	}
+	//} */
 	//mySheet(사원)로우 클릭시
 	function mySheet_OnClick(Row, Col) {
 		//defualt로 숨겨진 0000을 입력
 		if (Row != 0) {
-			mySheet2.DoSearch("${contextPath}/wm/p0001/WS_searchList.do", "P_EMP_CODE=" + mySheet.GetCellValue(Row, 0));
+			mySheet2.DoSearch("${contextPath}/wm/p0001/WS_searchList.do", "P_EMP_CODE=" + mySheet.GetCellValue(mySheet.GetSelectRow(), 0) + "&monthpicker=" +$('#monthpicker').val());
 			/* if(mySheet2.GetCellValue(Row, 6) == "" || mySheet2.GetCellValue(Row, 6) == null){
 				mySheet2.SetCellValue(Row, 6, "0000");
 			} */
@@ -295,8 +382,734 @@
 		
 	}
 	//mySheet2(출근시간, 퇴근시간 클릭시)로우 클릭시
+	function mySheet2_OnAfterEdit(Row, Col){
+		var Maskingcell = mySheet2.GetDataLastRow();
+		/* for(let i = Maskingcell; i >= 1; i--){ // savename: temp_시간의 col에 00:00 masking 값 입력
+			mySheet2.SetCellValue(i, 8, "0000");
+			/* alert(mySheet2.GetCellValue(i, 8)); */ //값 확인 완료
+		//} 
+		
+		
+		for(let i = 1; i <= Maskingcell; i++){
+			var week_NO_TIME = 0, week_EX_TIME = 0, week_NI_TIME = 0, holi_NO_TIME = 0, holi_EX_TIME = 0, holi_NI_TIME = 0;
+			if(i == mySheet2.GetSelectRow()){
+				/* alert(mySheet2.SelectRow()); */
+				mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), "");
+				mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), "");
+				mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), "");
+				mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), "");
+				mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), "");
+				mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), "");
+				
+			}
+			if(getTodayLabel(mySheet2.GetCellValue(i, 5)) >=1 & getTodayLabel(mySheet2.GetCellValue(i, 5)) <= 5){ //평일 일 때
+				if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0600"){ //0100 0500 //////////////시작시간이 06시 이전일때
+
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_TOTAL_TIME_CALC")))); //평일야간근무 ex) 0100, 0600
+					
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0900"){// 0300 0800
+					
+					var pre_temp_time = ("0600"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))); //0500출근시간이면 100이 출력
+					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0600");
+					if(pre_temp_time >= "100"){ //야간 근무 시간이 1시간 이상 일때 평일 야간근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
+
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							week_NI_TIME = week_NI_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							week_NI_TIME = week_NI_TIME + pre_temp_time - 40;
+						}
+						
+						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
+					}
+					if(next_temp_time >= "100"){ //연장근무 시간이 1시간 이상일때 평일 연장 근무시간에 +
+						
+						week_EX_TIME = week_EX_TIME + next_temp_time;
+						
+						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME);
+					}
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="1800"){
+					
+					var pre_temp_time = ("0600"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
+					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0900");
+					if(pre_temp_time >= "100"){ //야간 근무 시간이 1시간 이상 일때 평일 야간근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
+
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							week_NI_TIME = week_NI_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							week_NI_TIME = week_NI_TIME + pre_temp_time - 40;
+						}
+						
+						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
+					}
+					if(next_temp_time >= "100"){ // normal 근무 시간이 1시간 이상일때 평일 정상 근무 시간에 +
+						
+							week_NO_TIME = week_NO_TIME + next_temp_time;
+							mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), week_NO_TIME);
+						
+					}
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), "300");
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="2200"){
+					
+					var pre_temp_time = ("0600"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
+					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"1800");
+					if(pre_temp_time >= "100"){ //야간 근무 시간이 1시간 이상 일때 평일 야간근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
+
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							week_NI_TIME = week_NI_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							week_NI_TIME = week_NI_TIME + pre_temp_time - 40;
+						}
+						
+						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
+					}
+					if(next_temp_time >= "100"){ // normal 근무 시간이 1시간 이상일때 평일 정상 근무 시간에 +
+						
+							week_EX_TIME = week_EX_TIME + next_temp_time + 300;
+							mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME);
+							
+					}else if(next_temp_time < "100"){
+						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), "300");
+					}
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), "900");
+					
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"2200"){ //0100 2300
+					
+					var pre_temp_time = ("0600"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
+					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"2200");
+					if(pre_temp_time >= "100"){ //야간 근무 시간이 1시간 이상 일때 평일 야간근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
+
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							week_NI_TIME = week_NI_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							week_NI_TIME = week_NI_TIME + pre_temp_time - 40;
+						}
+						
+					}
+					if(next_temp_time >= "100"){ // 야간시간이 1시간 이상일때 평일 야간 근무 시간에 +
+						
+						week_NI_TIME = week_NI_TIME + next_temp_time;
+							
+					}
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), "900");
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), "700");
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) > mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){ //0600 0700 ///////////여기서 부터 START 06시작
+					//0600~0900시작
+					///////////////////////////////
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_TOTAL_TIME_CALC"))));
+					
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="1800"){// 0630 0900
+					var pre_temp_time = ("0900"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))); //0800출근시간이면 100이 출력
+					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0900");
+					if(pre_temp_time >= "100"){ //연장 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 1000 - 0630 = 370 - 40 = 330
+					//2
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							week_EX_TIME = week_EX_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							week_EX_TIME = week_EX_TIME + pre_temp_time - 40;
+						}
+						
+						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME);
+					}
+					if(next_temp_time >= "100"){ //정상근무 시간이 1시간 이상일때 평일 정상 근무시간에 +
+						
+						week_NO_TIME = week_NO_TIME + next_temp_time;
+						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), week_NO_TIME);
+					}
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="2200"){
+					//3
+					var pre_temp_time = ("0900"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
+					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"1800");
+					if(pre_temp_time >= "100"){ //연장 근무 시간이 1시간 이상 일때 평일 정근무시간에 + ex) 1800 - 0930 = 870 - 40 = 830
+
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							week_EX_TIME = week_EX_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							week_EX_TIME = week_EX_TIME + pre_temp_time - 40;
+						}
+						
+					}
+					if(next_temp_time >= "100"){ // 연장 근무 시간이 1시간 이상일때 평일 연장 근무 시간에 +
+						
+							week_EX_TIME = week_EX_TIME + next_temp_time;
+							
+						
+					}
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME);
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), "900");
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"2200"){
+					var pre_temp_time = ("0900"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
+					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"2200");
+					if(pre_temp_time >= "100"){ //연장 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
+					
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							week_EX_TIME = week_EX_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							week_EX_TIME = week_EX_TIME + pre_temp_time - 40;
+						}
+						
+					}
+					if(next_temp_time >= "100"){ // 야간 근무 시간이 1시간 이상일때 평일 야간 근무 시간에 +
+							week_NI_TIME = week_NI_TIME + next_temp_time;
+							mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
+							
+					}else if(next_temp_time < "100"){
+					}
+					week_EX_TIME = week_EX_TIME + 400; //기본 18:00 ~ 22:00
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), "900");
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
+					
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
+					var NI_num = Number("200");
+					var end_num = Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")));
+					var pre_temp_time = ("0900"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
+					var next_temp_time = (NI_num + end_num);
+					
+					if(pre_temp_time >= "100"){ //연장 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
+						
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							week_EX_TIME = week_EX_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							week_EX_TIME = week_EX_TIME + pre_temp_time - 40;
+						}
+						
+					}
+					
+					week_EX_TIME = week_EX_TIME + 400; //기본 18:00 ~ 22:00
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), "900");
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), next_temp_time);
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="1800"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) > mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){ //0900 1800 ///////////여기서 부터 START 09시작
+					//0900~1800시작
+					///////////////////////////////
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_TOTAL_TIME_CALC"))));
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="2200"){// 0930 1830
+					var pre_temp_time = ("1800"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))); //1700출근시간이면 100이 출력
+					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"1800");
+					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 정상 근무 시간에 + ex) 1800 - 0901 = 899 - 40 = 859
+						//2
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							week_NO_TIME = week_NO_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							week_NO_TIME = week_NO_TIME + pre_temp_time - 40;
+						}
+					}
+					if(next_temp_time >= "100"){
+						week_EX_TIME = week_EX_TIME + next_temp_time;
+						
+					}
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), week_NO_TIME);
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME);
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"2200"){
+					//3
+					var pre_temp_time = ("1800"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
+					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"2200");
+					if(pre_temp_time >= "100"){ //정상근무 시간이 1시간 이상 일때 평일 정상근무시간에 + ex) 1800 - 1030 = 770 - 40 = 730
+					
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							week_NO_TIME = week_NO_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							week_NO_TIME = week_NO_TIME + pre_temp_time - 40;
+						}
+						
+					}
+					if(next_temp_time >= "100"){ // 야간 근무 시간이 1시간 이상일때 평일 야간 근무 시간에 +
+							week_NI_TIME = week_NI_TIME + next_temp_time;
+							mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
+							
+					}
+					week_EX_TIME = week_EX_TIME + 400; //기본 18:00 ~ 22:00
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), week_NO_TIME); //지우고 100EX에 400을 넣어주어야한다.
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME );
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
+					
+					var NI_num = Number("200");
+					var end_num = Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")));
+					var pre_temp_time = ("1800"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
+					var next_temp_time = (NI_num + end_num);
+					
+					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
+						
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							week_NO_TIME = week_NO_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							week_NO_TIME = week_NO_TIME + pre_temp_time - 40;
+						}
+						
+					}
+					
+					week_EX_TIME = week_EX_TIME + 400; //기본 18:00 ~ 22:00
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), week_NO_TIME);
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), next_temp_time);
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
+					var NI_num = Number("200");
+					var end_num = Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")));
+					var pre_temp_time = ("1800"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
+					var next_temp_time = (NI_num + end_num);
+					
+					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
+						
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							week_NO_TIME = week_NO_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							week_NO_TIME = week_NO_TIME + pre_temp_time - 40;
+						}
+						
+					}
+					
+					week_EX_TIME = week_EX_TIME + 400; //기본 18:00 ~ 22:00
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), week_NO_TIME);
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), next_temp_time);
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="2200"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) > mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){ //1800 2300 ///////////여기서 부터 START 18시작
+					//1800~2200시작
+					///////////////////////////////
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_TOTAL_TIME_CALC"))));
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"2200"){// 1830 2230
+					
+					var pre_temp_time = ("2200"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))); //2100출근시간이면 100이 출력
+					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"2200");
+					
+					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 정상 근무 시간에 + ex) 1800 - 0901 = 899 - 40 = 859
+						//2
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							week_EX_TIME = week_EX_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							week_EX_TIME = week_EX_TIME + pre_temp_time - 40;
+						}
+					}
+					if(next_temp_time >= "100"){
+						week_NI_TIME = week_NI_TIME + next_temp_time;
+						
+					}
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME);
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
+					var NI_num = Number("200");
+					var end_num = Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")));
+					var pre_temp_time = ("2200"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
+					var next_temp_time = (NI_num + end_num);
+					
+					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
+						
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							week_EX_TIME = week_EX_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							week_EX_TIME = week_EX_TIME + pre_temp_time - 40;
+						}
+						
+					}
+					
+					/* week_EX_TIME = week_EX_TIME + 400; //기본 18:00 ~ 22:00 */
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), week_NO_TIME);
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), next_temp_time);
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0900"){
+					var pre_temp_time = ("2200"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
+					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0600");
+					
+					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
+						
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							week_EX_TIME = week_EX_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							week_EX_TIME = week_EX_TIME + pre_temp_time - 40;
+						}
+					} 
+					if(next_temp_time >= "100"){
+						week_EX_TIME = week_EX_TIME + next_temp_time;
+					}
+					week_NI_TIME = week_NI_TIME + 800;
+					var temp_EX	= week_EX_TIME % 100;
+					if(temp_EX/10 == 6){
+						week_EX_TIME = week_EX_TIME + 40;
+						
+					}
+					/* week_EX_TIME = week_EX_TIME + 400; //기본 18:00 ~ 22:00 */
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
+					
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0900"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
+					var pre_temp_time = ("2200"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
+					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0900");
+					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
+						
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							week_EX_TIME = week_EX_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							week_EX_TIME = week_EX_TIME + pre_temp_time - 40;
+						}
+					} 
+					if(next_temp_time >= "100"){
+						week_NO_TIME = week_NO_TIME + next_temp_time;
+					}
+					week_NI_TIME = week_NI_TIME + 800;
+					week_EX_TIME = week_EX_TIME + 300;
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), week_NO_TIME);
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME);
+				}
+				
+			}else if(getTodayLabel(mySheet2.GetCellValue(i, 5)) == 0 || getTodayLabel(mySheet2.GetCellValue(i, 5)) == 6){ // 주말일 때
+				//주말 시작!!! 
+				if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0600"){ //0100 0500 //////////////시작시간이 06시 이전일때
+
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_TOTAL_TIME_CALC")))); //평일야간근무 ex) 0100, 0600
+					
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0900"){// 0300 0800
+					
+					var pre_temp_time = ("0600"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))); //0500출근시간이면 100이 출력
+					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0600");
+					if(pre_temp_time >= "100"){ //야간 근무 시간이 1시간 이상 일때 평일 야간근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
+
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							holi_NI_TIME = holi_NI_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							holi_NI_TIME = holi_NI_TIME + pre_temp_time - 40;
+						}
+						
+						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
+					}
+					if(next_temp_time >= "100"){ //연장근무 시간이 1시간 이상일때 평일 연장 근무시간에 +
+						
+						holi_EX_TIME = holi_EX_TIME + next_temp_time;
+						
+						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME);
+					}
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="1800"){
+					
+					var pre_temp_time = ("0600"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
+					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0900");
+					if(pre_temp_time >= "100"){ //야간 근무 시간이 1시간 이상 일때 평일 야간근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
+
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							holi_NI_TIME = holi_NI_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							holi_NI_TIME = holi_NI_TIME + pre_temp_time - 40;
+						}
+						
+						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
+					}
+					if(next_temp_time >= "100"){ // normal 근무 시간이 1시간 이상일때 평일 정상 근무 시간에 +
+						
+							holi_NO_TIME = holi_NO_TIME + next_temp_time;
+							mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), holi_NO_TIME);
+						
+					}
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), "300");
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="2200"){
+					
+					var pre_temp_time = ("0600"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
+					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"1800");
+					if(pre_temp_time >= "100"){ //야간 근무 시간이 1시간 이상 일때 평일 야간근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
+
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							holi_NI_TIME = holi_NI_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							holi_NI_TIME = holi_NI_TIME + pre_temp_time - 40;
+						}
+						
+						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
+					}
+					if(next_temp_time >= "100"){ // normal 근무 시간이 1시간 이상일때 평일 정상 근무 시간에 +
+						
+							holi_EX_TIME = holi_EX_TIME + next_temp_time + 300;
+							mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME);
+							
+					}else if(next_temp_time < "100"){
+						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), "300");
+					}
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), "900");
+					
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"2200"){ //0100 2300
+					
+					var pre_temp_time = ("0600"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
+					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"2200");
+					if(pre_temp_time >= "100"){ //야간 근무 시간이 1시간 이상 일때 평일 야간근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
+
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							holi_NI_TIME = holi_NI_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							holi_NI_TIME = holi_NI_TIME + pre_temp_time - 40;
+						}
+						
+					}
+					if(next_temp_time >= "100"){ // 야간시간이 1시간 이상일때 평일 야간 근무 시간에 +
+						
+						holi_NI_TIME = holi_NI_TIME + next_temp_time;
+							
+					}
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), "900");
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), "700");
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) > mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){ //0600 0700 ///////////여기서 부터 START 06시작
+					//0600~0900시작
+					///////////////////////////////
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_TOTAL_TIME_CALC"))));
+					
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="1800"){// 0630 0900
+					var pre_temp_time = ("0900"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))); //0800출근시간이면 100이 출력
+					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0900");
+					if(pre_temp_time >= "100"){ //연장 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 1000 - 0630 = 370 - 40 = 330
+					//2
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							holi_EX_TIME = holi_EX_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							holi_EX_TIME = holi_EX_TIME + pre_temp_time - 40;
+						}
+						
+						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME);
+					}
+					if(next_temp_time >= "100"){ //정상근무 시간이 1시간 이상일때 평일 정상 근무시간에 +
+						
+						holi_NO_TIME = holi_NO_TIME + next_temp_time;
+						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), holi_NO_TIME);
+					}
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="2200"){
+					//3
+					var pre_temp_time = ("0900"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
+					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"1800");
+					if(pre_temp_time >= "100"){ //연장 근무 시간이 1시간 이상 일때 평일 정근무시간에 + ex) 1800 - 0930 = 870 - 40 = 830
+
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							holi_EX_TIME = holi_EX_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							holi_EX_TIME = holi_EX_TIME + pre_temp_time - 40;
+						}
+						
+					}
+					if(next_temp_time >= "100"){ // 연장 근무 시간이 1시간 이상일때 평일 연장 근무 시간에 +
+						
+							holi_EX_TIME = holi_EX_TIME + next_temp_time;
+							
+						
+					}
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME);
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), "900");
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"2200"){
+					//4
+					var pre_temp_time = ("0900"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
+					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"2200");
+					if(pre_temp_time >= "100"){ //연장 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
+					
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							holi_EX_TIME = holi_EX_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							holi_EX_TIME = holi_EX_TIME + pre_temp_time - 40;
+						}
+						
+					}
+					if(next_temp_time >= "100"){ // 야간 근무 시간이 1시간 이상일때 평일 야간 근무 시간에 +
+							holi_NI_TIME = holi_NI_TIME + next_temp_time;
+							mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
+							
+					}else if(next_temp_time < "100"){
+					}
+					holi_EX_TIME = holi_EX_TIME + 400; //기본 18:00 ~ 22:00
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), "900");
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
+					
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
+					var NI_num = Number("200");
+					var end_num = Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")));
+					var pre_temp_time = ("0900"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
+					var next_temp_time = (NI_num + end_num);
+					
+					if(pre_temp_time >= "100"){ //연장 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
+						
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							holi_EX_TIME = holi_EX_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							holi_EX_TIME = holi_EX_TIME + pre_temp_time - 40;
+						}
+						
+					}
+					
+					holi_EX_TIME = holi_EX_TIME + 400; //기본 18:00 ~ 22:00
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), "900");
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), next_temp_time);
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="1800"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) > mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){ //0900 1800 ///////////여기서 부터 START 09시작
+					//0900~1800시작
+					///////////////////////////////
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_TOTAL_TIME_CALC"))));
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="2200"){// 0930 1830
+					var pre_temp_time = ("1800"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))); //1700출근시간이면 100이 출력
+					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"1800");
+					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 정상 근무 시간에 + ex) 1800 - 0901 = 899 - 40 = 859
+						//2
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							holi_NO_TIME = holi_NO_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							holi_NO_TIME = holi_NO_TIME + pre_temp_time - 40;
+						}
+					}
+					if(next_temp_time >= "100"){
+						holi_EX_TIME = holi_EX_TIME + next_temp_time;
+						
+					}
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), holi_NO_TIME);
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME);
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"2200"){
+					//3
+					var pre_temp_time = ("1800"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
+					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"2200");
+					if(pre_temp_time >= "100"){ //정상근무 시간이 1시간 이상 일때 평일 정상근무시간에 + ex) 1800 - 1030 = 770 - 40 = 730
+					
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							holi_NO_TIME = holi_NO_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							holi_NO_TIME = holi_NO_TIME + pre_temp_time - 40;
+						}
+						
+					}
+					if(next_temp_time >= "100"){ // 야간 근무 시간이 1시간 이상일때 평일 야간 근무 시간에 +
+							holi_NI_TIME = holi_NI_TIME + next_temp_time;
+							mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
+							
+					}else if(next_temp_time < "100"){
+					}
+					holi_EX_TIME = holi_EX_TIME + 400; //기본 18:00 ~ 22:00
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), holi_NO_TIME); //지우고 100EX에 400을 넣어주어야한다.
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME );
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
+					var NI_num = Number("200");
+					var end_num = Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")));
+					var pre_temp_time = ("1800"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
+					var next_temp_time = (NI_num + end_num);
+					
+					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
+						
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							holi_NO_TIME = holi_NO_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							holi_NO_TIME = holi_NO_TIME + pre_temp_time - 40;
+						}
+						
+					}
+					
+					holi_EX_TIME = holi_EX_TIME + 400; //기본 18:00 ~ 22:00
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), holi_NO_TIME);
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), next_temp_time);
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
+					var NI_num = Number("200");
+					var end_num = Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")));
+					var pre_temp_time = ("1800"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
+					var next_temp_time = (NI_num + end_num);
+					
+					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
+						
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							holi_NO_TIME = holi_NO_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							holi_NO_TIME = holi_NO_TIME + pre_temp_time - 40;
+						}
+						
+					}
+					
+					holi_EX_TIME = holi_EX_TIME + 400; //기본 18:00 ~ 22:00
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), holi_NO_TIME);
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), next_temp_time);
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="2200"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) > mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){ //1800 2300 ///////////여기서 부터 START 18시작
+					//1800~2200시작
+					///////////////////////////////
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_TOTAL_TIME_CALC"))));
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"2200"){// 1830 2230
+					
+					var pre_temp_time = ("2200"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))); //2100출근시간이면 100이 출력
+					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"2200");
+					
+					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 정상 근무 시간에 + ex) 1800 - 0901 = 899 - 40 = 859
+						//2
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							holi_EX_TIME = holi_EX_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							holi_EX_TIME = holi_EX_TIME + pre_temp_time - 40;
+						}
+					}
+					if(next_temp_time >= "100"){
+						holi_NI_TIME = holi_NI_TIME + next_temp_time;
+						
+					}
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME);
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
+					var NI_num = Number("200");
+					var end_num = Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")));
+					var pre_temp_time = ("2200"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
+					var next_temp_time = (NI_num + end_num);
+					
+					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
+						
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							holi_EX_TIME = holi_EX_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							holi_EX_TIME = holi_EX_TIME + pre_temp_time - 40;
+						}
+						
+					}
+					
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), holi_NO_TIME);
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), next_temp_time);
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0900"){
+					var pre_temp_time = ("2200"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
+					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0600");
+					
+					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
+						
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							holi_EX_TIME = holi_EX_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							holi_EX_TIME = holi_EX_TIME + pre_temp_time - 40;
+						}
+					} 
+					if(next_temp_time >= "100"){
+						holi_EX_TIME = holi_EX_TIME + next_temp_time;
+					}
+					holi_NI_TIME = holi_NI_TIME + 800;
+					var temp_EX	= holi_EX_TIME % 100;
+					if(temp_EX/10 == 6){
+						holi_EX_TIME = holi_EX_TIME + 40;
+						
+					}
+					/* holi_EX_TIME = holi_EX_TIME + 400; //기본 18:00 ~ 22:00 */
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
+					
+				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0900"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
+					var pre_temp_time = ("2200"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
+					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0900");
+					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
+						
+						if((pre_temp_time) % 100 == 0){ //100, 200, 300
+							holi_EX_TIME = holi_EX_TIME + pre_temp_time;
+						}else if((pre_temp_time) % 100 != 0){
+							holi_EX_TIME = holi_EX_TIME + pre_temp_time - 40;
+						}
+					} 
+					if(next_temp_time >= "100"){
+						holi_NO_TIME = holi_NO_TIME + next_temp_time;
+					}
+					holi_NI_TIME = holi_NI_TIME + 800;
+					holi_EX_TIME = holi_EX_TIME + 300;
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), holi_NO_TIME);
+					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME);
+				}
+			} 
+		}
+	}
 	function mySheet2_OnClick(Row, Col){
 		//오른쪽 근무시간에 아이비시트에서 계산된 것을 뿌려줌
+		
 		if(Row!=0){
 			$('input[name=myRow]').val(Row);
 			var abcde = $('input[name=weekday_NORMAL_WORK_TIME]').val(textWithtimeFormat(mySheet2.GetCellValue(Row, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"))));
@@ -312,7 +1125,12 @@
 		}
 	}
 	function textWithtimeFormat(x) {
-		if(x >= 100){
+		if(x > 10000){
+			var temp_x = x.toString().replace(/\B(?=(\d{2})+(?!\d))/g, ":");
+			return temp_x.replace(':','');
+		}else if(x < 10000&& x >= 1000){
+			return x.toString().replace(/\B(?=(\d{2})+(?!\d))/g, ":");
+		}else if(x < 1000 && x >= 100){
 			return  "0"+ x.toString().replace(/\B(?=(\d{2})+(?!\d))/g, ":");
 		}else if(x == 0){
 			return "";
@@ -661,7 +1479,6 @@
 					}
 					week_NI_TIME = week_NI_TIME + 800;
 					var temp_EX	= week_EX_TIME % 100;
-					alert(temp_EX);
 					if(temp_EX/10 == 6){
 						week_EX_TIME = week_EX_TIME + 40;
 						
@@ -1014,7 +1831,6 @@
 					}
 					holi_NI_TIME = holi_NI_TIME + 800;
 					var temp_EX	= holi_EX_TIME % 100;
-					alert(temp_EX);
 					if(temp_EX/10 == 6){
 						holi_EX_TIME = holi_EX_TIME + 40;
 						
@@ -1058,723 +1874,9 @@
 		
 		
 		///////////////////////////////////////////////////////////////////평일 휴일 정상근무 휴일정상근무 프로세스
-		var Maskingcell = mySheet2.GetDataLastRow();
-		/* for(let i = Maskingcell; i >= 1; i--){ // savename: temp_시간의 col에 00:00 masking 값 입력
-			mySheet2.SetCellValue(i, 8, "0000");
-			/* alert(mySheet2.GetCellValue(i, 8)); */ //값 확인 완료
-		//} 
 		
-		
-		for(let i = 1; i <= Maskingcell; i++){
-			var week_NO_TIME = 0, week_EX_TIME = 0, week_NI_TIME = 0, holi_NO_TIME = 0, holi_EX_TIME = 0, holi_NI_TIME = 0;
-			if(getTodayLabel(mySheet2.GetCellValue(i, 5)) >=1 & getTodayLabel(mySheet2.GetCellValue(i, 5)) <= 5){ //평일 일 때
-				if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0600"){ //0100 0500 //////////////시작시간이 06시 이전일때
-
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_TOTAL_TIME_CALC")))); //평일야간근무 ex) 0100, 0600
-					
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0900"){// 0300 0800
-					
-					var pre_temp_time = ("0600"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))); //0500출근시간이면 100이 출력
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0600");
-					if(pre_temp_time >= "100"){ //야간 근무 시간이 1시간 이상 일때 평일 야간근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_NI_TIME = week_NI_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_NI_TIME = week_NI_TIME + pre_temp_time - 40;
-						}
-						
-						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
-					}
-					if(next_temp_time >= "100"){ //연장근무 시간이 1시간 이상일때 평일 연장 근무시간에 +
-						
-						week_EX_TIME = week_EX_TIME + next_temp_time;
-						
-						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME);
-					}
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="1800"){
-					
-					var pre_temp_time = ("0600"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0900");
-					if(pre_temp_time >= "100"){ //야간 근무 시간이 1시간 이상 일때 평일 야간근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_NI_TIME = week_NI_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_NI_TIME = week_NI_TIME + pre_temp_time - 40;
-						}
-						
-						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
-					}
-					if(next_temp_time >= "100"){ // normal 근무 시간이 1시간 이상일때 평일 정상 근무 시간에 +
-						
-							week_NO_TIME = week_NO_TIME + next_temp_time;
-							mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), week_NO_TIME);
-						
-					}
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), "300");
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="2200"){
-					
-					var pre_temp_time = ("0600"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"1800");
-					if(pre_temp_time >= "100"){ //야간 근무 시간이 1시간 이상 일때 평일 야간근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_NI_TIME = week_NI_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_NI_TIME = week_NI_TIME + pre_temp_time - 40;
-						}
-						
-						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
-					}
-					if(next_temp_time >= "100"){ // normal 근무 시간이 1시간 이상일때 평일 정상 근무 시간에 +
-						
-							week_EX_TIME = week_EX_TIME + next_temp_time + 300;
-							mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME);
-							
-					}else if(next_temp_time < "100"){
-						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), "300");
-					}
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), "900");
-					
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"2200"){ //0100 2300
-					
-					var pre_temp_time = ("0600"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"2200");
-					if(pre_temp_time >= "100"){ //야간 근무 시간이 1시간 이상 일때 평일 야간근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_NI_TIME = week_NI_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_NI_TIME = week_NI_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					if(next_temp_time >= "100"){ // 야간시간이 1시간 이상일때 평일 야간 근무 시간에 +
-						
-						week_NI_TIME = week_NI_TIME + next_temp_time;
-							
-					}
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), "900");
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), "700");
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) > mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){ //0600 0700 ///////////여기서 부터 START 06시작
-					//0600~0900시작
-					///////////////////////////////
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_TOTAL_TIME_CALC"))));
-					
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="1800"){// 0630 0900
-					var pre_temp_time = ("0900"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))); //0800출근시간이면 100이 출력
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0900");
-					if(pre_temp_time >= "100"){ //연장 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 1000 - 0630 = 370 - 40 = 330
-					//2
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_EX_TIME = week_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_EX_TIME = week_EX_TIME + pre_temp_time - 40;
-						}
-						
-						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME);
-					}
-					if(next_temp_time >= "100"){ //정상근무 시간이 1시간 이상일때 평일 정상 근무시간에 +
-						
-						week_NO_TIME = week_NO_TIME + next_temp_time;
-						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), week_NO_TIME);
-					}
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="2200"){
-					//3
-					var pre_temp_time = ("0900"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"1800");
-					if(pre_temp_time >= "100"){ //연장 근무 시간이 1시간 이상 일때 평일 정근무시간에 + ex) 1800 - 0930 = 870 - 40 = 830
-
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_EX_TIME = week_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_EX_TIME = week_EX_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					if(next_temp_time >= "100"){ // 연장 근무 시간이 1시간 이상일때 평일 연장 근무 시간에 +
-						
-							week_EX_TIME = week_EX_TIME + next_temp_time;
-							
-						
-					}
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), "900");
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"2200"){
-					var pre_temp_time = ("0900"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"2200");
-					if(pre_temp_time >= "100"){ //연장 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-					
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_EX_TIME = week_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_EX_TIME = week_EX_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					if(next_temp_time >= "100"){ // 야간 근무 시간이 1시간 이상일때 평일 야간 근무 시간에 +
-							week_NI_TIME = week_NI_TIME + next_temp_time;
-							mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
-							
-					}else if(next_temp_time < "100"){
-					}
-					week_EX_TIME = week_EX_TIME + 400; //기본 18:00 ~ 22:00
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), "900");
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
-					
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
-					var NI_num = Number("200");
-					var end_num = Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")));
-					var pre_temp_time = ("0900"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (NI_num + end_num);
-					
-					if(pre_temp_time >= "100"){ //연장 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-						
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_EX_TIME = week_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_EX_TIME = week_EX_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					
-					week_EX_TIME = week_EX_TIME + 400; //기본 18:00 ~ 22:00
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), "900");
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), next_temp_time);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="1800"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) > mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){ //0900 1800 ///////////여기서 부터 START 09시작
-					//0900~1800시작
-					///////////////////////////////
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_TOTAL_TIME_CALC"))));
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="2200"){// 0930 1830
-					var pre_temp_time = ("1800"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))); //1700출근시간이면 100이 출력
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"1800");
-					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 정상 근무 시간에 + ex) 1800 - 0901 = 899 - 40 = 859
-						//2
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_NO_TIME = week_NO_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_NO_TIME = week_NO_TIME + pre_temp_time - 40;
-						}
-					}
-					if(next_temp_time >= "100"){
-						week_EX_TIME = week_EX_TIME + next_temp_time;
-						
-					}
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), week_NO_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"2200"){
-					//3
-					var pre_temp_time = ("1800"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"2200");
-					if(pre_temp_time >= "100"){ //정상근무 시간이 1시간 이상 일때 평일 정상근무시간에 + ex) 1800 - 1030 = 770 - 40 = 730
-					
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_NO_TIME = week_NO_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_NO_TIME = week_NO_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					if(next_temp_time >= "100"){ // 야간 근무 시간이 1시간 이상일때 평일 야간 근무 시간에 +
-							week_NI_TIME = week_NI_TIME + next_temp_time;
-							mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
-							
-					}
-					week_EX_TIME = week_EX_TIME + 400; //기본 18:00 ~ 22:00
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), week_NO_TIME); //지우고 100EX에 400을 넣어주어야한다.
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME );
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
-					
-					var NI_num = Number("200");
-					var end_num = Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")));
-					var pre_temp_time = ("1800"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (NI_num + end_num);
-					
-					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-						
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_NO_TIME = week_NO_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_NO_TIME = week_NO_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					
-					week_EX_TIME = week_EX_TIME + 400; //기본 18:00 ~ 22:00
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), week_NO_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), next_temp_time);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
-					var NI_num = Number("200");
-					var end_num = Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")));
-					var pre_temp_time = ("1800"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (NI_num + end_num);
-					
-					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-						
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_NO_TIME = week_NO_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_NO_TIME = week_NO_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					
-					week_EX_TIME = week_EX_TIME + 400; //기본 18:00 ~ 22:00
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), week_NO_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), next_temp_time);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="2200"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) > mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){ //1800 2300 ///////////여기서 부터 START 18시작
-					//1800~2200시작
-					///////////////////////////////
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_TOTAL_TIME_CALC"))));
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"2200"){// 1830 2230
-					
-					var pre_temp_time = ("2200"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))); //2100출근시간이면 100이 출력
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"2200");
-					
-					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 정상 근무 시간에 + ex) 1800 - 0901 = 899 - 40 = 859
-						//2
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_EX_TIME = week_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_EX_TIME = week_EX_TIME + pre_temp_time - 40;
-						}
-					}
-					if(next_temp_time >= "100"){
-						week_NI_TIME = week_NI_TIME + next_temp_time;
-						
-					}
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
-					var NI_num = Number("200");
-					var end_num = Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")));
-					var pre_temp_time = ("2200"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (NI_num + end_num);
-					
-					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-						
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_EX_TIME = week_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_EX_TIME = week_EX_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					
-					/* week_EX_TIME = week_EX_TIME + 400; //기본 18:00 ~ 22:00 */
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), week_NO_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), next_temp_time);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0900"){
-					var pre_temp_time = ("2200"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0600");
-					
-					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-						
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_EX_TIME = week_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_EX_TIME = week_EX_TIME + pre_temp_time - 40;
-						}
-					} 
-					if(next_temp_time >= "100"){
-						week_EX_TIME = week_EX_TIME + next_temp_time;
-					}
-					week_NI_TIME = week_NI_TIME + 800;
-					var temp_EX	= week_EX_TIME % 100;
-					alert(temp_EX);
-					if(temp_EX/10 == 6){
-						week_EX_TIME = week_EX_TIME + 40;
-						
-					}
-					/* week_EX_TIME = week_EX_TIME + 400; //기본 18:00 ~ 22:00 */
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
-					
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0900"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
-					var pre_temp_time = ("2200"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0900");
-					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-						
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_EX_TIME = week_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_EX_TIME = week_EX_TIME + pre_temp_time - 40;
-						}
-					} 
-					if(next_temp_time >= "100"){
-						week_NO_TIME = week_NO_TIME + next_temp_time;
-					}
-					week_NI_TIME = week_NI_TIME + 800;
-					week_EX_TIME = week_EX_TIME + 300;
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), week_NO_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME);
-				}
-				
-			}else if(getTodayLabel(mySheet2.GetCellValue(i, 5)) == 0 || getTodayLabel(mySheet2.GetCellValue(i, 5)) == 6){ // 주말일 때
-				//주말 시작!!! 
-				if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0600"){ //0100 0500 //////////////시작시간이 06시 이전일때
-
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_TOTAL_TIME_CALC")))); //평일야간근무 ex) 0100, 0600
-					
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0900"){// 0300 0800
-					
-					var pre_temp_time = ("0600"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))); //0500출근시간이면 100이 출력
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0600");
-					if(pre_temp_time >= "100"){ //야간 근무 시간이 1시간 이상 일때 평일 야간근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_NI_TIME = holi_NI_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_NI_TIME = holi_NI_TIME + pre_temp_time - 40;
-						}
-						
-						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
-					}
-					if(next_temp_time >= "100"){ //연장근무 시간이 1시간 이상일때 평일 연장 근무시간에 +
-						
-						holi_EX_TIME = holi_EX_TIME + next_temp_time;
-						
-						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME);
-					}
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="1800"){
-					
-					var pre_temp_time = ("0600"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0900");
-					if(pre_temp_time >= "100"){ //야간 근무 시간이 1시간 이상 일때 평일 야간근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_NI_TIME = holi_NI_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_NI_TIME = holi_NI_TIME + pre_temp_time - 40;
-						}
-						
-						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
-					}
-					if(next_temp_time >= "100"){ // normal 근무 시간이 1시간 이상일때 평일 정상 근무 시간에 +
-						
-							holi_NO_TIME = holi_NO_TIME + next_temp_time;
-							mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), holi_NO_TIME);
-						
-					}
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), "300");
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="2200"){
-					
-					var pre_temp_time = ("0600"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"1800");
-					if(pre_temp_time >= "100"){ //야간 근무 시간이 1시간 이상 일때 평일 야간근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_NI_TIME = holi_NI_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_NI_TIME = holi_NI_TIME + pre_temp_time - 40;
-						}
-						
-						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
-					}
-					if(next_temp_time >= "100"){ // normal 근무 시간이 1시간 이상일때 평일 정상 근무 시간에 +
-						
-							holi_EX_TIME = holi_EX_TIME + next_temp_time + 300;
-							mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME);
-							
-					}else if(next_temp_time < "100"){
-						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), "300");
-					}
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), "900");
-					
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"2200"){ //0100 2300
-					
-					var pre_temp_time = ("0600"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"2200");
-					if(pre_temp_time >= "100"){ //야간 근무 시간이 1시간 이상 일때 평일 야간근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_NI_TIME = holi_NI_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_NI_TIME = holi_NI_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					if(next_temp_time >= "100"){ // 야간시간이 1시간 이상일때 평일 야간 근무 시간에 +
-						
-						holi_NI_TIME = holi_NI_TIME + next_temp_time;
-							
-					}
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), "900");
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), "700");
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) > mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){ //0600 0700 ///////////여기서 부터 START 06시작
-					//0600~0900시작
-					///////////////////////////////
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_TOTAL_TIME_CALC"))));
-					
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="1800"){// 0630 0900
-					var pre_temp_time = ("0900"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))); //0800출근시간이면 100이 출력
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0900");
-					if(pre_temp_time >= "100"){ //연장 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 1000 - 0630 = 370 - 40 = 330
-					//2
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time - 40;
-						}
-						
-						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME);
-					}
-					if(next_temp_time >= "100"){ //정상근무 시간이 1시간 이상일때 평일 정상 근무시간에 +
-						
-						holi_NO_TIME = holi_NO_TIME + next_temp_time;
-						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), holi_NO_TIME);
-					}
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="2200"){
-					//3
-					var pre_temp_time = ("0900"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"1800");
-					if(pre_temp_time >= "100"){ //연장 근무 시간이 1시간 이상 일때 평일 정근무시간에 + ex) 1800 - 0930 = 870 - 40 = 830
-
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					if(next_temp_time >= "100"){ // 연장 근무 시간이 1시간 이상일때 평일 연장 근무 시간에 +
-						
-							holi_EX_TIME = holi_EX_TIME + next_temp_time;
-							
-						
-					}
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), "900");
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"2200"){
-					//4
-					var pre_temp_time = ("0900"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"2200");
-					if(pre_temp_time >= "100"){ //연장 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-					
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					if(next_temp_time >= "100"){ // 야간 근무 시간이 1시간 이상일때 평일 야간 근무 시간에 +
-							holi_NI_TIME = holi_NI_TIME + next_temp_time;
-							mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
-							
-					}else if(next_temp_time < "100"){
-					}
-					holi_EX_TIME = holi_EX_TIME + 400; //기본 18:00 ~ 22:00
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), "900");
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
-					
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
-					var NI_num = Number("200");
-					var end_num = Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")));
-					var pre_temp_time = ("0900"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (NI_num + end_num);
-					
-					if(pre_temp_time >= "100"){ //연장 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-						
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					
-					holi_EX_TIME = holi_EX_TIME + 400; //기본 18:00 ~ 22:00
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), "900");
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), next_temp_time);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="1800"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) > mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){ //0900 1800 ///////////여기서 부터 START 09시작
-					//0900~1800시작
-					///////////////////////////////
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_TOTAL_TIME_CALC"))));
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="2200"){// 0930 1830
-					var pre_temp_time = ("1800"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))); //1700출근시간이면 100이 출력
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"1800");
-					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 정상 근무 시간에 + ex) 1800 - 0901 = 899 - 40 = 859
-						//2
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_NO_TIME = holi_NO_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_NO_TIME = holi_NO_TIME + pre_temp_time - 40;
-						}
-					}
-					if(next_temp_time >= "100"){
-						holi_EX_TIME = holi_EX_TIME + next_temp_time;
-						
-					}
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), holi_NO_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"2200"){
-					//3
-					var pre_temp_time = ("1800"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"2200");
-					if(pre_temp_time >= "100"){ //정상근무 시간이 1시간 이상 일때 평일 정상근무시간에 + ex) 1800 - 1030 = 770 - 40 = 730
-					
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_NO_TIME = holi_NO_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_NO_TIME = holi_NO_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					if(next_temp_time >= "100"){ // 야간 근무 시간이 1시간 이상일때 평일 야간 근무 시간에 +
-							holi_NI_TIME = holi_NI_TIME + next_temp_time;
-							mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
-							
-					}else if(next_temp_time < "100"){
-					}
-					holi_EX_TIME = holi_EX_TIME + 400; //기본 18:00 ~ 22:00
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), holi_NO_TIME); //지우고 100EX에 400을 넣어주어야한다.
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME );
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
-					var NI_num = Number("200");
-					var end_num = Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")));
-					var pre_temp_time = ("1800"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (NI_num + end_num);
-					
-					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-						
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_NO_TIME = holi_NO_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_NO_TIME = holi_NO_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					
-					holi_EX_TIME = holi_EX_TIME + 400; //기본 18:00 ~ 22:00
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), holi_NO_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), next_temp_time);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
-					var NI_num = Number("200");
-					var end_num = Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")));
-					var pre_temp_time = ("1800"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (NI_num + end_num);
-					
-					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-						
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_NO_TIME = holi_NO_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_NO_TIME = holi_NO_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					
-					holi_EX_TIME = holi_EX_TIME + 400; //기본 18:00 ~ 22:00
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), holi_NO_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), next_temp_time);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="2200"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) > mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){ //1800 2300 ///////////여기서 부터 START 18시작
-					//1800~2200시작
-					///////////////////////////////
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_TOTAL_TIME_CALC"))));
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"2200"){// 1830 2230
-					
-					var pre_temp_time = ("2200"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))); //2100출근시간이면 100이 출력
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"2200");
-					
-					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 정상 근무 시간에 + ex) 1800 - 0901 = 899 - 40 = 859
-						//2
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time - 40;
-						}
-					}
-					if(next_temp_time >= "100"){
-						holi_NI_TIME = holi_NI_TIME + next_temp_time;
-						
-					}
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
-					var NI_num = Number("200");
-					var end_num = Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")));
-					var pre_temp_time = ("2200"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (NI_num + end_num);
-					
-					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-						
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), holi_NO_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), next_temp_time);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0900"){
-					var pre_temp_time = ("2200"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0600");
-					
-					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-						
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time - 40;
-						}
-					} 
-					if(next_temp_time >= "100"){
-						holi_EX_TIME = holi_EX_TIME + next_temp_time;
-					}
-					holi_NI_TIME = holi_NI_TIME + 800;
-					var temp_EX	= holi_EX_TIME % 100;
-					alert(temp_EX);
-					if(temp_EX/10 == 6){
-						holi_EX_TIME = holi_EX_TIME + 40;
-						
-					}
-					/* holi_EX_TIME = holi_EX_TIME + 400; //기본 18:00 ~ 22:00 */
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
-					
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0900"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
-					var pre_temp_time = ("2200"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0900");
-					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-						
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time - 40;
-						}
-					} 
-					if(next_temp_time >= "100"){
-						holi_NO_TIME = holi_NO_TIME + next_temp_time;
-					}
-					holi_NI_TIME = holi_NI_TIME + 800;
-					holi_EX_TIME = holi_EX_TIME + 300;
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), holi_NO_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME);
-				}
-			} 
-		}
 	}
-	function mySheet2_OnAfterEdit(Row, Col){
+	function mySheet2_OnChange(Row, Col){
 		//출근, 조퇴, 외출 프로세스
 		if(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_START_TIME"))<="0900" && mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_END_TIME"))>="1800"){ //정상출근
 			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "00");
@@ -1786,721 +1888,7 @@
 		
 		
 		///////////////////////////////////////////////////////////////////평일 휴일 정상근무 휴일정상근무 프로세스
-		var Maskingcell = mySheet2.GetDataLastRow();
-		/* for(let i = Maskingcell; i >= 1; i--){ // savename: temp_시간의 col에 00:00 masking 값 입력
-			mySheet2.SetCellValue(i, 8, "0000");
-			/* alert(mySheet2.GetCellValue(i, 8)); */ //값 확인 완료
-		//} 
 		
-		
-		for(let i = 1; i <= Maskingcell; i++){
-			var week_NO_TIME = 0, week_EX_TIME = 0, week_NI_TIME = 0, holi_NO_TIME = 0, holi_EX_TIME = 0, holi_NI_TIME = 0;
-			if(getTodayLabel(mySheet2.GetCellValue(i, 5)) >=1 & getTodayLabel(mySheet2.GetCellValue(i, 5)) <= 5){ //평일 일 때
-				if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0600"){ //0100 0500 //////////////시작시간이 06시 이전일때
-
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_TOTAL_TIME_CALC")))); //평일야간근무 ex) 0100, 0600
-					
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0900"){// 0300 0800
-					
-					var pre_temp_time = ("0600"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))); //0500출근시간이면 100이 출력
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0600");
-					if(pre_temp_time >= "100"){ //야간 근무 시간이 1시간 이상 일때 평일 야간근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_NI_TIME = week_NI_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_NI_TIME = week_NI_TIME + pre_temp_time - 40;
-						}
-						
-						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
-					}
-					if(next_temp_time >= "100"){ //연장근무 시간이 1시간 이상일때 평일 연장 근무시간에 +
-						
-						week_EX_TIME = week_EX_TIME + next_temp_time;
-						
-						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME);
-					}
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="1800"){
-					
-					var pre_temp_time = ("0600"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0900");
-					if(pre_temp_time >= "100"){ //야간 근무 시간이 1시간 이상 일때 평일 야간근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_NI_TIME = week_NI_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_NI_TIME = week_NI_TIME + pre_temp_time - 40;
-						}
-						
-						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
-					}
-					if(next_temp_time >= "100"){ // normal 근무 시간이 1시간 이상일때 평일 정상 근무 시간에 +
-						
-							week_NO_TIME = week_NO_TIME + next_temp_time;
-							mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), week_NO_TIME);
-						
-					}
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), "300");
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="2200"){
-					
-					var pre_temp_time = ("0600"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"1800");
-					if(pre_temp_time >= "100"){ //야간 근무 시간이 1시간 이상 일때 평일 야간근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_NI_TIME = week_NI_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_NI_TIME = week_NI_TIME + pre_temp_time - 40;
-						}
-						
-						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
-					}
-					if(next_temp_time >= "100"){ // normal 근무 시간이 1시간 이상일때 평일 정상 근무 시간에 +
-						
-							week_EX_TIME = week_EX_TIME + next_temp_time + 300;
-							mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME);
-							
-					}else if(next_temp_time < "100"){
-						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), "300");
-					}
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), "900");
-					
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"2200"){ //0100 2300
-					
-					var pre_temp_time = ("0600"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"2200");
-					if(pre_temp_time >= "100"){ //야간 근무 시간이 1시간 이상 일때 평일 야간근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_NI_TIME = week_NI_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_NI_TIME = week_NI_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					if(next_temp_time >= "100"){ // 야간시간이 1시간 이상일때 평일 야간 근무 시간에 +
-						
-						week_NI_TIME = week_NI_TIME + next_temp_time;
-							
-					}
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), "900");
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), "700");
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) > mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){ //0600 0700 ///////////여기서 부터 START 06시작
-					//0600~0900시작
-					///////////////////////////////
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_TOTAL_TIME_CALC"))));
-					
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="1800"){// 0630 0900
-					var pre_temp_time = ("0900"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))); //0800출근시간이면 100이 출력
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0900");
-					if(pre_temp_time >= "100"){ //연장 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 1000 - 0630 = 370 - 40 = 330
-					//2
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_EX_TIME = week_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_EX_TIME = week_EX_TIME + pre_temp_time - 40;
-						}
-						
-						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME);
-					}
-					if(next_temp_time >= "100"){ //정상근무 시간이 1시간 이상일때 평일 정상 근무시간에 +
-						
-						week_NO_TIME = week_NO_TIME + next_temp_time;
-						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), week_NO_TIME);
-					}
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="2200"){
-					//3
-					var pre_temp_time = ("0900"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"1800");
-					if(pre_temp_time >= "100"){ //연장 근무 시간이 1시간 이상 일때 평일 정근무시간에 + ex) 1800 - 0930 = 870 - 40 = 830
-
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_EX_TIME = week_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_EX_TIME = week_EX_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					if(next_temp_time >= "100"){ // 연장 근무 시간이 1시간 이상일때 평일 연장 근무 시간에 +
-						
-							week_EX_TIME = week_EX_TIME + next_temp_time;
-							
-						
-					}
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), "900");
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"2200"){
-					var pre_temp_time = ("0900"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"2200");
-					if(pre_temp_time >= "100"){ //연장 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-					
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_EX_TIME = week_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_EX_TIME = week_EX_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					if(next_temp_time >= "100"){ // 야간 근무 시간이 1시간 이상일때 평일 야간 근무 시간에 +
-							week_NI_TIME = week_NI_TIME + next_temp_time;
-							mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
-							
-					}else if(next_temp_time < "100"){
-					}
-					week_EX_TIME = week_EX_TIME + 400; //기본 18:00 ~ 22:00
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), "900");
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
-					
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
-					var NI_num = Number("200");
-					var end_num = Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")));
-					var pre_temp_time = ("0900"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (NI_num + end_num);
-					
-					if(pre_temp_time >= "100"){ //연장 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-						
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_EX_TIME = week_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_EX_TIME = week_EX_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					
-					week_EX_TIME = week_EX_TIME + 400; //기본 18:00 ~ 22:00
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), "900");
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), next_temp_time);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="1800"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) > mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){ //0900 1800 ///////////여기서 부터 START 09시작
-					//0900~1800시작
-					///////////////////////////////
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_TOTAL_TIME_CALC"))));
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="2200"){// 0930 1830
-					var pre_temp_time = ("1800"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))); //1700출근시간이면 100이 출력
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"1800");
-					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 정상 근무 시간에 + ex) 1800 - 0901 = 899 - 40 = 859
-						//2
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_NO_TIME = week_NO_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_NO_TIME = week_NO_TIME + pre_temp_time - 40;
-						}
-					}
-					if(next_temp_time >= "100"){
-						week_EX_TIME = week_EX_TIME + next_temp_time;
-						
-					}
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), week_NO_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"2200"){
-					//3
-					var pre_temp_time = ("1800"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"2200");
-					if(pre_temp_time >= "100"){ //정상근무 시간이 1시간 이상 일때 평일 정상근무시간에 + ex) 1800 - 1030 = 770 - 40 = 730
-					
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_NO_TIME = week_NO_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_NO_TIME = week_NO_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					if(next_temp_time >= "100"){ // 야간 근무 시간이 1시간 이상일때 평일 야간 근무 시간에 +
-							week_NI_TIME = week_NI_TIME + next_temp_time;
-							mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
-							
-					}
-					week_EX_TIME = week_EX_TIME + 400; //기본 18:00 ~ 22:00
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), week_NO_TIME); //지우고 100EX에 400을 넣어주어야한다.
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME );
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
-					
-					var NI_num = Number("200");
-					var end_num = Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")));
-					var pre_temp_time = ("1800"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (NI_num + end_num);
-					
-					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-						
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_NO_TIME = week_NO_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_NO_TIME = week_NO_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					
-					week_EX_TIME = week_EX_TIME + 400; //기본 18:00 ~ 22:00
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), week_NO_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), next_temp_time);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
-					var NI_num = Number("200");
-					var end_num = Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")));
-					var pre_temp_time = ("1800"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (NI_num + end_num);
-					
-					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-						
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_NO_TIME = week_NO_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_NO_TIME = week_NO_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					
-					week_EX_TIME = week_EX_TIME + 400; //기본 18:00 ~ 22:00
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), week_NO_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), next_temp_time);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="2200"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) > mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){ //1800 2300 ///////////여기서 부터 START 18시작
-					//1800~2200시작
-					///////////////////////////////
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_TOTAL_TIME_CALC"))));
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"2200"){// 1830 2230
-					
-					var pre_temp_time = ("2200"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))); //2100출근시간이면 100이 출력
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"2200");
-					
-					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 정상 근무 시간에 + ex) 1800 - 0901 = 899 - 40 = 859
-						//2
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_EX_TIME = week_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_EX_TIME = week_EX_TIME + pre_temp_time - 40;
-						}
-					}
-					if(next_temp_time >= "100"){
-						week_NI_TIME = week_NI_TIME + next_temp_time;
-						
-					}
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
-					var NI_num = Number("200");
-					var end_num = Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")));
-					var pre_temp_time = ("2200"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (NI_num + end_num);
-					
-					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-						
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_EX_TIME = week_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_EX_TIME = week_EX_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					
-					/* week_EX_TIME = week_EX_TIME + 400; //기본 18:00 ~ 22:00 */
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), week_NO_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), next_temp_time);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0900"){
-					var pre_temp_time = ("2200"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0600");
-					
-					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-						
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_EX_TIME = week_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_EX_TIME = week_EX_TIME + pre_temp_time - 40;
-						}
-					} 
-					if(next_temp_time >= "100"){
-						week_EX_TIME = week_EX_TIME + next_temp_time;
-					}
-					week_NI_TIME = week_NI_TIME + 800;
-					var temp_EX	= week_EX_TIME % 100;
-					/* alert(temp_EX); */
-					if(temp_EX/10 == 6){
-						week_EX_TIME = week_EX_TIME + 40;
-						
-					}
-					/* week_EX_TIME = week_EX_TIME + 400; //기본 18:00 ~ 22:00 */
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
-					
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0900"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
-					var pre_temp_time = ("2200"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0900");
-					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-						
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							week_EX_TIME = week_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							week_EX_TIME = week_EX_TIME + pre_temp_time - 40;
-						}
-					} 
-					if(next_temp_time >= "100"){
-						week_NO_TIME = week_NO_TIME + next_temp_time;
-					}
-					week_NI_TIME = week_NI_TIME + 800;
-					week_EX_TIME = week_EX_TIME + 300;
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"), week_NI_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"), week_NO_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"), week_EX_TIME);
-				}
-				
-			}else if(getTodayLabel(mySheet2.GetCellValue(i, 5)) == 0 || getTodayLabel(mySheet2.GetCellValue(i, 5)) == 6){ // 주말일 때
-				//주말 시작!!! 
-				if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0600"){ //0100 0500 //////////////시작시간이 06시 이전일때
-
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_TOTAL_TIME_CALC")))); //평일야간근무 ex) 0100, 0600
-					
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0900"){// 0300 0800
-					
-					var pre_temp_time = ("0600"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))); //0500출근시간이면 100이 출력
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0600");
-					if(pre_temp_time >= "100"){ //야간 근무 시간이 1시간 이상 일때 평일 야간근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_NI_TIME = holi_NI_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_NI_TIME = holi_NI_TIME + pre_temp_time - 40;
-						}
-						
-						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
-					}
-					if(next_temp_time >= "100"){ //연장근무 시간이 1시간 이상일때 평일 연장 근무시간에 +
-						
-						holi_EX_TIME = holi_EX_TIME + next_temp_time;
-						
-						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME);
-					}
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="1800"){
-					
-					var pre_temp_time = ("0600"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0900");
-					if(pre_temp_time >= "100"){ //야간 근무 시간이 1시간 이상 일때 평일 야간근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_NI_TIME = holi_NI_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_NI_TIME = holi_NI_TIME + pre_temp_time - 40;
-						}
-						
-						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
-					}
-					if(next_temp_time >= "100"){ // normal 근무 시간이 1시간 이상일때 평일 정상 근무 시간에 +
-						
-							holi_NO_TIME = holi_NO_TIME + next_temp_time;
-							mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), holi_NO_TIME);
-						
-					}
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), "300");
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="2200"){
-					
-					var pre_temp_time = ("0600"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"1800");
-					if(pre_temp_time >= "100"){ //야간 근무 시간이 1시간 이상 일때 평일 야간근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_NI_TIME = holi_NI_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_NI_TIME = holi_NI_TIME + pre_temp_time - 40;
-						}
-						
-						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
-					}
-					if(next_temp_time >= "100"){ // normal 근무 시간이 1시간 이상일때 평일 정상 근무 시간에 +
-						
-							holi_EX_TIME = holi_EX_TIME + next_temp_time + 300;
-							mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME);
-							
-					}else if(next_temp_time < "100"){
-						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), "300");
-					}
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), "900");
-					
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"2200"){ //0100 2300
-					
-					var pre_temp_time = ("0600"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"2200");
-					if(pre_temp_time >= "100"){ //야간 근무 시간이 1시간 이상 일때 평일 야간근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_NI_TIME = holi_NI_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_NI_TIME = holi_NI_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					if(next_temp_time >= "100"){ // 야간시간이 1시간 이상일때 평일 야간 근무 시간에 +
-						
-						holi_NI_TIME = holi_NI_TIME + next_temp_time;
-							
-					}
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), "900");
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), "700");
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) > mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){ //0600 0700 ///////////여기서 부터 START 06시작
-					//0600~0900시작
-					///////////////////////////////
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_TOTAL_TIME_CALC"))));
-					
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="1800"){// 0630 0900
-					var pre_temp_time = ("0900"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))); //0800출근시간이면 100이 출력
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0900");
-					if(pre_temp_time >= "100"){ //연장 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 1000 - 0630 = 370 - 40 = 330
-					//2
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time - 40;
-						}
-						
-						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME);
-					}
-					if(next_temp_time >= "100"){ //정상근무 시간이 1시간 이상일때 평일 정상 근무시간에 +
-						
-						holi_NO_TIME = holi_NO_TIME + next_temp_time;
-						mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), holi_NO_TIME);
-					}
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="2200"){
-					//3
-					var pre_temp_time = ("0900"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"1800");
-					if(pre_temp_time >= "100"){ //연장 근무 시간이 1시간 이상 일때 평일 정근무시간에 + ex) 1800 - 0930 = 870 - 40 = 830
-
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					if(next_temp_time >= "100"){ // 연장 근무 시간이 1시간 이상일때 평일 연장 근무 시간에 +
-						
-							holi_EX_TIME = holi_EX_TIME + next_temp_time;
-							
-						
-					}
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), "900");
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"2200"){
-					//4
-					var pre_temp_time = ("0900"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"2200");
-					if(pre_temp_time >= "100"){ //연장 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-					
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					if(next_temp_time >= "100"){ // 야간 근무 시간이 1시간 이상일때 평일 야간 근무 시간에 +
-							holi_NI_TIME = holi_NI_TIME + next_temp_time;
-							mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
-							
-					}else if(next_temp_time < "100"){
-					}
-					holi_EX_TIME = holi_EX_TIME + 400; //기본 18:00 ~ 22:00
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), "900");
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
-					
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0600" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
-					var NI_num = Number("200");
-					var end_num = Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")));
-					var pre_temp_time = ("0900"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (NI_num + end_num);
-					
-					if(pre_temp_time >= "100"){ //연장 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-						
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					
-					holi_EX_TIME = holi_EX_TIME + 400; //기본 18:00 ~ 22:00
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), "900");
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), next_temp_time);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="1800"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) > mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){ //0900 1800 ///////////여기서 부터 START 09시작
-					//0900~1800시작
-					///////////////////////////////
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_TOTAL_TIME_CALC"))));
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="2200"){// 0930 1830
-					var pre_temp_time = ("1800"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))); //1700출근시간이면 100이 출력
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"1800");
-					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 정상 근무 시간에 + ex) 1800 - 0901 = 899 - 40 = 859
-						//2
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_NO_TIME = holi_NO_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_NO_TIME = holi_NO_TIME + pre_temp_time - 40;
-						}
-					}
-					if(next_temp_time >= "100"){
-						holi_EX_TIME = holi_EX_TIME + next_temp_time;
-						
-					}
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), holi_NO_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"2200"){
-					//3
-					var pre_temp_time = ("1800"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"2200");
-					if(pre_temp_time >= "100"){ //정상근무 시간이 1시간 이상 일때 평일 정상근무시간에 + ex) 1800 - 1030 = 770 - 40 = 730
-					
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_NO_TIME = holi_NO_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_NO_TIME = holi_NO_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					if(next_temp_time >= "100"){ // 야간 근무 시간이 1시간 이상일때 평일 야간 근무 시간에 +
-							holi_NI_TIME = holi_NI_TIME + next_temp_time;
-							mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
-							
-					}else if(next_temp_time < "100"){
-					}
-					holi_EX_TIME = holi_EX_TIME + 400; //기본 18:00 ~ 22:00
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), holi_NO_TIME); //지우고 100EX에 400을 넣어주어야한다.
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME );
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
-					var NI_num = Number("200");
-					var end_num = Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")));
-					var pre_temp_time = ("1800"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (NI_num + end_num);
-					
-					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-						
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_NO_TIME = holi_NO_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_NO_TIME = holi_NO_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					
-					holi_EX_TIME = holi_EX_TIME + 400; //기본 18:00 ~ 22:00
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), holi_NO_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), next_temp_time);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
-					var NI_num = Number("200");
-					var end_num = Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")));
-					var pre_temp_time = ("1800"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (NI_num + end_num);
-					
-					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-						
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_NO_TIME = holi_NO_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_NO_TIME = holi_NO_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					
-					holi_EX_TIME = holi_EX_TIME + 400; //기본 18:00 ~ 22:00
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), holi_NO_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), next_temp_time);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="2200"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) > mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){ //1800 2300 ///////////여기서 부터 START 18시작
-					//1800~2200시작
-					///////////////////////////////
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_TOTAL_TIME_CALC"))));
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"2200"){// 1830 2230
-					
-					var pre_temp_time = ("2200"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))); //2100출근시간이면 100이 출력
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"2200");
-					
-					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 정상 근무 시간에 + ex) 1800 - 0901 = 899 - 40 = 859
-						//2
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time - 40;
-						}
-					}
-					if(next_temp_time >= "100"){
-						holi_NI_TIME = holi_NI_TIME + next_temp_time;
-						
-					}
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
-					var NI_num = Number("200");
-					var end_num = Number(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")));
-					var pre_temp_time = ("2200"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (NI_num + end_num);
-					
-					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-						
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time - 40;
-						}
-						
-					}
-					
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), holi_NO_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), next_temp_time);
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0600"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))<="0900"){
-					var pre_temp_time = ("2200"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0600");
-					
-					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-						
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time - 40;
-						}
-					} 
-					if(next_temp_time >= "100"){
-						holi_EX_TIME = holi_EX_TIME + next_temp_time;
-					}
-					holi_NI_TIME = holi_NI_TIME + 800;
-					var temp_EX	= holi_EX_TIME % 100;
-					/* alert(temp_EX); */
-					if(temp_EX/10 == 6){
-						holi_EX_TIME = holi_EX_TIME + 40;
-						
-					}
-					/* holi_EX_TIME = holi_EX_TIME + 400; //기본 18:00 ~ 22:00 */
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME); //지우고 100EX에 400을 넣어주어야한다.
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
-					
-				}else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))>="1800" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))<"2200" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0900"&& mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) < mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME"))){
-					var pre_temp_time = ("2200"-mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")));
-					var next_temp_time = (mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME"))-"0900");
-					if(pre_temp_time >= "100"){ //정상 근무 시간이 1시간 이상 일때 평일 연장근무시간에 + ex) 0600 - 0430 = 170 - 40 = 130
-						
-						if((pre_temp_time) % 100 == 0){ //100, 200, 300
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time;
-						}else if((pre_temp_time) % 100 != 0){
-							holi_EX_TIME = holi_EX_TIME + pre_temp_time - 40;
-						}
-					} 
-					if(next_temp_time >= "100"){
-						holi_NO_TIME = holi_NO_TIME + next_temp_time;
-					}
-					holi_NI_TIME = holi_NI_TIME + 800;
-					holi_EX_TIME = holi_EX_TIME + 300;
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"), holi_NI_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), holi_NO_TIME);
-					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME);
-				}
-			} 
-		}
 	}
 	// 저장완료 후 처리할 작업
 	// code: 0(저장성공), -1(저장실패)
@@ -2511,7 +1899,111 @@
 			//mySheet.ReNumberSeq();
 		}
 	}
-	
+	function mySheet2_OnSaveEnd(code,msg){
+		//저장후 바로 sheet2 검색해서 update
+		mySheet2.DoSearch("${contextPath}/wm/p0001/WS_searchList.do", "P_EMP_CODE=" + mySheet.GetCellValue(mySheet.GetSelectRow(), 0) + "&monthpicker=" +$('#monthpicker').val());
+	}
+	function selectSite(){
+		var searchSite = $('#searchSite').val();
+		console.log(searchSite);
+		$.ajax({
+			url : "${contextPath}/sm/p0006/SiteList.do", //목록을 조회할 url
+			
+			type : "POST",
+			
+			dataType : "JSON",
+			
+			success : function(data){
+				for(var i = 0; i< data['Data'].length; i++){
+					var option = "<option name='1' value='" + data['Data'][i].site_NAME + "'>"
+						+ data['Data'][i].site_NAME + "</option>";
+						
+				//대상 콤보박스에 추가
+				
+				$('#searchSite').append(option);
+				
+				}
+			},
+			
+			error : function(jqxhr, status, error){
+				alert("에러");
+			}
+		});
+		
+	};
+	function selectType(){
+		var searchTYPE = $('#searchTYPE').val();
+		console.log(searchTYPE);
+		
+		$.ajax({
+			url : "${contextPath}/pm/p0001/TypeList.do", //목록을 조회할 url
+			type : "POST",
+			data : {
+				"searchTYPE" : searchTYPE
+			},
+			
+			dataType : "JSON",
+			
+			success : function(data){
+				$(".1").remove();
+				
+				if(data['Data'][0].site_name!= null && data['Data'][0].site_name!= ''){
+					for(var i = 0; i < data['Data'].length; i++){
+						var option = "<option class='1' value='" + data['Data'][i].site_name + "'>"
+							+data['Data'][i].site_name
+							+"</option>";
+							
+					//대상 콤보박스에 추가
+					$('#searchDetail').append(option);
+					}
+				}
+				if(data['Data'][0].department_name != null && data['Data'][0].department_name != ''){
+					for(var i = 0; i < data['Data'].length; i++){
+						
+						var option = "<option class='1' value='" + data['Data'][i].department_name + "'>"
+						+data['Data'][i].department_name
+						+ "</option>";
+						
+						//대상 콤보박스에 추가
+						$('#searchDetail').append(option);
+					}
+				}
+				
+				if(data['Data'][0].work_group_name!= null && data['Data'][0].work_group_name!= ''){
+					for (var i = 0; i < data['Data'].length; i++) {
+
+						var option = "<option class='1' value='" + data['Data'][i].work_group_name + "'>"
+								+ data['Data'][i].work_group_name
+								+ "</option>";
+
+						//대상 콤보박스에 추가
+						$('#searchDetail').append(option);
+					}
+				}
+					
+					if(data['Data'][0].project_name!= null && data['Data'][0].project_name!= ''){
+					for (var i = 0; i < data['Data'].length; i++) {
+
+						var option = "<option class='1' value='" + data['Data'][i].project_name + "'>"
+								+ data['Data'][i].project_name
+								+ "</option>";
+
+						//대상 콤보박스에 추가
+						$('#searchDetail').append(option);
+					}
+				}
+
+				},
+
+				error : function(jqxhr, status, error) {
+
+					alert("에러");
+
+				}
+
+			});
+
+};
 	
 		
 		
@@ -2575,16 +2067,15 @@
 }
 .center{
 	position: relative;
-	top: -190px;
+	top: -390px;
 	left: 460px;
-	width: 1000px;
+	width: 670px;
 	/* 670px; */
 }
 .right_end{
 position: relative;
-top: -495px;
-left: 100px;
-/* 1150px */
+top: -895px;
+left: 1150px;
 width: 300px;
 background: #EDF0F5;
 border-radius: 10px;
@@ -2614,16 +2105,17 @@ border-radius: 2px;
 
 .bottom{
 position: relative;
-top:  -300px;
+top:  -580px;
 left: 30px;
 }
 
 #searchBar {
 	background: #EBEBEB;
-	padding: 15px 225px;
+	padding: 15px 185px;
 	margin-bottom: 30px;
 	border-radius: 5px;
 	font-size: 12px;
+	/*여기서 중간 텀띄우기*/
 }
 
 .left input{
@@ -2689,25 +2181,37 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 		</header>
 	</div>
 	<div class="left">
-		<form id="searchBar">
+		<form id="searchBar" name="searchBar">
 			<span class="yearMonth">귀속연월</span> 
 			<input id="monthpicker" type="text">
 			<img id="btn_monthpicker" src="${contextPath}/resources/image/icons/icon_calendar.png">
-			<div class="left_rightsearch"><span class="kindofsearch">조회조건</span>
-				<select id="Employee_Select">
-		    	<option value="" selected>구분</option>
-				<option value="employee_name">사업장</option>
-				<option value="employee_code">부서</option>
+			<div class="left_rightsearch">
+			<span class="kindofsearch">사업장구분</span>
+				<select id="searchSite" >
+					<option value="all" selected>전체</option>
+				</select>
+			<span class="kindofsearch">조회조건</span>
+				<select id="searchTYPE" onchange="selectType()">
+		    		<option value="all" selected>전체</option>
+					<option value="department">부서</option>
+					<option value="work_group">근무조</option>
+					<option value="project">프로젝트</option>
+				</select>
+			<span class="kindofsearch">구분</span>
+			<select id="searchDetail" >
+				<option value="alldetail" selected>전체</option>
 			</select>
-			<input type="text" id="p_text" placeholder="사업장  or 부서">
+			<input type="hidden" id="Ppayment_code">
+			<input type="hidden" id="Ppayment_des_name">
 		</div>
 		</form>
-
-		<script>createIBSheet("mySheet", "100%", "100%");</script>
+		<script>createIBSheet("mySheet", "100%", "100%");
+		selectSite();
+		</script>
 	</div>
-	
 	<div class="center">
 		<script>createIBSheet("mySheet2", "100%", "100%");</script>
+		
 	</div>
 	
 	<div class="right_end">
