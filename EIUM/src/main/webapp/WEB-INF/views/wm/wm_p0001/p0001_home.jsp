@@ -63,7 +63,7 @@
 		initSheet2.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:0, ComboEditValidation:1};
 		initSheet2.HeaderMode = {Sort:1, ColMove:0, ColResize:0, HeaderCheck:1};
 		initSheet2.Cols = [
-			{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center", Hidden:1},
+			{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center",Hidden:1},
 	        {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},	
 	        {Header:"NO",Type:"Seq",SaveName:"NUMBER",MinWidth:50, Align:"Center"},
 	        {Header:"근태입력고유번호", Type:"Text",SaveName:"working_STATUS_CODE", Width:50, Height:50, Align:"Center", Hidden:1},
@@ -75,7 +75,7 @@
 			{Header:"근무총시간",Type:"Date",SaveName:"working_STATUS_TOTAL_TIME",MinWidth:50, Align:"Center", Format: "HH:mm", CalcLogic:"|7|+|8|-|6|", Hidden:1},
 			{Header:"퇴근-출근시간",Type:"Date",SaveName:"working_STATUS_TOTAL_TIME_CALC",MinWidth:50, Align:"Center",Format:"HH:mm", CalcLogic:"|7|+|8|-|6|"},
 			{Header:"비고",Type:"Combo",SaveName:"working_STATUS_DESC",MinWidth:80, Align:"Center", "ComboText":"출근|지각|조퇴|외출", "ComboCode":"00|01|02|03"},
-			{Header:"그 달의 해당YN:",Type:"Text",SaveName:"working_STATUS_YN", MinWidth:50,Align:"Center"},
+			{Header:"그 달의 해당YN:",Type:"Text",SaveName:"working_STATUS_YN", MinWidth:50,Align:"Center",Hidden:1},
 			//평일(table)
 			{Header:"평일정상근무시간",Type:"Text",SaveName:"weekday_NORMAL_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:"", Hidden:1},	
 			{Header:"평일연장근무시간",Type:"Text",SaveName:"weekday_EXTENSION_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:"", Hidden:1},			
@@ -103,6 +103,7 @@
 		initSheet3.Cols = [
 			{Header:"상태", Type:"Status", SaveName:"STATUS", Hidden:1},
 			{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK", Hidden:1},
+			
 			//평일
 			{Header:"평일정상근무시간(시간)",Type:"Text",SaveName:"weekday_NORMAL_WORK_TIME", Width:160,Edit:1,Align:"Center"},	
 			{Header:"평일연장근무시간(시간)",Type:"Text",SaveName:"weekday_EXTENSION_WORK_TIME", Width:160,Edit:1,Align:"Center"},			
@@ -146,6 +147,10 @@
 		/* mySheet.DoSearch("${contextPath}/wm/p0001/EMP_searchList.do"); */
 		
 		mySheet3.DataInsert(-1);
+		$("#sum").hide();
+		$("#add").hide();
+		$("#dead_buttons").hide(); //마감버튼은 보여주고
+		$("#dead_cancel_buttons").hide(); //계산버튼은 보여주고
 	}
 
 	//평일인지 주말인지 구할 메소드 //토일 0, 6 평일(월,화,수,목,금)1,2,3,4,5
@@ -185,9 +190,12 @@
 	function doAction(sAction) {
 		switch (sAction) {
 		case "search": //조회
+			$("#sum").show();
+			$("#add").show();
+			$("#dead_buttons").show(); //마감버튼은 보여주고
+			$("#dead_cancel_buttons").show(); //계산버튼은 보여주고
 			var param = FormQueryStringEnc(document.searchBar);
 			mySheet.DoSearch("${contextPath}/wm/p0001/EMP_searchList.do", param);
-			/* alert(mySheet2.GetCellValue(mySheet2.GetSelectRow(), 6)); */
 			//조회조건에 맞도록 조회하기
 			break;
 
@@ -195,20 +203,32 @@
 			mySheet.RemoveAll();
 			mySheet2.RemoveAll();
 			mySheet3.RemoveAll();
+			$("#all").show(); //전체버튼은 숨겨주고
+			$("#sum").show(); //계산버튼은 보여주고
+			$("#dead_buttons").show(); //마감버튼은 보여주고
+			$("#dead_cancel_buttons").show(); //계산버튼은 보여주고
+			$("#monthpicker").attr('value', "");
+			
+			
+			$("select#SiteList option[name='1']").remove();
+			$("select#DeptList option[class='1']").remove();
+			$('#SiteList').val(selectSite());
+			$('#Employee_Select').val('');
+			$('#p_text').val('');
+			$('#p_text').attr('placeholder', "사원명or사원코드");
 			break;
 		case "save": // 저장
 			mySheet2.DoSave("${contextPath}/wm/p0001/saveData.do", "p_emp_code=" + mySheet.GetCellValue(mySheet.GetSelectRow(),0));
 			
 			break;
-		case "insert":
+		case "insert": //추가
 			var row = mySheet2.DataInsert(-1);
-			/* mySheet2.SaveNameCol("temp_TIME") */ //mySheet2.GetSelectRow()
-			/* alert(mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("temp_TIME"), 0000)); */
-			/* alert(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("temp_TIME"))); */ //0000
 			
 			break;
 		
 		case "calculate": //정산
+			mySheet3.DataInsert(0);
+			
 			//평일정상근무시간 : week_NO_TIME
 			//평일연장근무시간 : week_EX_TIME
 			//평일야간근무시간 : week_NI_TIME
@@ -267,15 +287,103 @@
 				}else if(getTodayLabel(mySheet2.GetCellValue(i, 5)) == 0 || getTodayLabel(mySheet2.GetCellValue(i, 5)) == 6){ // 주말일 때
 					
 					T_holi_count = T_holi_count + 1;
-					/* alert(T_holi_count);
-					if() */
 					if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME")) == "900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME")) >= 0){
 						//총 연장 근무 = 연장 + 정상	
 						T_holi_EX_DAY = T_holi_EX_DAY + 1;
 					}
 					if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")) == "0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) == "1800"){
 						T_holi_NO_DAY = T_holi_NO_DAY + 1;
-						/* alert(T_holi_NO_DAY); */
+					}
+				}
+				//평일 총 정상근무일 + 휴일 총 정상 근무일
+				T_NO_COUNT = T_holi_NO_DAY + T_week_NO_DAY;
+				//평일 총 연장 근무일 + 휴일 총 연장 근무일  = (평일 연장 근무일 - 평일 정상 근무일) + (휴일 연장 근무일 - 평일 정상 근무일) 
+				T_EX_COUNT = (T_week_EX_DAY - T_week_NO_DAY) + (T_holi_EX_DAY - T_holi_NO_DAY);
+			}
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("weekday"), T_week_count);
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("holiday"), T_holi_count);
+			
+			//총 정상 근무일
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("normal_WORK_DAY"), T_NO_COUNT);
+			// 총연장 근무일
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("extension_WORK_DAY"), T_EX_COUNT);
+			/* $("#sum").hide; */
+			/* if($("#sum").css("display") != "none"){
+				mySheet3.RemoveAll();
+			} */
+			alert("정산 완료");
+			mySheet3.DoSave("${contextPath}/wm/p0001/SUM_saveData.do", "PP_EMP_CODE=" + mySheet.GetCellValue(mySheet.GetSelectRow(),0) + "&monthpicker=" +$('#monthpicker').val());
+		
+			//계산 후 계산 된 것을 바로 서버로 넘겨주어서 sheet3에 있는 총 근태 결과 정보 저장
+			break;
+		case "deadline": //마감
+				
+		
+		//마감은 정산해서 서버로 저장도 하면서 마감
+			//평일정상근무시간 : week_NO_TIME
+			//평일연장근무시간 : week_EX_TIME
+			//평일야간근무시간 : week_NI_TIME
+			//휴일정상근무시간 : holi_NO_TIME
+			//휴일연장근무시간 : holi_EX_TIME
+			//휴일야간근무시간 : holi_NI_TIME
+			
+			//총 평일 정상 근무시간 : T_week_NO_TIME
+			//총 평일 연장 근무시간 : T_week_EX_TIME
+			//총 평일 야간 근무시간 : T_week_NI_TIME
+			//총 휴일 정상 근무시간 : T_holi_NO_TIME
+			//총 휴일 연장 근무시간 : T_holi_EX_TIME
+			//총 휴일 야간 근무시간 : T_holi_NI_TIME
+			
+			//총 평일 일 수 : T_week_count
+			//총 휴일 일 수 : T_holi_count
+			
+			//총 평일 정상 근무일 : T_week_NO_DAY
+			//총 평일 연장 근무일 : T_week_EX_DAY
+			
+			//총 휴일 정상 근무일 : T_holi_NO_DAY
+			//총 휴일 연장 근무일 : T_holi_EX_DAY
+			
+			//총 정상 근무일 : T_NO_COUNT
+			//총 연장 근무일 : T_EX_COUNT
+			var T_week_NO_TIME = mySheet2.ComputeSum("|12|"); //총 평일 정상 근무시간
+			var T_week_EX_TIME = mySheet2.ComputeSum("|13|"); //총 평일 연장 근무시간
+			var T_week_NI_TIME = mySheet2.ComputeSum("|14|"); //총 평일 야간 근무시간
+			
+			var T_holi_NO_TIME = mySheet2.ComputeSum("|15|"); //총 휴일 정상 근무시간
+			var T_holi_EX_TIME = mySheet2.ComputeSum("|16|"); //총 휴일 연장 근무시간
+			var T_holi_NI_TIME = mySheet2.ComputeSum("|17|"); //총 휴일 야간 근무시간
+			
+			var T_week_count = 0, T_holi_count = 0, T_week_NO_DAY = 0, T_week_EX_DAY = 0, T_holi_NO_DAY = 0, T_holi_EX_DAY = 0, T_NO_COUNT = 0, T_EX_COUNT = 0;
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("weekday_NORMAL_WORK_TIME"), T_week_NO_TIME);
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("weekday_EXTENSION_WORK_TIME"), T_week_EX_TIME);
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("weekday_NIGHT_WORK_TIME"), T_week_NI_TIME);
+			 
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("holiday_NORMAL_WORK_TIME"), T_holi_NO_TIME);
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("holiday_EXTENSION_WORK_TIME"), T_holi_EX_TIME);
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("holiday_NIGHT_WORK_TIME"), T_holi_NI_TIME);
+			
+			//평일//휴일 분류
+			var T_Maskingcell = mySheet2.GetDataLastRow();
+			for(let i = 1; i <= T_Maskingcell; i++){
+				
+				if(getTodayLabel(mySheet2.GetCellValue(i, 5)) >=1 & getTodayLabel(mySheet2.GetCellValue(i, 5)) <= 5){ //평일 일 때
+					T_week_count = T_week_count + 1;
+					if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME")) == "900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME")) >= 0){
+						//총 연장 근무 = 연장 + 정상	
+						T_week_EX_DAY = T_week_EX_DAY + 1;
+					} 
+					if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")) == "0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) == "1800"){
+						T_week_NO_DAY = T_week_NO_DAY + 1;
+					}
+				}else if(getTodayLabel(mySheet2.GetCellValue(i, 5)) == 0 || getTodayLabel(mySheet2.GetCellValue(i, 5)) == 6){ // 주말일 때
+					
+					T_holi_count = T_holi_count + 1;
+					if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME")) == "900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME")) >= 0){
+						//총 연장 근무 = 연장 + 정상	
+						T_holi_EX_DAY = T_holi_EX_DAY + 1;
+					}
+					if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_START_TIME")) == "0900" && mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_END_TIME")) == "1800"){
+						T_holi_NO_DAY = T_holi_NO_DAY + 1;
 					}
 				}
 				//평일 총 정상근무일 + 휴일 총 정상 근무일
@@ -291,40 +399,28 @@
 			// 총연장 근무일
 			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("extension_WORK_DAY"), T_EX_COUNT);
 			
-			alert("정산 완료");
-			//정산 클릭 후 
-			var tempStr = mySheet3.GetSaveString();
-			alert("서버로 전달되는 문자열 확인 :" + tempStr);	
-			mySheet3.DoSave("${contextPath}/wm/p0001/TWS_saveData.do", "PP_EMP_CODE=" + mySheet.GetCellValue(mySheet.GetSelectRow(),0) + "&monthpicker=" +$('#monthpicker').val());
 			
-			//계산 후 계산 된 것을 바로 서버로 넘겨주어서 sheet3에 있는 총 근태 결과 정보 저장
-		case "deadline": //마감
-			$("#dead_buttons").hide(); //마감버튼은 숨겨주고
-			$("#dead_cancel_buttons").show(); //마감취소버튼은 보여주고
+			/* $("#dead_buttons").hide(); //마감버튼은 숨겨주고
+			$("#dead_cancel_buttons").show(); //마감취소버튼은 보여주고 */
 			//마감저장이 성공하면 그후엔 그 저장한 사원의 그 달 SHEET와 전체 작동 불가
 			//마감 버튼은 마감취소 버튼으로 변경
-			var T_Maskingcell = mySheet2.GetDataLastRow();
-			for(let i = 1; i <= T_Maskingcell; i++){
-				if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_YN")) == 'Y'){ //마감했을 경우 그 Row는 edit : 0
-					mySheet2.SetRowEditable(i,0); 
-					alert(mySheet2.GetRowEditable(i,0));
-				}
-			}
 			
+			alert("정산/마감 완료");
+			mySheet3.SetCellValue(1, 0, "I");   //상태 셀을 "입력" 상태로 설정
+			//정산 클릭 후 
+			/* var tempStr = mySheet3.GetSaveString();
+			alert("서버로 전달되는 문자열 확인 :" + tempStr);	 */
+			mySheet3.DoSave("${contextPath}/wm/p0001/TWS_saveData.do", "PP_EMP_CODE=" + mySheet.GetCellValue(mySheet.GetSelectRow(),0) + "&monthpicker=" +$('#monthpicker').val());
 		break;
 		
 		case "deadline_cancel": //마감취소
-			$("#dead_buttons").show();
-			$("#dead_cancel_buttons").hide();
+			/* $("#dead_buttons").show();
+			$("#dead_cancel_buttons").hide(); */
 			//마감저장이 성공하면 그후엔 그 저장한 사원의 그 달 SHEET와 전체 작동 불가
 			//마감 버튼은 마감취소 버튼으로 변경
-			var T_Maskingcell = mySheet2.GetDataLastRow();
-			for(let i = 1; i <= T_Maskingcell; i++){
-				if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_YN")) == 'N'){ //마감했을 경우 그 Row는 edit : 0
-					mySheet2.SetRowEditable(i,1); 
-					alert(mySheet2.GetRowEditable(i,0));
-				}
-			}
+			
+			mySheet2.DoSave("${contextPath}/wm/p0001/WS_YN_rollbackData.do", "PP_EMP_CODE=" + mySheet.GetCellValue(mySheet.GetSelectRow(),0) + "&monthpicker=" +$('#monthpicker').val());
+			
 			//다시 마감취소를 누르면 그 해당하는 달의 해당 사원의 근무를 다시 N으로 바꾸어 준다.
 		break;
 		
@@ -375,17 +471,7 @@
 			break; */
 		}
 	}
-	//정산하여 sheet3을 저장한 후 
-	function mySheet3_OnSaveEnd(Row, Col){
-		mySheet2.DoSearch("${contextPath}/wm/p0001/WS_searchList.do", "P_EMP_CODE=" + mySheet.GetCellValue(mySheet.GetSelectRow(), 0) + "&monthpicker=" +$('#monthpicker').val());
-		var T_Maskingcell = mySheet2.GetDataLastRow();
-		for(let i = 1; i <= T_Maskingcell; i++){
-			if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_YN")) == 'Y'){ //마감했을 경우 그 Row는 edit : 0
-				mySheet2.SetRowEditable(i,0); 
-				alert(mySheet2.GetRowEditable(i,0));
-			}
-		}
-	}
+	
 	 
 	
 
@@ -410,6 +496,8 @@
 	function mySheet_OnClick(Row, Col) {
 		//defualt로 숨겨진 0000을 입력
 		if (Row != 0) {
+			//정산 버튼이 보일 때는 sheet3를 mySheet3.RemoveAll();
+			
 			mySheet2.DoSearch("${contextPath}/wm/p0001/WS_searchList.do", "P_EMP_CODE=" + mySheet.GetCellValue(mySheet.GetSelectRow(), 0) + "&monthpicker=" +$('#monthpicker').val());
 			/* if(mySheet2.GetCellValue(Row, 6) == "" || mySheet2.GetCellValue(Row, 6) == null){
 				mySheet2.SetCellValue(Row, 6, "0000");
@@ -1156,9 +1244,6 @@
 			$('input[name=holiday_NORMAL_WORK_TIME]').val(textWithtimeFormat(mySheet2.GetCellValue(Row, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"))));
 			$('input[name=holiday_EXTENSION_WORK_TIME]').val(textWithtimeFormat(mySheet2.GetCellValue(Row, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"))));
 			$('input[name=holiday_NIGHT_WORK_TIME]').val(textWithtimeFormat(mySheet2.GetCellValue(Row, mySheet2.SaveNameCol("holiday_NIGHT_WORK_TIME"))));
-			/* var temp = mySheet2.GetCellValue(Row, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"));
-			var temp_t = textWithtimeFormat(temp);
-			alert(temp_t); */
 		}
 	}
 	function textWithtimeFormat(x) {
@@ -1184,20 +1269,12 @@
 	//휴일정상근무시간 : holi_NO_TIME
 	//휴일연장근무시간 : holi_EX_TIME
 	//휴일야간근무시간 : holi_NI_TIME
-	function mySheet2_OnSearchEnd(Code, Msg){ //mySheet2 근태 정보 검색하기 전
-		var T_Maskingcell = mySheet2.GetDataLastRow();
-		for(let i = 1; i <= T_Maskingcell; i++){
-			if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_YN")) == 'Y'){ //마감했을 경우 그 Row는 edit : 0
-				mySheet2.SetRowEditable(i,0); 
-				alert(mySheet2.GetRowEditable(i,0));
-			}
-		}
-		var Maskingcell = mySheet2.GetDataLastRow();
-		/* for(let i = Maskingcell; i >= 1; i--){ // savename: temp_시간의 col에 00:00 masking 값 입력
-			mySheet2.SetCellValue(i, 8, "0000");
-			/* alert(mySheet2.GetCellValue(i, 8)); */ //값 확인 완료
-		//} 
+	function mySheet2_OnSearchEnd(Code, Msg){ //mySheet2 근태 정보 검색한 후
+		mySheet2.SetWaitImageVisible(0);
+		mySheet3.SetWaitImageVisible(0);
+		//,BUTTON HIDDEN과 EDIT 0이 여기서 시작
 		
+		var Maskingcell = mySheet2.GetDataLastRow();
 		
 		for(let i = 1; i <= Maskingcell; i++){
 			var week_NO_TIME = 0, week_EX_TIME = 0, week_NI_TIME = 0, holi_NO_TIME = 0, holi_EX_TIME = 0, holi_NI_TIME = 0;
@@ -1905,6 +1982,8 @@
 				}
 			} 
 		}
+		
+		mySheet3.DoSearch("${contextPath}/wm/p0001/TWS_searchList.do", "P_EMP_CODE=" + mySheet.GetCellValue(mySheet.GetSelectRow(), 0) + "&monthpicker=" +$('#monthpicker').val());
 	}
 	function mySheet2_OnBeforeEdit(Row, Col) {
 		//출근, 조퇴, 외출 프로세스
@@ -1943,13 +2022,92 @@
 			//mySheet.ReNumberSeq();
 		}
 	}
+	
+	//MYSHEET3 저장 후
+	function mySheet3_OnSaveEnd(code, msg) {
+		if (msg != "") {
+			alert(msg);
+			/* alert("mysheet3 저장"); */
+			//번호 다시 매기기
+			/* mySheet3.SetHeaderBackColor("#c9e1f5"); 
+			mySheet3.SetHeaderFontColor("#000000");  */
+		}
+		mySheet2.DoSearch("${contextPath}/wm/p0001/WS_searchList.do", "P_EMP_CODE=" + mySheet.GetCellValue(mySheet.GetSelectRow(), 0) + "&monthpicker=" +$('#monthpicker').val());
+	}
+
+	//정산하여 sheet3을 저장한 후 
+	/* function mySheet3_OnSaveEnd(Row, Col){
+		
+		mySheet3.SetRowBackColor(1,"#ffff80"); 
+	} */
+	function mySheet3_OnBeforeSave() {
+	}
+
+	function mySheet3_OnSearchEnd(Code, message){
+		/* mySheet3.SetDataFontColor("#ffffff"); */
+		var T_Maskingcell = mySheet2.GetDataLastRow();
+		
+		if(mySheet3.GetCellValue(1, 2) == -1){ //조회되지않음=-1 //조회되지않았을 경우 //마감 취소 X 마감 O 정산 O 추가 O
+			$("#add").show();
+			$("#dead_buttons").show(); 
+			$("#dead_cancel_buttons").hide(); 
+			$("#sum").show();
+			
+		}else if(mySheet3.GetCellValue(1, 2) != -1){ //조회된 상태 != -1 //조회된 경우 - 정산까지 한 경우  마감 취소 X 마감 O 정산 O 추가 O
+			$("#add").show();
+			$("#dead_buttons").show(); 
+			$("#dead_cancel_buttons").hide(); 
+			$("#sum").show();
+			for(let i = 1; i <= T_Maskingcell; i++){
+				mySheet2.SetRowBackColor(i,"#ffff80");
+			}
+			mySheet3.SetRowBackColor(1,"#ffff80");
+			 //전체 로우의 수를 구한다.
+			for(let i = 1; i <= T_Maskingcell; i++){
+				if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_YN")) == 'N'){ //정산은 했지만 마감하지 않았을 경우 그 Row는 edit : 1
+					mySheet2.SetRowEditable(i,1); 
+					
+					$("#dead_cancel_buttons").hide(); //마감 취소 버튼 숨김
+					$("#dead_buttons").show(); //마감 버튼 보여줌
+					$("#sum").show(); //정산 버튼 보여줌
+					$("#add").show();//추가 버튼 보여줌
+					/* alert(mySheet3.GetCellValue(1, 0)); */
+					mySheet3.SetCellValue(2, 0, "I");   //상태 셀을 "입력" 상태로 설정
+					/* alert(mySheet3.GetCellValue(1, 0)); */
+					
+					
+				}
+				else if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_YN")) == 'Y'){ //정산도 하고 //마감했을 때
+					mySheet2.SetRowEditable(i,0); 
+					$("#dead_cancel_buttons").show(); //마감 취소 버튼 보여줌
+					$("#dead_buttons").hide(); //마감 버튼 숨김
+					$("#sum").hide(); //정산 버튼 숨김
+					$("#add").hide();//추가 버튼 숨김
+					mySheet2.SetRowBackColor(i,"#e0e0e0");
+					//마감이 된 상태이기에 탐색하여 sheet3의 조회
+					mySheet3.SetRowBackColor(1, "#e0e0e0"); //회색
+					
+				}
+			}
+			
+		}
+		
+	}
+	
 	function mySheet2_OnSaveEnd(code,msg){
 		//저장후 바로 sheet2 검색해서 update
 		mySheet2.DoSearch("${contextPath}/wm/p0001/WS_searchList.do", "P_EMP_CODE=" + mySheet.GetCellValue(mySheet.GetSelectRow(), 0) + "&monthpicker=" +$('#monthpicker').val());
+		if (msg != "") {
+			alert(msg);
+			/* alert("mysheet3 저장"); */
+			//번호 다시 매기기
+			/* mySheet3.SetHeaderBackColor("#FF0000"); 
+			mySheet3.SetHeaderFontColor("#ffffff"); */ 
+		}
 	}
 	function selectSite(){
-		var searchSite = $('#searchSite').val();
-		console.log(searchSite);
+		var searchList = $('#searchList').val();
+		console.log(searchList);
 		$.ajax({
 			url : "${contextPath}/sm/p0006/SiteList.do", //목록을 조회할 url
 			
@@ -1964,7 +2122,7 @@
 						
 				//대상 콤보박스에 추가
 				
-				$('#searchSite').append(option);
+				$('#SiteList').append(option);
 				
 				}
 			},
@@ -1975,80 +2133,47 @@
 		});
 		
 	};
-	function selectType(){
-		var searchTYPE = $('#searchTYPE').val();
-		console.log(searchTYPE);
+	function selectDept(){
+		
+		var SiteList = $('#SiteList').val();
+		console.log(SiteList);
 		
 		$.ajax({
-			url : "${contextPath}/pm/p0001/TypeList.do", //목록을 조회할 url
+			url : "${contextPath}/sm/p0006/DeptList.do",//목록을 조회 할 url
+
 			type : "POST",
+
 			data : {
-				"searchTYPE" : searchTYPE
+				"SiteList" : SiteList
 			},
-			
+
 			dataType : "JSON",
-			
-			success : function(data){
+
+			success : function(data) {
 				$(".1").remove();
-				
-				if(data['Data'][0].site_name!= null && data['Data'][0].site_name!= ''){
-					for(var i = 0; i < data['Data'].length; i++){
-						var option = "<option class='1' value='" + data['Data'][i].site_name + "'>"
-							+data['Data'][i].site_name
-							+"</option>";
-							
+
+				for (var i = 0; i < data['Data'].length; i++) {
+
+					var option = "<option class='1' value='" + data['Data'][i].department_NAME + "'>"
+							+ data['Data'][i].department_NAME
+							+ "</option>";
+
 					//대상 콤보박스에 추가
-					$('#searchDetail').append(option);
-					}
-				}
-				if(data['Data'][0].department_name != null && data['Data'][0].department_name != ''){
-					for(var i = 0; i < data['Data'].length; i++){
-						
-						var option = "<option class='1' value='" + data['Data'][i].department_name + "'>"
-						+data['Data'][i].department_name
-						+ "</option>";
-						
-						//대상 콤보박스에 추가
-						$('#searchDetail').append(option);
-					}
-				}
-				
-				if(data['Data'][0].work_group_name!= null && data['Data'][0].work_group_name!= ''){
-					for (var i = 0; i < data['Data'].length; i++) {
-
-						var option = "<option class='1' value='" + data['Data'][i].work_group_name + "'>"
-								+ data['Data'][i].work_group_name
-								+ "</option>";
-
-						//대상 콤보박스에 추가
-						$('#searchDetail').append(option);
-					}
-				}
-					
-					if(data['Data'][0].project_name!= null && data['Data'][0].project_name!= ''){
-					for (var i = 0; i < data['Data'].length; i++) {
-
-						var option = "<option class='1' value='" + data['Data'][i].project_name + "'>"
-								+ data['Data'][i].project_name
-								+ "</option>";
-
-						//대상 콤보박스에 추가
-						$('#searchDetail').append(option);
-					}
-				}
-
-				},
-
-				error : function(jqxhr, status, error) {
-
-					alert("에러");
+					$('#DeptList').append(option);
 
 				}
 
-			});
+			},
+
+			error : function(jqxhr, status, error) {
+
+				alert("에러");
+
+			}
+
+		});
 
 };
-	
 		
 		
 </script>
@@ -2078,14 +2203,14 @@
 	margin-top: 40px;
 	margin: 10px;
 	position: absolute;
-	right: 450px;
+	right: 420px;
 }
 
 .dead_cancel_buttons {
 	margin-top: 40px;
 	margin: 10px;
 	position: absolute;
-	right: 500px;
+	right: 480px;
 }
 
 .otherbuttons {
@@ -2168,7 +2293,7 @@ left: 30px;
 
 #searchBar {
 	background: #EBEBEB;
-	padding: 15px 185px;
+	padding: 15px 125px;
 	margin-bottom: 30px;
 	border-radius: 5px;
 	font-size: 12px;
@@ -2186,7 +2311,7 @@ left: 30px;
 
 .left_rightsearch input{
 	height: 22px;
-	width: 100px;
+	width: 140px;
 	border-radius: 3px;
 	border: none;
 	padding-left:5px;
@@ -2221,18 +2346,18 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 	<div class="leftbuttons">
 		<a href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
 	</div>
-	<div class="dead_cancel_buttons" id="dead_cancel_buttons">
-		<a href="javascript:doAction('deadline_cancel')" class="IBbutton">마감취소</a>
+	<div class="dead_cancel_buttons">
+		<a href="javascript:doAction('deadline_cancel')" class="IBbutton" id="dead_cancel_buttons">마감취소</a>
 	</div>
-	<div class="deadbuttons" id="dead_buttons">
-		<a href="javascript:doAction('deadline')" class="IBbutton">마감</a>
+	<div class="deadbuttons">
+		<a href="javascript:doAction('deadline')" class="IBbutton" id="dead_buttons">마감</a>
 	</div>
-	<div class="otherbuttons">
+	<div class="otherbuttons" id="sum">
 		<a href="javascript:doAction('calculate')" class="IBbutton">정산</a> 
 	</div>
-	<div class="rightbuttons">
+	<div class="rightbuttons" id="all">
 		<a href="javascript:doAction('reload')" class="IBbutton">초기화</a> 
-		<a href="javascript:doAction('insert')" class="IBbutton">추가</a>
+		<a href="javascript:doAction('insert')" class="IBbutton" id="add">추가</a>
 		<a href="javascript:doAction('search')" class="IBbutton">조회</a> <a
 			href="javascript:doAction('save')" class="IBbutton">저장</a>
 	</div>
@@ -2249,20 +2374,20 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 			<img id="btn_monthpicker" src="${contextPath}/resources/image/icons/icon_calendar.png">
 			<div class="left_rightsearch">
 			<span class="kindofsearch">사업장구분</span>
-				<select id="searchSite" >
-					<option value="all" selected>전체</option>
+				<select id="SiteList" onchange="selectDept()">
+					<option value="" selected>전체</option>
 				</select>
-			<span class="kindofsearch">조회조건</span>
-				<select id="searchTYPE" onchange="selectType()">
-		    		<option value="all" selected>전체</option>
-					<option value="department">부서</option>
-					<option value="work_group">근무조</option>
-					<option value="project">프로젝트</option>
+			<span class="kindofsearch">부서</span>
+				<select id="DeptList">
+		    		<option value="" selected>전체</option>
 				</select>
 			<span class="kindofsearch">구분</span>
-			<select id="searchDetail" >
-				<option value="alldetail" selected>전체</option>
+			<select id="Employee_Select" >
+				<option value="" selected>구분</option>
+				<option value="employee_name">사원명</option>
+				<option value="employee_code">사원코드</option>
 			</select>
+			<input type="text" id="p_text" placeholder="사원명 or사원코드">
 			<input type="hidden" id="Ppayment_code">
 			<input type="hidden" id="Ppayment_des_name">
 		</div>

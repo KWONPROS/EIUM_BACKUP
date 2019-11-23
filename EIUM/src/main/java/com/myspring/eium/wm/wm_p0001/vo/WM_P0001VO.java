@@ -100,7 +100,9 @@ public class WM_P0001VO {
 	}
 
 	//총근태결과
-	private String payment_CODE="";
+
+	private String total_WORKING_STATUS_CODE="";
+	private String TOTAL_MONTH="";
 	
 	private String weekday="";
 	private String holiday="";
@@ -116,14 +118,18 @@ public class WM_P0001VO {
 	private String holiday_EXTENSION_WORK_TIME="";
 	private String holiday_NIGHT_WORK_TIME="";
 
-
-	public String getPayment_CODE() {
-		return payment_CODE;
+	public String getTotal_WORKING_STATUS_CODE() {
+		return total_WORKING_STATUS_CODE;
 	}
-	public void setPayment_CODE(String payment_CODE) {
-		this.payment_CODE = payment_CODE;
+	public void setTotal_WORKING_STATUS_CODE(String total_WORKING_STATUS_CODE) {
+		this.total_WORKING_STATUS_CODE = total_WORKING_STATUS_CODE;
 	}
-	
+	public String getTOTAL_MONTH() {
+		return TOTAL_MONTH;
+	}
+	public void setTOTAL_MONTH(String tOTAL_MONTH) {
+		TOTAL_MONTH = tOTAL_MONTH;
+	}
 	public String getWeekday() {
 		return weekday;
 	}
