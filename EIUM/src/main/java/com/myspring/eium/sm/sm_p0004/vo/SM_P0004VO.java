@@ -7,8 +7,6 @@ public class SM_P0004VO {
 	private String employee_code;
 	private String employee_name;
 	private String employee_id;
-	private String department_code;
-	private String department_name;
 	private String employee_join_date;
 	private String employee_resignation_date;
 	private String employee_available_yn;
@@ -59,22 +57,6 @@ public class SM_P0004VO {
 
 	public void setEmployee_name(String employee_name) {
 		this.employee_name = employee_name;
-	}
-
-	public String getDepartment_code() {
-		return department_code;
-	}
-
-	public void setDepartment_code(String department_code) {
-		this.department_code = department_code;
-	}
-
-	public String getDepartment_name() {
-		return department_name;
-	}
-
-	public void setDepartment_name(String department_name) {
-		this.department_name = department_name;
 	}
 
 

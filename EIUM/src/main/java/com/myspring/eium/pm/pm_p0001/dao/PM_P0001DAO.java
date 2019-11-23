@@ -23,6 +23,7 @@ public interface PM_P0001DAO {
 
 	public void deleteData(Map<String, String> row) throws DataAccessException;
 	public List<PM_P0001VO> searchReceipt(Map<String, Object> searchMap)throws DataAccessException;
+	public List<PM_P0001VO> paygradeList(Map<String, Object> searchMap)throws DataAccessException;
 
 	
 	 

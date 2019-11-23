@@ -13,13 +13,35 @@ public class PM_P0001VO {
 	private String payment_code;
 	private String payment_date;
 	private String payment_des_name;
-	private String site_name;
 	private String department_name;
 	private String work_group_name;
 	private String project_name;
+	private String job_class_name;
+	private String user;
+	
+
 	
 	
 
+	public String getDepartment_name() {
+		return department_name;
+	}
+	public void setDepartment_name(String department_name) {
+		this.department_name = department_name;
+	}
+	public String getJob_class_name() {
+		return job_class_name;
+	}
+	public void setJob_class_name(String job_class_name) {
+		this.job_class_name = job_class_name;
+	}
+	
+	public String getUser() {
+		return user;
+	}
+	public void setUser(String user) {
+		this.user = user;
+	}
 	public String getPayment_receipt_code() {
 		return payment_receipt_code;
 	}
@@ -44,18 +66,7 @@ public class PM_P0001VO {
 	public void setPayment_code(String payment_code) {
 		this.payment_code = payment_code;
 	}
-	public String getSite_name() {
-		return site_name;
-	}
-	public void setSite_name(String site_name) {
-		this.site_name = site_name;
-	}
-	public String getDepartment_name() {
-		return department_name;
-	}
-	public void setDepartment_name(String department_name) {
-		this.department_name = department_name;
-	}
+	
 	public String getWork_group_name() {
 		return work_group_name;
 	}

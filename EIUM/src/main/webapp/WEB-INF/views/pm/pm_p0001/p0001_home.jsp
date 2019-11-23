@@ -26,6 +26,12 @@ function setPayment(){
 	payment_des_name=document.getElementById("Ppayment_des_name").value;
 };
 
+function setPaygrade(){
+	position_name=document.getElementById("Pposition_name").value;
+	pay_grade_name=document.getElementById("Ppay_grade_name").value;
+	salary=document.getElementById("Psalary").value;
+};
+
 	/*Sheet 기본 설정 */
 	function LoadPage() {
 		
@@ -38,13 +44,14 @@ function setPayment(){
 	        {Header:"NO",Type:"Seq",SaveName:"NUMBER",MinWidth:50, Align:"Center" },	
 	        {Header:"사원코드",Type:"Text",SaveName:"employee_code", MinWidth:50,  Align:"Center", KeyField:1, Edit: 0},	
 			{Header:"사원명",Type:"Text",SaveName:"employee_name", MinWidth:120, Align:"Center", Edit: 0},
-			{Header:"지급고유번호",Type:"Text",SaveName:"payment_code", MinWidth:120, Align:"Center", Hidden:"1"}
+			{Header:"지급고유번호",Type:"Text",SaveName:"payment_code", MinWidth:120, Align:"Center", Hidden:"1"},
+			{Header:"지급구분",Type:"Text",SaveName:"payment_des_name", MinWidth:120, Align:"Center"}
 
 		];   
 		IBS_InitSheet( mySheet , initSheet);
   
 		mySheet.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
-		mySheet.SetSheetHeight(200);
+		mySheet.SetSheetHeight(250);
 		
 		//아이비시트2------------------------------------------------------
 		mySheet2.RemoveAll();
@@ -54,17 +61,16 @@ function setPayment(){
 		initSheet2.Cols = [
 			{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
 	        {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},	
-       		{Header:"지급항목",Type:"Text", MinWidth:70, SaveName:"payment_receipt_item", DefaultValue :"기본급" , InsertEdit:"0", UpdateEdit:"0"},
+       		{Header:"급여계산서고유번호",Type:"Text",SaveName:"payment_receipt_code",MinWidth:70, Align:"Center",Hidden:"1"},
+	        {Header:"지급항목",Type:"Combo", MinWidth:70, SaveName:"payment_receipt_item", ComboText:"기본급|상여급", ComboCode:"기본급|상여급",PopupText:"기본급|상여급"},
 			{Header:"금액",Type:"Text",SaveName:"payment_receipt_price",MinWidth:70, Align:"Center"},
-       		{Header:"급여계산서고유번호",Type:"Text",SaveName:"payment_receipt_code",MinWidth:70, Align:"Center"},
-       		{Header:"사원고유번호",Type:"Text",SaveName:"employee_code",MinWidth:70, Align:"Center"},
-       		{Header:"지급고유번호",Type:"Text",SaveName:"payment_code",MinWidth:70, Align:"Center"}
 		];
 		
 		IBS_InitSheet( mySheet2 , initSheet2);
 		  
 		mySheet2.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
 		mySheet2.SetSheetHeight(250);
+		
 		
 		/* MonthPicker 옵션 */
 	    options = {
@@ -101,13 +107,10 @@ function setPayment(){
 			break;
 			
 		case "insert":
-		      var row = mySheet.DataInsert(-1);
-		      break;
-		      
-				
-		case "insert2":
-		      var row = mySheet2.DataInsert(-1);
+			var row = mySheet2.DataInsert(-1);
 		      break;      
+		      
+		      
 		     case "save":
 		    	 var tempStr = mySheet2.GetSaveString();
 		    	 mySheet2.DoSave("${contextPath}/pm/p0001/saveData.do");
@@ -116,29 +119,28 @@ function setPayment(){
 		}
 	}
 	
-	function mySheet2_OnSearchEnd() {
-		mySheet2.DataInsert(-1);
-	}
 	
-	function mySheet2_OnKeyUp(Row, Col, KeyCode, Shift) {
-		//if (Modify == 1) { 인사코드 부분 - 수정 가능일시이니까 / 인사기록카드에서는 상관x
-	         //console.log("keycode: "+KeyCode+"&col:"+mySheet2.LastCol()+"&row:"+mySheet2.RowCount());
-	         /* console.log("keycode: " + KeyCode);*/
-	         console.log("col:" + Col + "lastcol:" + mySheet2.LastCol());
-	         console.log("row:" + Row + "row갯수:" + mySheet2.RowCount()); 
-	         console.log("mySheet2:" +mySheet2.RowCount());
-	         if ( KeyCode == 13 &&  Col == mySheet2.LastCol()
-	               && Row == mySheet2.RowCount()) { // 엔터를 누르고 / col이 마지막 col이고 / row가 마지막 열일경우
-	            doAction("insert2");
-	         }
-		}
+	
+	
 
 	//로우 클릭시
 function mySheet_OnClick(Row, Col) { 
 		var param = "x="+mySheet.GetCellValue(Row, 1)+"&y="+mySheet.GetCellValue(Row, 3);
 			mySheet2.DoSearch("${contextPath}/pm/p0001/searchReceipt.do", param);
-			
+
 	}
+	
+	
+function mySheet2_OnDblClick(Row,Col,Value){
+	row=Row;
+	col=Col;
+	
+	if(Col=="4"){
+		
+	window.open("${contextPath}/pm/p0001/paygrade_Search.do", "a", "width=500, height=700, left=100, top=50"); 
+	}
+}
+
 	
 	 function showPopup() {
 		 var monthpicker = $('#monthpicker').val();
@@ -148,6 +150,7 @@ function mySheet_OnClick(Row, Col) {
 	  
 	  }
 	 
+
 	
 	 
 
@@ -200,8 +203,8 @@ function mySheet_OnClick(Row, Col) {
 	  
 	function selectType() {
 
-		var searchTYPE = $('#searchTYPE').val();
-		console.log(searchTYPE);
+		var searchSite = $('#searchSite').val();
+		console.log(searchSite);
 
 		$
 				.ajax({
@@ -211,66 +214,25 @@ function mySheet_OnClick(Row, Col) {
 					type : "POST",
 
 					data : {
-						"searchTYPE" : searchTYPE
+						"searchSite" : searchSite
 					},
 
 					dataType : "JSON",
 
 					success : function(data) {
-						$(".1").remove();
-						
-						if(data['Data'][0].site_name!= null && data['Data'][0].site_name!= ''){
-						for (var i = 0; i < data['Data'].length; i++) {
-
-							var option = "<option class='1' value='" + data['Data'][i].site_name + "'>"
-									+ data['Data'][i].site_name
-									+ "</option>";
-
-							//대상 콤보박스에 추가
-							$('#searchDetail').append(option);
-
-						}
-						}
-						
-						if(data['Data'][0].department_name!= null && data['Data'][0].department_name!= ''){
-						for (var i = 0; i < data['Data'].length; i++) {
+						$(".1").remove();				
+							for (var i = 0; i < data['Data'].length; i++) {
 
 							var option = "<option class='1' value='" + data['Data'][i].department_name + "'>"
 									+ data['Data'][i].department_name
 									+ "</option>";
 
 							//대상 콤보박스에 추가
-							$('#searchDetail').append(option);
+							$('#searchTYPE').append(option);
 
-						}
+						
 						}
 						
-						if(data['Data'][0].work_group_name!= null && data['Data'][0].work_group_name!= ''){
-						for (var i = 0; i < data['Data'].length; i++) {
-
-							var option = "<option class='1' value='" + data['Data'][i].work_group_name + "'>"
-									+ data['Data'][i].work_group_name
-									+ "</option>";
-
-							//대상 콤보박스에 추가
-							$('#searchDetail').append(option);
-
-						}
-						}
-						
-						if(data['Data'][0].project_name!= null && data['Data'][0].project_name!= ''){
-						for (var i = 0; i < data['Data'].length; i++) {
-
-							var option = "<option class='1' value='" + data['Data'][i].project_name + "'>"
-									+ data['Data'][i].project_name
-									+ "</option>";
-
-							//대상 콤보박스에 추가
-							$('#searchDetail').append(option);
-
-						}
-						}
-
 					},
 
 					error : function(jqxhr, status, error) {
@@ -336,9 +298,18 @@ function mySheet_OnClick(Row, Col) {
 
 .right{
 	position: relative;
-	top: -90px;
-	left: 500px;
+	top: -140px;
+	left: 450px;
 	width: 750px;
+	
+}
+
+.bottom{
+	top:-60px;
+	position: relative;
+	padding: 60px;	
+	width: 1053px;
+	margin-bottom: 50px;
 	
 }
 #searchBar {
@@ -347,6 +318,15 @@ function mySheet_OnClick(Row, Col) {
 	margin-bottom: 30px;
 	border-radius: 5px;
 	font-size: 12px;
+}
+
+#bottomBar {
+	background: #EBEBEB;
+	width :100%;
+	border-radius: 5px;
+	font-size: 12px;
+	margin-bottom: 50px;
+	
 }
 
 .left input{
@@ -413,18 +393,12 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 			<img id="btn_monthpicker"  src="${contextPath}/resources/image/icons/icon_calendar.png">
 		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
 		  지급일: <a href="javascript:showPopup();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a><input type="text" id="Ppayment_date"><br><br>
-		 사업장구분: <select id="searchSite" onchange="selectSite()">
+		 사업장구분: <select id="searchSite" onchange="selectType()">
 			<option value="all" selected>전체</option>
 			</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		  조회조건: <select id="searchTYPE" onchange="selectType()">
+		  부서: <select id="searchTYPE">
 		  	<option value="all" selected>전체</option>
-			<option value="department">부서</option>
-			<option value="work_group">근무조</option>
-			<option value="project">프로젝트</option>
-		</select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		구분 :<select id="searchDetail" >
-		<option value="alldetail" selected>전체</option>
-		</select>
+		</select> 
 		<input type="hidden" id="Ppayment_code">
 		<input type="hidden" id="Ppayment_des_name">
 		</div>
@@ -438,10 +412,11 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 	
 	<div class="right">
 		<script>createIBSheet("mySheet2", "100%", "100%");</script>
-	</div>
-	
+	</div>	
 </form>
-
+<input type="hidden" id="Ppayment_code">
+<input type="hidden" id="Ppayment_code">
+<input type="hidden" id="Psalary">
 
 
 </body>

@@ -27,6 +27,12 @@ public class PM_P0001ServiceImpl implements PM_P0001Service {
 	}
 	
 	
+	
+	@Override
+	public List<PM_P0001VO> paygrade_searchData(Map<String, Object> searchMap) throws DataAccessException {
+		List<PM_P0001VO> list =  p0001DAO.paygradeList(searchMap); 
+		return list;
+	}
 	@Override
 	public List<PM_P0001VO> paydate_searchList(Map<String, Object> searchMap) throws DataAccessException {
 		List<PM_P0001VO> list =  p0001DAO.paydate_searchList(searchMap); 
@@ -46,13 +52,13 @@ public class PM_P0001ServiceImpl implements PM_P0001Service {
 	}
 
 	@Override
-	public void saveData(Map<String, String[]> dataMap, String user)  throws DataAccessException  {
+	public void saveData(Map<String, String[]> dataMap, String user,String x, String y)  throws DataAccessException  {
 		String[] status = dataMap.get("STATUS");
 		int length = status.length; // row��
 		int i = 0;
 		
 		for(String str : status) {
-			Map<String, String> row = getRow(dataMap, length, i, user); // ���� Index�� Row Map
+			Map<String, String> row = getRow(dataMap, length, i, user, x, y); // ���� Index�� Row Map
 			if("I".equals(str)) { // �߰�
 				p0001DAO.insertData(row);
 			}else if("U".equals(str)) { // ����
@@ -64,13 +70,16 @@ public class PM_P0001ServiceImpl implements PM_P0001Service {
 		}
 	}
 	
-	private Map<String, String> getRow(Map<String, String[]> dataMap, int length, int index, String user) {
+	private Map<String, String> getRow(Map<String, String[]> dataMap, int length, int index, String user, String x, String y) {
 		Map<String, String> row = new HashMap<String, String>();
 		for(String name : dataMap.keySet()) {
 			String[] data = dataMap.get(name);
 			if(length == data.length) {
 				row.put(name, data[index]);
-				row.put(user, user);
+				row.put("user", user);
+				row.put("x", x);
+				row.put("y", y);
+
 
 			}
 		}		

@@ -37,8 +37,6 @@ function LoadPage(){
 	   {Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck"},
 	   {Header:"사원코드",SaveName:"employee_code",Type:"Text",width:100, KeyField:1, UpdateEdit:"0"},
 	   {Header:"사원명",SaveName:"employee_name",Type:"Text",width:100, KeyField:1 },
-	   {Header:"부서코드", Type:"Text", SaveName:"department_code",Width:100, Align: "Center", InsertEdit:"0", UpdateEdit:"0", KeyField:1},
-	   {Header:"부서명",SaveName:"department_name",type:"Text",width:100, InsertEdit:"0", UpdateEdit:"0", KeyField:1},
 	   {Header:"입사일",Type:"Date", Align:"Center", SaveName:"employee_join_date", Format:"yyyy-MM-dd", MinWidth:110},
 	   {Header:"퇴사일",Type:"Date", Align:"Center", SaveName:"employee_resignation_date", Format:"yyyy-MM-dd", MinWidth:110},
 	   {Header:"사용자여부",Type:"Combo", MinWidth:70, SaveName:"employee_available_yn", ComboText:"Y|N", ComboCode:"Y|N",PopupText:"Y|N"},
@@ -55,15 +53,7 @@ function LoadPage(){
 
 }
 
-function mySheet_OnDblClick(Row,Col,Value){
-	row=Row;
-	col=Col;
-	
-	if(Col=="4"){
-		
-	window.open("${contextPath}/sm/p0004/department_Search.do", "a", "width=500, height=700, left=100, top=50"); 
-	}
-}
+
 function doAction(sAction){
    switch(sAction){
    case "search":
