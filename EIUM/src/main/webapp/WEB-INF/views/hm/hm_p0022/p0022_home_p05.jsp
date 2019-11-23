@@ -108,7 +108,8 @@ function LoadPage(){
 	mySheet.SetEditableColorDiff(1);
 
 	mySheet.SetColEditable(2,0);
-
+	var param=FormQueryStringEnc(document.frm);
+	mySheet.DoSearch("${contextPath}/hm/p0022/homeSearch_p05.do",param);
 }
 
 
@@ -193,20 +194,15 @@ function selectSite() {
 	</div>
 	
 <form name="frm">
-  <div id="searchBar">
-            &nbsp;&nbsp; 사업장 : <select id="SiteList" >
-			<option value="" selected>전체</option>
-		</select>
-		</div>
+
+<input type="hidden" value=<%=request.getParameter("name")%> id="SiteList">
+ 
 		
 			
 </form>
 	
-    <div class="rightbuttons">
-	  <a href="javascript:doAction('reload')"  class="IBbutton">초기화</a>
-	  <a href="javascript:doAction('search')"  class="IBbutton">조회</a>
 
-	</div>
+
 
 	
 </body>

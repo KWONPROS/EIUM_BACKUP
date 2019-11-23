@@ -47,6 +47,7 @@ public class WM_P0001VO {
 	private String working_STATUS_END_TIME="";
 	private String working_STATUS_TOTAL_TIME="";
 	private String working_STATUS_DESC="";
+	private String working_STATUS_YN="";
 
 
 	public String getWorking_STATUS_CODE() {
@@ -91,7 +92,13 @@ public class WM_P0001VO {
 	public void setWorking_STATUS_DESC(String working_STATUS_DESC) {
 		this.working_STATUS_DESC = working_STATUS_DESC;
 	}
-	
+	public String getWorking_STATUS_YN() {
+		return working_STATUS_YN;
+	}
+	public void setWorking_STATUS_YN(String working_STATUS_YN) {
+		this.working_STATUS_YN = working_STATUS_YN;
+	}
+
 	//총근태결과
 	private String payment_CODE="";
 	

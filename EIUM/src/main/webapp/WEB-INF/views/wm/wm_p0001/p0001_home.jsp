@@ -75,6 +75,7 @@
 			{Header:"근무총시간",Type:"Date",SaveName:"working_STATUS_TOTAL_TIME",MinWidth:50, Align:"Center", Format: "HH:mm", CalcLogic:"|7|+|8|-|6|", Hidden:1},
 			{Header:"퇴근-출근시간",Type:"Date",SaveName:"working_STATUS_TOTAL_TIME_CALC",MinWidth:50, Align:"Center",Format:"HH:mm", CalcLogic:"|7|+|8|-|6|"},
 			{Header:"비고",Type:"Combo",SaveName:"working_STATUS_DESC",MinWidth:80, Align:"Center", "ComboText":"출근|지각|조퇴|외출", "ComboCode":"00|01|02|03"},
+			{Header:"그 달의 해당YN:",Type:"Text",SaveName:"working_STATUS_YN", MinWidth:50,Align:"Center"},
 			//평일(table)
 			{Header:"평일정상근무시간",Type:"Text",SaveName:"weekday_NORMAL_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:"", Hidden:1},	
 			{Header:"평일연장근무시간",Type:"Text",SaveName:"weekday_EXTENSION_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:"", Hidden:1},			
@@ -97,25 +98,25 @@
 		//아이비시트 3(총 근태결과)----------------------------------------------------
 		mySheet3.RemoveAll();
 		var initSheet3 = {};
-		initSheet3.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:0};
+		initSheet3.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:0,SumZeroValue:"0"};
 		initSheet3.HeaderMode = {Sort:1, ColMove:0, ColResize:0, HeaderCheck:1};
 		initSheet3.Cols = [
 			{Header:"상태", Type:"Status", SaveName:"STATUS", Hidden:1},
 			{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK", Hidden:1},
 			//평일
-			{Header:"평일정상근무시간(시간)",Type:"Text",SaveName:"weekday_NORMAL_WORK_TIME", Width:160,Edit:0,Align:"Center"},	
-			{Header:"평일연장근무시간(시간)",Type:"Text",SaveName:"weekday_EXTENSION_WORK_TIME", Width:160,Edit:0,Align:"Center"},			
-			{Header:"평일야간근무시간(시간)",Type:"Text",SaveName:"weekday_NIGHT_WORK_TIME", Width:160,Edit:0,Align:"Center"},
+			{Header:"평일정상근무시간(시간)",Type:"Text",SaveName:"weekday_NORMAL_WORK_TIME", Width:160,Edit:1,Align:"Center"},	
+			{Header:"평일연장근무시간(시간)",Type:"Text",SaveName:"weekday_EXTENSION_WORK_TIME", Width:160,Edit:1,Align:"Center"},			
+			{Header:"평일야간근무시간(시간)",Type:"Text",SaveName:"weekday_NIGHT_WORK_TIME", Width:160,Edit:1,Align:"Center"},
 			
 			//휴일
-			{Header:"휴일정상근무시간(시간)",Type:"Text",SaveName:"holiday_NORMAL_WORK_TIME", Width:160,Edit:0,Align:"Center"},	
-			{Header:"휴일연장근무시간(시간)",Type:"Text",SaveName:"holiday_EXTENSION_WORK_TIME", Width:160,Edit:0,Align:"Center"},			
-			{Header:"휴일야간근무시간(시간)",Type:"Text",SaveName:"holiday_NIGHT_WORK_TIME", Width:160,Edit:0,Align:"Center"},
+			{Header:"휴일정상근무시간(시간)",Type:"Text",SaveName:"holiday_NORMAL_WORK_TIME", Width:160,Edit:1,Align:"Center"},	
+			{Header:"휴일연장근무시간(시간)",Type:"Text",SaveName:"holiday_EXTENSION_WORK_TIME", Width:160,Edit:1,Align:"Center"},			
+			{Header:"휴일야간근무시간(시간)",Type:"Text",SaveName:"holiday_NIGHT_WORK_TIME", Width:160,Edit:1,Align:"Center"},
 			//etc
 			{Header:"평일(일)",Type:"Text",SaveName:"weekday",Edit:0, Width:95,Align:"Center"},	
 			{Header:"휴일(일)",Type:"Text",SaveName:"holiday",Edit:0, Width:95,Align:"Center"},			
-			{Header:"총정상근무일(일)",Type:"Text",SaveName:"normal_WORK_DAY", Width:140,Edit:0,Align:"Center"},
-			{Header:"총연장근무일(일)",Type:"Text",SaveName:"extension_WORK_DAY", Width:140,Edit:0,Align:"Center"}
+			{Header:"총정상근무일(일)",Type:"Text",SaveName:"normal_WORK_DAY", Width:140,Edit:1,Align:"Center"},
+			{Header:"총연장근무일(일)",Type:"Text",SaveName:"extension_WORK_DAY", Width:140,Edit:1,Align:"Center"}
 		];
 		
 		IBS_InitSheet(mySheet3, initSheet3);
@@ -188,7 +189,6 @@
 			mySheet.DoSearch("${contextPath}/wm/p0001/EMP_searchList.do", param);
 			/* alert(mySheet2.GetCellValue(mySheet2.GetSelectRow(), 6)); */
 			//조회조건에 맞도록 조회하기
-			
 			break;
 
 		case "reload": //초기화
@@ -207,16 +207,6 @@
 			/* alert(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("temp_TIME"))); */ //0000
 			
 			break;
-			
-		case "deadline": //마감
-			var tempStr = mySheet2.GetSaveString();
-			alert("서버로 전달되는 문자열 확인 :" + tempStr);	
-			mySheet3.DoSave("${contextPath}/wm/p0001/TWS_saveData.do", "PP_EMP_CODE=" + mySheet.GetCellValue(mySheet.GetSelectRow(),0) + "&P_PAYMENT_CODE=" +$('#monthpicker').val());
-			//마감저장이 성공하면 그후엔 그 저장한 사원의 그 달 SHEET와 전체 작동 불가
-			//마감 버튼은 마감취소 버튼으로 변경
-			
-			break;
-		
 		
 		case "calculate": //정산
 			//평일정상근무시간 : week_NO_TIME
@@ -253,13 +243,13 @@
 			var T_holi_NI_TIME = mySheet2.ComputeSum("|17|"); //총 휴일 야간 근무시간
 			
 			var T_week_count = 0, T_holi_count = 0, T_week_NO_DAY = 0, T_week_EX_DAY = 0, T_holi_NO_DAY = 0, T_holi_EX_DAY = 0, T_NO_COUNT = 0, T_EX_COUNT = 0;
-			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("weekday_NORMAL_WORK_TIME"), textWithtimeFormat(T_week_NO_TIME));
-			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("weekday_EXTENSION_WORK_TIME"), textWithtimeFormat(T_week_EX_TIME));
-			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("weekday_NIGHT_WORK_TIME"), textWithtimeFormat(T_week_NI_TIME));
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("weekday_NORMAL_WORK_TIME"), T_week_NO_TIME);
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("weekday_EXTENSION_WORK_TIME"), T_week_EX_TIME);
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("weekday_NIGHT_WORK_TIME"), T_week_NI_TIME);
 			 
-			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("holiday_NORMAL_WORK_TIME"), textWithtimeFormat(T_holi_NO_TIME));
-			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("holiday_EXTENSION_WORK_TIME"), textWithtimeFormat(T_holi_EX_TIME));
-			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("holiday_NIGHT_WORK_TIME"), textWithtimeFormat(T_holi_NI_TIME));
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("holiday_NORMAL_WORK_TIME"), T_holi_NO_TIME);
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("holiday_EXTENSION_WORK_TIME"), T_holi_EX_TIME);
+			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("holiday_NIGHT_WORK_TIME"), T_holi_NI_TIME);
 			
 			//평일//휴일 분류
 			var T_Maskingcell = mySheet2.GetDataLastRow();
@@ -301,6 +291,43 @@
 			// 총연장 근무일
 			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("extension_WORK_DAY"), T_EX_COUNT);
 			
+			alert("정산 완료");
+			//정산 클릭 후 
+			var tempStr = mySheet3.GetSaveString();
+			alert("서버로 전달되는 문자열 확인 :" + tempStr);	
+			mySheet3.DoSave("${contextPath}/wm/p0001/TWS_saveData.do", "PP_EMP_CODE=" + mySheet.GetCellValue(mySheet.GetSelectRow(),0) + "&monthpicker=" +$('#monthpicker').val());
+			
+			//계산 후 계산 된 것을 바로 서버로 넘겨주어서 sheet3에 있는 총 근태 결과 정보 저장
+		case "deadline": //마감
+			$("#dead_buttons").hide(); //마감버튼은 숨겨주고
+			$("#dead_cancel_buttons").show(); //마감취소버튼은 보여주고
+			//마감저장이 성공하면 그후엔 그 저장한 사원의 그 달 SHEET와 전체 작동 불가
+			//마감 버튼은 마감취소 버튼으로 변경
+			var T_Maskingcell = mySheet2.GetDataLastRow();
+			for(let i = 1; i <= T_Maskingcell; i++){
+				if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_YN")) == 'Y'){ //마감했을 경우 그 Row는 edit : 0
+					mySheet2.SetRowEditable(i,0); 
+					alert(mySheet2.GetRowEditable(i,0));
+				}
+			}
+			
+		break;
+		
+		case "deadline_cancel": //마감취소
+			$("#dead_buttons").show();
+			$("#dead_cancel_buttons").hide();
+			//마감저장이 성공하면 그후엔 그 저장한 사원의 그 달 SHEET와 전체 작동 불가
+			//마감 버튼은 마감취소 버튼으로 변경
+			var T_Maskingcell = mySheet2.GetDataLastRow();
+			for(let i = 1; i <= T_Maskingcell; i++){
+				if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_YN")) == 'N'){ //마감했을 경우 그 Row는 edit : 0
+					mySheet2.SetRowEditable(i,1); 
+					alert(mySheet2.GetRowEditable(i,0));
+				}
+			}
+			//다시 마감취소를 누르면 그 해당하는 달의 해당 사원의 근무를 다시 N으로 바꾸어 준다.
+		break;
+		
 			//mySheet2의 비고에 따라서 퇴근-출근 시간을 계산하여 총 근태 결과에 출력
 			/* mySheet3.SetSheetHeight(50);
 			alert(mySheet3.GetSheetHeight()); */
@@ -348,8 +375,17 @@
 			break; */
 		}
 	}
-	
-	 
+	//정산하여 sheet3을 저장한 후 
+	function mySheet3_OnSaveEnd(Row, Col){
+		mySheet2.DoSearch("${contextPath}/wm/p0001/WS_searchList.do", "P_EMP_CODE=" + mySheet.GetCellValue(mySheet.GetSelectRow(), 0) + "&monthpicker=" +$('#monthpicker').val());
+		var T_Maskingcell = mySheet2.GetDataLastRow();
+		for(let i = 1; i <= T_Maskingcell; i++){
+			if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_YN")) == 'Y'){ //마감했을 경우 그 Row는 edit : 0
+				mySheet2.SetRowEditable(i,0); 
+				alert(mySheet2.GetRowEditable(i,0));
+			}
+		}
+	}
 	 
 	
 
@@ -379,6 +415,7 @@
 				mySheet2.SetCellValue(Row, 6, "0000");
 			} */
 		}
+		
 		
 	}
 	//mySheet2(출근시간, 퇴근시간 클릭시)로우 클릭시
@@ -1148,6 +1185,13 @@
 	//휴일연장근무시간 : holi_EX_TIME
 	//휴일야간근무시간 : holi_NI_TIME
 	function mySheet2_OnSearchEnd(Code, Msg){ //mySheet2 근태 정보 검색하기 전
+		var T_Maskingcell = mySheet2.GetDataLastRow();
+		for(let i = 1; i <= T_Maskingcell; i++){
+			if(mySheet2.GetCellValue(i, mySheet2.SaveNameCol("working_STATUS_YN")) == 'Y'){ //마감했을 경우 그 Row는 edit : 0
+				mySheet2.SetRowEditable(i,0); 
+				alert(mySheet2.GetRowEditable(i,0));
+			}
+		}
 		var Maskingcell = mySheet2.GetDataLastRow();
 		/* for(let i = Maskingcell; i >= 1; i--){ // savename: temp_시간의 col에 00:00 masking 값 입력
 			mySheet2.SetCellValue(i, 8, "0000");
@@ -2030,6 +2074,19 @@
 	position: absolute;
 	left: 0px;
 }
+.deadbuttons {
+	margin-top: 40px;
+	margin: 10px;
+	position: absolute;
+	right: 450px;
+}
+
+.dead_cancel_buttons {
+	margin-top: 40px;
+	margin: 10px;
+	position: absolute;
+	right: 500px;
+}
 
 .otherbuttons {
 	margin-top: 40px;
@@ -2164,8 +2221,13 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 	<div class="leftbuttons">
 		<a href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
 	</div>
-	<div class="otherbuttons">
+	<div class="dead_cancel_buttons" id="dead_cancel_buttons">
+		<a href="javascript:doAction('deadline_cancel')" class="IBbutton">마감취소</a>
+	</div>
+	<div class="deadbuttons" id="dead_buttons">
 		<a href="javascript:doAction('deadline')" class="IBbutton">마감</a>
+	</div>
+	<div class="otherbuttons">
 		<a href="javascript:doAction('calculate')" class="IBbutton">정산</a> 
 	</div>
 	<div class="rightbuttons">

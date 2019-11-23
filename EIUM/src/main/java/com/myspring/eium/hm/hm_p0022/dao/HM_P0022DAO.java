@@ -41,6 +41,9 @@ public interface HM_P0022DAO {
 
 	void updateData4(Map<String, String> row) throws DataAccessException;
 
+	List<HM_P0022VO> appointList3(Map<String, Object> searchMap) throws DataAccessException;
+
+
 
 
 }

@@ -19,10 +19,13 @@ public interface WM_P0001DAO {
 
 	public void TWS_insertData(Map<String, String> row) throws DataAccessException;
 	
+	public void WS_YN_updateData(Map<String, String> row) throws DataAccessException;
+	
 	public void insertData(Map<String, String> row) throws DataAccessException;
 
 	public void updateData(Map<String, String> row) throws DataAccessException;
 
 	public void deleteData(Map<String, String> row) throws DataAccessException;
+	
 	 
 }

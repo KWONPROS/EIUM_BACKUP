@@ -206,6 +206,56 @@ public void setEmployee_CODE(String employee_CODE) {
 	this.employee_CODE = employee_CODE;
 }
 
+String job_CLASS_CODE;
+String position_CODE;
+String duty_CODE;
+String job_DIS_CODE;
+String pay_TYPE_CODE;
+String pay_GRADE_CODE;
+String out_REASON_CODE;
+public String getJob_CLASS_CODE() {
+	return job_CLASS_CODE;
+}
+public void setJob_CLASS_CODE(String job_CLASS_CODE) {
+	this.job_CLASS_CODE = job_CLASS_CODE;
+}
+public String getPosition_CODE() {
+	return position_CODE;
+}
+public void setPosition_CODE(String position_CODE) {
+	this.position_CODE = position_CODE;
+}
+public String getDuty_CODE() {
+	return duty_CODE;
+}
+public void setDuty_CODE(String duty_CODE) {
+	this.duty_CODE = duty_CODE;
+}
+public String getJob_DIS_CODE() {
+	return job_DIS_CODE;
+}
+public void setJob_DIS_CODE(String job_DIS_CODE) {
+	this.job_DIS_CODE = job_DIS_CODE;
+}
+public String getPay_TYPE_CODE() {
+	return pay_TYPE_CODE;
+}
+public void setPay_TYPE_CODE(String pay_TYPE_CODE) {
+	this.pay_TYPE_CODE = pay_TYPE_CODE;
+}
+public String getPay_GRADE_CODE() {
+	return pay_GRADE_CODE;
+}
+public void setPay_GRADE_CODE(String pay_GRADE_CODE) {
+	this.pay_GRADE_CODE = pay_GRADE_CODE;
+}
+public String getOut_REASON_CODE() {
+	return out_REASON_CODE;
+}
+public void setOut_REASON_CODE(String out_REASON_CODE) {
+	this.out_REASON_CODE = out_REASON_CODE;
+}
+
 
 
 

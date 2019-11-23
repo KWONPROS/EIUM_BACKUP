@@ -18,4 +18,8 @@ public interface WM_P0001Controller {
 	
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map TWS_saveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	/*
+	 * public Map WS_YN_updateData(HttpServletRequest request, HttpServletResponse
+	 * response) throws Exception;
+	 */
 }

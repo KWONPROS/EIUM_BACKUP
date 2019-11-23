@@ -44,5 +44,9 @@ public interface HM_P0022Controller {
 
 	Map saveData4(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
+	Map appointSearch_p02(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+
+
 
 }
