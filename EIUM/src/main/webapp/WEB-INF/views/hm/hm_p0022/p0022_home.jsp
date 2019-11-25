@@ -94,6 +94,19 @@ initSheet.Cols = [
 
 }
 
+function mySheet1_OnRowSearchEnd(Row) {
+	x = mySheet1.GetCellValue(Row, 5);
+    if(mySheet1.GetCellValue(Row, 5) == "마감완료"){
+	    mySheet1.SetRowEditable(Row,0);
+	}
+}
+
+function mySheet2_OnRowSearchEnd(Row) {
+    if(x == "마감완료"){
+	    mySheet2.SetRowEditable(Row,0);
+	}
+}
+
 function mySheet1_OnClick(Row,Col){
 	var status=mySheet1.GetCellValue(Row,0);
 	var finish=mySheet1.GetCellValue(Row,5);
@@ -101,7 +114,6 @@ function mySheet1_OnClick(Row,Col){
 
 	appointCode ="appointCode="+mySheet1.GetCellValue(Row,3);
 	mySheet2.DoSearch("${contextPath}/hm/p0022/appointList2.do",appointCode);
-	console.log(finish);
 	
 	}if(finish=="마감완료"){
 		
