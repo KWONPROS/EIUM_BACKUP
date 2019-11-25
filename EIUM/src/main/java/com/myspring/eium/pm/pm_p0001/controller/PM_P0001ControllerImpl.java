@@ -40,6 +40,8 @@ import com.myspring.eium.pm.pm_p0001.vo.PM_P0001VO;
 @Controller
 public class PM_P0001ControllerImpl implements PM_P0001Controller {
 	private static final Logger logger = LoggerFactory.getLogger(PM_P0001ControllerImpl.class);
+	String x=null;
+	String y=null;
 	Map<String, Object> dateMap = new HashMap<String, Object>();
 	@Autowired
 	PM_P0001Service p0001Service;
@@ -52,6 +54,18 @@ public class PM_P0001ControllerImpl implements PM_P0001Controller {
 	
 		return mav;
 	} 
+	
+	@Override
+	@RequestMapping(value = "/pm/p0001/paygrade_Search.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView paygrade_Search(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		
+		ModelAndView mav = new ModelAndView("pm/pm_p0001/p0001_paygradeSearch");
+	
+		return mav;
+	} 
+	
+	
 	
 	@Override
 	@RequestMapping(value = "/pm/p0001/searchPaymentdate.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -67,6 +81,7 @@ public class PM_P0001ControllerImpl implements PM_P0001Controller {
 	
 		return mav;
 	} 
+	
 	
 	@Override
 	@RequestMapping(value = "/pm/p0001/searchList.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -109,6 +124,21 @@ public class PM_P0001ControllerImpl implements PM_P0001Controller {
         resultMap.put("Data", data);
         return resultMap;
 	}
+	
+	@Override
+	@RequestMapping(value = "/pm/p0001/paygrade_searchData.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map paygrade_searchData(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>(); 
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+
+		searchMap.put("x", x);
+		List<PM_P0001VO> data = p0001Service.paygrade_searchData(searchMap);
+		
+        resultMap.put("Data", data);
+        return resultMap;
+	}
 
 	@Override
 	@RequestMapping(value = "pm/p0001/TypeList.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -119,8 +149,8 @@ public class PM_P0001ControllerImpl implements PM_P0001Controller {
 		Map<String, Object> resultMap = new HashMap<String, Object>(); // ??????
 		
 		// ??????????
-		searchMap.put("searchTYPE", request.getParameter("searchTYPE"));
-		System.out.println(request.getParameter("searchTYPE"));
+		searchMap.put("searchSite", request.getParameter("searchSite"));
+		System.out.println(request.getParameter("searchSite"));
 		//?????? ???
 		List<PM_P0001VO> data = p0001Service.searchTypeList(searchMap);
         resultMap.put("Data", data);
@@ -137,11 +167,12 @@ public class PM_P0001ControllerImpl implements PM_P0001Controller {
 		Map<String, Object> searchMap = new HashMap<String, Object>(); 
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
 
-
+		x =request.getParameter("x");
+		y =request.getParameter("y");
 		searchMap.put("x", request.getParameter("x"));
-		System.out.println(request.getParameter("x"));
+		System.out.println(x);
 		searchMap.put("y", request.getParameter("y"));
-		System.out.println(request.getParameter("y"));
+		System.out.println(y);
 
 		List<PM_P0001VO> data = p0001Service.searchReceipt(searchMap);
 		
@@ -160,18 +191,24 @@ public class PM_P0001ControllerImpl implements PM_P0001Controller {
 		LoginVO loginvo = new LoginVO();
 		loginvo = (LoginVO)session.getAttribute("login"); 
 		String user= (loginvo.getEmployee_name());
+		System.out.println(user);
+		System.out.println(x);
+		System.out.println(y);
+
+		
 		
 		// 저장 Data 추출하기
 		Enumeration enu = request.getParameterNames();
 		while (enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
+			System.out.println(name);
 			String[] values = request.getParameterValues(name);
 			dataMap.put(name, values);
 		}
 		
 		Map<String, String> result = new HashMap<String, String>();
 		try {
-			p0001Service.saveData(dataMap, user);	
+			p0001Service.saveData(dataMap, user, x, y);	
 			result.put("Code","0");
 			result.put("Message","저장되었습니다");
 		}catch(Exception e) {                                                               

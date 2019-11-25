@@ -94,6 +94,8 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
  
 		createIBSheet2($("#ib-container2")[0],"mySheet2", "100%", "300px");
         IBS_InitSheet(mySheet2,initData);
+		mySheet2.SetSheetHeight(150);
+
         
     //mySheet3 //경력
      initData.Cols = [
@@ -112,7 +114,7 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
       ];
        createIBSheet2($("#ib-container3")[0],"mySheet3", "100%", "300px");
        IBS_InitSheet(mySheet3,initData);
-
+       mySheet3.SetSheetHeight(150);
       
     //mySheet4 //면허
      initData.Cols = [
@@ -129,7 +131,7 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
         
      createIBSheet2($("#ib-container4")[0],"mySheet4", "100%", "300px");
      IBS_InitSheet(mySheet4,initData);
-
+     mySheet4.SetSheetHeight(150);
     
  
 		
@@ -146,7 +148,7 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
          
      createIBSheet2($("#ib-container5")[0],"mySheet5", "100%", "300px");
      IBS_InitSheet(mySheet5,initData);
-      
+     mySheet5.SetSheetHeight(150);      
     //mySheet6 //인사고과
    initData.Cols = [
 		{Header:"상태",SaveName:"sStatus",Type:"Status",align:"Center",width:50},
@@ -164,7 +166,7 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
          
    createIBSheet2($("#ib-container6")[0],"mySheet6", "100%", "300px");
    IBS_InitSheet(mySheet6,initData);
-
+   mySheet6.SetSheetHeight(150);
  
 		 //mySheet7 //근태
 	   initData.Cols = [
@@ -187,7 +189,8 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
 	         
 	   createIBSheet2($("#ib-container7")[0],"mySheet7", "100%", "300px");
 	      IBS_InitSheet(mySheet7,initData);
-    
+	      mySheet7.SetSheetHeight(150);    
+	      
     //mySheet8 //출장
    initData.Cols = [
 			{Header:"출장고유번호",Type:"Text", SaveName:"business_trip_code",Hidden:1},
@@ -205,7 +208,7 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
          
    createIBSheet2($("#ib-container8")[0],"mySheet8", "100%", "300px");
    IBS_InitSheet(mySheet8,initData);
-
+   mySheet8.SetSheetHeight(150);
     
     //mySheet9 //상벌관리
    initData.Cols = [
@@ -224,6 +227,7 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
          
    createIBSheet2($("#ib-container9")[0],"mySheet9", "100%", "300px");
    IBS_InitSheet(mySheet9,initData);
+   mySheet9.SetSheetHeight(150);  
    
    //mySheet10 //어학시험
    initData.Cols = [
@@ -240,7 +244,7 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
         
   createIBSheet2($("#ib-container10")[0],"mySheet10", "100%", "300px");
   IBS_InitSheet(mySheet10,initData);
-  
+  mySheet10.SetSheetHeight(150);  
   //mySheet11 //교육관리
   initData.Cols = [
      {Header:"교육명",Type:"Text", SaveName:"employee_training_name", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
@@ -257,7 +261,7 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
 		];       
  createIBSheet2($("#ib-container11")[0],"mySheet11", "100%", "300px");
  IBS_InitSheet(mySheet11,initData);
-	
+ mySheet11.SetSheetHeight(150);	
 	}
 	
 //로우 클릭시
@@ -680,7 +684,7 @@ border : none;
 
 		 <div id="tab1" class="ib-tab-tab">
                <div class="ib-tab-tabs-item">
-				<a class="ib-tab-tabs-item__link is-active"><span class="ib-tab-tabs-item__title">채용/거주/병역</span></a> 
+				<a class="ib-tab-tabs-item__link is-active"><span class="ib-tab-tabs-item__title">신체/병역/기타</span></a> 
 				<a class="ib-tab-tabs-item__link"><span class="ib-tab-tabs-item__title">학력</span></a>
 				<a class="ib-tab-tabs-item__link"><span class="ib-tab-tabs-item__title">경력</span></a>
 				<a class="ib-tab-tabs-item__link"><span class="ib-tab-tabs-item__title">면허자격</span></a>
@@ -701,21 +705,10 @@ border : none;
 
 <table class="tg">
   <tr>
-    <th class="tg-lu1x" rowspan="5"><i class="fa fa-address-book" aria-hidden="true"></i><br>개<br>인<br>정<br>보</th>
-    <td class="tg-8thm">한자이름</td><td class="tg-v9i9"><input type="text" id="employee_name_hn" name="employee_name_hn"><input type="hidden" name="myRow"></td>
-    <td class="tg-8thm">채용구분</td><td class="tg-v9i9"><select name="hire_type"><option value='공개채용' selected>공개채용</option><option value='수시채용'>수시채용</option></select></td>
-    <td class="tg-8thm">기수</td><td class="tg-v9i9" colspan="1"><input type="text" id="hire_number" name="hire_number"></td>
-  </tr>
-  <tr>
-  <td class="tg-8thm">현주소</td>
-    <td class="tg-v9i9" colspan="11"><input type="text" id="current_address" name="current_address"><a href="javascript:goPopup();" ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a><input type="text" id="current_address_detail" name="current_address_detail"></td>
+    <th class="tg-lu1x" rowspan="5"><i class="fa fa-address-book" aria-hidden="true"></i><br>개<br>인<br>정<br>보</th>  
   </tr>  
- <tr>
-<td class="tg-8thm">등록기준지</td>
-    <td class="tg-v9i9" colspan="11"><input type="text" id="resist_address" name="resist_address"><a href="javascript:goPopup2();" ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a><input type="text" id="resist_address_detail" name="resist_address_detail"></td>
- </tr>  
   <tr>
-<td class="tg-8thm">결혼구분</td><td class="tg-v9i9" colspan="1"><select name="marriage_yn"><option value='기혼' selected>기혼</option><option value='미혼'>미혼</option></select></td>
+<td class="tg-8thm">결혼구분</td><td class="tg-v9i9" ><select name="marriage_yn"><option value='기혼' selected>기혼</option><option value='미혼'>미혼</option></select></td>
     <td class="tg-8thm">종교</td>
     <td class="tg-v9i9"><select name="religion"><option value='기독교' selected>기독교</option>
 									<option value='천주교'>천주교</option>
@@ -730,11 +723,11 @@ border : none;
 									
   </tr>
   <tr>
-<td class="tg-8thm">병역구분</td><td class="tg-v9i9" colspan="1"><select name="military_type">
+<td class="tg-8thm">병역구분</td><td class="tg-v9i9" ><select name="military_type">
 									<option value='현역' selected>현역</option>
 									<option value='단기사병' >단기사병</option>
 									<option value='면제'>면제</option></select></td>
-    <td class="tg-8thm">군번</td><td class="tg-v9i9" colspan="1"><input type="text" id="military_number" name="military_number"></td>
+    <td class="tg-8thm">군번</td><td class="tg-v9i9"><input type="text" id="military_number" name="military_number"></td>
 	<td class="tg-8thm">제대구분</td><td class="tg-v9i9"><select name="discharge_yn">
 									<option value='만기' selected>만기</option>
 									<option value='단기'>단기</option>

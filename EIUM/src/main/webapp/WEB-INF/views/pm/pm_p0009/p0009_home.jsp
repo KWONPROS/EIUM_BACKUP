@@ -408,10 +408,87 @@ Highcharts.chart('payByDep', {
 		
 		
 		
-	}//LoadPage
+		  
+		
 	
 	
+	(function selectSite() {
+		$.ajax({
+					url : "${contextPath}/sm/p0006/SiteList.do",//목록을 조회 할 url
+					type : "POST",
+					dataType : "JSON",
+					success : function(data) {
+						for (var i = 0; i < data['Data'].length; i++) {	
+							var option = "<option name='1' value='" + data['Data'][i].site_NAME + "'>"
+									+ data['Data'][i].site_NAME + "</option>";
+							//대상 콤보박스에 추가
+							$('#searchSite').append(option);
+						}
+					},
+					error : function(jqxhr, status, error) {
+						alert("에러");
+					}
+				});
+	})();
+	  
+	function selectType() {
+		var searchTYPE = $('#searchTYPE').val();
+		console.log(searchTYPE);
+		$.ajax({
+					url : "${contextPath}/pm/p0001/TypeList.do",//목록을 조회 할 url
+					type : "POST",
+					data : {
+						"searchTYPE" : searchTYPE
+					},
+					dataType : "JSON",
+					success : function(data) {
+						$(".1").remove();
+						if(data['Data'][0].site_name!= null && data['Data'][0].site_name!= ''){
+						for (var i = 0; i < data['Data'].length; i++) {
+							var option = "<option class='1' value='" + data['Data'][i].site_name + "'>"
+									+ data['Data'][i].site_name
+									+ "</option>";
+							//대상 콤보박스에 추가
+							$('#searchDetail').append(option);
+						}
+						}
+						if(data['Data'][0].department_name!= null && data['Data'][0].department_name!= ''){
+						for (var i = 0; i < data['Data'].length; i++) {
+							var option = "<option class='1' value='" + data['Data'][i].department_name + "'>"
+									+ data['Data'][i].department_name
+									+ "</option>";
+							//대상 콤보박스에 추가
+							$('#searchDetail').append(option);
+						}
+						}
+						if(data['Data'][0].work_group_name!= null && data['Data'][0].work_group_name!= ''){
+						for (var i = 0; i < data['Data'].length; i++) {
 
+							var option = "<option class='1' value='" + data['Data'][i].work_group_name + "'>"
+									+ data['Data'][i].work_group_name
+									+ "</option>";
+							//대상 콤보박스에 추가
+							$('#searchDetail').append(option);
+						}
+						}
+						if(data['Data'][0].project_name!= null && data['Data'][0].project_name!= ''){
+						for (var i = 0; i < data['Data'].length; i++) {
+							var option = "<option class='1' value='" + data['Data'][i].project_name + "'>"
+									+ data['Data'][i].project_name
+									+ "</option>";
+							//대상 콤보박스에 추가
+							$('#searchDetail').append(option);
+						}
+						}
+					},
+					error : function(jqxhr, status, error) {
+						alert("에러");
+					}
+				});
+	};
+	
+	
+	}//LoadPage
 
 	//사원검색 조건
 	function searchCondition() {
@@ -570,23 +647,25 @@ position:relative;
 		<span class="searchBarTitle">지급일</span> 
 		<input type="text" style="width:81px;" readonly><img src="${contextPath}/resources/image/icons/icon_plus.png" ><input type="text" id="">
 			
-		<span class="searchBarTitle" >지급구분</span>  
-		<select style="width:81px;">
-		<option value="">전체</option>
-		<option value="">급여</option>
-		<option value="">상여</option>
+		<span class="searchBarTitle" >사업장구분</span>  
+		<select id="searchSite" style="width:81px;">
+			<option value="all" selected>전체</option>
 		</select>
 	
 		<span class="searchBarTitle">조회조건</span>
 		 <select id="searchTYPE" onchange="selectType()">
-			<option selected="selected"></option>
-			<option value="">사업장</option>
-			<option value="">부서</option>
-			<option value="">근무조</option>
-			<option value="">프로젝트</option>
+			<option value="all" selected>전체</option>
+			<option value="department">부서</option>
+			<option value="work_group">근무조</option>
+			<option value="project">프로젝트</option>
 		</select> 
 		<input type="text" id="">
 		<img src="${contextPath}/resources/image/icons/icon_plus.png" >
+		
+		<span class="searchBarTitle">구분</span>
+		<select id="searchDetail" >
+			<option value="alldetail" selected>전체</option>
+		</select>
 	</div>
 
 	<div id="mySheet"><script>createIBSheet("mySheet", "100%", "100%");</script></div>
