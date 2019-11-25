@@ -96,81 +96,31 @@ var initSheet = {};
 initSheet.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:3, MergeSheet:msHeaderOnly}
 initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 initSheet.Cols = [
-      {Header:"상태|상태",Type:"Status",SaveName:"Status", Align:"Center"},
-      {Header:"삭제|삭제",Type:"DelCheck",SaveName:"DEL_CHK"},
-      {Header:"발령일자|발령일자",Type:"Date",SaveName:"appoint_DATE",Align:"Center",Width:100},
-      {Header:"발령번호|발령번호",Type:"Text",SaveName:"appoint_CODE",Align:"Center",Width:100},   
-      {Header:"제목|제목",Type:"Text",SaveName:"appoint_TITLE",Align:"Center",Width:100},         
-      {Header:"마감/취소|마감/취소",Type:"Button",SaveName:"appoint_YN",Align:"Center",Width:100},         
-      {Header:"작성자|직원번호",Type:"Text",SaveName:"masterEmployee_CODE",Format:"Ymd",Width:100},
-      {Header:"작성자|작성자명",Type:"Text",SaveName:"masterEmployee_NAME",Align:"Center",Width:100},
-      {Header:"작성자|사업장",Type:"Text",SaveName:"site_NAME",Align:"Center",Width:100},
-      {Header:"작성자|부서",Type:"Text",SaveName:"department_NAME",Align:"Center",Width:100},
-      {Header:"작성자|직책",Type:"Text",SaveName:"duty_NAME",Align:"Center",Width:100}
+	  {Header:"NO",Type:"Seq",SaveName:"seq",Align:"Center",Width:100},
+      {Header:"인사발령내역고유번호",Type:"Text",SaveName:"appoint_HISTORY_CODE",Align:"Center",Width:100,"Hidden":1},   
+      {Header:"사원코드",Type:"Text",SaveName:"employee_CODE",Align:"Center",Width:100,InsertEdit:0},
+      {Header:"사원명",Type:"Text",SaveName:"employee_NAME",Align:"Center",Width:100},         
+      {Header:"시작일자",Type:"Date",SaveName:"start_DATE",Align:"Center",Width:100,Format:"Ymd"},         
+      {Header:"종료일자",Type:"Date",SaveName:"end_DATE",Align:"Center",Width:100,Format:"Ymd"},
+      {Header:"발령구분",Type:"Text",SaveName:"hr_APPOINT_INDEX_NAME",Align:"Center",Width:100},
+      {Header:"재직상태",Type:"Text",SaveName:"work_STATUS",Align:"Center",Width:100},
+      {Header:"입사일자",Type:"Text",SaveName:"employee_JOIN_DATE",Align:"Center",Width:100,Format:"Ymd"},
+      {Header:"사업장",Type:"Text",SaveName:"site_NAME",Align:"Center",Width:100},
+      {Header:"사업장코드",Type:"Text",SaveName:"site_CODE",Align:"Center",Width:100,Hidden:1},
+      {Header:"부서",Type:"Text",SaveName:"department_NAME",Align:"Center",Width:100},
+      {Header:"부서코드",Type:"Text",SaveName:"department_CODE",Align:"Center",Width:100,Hidden:1},
+      {Header:"직종",Type:"Text",SaveName:"job_CLASS_NAME",Align:"Center",Width:100},
+      {Header:"직급",Type:"Text",SaveName:"position_NAME",Align:"Center",Width:100},
+      {Header:"직책",Type:"Text",SaveName:"duty_NAME",Align:"Center",Width:100},
+      {Header:"직무",Type:"Text",SaveName:"job_DIS_NAME",Align:"Center",Width:100},
+      {Header:"급여유형",Type:"Text",SaveName:"pay_TYPE_NAME",Align:"Center",Width:100},
+      {Header:"급여호봉",Type:"Text",SaveName:"pay_GRADE_NAME",Align:"Center",Width:100},
+      {Header:"퇴직사유",Type:"Text",SaveName:"out_REASON_NAME",Align:"Center",Width:100}
+      
       ];
    IBS_InitSheet(mySheet1, initSheet);
    mySheet1.SetEditableColorDiff(1); //편집불가능한 셀 표시 구분
 
-   
-   mySheet2.RemoveAll();
-   //아이비시트 초기화
-   var initSheet2 = {};
-   initSheet2.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:3, FrozenCol:5}
-   initSheet2.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
-   initSheet2.Cols = [
-         {Header:"상태",Type:"Status",SaveName:"Status", Align:"Center"},
-         {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK"},
-         {Header:"인사발령내역고유번호",Type:"Text",SaveName:"appoint_HISTORY_CODE",Align:"Center",Width:100,"Hidden":1},   
-         {Header:"사원코드",Type:"Text",SaveName:"employee_CODE",Align:"Center",Width:100},
-         {Header:"사원명",Type:"Text",SaveName:"employee_NAME",Align:"Center",Width:100},         
-         {Header:"시작일자",Type:"Text",SaveName:"department_NAME",Align:"Center",Width:100},         
-         {Header:"종료일자",Type:"Text",SaveName:"duty_NAME",Align:"Center",Width:100},
-         {Header:"발령유형",Type:"Text",SaveName:"hr_APPOINT_INDEX_NAME",Align:"Center",Width:100},
-         {Header:"발령구분",Type:"Text",SaveName:"appoint_INDEX_NAME",Align:"Center",Width:100},
-         {Header:"재직상태",Type:"Text",SaveName:"work_STATE",Align:"Center",Width:100},
-         {Header:"입사일자",Type:"Text",SaveName:"join_DATE",Align:"Center",Width:100},
-         {Header:"사업장",Type:"Text",SaveName:"site_NAME",Align:"Center",Width:100},
-         {Header:"부서",Type:"Text",SaveName:"department_NAME",Align:"Center",Width:100},
-         {Header:"직종",Type:"Text",SaveName:"job_CLASS_NAME",Align:"Center",Width:100},
-         {Header:"직급",Type:"Text",SaveName:"position_NAME",Align:"Center",Width:100},
-         {Header:"직책",Type:"Text",SaveName:"duty_NAME",Align:"Center",Width:100},
-         {Header:"직무",Type:"Text",SaveName:"job_DIS_NAME",Align:"Center",Width:100},
-         {Header:"급여유형",Type:"Text",SaveName:"pay_TYPE_NAME",Align:"Center",Width:100},
-         {Header:"급여호봉",Type:"Text",SaveName:"pay_GRADE_NAME",Align:"Center",Width:100},
-         {Header:"퇴직사유",Type:"Text",SaveName:"out_REASON_NAME",Align:"Center",Width:100}
-         ];
-      IBS_InitSheet(mySheet2,initSheet2);
-      mySheet2.SetEditableColorDiff(1); //편집불가능한 셀 표시 구분
-
-      mySheet3.RemoveAll();
-      //아이비시트 초기화
-      var initSheet3 = {};
-      initSheet3.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:3, FrozenCol:5}
-      initSheet3.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
-      initSheet3.Cols = [
-            {Header:"상태",Type:"Status",SaveName:"Status", Align:"Center"},
-            {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK"},
-            {Header:"인사발령내역고유번호",Type:"Text",SaveName:"appoint_HISTORY_CODE",Align:"Center",Width:100,"Hidden":1},   
-            {Header:"사원코드",Type:"Text",SaveName:"employee_CODE",Align:"Center",Width:100},
-            {Header:"사원명",Type:"Text",SaveName:"employee_NAME",Align:"Center",Width:100},         
-            {Header:"시작일자",Type:"Text",SaveName:"department_NAME",Align:"Center",Width:100},         
-            {Header:"종료일자",Type:"Text",SaveName:"duty_NAME",Align:"Center",Width:100},
-            {Header:"발령유형",Type:"Text",SaveName:"hr_APPOINT_INDEX_NAME",Align:"Center",Width:100},
-            {Header:"발령구분",Type:"Text",SaveName:"appoint_INDEX_NAME",Align:"Center",Width:100},
-            {Header:"재직상태",Type:"Text",SaveName:"work_STATE",Align:"Center",Width:100},
-            {Header:"입사일자",Type:"Text",SaveName:"join_DATE",Align:"Center",Width:100},
-            {Header:"사업장",Type:"Text",SaveName:"site_NAME",Align:"Center",Width:100},
-            {Header:"부서",Type:"Text",SaveName:"department_NAME",Align:"Center",Width:100},
-            {Header:"직종",Type:"Text",SaveName:"job_CLASS_NAME",Align:"Center",Width:100},
-            {Header:"직급",Type:"Text",SaveName:"position_NAME",Align:"Center",Width:100},
-            {Header:"직책",Type:"Text",SaveName:"duty_NAME",Align:"Center",Width:100},
-            {Header:"직무",Type:"Text",SaveName:"job_DIS_NAME",Align:"Center",Width:100},
-            {Header:"급여유형",Type:"Text",SaveName:"pay_TYPE_NAME",Align:"Center",Width:100},
-            {Header:"급여호봉",Type:"Text",SaveName:"pay_GRADE_NAME",Align:"Center",Width:100},
-            {Header:"퇴직사유",Type:"Text",SaveName:"out_REASON_NAME",Align:"Center",Width:100}
-            ];
-         IBS_InitSheet(mySheet3,initSheet3);
-         mySheet3.SetEditableColorDiff(1); //편집불가능한 셀 표시 구분
 
 }
 
@@ -189,101 +139,78 @@ function doAction(sAction) {
 	    $('#p_text').attr('placeholder', "사원의 이름을 입력해주세요.");
 		break;
 	}
+	
+
 }
+
+function goPopup(){
+	window.open("${contextPath}/hm/p0023/departmentSearch_p01.do", "a", "width=500, height=700, left=100, top=50 location=0");
+}
+
+function goPopup2(){
+	window.open("${contextPath}/hm/p0023/employeeSearch_p02.do", "a", "width=500, height=700, left=100, top=50 location=0");
+}
+function employeeValue(rowData){
+	$("#employee").val(rowData.employee_NAME)
+	
+}
+function departmentValue(rowData){
+	$("#department").val(rowData.department_NAME)
+	
+}
+
 </script>
 <meta charset="UTF-8">
-<title>인사발령</title>
+<title>인사발령조회</title>
 </head>
 <body onload="LoadPage()">
-<form id="sendForm" name="sendForm" method="post">
-<div class= "sheet_search outer">
-<div>
-<table>
-<tbody>
-<tr>
-<td>
-<span class="Mandatory">
-"발령일"
-</span>
-<input  type="text" id="date" class="Datepicker">
-"~"
-<input type="text" id="date2" class="Datepicker">
-</td>
-<td>
-<span>제목</span>
-<input id = "title"  type="text" class="text" style="width: 160px">
-</td>
-<td>
-<span>작성자</span>
-<input id="masterEmpl" type="text" class="text">
-</td>
-<td id="commonSearchEmpId">
-<span id="">대상자</span>
-<input id="emplyCode" type="text" class="text" style="width:160px"><a href="" class="IBbutton"></a>
-<input id="emply" type="text" class="text" style="width:160px">
 
-</td>
-<td>
+<form name="frm" >
+
+
+
+"발령일시작일"
+
+<input id="date"type="text"  class="Datepicker">
+"~"
+<input  id="date2"type="text" class="Datepicker">
+
+<span>발령구분</span>
+<select id = "title"  class="" style="width: 160px">
+<option value="" selected >전체</option>
+<option value="채용" >채용</option>
+<option value="승진">승진</option>
+<option value="이동">이동</option>
+<option value="파견">파견</option>
+<option value="파견복귀">파견복귀</option>
+<option value="휴직">휴직</option>
+<option value="복직">복직</option>
+<option value="퇴직">퇴직</option>
+<option value="보직">보직</option>
+<option value="보직해제">보직해제</option>
+<option value="조직개편">조직개편</option>
+<option value="계약연장">계약연장</option>
+<option value="정직">정직</option>
+<option value="정직해제">정직해제</option>
+</select>
+
+<span>부서</span>
+<input id="department" type="text" >
+<a href="javascript:goPopup()" >부서검색</a>
+
+<span>직원</span>
+<input id="employee" type="text" >
+<input id="masterEmplCode" type="hidden">
+<a href="javascript:goPopup2()" >사원검색</a>
+
+
 <a href="javascript:doAction('search')" class="IBbutton">조회</a>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+
 </form>
-<table border="0" cellspacing="0" cellpadding="0" class="sheet_main">
-<tbody>
-<tr>
-<td>
-<div class="inner">
-<div class="sheet_title">
-<ul>
-<li class="txt">발령제목</li>
-<li class="btn">
-<a href="" class="IBbutton">입력</a>
-<a href="" class="IBbutton">저장</a>
-</li>
-</ul>
-</div>
-</div>
-<script type="text/javascript"> 
-createIBSheet("mySheet1","100%","30%");
-</script>
-<tr>
-<td>
-<div class = "inner">
-<div class="sheet_title">
-<ul>
-<li class="txt">발령후내역</li>
-<li class="btn">
-<a href="" class="IBbutton">입력</a>
-<a href="" class="IBbutton">저장</a>
-</li>
-</ul>
-</div>
-</div>
+
 <script type="text/javascript">
-createIBSheet("mySheet2","100%","40%");
+createIBSheet("mySheet1","100%","40%");
 </script>
-</td>
-</tr>
-<tr>
-<td>
-<div class="inner">
-<div class="sheet_title">
-<ul>
-<li class="txt">발령전내역</li>
-</ul>
-</div>
-</div>
-<script>
-createIBSheet("mySheet3","100%","10%");
-</script>
-</td>
-</tr>
-</tbody>
-</table>
 
 </body>
 </html>

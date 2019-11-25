@@ -96,12 +96,18 @@ initSheet.Cols = [
 
 function mySheet1_OnClick(Row,Col){
 	var status=mySheet1.GetCellValue(Row,0);
+	var finish=mySheet1.GetCellValue(Row,5);
 	if(status!="I"&& Col!=5){
 
 	appointCode ="appointCode="+mySheet1.GetCellValue(Row,3);
 	mySheet2.DoSearch("${contextPath}/hm/p0022/appointList2.do",appointCode);
+	console.log(finish);
 	
-	
+	}if(finish=="마감완료"){
+		
+		document.all.option.style.display="none";
+	}else{
+		document.all.option.style.display="";
 	}
 	
 }
@@ -290,10 +296,10 @@ createIBSheet("mySheet1","100%","30%");
 
 
 발령후내역
-
-<a href="javascript:doAction('insert2')" class="IBbutton">입력</a>
-<a href="javascript:doAction('save2')" class="IBbutton">저장</a>
-
+<div id="option">
+	<a href="javascript:doAction('insert2')" class="IBbutton">입력</a>
+	<a href="javascript:doAction('save2')" class="IBbutton">저장</a>
+</div>
 
 <script type="text/javascript">
 createIBSheet("mySheet2","100%","40%");

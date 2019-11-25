@@ -96,7 +96,7 @@ var data = {Data:[
 	{menuCode:"m13",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0018/searchInit.do", TITLE:"교육관리"},
 	{menuCode:"m14",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0021/searchInit.do", TITLE:"교육평가"},
 	{menuCode:"m15",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0022/searchInit.do", TITLE:"인사발령"},
-	{menuCode:"m17",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"인사발령조회"},
+	{menuCode:"m17",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0023/searchInit.do", TITLE:"인사발령조회"},
 	{menuCode:"m19",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"사원정보현황"},
 	{menuCode:"m20",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"인사고과/상벌현황"},
 	{menuCode:"m21",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"사원입퇴사현황"},
