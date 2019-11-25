@@ -22,6 +22,7 @@
 <link rel="stylesheet"href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css"	type="text/css" />
 <script	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/jquery.mtz.monthpicker.js"></script>
 <script language="javascript">
 
 
@@ -175,80 +176,8 @@
                     0.47
                 ]
             }
-        }/* ,
-        {
-            y: 5.58,
-            color: colors[3],
-            drilldown: {
-                name: 'Safari',
-                categories: [
-                    'Safari v11.0',
-                    'Safari v10.1',
-                    'Safari v10.0',
-                    'Safari v9.1',
-                    'Safari v9.0',
-                    'Safari v5.1'
-                ],
-                data: [
-                    3.39,
-                    0.96,
-                    0.36,
-                    0.54,
-                    0.13,
-                    0.2
-                ]
-            }
-        },
-        {
-            y: 4.02,
-            color: colors[5],
-            drilldown: {
-                name: 'Edge',
-                categories: [
-                    'Edge v16',
-                    'Edge v15',
-                    'Edge v14',
-                    'Edge v13'
-                ],
-                data: [
-                    2.6,
-                    0.92,
-                    0.4,
-                    0.1
-                ]
-            }
-        },
-        {
-            y: 1.92,
-            color: colors[4],
-            drilldown: {
-                name: 'Opera',
-                categories: [
-                    'Opera v50.0',
-                    'Opera v49.0',
-                    'Opera v12.1'
-                ],
-                data: [
-                    0.96,
-                    0.82,
-                    0.14
-                ]
-            }
-        },
-        {
-            y: 7.62,
-            color: colors[6],
-            drilldown: {
-                name: 'Other',
-                categories: [
-                    'Other'
-                ],
-                data: [
-                    7.62
-                ]
-            }
-        } */
-    ],
+        }
+        ],
     browserData = [],
     versionsData = [],
     i,
@@ -412,73 +341,64 @@ Highcharts.chart('payByDep', {
 		
 	
 	
-	(function selectSite() {
-		$.ajax({
-					url : "${contextPath}/sm/p0006/SiteList.do",//목록을 조회 할 url
-					type : "POST",
-					dataType : "JSON",
-					success : function(data) {
-						for (var i = 0; i < data['Data'].length; i++) {	
-							var option = "<option name='1' value='" + data['Data'][i].site_NAME + "'>"
-									+ data['Data'][i].site_NAME + "</option>";
-							//대상 콤보박스에 추가
-							$('#searchSite').append(option);
+		(function selectSite() {
+			$.ajax({
+						url : "${contextPath}/sm/p0006/SiteList.do",//목록을 조회 할 url
+						type : "POST",
+						dataType : "JSON",
+						success : function(data) {
+							for (var i = 0; i < data['Data'].length; i++) {	
+								var option = "<option name='1' value='" + data['Data'][i].site_NAME + "'>"
+										+ data['Data'][i].site_NAME + "</option>";
+								//대상 콤보박스에 추가
+								$('#searchSite').append(option);
+							}
+						},
+						error : function(jqxhr, status, error) {
+							alert("에러");
 						}
-					},
-					error : function(jqxhr, status, error) {
-						alert("에러");
-					}
-				});
-	})();
-	  
-	function selectType() {
-		var searchTYPE = $('#searchTYPE').val();
-		console.log(searchTYPE);
+					});
+		})();
+		  
+		
+	
+		/* MonthPicker 옵션 */
+	    var options = {
+	        pattern: 'yyyy-mm', 
+	     
+	        buttonImage: "${contextPath}/resources/image/icons/icon_calendar.png", 
+	        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']
+	    };
+	     
+	    /* MonthPicker Set */
+	    $('#monthpicker').monthpicker(options);
+	     
+	    /* 버튼 클릭시 MonthPicker Show */
+	    $('#btn_monthpicker').bind('click', function () {
+	        $('#monthpicker').monthpicker('show');
+	    });
+		
+		
+	}//LoadPage
+
+	
+	function selectDept() {
+		var SiteList = $('#searchSite').val();
 		$.ajax({
-					url : "${contextPath}/pm/p0001/TypeList.do",//목록을 조회 할 url
+					url : "${contextPath}/sm/p0006/DeptList.do",//목록을 조회 할 url
 					type : "POST",
 					data : {
-						"searchTYPE" : searchTYPE
+						"SiteList" : SiteList
 					},
 					dataType : "JSON",
 					success : function(data) {
 						$(".1").remove();
-						if(data['Data'][0].site_name!= null && data['Data'][0].site_name!= ''){
 						for (var i = 0; i < data['Data'].length; i++) {
-							var option = "<option class='1' value='" + data['Data'][i].site_name + "'>"
-									+ data['Data'][i].site_name
+							var option = "<option class='1' value='" + data['Data'][i].department_NAME + "'>"
+									+ data['Data'][i].department_NAME
 									+ "</option>";
 							//대상 콤보박스에 추가
-							$('#searchDetail').append(option);
-						}
-						}
-						if(data['Data'][0].department_name!= null && data['Data'][0].department_name!= ''){
-						for (var i = 0; i < data['Data'].length; i++) {
-							var option = "<option class='1' value='" + data['Data'][i].department_name + "'>"
-									+ data['Data'][i].department_name
-									+ "</option>";
-							//대상 콤보박스에 추가
-							$('#searchDetail').append(option);
-						}
-						}
-						if(data['Data'][0].work_group_name!= null && data['Data'][0].work_group_name!= ''){
-						for (var i = 0; i < data['Data'].length; i++) {
-
-							var option = "<option class='1' value='" + data['Data'][i].work_group_name + "'>"
-									+ data['Data'][i].work_group_name
-									+ "</option>";
-							//대상 콤보박스에 추가
-							$('#searchDetail').append(option);
-						}
-						}
-						if(data['Data'][0].project_name!= null && data['Data'][0].project_name!= ''){
-						for (var i = 0; i < data['Data'].length; i++) {
-							var option = "<option class='1' value='" + data['Data'][i].project_name + "'>"
-									+ data['Data'][i].project_name
-									+ "</option>";
-							//대상 콤보박스에 추가
-							$('#searchDetail').append(option);
-						}
+							$('#DeptList').append(option);
 						}
 					},
 					error : function(jqxhr, status, error) {
@@ -488,8 +408,7 @@ Highcharts.chart('payByDep', {
 	};
 	
 	
-	}//LoadPage
-
+	
 	//사원검색 조건
 	function searchCondition() {
 		var cond = document.getElementById("condition").value;
@@ -531,6 +450,21 @@ Highcharts.chart('payByDep', {
 			//mySheet.ReNumberSeq();
 		}
 	}
+	
+	
+	 function payPopup() {
+		 var monthpicker = $('#monthpicker').val();
+		 console.log(monthpicker);
+		 if(monthpicker==""){
+			 alert("귀속년월을 지정해주세요.");
+			 return;
+		 }
+		 var url = '${contextPath}/pm/p0001/searchPaymentdate.do?monthpicker='+monthpicker;
+
+		 window.open(url, "a", "width=342,height=520,resizable = no, scrollbars = no");
+	  
+	  }
+	
 </script>
 <style type="text/css">
 .title {
@@ -643,29 +577,32 @@ position:relative;
 	</div>
 
 
-	<div id="searchBar">	
+	<div id="searchBar">
+		
+		<span class="searchBarTitle">귀속연월</span> 
+		<input id="monthpicker" type="text" style="width:100px">
+		<img id="btn_monthpicker"  src="${contextPath}/resources/image/icons/icon_calendar.png">
+	
 		<span class="searchBarTitle">지급일</span> 
-		<input type="text" style="width:81px;" readonly><img src="${contextPath}/resources/image/icons/icon_plus.png" ><input type="text" id="">
-			
+		<a href="javascript:payPopup();" style="text-decoration: none;">
+		<input type="text" id="Ppayment_date">
+		<img src="${contextPath}/resources/image/icons/icon_plus.png">
+		</a>
+		
+		
 		<span class="searchBarTitle" >사업장구분</span>  
-		<select id="searchSite" style="width:81px;">
-			<option value="all" selected>전체</option>
+		<select id="searchSite" style="width:150px;"  onchange="selectDept()">
+			<option selected>전체</option>
 		</select>
 	
-		<span class="searchBarTitle">조회조건</span>
-		 <select id="searchTYPE" onchange="selectType()">
-			<option value="all" selected>전체</option>
-			<option value="department">부서</option>
-			<option value="work_group">근무조</option>
-			<option value="project">프로젝트</option>
+	
+		<span class="searchBarTitle">부서</span>
+		 <select id="DeptList"style="width:150px;">
+			<option selected>전체</option>
 		</select> 
-		<input type="text" id="">
-		<img src="${contextPath}/resources/image/icons/icon_plus.png" >
 		
-		<span class="searchBarTitle">구분</span>
-		<select id="searchDetail" >
-			<option value="alldetail" selected>전체</option>
-		</select>
+		
+		
 	</div>
 
 	<div id="mySheet"><script>createIBSheet("mySheet", "100%", "100%");</script></div>
