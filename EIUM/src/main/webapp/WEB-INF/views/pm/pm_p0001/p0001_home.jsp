@@ -30,6 +30,8 @@ function setPaygrade(){
 	position_name=document.getElementById("Pposition_name").value;
 	pay_grade_name=document.getElementById("Ppay_grade_name").value;
 	salary=document.getElementById("Psalary").value;
+	
+	mySheet2.SetCellText(row,4,salary);
 };
 
 	/*Sheet 기본 설정 */
@@ -63,8 +65,16 @@ function setPaygrade(){
 	        {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},	
        		{Header:"급여계산서고유번호",Type:"Text",SaveName:"payment_receipt_code",MinWidth:70, Align:"Center",Hidden:"1"},
 	        {Header:"지급항목",Type:"Combo", MinWidth:70, SaveName:"payment_receipt_item", ComboText:"기본급|상여급", ComboCode:"기본급|상여급",PopupText:"기본급|상여급"},
-			{Header:"금액",Type:"Text",SaveName:"payment_receipt_price",MinWidth:70, Align:"Center"},
-		];
+			{Header:"호봉",Type:"Text",SaveName:"salary",MinWidth:70, Align:"Center"},
+			{Header:"평일정상근무금액",Type:"Text",SaveName:"weekday_normal_work_time",MinWidth:70, Align:"Center", CalcLogic : "(|payment_receipt_price|/209) * |5|)" },
+			{Header:"평일연장근무금액",Type:"Text",SaveName:"weekday_extension_work_time",MinWidth:70, Align:"Center", CalcLogic : "((|payment_receipt_price|/209)*1.5) * |6|)"},
+			{Header:"평일야간근무금액",Type:"Text",SaveName:"weekday_night_work_time",MinWidth:70, Align:"Center", CalcLogic : "((|payment_receipt_price|/209)*1.5) * |7|)"},
+			{Header:"휴일정상근무금액",Type:"Text",SaveName:"holiday_normal_work_time",MinWidth:70, Align:"Center", CalcLogic : "((|payment_receipt_price|/209)*1.5) * |8|)"},
+			{Header:"휴일연장근무금액",Type:"Text",SaveName:"holiday_extension_work_time",MinWidth:70, Align:"Center", CalcLogic : "((|payment_receipt_price|/209)*1.5) * |9|)"},
+			{Header:"휴일야간근무금액",Type:"Text",SaveName:"holiday_night_work_time",MinWidth:70, Align:"Center", CalcLogic : "((|payment_receipt_price|/209)*2) * |10|)"},
+			{Header:"총액",Type:"Text",SaveName:"payment_receipt_price",MinWidth:70, Align:"Center", CalcLogic : "((|payment_receipt_price|/209)*2.5) * |11|)"},
+
+			];
 		
 		IBS_InitSheet( mySheet2 , initSheet2);
 		  
@@ -414,8 +424,8 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 		<script>createIBSheet("mySheet2", "100%", "100%");</script>
 	</div>	
 </form>
-<input type="hidden" id="Ppayment_code">
-<input type="hidden" id="Ppayment_code">
+<input type="hidden" id="Pposition_name">
+<input type="hidden" id="Ppay_grade_name">
 <input type="hidden" id="Psalary">
 
 

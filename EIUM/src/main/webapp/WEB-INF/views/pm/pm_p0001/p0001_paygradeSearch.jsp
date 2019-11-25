@@ -21,7 +21,7 @@ function LoadPage(){
 	initSheet.HeaderMode = {Sort:1,ColMove:1,ColResize:1,HeaderCheck:1};
 	initSheet.Cols=[
 
-		{Header:"직책명",Type:"Text",Width:100,SaveName:"position_name",Align:"Center"},
+		{Header:"직급명",Type:"Text",Width:100,SaveName:"position_name",Align:"Center"},
 		{Header:"호봉구분",Type:"Text",Width:100,SaveName:"pay_grade_name",Align:"Center"},
 		{Header:"금액",Type:"Text",Width:100,SaveName:"salary",Align:"Center"}
 
@@ -70,6 +70,6 @@ function mySheet2_OnDblClick(Row, Col, Value) {
 				</script>
 	<input type="hidden" id="Cposition_name">
 	<input type="hidden" id="Cpay_grade_name">
-		<input type="hidden" id="Csalary">
+	<input type="hidden" id="Csalary">
 </body>
 </html>

@@ -12,8 +12,17 @@
 		<result property="payment_code" column="payment_code" />
 		<result property="payment_date" column="payment_date" />
 		<result property="payment_des_name" column="payment_des_name" />
-		<result property="work_group_name" column="work_group_name" />
-		<result property="project_name" column="project_name" />
+		<result property="position_name" column="position_name" />
+		<result property="pay_grade_name" column="pay_grade_name" />
+		<result property="salary" column="salary" />
+		
+		
+		<result property="weekday_normal_work_time" column="weekday_normal_work_time" />
+		<result property="weekday_extension_work_time" column="weekday_extension_work_time" />
+		<result property="weekday_night_work_time" column="weekday_night_work_time" />
+		<result property="holiday_normal_work_time" column="holiday_normal_work_time" />
+		<result property="holiday_extension_work_time" column="holiday_extension_work_time" />
+		<result property="holiday_night_work_time" column="holiday_night_work_time" />
 	</resultMap>
 	
 	<!-- /////////////////////////////////////EMP_SEARCHLIST ////////////////////////////////////////-->
@@ -45,17 +54,25 @@
 	</select>
 	
 <select id = "searchReceipt" resultMap="P0001resultVO" parameterType="java.util.Map">
-		select payment_receipt_code, payment_receipt_item, payment_receipt_price
-		from payment_receipt
+		select p.payment_receipt_code, p.payment_receipt_item, p.payment_receipt_price, t.weekday_normal_work_time, t.weekday_extension_work_time, t.weekday_night_work_time, t.holiday_normal_work_time, t.holiday_extension_work_time, t.holiday_night_work_time
+		from payment_receipt p, total_working_status t
 		where payment_code =  #{y}
+		and p.employee_code = t.employee_code
         and employee_code =  #{x}
 </select>
 
 <select id = "paygradeList" resultMap="P0001resultVO" parameterType="java.util.Map">
-		select payment_receipt_code, payment_receipt_item, payment_receipt_price
-		from payment_receipt
-		where payment_code =  #{y}
-        and employee_code =  #{x}
+	<![CDATA[
+			select  p.position_name, pg.pay_grade_name, pt.salary
+		from employee_work e, position p, pay_grade pg, pay_grade_table pt
+        where e.position_code = p.position_code
+        and e.pay_grade_code = pg.pay_grade_code
+        and e.pay_grade_code = pt.pay_grade_code
+        and e.position_code =pt.position_code
+        and SUBSTR(TO_DATE(SUBSTR(pt.start_date,1,6), 'YYYY-MM'),1,5) <=   SUBSTR(to_char(sysdate, 'YYYY/MM/DD'),3,5)
+        and  SUBSTR(to_char(sysdate, 'YYYY/MM/DD'),3,5) <= SUBSTR(TO_DATE(SUBSTR(pt.end_date,1,6), 'YYYY-MM'),1,5)
+        and e.employee_code =  #{x}
+        	]]> 
 </select>
 	
 	<insert id="insertData" parameterType="java.util.Map">

@@ -14,8 +14,9 @@ public class PM_P0001VO {
 	private String payment_date;
 	private String payment_des_name;
 	private String department_name;
-	private String work_group_name;
-	private String project_name;
+	private String position_name;
+	private String pay_grade_name;
+	private String salary;
 	private String job_class_name;
 	private String user;
 	
@@ -23,6 +24,24 @@ public class PM_P0001VO {
 	
 	
 
+	public String getPosition_name() {
+		return position_name;
+	}
+	public void setPosition_name(String position_name) {
+		this.position_name = position_name;
+	}
+	public String getPay_grade_name() {
+		return pay_grade_name;
+	}
+	public void setPay_grade_name(String pay_grade_name) {
+		this.pay_grade_name = pay_grade_name;
+	}
+	public String getSalary() {
+		return salary;
+	}
+	public void setSalary(String salary) {
+		this.salary = salary;
+	}
 	public String getDepartment_name() {
 		return department_name;
 	}
@@ -66,19 +85,7 @@ public class PM_P0001VO {
 	public void setPayment_code(String payment_code) {
 		this.payment_code = payment_code;
 	}
-	
-	public String getWork_group_name() {
-		return work_group_name;
-	}
-	public void setWork_group_name(String work_group_name) {
-		this.work_group_name = work_group_name;
-	}
-	public String getProject_name() {
-		return project_name;
-	}
-	public void setProject_name(String project_name) {
-		this.project_name = project_name;
-	}
+
 	
 	public String getEmployee_code() {
 		return employee_code;

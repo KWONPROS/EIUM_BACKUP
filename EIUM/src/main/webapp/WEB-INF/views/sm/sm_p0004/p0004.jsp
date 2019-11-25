@@ -13,16 +13,7 @@
 
 <script type="text/javascript">
 var pageheightoffset = 200; //시트높이 계산용
-function setDepartment(){
-	
-	 department_code=document.getElementById("Pdepartment_code").value;
-	 department_name=document.getElementById("Pdepartment_name").value;
-	mySheet.SetCellText(row,col,department_code);
-	mySheet.SetCellText(row,col+1,department_name);
 
-
-	
-};
 
 //sheet 기본설정
 function LoadPage(){
