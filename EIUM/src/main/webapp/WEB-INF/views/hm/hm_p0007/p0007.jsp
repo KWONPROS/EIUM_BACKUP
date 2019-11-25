@@ -67,7 +67,8 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
 	        {Header:"거주구분",Type:"Text",SaveName:"residential_division",Hidden:1},
 	        {Header:"병역구분",Type:"Text",SaveName:"military_type",Hidden:1},         
 	        {Header:"군번",Type:"Text",SaveName:"military_number",Hidden:1},
-	        {Header:"제대구분",Type:"Text",SaveName:"discharge_yn",Hidden:1}
+	        {Header:"제대구분",Type:"Text",SaveName:"discharge_yn",Hidden:1},
+			{Header:"사진",Type:"Image",SaveName:"picture",   Hidden:1  }
 		];  
 		IBS_InitSheet(mySheet , initSheet);
   
@@ -282,6 +283,7 @@ function mySheet_OnClick(Row, Col) {
 
 
 		  $('input[name=myRow]').val(Row);
+	      $('#uploadedImg').attr('src',"${contextPath}/hm/p0007/getByteImage.do?employee_code="+mySheet.GetCellValue(Row,2));	
 		  $('input[name=employee_name_hn]').val(mySheet.GetCellValue(Row,4));
 	      $('select[name=hire_type]').val(mySheet.GetCellValue(Row,5));
 	      $('input[name=hire_number]').val(mySheet.GetCellValue(Row,6)); 
@@ -530,7 +532,17 @@ function mySheet_OnClick(Row, Col) {
 
 		document.form.resist_address.value = roadAddrPart1;	
 		document.form.resist_address_detail.value = addrDetail;	
-	}	
+	}
+
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$('#uploadedImg').attr('src', e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
 						
 	        
 	// }
@@ -671,8 +683,8 @@ border : none;
 	<div class="left">
 		<table class="tg1" >
   <tr>
-    <th class="tg-2ut6"><img src="image/employee001.jpg" width="100%" height="30%"></th>
-  </tr>
+<td class="tg-dm68" rowspan="7"><img id=uploadedImg alt="" src="" ></td></tr>
+  
 </table>
 		
 		

@@ -6,7 +6,10 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.myspring.eium.hm.hm_p0007.vo.HM_P0007VO;
 
 public interface HM_P0007Controller {
 	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception;
@@ -14,4 +17,5 @@ public interface HM_P0007Controller {
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	ModelAndView findAddress(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	ModelAndView findAddress2(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	ResponseEntity<byte[]> getByteImage(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

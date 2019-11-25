@@ -2,6 +2,7 @@ package com.myspring.eium.hm.hm_p0007.vo;
 
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 @Component
 public class HM_P0007VO {
@@ -26,9 +27,16 @@ public class HM_P0007VO {
 	private String hr_appoint_title;
 	private String hr_appoint_history;
 	private String hr_appoint_before_info;
+	private MultipartFile picture;
+
 	
 	
-	
+	public MultipartFile getPicture() {
+		return picture;
+	}
+	public void setPicture(MultipartFile picture) {
+		this.picture = picture;
+	}
 	public String getHr_appoint_number() {
 		return hr_appoint_number;
 	}

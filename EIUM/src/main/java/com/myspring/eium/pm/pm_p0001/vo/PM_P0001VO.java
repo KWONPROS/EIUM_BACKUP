@@ -18,12 +18,54 @@ public class PM_P0001VO {
 	private String pay_grade_name;
 	private String salary;
 	private String job_class_name;
+	private String weekday_normal_work_time;
+	private String weekday_extension_work_time;
+	private String weekday_night_work_time;
+	private String holiday_normal_work_time;
+	private String holiday_extension_work_time;
+	private String holiday_night_work_time;
 	private String user;
 	
 
 	
 	
 
+	public String getWeekday_normal_work_time() {
+		return weekday_normal_work_time;
+	}
+	public void setWeekday_normal_work_time(String weekday_normal_work_time) {
+		this.weekday_normal_work_time = weekday_normal_work_time;
+	}
+	public String getWeekday_extension_work_time() {
+		return weekday_extension_work_time;
+	}
+	public void setWeekday_extension_work_time(String weekday_extension_work_time) {
+		this.weekday_extension_work_time = weekday_extension_work_time;
+	}
+	public String getWeekday_night_work_time() {
+		return weekday_night_work_time;
+	}
+	public void setWeekday_night_work_time(String weekday_night_work_time) {
+		this.weekday_night_work_time = weekday_night_work_time;
+	}
+	public String getHoliday_normal_work_time() {
+		return holiday_normal_work_time;
+	}
+	public void setHoliday_normal_work_time(String holiday_normal_work_time) {
+		this.holiday_normal_work_time = holiday_normal_work_time;
+	}
+	public String getHoliday_extension_work_time() {
+		return holiday_extension_work_time;
+	}
+	public void setHoliday_extension_work_time(String holiday_extension_work_time) {
+		this.holiday_extension_work_time = holiday_extension_work_time;
+	}
+	public String getHoliday_night_work_time() {
+		return holiday_night_work_time;
+	}
+	public void setHoliday_night_work_time(String holiday_night_work_time) {
+		this.holiday_night_work_time = holiday_night_work_time;
+	}
 	public String getPosition_name() {
 		return position_name;
 	}

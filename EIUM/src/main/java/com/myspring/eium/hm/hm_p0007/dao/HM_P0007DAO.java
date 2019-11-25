@@ -17,5 +17,8 @@ public interface HM_P0007DAO {
 	public void updateData(Map<String, String> row) throws DataAccessException;
 
 	public void deleteData(Map<String, String> row) throws DataAccessException;
-	 
+	
+	public Map<String, Object> getByteImage(Map<String, Object> searchMap);
+
+ 
 }

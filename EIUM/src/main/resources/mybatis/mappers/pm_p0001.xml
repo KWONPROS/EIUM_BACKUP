@@ -54,11 +54,12 @@
 	</select>
 	
 <select id = "searchReceipt" resultMap="P0001resultVO" parameterType="java.util.Map">
+		
 		select p.payment_receipt_code, p.payment_receipt_item, p.payment_receipt_price, t.weekday_normal_work_time, t.weekday_extension_work_time, t.weekday_night_work_time, t.holiday_normal_work_time, t.holiday_extension_work_time, t.holiday_night_work_time
 		from payment_receipt p, total_working_status t
-		where payment_code =  #{y}
-		and p.employee_code = t.employee_code
-        and employee_code =  #{x}
+		where p.employee_code = t.employee_code
+		and p.payment_code =  #{y}
+		and p.employee_code =  #{x}
 </select>
 
 <select id = "paygradeList" resultMap="P0001resultVO" parameterType="java.util.Map">
