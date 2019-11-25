@@ -72,6 +72,7 @@ public class HM_P0004VO {
 	
 	private String pay_GRADE_CODE;
 	private String pay_GRADE_NAME;
+
 	private String salary;
 	private String bank_CODE_1;
 	private String bank_NAME_1;
@@ -81,19 +82,6 @@ public class HM_P0004VO {
 	private String bank_NAME_2;
 	private String account_NUMBER_2;
 	private String account_NAME_2;
-	
-	public String getPay_TYPE_CODE() {
-		return pay_TYPE_CODE;
-	}
-	public void setPay_TYPE_CODE(String pay_TYPE_CODE) {
-		this.pay_TYPE_CODE = pay_TYPE_CODE;
-	}
-	public String getPay_TYPE_NAME() {
-		return pay_TYPE_NAME;
-	}
-	public void setPay_TYPE_NAME(String pay_TYPE_NAME) {
-		this.pay_TYPE_NAME = pay_TYPE_NAME;
-	}
 	public String getEmp_CODE() {
 		return emp_CODE;
 	}
@@ -400,6 +388,18 @@ public class HM_P0004VO {
 	public void setWork_TYPE_NAME(String work_TYPE_NAME) {
 		this.work_TYPE_NAME = work_TYPE_NAME;
 	}
+	public String getPay_TYPE_CODE() {
+		return pay_TYPE_CODE;
+	}
+	public void setPay_TYPE_CODE(String pay_TYPE_CODE) {
+		this.pay_TYPE_CODE = pay_TYPE_CODE;
+	}
+	public String getPay_TYPE_NAME() {
+		return pay_TYPE_NAME;
+	}
+	public void setPay_TYPE_NAME(String pay_TYPE_NAME) {
+		this.pay_TYPE_NAME = pay_TYPE_NAME;
+	}
 	public String getPay_GRADE_CODE() {
 		return pay_GRADE_CODE;
 	}
@@ -467,6 +467,7 @@ public class HM_P0004VO {
 		this.account_NAME_2 = account_NAME_2;
 	}
 	
+
 	
 	
 }

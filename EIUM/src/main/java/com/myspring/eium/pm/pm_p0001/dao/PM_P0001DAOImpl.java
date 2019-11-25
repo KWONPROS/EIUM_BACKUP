@@ -30,6 +30,12 @@ public class PM_P0001DAOImpl implements PM_P0001DAO {
 	
 	
 	@Override
+	public List<PM_P0001VO> paygradeList(Map<String, Object> searchMap) throws DataAccessException {
+		List<PM_P0001VO> list = sqlSession.selectList("mapper.pm_p0001.paygradeList", searchMap);
+		return list;
+	}
+	
+	@Override
 	public List<PM_P0001VO> paydate_searchList(Map<String, Object> searchMap) throws DataAccessException {
 		List<PM_P0001VO> list = sqlSession.selectList("mapper.pm_p0001.paydate_searchList", searchMap);
 		return list;
