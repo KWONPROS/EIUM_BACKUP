@@ -41,8 +41,6 @@ public class HM_P0004VO {
 	private String  hire_NUM;
 	private String  cur_ADDRESS;
 	private String  cur_ADDRESS_DETAIL;
-	private String  mil_TYPE;
-	private String  mil_NUM;
 	
 	private String employee_JOIN_DATE;
 	private String employee_RESIGNATION_DATE;
@@ -52,16 +50,13 @@ public class HM_P0004VO {
 	private String position_NAME;
 	private String out_REASON_CODE;
 	private String out_REASON_NAME;
-	private String work_GROUP_CODE;
-	private String work_GROUP_NAME;
+
 	private String job_CLASS_CODE;
 	private String job_CLASS_NAME;
 	private String duty_CODE;
 	private String duty_NAME;
 	private String job_DIS_CODE;
 	private String job_DIS_NAME;
-	private String project_CODE;
-	private String project_NAME;
 	private String work_STATUS;
 	private String probation_YN;
 	private String probation_DATE;
@@ -72,6 +67,8 @@ public class HM_P0004VO {
 	private String d_CODE_NAME;
 	private String work_TYPE_CODE;
 	private String work_TYPE_NAME;
+	private String pay_TYPE_CODE;
+	private String pay_TYPE_NAME;
 	
 	private String pay_GRADE_CODE;
 	private String pay_GRADE_NAME;
@@ -84,6 +81,19 @@ public class HM_P0004VO {
 	private String bank_NAME_2;
 	private String account_NUMBER_2;
 	private String account_NAME_2;
+	
+	public String getPay_TYPE_CODE() {
+		return pay_TYPE_CODE;
+	}
+	public void setPay_TYPE_CODE(String pay_TYPE_CODE) {
+		this.pay_TYPE_CODE = pay_TYPE_CODE;
+	}
+	public String getPay_TYPE_NAME() {
+		return pay_TYPE_NAME;
+	}
+	public void setPay_TYPE_NAME(String pay_TYPE_NAME) {
+		this.pay_TYPE_NAME = pay_TYPE_NAME;
+	}
 	public String getEmp_CODE() {
 		return emp_CODE;
 	}
@@ -246,18 +256,6 @@ public class HM_P0004VO {
 	public void setCur_ADDRESS_DETAIL(String cur_ADDRESS_DETAIL) {
 		this.cur_ADDRESS_DETAIL = cur_ADDRESS_DETAIL;
 	}
-	public String getMil_TYPE() {
-		return mil_TYPE;
-	}
-	public void setMil_TYPE(String mil_TYPE) {
-		this.mil_TYPE = mil_TYPE;
-	}
-	public String getMil_NUM() {
-		return mil_NUM;
-	}
-	public void setMil_NUM(String mil_NUM) {
-		this.mil_NUM = mil_NUM;
-	}
 	public String getEmployee_JOIN_DATE() {
 		return employee_JOIN_DATE;
 	}
@@ -306,18 +304,6 @@ public class HM_P0004VO {
 	public void setOut_REASON_NAME(String out_REASON_NAME) {
 		this.out_REASON_NAME = out_REASON_NAME;
 	}
-	public String getWork_GROUP_CODE() {
-		return work_GROUP_CODE;
-	}
-	public void setWork_GROUP_CODE(String work_GROUP_CODE) {
-		this.work_GROUP_CODE = work_GROUP_CODE;
-	}
-	public String getWork_GROUP_NAME() {
-		return work_GROUP_NAME;
-	}
-	public void setWork_GROUP_NAME(String work_GROUP_NAME) {
-		this.work_GROUP_NAME = work_GROUP_NAME;
-	}
 	public String getJob_CLASS_CODE() {
 		return job_CLASS_CODE;
 	}
@@ -353,18 +339,6 @@ public class HM_P0004VO {
 	}
 	public void setJob_DIS_NAME(String job_DIS_NAME) {
 		this.job_DIS_NAME = job_DIS_NAME;
-	}
-	public String getProject_CODE() {
-		return project_CODE;
-	}
-	public void setProject_CODE(String project_CODE) {
-		this.project_CODE = project_CODE;
-	}
-	public String getProject_NAME() {
-		return project_NAME;
-	}
-	public void setProject_NAME(String project_NAME) {
-		this.project_NAME = project_NAME;
 	}
 	public String getWork_STATUS() {
 		return work_STATUS;
@@ -492,10 +466,6 @@ public class HM_P0004VO {
 	public void setAccount_NAME_2(String account_NAME_2) {
 		this.account_NAME_2 = account_NAME_2;
 	}
-	
-
-
-	
 	
 	
 	
