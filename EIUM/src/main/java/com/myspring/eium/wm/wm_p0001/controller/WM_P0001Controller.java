@@ -15,9 +15,11 @@ public interface WM_P0001Controller {
 	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map EMP_searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map WS_searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	
+	public Map TWS_searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public Map SUM_saveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map TWS_saveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public Map WS_YN_rollbackData(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	/*
 	 * public Map WS_YN_updateData(HttpServletRequest request, HttpServletResponse
 	 * response) throws Exception;

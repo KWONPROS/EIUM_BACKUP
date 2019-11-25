@@ -37,92 +37,104 @@
 	
 	<!-- /////////////////////////////////////EMP_SEARCHLIST ////////////////////////////////////////-->
 	<select id = "EMP_searchList" resultMap="P0001resultVO" parameterType="java.util.Map">
+		<![CDATA[
+			SELECT DISTINCT(E.EMPLOYEE_CODE), E.EMPLOYEE_NAME, S.SITE_NAME,D.DEPARTMENT_NAME, D.DEPARTMENT_CODE  
+			FROM EMPLOYEE E, EMPLOYEE_WORK EW, DEPARTMENT D, SITE S, WORKING_STATUS WS
+		]]>
 		<choose>
-			<!-- 전체 전체 전체 0 0 0 수정중-->
-			<when test= "searchSite=='all' and searchTYPE == 'all'  and searchDetail =='alldetail'">
-				select DISTINCT(E.EMPLOYEE_CODE), E.EMPLOYEE_NAME, D.DEPARTMENT_NAME, D.DEPARTMENT_CODE  
-				from EMPLOYEE E, EMPLOYEE_WORK EW, DEPARTMENT D, SITE S, WORKING_STATUS WS
-				where E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE
-       			AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE
-        		AND EW.EMPLOYEE_CODE = WS.EMPLOYEE_CODE
-				AND D.DEPARTMENT_CODE = EW.DEPARTMENT_CODE
-        		AND D.SITE_CODE = S.SITE_CODE
-        		AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
-				ORDER BY E.EMPLOYEE_CODE ASC
-			</when>
-			<!-- 전체 전체 전체아니고 0 0 1-->
-			<when test= " searchSite=='all' and searchTYPE == 'all'  and  searchDetail !='alldetail'">
-				select DISTINCT(E.EMPLOYEE_CODE), E.EMPLOYEE_NAME, D.DEPARTMENT_NAME, D.DEPARTMENT_CODE  
-				from EMPLOYEE E, EMPLOYEE_WORK EW, DEPARTMENT D, SITE S, WORKING_STATUS WS
-				where E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE
-       			AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE
-        		AND EW.EMPLOYEE_CODE = WS.EMPLOYEE_CODE
-				AND D.DEPARTMENT_CODE = EW.DEPARTMENT_CODE
-        		AND D.SITE_CODE = S.SITE_CODE
+			<when test= "Employee_Select.equals('employee_name') and p_text != '' and p_text != null and SiteList != ''  and  SiteList != null and DeptList != '' and DeptList != null ">
+				WHERE E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE(+)
+				AND D.SITE_CODE = S.SITE_CODE(+)
+				AND EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE(+)
+				AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE(+)
+				and S.SITE_NAME = #{SiteList,jdbcType=VARCHAR}
+				and D.DEPARTMENT_NAME = #{DeptList,jdbcType=VARCHAR}
+				and E.EMPLOYEE_NAME LIKE '%'||#{p_text,jdbcType=VARCHAR}||'%'
 				AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
-				AND S.site_name = #{searchSite}
-				ORDER BY E.EMPLOYEE_CODE ASC
-			</when>
+				order by E.EMPLOYEE_CODE ASC
+			</when> <!--1 년월 사업장 부서 사원명 --> 
 			
-			<!-- 전체아니고 부서 전체 1 1 O-->
-			<when test= " searchSite!='all' and searchTYPE == 'department'  and  searchDetail=='alldetail'">
-				select DISTINCT(E.EMPLOYEE_CODE), E.EMPLOYEE_NAME, D.DEPARTMENT_NAME, D.DEPARTMENT_CODE  
-				from EMPLOYEE E, EMPLOYEE_WORK EW, DEPARTMENT D, SITE S, WORKING_STATUS WS
-				where E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE
-       			AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE
-        		AND EW.EMPLOYEE_CODE = WS.EMPLOYEE_CODE
-				AND D.DEPARTMENT_CODE = EW.DEPARTMENT_CODE
-        		AND D.SITE_CODE = S.SITE_CODE
+			<when test= " Employee_Select.equals('employee_code') and p_text != '' and p_text != null and SiteList != ''  and  SiteList != null and DeptList != '' and DeptList != null ">
+				WHERE E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE(+)
+				AND D.SITE_CODE = S.SITE_CODE(+)
+				AND EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE(+)
+				AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE(+)
+				and S.SITE_NAME = #{SiteList,jdbcType=VARCHAR}
+				and D.DEPARTMENT_NAME = #{DeptList,jdbcType=VARCHAR}
+				and E.EMPLOYEE_CODE LIKE '%'||#{p_text,jdbcType=VARCHAR}||'%'
 				AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
-				AND S.site_name = #{searchSite}
-				and EW.depart_code is not null
-				ORDER BY E.EMPLOYEE_CODE ASC
-			</when>
+				order by E.EMPLOYEE_CODE ASC 
+			</when> <!-- 2 사업장 부서 사원코드 -->
 			
-			<!-- 전체아니고 부서 전체아니고 -->
-			<when test= " searchSite!='all' and searchTYPE == 'department'  and  searchDetail !='alldetail'">
-				select DISTINCT(E.EMPLOYEE_CODE), E.EMPLOYEE_NAME, D.DEPARTMENT_NAME, D.DEPARTMENT_CODE  
-				from EMPLOYEE E, EMPLOYEE_WORK EW, DEPARTMENT D, SITE S, WORKING_STATUS WS
-				where E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE
-       			AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE
-        		AND EW.EMPLOYEE_CODE = WS.EMPLOYEE_CODE
-				AND D.DEPARTMENT_CODE = EW.DEPARTMENT_CODE
-        		AND D.SITE_CODE = S.SITE_CODE
+			<when test= " SiteList != ''  and  SiteList != null and DeptList != '' and DeptList != null">
+				WHERE E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE(+)
+				AND D.SITE_CODE = S.SITE_CODE(+)
+				AND EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE(+)
+				AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE(+)
+				and S.SITE_NAME = #{SiteList,jdbcType=VARCHAR}
+				and D.DEPARTMENT_NAME = #{DeptList,jdbcType=VARCHAR}
 				AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
-				AND S.site_name = #{searchSite}
-				and D.depart_name = #{searchDetail,jdbcType=VARCHAR}
-				ORDER BY E.EMPLOYEE_CODE ASC
-			</when>
+				order by E.EMPLOYEE_CODE ASC
+			</when> <!-- 3 사업장 부서 -->
 			
-			<!-- 전체아니고  근무조 전체-->
-			<when test= " searchSite!='all' and searchTYPE == 'work_group'  and  searchDetail=='alldetail'">
-				select DISTINCT(E.EMPLOYEE_CODE), E.EMPLOYEE_NAME, D.DEPARTMENT_NAME, D.DEPARTMENT_CODE  
-				from EMPLOYEE E, EMPLOYEE_WORK EW, DEPARTMENT D, SITE S, WORKING_STATUS WS
-				where E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE
-       			AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE
-        		AND EW.EMPLOYEE_CODE = WS.EMPLOYEE_CODE
-				AND D.DEPARTMENT_CODE = EW.DEPARTMENT_CODE
-        		AND D.SITE_CODE = S.SITE_CODE
+			<when test= " Employee_Select.equals('employee_name') and p_text != '' and p_text != null and SiteList != ''  and  SiteList != null "> 
+				WHERE E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE(+)
+				AND D.SITE_CODE = S.SITE_CODE(+)
+				AND EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE(+)
+				AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE(+)
+				and S.SITE_NAME = #{SiteList,jdbcType=VARCHAR}
+				and E.EMPLOYEE_NAME LIKE '%'||#{p_text,jdbcType=VARCHAR}||'%'
 				AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
-				AND S.site_name = #{searchSite}
-				and EW.work_group_code is not null
-				ORDER BY E.EMPLOYEE_CODE ASC
-			</when>
+				order by E.EMPLOYEE_CODE ASC
+			</when> <!-- 4 사업장 null 사원명 -->
 			
-			<!-- 전체 아니고 근무조 전체아니고 -->
-			<when test= "searchSite!='all' and searchTYPE == 'work_group'  and  searchDetail !='alldetail'" >
-				select DISTINCT(E.EMPLOYEE_CODE), E.EMPLOYEE_NAME, D.DEPARTMENT_NAME, D.DEPARTMENT_CODE  
-				from EMPLOYEE E, EMPLOYEE_WORK EW, DEPARTMENT D, SITE S, WORKING_STATUS WS, WORK_GROUP W
-				where E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE
-       			AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE
-        		AND EW.EMPLOYEE_CODE = WS.EMPLOYEE_CODE
-				AND D.DEPARTMENT_CODE = EW.DEPARTMENT_CODE
-        		AND D.SITE_CODE = S.SITE_CODE
+			<when test= " Employee_Select.equals('employee_code') and p_text != '' and p_text != null and SiteList != ''  and  SiteList != null "> 
+				WHERE E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE(+)
+				AND D.SITE_CODE = S.SITE_CODE(+)
+				AND EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE(+)
+				AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE(+)
+				and S.SITE_NAME = #{SiteList,jdbcType=VARCHAR}
+				and E.EMPLOYEE_CODE LIKE '%'||#{p_text,jdbcType=VARCHAR}||'%'
 				AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
-				AND S.site_name = #{searchSite}
-				and W.work_group_name = #{searchDetail,jdbcType=VARCHAR}
-				ORDER BY E.EMPLOYEE_CODE ASC
-			</when>
+				order by E.EMPLOYEE_CODE ASC
+			</when> <!-- 5 사업장 null 사원코드 -->
+				
+			<when test= " SiteList != ''  and  SiteList != null">
+				WHERE E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE(+)
+				AND D.SITE_CODE = S.SITE_CODE(+)
+				AND EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE(+)
+				AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE(+)
+				and S.SITE_NAME = #{SiteList,jdbcType=VARCHAR}
+				AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
+				order by E.EMPLOYEE_CODE ASC
+			</when> <!-- 6 사업장  -->
+			
+			<when test= " Employee_Select.equals('employee_code') and p_text != '' and p_text != null "> 
+				WHERE E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE(+)
+				AND D.SITE_CODE = S.SITE_CODE(+)
+				AND EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE(+)
+				AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE(+)
+				and E.EMPLOYEE_CODE LIKE '%'||#{p_text,jdbcType=VARCHAR}||'%'
+				AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
+				order by E.EMPLOYEE_CODE ASC
+			</when> <!-- 7 null null 사원코드  -->
+			
+			<when test= " Employee_Select.equals('employee_name') and p_text != '' and p_text != null "> 
+				WHERE E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE(+)
+				AND D.SITE_CODE = S.SITE_CODE(+)
+				AND EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE(+)
+				AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE(+)
+				and E.EMPLOYEE_NAME LIKE '%'||#{p_text,jdbcType=VARCHAR}||'%'
+				AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
+				order by E.EMPLOYEE_CODE ASC
+			</when> <!-- 8 null null 사원명  -->
+			<otherwise>
+			    WHERE E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE(+)
+				AND D.SITE_CODE = S.SITE_CODE(+)
+				AND EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE(+)
+				AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE(+)
+				ORDER BY E.EMPLOYEE_CODE ASC 
+			</otherwise> <!-- 조건x(전체조회) 년월도 없는경우 -->
 		</choose>
 	</select>
 	
@@ -136,11 +148,23 @@
 		ORDER BY WS.WORKING_STATUS_DATE ASC
 	]]>
 	</select>
+	
+	<!-- //////////////////////////////////////TOTAL_WORKING_STATUS_SEARCHLIST ///////////////////////////////-->
+	<select id = "TWS_searchList" resultMap="P0001resultVO" parameterType="java.util.Map">
+	<![CDATA[
+		select DISTINCT(TWS.TOTAL_MONTH),TWS.TOTAL_WORKING_STATUS_CODE,TWS.EMPLOYEE_CODE, TWS.WEEKDAY, TWS.HOLIDAY, TWS.NORMAL_WORK_DAY, TWS.EXTENSION_WORK_DAY, TWS.WEEKDAY_NORMAL_WORK_TIME, TWS.WEEKDAY_EXTENSION_WORK_TIME, TWS.WEEKDAY_NIGHT_WORK_TIME, TWS.HOLIDAY_NORMAL_WORK_TIME, TWS.HOLIDAY_EXTENSION_WORK_TIME, TWS.HOLIDAY_NIGHT_WORK_TIME
+		from TOTAL_WORKING_STATUS TWS
+		where TWS.EMPLOYEE_CODE = #{P_EMP_CODE}
+		AND TWS.TOTAL_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
+	]]>
+	</select>
+	
+	
 	<!-- //////////////////////////////////////WORKING_STATUS_INSERT//////////////////////////////// -->
 	<insert id="insertData" parameterType="java.util.Map">
-		insert into WORKING_STATUS (WORKING_STATUS_CODE, EMPLOYEE_CODE, WORKING_STATUS_MONTH, WORKING_STATUS_DATE, WORKING_STATUS_START_TIME, WORKING_STATUS_END_TIME, WORKING_STATUS_TOTAL_TIME, WORKING_STATUS_DESC, WORKINIG_STATUS_YN)
+		insert into WORKING_STATUS (WORKING_STATUS_CODE, EMPLOYEE_CODE, WORKING_STATUS_MONTH, WORKING_STATUS_DATE, WORKING_STATUS_START_TIME, WORKING_STATUS_END_TIME, WORKING_STATUS_TOTAL_TIME, WORKING_STATUS_DESC, WORKING_STATUS_YN)
 		values (WORKING_STATUS_CODE_SEQ.NEXTVAL, #{P_EMPLOYEE_CODE, jdbcType=VARCHAR}, #{working_STATUS_MONTH, jdbcType=VARCHAR}, #{working_STATUS_DATE, jdbcType=VARCHAR}, #{working_STATUS_START_TIME, jdbcType=VARCHAR}, #{working_STATUS_END_TIME, jdbcType=VARCHAR}, #{working_STATUS_TOTAL_TIME, jdbcType=VARCHAR}, #{working_STATUS_DESC, jdbcType=VARCHAR}, 'N')
-	</insert>
+	</insert> 
 	
 	<!-- ///////////////////////////////////////WORKING_STATUS_UPDATE////////////////////////////// -->
 	<update id="updateData" parameterType="java.util.Map">
@@ -160,10 +184,19 @@
 		where WORKING_STATUS_CODE = #{working_STATUS_CODE}
 	</delete>
 	
-	<!-- //////////////////////////////////////////TOTAL_WORKING_STATUS_INSERT////////////////////////////// -->
+	<!-- //////////////////////////////////////////TOTAL_WORKING_STATUS_MERGE(있으면 UPDATE 없으면 INSERT)////////////////////////////// -->
+	
 	<insert id="TWS_insertData" parameterType="java.util.Map">
-		insert into TOTAL_WORKING_STATUS(TOTAL_WORKING_STATUS_CODE, EMPLOYEE_CODE, WEEKDAY, HOLIDAY, NORMAL_WORK_DAY, EXTENSION_WORK_DAY, WEEKDAY_NORMAL_WORK_TIME, WEEKDAY_EXTENSION_WORK_TIME, WEEKDAY_NIGHT_WORK_TIME, HOLIDAY_NORMAL_WORK_TIME, HOLIDAY_EXTENSION_WORK_TIME, HOLIDAY_NIGHT_WORK_TIME)
-			values (TOTAL_WORKING_STATUS_CODE_SEQ.NEXTVAL, #{PP_EMPLOYEE_CODE, jdbcType=VARCHAR}, #{weekday, jdbcType=VARCHAR}, #{holiday, jdbcType=VARCHAR}, #{normal_WORK_DAY, jdbcType=VARCHAR},#{extension_WORK_DAY, jdbcType=VARCHAR}, #{weekday_NORMAL_WORK_TIME, jdbcType=VARCHAR}, #{weekday_EXTENSION_WORK_TIME, jdbcType=VARCHAR}, #{weekday_NIGHT_WORK_TIME, jdbcType=VARCHAR}, #{holiday_NORMAL_WORK_TIME, jdbcType=VARCHAR}, #{holiday_EXTENSION_WORK_TIME, jdbcType=VARCHAR}, #{holiday_NIGHT_WORK_TIME, jdbcType=VARCHAR})
+		MERGE INTO TOTAL_WORKING_STATUS TWS
+		USING DUAL
+			ON (TWS.EMPLOYEE_CODE = #{PP_EMPLOYEE_CODE, jdbcType=VARCHAR} AND TWS.TOTAL_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7))
+			WHEN MATCHED THEN
+    			update set WEEKDAY=#{weekday, jdbcType=VARCHAR}, HOLIDAY=#{holiday, jdbcType=VARCHAR}, NORMAL_WORK_DAY=#{normal_WORK_DAY, jdbcType=VARCHAR}, EXTENSION_WORK_DAY=#{extension_WORK_DAY, jdbcType=VARCHAR}, WEEKDAY_NORMAL_WORK_TIME=#{weekday_NORMAL_WORK_TIME, jdbcType=VARCHAR}, WEEKDAY_EXTENSION_WORK_TIME=#{weekday_EXTENSION_WORK_TIME, jdbcType=VARCHAR}, WEEKDAY_NIGHT_WORK_TIME=#{weekday_NIGHT_WORK_TIME, jdbcType=VARCHAR}, HOLIDAY_NORMAL_WORK_TIME=#{holiday_NORMAL_WORK_TIME, jdbcType=VARCHAR}, HOLIDAY_EXTENSION_WORK_TIME=#{holiday_EXTENSION_WORK_TIME, jdbcType=VARCHAR}, HOLIDAY_NIGHT_WORK_TIME=#{holiday_NIGHT_WORK_TIME, jdbcType=VARCHAR}
+    			where EMPLOYEE_CODE = #{PP_EMPLOYEE_CODE, jdbcType=VARCHAR}
+    			AND TOTAL_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
+			WHEN NOT MATCHED THEN
+    			insert (TOTAL_WORKING_STATUS_CODE, TOTAL_MONTH,EMPLOYEE_CODE, WEEKDAY, HOLIDAY, NORMAL_WORK_DAY, EXTENSION_WORK_DAY, WEEKDAY_NORMAL_WORK_TIME, WEEKDAY_EXTENSION_WORK_TIME, WEEKDAY_NIGHT_WORK_TIME, HOLIDAY_NORMAL_WORK_TIME, HOLIDAY_EXTENSION_WORK_TIME, HOLIDAY_NIGHT_WORK_TIME)
+					values (TOTAL_WORKING_STATUS_CODE_SEQ.NEXTVAL, SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7) ,#{PP_EMPLOYEE_CODE, jdbcType=VARCHAR}, #{weekday, jdbcType=VARCHAR}, #{holiday, jdbcType=VARCHAR}, #{normal_WORK_DAY, jdbcType=VARCHAR},#{extension_WORK_DAY, jdbcType=VARCHAR}, #{weekday_NORMAL_WORK_TIME, jdbcType=VARCHAR}, #{weekday_EXTENSION_WORK_TIME, jdbcType=VARCHAR}, #{weekday_NIGHT_WORK_TIME, jdbcType=VARCHAR}, #{holiday_NORMAL_WORK_TIME, jdbcType=VARCHAR}, #{holiday_EXTENSION_WORK_TIME, jdbcType=VARCHAR}, #{holiday_NIGHT_WORK_TIME, jdbcType=VARCHAR})
 	</insert>
 	
 	<!-- ///////////////////////////////////////////WORKING_STATUS_YN_UPDATE ///////////////////////////-->
@@ -175,6 +208,17 @@
     		AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)) 
 		SET WORKING_STATUS_YN = 'Y'
 		WHERE WORKING_STATUS_YN = 'N'
+	</update>
+	
+	<!-- ///////////////////////////////////////////WORKING_STATUS_YN_ROLLBACK ///////////////////////////-->
+	<update id="WS_YN_rollbackData" parameterType="java.util.Map">
+		update
+    		(select WS.WORKING_STATUS_YN
+    		from WORKING_STATUS WS
+    		where WS.EMPLOYEE_CODE = #{PP_EMPLOYEE_CODE, jdbcType=VARCHAR} 
+    		AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)) 
+		SET WORKING_STATUS_YN = 'N'
+		WHERE WORKING_STATUS_YN = 'Y'
 	</update>
 	
 </mapper>
