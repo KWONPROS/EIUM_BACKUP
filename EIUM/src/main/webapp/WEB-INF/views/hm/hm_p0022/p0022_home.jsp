@@ -93,7 +93,7 @@ initSheet.Cols = [
 
 
 }
-
+.
 function mySheet1_OnRowSearchEnd(Row) {
 	x = mySheet1.GetCellValue(Row, 5);
     if(mySheet1.GetCellValue(Row, 5) == "마감완료"){
