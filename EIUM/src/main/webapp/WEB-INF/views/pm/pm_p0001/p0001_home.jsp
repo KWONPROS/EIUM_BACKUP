@@ -132,10 +132,11 @@ function setPaygrade(){
 	}
 	
 	function mySheet2_OnRowSearchEnd(Row) {
-	    if(mySheet2.GetCellValue(Row, 3) == "기본급"){
+	    if(mySheet2.GetCellValue(Row, 3) == "기본급" && mySheet2.GetCellValue(Row, 4) != null){
+	    	alert("dlfjdlfjdlf : " + mySheet2.GetCellValue(Row, 3));
 	    	var a = mySheet2.GetCellValue(Row, 4)/209;
 	    	var z = (a*mySheet2.GetCellValue(Row, 5)) + ((a*1.5)*mySheet2.GetCellValue(Row, 6)) + ((a*1.5)*mySheet2.GetCellValue(Row, 7))+ ((a*1.5)*mySheet2.GetCellValue(Row, 8))+ ((a*2)*mySheet2.GetCellValue(Row, 9))+ ((a*2.5)*mySheet2.GetCellValue(Row, 10));
-	       mySheet2.SetCellValue(Row-1, 11, z);
+	       mySheet2.SetCellValue(Row, 11, z);
 	   }
 	}
 	
