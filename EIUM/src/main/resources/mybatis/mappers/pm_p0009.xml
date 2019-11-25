@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.pm_p0009">
+	<resultMap id="P0009resultVO" type="PM_P0009VO">
+		<result property="employee_CODE" column="EMPLOYEE_CODE" />
+		<result property="employee_NAME" column="EMPLOYEE_NAME" />
+		<result property="department_CODE" column="DEPARTMENT_CODE" />
+		<result property="department_NAME" column="DEPARTMENT_NAME" />
+		<result property="basic_SALARY" column="BASIC_SALARY" />
+		<result property="position_SALARY" column="POSITION_SALARY" />
+		<result property="bonus_SALARY" column="BONUS_SALARY" />
+
+
+	</resultMap>
+	<select id="searchList" resultMap="P0009resultVO"
+		parameterType="java.util.Map"> 
+      <![CDATA[
+       select c.department_code as DEPARTMENT_CODE, 
+       c.department_name as DEPARTMENT_NAME, 
+        a.employee_code as EMPLOYEE_CODE, 
+       a.employee_name as EMPLOYEE_NAME,
+       z."basic_SALARY" as BASIC_SALARY,z."position_SALARY" as POSITION_SALARY , z."bonus_SALARY" as BONUS_SALARY
+from employee a,(select employee_code, sum(case when PAYMENT_RECEIPT_ITEM='기본급' then PAYMENT_RECEIPT_PRICE end) as "basic_SALARY", 
+                sum(case when PAYMENT_RECEIPT_ITEM='직책수당' then PAYMENT_RECEIPT_PRICE end) as "position_SALARY",
+                sum(case when PAYMENT_RECEIPT_ITEM='상여급' then PAYMENT_RECEIPT_PRICE end) as "bonus_SALARY"
+                from payment_receipt 
+                group by employee_code) z,
+                department c,
+                employee_work d
+where a.employee_code = z.employee_code
+and c.department_code=d.department_code
+and d.employee_code=a.employee_code
+]]>
+		<if test="condition != '' and condition != null">
+			AND A.EMPLOYEE_CODE like '%'|| #{condition} || '%'
+		</if>
+
+
+
+
+
+	</select>
+
+
+</mapper>

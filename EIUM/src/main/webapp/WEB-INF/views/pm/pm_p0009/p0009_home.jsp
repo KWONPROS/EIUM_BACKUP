@@ -35,11 +35,13 @@
 			return ((width+100)/8);
 		}());
 		//컬러 fnction
-		var pieColors = (function() {
-			var colors = [], base = Highcharts.getOptions().colors[0], i;
-			for (i = 0; i < 10; i += 1) {
-				colors.push(Highcharts.Color(base).brighten((i - 3) / 7).get());
-			}
+		var graphColors = (function() {
+			var colors = [];
+			colors[0]="#1ABC9C";
+			colors[1]="#3498DB";
+			colors[2]="#2980B9";
+			colors[3]="#2C3E50";
+			
 			return colors;
 		}());
 		
@@ -51,26 +53,31 @@
 		initSheet.Cols = [		
 			{Header:"상태",Type:"Status",SaveName:"STATUS" ,Hidden:1},
 	        {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",Hidden:1},	
-	        {Header:"부서코드",Type:"Text",SaveName:"emp_CODE",MinWidth:0.75*colWidth,KeyField:1,Edit:0,Align:"Center"},	
-	        {Header:"부서명",Type:"Text",SaveName:"emp_CODE",MinWidth:colWidth,KeyField:1,Edit:0,Align:"Center"},	
-	        {Header:"사원코드",Type:"Text",SaveName:"emp_CODE",MinWidth:0.75*colWidth,KeyField:1,Edit:0,Align:"Center"},	
-	        {Header:"사원명",Type:"Text",SaveName:"emp_CODE",MinWidth:colWidth,KeyField:1,Edit:0,Align:"Center"},	
-			{Header:"기본급",Type:"Text",SaveName:"emp_NAME",MinWidth:colWidth,Edit:0,Align:"Center"},			
-			{Header:"칙책수당",Type:"Text",SaveName:"dep_NAME",MinWidth:colWidth,Edit:0,Align:"Center"},
-			{Header:"상여",Type:"Text",SaveName:"dep_NAME",MinWidth:colWidth,Edit:0,Align:"Center"},
-			{Header:"지급합계",Type:"Text",SaveName:"dep_NAME",MinWidth:1.5*colWidth,Edit:0,Align:"Center"},
+	        {Header:"부서코드",Type:"Text",SaveName:"department_CODE",MinWidth:0.75*colWidth,KeyField:1,Edit:0,Align:"Center"},	
+	        {Header:"부서명",Type:"Text",SaveName:"department_NAME",MinWidth:colWidth,KeyField:1,Edit:0,Align:"Center"},	
+	        {Header:"사원코드",Type:"Text",SaveName:"employee_CODE",MinWidth:0.75*colWidth,KeyField:1,Edit:0,Align:"Center"},	
+	        {Header:"사원명",Type:"Text",SaveName:"employee_NAME",MinWidth:colWidth,KeyField:1,Edit:0,Align:"Center"},	
+			{Header:"기본급",Type:"AutoSum",SaveName:"basic_SALARY",MinWidth:colWidth,Edit:0,Align:"Right"},			
+			{Header:"칙책수당",Type:"AutoSum",SaveName:"position_SALARY",MinWidth:colWidth,Edit:0,Align:"Right"},
+			{Header:"상여",Type:"AutoSum",SaveName:"bonus_SALARY",MinWidth:colWidth,Edit:0,AutoSum:1,Align:"Right"},
+			{Header:"지급합계",Type:"AutoSum" ,CalcLogic:' (|6| + |7|+ |8|) ', SaveName:"total_SALARY",MinWidth:1.5*colWidth,Edit:0,Align:"Right"},
 			
 		];   
 		IBS_InitSheet( mySheet , initSheet);
   
 		mySheet.SetSheetHeight(350);
-	
+		mySheet.ShowSubSum([{
+            "StdCol": '3',
+            "SumCols": "6|7|8|9",
+            "CaptionText" : "소계"
+        }]);
+		
 		
 		
 		
 		// 원그래프
-		var colors =pieColors,
-    categories = [
+		
+   var categories = [
         'Chrome',
         'Firefox',
         'Internet Explorer',
@@ -82,7 +89,7 @@
     data = [
         {
             y: 62.74,
-            color: colors[2],
+            color: graphColors[0],
             drilldown: {
                 name: 'Chrome',
                 categories: [
@@ -129,7 +136,7 @@
         },
         {
             y: 10.57,
-            color: colors[1],
+            color: graphColors[1],
             drilldown: {
                 name: 'Firefox',
                 categories: [
@@ -160,7 +167,7 @@
         },
         {
             y: 7.23,
-            color: colors[0],
+            color: graphColors[2],
             drilldown: {
                 name: 'Internet Explorer',
                 categories: [
@@ -204,7 +211,7 @@ for (i = 0; i < dataLen; i += 1) {
         versionsData.push({
             name: data[i].drilldown.categories[j],
             y: data[i].drilldown.data[j],
-            color: Highcharts.Color(data[i].color).brighten(brightness).get()
+            color: data[i].color
         });
     }
 }
@@ -247,12 +254,12 @@ Highcharts.chart('payByDep', {
         valueSuffix: '%'
     },
     series: [{
-        name: 'Browsers',
+        name: '부서',
         data: browserData,
         size: '60%',
         id: 'Browsers'
     }, {
-        name: 'Versions',
+        name: '이름',
         data: versionsData,
         size: '80%',
         innerSize: '60%',
@@ -310,16 +317,16 @@ Highcharts.chart('payByDep', {
 		    
 		    series: [{
 		        type: 'column',
-		        color: colors[0],
+		        color: graphColors[0],
 		        name: '기본급',
 		        data: [3, 2, 1, 3, 4]
 		    }, {
-		        type: 'column', color: colors[1],
+		        type: 'column', color: graphColors[1],
 		        name: '직책수당',
 		        data: [2, 3, 5, 7, 6]
 		        
 		    }, {
-		        type: 'column', color: colors[2],
+		        type: 'column', color: graphColors[2],
 		        name: '상여',
 		        data: [4, 3, 3, 9, 0]
 		        
@@ -364,8 +371,7 @@ Highcharts.chart('payByDep', {
 	
 		/* MonthPicker 옵션 */
 	    var options = {
-	        pattern: 'yyyy-mm', 
-	     
+	        pattern: 'yy/mm',  
 	        buttonImage: "${contextPath}/resources/image/icons/icon_calendar.png", 
 	        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']
 	    };
@@ -407,48 +413,167 @@ Highcharts.chart('payByDep', {
 				});
 	};
 	
-	
-	
-	//사원검색 조건
-	function searchCondition() {
-		var cond = document.getElementById("condition").value;
-
-		mySheet.DoSearch('${contextPath}/pm/p0009/searchList.do', 'condition='
-				+ cond);
-	}
-
 	/*Sheet 각종 처리*/
 	function doAction(sAction) {
 		switch (sAction) {
 		case "search": //조회
-			mySheet.DoSearch("${contextPath}/pm/p0009/searchList.do");
+			var param = FormQueryStringEnc(document.frm);
+			mySheet.DoSearch("${contextPath}/pm/p0009/searchList.do",param);
 			break;
 
-		case "reload": //초기화
+		case "reload": //초기화		
 			mySheet.RemoveAll();
 			break;
 
 		}
 	}
 
-	//로우 클릭시
-	function mySheet_OnClick(Row, Col) {
-		if (Row != 0) {
-
-			$('input[name=myRow]').val(Row);
-
-		}
-
-	}
 
 	// 저장완료 후 처리할 작업
-	// code: 0(저장성공), -1(저장실패)
-	function mySheet_OnSaveEnd(code, msg) {
-		if (msg != "") {
-			alert(msg);
-			//번호 다시 매기기
-			//mySheet.ReNumberSeq();
-		}
+	function mySheet_OnSearchEnd(code, msg) {
+		console.log(mySheet.GetRowData(2));
+
+		// 원그래프
+		
+   var categories = [
+        'Chrome',
+        'Firefox',
+        'Internet Explorer',
+        'Safari',
+        'Edge',
+        'Opera',
+        'Other'
+    ],
+    data = [
+        {
+            y: 62.74,
+            color: graphColors[0],
+            drilldown: {
+                name: 'Chrome',
+                categories: [
+                    'Chrome v65.0',
+                    'Chrome v64.0',
+                    'Chrome v63.0',
+                    'Chrome v62.0',
+                    'Chrome v61.0',
+                    'Chrome v60.0',
+                    'Chrome v59.0',
+                    'Chrome v58.0',
+                    'Chrome v57.0',
+                    'Chrome v56.0',
+                    'Chrome v55.0',
+                    'Chrome v54.0',
+                    'Chrome v51.0',
+                    'Chrome v49.0',
+                    'Chrome v48.0',
+                    'Chrome v47.0',
+                    'Chrome v43.0',
+                    'Chrome v29.0'
+                ],
+                data: [
+                    0.1,
+                    1.3,
+                    53.02,
+                    1.4,
+                    0.88,
+                    0.56,
+                    0.45,
+                    0.49,
+                    0.32,
+                    0.29,
+                    0.79,
+                    0.18,
+                    0.13,
+                    2.16,
+                    0.13,
+                    0.11,
+                    0.17,
+                    0.26
+                ]
+            }
+        },
+        {
+            y: 10.57,
+            color: graphColors[1],
+            drilldown: {
+                name: 'Firefox',
+                categories: [
+                    'Firefox v58.0',
+                    'Firefox v57.0',
+                    'Firefox v56.0',
+                    'Firefox v55.0',
+                    'Firefox v54.0',
+                    'Firefox v52.0',
+                    'Firefox v51.0',
+                    'Firefox v50.0',
+                    'Firefox v48.0',
+                    'Firefox v47.0'
+                ],
+                data: [
+                    1.02,
+                    7.36,
+                    0.35,
+                    0.11,
+                    0.1,
+                    0.95,
+                    0.15,
+                    0.1,
+                    0.31,
+                    0.12
+                ]
+            }
+        },
+        {
+            y: 7.23,
+            color: graphColors[2],
+            drilldown: {
+                name: 'Internet Explorer',
+                categories: [
+                    'Internet Explorer v11.0',
+                    'Internet Explorer v10.0',
+                    'Internet Explorer v9.0',
+                    'Internet Explorer v8.0'
+                ],
+                data: [
+                    6.2,
+                    0.29,
+                    0.27,
+                    0.47
+                ]
+            }
+        }
+        ],
+    browserData = [],
+    versionsData = [],
+    i,
+    j,
+    dataLen = data.length,
+    drillDataLen,
+    brightness;
+
+
+// Build the data arrays
+for (i = 0; i < dataLen; i += 1) {
+
+    // add browser data
+    browserData.push({
+        name: mySheet.GetCellValue(i,3), //부서명
+        y: mySheet.GetCellValue(i,9),
+        color: graphColors[i]
+    });
+
+    // add version data
+    drillDataLen = data[i].drilldown.data.length;
+    for (j = 0; j < drillDataLen; j += 1) {
+        versionsData.push({
+            name: data[i].drilldown.categories[j],
+            y: data[i].drilldown.data[j],
+            color: data[i].color
+        });
+    }
+}
+		
+		
 	}
 	
 	
@@ -464,6 +589,7 @@ Highcharts.chart('payByDep', {
 		 window.open(url, "a", "width=342,height=520,resizable = no, scrollbars = no");
 	  
 	  }
+	 function setPayment(){}
 	
 </script>
 <style type="text/css">
@@ -573,36 +699,33 @@ position:relative;
 	</div>
 
 	<div class="title">
-		<header><i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 급여관리 : 월별지급현황</header>
+		<header>
+			<i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 급여관리 : 월별지급현황
+		</header>
 	</div>
 
 
 	<div id="searchBar">
-		
-		<span class="searchBarTitle">귀속연월</span> 
-		<input id="monthpicker" type="text" style="width:100px">
-		<img id="btn_monthpicker"  src="${contextPath}/resources/image/icons/icon_calendar.png">
-	
-		<span class="searchBarTitle">지급일</span> 
-		<a href="javascript:payPopup();" style="text-decoration: none;">
-		<input type="text" id="Ppayment_date">
-		<img src="${contextPath}/resources/image/icons/icon_plus.png">
-		</a>
-		
-		
-		<span class="searchBarTitle" >사업장구분</span>  
-		<select id="searchSite" style="width:150px;"  onchange="selectDept()">
-			<option selected>전체</option>
-		</select>
-	
-	
-		<span class="searchBarTitle">부서</span>
-		 <select id="DeptList"style="width:150px;">
-			<option selected>전체</option>
-		</select> 
-		
-		
-		
+		<form name="frm">
+			<span class="searchBarTitle">귀속연월</span> <input id="monthpicker"
+				type="text" style="width: 100px;"> <img id="btn_monthpicker"
+				src="${contextPath}/resources/image/icons/icon_calendar.png">
+			<span class="searchBarTitle">지급일</span> 
+			<input type="hidden" id="Ppayment_code">
+			
+			<a href="javascript:payPopup();" style="text-decoration: none;"> <input
+				type="text" id="Ppayment_date" style="width: 100px;">
+				<input type="text" id="Ppayment_des_name" style="width:50px;"> 
+				<img src="${contextPath}/resources/image/icons/icon_plus.png">
+			</a> <span class="searchBarTitle">사업장구분</span> <select id="searchSite"
+				style="width: 150px;" onchange="selectDept()">
+				<option selected>전체</option>
+			</select> <span class="searchBarTitle">부서</span> <select id="DeptList"
+				style="width: 150px;">
+				<option selected>전체</option>
+			</select>
+		</form>
+
 	</div>
 
 	<div id="mySheet"><script>createIBSheet("mySheet", "100%", "100%");</script></div>
