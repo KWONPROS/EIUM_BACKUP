@@ -65,9 +65,6 @@ public class PM_P0009ControllerImpl implements PM_P0009Controller {
 			System.out.println(name+";:::::"+values[0]);
 			searchMap.put(name, values[0]);
 		}
-		
-		
-		System.out.println(request.getParameter("searchSite"));
 		List<PM_P0009VO> data = p0009Service.searchList(searchMap);
         resultMap.put("Data", data);
     	System.out.println("resultMap::::"+resultMap);

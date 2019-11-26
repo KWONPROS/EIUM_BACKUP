@@ -25,7 +25,16 @@
 <script type="text/javascript" src="${contextPath}/resources/js/jquery.mtz.monthpicker.js"></script>
 <script language="javascript">
 
+var graphColors = (function() {
+	var colors = [];
+	colors[0]="#1ABC9C";
+	colors[1]="#3498DB";
+	colors[2]="#2C3E50";
+	colors[3]="#2980B9";
 
+	
+	return colors;
+}());
 	/*Sheet 기본 설정 */
 	function LoadPage() {
 		//IbSheet Wiwdth function
@@ -35,15 +44,7 @@
 			return ((width+100)/8);
 		}());
 		//컬러 fnction
-		var graphColors = (function() {
-			var colors = [];
-			colors[0]="#1ABC9C";
-			colors[1]="#3498DB";
-			colors[2]="#2980B9";
-			colors[3]="#2C3E50";
-			
-			return colors;
-		}());
+		
 		
 		//아이비시트1 
 		mySheet.RemoveAll();
@@ -71,284 +72,9 @@
             "SumCols": "6|7|8|9",
             "CaptionText" : "소계"
         }]);
-		
-		
-		
-		
-		// 원그래프
-		
-   var categories = [
-        'Chrome',
-        'Firefox',
-        'Internet Explorer',
-        'Safari',
-        'Edge',
-        'Opera',
-        'Other'
-    ],
-    data = [
-        {
-            y: 62.74,
-            color: graphColors[0],
-            drilldown: {
-                name: 'Chrome',
-                categories: [
-                    'Chrome v65.0',
-                    'Chrome v64.0',
-                    'Chrome v63.0',
-                    'Chrome v62.0',
-                    'Chrome v61.0',
-                    'Chrome v60.0',
-                    'Chrome v59.0',
-                    'Chrome v58.0',
-                    'Chrome v57.0',
-                    'Chrome v56.0',
-                    'Chrome v55.0',
-                    'Chrome v54.0',
-                    'Chrome v51.0',
-                    'Chrome v49.0',
-                    'Chrome v48.0',
-                    'Chrome v47.0',
-                    'Chrome v43.0',
-                    'Chrome v29.0'
-                ],
-                data: [
-                    0.1,
-                    1.3,
-                    53.02,
-                    1.4,
-                    0.88,
-                    0.56,
-                    0.45,
-                    0.49,
-                    0.32,
-                    0.29,
-                    0.79,
-                    0.18,
-                    0.13,
-                    2.16,
-                    0.13,
-                    0.11,
-                    0.17,
-                    0.26
-                ]
-            }
-        },
-        {
-            y: 10.57,
-            color: graphColors[1],
-            drilldown: {
-                name: 'Firefox',
-                categories: [
-                    'Firefox v58.0',
-                    'Firefox v57.0',
-                    'Firefox v56.0',
-                    'Firefox v55.0',
-                    'Firefox v54.0',
-                    'Firefox v52.0',
-                    'Firefox v51.0',
-                    'Firefox v50.0',
-                    'Firefox v48.0',
-                    'Firefox v47.0'
-                ],
-                data: [
-                    1.02,
-                    7.36,
-                    0.35,
-                    0.11,
-                    0.1,
-                    0.95,
-                    0.15,
-                    0.1,
-                    0.31,
-                    0.12
-                ]
-            }
-        },
-        {
-            y: 7.23,
-            color: graphColors[2],
-            drilldown: {
-                name: 'Internet Explorer',
-                categories: [
-                    'Internet Explorer v11.0',
-                    'Internet Explorer v10.0',
-                    'Internet Explorer v9.0',
-                    'Internet Explorer v8.0'
-                ],
-                data: [
-                    6.2,
-                    0.29,
-                    0.27,
-                    0.47
-                ]
-            }
-        }
-        ],
-    browserData = [],
-    versionsData = [],
-    i,
-    j,
-    dataLen = data.length,
-    drillDataLen,
-    brightness;
 
-
-// Build the data arrays
-for (i = 0; i < dataLen; i += 1) {
-
-    // add browser data
-    browserData.push({
-        name: categories[i],
-        y: data[i].y,
-        color: data[i].color
-    });
-
-    // add version data
-    drillDataLen = data[i].drilldown.data.length;
-    for (j = 0; j < drillDataLen; j += 1) {
-        brightness = 0.2 - (j / drillDataLen) / 5;
-        versionsData.push({
-            name: data[i].drilldown.categories[j],
-            y: data[i].drilldown.data[j],
-            color: data[i].color
-        });
-    }
-}
-
-// Create the chart
-Highcharts.chart('payByDep', {
-    chart: {
-        type: 'pie'
-    },
-    title: {
-        text: '부서별 지급액',
-        verticalAlign : 'bottom',
-		align: 'center',
-		style : {
-			color : '#111820',
-			fontFamily : 'san-serif',
-			fontSize : '18px',
-			fontWeight: 'bold'
-		}
-    },
-    legend: {
-	    align: 'left',
-	    layout: 'vertical',
-	    verticalAlign: 'bottom',
-	    x: -20,
-	    y: -40,  
-	    floating:true
-	},
-    plotOptions: {
-    	pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-                enabled: false
-            },
-            showInLegend: true
-        }
-    },
-    tooltip: {
-        valueSuffix: '%'
-    },
-    series: [{
-        name: '부서',
-        data: browserData,
-        size: '60%',
-        id: 'Browsers'
-    }, {
-        name: '이름',
-        data: versionsData,
-        size: '80%',
-        innerSize: '60%',
-        showInLegend: false,
-        id: 'versions'
-    }],
-  
-});
-
-		
-		
-		
-		// 막대
-		Highcharts.chart('payByType', {
-		    title: {
-		    	text : '지급구분 사원별 지급액',
-				verticalAlign : 'bottom',
-				align: 'center',
-				x: 30,
-				style : {
-					color : '#111820',
-					fontFamily : 'san-serif',
-					fontSize : '18px',
-					fontWeight: 'bold'
-
-				}
-		    },
-		    legend: {
-			    align: 'left',
-			    layout: 'vertical',
-			    verticalAlign: 'bottom',
-			    x: 0,
-			    y: -50
-			},
-		    xAxis: {
-		        categories: ['Apples', 'Oranges', 'Pears', 'Bananas', 'Plums']
-			},
-		    yAxis: [{ // Primary yAxis
-		        labels: {
-		            format: '{value}',
-		            style: {
-		                color: Highcharts.getOptions().colors[1]
-		            }
-		        },
-		        title: {
-		            text: '금액',
-		            style: {
-		                color: Highcharts.getOptions().colors[1]
-		            }
-		        }
-		    }],
-		    tooltip: {
-		        shared: true
-		    },
-		    
-		    series: [{
-		        type: 'column',
-		        color: graphColors[0],
-		        name: '기본급',
-		        data: [3, 2, 1, 3, 4]
-		    }, {
-		        type: 'column', color: graphColors[1],
-		        name: '직책수당',
-		        data: [2, 3, 5, 7, 6]
-		        
-		    }, {
-		        type: 'column', color: graphColors[2],
-		        name: '상여',
-		        data: [4, 3, 3, 9, 0]
-		        
-		    }, {
-		        type: 'spline', color: '#212121',
-		        name: '합계',
-		        data: [12, 23, 3, 6.33, 3.33],
-		        marker: {
-		            lineWidth: 2,
-		            lineColor: '#212121'
-		         
-		        }
-		    }]
-		});
-		
-		
-		
-		  
-		
-	
-	
 		(function selectSite() {
+			
 			$.ajax({
 						url : "${contextPath}/sm/p0006/SiteList.do",//목록을 조회 할 url
 						type : "POST",
@@ -384,11 +110,17 @@ Highcharts.chart('payByDep', {
 	        $('#monthpicker').monthpicker('show');
 	    });
 		
-		
+
+	    mySheet.DoSearch("${contextPath}/pm/p0009/searchList.do");	    
 	}//LoadPage
 
 	
 	function selectDept() {
+		if($('#Ppayment_code').val()==""){
+			alert("지급일을 먼저 설정해주세요.");
+			return false;
+		}
+		
 		var SiteList = $('#searchSite').val();
 		$.ajax({
 					url : "${contextPath}/sm/p0006/DeptList.do",//목록을 조회 할 url
@@ -418,6 +150,8 @@ Highcharts.chart('payByDep', {
 		switch (sAction) {
 		case "search": //조회
 			var param = FormQueryStringEnc(document.frm);
+			console.log(param);
+		
 			mySheet.DoSearch("${contextPath}/pm/p0009/searchList.do",param);
 			break;
 
@@ -431,155 +165,159 @@ Highcharts.chart('payByDep', {
 
 	// 저장완료 후 처리할 작업
 	function mySheet_OnSearchEnd(code, msg) {
-		console.log(mySheet.GetRowData(2));
 
-		// 원그래프
+		var subPieData=[],genPieData=[];
+		var barNames=[],barBasic_SALARY=[],barPosition_SALARY=[],barBonus_SALARY=[],barTotal_SALARY=[]
 		
-   var categories = [
-        'Chrome',
-        'Firefox',
-        'Internet Explorer',
-        'Safari',
-        'Edge',
-        'Opera',
-        'Other'
-    ],
-    data = [
-        {
-            y: 62.74,
-            color: graphColors[0],
-            drilldown: {
-                name: 'Chrome',
-                categories: [
-                    'Chrome v65.0',
-                    'Chrome v64.0',
-                    'Chrome v63.0',
-                    'Chrome v62.0',
-                    'Chrome v61.0',
-                    'Chrome v60.0',
-                    'Chrome v59.0',
-                    'Chrome v58.0',
-                    'Chrome v57.0',
-                    'Chrome v56.0',
-                    'Chrome v55.0',
-                    'Chrome v54.0',
-                    'Chrome v51.0',
-                    'Chrome v49.0',
-                    'Chrome v48.0',
-                    'Chrome v47.0',
-                    'Chrome v43.0',
-                    'Chrome v29.0'
-                ],
-                data: [
-                    0.1,
-                    1.3,
-                    53.02,
-                    1.4,
-                    0.88,
-                    0.56,
-                    0.45,
-                    0.49,
-                    0.32,
-                    0.29,
-                    0.79,
-                    0.18,
-                    0.13,
-                    2.16,
-                    0.13,
-                    0.11,
-                    0.17,
-                    0.26
-                ]
-            }
-        },
-        {
-            y: 10.57,
-            color: graphColors[1],
-            drilldown: {
-                name: 'Firefox',
-                categories: [
-                    'Firefox v58.0',
-                    'Firefox v57.0',
-                    'Firefox v56.0',
-                    'Firefox v55.0',
-                    'Firefox v54.0',
-                    'Firefox v52.0',
-                    'Firefox v51.0',
-                    'Firefox v50.0',
-                    'Firefox v48.0',
-                    'Firefox v47.0'
-                ],
-                data: [
-                    1.02,
-                    7.36,
-                    0.35,
-                    0.11,
-                    0.1,
-                    0.95,
-                    0.15,
-                    0.1,
-                    0.31,
-                    0.12
-                ]
-            }
-        },
-        {
-            y: 7.23,
-            color: graphColors[2],
-            drilldown: {
-                name: 'Internet Explorer',
-                categories: [
-                    'Internet Explorer v11.0',
-                    'Internet Explorer v10.0',
-                    'Internet Explorer v9.0',
-                    'Internet Explorer v8.0'
-                ],
-                data: [
-                    6.2,
-                    0.29,
-                    0.27,
-                    0.47
-                ]
-            }
-        }
-        ],
-    browserData = [],
-    versionsData = [],
-    i,
-    j,
-    dataLen = data.length,
-    drillDataLen,
-    brightness;
+		var subrow = mySheet.FindSubSumRow().split("|");
+		var colorSelect=0;
+		 for(var i = 1; i<=mySheet.GetDataLastRow();i++){
+			 if(subrow.includes(i.toString())){		
+				subPieData.push({		//파이소계행
+					name: mySheet.GetCellValue(i-1,3),
+					y: mySheet.GetCellValue(i,9),
+					color: graphColors[colorSelect]
+				})
+					colorSelect++;
+			}else{
+				//막대그래프
+				barNames.push(mySheet.GetCellValue(i,5));
+				barBasic_SALARY.push(mySheet.GetCellValue(i,6));
+				barPosition_SALARY.push(mySheet.GetCellValue(i,7));
+				barBonus_SALARY.push(mySheet.GetCellValue(i,8));
+				barTotal_SALARY.push(mySheet.GetCellValue(i,9));
+				
+				genPieData.push({			//파이일반행
+					name: mySheet.GetCellValue(i,5),
+					y: mySheet.GetCellValue(i,9),
+					color: graphColors[colorSelect]
+				});	  				
+			}
+		} 
+		 
+		 
+		// 막대
+			Highcharts.chart('payByType', {
+			    title: {
+			    	text : '지급구분 사원별 지급액',
+					verticalAlign : 'bottom',
+					align: 'center',
+					x: 30,
+					style : {
+						color : '#111820',
+						fontFamily : 'san-serif',
+						fontSize : '18px',
+						fontWeight: 'bold'
 
-
-// Build the data arrays
-for (i = 0; i < dataLen; i += 1) {
-
-    // add browser data
-    browserData.push({
-        name: mySheet.GetCellValue(i,3), //부서명
-        y: mySheet.GetCellValue(i,9),
-        color: graphColors[i]
-    });
-
-    // add version data
-    drillDataLen = data[i].drilldown.data.length;
-    for (j = 0; j < drillDataLen; j += 1) {
-        versionsData.push({
-            name: data[i].drilldown.categories[j],
-            y: data[i].drilldown.data[j],
-            color: data[i].color
-        });
-    }
-}
-		
+					}
+			    },
+			    legend: {
+				    align: 'left',
+				    layout: 'vertical',
+				    verticalAlign: 'bottom',
+				    x: 0,
+				    y: -50
+				},
+			    xAxis: {
+			        categories: barNames
+				},
+				  
+			    yAxis: [{ // Primary yAxis
+			        labels: {
+			        	format: '{value:,.0f}'
+			        },
+			        title: {
+			            text: '금액',
+			        }
+			    }],
+			    
+			
+			    series: [{
+			        type: 'column',
+			        color: graphColors[0],
+			        name: '기본급',
+			        data: barBasic_SALARY
+			    }, {
+			        type: 'column', 
+			        color: graphColors[1],
+			        name: '직책수당',
+			        data: barPosition_SALARY
+			        
+			    }, {
+			        type: 'column', color: graphColors[2],
+			        name: '상여',
+			        data: barBonus_SALARY
+			        
+			    }, {
+			        type: 'spline', color: '#212121',
+			        name: '합계',
+			        data: barTotal_SALARY,
+			        marker: {
+			            lineWidth: 2,
+			            lineColor: '#212121'
+			         
+			        }
+			    }]
+			});
+				 
+		 Highcharts.chart('payByDep', {
+			
+			    chart: {
+			        type: 'pie'
+			    },
+			    title: {
+			        text: '부서별 지급액',
+			        verticalAlign : 'bottom',
+					align: 'center',
+					style : {
+						color : '#111820',
+						fontFamily : 'san-serif',
+						fontSize : '18px',
+						fontWeight: 'bold'
+					}
+			    },
+			    legend: {
+				    align: 'left',
+				    layout: 'vertical',
+				    verticalAlign: 'bottom',
+				    x: -20,
+				    y: -40,  
+				    floating:true
+				},
+			    plotOptions: {
+			    	pie: {
+			            allowPointSelect: true,
+			            cursor: 'pointer',
+			            dataLabels: {
+			                enabled: false
+			            }    
+			        }
+			    },
+			    tooltip: {
+			        valueSuffix: '원'
+			    },
+			    series: [{
+			        name: '금액',
+			        data: subPieData,
+			        size: '60%',
+			        id: 'subPieData',
+			        showInLegend: true
+			    }, {
+			        name: '금액',
+			        data: genPieData,
+			        size: '80%',
+			        innerSize: '60%',
+			        showInLegend: false,
+			        id: 'genPieData'
+			    }],
+			  
+			});	
 		
 	}
 	
 	
 	 function payPopup() {
 		 var monthpicker = $('#monthpicker').val();
-		 console.log(monthpicker);
 		 if(monthpicker==""){
 			 alert("귀속년월을 지정해주세요.");
 			 return;
@@ -671,18 +409,20 @@ for (i = 0; i < dataLen; i += 1) {
 position: relative;
 top:115px;
 width: 100%;
+z-index:100;
 }
 
 .payByDep {
 	position:relative;
-	top:120px;
+	top:100px;
 	left:70px;
 	width: 350px;
-	height: 320px;
+	height: 340px;
+	z-index:10;
 }
 .payByType {
 position:relative;
-	top:-200px;
+	top:-220px;
 	left:480px;
 	width: 1150px;
 	height: 320px;
@@ -718,7 +458,7 @@ position:relative;
 				<input type="text" id="Ppayment_des_name" style="width:50px;"> 
 				<img src="${contextPath}/resources/image/icons/icon_plus.png">
 			</a> <span class="searchBarTitle">사업장구분</span> <select id="searchSite"
-				style="width: 150px;" onchange="selectDept()">
+				style="width: 150px;" onclick="selectDept()">
 				<option selected>전체</option>
 			</select> <span class="searchBarTitle">부서</span> <select id="DeptList"
 				style="width: 150px;">
