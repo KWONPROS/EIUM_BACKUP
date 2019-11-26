@@ -47,7 +47,14 @@ function setPaygrade(){
 	        {Header:"사원코드",Type:"Text",SaveName:"employee_code", MinWidth:50,  Align:"Center", KeyField:1, Edit: 0},	
 			{Header:"사원명",Type:"Text",SaveName:"employee_name", MinWidth:120, Align:"Center", Edit: 0},
 			{Header:"지급고유번호",Type:"Text",SaveName:"payment_code", MinWidth:120, Align:"Center", Hidden:"1"},
-			{Header:"지급구분",Type:"Text",SaveName:"payment_des_name", MinWidth:120, Align:"Center"}
+			{Header:"지급구분",Type:"Text",SaveName:"payment_des_name", MinWidth:120, Align:"Center"},
+			{Header:"호봉",Type:"Text",SaveName:"salary",MinWidth:70, Align:"Center" , Hidden:1},
+			{Header:"평일정상근무시간",Type:"Text",SaveName:"weekday_normal_work_time",MinWidth:70, Align:"Center", Hidden:1 },
+			{Header:"평일연장근무일시간",Type:"Text",SaveName:"weekday_extension_work_time",MinWidth:70, Align:"Center", Hidden:1},
+			{Header:"평일야간근무시간",Type:"Text",SaveName:"weekday_night_work_time",MinWidth:70, Align:"Center", Hidden:1},
+			{Header:"휴일정상근무시간",Type:"Text",SaveName:"holiday_normal_work_time",MinWidth:70, Align:"Center", Hidden:1},
+			{Header:"휴일연장근무시간",Type:"Text",SaveName:"holiday_extension_work_time",MinWidth:70, Align:"Center", Hidden:1},
+			{Header:"휴일야간근무시간",Type:"Text",SaveName:"holiday_night_work_time",MinWidth:70, Align:"Center", Hidden:1}
 
 		];   
 		IBS_InitSheet( mySheet , initSheet);
@@ -64,14 +71,7 @@ function setPaygrade(){
 			{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
 	        {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},	
        		{Header:"급여계산서고유번호",Type:"Text",SaveName:"payment_receipt_code",MinWidth:70, Align:"Center",Hidden:"1"},
-	        {Header:"지급항목",Type:"Combo", MinWidth:70, SaveName:"payment_receipt_item", ComboText:"기본급|상여급", ComboCode:"기본급|상여급",PopupText:"기본급|상여급"},
-			{Header:"호봉",Type:"Text",SaveName:"salary",MinWidth:70, Align:"Center"},
-			{Header:"평일정상근무시간",Type:"Text",SaveName:"weekday_normal_work_time",MinWidth:70, Align:"Center" },
-			{Header:"평일연장근무일시간",Type:"Text",SaveName:"weekday_extension_work_time",MinWidth:70, Align:"Center"},
-			{Header:"평일야간근무시간",Type:"Text",SaveName:"weekday_night_work_time",MinWidth:70, Align:"Center"},
-			{Header:"휴일정상근무시간",Type:"Text",SaveName:"holiday_normal_work_time",MinWidth:70, Align:"Center"},
-			{Header:"휴일연장근무시간",Type:"Text",SaveName:"holiday_extension_work_time",MinWidth:70, Align:"Center"},
-			{Header:"휴일야간근무시간",Type:"Text",SaveName:"holiday_night_work_time",MinWidth:70, Align:"Center"},
+	        {Header:"지급항목",Type:"Combo", MinWidth:70, SaveName:"payment_receipt_item", ComboText:"|기본급|상여급", ComboCode:"|기본급|상여급"},
 			{Header:"총액",Type:"AutoSum", Format:"Integer", SaveName:"payment_receipt_price", MinWidth:70, Align:"Center"}
 			
 			];
@@ -131,12 +131,16 @@ function setPaygrade(){
 		}
 	}
 	
-	function mySheet2_OnRowSearchEnd(Row) {
-	    if(mySheet2.GetCellValue(Row, 3) == "기본급" && mySheet2.GetCellValue(Row, 4) != null){
-	    	alert("dlfjdlfjdlf : " + mySheet2.GetCellValue(Row, 3));
-	    	var a = mySheet2.GetCellValue(Row, 4)/209;
-	    	var z = (a*mySheet2.GetCellValue(Row, 5)) + ((a*1.5)*mySheet2.GetCellValue(Row, 6)) + ((a*1.5)*mySheet2.GetCellValue(Row, 7))+ ((a*1.5)*mySheet2.GetCellValue(Row, 8))+ ((a*2)*mySheet2.GetCellValue(Row, 9))+ ((a*2.5)*mySheet2.GetCellValue(Row, 10));
-	       mySheet2.SetCellValue(Row, 11, z);
+	function mySheet2_OnChange(Row, Col, Value) {
+	    if(mySheet2.GetCellValue(Row, 3) == "기본급"){
+	    	var a = mySheet.GetCellValue(Row, 5)/209;
+	    	var z = (a*mySheet.GetCellValue(Row, 6)) + ((a*1.5)*mySheet.GetCellValue(Row, 7)) + ((a*1.5)*mySheet.GetCellValue(Row, 8))+ ((a*1.5)*mySheet.GetCellValue(Row, 9))+ ((a*2)*mySheet.GetCellValue(Row, 10))+ ((a*2.5)*mySheet.GetCellValue(Row, 11));
+	       mySheet2.SetCellValue(Row, 4, z);
+	   }
+	    
+	    if(mySheet2.GetCellValue(Row, 3) == "상여급"){
+	    	var z = mySheet.GetCellValue(Row-1, 5);
+	       mySheet2.SetCellValue(Row, 4, z);
 	   }
 	}
 	
@@ -144,13 +148,14 @@ function setPaygrade(){
 
 	//로우 클릭시
 function mySheet_OnClick(Row, Col) { 
-		var param = "x="+mySheet.GetCellValue(Row, 1)+"&y="+mySheet.GetCellValue(Row, 3);
+			x = "x=" + mySheet.GetCellValue(Row, 1);
+			var param = "x="+mySheet.GetCellValue(Row, 1)+"&y="+mySheet.GetCellValue(Row, 3);
 			mySheet2.DoSearch("${contextPath}/pm/p0001/searchReceipt.do", param);
 
 	}
 	
 	
-function mySheet2_OnDblClick(Row,Col,Value){
+/* function mySheet2_OnDblClick(Row,Col,Value){
 	row=Row;
 	col=Col;
 	
@@ -158,7 +163,7 @@ function mySheet2_OnDblClick(Row,Col,Value){
 		
 	window.open("${contextPath}/pm/p0001/paygrade_Search.do", "a", "width=500, height=700, left=100, top=50"); 
 	}
-}
+} */
 
 	
 	 function showPopup() {
@@ -318,7 +323,7 @@ function mySheet2_OnDblClick(Row,Col,Value){
 .right{
 	position: relative;
 	top: -140px;
-	left: 450px;
+ 	left: 450px;
 	width: 750px;
 	
 }
