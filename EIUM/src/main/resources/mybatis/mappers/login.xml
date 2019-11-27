@@ -8,6 +8,13 @@
 		<result property="employee_id" column="employee_id" />
 		<result property="employee_name" column="employee_name" />
         <result property="employee_password" column="employee_password" />
+        
+        <result property="employee_code" column="employee_code" />
+        <result property="authority_code" column="authority_code" />
+        <result property="authority_name" column="authority_name" />
+        
+        <result property="menu_code" column="menu_code" />
+        <result property="access_grant" column="access_grant" />
        
 	</resultMap> 
 	<!-- 
@@ -19,12 +26,12 @@
       <result property="joinDate" column="joinDate" />
    </resultMap> -->
 
-	<select id="loginById" resultType="loginVO"  parameterType="String" >
+	<select id="searchList" resultType="loginVO"  parameterType="java.util.Map" >
       <![CDATA[
-         select ac.employee_id, e.employee_name 
-         from account ac, employee e 
-         where ac.employee_code = e.employee_code
-         and ac.employee_id = #{employee_id} and ac.employee_password = #{employee_password}
+         select a.employee_id, e.employee_name, u.authority_code, m.menu_code
+         from account a, employee e, user_auth u, menu_by_authority m
+         where a.employee_code = e.employee_code and a.employee_id = u.employee_id and u.authority_code = m.authority_code
+         and a.employee_id = #{employee_id} and a.employee_password = #{employee_password} and m.access_grant = '1' order by m.menu_code
       ]]>
 	 </select>	
 
