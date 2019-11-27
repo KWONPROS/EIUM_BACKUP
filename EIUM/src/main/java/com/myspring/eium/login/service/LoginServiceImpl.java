@@ -1,5 +1,8 @@
 package com.myspring.eium.login.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -14,9 +17,10 @@ public class LoginServiceImpl implements LoginService {
 	@Autowired
 	private LoginDAO loginDAO;
 
-
 	@Override
-	public LoginVO login(LoginVO loginVO) throws Exception {
-		return loginDAO.loginById(loginVO); 
+	public List<LoginVO> searchList(Map<String, Object> searchMap) {
+		List<LoginVO> list =  loginDAO.searchList(searchMap); 
+		return list;
 	}
+
 }

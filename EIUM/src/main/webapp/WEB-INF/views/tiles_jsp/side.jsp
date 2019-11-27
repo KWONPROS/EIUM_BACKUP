@@ -102,6 +102,29 @@ var data = {Data:[
 	</c:if>
 	</c:forEach>
 	
+	{menuCode:"m000",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"등록정보관리"},
+	
+	<c:forEach items="${sessionScope.menu_code}" begin="0" end="35" step="1" var="menu_code" varStatus="status">
+	<c:if test="${menu_code eq 'M001'}">
+	{menuCode:"M001",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0001/searchInit.do",TITLE:"회사등록"},
+	</c:if>
+	<c:if test="${menu_code eq 'M002'}">
+	{menuCode:"M002",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0002/searchInit.do", TITLE:"사업장등록"},
+	</c:if>
+	<c:if test="${menu_code eq 'M003'}">
+	{menuCode:"M003",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0003/searchInit.do", TITLE:"부서등록"},
+	</c:if>
+	<c:if test="${menu_code eq 'M004'}">
+	{menuCode:"M004",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0004/searchInit.do", TITLE:"사원등록"},
+	</c:if>
+	<c:if test="${menu_code eq 'M005'}">
+	{menuCode:"M005",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0005/searchInit.do", TITLE:"권한관리"},
+	</c:if>
+	<c:if test="${menu_code eq 'M006'}">
+	{menuCode:"M006",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0006/searchInit.do", TITLE:"계정별권한설정"},
+	</c:if>
+	</c:forEach>
+	
 	{menuCode:"m06",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"기초환경설정"},
 	
 	<c:forEach items="${sessionScope.menu_code}" begin="0" end="35" step="1" var="menu_code" varStatus="status">

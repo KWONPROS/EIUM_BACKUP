@@ -67,7 +67,8 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
 	        {Header:"거주구분",Type:"Text",SaveName:"residential_division",Hidden:1},
 	        {Header:"병역구분",Type:"Text",SaveName:"military_type",Hidden:1},         
 	        {Header:"군번",Type:"Text",SaveName:"military_number",Hidden:1},
-	        {Header:"제대구분",Type:"Text",SaveName:"discharge_yn",Hidden:1}
+	        {Header:"제대구분",Type:"Text",SaveName:"discharge_yn",Hidden:1},
+			{Header:"사진",Type:"Image",SaveName:"picture",   Hidden:1  }		
 		];  
 		IBS_InitSheet(mySheet , initSheet);
   
@@ -268,17 +269,18 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
 function mySheet_OnClick(Row, Col) {
 	/* if (Row != 0) {	 */		
 		  x = "x=" + mySheet.GetCellValue(Row, 2);
-		  
-		mySheet2.DoSearch("${contextPath}/hm/p0007/searchEducation.do", x);
-		mySheet3.DoSearch("${contextPath}/hm/p0007/searchCareer.do", x);
-	    mySheet4.DoSearch("${contextPath}/hm/p0007/searchLicense.do", x);
-		mySheet5.DoSearch("${contextPath}/hm/p0007/searchAppoint.do", x);
-		mySheet6.DoSearch("${contextPath}/hm/p0007/searchAssessment.do", x);
-		mySheet7.DoSearch("${contextPath}/hm/p0007/searchWorking_status.do", x);
-		mySheet8.DoSearch("${contextPath}/hm/p0007/searchBusiness_trip.do", x);
-		mySheet9.DoSearch("${contextPath}/hm/p0007/searchRnp.do", x);
-		mySheet10.DoSearch("${contextPath}/hm/p0007/searchEmployee_language.do", x);
-		mySheet11.DoSearch("${contextPath}/hm/p0007/searchTraining_assessment.do", x);
+	
+			mySheet2.DoSearch("${contextPath}/hm/p0007/searchEducation.do", x);
+			mySheet3.DoSearch("${contextPath}/hm/p0007/searchCareer.do", x);
+		    mySheet4.DoSearch("${contextPath}/hm/p0007/searchLicense.do", x);
+	/* 		mySheet5.DoSearch("${contextPath}/hm/p0007/searchAppoint.do", x);
+	 */		mySheet6.DoSearch("${contextPath}/hm/p0007/searchAssessment.do", x);
+	/* 		mySheet7.DoSearch("${contextPath}/hm/p0007/searchWorking_status.do", x);
+	 */		mySheet8.DoSearch("${contextPath}/hm/p0007/searchBusiness_trip.do", x);
+			mySheet9.DoSearch("${contextPath}/hm/p0007/searchRnp.do", x);
+			mySheet10.DoSearch("${contextPath}/hm/p0007/searchEmployee_language.do", x);
+			mySheet11.DoSearch("${contextPath}/hm/p0007/searchTraining_assessment.do", x);		  
+
 
 
 		  $('input[name=myRow]').val(Row);
@@ -295,6 +297,7 @@ function mySheet_OnClick(Row, Col) {
 	      $('select[name=military_type]').val(mySheet.GetCellValue(Row,14));
 	      $('input[name=military_number]').val(mySheet.GetCellValue(Row,15));
 	      $('select[name=discharge_yn]').val(mySheet.GetCellValue(Row,16));
+	      $('#uploadedImg').attr('src',"${contextPath}/hm/p0007/getByteImage.do?employee_code="+mySheet.GetCellValue(Row,2));	
 	      
 
 	      
@@ -530,7 +533,17 @@ function mySheet_OnClick(Row, Col) {
 
 		document.form.resist_address.value = roadAddrPart1;	
 		document.form.resist_address_detail.value = addrDetail;	
-	}	
+	}
+
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$('#uploadedImg').attr('src', e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
 						
 	        
 	// }
@@ -671,8 +684,8 @@ border : none;
 	<div class="left">
 		<table class="tg1" >
   <tr>
-    <th class="tg-2ut6"><img src="image/employee001.jpg" width="100%" height="30%"></th>
-  </tr>
+<td class="tg-dm68"><img id=uploadedImg alt="" src="" ></td></tr>
+  
 </table>
 		
 		
@@ -706,7 +719,12 @@ border : none;
 <table class="tg">
   <tr>
     <th class="tg-lu1x" rowspan="5"><i class="fa fa-address-book" aria-hidden="true"></i><br>개<br>인<br>정<br>보</th>  
-  </tr>  
+  </tr>
+   <tr>
+   <td class="tg-8thm">신장</td><td class="tg-v9i9" ><input type="text" id="military_number" name="military_number"><td class="tg-8thm">체중</td><td class="tg-v9i9" ><input type="text" id="military_number" name="military_number"><td class="tg-8thm">혈액형</td><td class="tg-v9i9" ><input type="text" id="military_number" name="military_number"></td>
+   
+   
+   </tr>
   <tr>
 <td class="tg-8thm">결혼구분</td><td class="tg-v9i9" ><select name="marriage_yn"><option value='기혼' selected>기혼</option><option value='미혼'>미혼</option></select></td>
     <td class="tg-8thm">종교</td>

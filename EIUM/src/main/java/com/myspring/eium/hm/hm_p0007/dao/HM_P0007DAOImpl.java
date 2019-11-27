@@ -41,5 +41,12 @@ public class HM_P0007DAOImpl implements HM_P0007DAO {
 	public void deleteData(Map<String, String> row) throws DataAccessException {
 		sqlSession.update("mapper.hm_p0007.deleteData", row);
 	}
+	
+
+	@Override
+	public Map<String, Object> getByteImage(Map<String, Object> searchMap) {
+		System.out.println("dao확인 :"+searchMap.get("employee_code"));
+		return sqlSession.selectOne("mapper.hm_p0007.getByteImage" ,searchMap);
+	}
 
 }

@@ -14,12 +14,17 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myspring.eium.hm.hm_p0007.dao.HM_P0007DAO;
 import com.myspring.eium.hm.hm_p0007.service.HM_P0007Service;
 import com.myspring.eium.hm.hm_p0007.vo.HM_P0007VO;
 import com.myspring.eium.login.vo.LoginVO;
@@ -32,6 +37,8 @@ public class HM_P0007ControllerImpl implements HM_P0007Controller {
 	private static final Logger logger = LoggerFactory.getLogger(HM_P0007ControllerImpl.class);
 	@Autowired
 	HM_P0007Service hM_P0007Service;
+	HM_P0007DAO p0007dao;
+
 	
 	@Override
 	@RequestMapping(value = "/hm/p0007/searchInit.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -100,6 +107,7 @@ public class HM_P0007ControllerImpl implements HM_P0007Controller {
         return resultMap;
 	}
 	
+	
 	@Override
 	@RequestMapping(value = "/hm/p0007/findAddress.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView findAddress(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -114,6 +122,28 @@ public class HM_P0007ControllerImpl implements HM_P0007Controller {
 		ModelAndView mav = new ModelAndView("/hm/hm_p0007/p0007Address2");
 		return mav;
 
+	}
+	
+	
+	
+	@Override
+	@RequestMapping(value = "/hm/p0007/getByteImage.do")
+	@ResponseBody
+	public ResponseEntity<byte[]> getByteImage(HttpServletRequest request, HttpServletResponse response)throws Exception {
+		
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+
+		searchMap.put("employee_code", request.getParameter("employee_code"));
+		System.out.println("controller확인 :"+searchMap.get("employee_code"));
+		
+		resultMap = p0007dao.getByteImage(searchMap);
+		
+		byte[] imageContent = (byte[]) resultMap.get("picture");
+
+		final HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.IMAGE_PNG);
+		return new ResponseEntity<byte[]>(imageContent, headers, HttpStatus.OK);
 	}
 
 

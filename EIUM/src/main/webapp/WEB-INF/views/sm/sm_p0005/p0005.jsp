@@ -66,12 +66,15 @@ function doAction(sAction){
       mySheet.RemoveAll();
       mySheet2.RemoveAll();
       break;
-   case "save":
+   case "save1":
 	  mySheet.DoSave("${contextPath}/sm/p0005/saveData.do", x);
-	  mySheet2.DoSave("${contextPath}/sm/p0005_01/saveData.do", x);
 	  mySheet2.RemoveAll();
       break;
-
+   case "save2":
+		  mySheet2.DoSave("${contextPath}/sm/p0005_01/saveData.do", x);
+		  mySheet2.RemoveAll();
+	      break;
+      
    case "insert":
       var row = mySheet.DataInsert();
       break;
@@ -136,7 +139,8 @@ background-color: #2C3E50;
 	<button type="button" onclick="doAction('reset')" class="IBbutton">초기화</button>
 	<button type="button" onclick="doAction('search')" class="IBbutton">조회</button>
 	<button type="button" onclick="doAction('insert')" class="IBbutton">추가</button>
-	<button type="button" onclick="doAction('save')" class="IBbutton">저장</button>
+	<button type="button" onclick="doAction('save1')" class="IBbutton">코드저장</button>
+	<button type="button" onclick="doAction('save2')" class="IBbutton">메뉴저장</button>
 	</div>
 	
 	<div class="title"> 

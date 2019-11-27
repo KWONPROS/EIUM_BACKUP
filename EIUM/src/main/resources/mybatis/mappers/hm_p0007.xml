@@ -20,6 +20,7 @@
         <result property="military_number" column="military_number" />
         <result property="discharge_yn" column="discharge_yn" />
         <result property="residential_division" column="residential_division" />
+        <result property="picture" column="picture" />
         <result property="int_user_id" column="int_user_id" />
         <result property="int_date" column="int_date" />
         <result property="upt_user_id" column="upt_user_id" />
@@ -28,7 +29,7 @@
  
 	<select id="searchList" resultMap="P0007resultVO" parameterType="java.util.Map"> 
       <![CDATA[
-         select e.employee_code, e.employee_name, eh.employee_name_hn, eh.hire_type, eh.hire_number,  eh.current_address, eh.current_address_detail, eh.resist_address, eh.resist_address_detail, eh.marriage_yn, eh.religion, eh.military_type, eh.military_number, eh.discharge_yn, eh.residential_division
+         select e.employee_code, e.employee_name, eh.employee_name_hn, eh.hire_type, eh.hire_number,  eh.current_address, eh.current_address_detail, eh.resist_address, eh.resist_address_detail, eh.marriage_yn, eh.religion, eh.military_type, eh.military_number, eh.discharge_yn, eh.residential_division, eh.picture
          from employee e, employee_hr_info eh
          where e.employee_code = eh.employee_code
          order by e.employee_code
@@ -36,6 +37,8 @@
       
       
 	</select>
+	
+
  
  <update id="updateHr_info" parameterType="java.util.Map">
 		update employee_hr_info
@@ -507,6 +510,19 @@
          from employee_training_list ta, employee_training et
          where ta.employee_code = #{x}
                ]]>
+	</select>
+	
+	
+	<resultMap id="clobMap" type="java.util.HashMap">
+		<result property="picture" column="picture" javaType="[B"
+			jdbcType="BLOB" />
+	</resultMap>
+	
+	
+	<select id="getByteImage" parameterType="java.util.Map" resultMap="clobMap">
+		select picture
+		from employee_hr_info
+		where TRIM(employee_code) = #{employee_code}
 	</select>
 
 </mapper>

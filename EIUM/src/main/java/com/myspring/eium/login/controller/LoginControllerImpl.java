@@ -1,14 +1,23 @@
 package com.myspring.eium.login.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -20,6 +29,7 @@ import com.myspring.eium.login.vo.LoginVO;
 
 @Controller
 public class LoginControllerImpl   implements LoginController {
+	private static final Logger logger = LoggerFactory.getLogger(LoginControllerImpl.class);
 	@Autowired
 	private LoginService loginService;
 	@Autowired
@@ -46,30 +56,40 @@ public class LoginControllerImpl   implements LoginController {
 	 * viewName; }
 	 */
 
+	
 	@Override
-	@RequestMapping(value="/login/Login.do", method=RequestMethod.POST)
-	public ModelAndView login(@ModelAttribute("login") LoginVO login, RedirectAttributes rAttr, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "/login/Login.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public ModelAndView appointList(@ModelAttribute("login") LoginVO login, RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
 		ModelAndView mav = new ModelAndView();
-		loginVO = loginService.login(login);
-System.out.println("###########"+loginVO);
-		if(loginVO != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("login", loginVO);
-			session.setAttribute("isLogOn", true);
+
+		Map<String, Object> searchMap = new HashMap<String, Object>(); // 검색조건
+		Map<String, Object> resultMap = new HashMap<String, Object>(); // 조회결과
+		int i;
+		ArrayList<String> menuList = new ArrayList<String>();
 
 	
-			mav.setViewName("redirect:/main.do");
-			}else {
-			//RedirectAttributes: redirect���� Data�� �����ϴ� ����� ����
-			rAttr.addAttribute("result", "loginFailed");
-			mav.setViewName("redirect:/login.do");
-			}
-		return mav;
+		searchMap.put("employee_id", login.getEmployee_id());
+		searchMap.put("employee_password", login.getEmployee_password());
+	
+		List<LoginVO> data = loginService.searchList(searchMap);
+
+    	if(data != null) {
+    		HttpSession session = request.getSession();
+    		for(i=0; i<data.size(); i++) {
+    			 menuList.add(data.get(i).getMenu_code());
+    		}
+    		session.setAttribute("menu_code", menuList);
+    		session.setAttribute("login", data.get(0));
+    		session.setAttribute("isLogOn", true);
+    		
+    		mav.setViewName("redirect:/main.do");
+    		}else {
+    		rAttr.addAttribute("result", "loginFailed");
+    		mav.setViewName("redirect:/login.do");
+    		}
+    	return mav;
 	}
-	
-
-	
-
 
 }
