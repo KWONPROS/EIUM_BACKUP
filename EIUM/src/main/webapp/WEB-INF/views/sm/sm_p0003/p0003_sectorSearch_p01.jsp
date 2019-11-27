@@ -38,17 +38,10 @@ function LoadPage(){
 
 function mySheet_OnDblClick(Row, Col, Value) { 
 
-	 var selectRowJson = mySheet.GetRowData(Row);
-	 var sectorcode=selectRowJson.sector_CODE;
-	 var sectorname=selectRowJson.sector_NAME;
 
-		 document.getElementById("CsectorCode").setAttribute('value', sectorcode);
-		 document.getElementById("CsectorName").setAttribute('value', sectorname);
-		 opener.document.getElementById("PsectorCode").value=document.getElementById("CsectorCode").value;
-		 opener.document.getElementById("PsectorName").value=document.getElementById("CsectorName").value;
-		 opener.setSector();
-
-
+ 	var rowData=mySheet.GetRowData(Row);
+	
+	 window.opener.sectorValue(rowData);
 	
 	    
 	self.close(); 

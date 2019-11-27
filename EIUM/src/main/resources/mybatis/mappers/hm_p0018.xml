@@ -111,21 +111,22 @@
 	
 	 
 	<select id="employeeSearch" resultMap="P0018resultVO" parameterType="java.util.Map"> 
+
+	
+    	
+	SELECT E.EMPLOYEE_CODE,E.EMPLOYEE_NAME,D.department_NAME,P.POSITION_NAME
+	FROM EMPLOYEE E , DEPARTMENT D, POSITION P,EMPLOYEE_WORK EW
+	WHERE E.EMPLOYEE_CODE=EW.EMPLOYEE_CODE
+	AND EW.DEPARTMENT_CODE= D.DEPARTMENT_CODE
+	AND EW.POSITION_CODE=P.POSITION_CODE
+
+  
 	<choose>
 	<when test="E_id != '' and E_id != null">
 	    <![CDATA[
-	SELECT EMPLOYEE_CODE,EMPLOYEE_NAME
-	FROM EMPLOYEE
-	WHERE EMPLOYEE_NAME=#{E_id}
+	AND E.EMPLOYEE_NAME={#E_id}
 			]]>
 	</when>
-	<otherwise>
-	<![CDATA[
-	SELECT EMPLOYEE_CODE,EMPLOYEE_NAME
-	FROM EMPLOYEE
-			]]>
-	
-	</otherwise>
 	</choose>
     </select>
 	

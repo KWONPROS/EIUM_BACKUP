@@ -70,6 +70,19 @@ ul, ol {
 .IBbutton:hover {
 	background-color: #2C3E50;
 }
+.title {
+		width: 100%;
+	color: #2C3E50;
+	font-weight: bold;
+	font-size: 20px;
+	padding-left: 30px;
+	padding-bottom: 10px;
+	padding-top: 20px;
+	border-top: thin solid #5E5E5E;
+	border-bottom: thin dashed #5E5E5E;
+	top: 50px;
+
+}
 
 
 </style>
@@ -129,10 +142,10 @@ function doAction(sAction) {
 	switch (sAction) {
 	case "search":
 		var param = FormQueryStringEnc(document.frm);
-	    mySheet.DoSearch("${contextPath}/wm/p0005/searchList.do", param);
+	    mySheet1.DoSearch("${contextPath}/hm/p0023/searchList.do", param);
 		break;
 	case "reset":
-		mySheet.RemoveAll();
+		mySheet1.RemoveAll();
 	    $('#date').attr('value', "");
 	    $('#date2').attr('value', "");
 	    $('#p_text').attr('value', "");
@@ -165,6 +178,12 @@ function departmentValue(rowData){
 </head>
 <body onload="LoadPage()">
 
+	<div class="title">
+		<header>
+			<i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 등록정보관리 :
+			인사발령조회
+		</header>
+	</div>
 <form name="frm" >
 
 
@@ -176,7 +195,7 @@ function departmentValue(rowData){
 <input  id="date2"type="text" class="Datepicker">
 
 <span>발령구분</span>
-<select id = "title"  class="" style="width: 160px">
+<select id = "appoint_index"  class="" style="width: 160px">
 <option value="" selected >전체</option>
 <option value="채용" >채용</option>
 <option value="승진">승진</option>
@@ -200,7 +219,7 @@ function departmentValue(rowData){
 
 <span>직원</span>
 <input id="employee" type="text" >
-<input id="masterEmplCode" type="hidden">
+<input id="EmplCode" type="hidden">
 <a href="javascript:goPopup2()" >사원검색</a>
 
 

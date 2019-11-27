@@ -103,6 +103,9 @@ function LoadPage(){
 		{Header:"NO",Type:"Seq",Width:100,SaveName:"seq",Align:"Center"},
 		{Header:"사원코드",Type:"Text",Width:100,SaveName:"employee_CODE",Align:"Center"},
 		{Header:"사원명",Type:"Text",Width:100,SaveName:"employee_NAME",Align:"Center"},
+		{Header:"부서",Type:"Text",Width:100,SaveName:"department_NAME",Align:"Center",Hidden:1},
+		{Header:"직책",Type:"Text",Width:100,SaveName:"position_NAME",Align:"Center",Hidden:1},
+		
 		];
 	IBS_InitSheet(mySheet,initSheet);
 	mySheet.SetEditableColorDiff(1);
@@ -114,18 +117,13 @@ function LoadPage(){
 
 
 function mySheet_OnDblClick(Row,Col,Value){
-	 var selectRowJson = mySheet.GetRowData(Row);
-	 var Ccode=selectRowJson.employee_CODE;
-	 var Cname=selectRowJson.employee_NAME;
 
-	 
-	 console.log(Ccode);
-		$("#Ccode").attr("value",Ccode);
-		$("#Cname").attr("value",Cname);
-		console.log($("#Cname").val());
-		 opener.document.getElementById("Pcode").value=document.getElementById("Ccode").value;
-		 opener.document.getElementById("Pname").value=document.getElementById("Cname").value;
-		 opener.setPopupValue();
+
+	 	var rowData=mySheet.GetRowData(Row);
+		
+		 window.opener.employeeValue(rowData);
+		
+		    
 		    
 			self.close(); 
 			return false; //창을 닫는 경우에는 false를 리턴해 줘야 함. }

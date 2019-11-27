@@ -58,6 +58,9 @@
 	<when test="data != '' and date2 !='' and title !=''">
 	AND to_date(ha.appoint_date,'YYYY-MM-DD') BETWEEN  #{date} AND #{date2}
 	AND ha.appoint_title=#{title}
+	</when>	<when test="data != '' and date2 !='' and masterEmpl !='' ">
+	AND to_date(ha.appoint_date,'YYYY-MM-DD') BETWEEN  #{date} AND #{date2}
+	AND e.employee_name=#{masterEmpl}
 	</when>
 	<when test="title !='' and masterEmpl !='' "> 
 	AND ha.appoint_title=#{title}
@@ -71,7 +74,7 @@
 	</when>
 	</choose>
 	</select>
-
+ 
 	<select  id="appointList2" resultMap="P0022resultVO" parameterType="java.util.Map">
 	    <![CDATA[
        SELECT HAH.APPOINT_EMPLOYEE_CODE AS EMPLOYEE_CODE,

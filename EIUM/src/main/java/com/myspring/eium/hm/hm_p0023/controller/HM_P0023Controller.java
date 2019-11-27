@@ -17,4 +17,7 @@ public interface HM_P0023Controller {
 
 	ModelAndView employeeSearch_p02(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
+
+	Map appointList(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
 }

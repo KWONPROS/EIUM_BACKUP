@@ -79,43 +79,126 @@
 
 //데이터는 서버로 옮겨야 함
 var data = {Data:[
-	{menuCode:"m00",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"등록정보관리"},
-	{menuCode:"m01",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0001/searchInit.do",TITLE:"회사등록"},
-	{menuCode:"m02",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0002/searchInit.do", TITLE:"사업장등록"},
-	{menuCode:"m03",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0003/searchInit.do", TITLE:"부서등록"},
-	{menuCode:"m04",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0004/searchInit.do", TITLE:"사원등록"},
-	{menuCode:"m05",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0005/searchInit.do", TITLE:"권한관리"},
-	{menuCode:"m38",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0006/searchInit.do", TITLE:"계정별권한설정"},
+	{menuCode:"m000",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"등록정보관리"},
+	
+	<c:forEach items="${sessionScope.menu_code}" begin="0" end="35" step="1" var="menu_code" varStatus="status">
+	<c:if test="${menu_code eq 'M001'}">
+	{menuCode:"M001",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0001/searchInit.do",TITLE:"회사등록"},
+	</c:if>
+	<c:if test="${menu_code eq 'M002'}">
+	{menuCode:"M002",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0002/searchInit.do", TITLE:"사업장등록"},
+	</c:if>
+	<c:if test="${menu_code eq 'M003'}">
+	{menuCode:"M003",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0003/searchInit.do", TITLE:"부서등록"},
+	</c:if>
+	<c:if test="${menu_code eq 'M004'}">
+	{menuCode:"M004",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0004/searchInit.do", TITLE:"사원등록"},
+	</c:if>
+	<c:if test="${menu_code eq 'M005'}">
+	{menuCode:"M005",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0005/searchInit.do", TITLE:"권한관리"},
+	</c:if>
+	<c:if test="${menu_code eq 'M006'}">
+	{menuCode:"M006",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0006/searchInit.do", TITLE:"계정별권한설정"},
+	</c:if>
+	</c:forEach>
+	
 	{menuCode:"m06",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"기초환경설정"},
-	{menuCode:"m07",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0001/searchInit.do", TITLE:"호봉테이블등록 "},
-	{menuCode:"m08",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0002/searchInit.do", TITLE:"지급일등록"},
-	{menuCode:"m09",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0003/searchInit.do", TITLE:"인사기초코드등록 "},
+	
+	<c:forEach items="${sessionScope.menu_code}" begin="0" end="35" step="1" var="menu_code" varStatus="status">
+	<c:if test="${menu_code eq 'M007'}">
+	{menuCode:"M007",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0001/searchInit.do", TITLE:"호봉테이블등록 "},
+	</c:if>
+	<c:if test="${menu_code eq 'M008'}">
+	{menuCode:"M008",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0002/searchInit.do", TITLE:"지급일등록"},
+	</c:if>
+	<c:if test="${menu_code eq 'M009'}">
+	{menuCode:"M009",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0003/searchInit.do", TITLE:"인사기초코드등록 "},
+	</c:if>
+	</c:forEach>
+	
 	{menuCode:"m10",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"인사관리"},
-	{menuCode:"m11",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0004/searchInit.do", TITLE:"인사정보등록"},
-	{menuCode:"m12",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0007/searchInit.do", TITLE:"인사기록카드"},
-	{menuCode:"m13",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0018/searchInit.do", TITLE:"교육관리"},
-	{menuCode:"m14",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0021/searchInit.do", TITLE:"교육평가"},
-	{menuCode:"m15",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0022/searchInit.do", TITLE:"인사발령"},
-	{menuCode:"m17",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0023/searchInit.do", TITLE:"인사발령조회"},
-	{menuCode:"m19",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"사원정보현황"},
-	{menuCode:"m20",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"인사고과/상벌현황"},
-	{menuCode:"m21",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"사원입퇴사현황"},
-	{menuCode:"m22",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"책정임금현황"},
-	{menuCode:"m23",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"근속년수현황"},
-	{menuCode:"m24",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"교육현황"},
+	
+	<c:forEach items="${sessionScope.menu_code}" begin="0" end="35" step="1" var="menu_code" varStatus="status">
+	<c:if test="${menu_code eq 'M010'}">
+	{menuCode:"M010",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0004/searchInit.do", TITLE:"인사정보등록"},
+	</c:if>
+	<c:if test="${menu_code eq 'M011'}">
+	{menuCode:"M011",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0007/searchInit.do", TITLE:"인사기록카드"},
+	</c:if>
+	<c:if test="${menu_code eq 'M012'}">
+	{menuCode:"M012",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0018/searchInit.do", TITLE:"교육관리"},
+	</c:if>
+	<c:if test="${menu_code eq 'M013'}">
+	{menuCode:"M013",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0021/searchInit.do", TITLE:"교육평가"},
+	</c:if>
+	<c:if test="${menu_code eq 'M014'}">
+	{menuCode:"M014",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0022/searchInit.do", TITLE:"인사발령"},
+	</c:if>
+	<c:if test="${menu_code eq 'M015'}">
+	{menuCode:"M015",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0023/searchInit.do", TITLE:"인사발령조회"},
+	</c:if>
+	<c:if test="${menu_code eq 'M016'}">
+	{menuCode:"M016",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"사원정보현황"},
+	</c:if>
+	<c:if test="${menu_code eq 'M017'}">
+	{menuCode:"M017",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"인사고과/상벌현황"},
+	</c:if>
+	<c:if test="${menu_code eq 'M018'}">
+	{menuCode:"M018",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"사원입퇴사현황"},
+	</c:if>
+	<c:if test="${menu_code eq 'M019'}">
+	{menuCode:"M019",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"책정임금현황"},
+	</c:if>
+	<c:if test="${menu_code eq 'M020'}">
+	{menuCode:"M020",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"근속년수현황"},
+	</c:if>
+	<c:if test="${menu_code eq 'M021'}">
+	{menuCode:"M021",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0040/searchInit.do", TITLE:"교육현황"},
+	</c:if>
+	</c:forEach>
+	
 	{menuCode:"m25",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"급여관리"},
-	{menuCode:"m26",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"pm/p0001/searchInit.do", TITLE:"급여입력및계산"},
-	{menuCode:"m27",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"급여대장"},
-	{menuCode:"m28",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"급여명세"},
-	{menuCode:"m29",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"급상여이체현황"},
-	{menuCode:"m30",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"pm/p0009/searchInit.do", TITLE:"월별지급현황"},
-	{menuCode:"m31",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"사원임금통계"},
+	
+	<c:forEach items="${sessionScope.menu_code}" begin="0" end="35" step="1" var="menu_code" varStatus="status">
+	<c:if test="${menu_code eq 'M022'}">
+	{menuCode:"M022",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"pm/p0001/searchInit.do", TITLE:"급여입력및계산"},
+	</c:if>
+	<c:if test="${menu_code eq 'M023'}">
+	{menuCode:"M023",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"pm/p0002/searchInit.do", TITLE:"급여대장"},
+	</c:if>
+	<c:if test="${menu_code eq 'M024'}">
+	{menuCode:"M024",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"급여명세"},
+	</c:if>
+	<c:if test="${menu_code eq 'M025'}">
+	{menuCode:"M025",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"pm/p0003/searchInit.do", TITLE:"급상여이체현황"},
+	</c:if>
+	<c:if test="${menu_code eq 'M026'}">
+	{menuCode:"M026",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"pm/p0009/searchInit.do", TITLE:"월별지급현황"},
+	</c:if>
+	<c:if test="${menu_code eq 'M027'}">
+	{menuCode:"M027",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"사원임금통계"},
+	</c:if>
+	</c:forEach>
+	
 	{menuCode:"m32",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"근태관리"},
-	{menuCode:"m33",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"wm/p0001/searchInit.do", TITLE:"근태입력"},
-	{menuCode:"m34",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"wm/p0002/searchInit.do", TITLE:"휴가관리"},
-	{menuCode:"m35",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"wm/p0003/searchInit.do", TITLE:"휴가내역"},
-	{menuCode:"m36",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"wm/p0004/searchInit.do", TITLE:"출장관리"},
-	{menuCode:"m37",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"wm/p0005/searchInit.do", TITLE:"출장조회"}
+	
+	<c:forEach items="${sessionScope.menu_code}" begin="0" end="35" step="1" var="menu_code" varStatus="status">
+	<c:if test="${menu_code eq 'M028'}">
+	{menuCode:"M028",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"wm/p0001/searchInit.do", TITLE:"근태입력"},
+	</c:if>
+	<c:if test="${menu_code eq 'M029'}">
+	{menuCode:"M029",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"wm/p0002/searchInit.do", TITLE:"휴가관리"},
+	</c:if>
+	<c:if test="${menu_code eq 'M030'}">
+	{menuCode:"M030",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"wm/p0003/searchInit.do", TITLE:"휴가내역"},
+	</c:if>
+	<c:if test="${menu_code eq 'M031'}">
+	{menuCode:"M031",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"wm/p0004/searchInit.do", TITLE:"출장관리"},
+	</c:if>
+	<c:if test="${menu_code eq 'M032'}">
+	{menuCode:"M032",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"wm/p0005/searchInit.do", TITLE:"출장조회"}
+	</c:if>
+	</c:forEach>
 	]};
 
 
@@ -231,7 +314,7 @@ $(document).ready(function(){
 		<div class="logobox">
 			<a href="${contextPath}/main.do"> <img class="logo"
 				src="${contextPath}/resources/image/EIUM_banner.png" /></a>
-				
+
 			<div class="sideSearchBar">
 				<input type="search" id="search" placeholder="찾을 메뉴 입력..." /> <span
 					class="icon"><i class="fa fa-search"></i></span>
@@ -239,6 +322,7 @@ $(document).ready(function(){
 			
 		</div>
 		<div id="sideMenu"></div>
+		
 	</div>
 
 </body>

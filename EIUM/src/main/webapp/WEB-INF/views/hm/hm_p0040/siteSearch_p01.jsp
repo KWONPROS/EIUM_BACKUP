@@ -42,6 +42,7 @@ function mySheet2_OnDblClick(Row, Col, Value) {
 
  	var rowData=mySheet2.GetRowData(Row);
 	
+ 	
 	 window.opener.siteValue(rowData);
 	
 	    

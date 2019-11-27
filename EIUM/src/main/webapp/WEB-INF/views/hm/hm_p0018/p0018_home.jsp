@@ -34,7 +34,7 @@
 				{Header:"교육명",Type:"Text",SaveName:"employee_TRAINING_NAME", Align:"Center",Width:100},			
 				{Header:"시작일",Type:"Date",SaveName:"employee_TRAINING_START_DATE", Edit: 1, Align:"Center",Format:"Ymd",Width:100},			
 				{Header:"종료일",Type:"Date",SaveName:"employee_TRAINING_END_DATE",Format:"Ymd",Width:100},			
-				{Header:"교육일수",Type:"Text",SaveName:"employee_TRAINING_DATE_COUNT",  Hidden:1},
+				{Header:"교육일수",Type:"Text",SaveName:"employee_TRAINING_DATE_COUNT",Hidden:1},
 				{Header:"교육목적",Type:"Text",SaveName:"employee_TRAINING_GOAL",Hidden:1},
 				{Header:"교육장소",Type:"Text",SaveName:"employee_TRAINING_LOCATION",Hidden:1},			
 				{Header:"담당강사",Type:"Text",SaveName:"employee_TRAINING_TEACHER", Hidden:1},			
@@ -148,6 +148,7 @@ console.log(Row,Col);
 		}	
 	}
 	
+
 	
 	
 </script>

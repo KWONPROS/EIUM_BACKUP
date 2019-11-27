@@ -32,138 +32,104 @@
 
 	<select  id="appointList" resultMap="P0023resultVO" parameterType="java.util.Map">
 	    <![CDATA[
-	SELECT hr_appoint_number,hr_appoint_title,hai.hr_appoint_index_name,hr_appoint_date,ha.hr_appoint_master_code,e.employee_name,s.site_name,d.department_name
-	FROM hr_appoint ha,employee e,employee_work ew,department d,hr_appoint_index hai,site s
-    WHERE ha.hr_appoint_index_code=e.employee_code
-    AND e.employee_code=ew.employee_code
-    AND ew.department_code=d.department_code
-    AND ha.hr_appoint_index_code=hai.hr_appoint_index_code
-    AND d.site_code=s.site_code
-    
-			]]>
-	</select>
+SELECT HAH.APPOINT_EMPLOYEE_CODE AS EMPLOYEE_CODE,
+E.EMPLOYEE_NAME,
+HAH.APPOINT_CODE,
+HAH.START_DATE,
+HAH.END_DATE,
+AI.HR_APPOINT_INDEX_NAME,
+EW.WORK_STATUS,
+EW.EMPLOYEE_JOIN_DATE,
+S.SITE_NAME,
+D.DEPARTMENT_NAME,
+JC.JOB_CLASS_NAME,
+P.POSITION_NAME,
+DT.DUTY_NAME,
+JD.JOB_DIS_NAME,
+PT.PAY_TYPE_NAME,
+PG.PAY_GRADE_NAME,
+ORN.OUT_REASON_NAME,
+HAH.START_DATE,
+HAH.END_DATE
 
-	<select  id="appointSearch_p01" resultMap="P0023resultVO" parameterType="java.util.Map">
-	    <![CDATA[
-	SELECT HR_APPOINT_INDEX_CODE,HR_APPOINT_INDEX_NAME
-	FROM HR_APPOINT_INDEX
+FROM HR_APPOINT_HISTORY HAH,
+    EMPLOYEE_WORK EW,
+    EMPLOYEE E,
+    HR_APPOINT_INDEX AI,
+    SITE S,
+    DEPARTMENT D,
+    JOB_CLASS JC,
+    POSITION P,
+    DUTY DT,
+    JOB_DIS JD,
+    PAY_TYPE PT,
+    PAY_GRADE PG,
+    OUT_REASON ORN
+
+
+WHERE HAH.APPOINT_EMPLOYEE_CODE = E.EMPLOYEE_CODE(+)
+AND HAH.appoint_index_code = AI.hr_appoint_index_code(+)
+AND HAH.APPOINT_EMPLOYEE_CODE=EW.EMPLOYEE_CODE(+)
+AND D.SITE_CODE = S.SITE_CODE(+)
+AND EW.DEPARTMENT_CODE=D.DEPARTMENT_CODE(+)
+AND EW.JOB_CLASS_CODE=JC.JOB_CLASS_CODE(+)
+AND EW.POSITION_CODE=P.POSITION_CODE(+)
+AND EW.DUTY_CODE=DT.DUTY_CODE(+)
+AND EW.JOB_DIS_CODE = JD.JOB_DIS_CODE(+)
+AND EW.PAY_TYPE_CODE = PT.PAY_TYPE_CODE(+)
+AND EW.PAY_GRADE_CODE = PG.PAY_GRADE_CODE(+)
+AND EW.OUT_REASON_CODE = ORN.OUT_REASON_CODE(+)
     
 			]]>
-	</select>
-	
-	
-	<select  id="masterEmployee_p02" resultMap="P0023resultVO" parameterType="java.util.Map">
-	<choose>
-	<when test="E_id != '' and E_id != null">
-	    <![CDATA[
-    SELECT E.EMPLOYEE_CODE,E.EMPLOYEE_NAME,D.DEPARTMENT_NAME,S.SITE_NAME,DT.DUTY_NAME
-	FROM EMPLOYEE E, EMPLOYEE_WORK EW,DEPARTMENT D,SITE S,DUTY DT
-	WHERE EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE
-	AND D.SITE_CODE=S.SITE_CODE
-	AND E.EMPLOYEE_CODE= EW.EMPLOYEE_CODE
-	AND EW.DUTY_CODE=DT.DUTY_CODE
-	AND E.EMPLOYEE_NAME =  #{E_id jdbcType=VARCHAR}
-    
-			]]>
-			
+				<choose>
+	<when test="data != '' and date2 !='' and appoint_index !='' and employee !='' and department !='' ">
+	AND to_date(hah.start_date,'YYYY-MM-DD') BETWEEN  #{date} AND #{date2}
+	AND AI.hr_appoint_INDEX_NAME=#{appoint_index}
+	AND e.employee_name=#{employee}
+	AND d.department_NAME=#{department}
 	</when>
-	<otherwise>
-		    <![CDATA[
-    SELECT E.EMPLOYEE_CODE,E.EMPLOYEE_NAME,D.DEPARTMENT_NAME,S.SITE_NAME,DT.DUTY_NAME
-	FROM EMPLOYEE E, EMPLOYEE_WORK EW,DEPARTMENT D,SITE S,DUTY DT
-	WHERE EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE
-	AND D.SITE_CODE=S.SITE_CODE
-	AND E.EMPLOYEE_CODE= EW.EMPLOYEE_CODE
-	AND EW.DUTY_CODE=DT.DUTY_CODE
-    
-			]]>
-	</otherwise>
+	<when test="data != '' and date2 !='' and appoint_index !='' and department !='' ">
+	AND to_date(hah.start_date,'YYYY-MM-DD') BETWEEN  #{date} AND #{date2}
+	AND AI.hr_appoint_INDEX_NAME=#{appoint_index}
+	AND d.department_NAME=#{department}	
+	</when>
+	<when test="data != '' and date2 !='' and department !='' ">
+	AND to_date(hah.start_date,'YYYY-MM-DD') BETWEEN  #{date} AND #{date2}
+	AND d.department_NAME=#{department}	
+	</when>
+	<when test="appoint_index !='' and employee !='' and department !='' "> 
+	AND AI.hr_appoint_INDEX_NAME=#{appoint_index}
+	AND e.employee_name = #{employee}
+	AND d.department_NAME = #{department}
+	</when>
+	<when test="appoint_index !='' and employee !='' "> 
+	AND AI.hr_appoint_INDEX_NAME=#{appoint_index}
+	AND e.employee_name = #{employee}
+	</when>
+	<when test="data != '' and date2 !='' and appoint_index!='' ">
+	AND to_date(hah.start_date,'YYYY-MM-DD') BETWEEN  #{date} AND #{date2}
+	AND AI.hr_appoint_INDEX_NAME=#{appoint_index}
+	</when>
+		<when test="data != '' and date2 !='' and employee != '' ">
+	AND to_date(hah.start_date,'YYYY-MM-DD') BETWEEN  #{date} AND #{date2}
+	AND e.employee_NAME=#{employee}
+	</when>
+	<when test="data != '' and date2 !='' ">
+	AND to_date(hah.start_date,'YYYY-MM-DD') BETWEEN  #{date} AND #{date2}
+	</when>
+	<when test="employee !='' and employee != null ">
+	AND e.employee_name=#{employee}	
+	</when>
+	<when test="department !='' and department != null ">
+	AND d.department_NAME=#{department}	
+	</when>
+	<when test="appoint_index !='' and appoint_index != null ">
+	AND AI.hr_appoint_INDEX_NAME=#{appoint_index}
+	</when>
+	
 	</choose>
 	</select>
 
-
-
-	<select  id="homeSearch_p03" resultMap="P0023resultVO" parameterType="java.util.Map">
-	<choose>
-	<when test="E_id != '' and E_id != null">
-	    <![CDATA[
-    SELECT E.EMPLOYEE_CODE,E.EMPLOYEE_NAME,D.DEPARTMENT_NAME,S.SITE_NAME,DT.DUTY_NAME
-	FROM EMPLOYEE E, EMPLOYEE_WORK EW,DEPARTMENT D,SITE S,DUTY DT
-	WHERE EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE
-	AND D.SITE_CODE=S.SITE_CODE
-	AND E.EMPLOYEE_CODE= EW.EMPLOYEE_CODE
-	AND EW.DUTY_CODE=DT.DUTY_CODE
-	AND E.EMPLOYEE_NAME =  #{E_id jdbcType=VARCHAR}
-    
-			]]>
-			
-	</when>
-	<otherwise>
-		    <![CDATA[
-    SELECT E.EMPLOYEE_CODE,E.EMPLOYEE_NAME,D.DEPARTMENT_NAME,S.SITE_NAME,DT.DUTY_NAME
-	FROM EMPLOYEE E, EMPLOYEE_WORK EW,DEPARTMENT D,SITE S,DUTY DT
-	WHERE EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE
-	AND D.SITE_CODE=S.SITE_CODE
-	AND E.EMPLOYEE_CODE= EW.EMPLOYEE_CODE
-	AND EW.DUTY_CODE=DT.DUTY_CODE
-    
-			]]>
-	</otherwise>
-	</choose>
-	</select>
-
-
-
-
-	<select  id="homeEmployeeSearch" resultMap="P0023resultVO" parameterType="java.util.Map">
-	    <![CDATA[
-	SELECT HA.EMPLOYEE_CODE,E.EMPLOYEE_NAME,D.DEPARTMENT_NAME,DT.DUTY_NAME
-	FROM EMPLOYEE E , HR_APPOINT HA , DUTY DT , DEPARTMENT D,EMPLOYEE_WORK EW
-	WHERE HA.EMPLOYEE_CODE=E.EMPLOYEE_CODE
-	AND HA.EMPLOYEE_CODE=EW.EMPLOYEE_CODE
-	AND EW.DEPARTMENT_CODE=D.DEPARTMENT_CODE
-	AND EW.DUTY_CODE=DT.DUTY_CODE
-	AND HA.HR_APPOINT_NUMBER=#{param}
-	    
-			]]>
-	</select>
-
-
-	<insert id="insertData" parameterType="java.util.Map">
-	insert into HR_APPOINT(HR_APPOINT_NUMBER,HR_APPOINT_TITLE,HR_APPOINT_INDEX_CODE,HR_APPOINT_DATE,HR_APPOINT_MASTER_CODE,HR_APPOINT_CODE)
-	values(#{hr_APPOINT_NUMBER}, #{hr_APPOINT_TITLE}, #{hr_APPOINT_INDEX_CODE},#{hr_APPOINT_DATE},#{hr_APPOINT_MASTER_CODE},HR_APPOINT_CODE_SEQ.NEXTVAL)
-	</insert>	
-	
 	
 
-	<update id="updateData" parameterType="java.util.Map">
-		update HR_APPOINT
-		set  HR_APPOINT_TITLE=#{hr_APPOINT_TITLE}
-		   , HR_APPOINT_DATE=#{hr_APPOINT_DATE}
-		   , HR_APPOINT_MASTER_CODE=#{hr_APPOINT_MASTER_CODE}
-		where HR_APPOINT_NUMBER = #{hr_APPOINT_NUMBER}
-	</update>	
-	
-	
-	<delete id="deleteData" parameterType="java.util.Map">
-		delete HR_APPOINT
-		where HR_APPOINT_NUMBER = #{hr_APPOINT_NUMBER}
-	</delete>	
-	
-	
-		<insert id="insertData2" parameterType="java.util.Map">
-	insert into HR_APPOINT(EMPLOYEE_CODE)
-	values(#{employee_code})
-	</insert>	
-	
-	
-	
-	
-	<delete id="deleteData2" parameterType="java.util.Map">
-		delete HR_APPOINT
-		where EMPLOYEE_CODE = #{employee_code}
-	</delete>	
-	
-	
-	
 </mapper>

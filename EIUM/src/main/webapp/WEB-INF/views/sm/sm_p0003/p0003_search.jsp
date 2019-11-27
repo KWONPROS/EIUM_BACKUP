@@ -55,24 +55,7 @@ left: 330px;
 <script src="http://code.jquery.com/jquery-latest.js"></script>  
 <script type="text/javascript">
 var pageheightoffset = 200; //시트높이 계산용
-function setSite(){
-	
-	 siteName=document.getElementById("PsiteName").value;
-	 siteCode=document.getElementById("PsiteCode").value;
-	mySheet.SetCellText(row,col,siteCode);
-	mySheet.SetCellText(row,col+1,siteName);
 
-	
-};
-function setSector(){
-	
-	 sectorName=document.getElementById("PsectorName").value;
-	 sectorCode=document.getElementById("PsectorCode").value;
-	mySheet.SetCellText(row,col,sectorCode);
-	mySheet.SetCellText(row,col+1,sectorName);
-
-	
-};
 
 //sheet 기본설정
 function LoadPage(){
@@ -86,10 +69,10 @@ function LoadPage(){
 		{Header:"삭제	",Type:"DelCheck",Width:60,SaveName:"Delete",Align:"Center"},
 		{Header:"부서코드",Type:"Text",Width:100,SaveName:"department_CODE",Align:"Center",UpdateEdit:0},
 		{Header:"부서명",Type:"Text",Width:100,SaveName:"department_NAME",Align:"Center"},
-		{Header:"사업장코드",Type:"Text",Width:120,SaveName:"site_CODE",Align:"Center",InsertEdit:0}, 
-		{Header:"사업장이름",Type:"Text",Width:120,SaveName:"site_NAME",Align:"Center",InsertEdit:0}, 
-		{Header:"부문코드",Type:"Text",Width:60,SaveName:"sector_CODE",Align:"Center",InsertEdit:0}, 
-		{Header:"부문명",Type:"Text",Width:150,SaveName:"sector_NAME",Align:"Center",InsertEdit:0},
+		{Header:"사업장코드",Type:"Popup",Width:120,SaveName:"site_CODE",Align:"Center"}, 
+		{Header:"사업장이름",Type:"Text",Width:120,SaveName:"site_NAME",Align:"Center"}, 
+		{Header:"부문코드",Type:"Popup",Width:60,SaveName:"sector_CODE",Align:"Center"}, 
+		{Header:"부문명",Type:"Text",Width:150,SaveName:"sector_NAME",Align:"Center"},
 		{Header:"사용기간",Type:"Date",Width:120,SaveName:"department_TERM",Align:"Center"},
 		];
 	IBS_InitSheet(mySheet,initSheet);
@@ -98,23 +81,22 @@ function LoadPage(){
 
 }
 
-function mySheet_OnDblClick(Row,Col,Value){
-	var status=mySheet.GetCellValue(Row,0);
-	console.log("row"+Row,"col"+Col);
-	row=Row;
-	col=Col;
-	
-	if(Col=="4"&&status=="I"){
-		
-	window.open("${contextPath}/sm/p0003/siteSearch_Init.do", "a", "width=500, height=700, left=100, top=50"); 
 
+
+	function mySheet_OnPopupClick(Row,Col){
+		if(Col=="4"){
+			
+			window.open("${contextPath}/sm/p0003/siteSearch_Init.do", "a", "width=500, height=700, left=100, top=50"); 
+
+			}
+		if (Col=="6"){
+			window.open("${contextPath}/sm/p0003/sectorSearch_Init.do", "a", "width=500, height=700, left=100, top=50");	
+
+		}
+	
 	}
-	if (Col=="6"&&status=="I"){
-	window.open("${contextPath}/sm/p0003/sectorSearch_Init.do", "a", "width=500, height=700, left=100, top=50");	
-
-}
 	
-}
+
 function mySheet_OnSelectMenu(text,code){
 	if(text=="엑셀 파일 저장"){
 	
@@ -154,8 +136,12 @@ function doAction(sAction){
 }
 
 
-
-
+function siteValue(rowData){
+	mySheet.SetRowData(mySheet.GetSelectRow(),rowData);
+}
+function sectorValue(rowData){
+	mySheet.SetRowData(mySheet.GetSelectRow(),rowData);
+}
 </script>
 
 <script>
@@ -241,10 +227,6 @@ $.ajax({
 				
             </div>
 
-	<input type="hidden" id="PsiteCode">
-	<input type="hidden" id="PsiteName">
-	<input type="hidden" id="PsectorCode">
-	<input type="hidden" id="PsectorName">
 	
 
 </body>

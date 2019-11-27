@@ -82,7 +82,7 @@ function setPopupValue(){
 			initSheet2.Cols = [
 					{Header:"상태",Type:"Status",SaveName:"STATUS", Align:"Center"},
 					{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK"},
-					{Header:"사원코드",Type:"Text",SaveName:"employee_CODE",Align:"Center",Width:100},
+					{Header:"사원코드",Type:"Popup",SaveName:"employee_CODE",Align:"Center",Width:100},
 					{Header:"사원명",Type:"Text",SaveName:"employee_NAME",Align:"Center",InsertEdit:0,Width:100},			
 					{Header:"부서",Type:"Text",SaveName:"department_NAME",InsertEdit:0,Width:100},			
 					{Header:"직책",Type:"Text",SaveName:"position_NAME",InsertEdit:0,Width:100}	,
@@ -149,21 +149,18 @@ function setPopupValue(){
 	  function showPopup() { window.open("${contextPath}/hm/p0018/home2_p01.do", "a", "width=600, height=500, left=100, top=50");
 	  
 	  }
-	  
-	function mySheet2_OnDblClick(Row,Col){
-			var status=mySheet2.GetCellValue(Row,0);
 
-			row=Row;
-			col=Col;
-			
-			if(Col=="2"&&status=="I"){
+	  function mySheet2_OnPopupClick(Row,Col){
+			if(Col=="2"){
 				
-			window.open("${contextPath}/hm/p0018/home2_p02.do", "a", "width=500, height=700, left=100, top=50"); 
+				window.open("${contextPath}/hm/p0018/home2_p02.do", "a", "width=500, height=700, left=100, top=50"); 
 
-			}
-
+				}
+	  }
+		function employeeValue(rowData){
+			mySheet2.SetRowData(mySheet2.GetSelectRow(),rowData);
+		}
 		
-	}
 	
 </script>
 

@@ -52,7 +52,7 @@ public class LoginControllerImpl   implements LoginController {
 			HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		loginVO = loginService.login(login);
-
+System.out.println("###########"+loginVO);
 		if(loginVO != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("login", loginVO);

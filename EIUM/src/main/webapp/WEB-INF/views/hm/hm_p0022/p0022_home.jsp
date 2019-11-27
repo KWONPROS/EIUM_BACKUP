@@ -18,7 +18,19 @@
 	
 
 <style>
+.title {
+		width: 100%;
+	color: #2C3E50;
+	font-weight: bold;
+	font-size: 20px;
+	padding-left: 30px;
+	padding-bottom: 10px;
+	padding-top: 20px;
+	border-top: thin solid #5E5E5E;
+	border-bottom: thin dashed #5E5E5E;
+	top: 50px;
 
+}
 
 </style>
 
@@ -270,6 +282,13 @@ function mySheet1_OnSaveEnd(){
 <title>인사발령</title>
 </head>
 <body onload="LoadPage()">
+
+	<div class="title">
+		<header>
+			<i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 등록정보관리 :
+			인사발령
+		</header>
+	</div>
 
 <form name="frm" >
 
