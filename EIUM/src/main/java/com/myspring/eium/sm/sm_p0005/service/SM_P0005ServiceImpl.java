@@ -40,6 +40,8 @@ public class SM_P0005ServiceImpl implements SM_P0005Service {
 				sM_P0005DAO.updateData(row);
 			}else if("D".equals(str)) { // 삭제
 				sM_P0005DAO.deleteData(row);
+			}else if("".equals(str))  {
+				
 			}
 			i++;
 		}
