@@ -161,7 +161,7 @@ var data = {Data:[
 	{menuCode:"M015",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0023/searchInit.do", TITLE:"인사발령조회"},
 	</c:if>
 	<c:if test="${menu_code eq 'M016'}">
-	{menuCode:"M016",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"사원정보현황"},
+	{menuCode:"M016",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0029/searchInit.do", TITLE:"사원정보현황"},
 	</c:if>
 	<c:if test="${menu_code eq 'M017'}">
 	{menuCode:"M017",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"인사고과/상벌현황"},
