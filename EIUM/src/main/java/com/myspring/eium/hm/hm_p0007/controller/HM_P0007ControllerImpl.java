@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-
 import com.myspring.eium.hm.hm_p0007.dao.HM_P0007DAO;
 import com.myspring.eium.hm.hm_p0007.service.HM_P0007Service;
 import com.myspring.eium.hm.hm_p0007.vo.HM_P0007VO;
@@ -133,12 +132,14 @@ public class HM_P0007ControllerImpl implements HM_P0007Controller {
 	public ResponseEntity<byte[]> getByteImage(HttpServletRequest request, HttpServletResponse response)throws Exception {
 		
 		Map<String, Object> searchMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+
 		searchMap.put("employee_code", request.getParameter("employee_code"));
-		System.out.println("사진"+request.getParameter("employee_code"));
+		System.out.println("controller확인 :"+searchMap.get("employee_code"));
 		
-		Map<String, Object> map = p0007dao.getByteImage(searchMap);
+		resultMap = p0007dao.getByteImage(searchMap);
 		
-		byte[] imageContent = (byte[]) map.get("picture");
+		byte[] imageContent = (byte[]) resultMap.get("picture");
 
 		final HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.IMAGE_PNG);

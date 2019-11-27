@@ -18,23 +18,14 @@
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script type="text/javascript" src="${contextPath}/resources/js/jquery.mtz.monthpicker.js"></script>
 <script language="javascript">
-
-
-function setPayment(){
+	/*Sheet 기본 설정 */
+	function setPayment(){
 	payment_code=document.getElementById("Ppayment_code").value;
 	payment_date=document.getElementById("Ppayment_date").value;
 	payment_des_name=document.getElementById("Ppayment_des_name").value;
 };
 
-function setPaygrade(){
-	position_name=document.getElementById("Pposition_name").value;
-	pay_grade_name=document.getElementById("Ppay_grade_name").value;
-	salary=document.getElementById("Psalary").value;
-	
-	mySheet2.SetCellText(row,4,salary);
-};
 
-	/*Sheet 기본 설정 */
 	function LoadPage() {
 		
 		//아이비시트1 
@@ -45,17 +36,9 @@ function setPaygrade(){
 		initSheet.Cols = [		
 	        {Header:"NO",Type:"Seq",SaveName:"NUMBER",MinWidth:50, Align:"Center" },	
 	        {Header:"사원코드",Type:"Text",SaveName:"employee_code", MinWidth:50,  Align:"Center", KeyField:1, Edit: 0},	
-			{Header:"사원명",Type:"Text",SaveName:"employee_name", MinWidth:120, Align:"Center", Edit: 0},
+	        {Header:"사원명",Type:"Text",SaveName:"employee_name", MinWidth:120, Align:"Center", Edit: 0},
 			{Header:"지급고유번호",Type:"Text",SaveName:"payment_code", MinWidth:120, Align:"Center", Hidden:"1"},
-			{Header:"지급구분",Type:"Text",SaveName:"payment_des_name", MinWidth:120, Align:"Center"},
-			{Header:"호봉",Type:"Text",SaveName:"salary",MinWidth:70, Align:"Center" , Hidden:1},
-			{Header:"평일정상근무시간",Type:"Text",SaveName:"weekday_normal_work_time",MinWidth:70, Align:"Center", Hidden:1 },
-			{Header:"평일연장근무일시간",Type:"Text",SaveName:"weekday_extension_work_time",MinWidth:70, Align:"Center", Hidden:1},
-			{Header:"평일야간근무시간",Type:"Text",SaveName:"weekday_night_work_time",MinWidth:70, Align:"Center", Hidden:1},
-			{Header:"휴일정상근무시간",Type:"Text",SaveName:"holiday_normal_work_time",MinWidth:70, Align:"Center", Hidden:1},
-			{Header:"휴일연장근무시간",Type:"Text",SaveName:"holiday_extension_work_time",MinWidth:70, Align:"Center", Hidden:1},
-			{Header:"휴일야간근무시간",Type:"Text",SaveName:"holiday_night_work_time",MinWidth:70, Align:"Center", Hidden:1}
-
+	        {Header:"부서",Type:"Text",SaveName:"department_name", MinWidth:120, Align:"Center", Edit: 0}
 		];   
 		IBS_InitSheet( mySheet , initSheet);
   
@@ -68,11 +51,9 @@ function setPaygrade(){
 		initSheet2.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:0};
 		initSheet2.HeaderMode = {Sort:1, ColMove:0, ColResize:0, HeaderCheck:1};
 		initSheet2.Cols = [
-			{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
-	        {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},	
-       		{Header:"급여계산서고유번호",Type:"Text",SaveName:"payment_receipt_code",MinWidth:70, Align:"Center",Hidden:"1"},
-	        {Header:"지급항목",Type:"Combo", MinWidth:70, SaveName:"payment_receipt_item", ComboText:"|기본급|상여급", ComboCode:"|기본급|상여급"},
-			{Header:"총액",Type:"AutoSum", Format:"Integer", SaveName:"payment_receipt_price", MinWidth:70, Align:"Center"}
+       		{Header:"급여계산서고유번호",Type:"Text",SaveName:"payment_receipt_code",MinWidth:70, Align:"Center",Hidden:"1", Edit: 0},
+	        {Header:"지급항목",Type:"Combo", MinWidth:70, SaveName:"payment_receipt_item", ComboText:"|기본급|상여급", ComboCode:"|기본급|상여급", Edit: 0},
+			{Header:"총액",Type:"AutoSum", Format:"Integer", SaveName:"payment_receipt_price", MinWidth:70, Align:"Center", Edit: 0}
 			
 			];
 		
@@ -109,7 +90,7 @@ function setPaygrade(){
 		switch (sAction) {
 		case "search": //조회
 			var param = FormQueryStringEnc(document.frm);
-			mySheet.DoSearch("${contextPath}/pm/p0001/searchList.do", param);
+			mySheet.DoSearch("${contextPath}/pm/p0002/searchList.do", param);
 			//조회조건에 맞도록 조회하기
 			break;
 
@@ -123,34 +104,18 @@ function setPaygrade(){
 		      break;      
 		      
 		      
-		     case "save":
-		    	 var tempStr = mySheet2.GetSaveString();
-		    	 mySheet2.DoSave("${contextPath}/pm/p0001/saveData.do");
-			break;
 
 		}
 	}
 	
-	function mySheet2_OnChange(Row, Col, Value) {
-	    if(mySheet2.GetCellValue(Row, 3) == "기본급"){
-	    	var a = mySheet.GetCellValue(x, 5)/209;
-	    	var z = (a*mySheet.GetCellValue(x, 6)) + ((a*1.5)*mySheet.GetCellValue(x, 7)) + ((a*1.5)*mySheet.GetCellValue(x, 8))+ ((a*1.5)*mySheet.GetCellValue(x, 9))+ ((a*2)*mySheet.GetCellValue(x, 10))+ ((a*2.5)*mySheet.GetCellValue(x, 11));
-	       mySheet2.SetCellValue(Row, 4, z);
-	   }
-	    
-	    if(mySheet2.GetCellValue(Row, 3) == "상여급"){
-	    	var z = mySheet.GetCellValue(x, 5);
-	       mySheet2.SetCellValue(Row, 4, z);
-	   }
-	}
 	
 	
 
 	//로우 클릭시
-function mySheet_OnClick(Row, Col) {
-			x = mySheet.GetSelectRow(); 
+function mySheet_OnClick(Row, Col) { 
+			x = "x=" + mySheet.GetCellValue(Row, 1);
 			var param = "x="+mySheet.GetCellValue(Row, 1)+"&y="+mySheet.GetCellValue(Row, 3);
-			mySheet2.DoSearch("${contextPath}/pm/p0001/searchReceipt.do", param);
+			mySheet2.DoSearch("${contextPath}/pm/p0002/searchReceipt.do", param);
 
 	}
 	
@@ -168,7 +133,7 @@ function mySheet_OnClick(Row, Col) {
 	
 	 function showPopup() {
 		 var monthpicker = $('#monthpicker').val();
-		 var url = '${contextPath}/pm/p0001/searchPaymentdate.do?monthpicker='+monthpicker;
+		 var url = '${contextPath}/pm/p0002/searchPaymentdate.do?monthpicker='+monthpicker;
 
 		 window.open(url, "a", "width=600, height=500, left=100, top=50");
 	  
@@ -408,7 +373,7 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 
 	<div class="title">
 		<header>
-			<i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 급여관리 : 급여입력및계산
+			<i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 급여관리 : 급여대장
 		</header>
 	</div>
 	<div class="left">
@@ -423,9 +388,9 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 		  부서: <select id="searchTYPE">
 		  	<option value="all" selected>전체</option>
 		</select> 
+		</div>
 		<input type="hidden" id="Ppayment_code">
 		<input type="hidden" id="Ppayment_des_name">
-		</div>
 		
 
 		<script>
@@ -438,9 +403,7 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 		<script>createIBSheet("mySheet2", "100%", "100%");</script>
 	</div>	
 </form>
-<input type="hidden" id="Pposition_name">
-<input type="hidden" id="Ppay_grade_name">
-<input type="hidden" id="Psalary">
+
 
 
 </body>
