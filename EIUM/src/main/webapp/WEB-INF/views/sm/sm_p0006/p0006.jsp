@@ -271,7 +271,6 @@ background-color: #2C3E50;
 <body onload="LoadPage()">
 	<form name="frm">
         <div class="leftbuttons">  
-		<button type="button" onclick="doAction('print')" class="IBbutton">인쇄</button>
 		<button type="button" onclick="doAction('down')" class="IBbutton">엑셀</button>
         </div> 
         
@@ -282,7 +281,7 @@ background-color: #2C3E50;
 		</div>
 
 		<div class="title"> 
-        <header> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 계정별권한설정</header>
+        <header> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 등록정보관리 : 계정별권한설정</header>
         </div>
         
         <div class="left">

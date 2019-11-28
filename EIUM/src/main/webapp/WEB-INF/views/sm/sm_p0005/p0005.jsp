@@ -131,7 +131,6 @@ background-color: #2C3E50;
 	<form name="frm">
 	
 	<div class="leftbuttons">
-	<button type="button" onclick="doAction('print')" class="IBbutton">인쇄</button>
 	<button type="button" onclick="doAction('down')" class="IBbutton">엑셀</button>
     </div> 
     
@@ -144,7 +143,7 @@ background-color: #2C3E50;
 	</div>
 	
 	<div class="title"> 
-    <header> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 권한관리</header>
+    <header> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 등록정보관리 : 권한관리</header>
     </div>
     
 <div style="position:absolute; top:140px; left:65px;">
