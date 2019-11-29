@@ -38,11 +38,14 @@ function LoadPage(){
 	    {"Header":"상태","SaveName":"sStatus","Type":"Status","Align":"Center","Width":100,"ColMerge":0},
 		{"Header":"사용가능한메뉴","SaveName":"access_GRANT","Type":"CheckBox","Width":50,"Align":"Center","ColMerge":0},
 		{"Header":"사용가능한메뉴","SaveName":"menu_NAME","Type":"Text","Width":130,"Align":"Center","ColMerge":0},
-		{"Header":"조회권한","SaveName":"access_RANGE","Type":"Text","Width":100,"ColMerge":0},
+		{"Header":"조회권한","SaveName":"access_RANGE","Type":"Combo", "ComboText":"사업장|부서|사원", "ComboCode":"사업장|부서|사원", "Width":100,"ColMerge":0},
 		{"Header":"추가","SaveName":"access_INSERT","Type":"CheckBox","Width":100,"ColMerge":0},
 		{"Header":"수정","SaveName":"access_UPDATE","Type":"CheckBox","Width":100,"ColMerge":0},
 		{"Header":"삭제","SaveName":"access_DELETE","Type":"CheckBox","Width":100,"ColMerge":0},
       ];
+   
+
+   
    IBS_InitSheet(mySheet,initSheet);
    IBS_InitSheet(mySheet2,initSheet2);
    mySheet.SetEditableColorDiff(1);
