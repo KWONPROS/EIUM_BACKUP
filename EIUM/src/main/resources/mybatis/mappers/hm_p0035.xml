@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.hm_p0035">
+	<resultMap id="p0035Result" type="HM_P0035VO">
+	    <result property="SITE_NAME" column="SITE_NAME" />
+	    <result property="SITE_CODE" column="SITE_CODE" />
+	    
+	    <result property="DEPARTMENT_NAME" column="DEPARTMENT_NAME" />
+	    <result property="DEPARTMENT_CODE" column="DEPARTMENT_CODE" />
+		
+		<result property="EMPLOYEE_ID" column="EMPLOYEE_ID" />
+		<result property="EMPLOYEE_NAME" column="EMPLOYEE_NAME" />
+		<result property="EMPLOYEE_CODE" column="EMPLOYEE_CODE" />
+		
+		<result property="DUTY_NAME" column="DUTY_NAME" />
+		<result property="EMPLOYEE_JOIN_DATE" column="EMPLOYEE_JOIN_DATE" />
+		<result property="JOB_CLASS_NAME" column="JOB_CLASS_NAME" />
+		<result property="PAY_TYPE_NAME" column="PAY_TYPE_NAME" />
+		<result property="PAYMENT_DATE" column="PAYMENT_DATE" />
+		<result property="PAYMENT_RECEIPT_PRICE" column="PAYMENT_RECEIPT_PRICE" />
+	</resultMap>
+	
+	<select id="searchSiteList" resultMap="p0035Result" parameterType="java.util.List">
+	  <![CDATA[
+         select SITE_NAME, SITE_CODE FROM SITE
+      ]]>
+	</select>
+	
+	<select id="searchDeptList" resultMap="p0035Result" parameterType="java.util.List">
+	  <![CDATA[
+         select DEPARTMENT_CODE,DEPARTMENT_NAME
+         from department d, site si
+      ]]>
+      <choose>
+			<when test= " SiteList != ''  and  SiteList != null">
+				where d.site_code=si.site_code
+				and site_name=#{SiteList,jdbcType=VARCHAR}
+			</when>
+			<otherwise>
+				where d.site_code=si.site_code
+			</otherwise>
+			</choose>
+	</select>
+
+	<select id="searchList" resultMap="p0035Result" parameterType="java.util.List">
+      <![CDATA[
+         SELECT ew.employee_code, e.employee_name, de.department_name, du.duty_name, ew.employee_join_date, j.job_class_name, pt.pay_type_name, pm.payment_date, pr.payment_receipt_price
+         FROM employee e, employee_work ew, department de, duty du, job_class j, pay_type pt, payment_receipt pr, payment pm
+      ]]>
+      <choose>
+      
+            <when test= " Employee_Select.equals('employee_name') and p_text != '' and p_text != null and SiteList != ''  and  SiteList != null and DeptList != '' and DeptList != null ">
+                where A.EMPLOYEE_CODE = E.EMPLOYEE_CODE and EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE and D.SITE_CODE = S.SITE_CODE and E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE
+				and S.SITE_NAME = #{SiteList,jdbcType=VARCHAR}
+				and D.DEPARTMENT_NAME = #{DeptList,jdbcType=VARCHAR}
+				and E.EMPLOYEE_NAME = #{p_text,jdbcType=VARCHAR}
+				order by A.EMPLOYEE_ID
+			</when> <!-- 사업장 부서 사원명 -->
+			
+			<when test= " Employee_Select.equals('employee_code') and p_text != '' and p_text != null and SiteList != ''  and  SiteList != null and DeptList != '' and DeptList != null ">
+                where A.EMPLOYEE_CODE = E.EMPLOYEE_CODE and EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE and D.SITE_CODE = S.SITE_CODE and E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE
+				and S.SITE_NAME = #{SiteList,jdbcType=VARCHAR}
+				and D.DEPARTMENT_NAME = #{DeptList,jdbcType=VARCHAR}
+				and A.EMPLOYEE_CODE = #{p_text,jdbcType=VARCHAR}
+				order by A.EMPLOYEE_ID
+			</when> <!-- 사업장 부서 사원코드 -->
+            
+            <when test= " SiteList != ''  and  SiteList != null and DeptList != '' and DeptList != null">
+                where A.EMPLOYEE_CODE = E.EMPLOYEE_CODE and EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE and D.SITE_CODE = S.SITE_CODE and E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE
+				and S.SITE_NAME = #{SiteList,jdbcType=VARCHAR}
+				and D.DEPARTMENT_NAME = #{DeptList,jdbcType=VARCHAR}
+				order by A.EMPLOYEE_ID
+			</when> <!-- 사업장 부서 -->
+			
+			<when test= " Employee_Select.equals('employee_name') and p_text != '' and p_text != null and SiteList != ''  and  SiteList != null "> 
+                where A.EMPLOYEE_CODE = E.EMPLOYEE_CODE and EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE and D.SITE_CODE = S.SITE_CODE and E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE
+                and S.SITE_NAME = #{SiteList,jdbcType=VARCHAR}
+				and E.EMPLOYEE_NAME = #{p_text,jdbcType=VARCHAR}
+				order by A.EMPLOYEE_ID
+			</when> <!-- 사업장 null 사원명 -->
+			
+			<when test= " Employee_Select.equals('employee_code') and p_text != '' and p_text != null and SiteList != ''  and  SiteList != null "> 
+                where A.EMPLOYEE_CODE = E.EMPLOYEE_CODE and EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE and D.SITE_CODE = S.SITE_CODE and E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE
+                and S.SITE_NAME = #{SiteList,jdbcType=VARCHAR}
+				and A.EMPLOYEE_CODE = #{p_text,jdbcType=VARCHAR}
+				order by A.EMPLOYEE_ID
+			</when> <!-- 사업장 null 사원코드 -->
+			
+            <when test= " SiteList != ''  and  SiteList != null">
+                where A.EMPLOYEE_CODE = E.EMPLOYEE_CODE and EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE and D.SITE_CODE = S.SITE_CODE and E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE
+				and S.SITE_NAME = #{SiteList,jdbcType=VARCHAR}
+				order by A.EMPLOYEE_ID
+			</when> <!-- 사업장  -->
+
+            <when test= " Employee_Select.equals('employee_code') and p_text != '' and p_text != null "> 
+                where A.EMPLOYEE_CODE = E.EMPLOYEE_CODE and EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE and D.SITE_CODE = S.SITE_CODE and E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE
+				and A.EMPLOYEE_CODE = #{p_text,jdbcType=VARCHAR}
+				order by A.EMPLOYEE_ID
+			</when> <!-- null null 사원코드 -->
+			
+			<when test= " Employee_Select.equals('employee_name') and p_text != '' and p_text != null "> 
+                where A.EMPLOYEE_CODE = E.EMPLOYEE_CODE and EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE and D.SITE_CODE = S.SITE_CODE and E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE
+				and E.EMPLOYEE_NAME = #{p_text,jdbcType=VARCHAR}
+				order by A.EMPLOYEE_ID
+			</when> <!-- null null 사원명 -->
+		
+			<otherwise>
+			    WHERE ew.employee_code = e.employee_code
+                AND ew.department_code = de.department_code
+                AND ew.duty_code = du.duty_code
+                AND ew.job_class_code = j.job_class_code
+                AND ew.pay_type_code = pt.pay_type_code
+                AND ew.employee_code = pr.employee_code
+                AND pr.payment_code = pm.payment_code
+			</otherwise> <!-- 조건x(전체조회) -->
+	   </choose>
+	</select>
+</mapper>
