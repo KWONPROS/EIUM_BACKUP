@@ -54,7 +54,7 @@
 	</insert>	
 			<insert id="insertData5" parameterType="java.util.Map">
 
-		insert into employee_work(employee_code, employee_join_date, employee_resignation_date, int_user_id, int_date) values(#{employee_code}, #{employee_join_date}, #{employee_resignation_date}, #{user}, sysdate)	
+		insert into employee_work(employee_code, employee_join_date, employee_resignation_date, int_user_id, int_date) values(#{employee_code}, to_date(' #{employee_join_date}',YYYY-MM-DD), to_date('#{employee_resignation_date}',YYYY-MM-DD), , #{user}, sysdate)	
 	</insert>
 	
 				

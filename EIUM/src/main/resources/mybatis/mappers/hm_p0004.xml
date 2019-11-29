@@ -147,7 +147,7 @@
                                                                                                                                                             FROM PAY_GRADE_TABLE X
                                                                                                                                                             WHERE X.START_DATE < to_char( sysdate, 'yyyymmdd')
                                                                                                                                                             AND X.END_DATE > to_char( sysdate, 'yyyymmdd') )X
-         WHERE D.DEPARTMENT_CODE = B.DEPARTMENT_CODE
+         WHERE D.DEPARTMENT_CODE = B.DEPARTMENT_CODE(+)
          AND A.EMPLOYEE_CODE = C.EMPLOYEE_CODE
          AND A.EMPLOYEE_CODE = D.EMPLOYEE_CODE
          AND A.EMPLOYEE_CODE = G.EMPLOYEE_CODE
