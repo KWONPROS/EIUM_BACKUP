@@ -7,6 +7,9 @@ public class LoginVO {
 	 private String employee_id;
 	 private String employee_name;
 	 private String employee_password;
+	 
+	 private String company_name;
+	 
 	 private String employee_code;
 	 
 	 private String authority_code;
@@ -82,8 +85,17 @@ public class LoginVO {
 		this.access_grant = access_grant;
 	}
 
+	
+	public String getCompany_name() {
+		return company_name;
+	}
+
+	public void setCompany_name(String company_name) {
+		this.company_name = company_name;
+	}
+
 	public LoginVO(String employee_id, String employee_name, String employee_password, String employee_code,
-			String authority_code, String authority_name, String menu_code, String access_grant) {
+			String authority_code, String authority_name, String menu_code, String access_grant, String company_name) {
 		this.employee_id = employee_id;
 		this.employee_name = employee_name;
 		this.employee_password = employee_password;
@@ -92,6 +104,7 @@ public class LoginVO {
 		this.authority_name = authority_name;
 		this.menu_code = menu_code;
 		this.access_grant = access_grant;
+		this.company_name = company_name;
 	}
 
 }

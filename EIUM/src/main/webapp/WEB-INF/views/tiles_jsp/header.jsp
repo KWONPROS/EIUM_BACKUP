@@ -133,14 +133,14 @@ $(document).ready(function(){printClock();});
 	<div class="currentInfo">
 		<span id="headerinfo" class="user">
 		사용자 : ${sessionScope.login.employee_name}</span> <span
-			id="headerinfo" class="company">회사 : (주)00전자</span> <span
+			id="headerinfo" class="company">회사 : ${sessionScope.login.company_name}</span> <span
 			id="headerinfo" class="logindate">접속일시 : <b id="systemClock"></b>
 		</span>
 	</div>
 
 	<div class="homelogin">
 		<a onclick="tabMenu.goToFirstTab()"><span id="headerinfo" class="icon"><i
-				class="fa fa-home"> Home</i></span></a> <a href="Login.do"><span id="headerinfo"
+				class="fa fa-home"> Home</i></span></a> <a href="${contextPath}/login.do"><span id="headerinfo"
 			class="icon"><i class="fa fa-share-square-o"> Logout</i></span></a>
 	</div>
 
