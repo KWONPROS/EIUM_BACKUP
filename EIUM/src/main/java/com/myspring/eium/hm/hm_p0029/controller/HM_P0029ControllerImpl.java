@@ -43,11 +43,47 @@ public class HM_P0029ControllerImpl implements HM_P0029Controller {
 	@RequestMapping(value = "/hm/p0029/searchInit.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("hm/hm_p0029/p0029_home");
+		ModelAndView mav = new ModelAndView("hm/hm_p0029/p0029_tab");
 	
 		return mav;
 	} 
 	
+	@Override
+	@RequestMapping(value = "/hm/p0033/searchInit_TN.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView searchInit_TN(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("hm/hm_p0033/p0033_TN");
+	
+		return mav;
+	} 
+	
+	@Override
+	@RequestMapping(value = "/hm/p0033/searchInit_BN.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView searchInit_BN(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("hm/hm_p0033/p0033_BN");
+	
+		return mav;
+	} 
+	
+	@Override
+	@RequestMapping(value = "/hm/p0033/searchInit_LI.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView searchInit_LI(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("hm/hm_p0033/p0033_LI");
+	
+		return mav;
+	} 
+	
+	@Override
+	@RequestMapping(value = "/hm/p0033/searchInit_LA.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView searchInit_LA(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("hm/hm_p0033/p0033_LA");
+	
+		return mav;
+	} 
+	//4가지 모델엔 뷰
 	@Override
 	@RequestMapping(value = "/hm/p0029/searchList.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
