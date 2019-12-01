@@ -13,9 +13,15 @@ public class HM_P0033VO {
 	private String hr_assessment_test_end_date;
 	private String hr_assessment_date;
 	private String hr_assessment_master;
-	private String hr_assessment_pcnt;
+	private String hr_assessment_reflection_pcnt;
 	private String hr_assessment_score;
 	private String hr_assessment_grade;
+	private String hr_rnp_index;
+	private String hr_rnp_name;
+	private String hr_rnp_date;
+	private String hr_rnp_history;
+	private String hr_rnp_institute;
+	private String hr_rnp_cost;
 	private String site_code;
 	private String site_name;
 	private String department_code;
@@ -27,6 +33,42 @@ public class HM_P0033VO {
 
 	
 
+	public String getHr_rnp_index() {
+		return hr_rnp_index;
+	}
+	public void setHr_rnp_index(String hr_rnp_index) {
+		this.hr_rnp_index = hr_rnp_index;
+	}
+	public String getHr_rnp_name() {
+		return hr_rnp_name;
+	}
+	public void setHr_rnp_name(String hr_rnp_name) {
+		this.hr_rnp_name = hr_rnp_name;
+	}
+	public String getHr_rnp_date() {
+		return hr_rnp_date;
+	}
+	public void setHr_rnp_date(String hr_rnp_date) {
+		this.hr_rnp_date = hr_rnp_date;
+	}
+	public String getHr_rnp_history() {
+		return hr_rnp_history;
+	}
+	public void setHr_rnp_history(String hr_rnp_history) {
+		this.hr_rnp_history = hr_rnp_history;
+	}
+	public String getHr_rnp_institute() {
+		return hr_rnp_institute;
+	}
+	public void setHr_rnp_institute(String hr_rnp_institute) {
+		this.hr_rnp_institute = hr_rnp_institute;
+	}
+	public String getHr_rnp_cost() {
+		return hr_rnp_cost;
+	}
+	public void setHr_rnp_cost(String hr_rnp_cost) {
+		this.hr_rnp_cost = hr_rnp_cost;
+	}
 	public String getDepartment_name() {
 		return department_name;
 	}
@@ -69,11 +111,12 @@ public class HM_P0033VO {
 	public void setHr_assessment_master(String hr_assessment_master) {
 		this.hr_assessment_master = hr_assessment_master;
 	}
-	public String getHr_assessment_pcnt() {
-		return hr_assessment_pcnt;
+
+	public String getHr_assessment_reflection_pcnt() {
+		return hr_assessment_reflection_pcnt;
 	}
-	public void setHr_assessment_pcnt(String hr_assessment_pcnt) {
-		this.hr_assessment_pcnt = hr_assessment_pcnt;
+	public void setHr_assessment_reflection_pcnt(String hr_assessment_reflection_pcnt) {
+		this.hr_assessment_reflection_pcnt = hr_assessment_reflection_pcnt;
 	}
 	public String getHr_assessment_score() {
 		return hr_assessment_score;

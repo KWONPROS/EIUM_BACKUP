@@ -36,7 +36,7 @@ public class HM_P0007_10ControllerImpl implements HM_P0007_10Controller {
 	@Override
 	@RequestMapping(value = "/hm/p0007/searchEmployee_language.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
-	public Map searchBusiness_trip(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public Map searchLanguage(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 

@@ -20,6 +20,10 @@ public interface HM_P0033DAO {
 	public List<HM_P0033VO> site_List(Map<String, Object> searchMap) throws DataAccessException;
 	public List<HM_P0033VO> employee_List(Map<String, Object> searchMap) throws DataAccessException;
 
+	public List<HM_P0033VO> hr_rnp_List(Map<String, Object> searchMap) throws DataAccessException;
+
+	public List<HM_P0033VO> searchList2(Map<String, Object> searchMap) throws DataAccessException;
+
 	
 	 
 }

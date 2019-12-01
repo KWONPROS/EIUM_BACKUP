@@ -36,7 +36,7 @@ public class HM_P0007_11ControllerImpl implements HM_P0007_11Controller {
 	@Override
 	@RequestMapping(value = "/hm/p0007/searchTraining_assessment.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
-	public Map searchRnp(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public Map searchTraining(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 

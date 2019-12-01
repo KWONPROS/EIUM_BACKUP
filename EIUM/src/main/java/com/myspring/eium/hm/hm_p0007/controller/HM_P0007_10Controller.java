@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 
 public interface HM_P0007_10Controller {
-	public Map searchBusiness_trip(HttpServletRequest request, HttpServletResponse response) throws Exception;  
+	public Map searchLanguage(HttpServletRequest request, HttpServletResponse response) throws Exception;  
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 }

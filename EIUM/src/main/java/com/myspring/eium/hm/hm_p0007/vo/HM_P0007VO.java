@@ -9,13 +9,6 @@ public class HM_P0007VO {
 	
 	private String employee_code;
 	private String employee_name;
-	private String employee_name_hn;
-	private String hire_type;
-	private String hire_number;
-	private String current_address;
-	private String current_address_detail;
-	private String resist_address;
-	private String resist_address_detail;
 	private String marriage_yn;
 	private String religion;
 	private String military_type;
@@ -28,9 +21,27 @@ public class HM_P0007VO {
 	private String hr_appoint_history;
 	private String hr_appoint_before_info;
 	private MultipartFile picture;
+	private String height;
+	private String weight;
+	private String blood_type;
+	private String handicapped_yn;
+	private String hobby;
+	private String special_ability;
 
 	
 	
+	public String getHobby() {
+		return hobby;
+	}
+	public void setHobby(String hobby) {
+		this.hobby = hobby;
+	}
+	public String getSpecial_ability() {
+		return special_ability;
+	}
+	public void setSpecial_ability(String special_ability) {
+		this.special_ability = special_ability;
+	}
 	public MultipartFile getPicture() {
 		return picture;
 	}
@@ -91,48 +102,31 @@ public class HM_P0007VO {
 	
 	
 	
-	public String getHire_number() {
-		return hire_number;
+	public String getHeight() {
+		return height;
 	}
-	public void setHire_number(String hire_number) {
-		this.hire_number = hire_number;
+	public void setHeight(String height) {
+		this.height = height;
 	}
-	public String getEmployee_name_hn() {
-		return employee_name_hn;
+	public String getWeight() {
+		return weight;
 	}
-	public void setEmployee_name_hn(String employee_name_hn) {
-		this.employee_name_hn = employee_name_hn;
+	public void setWeight(String weight) {
+		this.weight = weight;
 	}
-	public String getHire_type() {
-		return hire_type;
+	public String getBlood_type() {
+		return blood_type;
 	}
-	public void setHire_type(String hire_type) {
-		this.hire_type = hire_type;
+	public void setBlood_type(String blood_type) {
+		this.blood_type = blood_type;
 	}
-	public String getCurrent_address() {
-		return current_address;
+	public String getHandicapped_yn() {
+		return handicapped_yn;
 	}
-	public void setCurrent_address(String current_address) {
-		this.current_address = current_address;
+	public void setHandicapped_yn(String handicapped_yn) {
+		this.handicapped_yn = handicapped_yn;
 	}
-	public String getCurrent_address_detail() {
-		return current_address_detail;
-	}
-	public void setCurrent_address_detail(String current_address_detail) {
-		this.current_address_detail = current_address_detail;
-	}
-	public String getResist_address() {
-		return resist_address;
-	}
-	public void setResist_address(String resist_address) {
-		this.resist_address = resist_address;
-	}
-	public String getResist_address_detail() {
-		return resist_address_detail;
-	}
-	public void setResist_address_detail(String resist_address_detail) {
-		this.resist_address_detail = resist_address_detail;
-	}
+	
 	public String getMarriage_yn() {
 		return marriage_yn;
 	}

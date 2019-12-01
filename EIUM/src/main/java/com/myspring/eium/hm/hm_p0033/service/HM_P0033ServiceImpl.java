@@ -28,6 +28,12 @@ public class HM_P0033ServiceImpl implements HM_P0033Service {
 	}
 	
 	@Override
+	public List<HM_P0033VO> hr_rnp_List(Map<String, Object> searchMap) throws DataAccessException {
+		List<HM_P0033VO> list =  p0033DAO.hr_rnp_List(searchMap); 
+		return list;
+	}
+	
+	@Override
 	public List<HM_P0033VO> site_List(Map<String, Object> searchMap) throws DataAccessException {
 		List<HM_P0033VO> list =  p0033DAO.site_List(searchMap); 
 		return list;
@@ -42,6 +48,12 @@ public class HM_P0033ServiceImpl implements HM_P0033Service {
 	@Override
 	public List<HM_P0033VO> searchList(Map<String, Object> searchMap) throws DataAccessException {
 		List<HM_P0033VO> list =  p0033DAO.searchList(searchMap); 
+		return list;
+	}
+	
+	@Override
+	public List<HM_P0033VO> searchList2(Map<String, Object> searchMap) throws DataAccessException {
+		List<HM_P0033VO> list =  p0033DAO.searchList2(searchMap); 
 		return list;
 	}
 	

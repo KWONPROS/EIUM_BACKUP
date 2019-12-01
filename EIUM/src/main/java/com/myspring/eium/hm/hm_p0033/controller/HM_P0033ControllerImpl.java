@@ -39,7 +39,25 @@ public class HM_P0033ControllerImpl implements HM_P0033Controller {
 	@RequestMapping(value = "/hm/p0033/searchInit.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("hm/hm_p0033/p0033_tab");
+	
+		return mav;
+	} 
+	
+	@Override
+	@RequestMapping(value = "/hm/p0033/searchInit2.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView searchInit2(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
 		ModelAndView mav = new ModelAndView("hm/hm_p0033/p0033");
+	
+		return mav;
+	} 
+	
+	@Override
+	@RequestMapping(value = "/hm/p0033/searchInit3.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView searchInit3(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("hm/hm_p0033/p0033-2");
 	
 		return mav;
 	} 
@@ -50,6 +68,16 @@ public class HM_P0033ControllerImpl implements HM_P0033Controller {
 		request.setCharacterEncoding("utf-8");
 		
 		ModelAndView mav = new ModelAndView("hm/hm_p0033/p0033_SearchHrassessment");
+	
+		return mav;
+	} 
+	
+	@Override
+	@RequestMapping(value = "/hm/p0033/searchHrrnp.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView searchHrrnp(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		
+		ModelAndView mav = new ModelAndView("hm/hm_p0033/p0033_SearchHrrnp");
 	
 		return mav;
 	} 
@@ -84,6 +112,20 @@ public class HM_P0033ControllerImpl implements HM_P0033Controller {
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
 
 		List<HM_P0033VO> data = p0033Service.hr_assessment_List(searchMap);
+		
+        resultMap.put("Data", data);
+        return resultMap;
+	}
+	
+	@Override
+	@RequestMapping(value = "/hm/p0033/hr_rnp_List.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map hr_rnp_List(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>(); 
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+
+		List<HM_P0033VO> data = p0033Service.hr_rnp_List(searchMap);
 		
         resultMap.put("Data", data);
         return resultMap;
@@ -130,16 +172,18 @@ public class HM_P0033ControllerImpl implements HM_P0033Controller {
 		Map<String, Object> searchMap = new HashMap<String, Object>(); 
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
 
-		searchMap.put("Ppayment_code", request.getParameter("Ppayment_code"));
-		searchMap.put("searchBank", request.getParameter("searchBank"));
-		searchMap.put("searchSite", request.getParameter("searchSite"));
-		searchMap.put("searchTYPE", request.getParameter("searchTYPE"));
+		searchMap.put("hr_assessment_code", request.getParameter("Phr_assessment_code"));
+		searchMap.put("site_code", request.getParameter("Psite_code"));
+		searchMap.put("employee_code", request.getParameter("Pemployee_code"));
+		searchMap.put("date", request.getParameter("date"));
+		searchMap.put("date2", request.getParameter("date2"));
 
 
-		System.out.println(request.getParameter("Ppayment_code"));
-		System.out.println(request.getParameter("searchBank"));
-		System.out.println(request.getParameter("searchSite"));
-		System.out.println(request.getParameter("searchTYPE"));
+		System.out.println(request.getParameter("Phr_assessment_code"));
+		System.out.println(request.getParameter("Psite_code"));
+		System.out.println(request.getParameter("Pemployee_code"));
+		System.out.println(request.getParameter("date"));
+		System.out.println(request.getParameter("date2"));
 
 
 		List<HM_P0033VO> data = p0033Service.searchList(searchMap);
@@ -148,6 +192,34 @@ public class HM_P0033ControllerImpl implements HM_P0033Controller {
         return resultMap;
 	}
 	
+	
+	@Override
+	@RequestMapping(value = "/hm/p0033/searchList2.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map searchList2(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>(); 
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+
+		searchMap.put("hr_rnp_code", request.getParameter("Phr_rnp_code"));
+		searchMap.put("site_code", request.getParameter("Psite_code"));
+		searchMap.put("employee_code", request.getParameter("Pemployee_code"));
+		searchMap.put("date", request.getParameter("date"));
+		searchMap.put("date2", request.getParameter("date2"));
+
+
+		System.out.println(request.getParameter("Phr_rnp_code"));
+		System.out.println(request.getParameter("Psite_code"));
+		System.out.println(request.getParameter("Pemployee_code"));
+		System.out.println(request.getParameter("date"));
+		System.out.println(request.getParameter("date2"));
+
+
+		List<HM_P0033VO> data = p0033Service.searchList2(searchMap);
+		
+        resultMap.put("Data", data);
+        return resultMap;
+	}
 	
 	
 

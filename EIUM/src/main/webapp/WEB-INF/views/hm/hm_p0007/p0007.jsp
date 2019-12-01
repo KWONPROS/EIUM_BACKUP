@@ -55,13 +55,12 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
 			{Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck"},
 	        {Header:"사원코드",Type:"Text",SaveName:"employee_code",KeyField:1,Align:"Center",Edit:0},	
 			{Header:"사원명",Type:"Text",SaveName:"employee_name",MinWidth:120, Align:"Center",Edit:0},
-	        {Header:"사원명(한자)",Type:"Text",SaveName:"employee_name_hn",Hidden:1},         
-	        {Header:"채용구분",Type:"Text",SaveName:"hire_type",Hidden:1},         
-	        {Header:"기수",Type:"Text",SaveName:"hire_number",Hidden:1 },         
-	        {Header:"현주소",Type:"Text",SaveName:"current_address",Hidden:1},         
-	        {Header:"현주소상세",Type:"Text",SaveName:"current_address_detail",Hidden:1},         
-	        {Header:"주민등록주소",Type:"Text",SaveName:"resist_address",Hidden:1},         
-	        {Header:"주민등록주소상세",Type:"Text",SaveName:"resist_address_detail",Hidden:1},         
+	        {Header:"키",Type:"Text",SaveName:"height",Hidden:1 },         
+	        {Header:"몸무게",Type:"Text",SaveName:"weight",Hidden:1},         
+	        {Header:"혈액형",Type:"Text",SaveName:"blood_type",Hidden:1},         
+	        {Header:"취미",Type:"Text",SaveName:"hobby",Hidden:1},         
+	        {Header:"특기",Type:"Text",SaveName:"special_ability",Hidden:1},
+	        {Header:"장애구분",Type:"Text",SaveName:"handicapped_yn",Hidden:1},         
 	        {Header:"결혼여부",Type:"Text",SaveName:"marriage_yn",Hidden:1},         
 	        {Header:"종교",Type:"Text",SaveName:"religion",Hidden:1},
 	        {Header:"거주구분",Type:"Text",SaveName:"residential_division",Hidden:1},
@@ -284,19 +283,18 @@ function mySheet_OnClick(Row, Col) {
 
 
 		  $('input[name=myRow]').val(Row);
-		  $('input[name=employee_name_hn]').val(mySheet.GetCellValue(Row,4));
-	      $('select[name=hire_type]').val(mySheet.GetCellValue(Row,5));
-	      $('input[name=hire_number]').val(mySheet.GetCellValue(Row,6)); 
-	      $('input[name=current_address]').val(mySheet.GetCellValue(Row,7));
-	      $('input[name=current_address_detail]').val(mySheet.GetCellValue(Row,8));
-	      $('input[name=resist_address]').val(mySheet.GetCellValue(Row,9));
-	      $('input[name=resist_address_detail]').val(mySheet.GetCellValue(Row,10));
-	      $('select[name=marriage_yn]').val(mySheet.GetCellValue(Row,11));
-	      $('select[name=religion]').val(mySheet.GetCellValue(Row,12));
-	      $('select[name=residential_division]').val(mySheet.GetCellValue(Row,13));
-	      $('select[name=military_type]').val(mySheet.GetCellValue(Row,14));
-	      $('input[name=military_number]').val(mySheet.GetCellValue(Row,15));
-	      $('select[name=discharge_yn]').val(mySheet.GetCellValue(Row,16));
+		  $('input[name=height]').val(mySheet.GetCellValue(Row,4));
+	      $('input[name=weight]').val(mySheet.GetCellValue(Row,5));
+	      $('select[name=blood_type]').val(mySheet.GetCellValue(Row,6)); 
+	      $('input[name=hobby]').val(mySheet.GetCellValue(Row,7));
+	      $('input[name=special_ability]').val(mySheet.GetCellValue(Row,8));
+	      $('select[name=handicapped_yn]').val(mySheet.GetCellValue(Row,9));
+	      $('select[name=marriage_yn]').val(mySheet.GetCellValue(Row,10));
+	      $('select[name=religion]').val(mySheet.GetCellValue(Row,11));
+	      $('select[name=residential_division]').val(mySheet.GetCellValue(Row,12));
+	      $('select[name=military_type]').val(mySheet.GetCellValue(Row,13));
+	      $('input[name=military_number]').val(mySheet.GetCellValue(Row,14));
+	      $('select[name=discharge_yn]').val(mySheet.GetCellValue(Row,15));
 	      $('#uploadedImg').attr('src',"${contextPath}/hm/p0007/getByteImage.do?employee_code="+mySheet.GetCellValue(Row,2));	
 	      
 
@@ -325,36 +323,34 @@ function mySheet_OnClick(Row, Col) {
 			mySheet9.RemoveAll();
 			mySheet10.RemoveAll();
 			mySheet11.RemoveAll();
-			  $('input[name=employee_name_hn]').val(mySheet.GetCellValue(Row,4));
-		      $('input[name=hire_type]').val(mySheet.GetCellValue(Row,5));
-		      $('input[name=hire_number]').val(mySheet.GetCellValue(Row,6)); 
-		      $('input[name=current_address]').val(mySheet.GetCellValue(Row,7));
-		      $('input[name=current_address_detail]').val(mySheet.GetCellValue(Row,8));
-		      $('input[name=resist_address]').val(mySheet.GetCellValue(Row,9));
-		      $('input[name=resist_address_detail]').val(mySheet.GetCellValue(Row,10));
-		      $('input[name=marriage_yn]').val(mySheet.GetCellValue(Row,11));
-		      $('input[name=religion]').val(mySheet.GetCellValue(Row,12));
+		      $('input[name=height]').val(mySheet.GetCellValue(Row,4));
+		      $('input[name=weight]').val(mySheet.GetCellValue(Row,5)); 
+		      $('input[name=blood_type]').val(mySheet.GetCellValue(Row,6));
+		      $('input[name=hobby]').val(mySheet.GetCellValue(Row,7));
+		      $('input[name=special_ability]').val(mySheet.GetCellValue(Row,8));
+		      $('input[name=handicapped_yn]').val(mySheet.GetCellValue(Row,9));
+		      $('input[name=marriage_yn]').val(mySheet.GetCellValue(Row,10));
+		      $('input[name=religion]').val(mySheet.GetCellValue(Row,11));
+		      $('input[name=residential_division]').val(mySheet.GetCellValue(Row,12));
 		      $('input[name=military_type]').val(mySheet.GetCellValue(Row,13));
 		      $('input[name=military_number]').val(mySheet.GetCellValue(Row,14));
 		      $('input[name=discharge_yn]').val(mySheet.GetCellValue(Row,15));
-		      $('input[name=residential_division]').val(mySheet.GetCellValue(Row,16));
 			
 			break;
 			
 		case "save": // 저장
-			 mySheet.SetCellValue($('input[name=myRow]').val(),4,$('input[name=employee_name_hn]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),5,$('select[name=hire_type]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),6,$('input[name=hire_number]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),7,$('input[name=current_address]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),8,$('input[name=current_address_detail]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),9,$('input[name=resist_address]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),10,$('input[name=resist_address_detail]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),11,$('select[name=marriage_yn]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),12,$('select[name=religion]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),13,$('select[name=residential_division]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),14,$('select[name=military_type]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),15,$('input[name=military_number]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),16,$('select[name=discharge_yn]').val());
+			 mySheet.SetCellValue($('input[name=myRow]').val(),4,$('input[name=height]').val());
+	         mySheet.SetCellValue($('input[name=myRow]').val(),5,$('input[name=weight]').val());
+	         mySheet.SetCellValue($('input[name=myRow]').val(),6,$('select[name=blood_type]').val());
+	         mySheet.SetCellValue($('input[name=myRow]').val(),7,$('input[name=hobby]').val());
+	         mySheet.SetCellValue($('input[name=myRow]').val(),8,$('input[name=special_ability]').val());
+	         mySheet.SetCellValue($('input[name=myRow]').val(),9,$('select[name=handicapped_yn]').val());
+	         mySheet.SetCellValue($('input[name=myRow]').val(),10,$('select[name=marriage_yn]').val());
+	         mySheet.SetCellValue($('input[name=myRow]').val(),11,$('select[name=religion]').val());
+	         mySheet.SetCellValue($('input[name=myRow]').val(),12,$('select[name=residential_division]').val());
+	         mySheet.SetCellValue($('input[name=myRow]').val(),13,$('select[name=military_type]').val());
+	         mySheet.SetCellValue($('input[name=myRow]').val(),14,$('input[name=military_number]').val());
+	         mySheet.SetCellValue($('input[name=myRow]').val(),15,$('select[name=discharge_yn]').val());
 	          
 
 		var tempStr = mySheet.GetSaveString();
@@ -721,7 +717,12 @@ border : none;
     <th class="tg-lu1x" rowspan="5"><i class="fa fa-address-book" aria-hidden="true"></i><br>개<br>인<br>정<br>보</th>  
   </tr>
    <tr>
-   <td class="tg-8thm">신장</td><td class="tg-v9i9" ><input type="text" id="military_number" name="military_number"><td class="tg-8thm">체중</td><td class="tg-v9i9" ><input type="text" id="military_number" name="military_number"><td class="tg-8thm">혈액형</td><td class="tg-v9i9" ><input type="text" id="military_number" name="military_number"></td>
+   <td class="tg-8thm">신장</td><td class="tg-v9i9" ><input type="text" id="height" name="height"><td class="tg-8thm">체중</td><td class="tg-v9i9" ><input type="text" id="weight" name="weight"><td class="tg-8thm">
+   
+   혈액형</td><td class="tg-v9i9" ><select name="blood_type"><option value='A형' selected>A형</option>
+									<option value='B형'>B형</option>
+									<option value='O형'>O형</option>
+									<option value='AB형'>AB형</option></select>
    
    
    </tr>
@@ -750,9 +751,18 @@ border : none;
 									<option value='만기' selected>만기</option>
 									<option value='단기'>단기</option>
 									<option value='의가'>의가</option></select>
-	</td>
-									
+	</td>							
   </tr>
+  
+    <tr>
+   <td class="tg-8thm">취미</td><td class="tg-v9i9" ><input type="text" id="hobby" name="hobby"><td class="tg-8thm">특기</td><td class="tg-v9i9" ><input type="text" id="special_ability" name="special_ability">
+   <td class="tg-8thm">장애여부</td><td class="tg-v9i9"><select name="handicapped_yn">
+									<option value='Y' selected>여</option>
+									<option value='N'>부</option>
+									</select>
+	</td>							
+   
+   </tr>
 </table>
 				</div>
 				    </form>

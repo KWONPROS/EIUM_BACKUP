@@ -30,9 +30,9 @@
 		employee_name=document.getElementById("Pemployee_name").value;
 	};
 	
-	function setHrassessment(){
-		hr_assessment_code=document.getElementById("Phr_assessment_code").value;
-		hr_assessment_name=document.getElementById("Phr_assessment_name").value;
+	function setHrrnp(){
+		hr_rnp_code=document.getElementById("Phr_rnp_code").value;
+		hr_rnp_name=document.getElementById("Phr_rnp_name").value;
 	};
 
 
@@ -64,14 +64,12 @@
 			 {Header:"NO",Type:"Seq",SaveName:"NUMBER",MinWidth:50, Align:"Center" },
 		        {Header:"사원코드",Type:"Text",SaveName:"employee_code", MinWidth:50,  Align:"Center", Edit: 0},	
 		        {Header:"사원명",Type:"Text",SaveName:"employee_name", MinWidth:80, Align:"Center", Edit: 0},
-				{Header:"고과명",Type:"Text",SaveName:"hr_assessment_name", MinWidth:120, Align:"Center", Edit: 0},
-				{Header:"평가시작일",Type:"Text",SaveName:"hr_assessment_test_start_date", MinWidth:120, Align:"Center", Edit: 0},
-				{Header:"평가종료일",Type:"Text",SaveName:"hr_assessment_test_end_date", MinWidth:120, Align:"Center", Edit: 0},
-				{Header:"고과일자",Type:"Text",SaveName:"hr_assessment_date", MinWidth:120, Align:"Center", Edit: 0},
-				{Header:"고과자",Type:"Text",SaveName:"hr_assessment_master", MinWidth:80, Align:"Center", Edit: 0},
-				{Header:"반영률",Type:"Text",SaveName:"hr_assessment_reflection_pcnt", MinWidth:80, Align:"Center", Edit: 0},
-				{Header:"점수",Type:"Text",SaveName:"hr_assessment_score", MinWidth:80, Align:"Center", Edit: 0},
-				{Header:"등급",Type:"Text",SaveName:"hr_assessment_grade", MinWidth:80, Align:"Center", Edit: 0}, 
+				{Header:"구분",Type:"Text",SaveName:"hr_rnp_index", MinWidth:120, Align:"Center", Edit: 0},
+				{Header:"포상/징계명",Type:"Text",SaveName:"hr_rnp_name", MinWidth:120, Align:"Center", Edit: 0},
+				{Header:"포상/징계일자",Type:"Text",SaveName:"hr_rnp_date", MinWidth:120, Align:"Center", Edit: 0},
+				{Header:"포상/징계내역",Type:"Text",SaveName:"hr_rnp_history", MinWidth:120, Align:"Center", Edit: 0},
+				{Header:"사행처",Type:"Text",SaveName:"hr_rnp_institute", MinWidth:80, Align:"Center", Edit: 0},
+				{Header:"금액",Type:"Text",SaveName:"hr_rnp_cost", MinWidth:80, Align:"Center", Edit: 0},
 		                 ];
 
 		IBS_InitSheet(mySheet, initSheet);
@@ -87,15 +85,13 @@
 		mySheet.SetColEditable(6, 0);
 		mySheet.SetColEditable(7, 0);
 		mySheet.SetColEditable(8, 0);
-		mySheet.SetColEditable(9, 0);
-		mySheet.SetColEditable(10, 0);
 	}
 
 	function doAction(sAction) {
 		switch (sAction) {
 		case "search":
 			var param = FormQueryStringEnc(document.frm);
-		    mySheet.DoSearch("${contextPath}/hm/p0033/searchList.do", param);
+		    mySheet.DoSearch("${contextPath}/hm/p0033/searchList2.do", param);
 			break;
 		case "reset":
 			mySheet.RemoveAll();
@@ -109,7 +105,7 @@
 	}
 	
 	 function showPopup1() {
-		 var url = '${contextPath}/hm/p0033/searchHrassessment.do';
+		 var url = '${contextPath}/hm/p0033/searchHrrnp.do';
 
 		 window.open(url, "a", "width=600, height=500, left=100, top=50");
 	  
@@ -213,14 +209,14 @@ background-color: #2C3E50;
         <div class="left">
         <div id="searchBar">
             &nbsp;&nbsp; 
-            고과명 : <input type="text" id="Phr_assessment_name"><a href="javascript:showPopup1();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
+            상벌명 : <input type="text" id="Phr_rnp_name"><a href="javascript:showPopup1();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
            사업장 : <input type="text" id="Psite_name"><a href="javascript:showPopup2();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
            <br><br>
             &nbsp;&nbsp;          
             사원명 : <input type="text" id="Pemployee_name"><a href="javascript:showPopup3();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          
-            고과일자 : <input type="text" id="date" class="Datepicker">
+            포상/징계일자 : <input type="text" id="date" class="Datepicker">
              ~ <input type="text" id="date2" class="Datepicker">
            
         </div>
@@ -233,7 +229,7 @@ background-color: #2C3E50;
 		</div>
       <input type="hidden" id="Psite_code" >
       <input type="hidden" id="Pemployee_code" >
-      <input type="hidden" id="Phr_assessment_code" >
+      <input type="hidden" id="Phr_rnp_code" >
       
 
 	</form>
