@@ -141,7 +141,7 @@ var data = {Data:[
 	{menuCode:"M016",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0029/searchInit.do", TITLE:"사원정보현황"},
 	</c:if>
 	<c:if test="${menu_code eq 'M017'}">
-	{menuCode:"M017",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"인사고과/상벌현황"},
+	{menuCode:"M017",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0033/searchInit.do", TITLE:"인사고과/상벌현황"},
 	</c:if>
 	<c:if test="${menu_code eq 'M018'}">
 	{menuCode:"M018",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"사원입퇴사현황"},
@@ -176,7 +176,7 @@ var data = {Data:[
 	{menuCode:"M026",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"pm/p0009/searchInit.do", TITLE:"월별지급현황"},
 	</c:if>
 	<c:if test="${menu_code eq 'M027'}">
-	{menuCode:"M027",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"사원임금통계"},
+	{menuCode:"M027",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"pm/p0010/searchInit.do", TITLE:"사원임금통계"},
 	</c:if>
 	</c:forEach>
 	

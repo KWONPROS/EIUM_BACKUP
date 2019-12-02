@@ -8,13 +8,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 public interface HM_P0033Controller {
 	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public Map payment_searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public Map searchTypeList(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public Map bankList(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView searchInit2(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView searchInit3(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public Map searchReceipt(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public Map paygrade_searchData(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public ModelAndView paymentdateSerch_init(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public ModelAndView paygrade_Search(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public Map searchList2(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView searchHrassessment(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView searchHrrnp(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView searchSite(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView searchEmployeename(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public Map hr_assessment_List(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public Map hr_rnp_List(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public Map site_List(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public Map employee_List(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
 }

@@ -21,7 +21,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.myspring.eium.hm.hm_p0029.vo.HM_P0029VO;
 
 public interface HM_P0029Controller {
+	//첫 모델엔뷰
 	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView searchInit_TN(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView searchInit_BN(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView searchInit_LI(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView searchInit_LA(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	
 	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;	
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView findAddress(HttpServletRequest request, HttpServletResponse response) throws Exception;
@@ -31,6 +38,14 @@ public interface HM_P0029Controller {
 
 	public void saveFile(HM_P0029VO VO, ModelAndView mav, HttpServletRequest request, HttpServletResponse response)
 			throws Exception;
+
+
+
+	
+
+
+
+
 
 	
 	

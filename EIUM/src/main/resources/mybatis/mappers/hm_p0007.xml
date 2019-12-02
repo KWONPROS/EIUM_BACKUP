@@ -7,13 +7,6 @@
 	<resultMap id="P0007resultVO" type="HM_P0007VO">
 		<result property="employee_code" column="employee_code" />
         <result property="employee_name" column="employee_name" />
-         <result property="employee_name_hn" column="employee_name_hn" />
-        <result property="hire_type" column="hire_type" />
-        <result property="hire_number" column="hire_number" />
-        <result property="current_address" column="current_address" />
-        <result property="current_address_detail" column="current_address_detail" />
-        <result property="resist_address" column="resist_address" />
-        <result property="resist_address_detail" column="resist_address_detail" />
         <result property="marriage_yn" column="marriage_yn" />
         <result property="religion" column="religion" />
         <result property="military_type" column="military_type" />
@@ -21,6 +14,12 @@
         <result property="discharge_yn" column="discharge_yn" />
         <result property="residential_division" column="residential_division" />
         <result property="picture" column="picture" />
+        <result property="handicapped_yn" column="handicapped_yn" />
+        <result property="height" column="height" />
+        <result property="weight" column="weight" />
+        <result property="blood_type" column="blood_type" />
+        <result property="hobby" column="hobby" />
+        <result property="special_ability" column="special_ability" />
         <result property="int_user_id" column="int_user_id" />
         <result property="int_date" column="int_date" />
         <result property="upt_user_id" column="upt_user_id" />
@@ -29,7 +28,7 @@
  
 	<select id="searchList" resultMap="P0007resultVO" parameterType="java.util.Map"> 
       <![CDATA[
-         select e.employee_code, e.employee_name, eh.employee_name_hn, eh.hire_type, eh.hire_number,  eh.current_address, eh.current_address_detail, eh.resist_address, eh.resist_address_detail, eh.marriage_yn, eh.religion, eh.military_type, eh.military_number, eh.discharge_yn, eh.residential_division, eh.picture
+         select e.employee_code, e.employee_name, eh.hobby, eh.special_ability, eh.height, eh.weight, eh.blood_type, eh.handicapped_yn, eh.marriage_yn, eh.religion, eh.military_type, eh.military_number, eh.discharge_yn, eh.residential_division, eh.picture
          from employee e, employee_hr_info eh
          where e.employee_code = eh.employee_code
          order by e.employee_code
@@ -43,12 +42,12 @@
  <update id="updateHr_info" parameterType="java.util.Map">
 		update employee_hr_info
 		set employee_name_hn = #{employee_name_hn}
-		   , hire_type = #{hire_type}
-		   , hire_number = #{hire_number}
-		   , current_address = #{current_address}
-		   , current_address_detail = #{current_address_detail}
-		   , resist_address = #{resist_address}
-		   , resist_address_detail = #{resist_address_detail}
+		   , hobby = #{hobby}
+		   , special_ability = #{special_ability}
+		   , height = #{height}
+		   , weight = #{weight}
+		   , blood_type = #{blood_type}
+		   , handicapped_yn = #{handicapped_yn}
 		   , marriage_yn = #{marriage_yn}
 		   , religion = #{religion}
 		   , residential_division = #{residential_division}
@@ -354,7 +353,7 @@
 	</select>
 	<insert id="insertemployee_business_trip" parameterType="java.util.Map">
 		insert into employee_business_trip(employee_code,business_trip_code,country,area,start_date,end_date,flight_cost,self_burden, company_burden, ect_cost,total_cost,int_user_id,int_date) 
-		values(#{x},business_trip_code_seq,#{country},#{area},#{start_date},#{end_date},#{flight_cost},#{self_burden},#{company_burden},#{ect_cost},#{total_cost},#{user},sysdate)
+		values(#{x},business_trip_code_seq.nextval,#{country},#{area},#{start_date},#{end_date},#{flight_cost},#{self_burden},#{company_burden},#{ect_cost},#{total_cost},#{user},sysdate)
 	</insert>	
 	
 	<update id="updateemployee_business_trip" parameterType="java.util.Map">
@@ -410,7 +409,7 @@
 	
 	<insert id="inserthr_rnp" parameterType="java.util.Map">
 		insert into hr_rnp(employee_code,hr_rnp_code,hr_rnp_index,hr_rnp_name,hr_rnp_date,hr_rnp_history,hr_rnp_institute,hr_rnp_cost,hr_rnp_start_date,hr_rnp_end_date,int_user_id,int_date) 
-		values(#{x},hr_rnp_code_seq,#{hr_rnp_index},#{hr_rnp_name},#{hr_rnp_date},#{hr_rnp_history},#{hr_rnp_institute},#{hr_rnp_cost},#{hr_rnp_start_date},#{hr_rnp_end_date},#{user},sysdate)
+		values(#{x},hr_rnp_code_seq.nextval,#{hr_rnp_index},#{hr_rnp_name},#{hr_rnp_date},#{hr_rnp_history},#{hr_rnp_institute},#{hr_rnp_cost},#{hr_rnp_start_date},#{hr_rnp_end_date},#{user},sysdate)
 	</insert>	
 	
 	<update id="updatehr_rnp" parameterType="java.util.Map">
@@ -460,8 +459,8 @@
                ]]>
 	</select>
 	<insert id="insertEmployee_language" parameterType="java.util.Map">
-		insert into employee_language(employee_code,language_code,name,start_date,end_date,grade,institute,int_user_id,int_date) 
-		values(#{x},language_code_seq,#{name},#{start_date},#{end_date},#{grade},#{institute},#{user},sysdate)
+		insert into employee_language(employee_code, language_code, name, start_date, end_date,grade, institute, int_user_id, int_date) 
+		values(#{x},language_code_seq.nextval, #{name}, #{start_date}, #{end_date}, #{grade}, #{institute}, #{user}, sysdate)
 	</insert>	
 	
 	<update id="updateEmployee_language" parameterType="java.util.Map">

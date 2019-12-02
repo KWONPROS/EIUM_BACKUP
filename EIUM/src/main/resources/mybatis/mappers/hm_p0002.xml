@@ -21,6 +21,20 @@
 	</resultMap> 
 	
 	<select id="searchList" resultMap="P0002resultVO" parameterType="java.util.Map"> 
+      <choose>
+	
+			<when test= " date ==''">	
+			<![CDATA[		
+			select p.payment_code, p.payment_date, pd.payment_des_name
+         	from payment p, payment_des pd
+        	 where p.payment_des_code = pd.payment_des_code 
+         
+			
+			]]> 
+   		    </when>	
+      
+      
+      <when test= " date !=''">	
       <![CDATA[
          select p.payment_code, p.payment_date, pd.payment_des_name
          from payment p, payment_des pd
@@ -28,7 +42,10 @@
          and SUBSTR(TO_DATE(SUBSTR(p.payment_date,1,6), 'YYYY-MM'),1,5) = #{date,jdbcType=VARCHAR}
          order by p.payment_date
       ]]>
+      	      </when>
+      	      </choose> 
 	</select>
+
 	
 	
 	

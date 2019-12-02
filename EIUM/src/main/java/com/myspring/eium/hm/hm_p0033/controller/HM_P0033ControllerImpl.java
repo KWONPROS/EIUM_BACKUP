@@ -39,37 +39,129 @@ public class HM_P0033ControllerImpl implements HM_P0033Controller {
 	@RequestMapping(value = "/hm/p0033/searchInit.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("hm/hm_p0033/p0033_tab");
+	
+		return mav;
+	} 
+	
+	@Override
+	@RequestMapping(value = "/hm/p0033/searchInit2.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView searchInit2(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
 		ModelAndView mav = new ModelAndView("hm/hm_p0033/p0033");
 	
 		return mav;
 	} 
 	
 	@Override
-	@RequestMapping(value = "/hm/p0033/paygrade_Search.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView paygrade_Search(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "/hm/p0033/searchInit3.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView searchInit3(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		
-		ModelAndView mav = new ModelAndView("hm/hm_p0033/p0033_paygradeSearch");
+		ModelAndView mav = new ModelAndView("hm/hm_p0033/p0033-2");
 	
 		return mav;
 	} 
 	
+	@Override
+	@RequestMapping(value = "/hm/p0033/searchHrassessment.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView searchHrassessment(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		
+		ModelAndView mav = new ModelAndView("hm/hm_p0033/p0033_SearchHrassessment");
+	
+		return mav;
+	} 
+	
+	@Override
+	@RequestMapping(value = "/hm/p0033/searchHrrnp.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView searchHrrnp(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		
+		ModelAndView mav = new ModelAndView("hm/hm_p0033/p0033_SearchHrrnp");
+	
+		return mav;
+	} 
+	
+	@Override
+	@RequestMapping(value = "/hm/p0033/searchSite.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView searchSite(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		
+		ModelAndView mav = new ModelAndView("hm/hm_p0033/p0033_SearchSite");
+	
+		return mav;
+	} 
+	
+	@Override
+	@RequestMapping(value = "/hm/p0033/searchEmployeename.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView searchEmployeename(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		
+		ModelAndView mav = new ModelAndView("hm/hm_p0033/p0033_SearchEmployee");
+	
+		return mav;
+	} 
 	
 	
 	@Override
-	@RequestMapping(value = "/hm/p0033/searchPaymentdate.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView paymentdateSerch_init(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "/hm/p0033/hr_assessment_List.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map hr_assessment_List(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		dateMap.put("date", request.getParameter("monthpicker"));
-		System.out.println("1");
-		System.out.println(request.getParameter("monthpicker"));
+		Map<String, Object> searchMap = new HashMap<String, Object>(); 
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+
+		List<HM_P0033VO> data = p0033Service.hr_assessment_List(searchMap);
 		
-		ModelAndView mav = new ModelAndView("hm/hm_p0033/p0033_Payment_date");
-		
-		mav.addObject("monthpicker",request.getParameter("monthpicker"));
+        resultMap.put("Data", data);
+        return resultMap;
+	}
 	
-		return mav;
-	} 
+	@Override
+	@RequestMapping(value = "/hm/p0033/hr_rnp_List.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map hr_rnp_List(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>(); 
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+
+		List<HM_P0033VO> data = p0033Service.hr_rnp_List(searchMap);
+		
+        resultMap.put("Data", data);
+        return resultMap;
+	}
+	
+	
+	@Override
+	@RequestMapping(value = "/hm/p0033/site_List.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map site_List(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>(); 
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+
+		List<HM_P0033VO> data = p0033Service.site_List(searchMap);
+		
+        resultMap.put("Data", data);
+        return resultMap;
+	}
+	
+	
+	@Override
+	@RequestMapping(value = "/hm/p0033/employee_List.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map employee_List(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>(); 
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+
+		List<HM_P0033VO> data = p0033Service.employee_List(searchMap);
+		
+        resultMap.put("Data", data);
+        return resultMap;
+	}
+	
+	
 	
 	
 	@Override
@@ -80,16 +172,18 @@ public class HM_P0033ControllerImpl implements HM_P0033Controller {
 		Map<String, Object> searchMap = new HashMap<String, Object>(); 
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
 
-		searchMap.put("Ppayment_code", request.getParameter("Ppayment_code"));
-		searchMap.put("searchBank", request.getParameter("searchBank"));
-		searchMap.put("searchSite", request.getParameter("searchSite"));
-		searchMap.put("searchTYPE", request.getParameter("searchTYPE"));
+		searchMap.put("hr_assessment_code", request.getParameter("Phr_assessment_code"));
+		searchMap.put("site_code", request.getParameter("Psite_code"));
+		searchMap.put("employee_code", request.getParameter("Pemployee_code"));
+		searchMap.put("date", request.getParameter("date"));
+		searchMap.put("date2", request.getParameter("date2"));
 
 
-		System.out.println(request.getParameter("Ppayment_code"));
-		System.out.println(request.getParameter("searchBank"));
-		System.out.println(request.getParameter("searchSite"));
-		System.out.println(request.getParameter("searchTYPE"));
+		System.out.println(request.getParameter("Phr_assessment_code"));
+		System.out.println(request.getParameter("Psite_code"));
+		System.out.println(request.getParameter("Pemployee_code"));
+		System.out.println(request.getParameter("date"));
+		System.out.println(request.getParameter("date2"));
 
 
 		List<HM_P0033VO> data = p0033Service.searchList(searchMap);
@@ -99,134 +193,45 @@ public class HM_P0033ControllerImpl implements HM_P0033Controller {
 	}
 	
 	
-	
-
-	
 	@Override
-	@RequestMapping(value = "/hm/p0033/searchPaymentdateList.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/hm/p0033/searchList2.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
-	public Map payment_searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public Map searchList2(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		Map<String, Object> searchMap = new HashMap<String, Object>(); 
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
 
-		searchMap= dateMap;
-		List<HM_P0033VO> data = p0033Service.paydate_searchList(searchMap);
+		searchMap.put("hr_rnp_code", request.getParameter("Phr_rnp_code"));
+		searchMap.put("site_code", request.getParameter("Psite_code"));
+		searchMap.put("employee_code", request.getParameter("Pemployee_code"));
+		searchMap.put("date", request.getParameter("date"));
+		searchMap.put("date2", request.getParameter("date2"));
+
+
+		System.out.println(request.getParameter("Phr_rnp_code"));
+		System.out.println(request.getParameter("Psite_code"));
+		System.out.println(request.getParameter("Pemployee_code"));
+		System.out.println(request.getParameter("date"));
+		System.out.println(request.getParameter("date2"));
+
+
+		List<HM_P0033VO> data = p0033Service.searchList2(searchMap);
 		
         resultMap.put("Data", data);
         return resultMap;
 	}
 	
-	@Override
-	@RequestMapping(value = "/hm/p0033/paygrade_searchData.do", method = { RequestMethod.GET, RequestMethod.POST })
-	@ResponseBody
-	public Map paygrade_searchData(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-		Map<String, Object> searchMap = new HashMap<String, Object>(); 
-		Map<String, Object> resultMap = new HashMap<String, Object>(); 
-
-		searchMap.put("x", x);
-		List<HM_P0033VO> data = p0033Service.paygrade_searchData(searchMap);
-		
-        resultMap.put("Data", data);
-        return resultMap;
-	}
 	
-	@Override
-	@RequestMapping(value = "hm/p0033/TypeList.do", method = { RequestMethod.GET, RequestMethod.POST })
-	@ResponseBody
-	public Map searchTypeList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-		Map<String, Object> searchMap = new HashMap<String, Object>(); // ???????
-		Map<String, Object> resultMap = new HashMap<String, Object>(); // ??????
-		
-		// ??????????
-		searchMap.put("searchSite", request.getParameter("searchSite"));
-		System.out.println(request.getParameter("searchSite"));
-		//?????? ???
-		List<HM_P0033VO> data = p0033Service.searchTypeList(searchMap);
-        resultMap.put("Data", data);
-       
-        return resultMap;
-	}
-	
-	@Override
-	@RequestMapping(value = "hm/p0033/BankList.do", method = { RequestMethod.GET, RequestMethod.POST })
-	@ResponseBody
-	public Map bankList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-		Map<String, Object> searchMap = new HashMap<String, Object>(); // ???????
-		Map<String, Object> resultMap = new HashMap<String, Object>(); // ??????
-		
 
-		List<HM_P0033VO> data = p0033Service.BankList(searchMap);
-        resultMap.put("Data", data);
-       
-        return resultMap;
-	}
+	
+
+	
+
+	
+
 	
 	
-	@Override
-	@RequestMapping(value = "/hm/p0033/searchReceipt.do", method = { RequestMethod.GET, RequestMethod.POST })
-	@ResponseBody
-	public Map searchReceipt(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-		Map<String, Object> searchMap = new HashMap<String, Object>(); 
-		Map<String, Object> resultMap = new HashMap<String, Object>(); 
 
-		x =request.getParameter("x");
-		y =request.getParameter("y");
-		searchMap.put("x", request.getParameter("x"));
-		System.out.println(x);
-		searchMap.put("y", request.getParameter("y"));
-		System.out.println(y);
-
-		List<HM_P0033VO> data = p0033Service.searchReceipt(searchMap);
-		
-        resultMap.put("Data", data);
-        return resultMap;
-	}
-	@Override
-	@RequestMapping(value = "/hm/p0033/saveData.do", method = { RequestMethod.GET, RequestMethod.POST })
-	@ResponseBody
-	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-		Map<String, String[]> dataMap = new HashMap<String, String[]>(); 
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		
-		HttpSession session = request.getSession(); 
-		LoginVO loginvo = new LoginVO();
-		loginvo = (LoginVO)session.getAttribute("login"); 
-		String user= (loginvo.getEmployee_name());
-		System.out.println(user);
-		System.out.println(x);
-		System.out.println(y);
-
-		
-		
-		// 저장 Data 추출하기
-		Enumeration enu = request.getParameterNames();
-		while (enu.hasMoreElements()) {
-			String name = (String) enu.nextElement();
-			System.out.println(name);
-			String[] values = request.getParameterValues(name);
-			dataMap.put(name, values);
-		}
-		
-		Map<String, String> result = new HashMap<String, String>();
-		try {
-			p0033Service.saveData(dataMap, user, x, y);	
-			result.put("Code","0");
-			result.put("Message","저장되었습니다");
-		}catch(Exception e) {                                                               
-			result.put("Code","-1");
-			result.put("Message","저장에 실패하였습니다");
-			e.printStackTrace();
-		}
-		
-		resultMap.put("Result", result);         
-        return resultMap;
-	}
-
+	
 
 }

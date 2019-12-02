@@ -8,12 +8,11 @@ import org.springframework.dao.DataAccessException;
 import com.myspring.eium.hm.hm_p0033.vo.HM_P0033VO;
 
 public interface HM_P0033Service {
-	public void saveData(Map<String, String[]> dataMap, String user, String x, String y)  throws DataAccessException ;
-	public List<HM_P0033VO> paydate_searchList(Map<String, Object> searchMap) throws DataAccessException;
-	public List<HM_P0033VO> searchTypeList(Map<String, Object> searchMap) throws DataAccessException;
 	public List<HM_P0033VO> searchList(Map<String, Object> searchMap) throws DataAccessException;
-	public List<HM_P0033VO> searchReceipt(Map<String, Object> searchMap)throws DataAccessException;
-	public List<HM_P0033VO> paygrade_searchData(Map<String, Object> searchMap)throws DataAccessException;
-	public List<HM_P0033VO> BankList(Map<String, Object> searchMap)throws DataAccessException;
+	public List<HM_P0033VO> searchList2(Map<String, Object> searchMap) throws DataAccessException;
+	public List<HM_P0033VO> hr_assessment_List(Map<String, Object> searchMap)throws DataAccessException;
+	public List<HM_P0033VO> site_List(Map<String, Object> searchMap) throws DataAccessException;
+	public List<HM_P0033VO> employee_List(Map<String, Object> searchMap) throws DataAccessException;
+	public List<HM_P0033VO> hr_rnp_List(Map<String, Object> searchMap) throws DataAccessException;
 
 }
