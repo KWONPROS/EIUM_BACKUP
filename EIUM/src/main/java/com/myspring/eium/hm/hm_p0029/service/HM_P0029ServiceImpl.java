@@ -39,7 +39,11 @@ public class HM_P0029ServiceImpl implements HM_P0029Service {
 		List<HM_P0029VO> list =  p0029DAO.searchList2(searchMap); 
 		return list;
 	}
-	
+	@Override
+	public List<HM_P0029VO> searchList_site(Map<String, Object> searchMap) throws DataAccessException {
+		List<HM_P0029VO> list = p0029DAO.searchList_site(searchMap);
+		return list;
+	}
 
 	@Override
 	public void saveData(Map<String, String[]> dataMap)  throws DataAccessException  {

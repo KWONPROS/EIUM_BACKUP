@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.myspring.eium.hm.hm_p0029.dao.HM_P0029DAO;
 import com.myspring.eium.hm.hm_p0029.service.HM_P0029Service;
 import com.myspring.eium.hm.hm_p0029.vo.HM_P0029VO;
+import com.myspring.eium.hm.hm_p0033.vo.HM_P0033VO;
 
 
 @Controller
@@ -49,41 +50,73 @@ public class HM_P0029ControllerImpl implements HM_P0029Controller {
 	} 
 	
 	@Override
-	@RequestMapping(value = "/hm/p0033/searchInit_TN.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/hm/p0029/searchInit_TN.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchInit_TN(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("hm/hm_p0033/p0033_TN");
+		ModelAndView mav = new ModelAndView("hm/hm_p0029/p0029_TN");
 	
 		return mav;
 	} 
 	
 	@Override
-	@RequestMapping(value = "/hm/p0033/searchInit_BN.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/hm/p0029/searchInit_BN.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchInit_BN(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("hm/hm_p0033/p0033_BN");
+		ModelAndView mav = new ModelAndView("hm/hm_p0029/p0029_BN");
 	
 		return mav;
 	} 
 	
 	@Override
-	@RequestMapping(value = "/hm/p0033/searchInit_LI.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/hm/p0029/searchInit_LI.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchInit_LI(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("hm/hm_p0033/p0033_LI");
+		ModelAndView mav = new ModelAndView("hm/hm_p0029/p0029_LI");
 	
 		return mav;
 	} 
 	
 	@Override
-	@RequestMapping(value = "/hm/p0033/searchInit_LA.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/hm/p0029/searchInit_LA.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchInit_LA(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("hm/hm_p0033/p0033_LA");
+		ModelAndView mav = new ModelAndView("hm/hm_p0029/p0029_LA");
 	
 		return mav;
 	} 
 	//4가지 모델엔 뷰
+	
+	@Override
+	@RequestMapping(value = "/hm/p0029/search_Site.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView search_Site(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("hm/hm_p0029/p0029_SearchSite");
+		return mav;
+	}
+	
+	
+	@Override
+	@RequestMapping(value = "/hm/p0029/searchList_site.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map searchList_site(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>(); 
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+
+		List<HM_P0029VO> data = p0029Service.searchList_site(searchMap);
+		
+        resultMap.put("Data", data);
+        return resultMap;
+	}
+	
+	@Override
+	@RequestMapping(value = "/hm/p0029/search_Dept.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView search_Dept(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("hm/hm_p0029/p0029_SearchDept");
+		return mav;
+	}
+	
 	@Override
 	@RequestMapping(value = "/hm/p0029/searchList.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
