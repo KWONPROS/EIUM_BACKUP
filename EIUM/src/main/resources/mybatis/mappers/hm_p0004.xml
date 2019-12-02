@@ -144,10 +144,10 @@
          
          from EMPLOYEE A, DEPARTMENT B,EMPLOYEE_HR_INFO C, EMPLOYEE_WORK D, FINAL_EDU E, COUNTRY F, EMPLOYEE_WORK G, EMPLOYEE_SALARY H,POSITION I,
           PAY_GRADE J, OUT_REASON L, JOB_CLASS N, DUTY O, JOB_DIS P, D_CODE R, WORK_TYPE S, PAY_TYPE T, EMPLOYEE_SALARY U,BANK W,(SELECT *
-                                                                                                                                                            FROM PAY_GRADE_TABLE X
+                                                                                                                                                           FROM PAY_GRADE_TABLE X
                                                                                                                                                             WHERE X.START_DATE < to_char( sysdate, 'yyyymmdd')
                                                                                                                                                             AND X.END_DATE > to_char( sysdate, 'yyyymmdd') )X
-         WHERE D.DEPARTMENT_CODE = B.DEPARTMENT_CODE
+         WHERE D.DEPARTMENT_CODE = B.DEPARTMENT_CODE(+)
          AND A.EMPLOYEE_CODE = C.EMPLOYEE_CODE
          AND A.EMPLOYEE_CODE = D.EMPLOYEE_CODE
          AND A.EMPLOYEE_CODE = G.EMPLOYEE_CODE
