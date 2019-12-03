@@ -31,6 +31,11 @@ public class PM_P0010ServiceImpl implements PM_P0010Service {
 		List<PM_P0010VO> list =  p0010DAO.searchList2(searchMap); 
 		return list;
 	}
+	@Override
+	public List<PM_P0010VO> searchList3(Map<String, Object> searchMap) throws DataAccessException {
+		List<PM_P0010VO> list =  p0010DAO.searchList3(searchMap); 
+		return list;
+	}
 
 	
 }

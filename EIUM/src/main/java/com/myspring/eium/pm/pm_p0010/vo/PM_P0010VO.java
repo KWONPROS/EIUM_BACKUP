@@ -16,6 +16,7 @@ public class PM_P0010VO {
 	private String  basic_SALARY;
 	private String  position_SALARY;
 	private String  bonus_SALARY;
+	private String  total_SALARY;
 	private String  total_basic_SALARY;
 	private String  total_position_SALARY;
 	private String  total_bonus_SALARY;
@@ -24,6 +25,12 @@ public class PM_P0010VO {
 	
 	
 	
+	public String getTotal_SALARY() {
+		return total_SALARY;
+	}
+	public void setTotal_SALARY(String total_SALARY) {
+		this.total_SALARY = total_SALARY;
+	}
 	public String getTotal_basic_SALARY() {
 		return total_basic_SALARY;
 	}

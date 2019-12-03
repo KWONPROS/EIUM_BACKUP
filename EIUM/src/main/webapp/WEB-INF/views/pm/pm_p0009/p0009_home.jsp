@@ -194,8 +194,7 @@ var graphColors = (function() {
 				});	  				
 			}
 		} 
-		 
-		 
+				
 		// 막대
 			Highcharts.chart('payByType', {
 			    title: {

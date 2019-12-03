@@ -27,6 +27,11 @@ public class PM_P0010DAOImpl implements PM_P0010DAO {
 		List<PM_P0010VO> list = sqlSession.selectList("mapper.pm_p0010.searchList2", searchMap);
 		return list;
 	}
+	@Override
+	public List<PM_P0010VO> searchList3(Map<String, Object> searchMap) throws DataAccessException {
+		List<PM_P0010VO> list = sqlSession.selectList("mapper.pm_p0010.searchList3", searchMap);
+		return list;
+	}
 	
 
 }

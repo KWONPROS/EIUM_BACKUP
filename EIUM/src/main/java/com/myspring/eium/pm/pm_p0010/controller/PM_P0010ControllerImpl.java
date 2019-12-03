@@ -91,5 +91,25 @@ public class PM_P0010ControllerImpl implements PM_P0010Controller {
 		
 		return resultMap;
 	}
+	@Override
+	@RequestMapping(value = "/pm/p0010/searchList3.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map searchList3(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+		Enumeration enu = request.getParameterNames();
+		while (enu.hasMoreElements()) {
+			String name = (String) enu.nextElement();
+			String[] values = request.getParameterValues(name);
+			System.out.println(name+";:::::"+values[0]);
+			searchMap.put(name, values[0]);
+		}
+		List<PM_P0010VO> data = p0010Service.searchList3(searchMap);
+		resultMap.put("Data", data);
+		System.out.println("resultMap::::"+resultMap);
+		
+		return resultMap;
+	}
 
 }
