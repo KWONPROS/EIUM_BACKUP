@@ -25,7 +25,7 @@
 	<select id="searchList" resultMap="P0010resultVO"
 		parameterType="java.util.Map"> 
    
-  				select x.payment_code,(select payment_date
+  				select x.payment_code,(select substr(payment_date,0,6)
                           				from payment z
                           				where x.payment_code= z.payment_code) as "payment_DATE", 
                             			count(distinct x.employee_code) as "employee_COUNT", 
@@ -75,7 +75,7 @@
                 from payment_receipt x,payment p 
                 
 				where x.payment_code = p.payment_code
-                and substr(to_date(p.payment_date,'yyyy/mm/dd'),1,2) in substr(to_date(#{payment_DATE} ,'YYYYmmdd'),1,2)
+                and substr(to_date(p.payment_date,'yyyy/mm/dd'),1,2) in substr(to_date(CONCAT(#{payment_DATE},'01') ,'YYYYmmdd'),1,2)
                 group by employee_code) z,
                 department c,
                 employee_work d,
@@ -96,7 +96,7 @@ and t.employee_code = z.employee_code
 <select id="searchList3" resultMap="P0010resultVO"
 		parameterType="java.util.Map"> 
    
-  	select x.payment_code,(select payment_date
+  	select x.payment_code,(select substr(payment_date,0,6)
                           				from payment z
                           				where x.payment_code= z.payment_code) as "payment_DATE", 
                             			sum(case when x.PAYMENT_RECEIPT_ITEM='기본급' then x.PAYMENT_RECEIPT_PRICE end) as "basic_SALARY", 
@@ -106,7 +106,7 @@ and t.employee_code = z.employee_code
                	from payment_receipt x,department c, employee_work d, site o
                	where x.payment_code in (select y.payment_code
                                         from payment y
-                                        where to_date(y.payment_date,'yyyymmdd') between add_months(#{payment_DATE},-6) and add_months(#{payment_DATE},6)  )
+                                        where to_date(y.payment_date,'yyyymmdd') between add_months(CONCAT(#{payment_DATE},'01'),-6) and add_months(CONCAT(#{payment_DATE},'01'),6)  )
                 and c.department_code=d.department_code
                 and d.employee_code=x.employee_code
                 and o.site_code =  c.site_code

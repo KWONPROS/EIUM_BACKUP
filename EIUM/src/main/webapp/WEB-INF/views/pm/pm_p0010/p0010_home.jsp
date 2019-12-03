@@ -286,7 +286,10 @@ var graphColors = (function() {
 			    y: -50
 			},
 		    xAxis: {
-		        categories: barNames
+		        categories: barNames,
+		        title: {
+		            text: '비교연월'
+		        }
 			},
 			  
 		    yAxis: [{ // Primary yAxis
@@ -371,9 +374,7 @@ var graphColors = (function() {
 			legend : {
 				align : 'right',
 				layout : 'vertical',
-				verticalAlign : 'top',
-				x : 20,
-				floating : true
+				verticalAlign : 'top'
 			},
 			yAxis : {
 				visible : false
