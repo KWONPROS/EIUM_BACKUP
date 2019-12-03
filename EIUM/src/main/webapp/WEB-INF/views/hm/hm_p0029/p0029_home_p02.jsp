@@ -17,7 +17,7 @@ function LoadPage(){
    mySheet2.RemoveAll();
    //아이비시트 초기화
    var initSheet = {};
-   initSheet.Cfg={SearchMode:smLazyLoad,ToolTip:1};
+   initSheet.Cfg={SearchMode:smLazyLoad,ToolTip:1, MouseHoverMode : 2};
    initSheet.HeaderMode = {Sort:1,ColMove:1,ColResize:1,HeaderCheck:1};
    initSheet.Cols=[
 
@@ -32,7 +32,6 @@ function LoadPage(){
 
   
    
- 
 	   mySheet2.DoSearch("${contextPath}/hm/p0029/searchList2.do" , "command="+document.getElementById("table").value);
 
 
@@ -42,10 +41,8 @@ function mySheet2_OnDblClick(Row, Col, Value) {
 	if(Row!=0){
     var m_code=mySheet2.GetCellValue(Row,0);
     var m_name=mySheet2.GetCellValue(Row,1);
-
        document.getElementById("m_code").setAttribute('value', m_code);
        document.getElementById("m_name").setAttribute('value', m_name);
-       
        var index=document.getElementById("index").value;
        if(index != 'undefined'){
     	   opener.document.getElementById(document.getElementById("table").value+"_CODE"+index).value=document.getElementById("m_code").value;

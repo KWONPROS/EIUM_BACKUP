@@ -49,13 +49,16 @@
 		initSheet.HeaderMode = { Sort : 1, ColMove : 1, ColResize : 10, HeaderCheck : 1 };
 		initSheet.Cols = [ 
 			 	{Header:"NO",Type:"Seq",SaveName:"NUMBER",Width:70, Align:"Center" },
-			 	{Header:"교육코드",Type:"Text",SaveName:"employee_TRAINING_CODE",  Align:"Center", Edit: 0,Hidden:1},	
-		        {Header:"교육명",Type:"Text",SaveName:"employee_TRAINING_NAME", Width:180,  Align:"Center", Edit: 0},	
 		        {Header:"사원코드",Type:"Text",SaveName:"employee_CODE", Width:180, Align:"Center", Edit: 0},
 				{Header:"사원명",Type:"Text",SaveName:"employee_NAME", Width:180, Align:"Center", Edit: 0},
-				{Header:"시작일",Type:"Text",SaveName:"employee_TRAINING_START_DATE", Width:190, Align:"Center", Edit: 0},
-				{Header:"종료일",Type:"Text",SaveName:"employee_TRAINING_END_DATE", Width:190, Align:"Center", Edit: 0},
-				{Header:"평가",Type:"Text",SaveName:"assessment_DESC", Width:200, Align:"Center", Edit: 0}
+				{Header:"출장국가",Type:"Text",SaveName:"country", Width:180, Align:"Center", Edit: 0},
+				{Header:"출장지",Type:"Text",SaveName:"area", Width:180, Align:"Center", Edit: 0},
+				{Header:"시작일",Type:"Text",SaveName:"start_DATE", Width:180, Align:"Center", Edit: 0},
+				{Header:"종료일",Type:"Text",SaveName:"end_DATE", Width:190, Align:"Center", Edit: 0},
+				{Header:"항공료",Type:"Text",SaveName:"flight_COST", Width:190, Align:"Center", Edit: 0},
+				{Header:"총비용",Type:"Text",SaveName:"total_COST", Width:200, Align:"Center", Edit: 0},
+				{Header:"목적",Type:"Text",SaveName:"purpose", Width:200, Align:"Center", Edit: 0},
+				{Header:"출장고유코드",Type:"Text",SaveName:"business_TRIP_CODE", Width:200, Align:"Center", Edit: 0, "Hidden" : 1 }
 		];
 
 		IBS_InitSheet(mySheet, initSheet);
@@ -76,7 +79,7 @@
 		switch (sAction) {
 		case "search":
 			var param = FormQueryStringEnc(document.frm);
-		    mySheet.DoSearch("${contextPath}/hm/p0029/searchList_TN.do", param);
+		    mySheet.DoSearch("${contextPath}/hm/p0029/searchList_BN.do", param);
 			break;
 		case "reset":
 			mySheet.RemoveAll();
@@ -252,9 +255,9 @@ background-color: #2C3E50;
 				<span class="searchBarTitle">기간</span>
 				<input type="text" id="date" class="Datepicker">
              ~ <input type="text" id="date2" class="Datepicker">
-             	<span class="searchBarTitle">교육명</span>
-				<input type="text" id="EMPLOYEE_TRAINING_CODE" style="width: 60px;"><a href="javascript:findPopup('EMPLOYEE_TRAINING');"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
-				<input type="text" id="EMPLOYEE_TRAINING_NAME">
+             	<span class="searchBarTitle">출장국가</span>
+				<input type="text" id="COUNTRY_CODE" style="width: 60px;"><a href="javascript:findPopup('COUNTRY');"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
+				<input type="text" id="COUNTRY_NAME">
 				</div>
            <%--  고과명 : <input type="text" id="Phr_assessment_name"><a href="javascript:showPopup1();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
            사업장 : <input type="text" id="Psite_name"><a href="javascript:showPopup2();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>

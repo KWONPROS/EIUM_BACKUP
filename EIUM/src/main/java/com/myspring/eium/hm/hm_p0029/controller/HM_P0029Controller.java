@@ -35,25 +35,18 @@ public interface HM_P0029Controller {
 	//부서 팝업 모델엔뷰
 	public ModelAndView search_Dept(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
-	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;	
-	
-	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public ModelAndView findAddress(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public Map searchList2(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	//table명으로 popup창 띄우기
 	public ModelAndView findPopup(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public ResponseEntity<byte[]> getByteImage(HttpServletRequest request, HttpServletResponse response) throws Exception;
-
-	public void saveFile(HM_P0029VO VO, ModelAndView mav, HttpServletRequest request, HttpServletResponse response)
-			throws Exception;
-
-
-
+	//popup 창 띄우기 위한 맵 리스트
+	public Map searchList2(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
-
-
-
-
-
-	
+	//조건에 따른 교육 조회
+	public Map searchList_TN(HttpServletRequest request, HttpServletResponse response) throws Exception;	
+	//조건에 따른 출장 조회
+	public Map searchList_BN(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	//조건에 따른 자격/면허 조회
+	public Map searchList_LI(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	//조건에 따른 어학시험 조회
+	public Map searchList_LA(HttpServletRequest request, HttpServletResponse response) throws Exception;	
 	
 }

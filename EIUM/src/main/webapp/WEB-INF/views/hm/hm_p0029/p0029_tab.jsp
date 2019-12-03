@@ -82,16 +82,16 @@ function PageLoad(){
 		],
 		contents:[{
 			type:"iframe",	
-			contents:"searchInit_TN.do"
+			contents:"searchInit_TN.do" //교육 탭
 		},{
 			type:"iframe",	
-			contents:"searchInit_BN.do"
+			contents:"searchInit_BN.do" //출장 탭
 		},{
 			type:"iframe",	
-			contents:"searchInit_LI.do"
+			contents:"searchInit_LI.do" //자격/면허 탭
 		},{
 			type:"iframe",	
-			contents:"searchInit_LA.do"
+			contents:"searchInit_LA.do" //어학시험 탭
 		}
 		]
 	});

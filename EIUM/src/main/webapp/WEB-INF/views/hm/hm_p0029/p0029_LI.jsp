@@ -49,13 +49,15 @@
 		initSheet.HeaderMode = { Sort : 1, ColMove : 1, ColResize : 10, HeaderCheck : 1 };
 		initSheet.Cols = [ 
 			 	{Header:"NO",Type:"Seq",SaveName:"NUMBER",Width:70, Align:"Center" },
-			 	{Header:"교육코드",Type:"Text",SaveName:"employee_TRAINING_CODE",  Align:"Center", Edit: 0,Hidden:1},	
-		        {Header:"교육명",Type:"Text",SaveName:"employee_TRAINING_NAME", Width:180,  Align:"Center", Edit: 0},	
-		        {Header:"사원코드",Type:"Text",SaveName:"employee_CODE", Width:180, Align:"Center", Edit: 0},
-				{Header:"사원명",Type:"Text",SaveName:"employee_NAME", Width:180, Align:"Center", Edit: 0},
-				{Header:"시작일",Type:"Text",SaveName:"employee_TRAINING_START_DATE", Width:190, Align:"Center", Edit: 0},
-				{Header:"종료일",Type:"Text",SaveName:"employee_TRAINING_END_DATE", Width:190, Align:"Center", Edit: 0},
-				{Header:"평가",Type:"Text",SaveName:"assessment_DESC", Width:200, Align:"Center", Edit: 0}
+			 	{Header:"사원코드",Type:"Text",SaveName:"employee_CODE",  Align:"Center", Edit: 0,Hidden:1},	
+		        {Header:"사원명",Type:"Text",SaveName:"employee_NAME", Width:180,  Align:"Center", Edit: 0},	
+		        {Header:"자격종류",Type:"Text",SaveName:"license_NAME", Width:180, Align:"Center", Edit: 0},
+				{Header:"취득일",Type:"Text",SaveName:"start_date", Width:180, Align:"Center", Edit: 0},
+				{Header:"만료일",Type:"Text",SaveName:"end_date", Width:190, Align:"Center", Edit: 0},
+				{Header:"자격증번호",Type:"Text",SaveName:"license_NUMBER", Width:190, Align:"Center", Edit: 0},
+				{Header:"발행기관",Type:"Text",SaveName:"institute", Width:200, Align:"Center", Edit: 0},
+				{Header:"수당여부",Type:"Text",SaveName:"bonus", Width:200, Align:"Center", Edit: 0},
+				{Header:"자격면허코드",Type:"Text",SaveName:"license_CODE", Width:200, Align:"Center", Edit: 0, Hidden:1}
 		];
 
 		IBS_InitSheet(mySheet, initSheet);
@@ -76,7 +78,7 @@
 		switch (sAction) {
 		case "search":
 			var param = FormQueryStringEnc(document.frm);
-		    mySheet.DoSearch("${contextPath}/hm/p0029/searchList_TN.do", param);
+		    mySheet.DoSearch("${contextPath}/hm/p0029/searchList_LI.do", param);
 			break;
 		case "reset":
 			mySheet.RemoveAll();
@@ -249,12 +251,9 @@ background-color: #2C3E50;
 				<input type="text" id="POSITION_CODE" style="width: 60px;"><a href="javascript:findPopup('POSITION');"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
 				<input type="text" id="POSITION_NAME" style="width: 60px;">
 				<div class="otherline">
-				<span class="searchBarTitle">기간</span>
-				<input type="text" id="date" class="Datepicker">
-             ~ <input type="text" id="date2" class="Datepicker">
-             	<span class="searchBarTitle">교육명</span>
-				<input type="text" id="EMPLOYEE_TRAINING_CODE" style="width: 60px;"><a href="javascript:findPopup('EMPLOYEE_TRAINING');"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
-				<input type="text" id="EMPLOYEE_TRAINING_NAME">
+             	<span class="searchBarTitle">자격증</span>
+				<input type="text" id="LICENSE_CODE" style="width: 60px;"><a href="javascript:findPopup('LICENSE');"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
+				<input type="text" id="LICENSE_NAME">
 				</div>
            <%--  고과명 : <input type="text" id="Phr_assessment_name"><a href="javascript:showPopup1();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
            사업장 : <input type="text" id="Psite_name"><a href="javascript:showPopup2();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
