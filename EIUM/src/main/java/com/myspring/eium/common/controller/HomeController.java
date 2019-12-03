@@ -62,7 +62,7 @@ public class HomeController {
 
 		if (request.getParameter("EMPLOYEE_CODE") != null) {
 			
-			Map<String, Object> searchMap = new HashMap<String, Object>(); // �˻�����
+			Map<String, Object> searchMap = new HashMap<String, Object>(); 
 			
 			searchMap.put("EMPLOYEE_CODE", request.getParameter("EMPLOYEE_CODE"));
 			searchMap.put("EMPLOYEE_ID", request.getParameter("EMPLOYEE_ID"));
@@ -133,7 +133,7 @@ public class HomeController {
 		return main;
 	}
 	
-	// 새 글 올리기
+
 	@RequestMapping(value = "/cm/board.do", method = RequestMethod.POST)
 	public void create(@RequestBody Map<String, Object> map,HttpServletRequest request,
 			HttpServletResponse response) throws Exception{	
@@ -143,7 +143,7 @@ public class HomeController {
 		homeService.boardInsert(map);
 	}
 	
-	// 글 수정
+
 	@RequestMapping(value = "/cm/board.do", method = RequestMethod.PUT)
 	public void modify(@RequestBody Map<String, Object> map,HttpServletRequest request,
 			HttpServletResponse response) throws Exception{
@@ -151,7 +151,7 @@ public class HomeController {
 		homeService.boardUpdate(map);
 	}
 
-	// 글 삭제
+
 	@RequestMapping(value = "/cm/board.do", method = RequestMethod.GET)
 	public void delete(@Param("board_CODE") Integer board_CODE) throws Exception{		
 		  homeService.boardDelete(board_CODE);	
