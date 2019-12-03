@@ -41,8 +41,6 @@ public class HM_P0004DAOImpl implements HM_P0004DAO {
 		sqlSession.update("mapper.hm_p0004.insertData3", row);
 	}
 
-
-
 	@Override
 	public void updateData(Map<String, String> row) throws DataAccessException {
 		sqlSession.update("mapper.hm_p0004.updateData", row);
@@ -60,11 +58,32 @@ public class HM_P0004DAOImpl implements HM_P0004DAO {
 		
 		sqlSession.update("mapper.hm_p0004.insertFile", dataMap);
 	}
+	
 	@Override
 	public Map<String, Object> getByteImage(Map<String, Object> searchMap) {
 		return sqlSession.selectOne("mapper.hm_p0004.getByteImage" ,searchMap);
 	}
-
 	
+	@Override
+	public List<HM_P0004VO> searchContract(Map<String, Object> searchMap) throws DataAccessException {
+		List<HM_P0004VO> list = sqlSession.selectList("mapper.hm_p0004.searchContract", searchMap);
+		return list;
+	}
+	
+	@Override
+	public void insertData2(Map<String, String> row) throws DataAccessException {
+		sqlSession.update("mapper.hm_p0004.insertContract", row);
+	}
+	
+	@Override
+	public void updateData2(Map<String, String> row) throws DataAccessException {
+		sqlSession.update("mapper.hm_p0004.updateContract", row);
+	}
+	
+	@Override
+	public void deleteData2(Map<String, String> row) throws DataAccessException {
+		sqlSession.update("mapper.hm_p0004.deleteContract", row);
+	}
+
 
 }

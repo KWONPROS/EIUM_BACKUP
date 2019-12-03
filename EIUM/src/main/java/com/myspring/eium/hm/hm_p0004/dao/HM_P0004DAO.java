@@ -26,6 +26,14 @@ public interface HM_P0004DAO {
 
 		public Map<String, Object> getByteImage(Map<String, Object> searchMap);
 
+		public List<HM_P0004VO> searchContract(Map<String, Object> searchMap)throws DataAccessException;
+
+		public void insertData2(Map<String, String> row) throws DataAccessException;
+
+		public void updateData2(Map<String, String> row) throws DataAccessException;
+
+		public void deleteData2(Map<String, String> row) throws DataAccessException;
+
 	
 
 	 

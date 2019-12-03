@@ -31,6 +31,8 @@ public interface HM_P0004Controller {
 
 	public void saveFile(HM_P0004VO VO, ModelAndView mav, HttpServletRequest request, HttpServletResponse response)
 			throws Exception;
+	public Map searchContract(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public Map saveData2(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 	
 	

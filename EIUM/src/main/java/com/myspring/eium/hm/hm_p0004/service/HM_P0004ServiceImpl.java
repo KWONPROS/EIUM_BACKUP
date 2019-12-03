@@ -59,6 +59,26 @@ public class HM_P0004ServiceImpl implements HM_P0004Service {
 			i++;
 		}
 	}
+	
+	@Override
+	public void saveData2(Map<String, String[]> dataMap, String empCode)  throws DataAccessException  {
+		String[] status = dataMap.get("STATUS");
+		int length = status.length; 
+		int i = 0;
+		
+		for(String str : status) {
+			Map<String, String> row = getRow2(dataMap, length, i, empCode); 
+			if("I".equals(str)) { 
+				p0004DAO.insertData2(row);
+			}else if("U".equals(str)) { 
+				p0004DAO.updateData2(row);
+			}else if("D".equals(str)) { 
+				p0004DAO.deleteData2(row);
+			}
+			i++;
+		}
+	}
+	
 	@Override
 	public void saveFile(Map<String,Object> dataMap)  throws DataAccessException  {
 		p0004DAO.saveFile(dataMap);
@@ -74,6 +94,24 @@ public class HM_P0004ServiceImpl implements HM_P0004Service {
 			}
 		}		
 		return row;
+	}
+	
+	private Map<String, String> getRow2(Map<String, String[]> dataMap, int length, int index, String empCode) {
+		Map<String, String> row = new HashMap<String, String>();
+		for(String name : dataMap.keySet()) {
+			String[] data = dataMap.get(name);
+			if(length == data.length) {
+				row.put(name, data[index]);
+				row.put("empCode", empCode);
+			}
+		}		
+		return row;
+	}
+	
+	@Override
+	public List<HM_P0004VO> searchContract(Map<String, Object> searchMap) throws DataAccessException {
+		List<HM_P0004VO> list =  p0004DAO.searchContract(searchMap); 
+		return list;
 	}	
 	
 	

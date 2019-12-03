@@ -17,10 +17,17 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script language="javascript">
-
 	/*Sheet 기본 설정 */
 	function LoadPage() {
-		
+		//탭
+		createIBTab($('#ib_sheetTab')[0], $('#ib_sheetContents')[0], 'sheetTab', {
+		    themes: {
+		        tabs: "flat_blue",
+		        contents: "flat_blue",
+		        contextMenu: "flat_blue"
+		    },
+		    allowCloseBTN: false
+		});
 		//아이비시트1 
 		mySheet.RemoveAll();
 		var initSheet = {};
@@ -99,7 +106,6 @@
 			{Header:"은행명2",Type:"Text",SaveName:"bank_NAME_2", Hidden:1},			
 			{Header:"계좌번호2",Type:"Text",SaveName:"account_NUMBER_2", Hidden:1},			
 			{Header:"예금주2",Type:"Text",SaveName:"account_NAME_2", Hidden:1}			
-
 			
            
 		];   
@@ -109,19 +115,27 @@
 		mySheet.SetSheetHeight(600);
 	
 		
+// 		 mySheet2.RemoveAll();
+		   //아이비시트 초기화
+		   var initSheet2 = {};
+		   initSheet2.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:3, FrozenCol:5,MouseHoverMode:2}
+		   initSheet2.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
+		   initSheet2.Cols = [
+		         {Header:"상태",Type:"Status",SaveName:"STATUS", Align:"Center"},
+		         {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK"},
+		         {Header:"사원코드",Type:"Text",SaveName:"employee_CODE",Align:"Center",Width:100,InsertEdit:0, Hidden:1},    
+		         {Header:"계약시작월",Type:"Date",SaveName:"contract_START_MONTH",Align:"Center",Width:100,Format:"Ym"},         
+		         {Header:"계약종료월",Type:"Date",SaveName:"contract_END_MONTH",Align:"Center",Width:100,Format:"Ym"},
+		         {Header:"연봉",Type:"Text",SaveName:"contract_YEAR_PAY",Align:"Center",Width:150},         
+		         {Header:"월급",Type:"Text",SaveName:"contract_MONTH_PAY",Align:"Center",Width:150},         
+		         {Header:"일급",Type:"Text",SaveName:"contract_DAY_PAY",Align:"Center",Width:105},       
+		         {Header:"시급",Type:"Text",SaveName:"contract_TIME_PAY",Align:"Center",Width:100}
+		         ];
+		   createIBSheet2($("#yogi")[0],"mySheet2", "1200px", "300px");
+		   IBS_InitSheet(mySheet2,initSheet2);
+		   mySheet2.SetEditableColorDiff(1); //편집불가능한 셀 표시 구분
 		
 		
-		
-
-		//탭
-		createIBTab($('#ib_sheetTab')[0], $('#ib_sheetContents')[0], 'sheetTab', {
-		    themes: {
-		        tabs: "flat_blue",
-		        contents: "flat_blue",
-		        contextMenu: "flat_blue"
-		    },
-		    allowCloseBTN: false
-		});
 		
 		
 		
@@ -161,11 +175,13 @@
 		case "search": //조회
 			mySheet.DoSearch("${contextPath}/hm/p0004/searchList.do");		
 			break;
-
 		 case "reload": //초기화
 	            mySheet.RemoveAll();
 	            break;
-	         case "save": // 저장
+		 case "insert": //초기화
+			    var row = mySheet2.DataInsert();
+	            break;
+	     case "save": // 저장
 	         
 	            mySheet.SetCellValue($('input[name=myRow]').val(),5,$('input[name=engName]').val());
 	            
@@ -239,14 +255,13 @@
 	            var tempStr = mySheet.GetSaveString();
 	            alert("서버로 전달되는 문자열 확인 :"+tempStr);
 	            mySheet.DoSave("${contextPath}/hm/p0004/saveData.do");
+	            mySheet2.DoSave("${contextPath}/hm/p0004/saveData2.do",empCode);
 	            break;      
 		}
 	}
-
 	//로우 클릭시
 	function mySheet_OnClick(Row, Col) {
 		if (Row != 0) {
-
 			 $('input[name=myRow]').val(Row);
 			 
 			//인적정보
@@ -270,55 +285,54 @@
 		      $('select[name=handicappedYN]').val(mySheet.GetCellValue(Row,22));
 		      $('input[name=countryCODE]').val(mySheet.GetCellValue(Row,23));
 		      $('input[name=countryNAME]').val(mySheet.GetCellValue(Row,24));
-		      $('select[name=hireType]').val(mySheet.GetCellValue(Row,27));
-		      $('input[name=hireNum]').val(mySheet.GetCellValue(Row,28));
+		      $('select[name=hireType]').val(mySheet.GetCellValue(Row,25));
+		      $('input[name=hireNum]').val(mySheet.GetCellValue(Row,26));
 		
 		    //재직정보  
-		      $('input[name=employee_JOIN_DATE]').val(mySheet.GetCellValue(Row,29));
-		      $('input[name=employee_RESIGNATION_DATE]').val(mySheet.GetCellValue(Row,30)); 
-		      $('input[name=department_CODE]').val(mySheet.GetCellValue(Row,31));
-		      $('input[name=department_NAME]').val(mySheet.GetCellValue(Row,32));
-		      $('input[name=position_CODE]').val(mySheet.GetCellValue(Row,33));
-		      $('input[name=position_NAME]').val(mySheet.GetCellValue(Row,34));
-		      $('input[name=out_REASON_CODE]').val(mySheet.GetCellValue(Row,35));
-		      $('input[name=out_REASON_NAME]').val(mySheet.GetCellValue(Row,36));
-		      $('input[name=job_CLASS_CODE]').val(mySheet.GetCellValue(Row,39));
-		      $('input[name=job_CLASS_NAME]').val(mySheet.GetCellValue(Row,40));
-		      $('input[id=duty_CODE]').val(mySheet.GetCellValue(Row,41)); 
-		      $('input[name=duty_NAME]').val(mySheet.GetCellValue(Row,42));
-		      $('input[name=job_DIS_CODE]').val(mySheet.GetCellValue(Row,43));
-		      $('input[name=job_DIS_NAME]').val(mySheet.GetCellValue(Row,44));
-		      $('select[name=work_STATUS]').val(mySheet.GetCellValue(Row,47));
-		      $('select[name=probation_YN]').val(mySheet.GetCellValue(Row,48));
-		      $('input[name=probation_DATE]').val(mySheet.GetCellValue(Row,49));
-		      $('select[name=work_INCLUDE_YN]').val(mySheet.GetCellValue(Row,50));
-		      $('input[name=leave_DATE_START]').val(mySheet.GetCellValue(Row,51));
-		      $('input[name=leave_DATE_END]').val(mySheet.GetCellValue(Row,52));
-		      $('input[name=d_CODE_CODE]').val(mySheet.GetCellValue(Row,53));
-		      $('input[name=d_CODE_NAME]').val(mySheet.GetCellValue(Row,54));
-		      $('input[name=work_TYPE_CODE]').val(mySheet.GetCellValue(Row,55));
-		      $('input[name=work_TYPE_NAME]').val(mySheet.GetCellValue(Row,56));
-		      $('input[name=pay_TYPE_CODE]').val(mySheet.GetCellValue(Row,57));
-		      $('input[name=pay_TYPE_NAME]').val(mySheet.GetCellValue(Row,58));
+		      $('input[name=employee_JOIN_DATE]').val(mySheet.GetCellValue(Row,27));
+		      $('input[name=employee_RESIGNATION_DATE]').val(mySheet.GetCellValue(Row,28)); 
+		      $('input[name=department_CODE]').val(mySheet.GetCellValue(Row,29));
+		      $('input[name=department_NAME]').val(mySheet.GetCellValue(Row,30));
+		      $('input[name=position_CODE]').val(mySheet.GetCellValue(Row,31));
+		      $('input[name=position_NAME]').val(mySheet.GetCellValue(Row,32));
+		      $('input[name=out_REASON_CODE]').val(mySheet.GetCellValue(Row,33));
+		      $('input[name=out_REASON_NAME]').val(mySheet.GetCellValue(Row,34));
+		      $('input[name=job_CLASS_CODE]').val(mySheet.GetCellValue(Row,35));
+		      $('input[name=job_CLASS_NAME]').val(mySheet.GetCellValue(Row,36));
+		      $('input[id=duty_CODE]').val(mySheet.GetCellValue(Row,37)); 
+		      $('input[name=duty_NAME]').val(mySheet.GetCellValue(Row,38));
+		      $('input[name=job_DIS_CODE]').val(mySheet.GetCellValue(Row,39));
+		      $('input[name=job_DIS_NAME]').val(mySheet.GetCellValue(Row,40));
+		      $('select[name=work_STATUS]').val(mySheet.GetCellValue(Row,41));
+		      $('select[name=probation_YN]').val(mySheet.GetCellValue(Row,42));
+		      $('input[name=probation_DATE]').val(mySheet.GetCellValue(Row,43));
+		      $('select[name=work_INCLUDE_YN]').val(mySheet.GetCellValue(Row,44));
+		      $('input[name=leave_DATE_START]').val(mySheet.GetCellValue(Row,45));
+		      $('input[name=leave_DATE_END]').val(mySheet.GetCellValue(Row,46));
+		      $('input[name=d_CODE_CODE]').val(mySheet.GetCellValue(Row,47));
+		      $('input[name=d_CODE_NAME]').val(mySheet.GetCellValue(Row,48));
+		      $('input[name=work_TYPE_CODE]').val(mySheet.GetCellValue(Row,49));
+		      $('input[name=work_TYPE_NAME]').val(mySheet.GetCellValue(Row,50));
+		      $('input[name=pay_TYPE_CODE]').val(mySheet.GetCellValue(Row,51));
+		      $('input[name=pay_TYPE_NAME]').val(mySheet.GetCellValue(Row,52));
 		      
 		      //급여정보  
-		      $('input[name=pay_GRADE_CODE]').val(mySheet.GetCellValue(Row,59));
-		      $('input[name=pay_GRADE_NAME]').val(mySheet.GetCellValue(Row,60)); 
-		      $('input[name=salary]').val(mySheet.GetCellValue(Row,61)); 
-		      $('input[name=bank_CODE_1]').val(mySheet.GetCellValue(Row,62));
-		      $('input[name=bank_NAME_1]').val(mySheet.GetCellValue(Row,63));
-		      $('input[name=account_NUMBER_1]').val(mySheet.GetCellValue(Row,64));
-		      $('input[name=account_NAME_1]').val(mySheet.GetCellValue(Row,65));
-		      $('input[name=bank_CODE_2]').val(mySheet.GetCellValue(Row,66));
-		      $('input[name=bank_NAME_2]').val(mySheet.GetCellValue(Row,67));
-		      $('input[name=account_NUMBER_2]').val(mySheet.GetCellValue(Row,68));
-		      $('input[name=account_NAME_2]').val(mySheet.GetCellValue(Row,69));
-		 
+		      $('input[name=pay_GRADE_CODE]').val(mySheet.GetCellValue(Row,53));
+		      $('input[name=pay_GRADE_NAME]').val(mySheet.GetCellValue(Row,54)); 
+		      $('input[name=salary]').val(mySheet.GetCellValue(Row,55)); 
+		      $('input[name=bank_CODE_1]').val(mySheet.GetCellValue(Row,56));
+		      $('input[name=bank_NAME_1]').val(mySheet.GetCellValue(Row,57));
+		      $('input[name=account_NUMBER_1]').val(mySheet.GetCellValue(Row,58));
+		      $('input[name=account_NAME_1]').val(mySheet.GetCellValue(Row,59));
+		      $('input[name=bank_CODE_2]').val(mySheet.GetCellValue(Row,60));
+		      $('input[name=bank_NAME_2]').val(mySheet.GetCellValue(Row,61));
+		      $('input[name=account_NUMBER_2]').val(mySheet.GetCellValue(Row,62));
+		      $('input[name=account_NAME_2]').val(mySheet.GetCellValue(Row,63));
+		      empCode = "empCode=" + mySheet.GetCellValue(Row,2);
+		      mySheet2.DoSearch("${contextPath}/hm/p0004/searchContract.do", "empCode="+mySheet.GetCellValue(Row,2));  
 		   
 		}
-
 	}
-
 	// 저장완료 후 처리할 작업
 	// code: 0(저장성공), -1(저장실패)
 	function mySheet_OnSaveEnd(code, msg) {
@@ -333,9 +347,7 @@
 	   function goPopup(){
 	      var pop = window.open("findAddress.do","addressPopup","width=570,height=420, scrollbars=yes, resizable=yes"); 
 	   }
-
 	   function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
-
 	      document.form.zipcode.value = zipNo;    
 	      document.form.address.value = roadAddrPart1;   
 	      document.form.addressDetail.value = addrDetail;   
@@ -346,14 +358,11 @@
 	 //분류코드 팝업   
 	   function findPopup(tablename){
 	      var pop = window.open("findPopup.do?command="+tablename,"findPopup","width=342,height=520,resizable = no, scrollbars = no"); 
-
 	   }
 	   function findPopup(tablename, index){
 	      var pop = window.open("findPopup.do?command="+tablename+"&index="+index,"findPopup","width=342,height=520,resizable = no, scrollbars = no"); 
-
 	   }
 	  
-
 	//사진전송
 	function sendData() {	
 		var data = new FormData();
@@ -397,7 +406,6 @@
 .ui-datepicker{ font-size: 12px; width: 210px; }
 .ui-datepicker select.ui-datepicker-month{ width:30%; font-size: 11px; }
 .ui-datepicker select.ui-datepicker-year{ width:40%; font-size: 11px; }
-
 .title {
 	width: 100%;
 	color: #2C3E50;
@@ -411,21 +419,18 @@
 	position: absolute;
 	top: 50px;
 }
-
 .leftbuttons {
 	margin-top: 40px;
 	margin: 10px;
 	position: absolute;
 	left: 0px;
 }
-
 .rightbuttons {
 	margin-top: 40px;
 	margin: 10px;
 	position: absolute;
 	right: 0px;
 }
-
 .IBbutton {
 	font-size: 13px;
 	margin-left: 5px;
@@ -435,11 +440,9 @@
 	border-radius: 7px;
 	text-decoration: none;
 }
-
 .IBbutton:hover {
 	background-color: #2C3E50;
 }
-
 .pictureUpload {
 	font-size: 13px;
 	margin-left: 5px;
@@ -449,11 +452,9 @@
 	border-radius: 7px;
 	text-decoration: none;
 }
-
 .pictureUpload:hover {
 	background-color: #2C3E50;
 }
-
 .left {
 	position: relative;
 	top: 130px;
@@ -468,7 +469,6 @@
 	vertical-align: middle;
 	}
 	
-
 .right {
 	position: relative;
 	top: -560px;
@@ -489,7 +489,6 @@ text-decoration: none;
 	font-size: 12px;
 	border-radius: 5px;
 }
-
 .tg input, select {
 	height: 22px;
 	border-radius: 3px;
@@ -497,19 +496,16 @@ text-decoration: none;
 	padding-left:5px;
 	vertical-align: middle;
 }
-
 .tg img {
 	vertical-align: middle;
 	padding: 0px 5px 0px 2px;
 }
-
 .tg {
 	border-collapse: collapse;
 	border-spacing: 0;
 	width: 90%;
 	
 }
-
 .tg td {
 	font-family: Arial, sans-serif;
 	font-size: 14px;
@@ -518,7 +514,6 @@ text-decoration: none;
 	word-break: normal;
 	border-color: black;
 }
-
 .tg th {
 	font-family: Arial, sans-serif;
 	font-size: 14px;
@@ -528,7 +523,6 @@ text-decoration: none;
 	word-break: normal;
 	border-color: black;
 }
-
 .tg .tg-dm68 {
 	font-size: 12px;
 	font-family: Verdana, Geneva, sans-serif !important;;
@@ -537,7 +531,6 @@ text-decoration: none;
 	text-align: center;
 	vertical-align: center
 }
-
 .tg .tg-lu1x {
 	font-size: 12px;
 	font-family: Verdana, Geneva, sans-serif !important;;
@@ -549,7 +542,6 @@ text-decoration: none;
 	width: 40px;
 	border-radius: 2px;
 }
-
 .tg .tg-au0w {
 	font-size: 12px;
 	font-family: Verdana, Geneva, sans-serif !important;;
@@ -557,7 +549,6 @@ text-decoration: none;
 	text-align: left;
 	vertical-align: center
 }
-
 .tg .tg-8thm {
 	font-size: 12px;
 	font-family: Verdana, Geneva, sans-serif !important;;
@@ -566,7 +557,6 @@ text-decoration: none;
 	text-align: right;
 	vertical-align: center
 }
-
 .tg .tg-v9i9 {
 	font-size: 12px;
 	font-family: Verdana, Geneva, sans-serif !important;;
@@ -584,6 +574,7 @@ text-decoration: none;
 	<div class="rightbuttons">
 		<a href="javascript:doAction('reload')" class="IBbutton">초기화</a> <a
 			href="javascript:doAction('search')" class="IBbutton">조회</a> <a
+			href="javascript:doAction('insert')" class="IBbutton">계약추가</a> <a
 			href="javascript:doAction('save')" class="IBbutton">저장</a>
 	</div>
 
@@ -922,7 +913,7 @@ text-decoration: none;
 							<th class="tg-lu1x" rowspan="7"><i class="fa fa-id-card"
 								aria-hidden="true"></i><br>급<br>여<br>정<br>보
 							</th>
-							<td class="tg-au0w" rowspan="7"></td>
+							
 							<td class="tg-8thm">호봉</td>
 							<td class="tg-v9i9" rowspan="7"></td>
 							<td class="tg-v9i9"><input type="text"
@@ -979,10 +970,21 @@ text-decoration: none;
 							<td class="tg-v9i9"><input type="text" id="account_NAME_2" name="account_NAME_2"
 								style="width: 150px;"></td>
 						</tr>
+						<tr>
+							<td class="tg-au0w" colspan="8"></td>
+						</tr>
+						<tr>
+							<th class="tg-lu1x" rowspan="7"><i class="fa fa-id-card"
+								aria-hidden="true"></i><br>계<br>약<br>정<br>보
+							</th>
+							<td><div id='yogi'></div></td>
+							
+						</tr>
 					</table>
 
 				</div>
 			</div>
+			
 		</div>
 	</div>
 
