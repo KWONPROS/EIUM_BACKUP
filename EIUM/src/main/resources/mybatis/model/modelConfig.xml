@@ -50,6 +50,7 @@
 				<typeAlias type="com.myspring.eium.pm.pm_p0003.vo.PM_P0003VO" alias="PM_P0003VO" />
 				
 				<typeAlias type="com.myspring.eium.pm.pm_p0009.vo.PM_P0009VO" alias="PM_P0009VO" />
+				<typeAlias type="com.myspring.eium.pm.pm_p0010.vo.PM_P0010VO" alias="PM_P0010VO" />
 				
 				<typeAlias type="com.myspring.eium.wm.wm_p0001.vo.WM_P0001VO" alias="WM_P0001VO" />
 				<typeAlias type="com.myspring.eium.wm.wm_p0002.vo.WM_P0002VO" alias="WM_P0002VO" />

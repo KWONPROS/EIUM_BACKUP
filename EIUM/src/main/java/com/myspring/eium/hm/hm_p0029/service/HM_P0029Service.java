@@ -21,5 +21,6 @@ public interface HM_P0029Service {
 	public List<HM_P0029VO> searchList2(Map<String, Object> searchMap) throws DataAccessException;
 	public void saveFile(Map<String,Object> dataMap);
 	
+	public List<HM_P0029VO> searchList_site(Map<String, Object> searchMap) throws DataAccessException;
 
 }

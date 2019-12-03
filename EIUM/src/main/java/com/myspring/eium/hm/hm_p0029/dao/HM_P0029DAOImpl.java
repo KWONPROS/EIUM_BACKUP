@@ -35,6 +35,12 @@ public class HM_P0029DAOImpl implements HM_P0029DAO {
 	}
 	
 	@Override
+	public List<HM_P0029VO> searchList_site(Map<String, Object> searchMap) throws DataAccessException{
+		List<HM_P0029VO> list= sqlSession.selectList("mapper.hm_p0029.searchList_site", searchMap);
+		
+		return list;
+	}
+	@Override
 	public void insertData(Map<String, String> row) throws DataAccessException {
 		sqlSession.update("mapper.hm_p0029.insertData", row);
 		sqlSession.update("mapper.hm_p0029.insertData2", row);

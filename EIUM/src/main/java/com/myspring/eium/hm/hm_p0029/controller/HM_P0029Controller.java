@@ -28,8 +28,15 @@ public interface HM_P0029Controller {
 	public ModelAndView searchInit_LI(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView searchInit_LA(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
+	//사업장 팝업 모델엔뷰
+	public ModelAndView search_Site(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public Map searchList_site(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	//부서 팝업 모델엔뷰
+	public ModelAndView search_Dept(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;	
+	
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView findAddress(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map searchList2(HttpServletRequest request, HttpServletResponse response) throws Exception;

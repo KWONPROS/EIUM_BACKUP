@@ -88,6 +88,9 @@ public class HM_P0029VO {
 	
 	private String  pay_TYPE_CODE;
 	private String  pay_TYPE_NAME;
+	
+	private String site_CODE;
+	private String site_NAME;
 	public String getEmp_CODE() {
 		return emp_CODE;
 	}
@@ -508,8 +511,23 @@ public class HM_P0029VO {
 	public void setPay_TYPE_NAME(String pay_TYPE_NAME) {
 		this.pay_TYPE_NAME = pay_TYPE_NAME;
 	}
+	public String getSite_CODE() {
+		return site_CODE;
+	}
+	public void setSite_CODE(String site_CODE) {
+		this.site_CODE = site_CODE;
+	}
 	
+	public String getSite_NAME() {
+		return site_NAME;
+	}
+	public void setSite_NAME(String site_NAME) {
+		this.site_NAME = site_NAME;
+	}
 	
+	public HM_P0029VO() {
+		
+	}
 	
 	
 	

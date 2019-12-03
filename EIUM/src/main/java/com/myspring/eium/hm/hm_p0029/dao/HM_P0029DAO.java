@@ -26,6 +26,9 @@ public interface HM_P0029DAO {
 
 		public Map<String, Object> getByteImage(Map<String, Object> searchMap);
 
+		//사업장 팝업 dao
+		public List<HM_P0029VO> searchList_site(Map<String, Object> searchMap)throws DataAccessException;
+
 	
 
 	 

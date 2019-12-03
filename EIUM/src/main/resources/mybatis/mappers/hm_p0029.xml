@@ -202,6 +202,7 @@
 
 	</select>
 
+	
 	<select id="searchList2" resultType="hashmap"
 		parameterType="java.util.Map">
 
@@ -210,6 +211,11 @@
 		${command}_NAME
 		from ${command}
 
+	</select>
+	
+	<select id="searchList_site" resultMap="P0029resultVO" parameterType="java.util.Map">
+		select site_code, site_name
+		from site
 	</select>
 
 	<update id="updateData" parameterType="java.util.Map">
