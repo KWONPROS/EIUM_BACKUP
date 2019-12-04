@@ -95,7 +95,7 @@ public class PM_P0003ControllerImpl implements PM_P0003Controller {
 		ArrayList<String> accessRange = new ArrayList<String>();		
 		accessRange = (ArrayList<String>) session.getAttribute("access_range"); 
 		accessMap = (Map<String, Object>) session.getAttribute("accessnum");		
-		int n =  (int) accessMap.get("M024");
+		int n =  (Integer) accessMap.get("M024");
 		System.out.println(accessRange.get(n));
 
 		

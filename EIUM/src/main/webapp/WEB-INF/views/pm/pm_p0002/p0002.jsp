@@ -177,14 +177,33 @@
 	
 
 	//로우 클릭시
-function mySheet_OnClick(Row, Col) { 
-			x = "x=" + mySheet.GetCellValue(Row, 1);
-			var param = "x="+mySheet.GetCellValue(Row, 1)+"&y="+mySheet.GetCellValue(Row, 3);
+function mySheet1_OnClick(Row, Col) { 
+			x = "x=" + mySheet1.GetCellValue(Row, 1);
+			var param = "x="+mySheet1.GetCellValue(Row, 1)+"&y="+mySheet1.GetCellValue(Row, 3);
 			mySheet2.DoSearch("${contextPath}/pm/p0002/searchReceipt.do", param);
 
 	}
 	
-	
+function mySheet3_OnClick(Row, Col) { 
+	x = "x=" + mySheet3.GetCellValue(Row, 1);
+	var param = "x="+mySheet3.GetCellValue(Row, 1)+"&y="+mySheet3.GetCellValue(Row, 3);
+	mySheet2.DoSearch("${contextPath}/pm/p0002/searchReceipt.do", param);
+
+}
+
+function mySheet4_OnClick(Row, Col) { 
+	x = "x=" + mySheet4.GetCellValue(Row, 1);
+	var param = "x="+mySheet4.GetCellValue(Row, 1)+"&y="+mySheet4.GetCellValue(Row, 3);
+	mySheet2.DoSearch("${contextPath}/pm/p0002/searchReceipt.do", param);
+
+}
+
+function mySheet5_OnClick(Row, Col) { 
+	x = "x=" + mySheet5.GetCellValue(Row, 1);
+	var param = "x="+mySheet5.GetCellValue(Row, 1)+"&y="+mySheet5.GetCellValue(Row, 3);
+	mySheet2.DoSearch("${contextPath}/pm/p0002/searchReceipt.do", param);
+
+}
 /* function mySheet2_OnDblClick(Row,Col,Value){
 	row=Row;
 	col=Col;
