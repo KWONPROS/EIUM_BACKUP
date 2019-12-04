@@ -132,13 +132,22 @@ border-radius: 2px;
 		switch(sAction){
 		case "search": // 조회
 			var param = FormQueryStringEnc(document.frm);
-			mySheet.DoSearch("${contextPath}/hm/p0036/searchList.do",param);
+		if($("#date").val() == '' || $("#date2").val() == ''){
+			alert('기준일은 필수항목입니다');
+			}else if($("#date").val() > $("#date2").val()){
+				alert("기준일을 확인하여 주십시오");
+			}else{
+				mySheet.DoSearch("${contextPath}/hm/p0036/searchList.do",param);
+			}
+			
 
 			break;
 		case "reload": //초기화
 			//조회 데이터 삭제
 			mySheet.RemoveAll();
-
+			$("form").each(function() {  
+	            this.reset();
+	         });  
 			break;
 	}
 	}
@@ -148,7 +157,7 @@ border-radius: 2px;
 	//달력 API
 	$(function() {
 	  $( ".Datepicker" ).datepicker({
-	  	dateFormat: "yymmdd",
+	  	dateFormat: "yy-mm-dd",
 	  	showOn: "both", 
 	      buttonImage: "${contextPath}/resources/image/icons/icon_calendar.png", 
 	      buttonImageOnly: true , 
