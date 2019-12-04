@@ -104,7 +104,8 @@ border-radius: 2px;
 <script>
 	/*Sheet 기본 설정 */
 	function LoadPage() {
-		
+		$("#date").datepicker().datepicker("setDate", new Date());
+		$("#date2").datepicker().datepicker("setDate", new Date());
 		mySheet.RemoveAll();
 		//아이비시트 초기화
 		var initSheet = {};
@@ -132,10 +133,16 @@ border-radius: 2px;
 	function doAction(sAction) {
 		switch(sAction){
 		case "search": // 조회
+		if($("#date").val()=='' || $("#date2").val()==''){
+			alert('기준일은 필수항목 입니다');
+		}else if($("#date").val() > $("#date2").val()){
+			alert("기준일을 확인하여 주십시오")
+		}else{
 			var param = FormQueryStringEnc(document.frm);
 			mySheet.DoSearch("${contextPath}/hm/p0036/searchList2.do",param);
-
-			break;
+		}
+		break;
+		
 		case "reload": //초기화
 			//조회 데이터 삭제
 			mySheet.RemoveAll();

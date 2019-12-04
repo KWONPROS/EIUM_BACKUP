@@ -166,7 +166,7 @@ public class HM_P0036ControllerImpl  implements HM_P0036Controller{
 
 		
 
-		List<HM_P0036VO> data = hM_P0036Service.searchList(searchMap);
+		List<HM_P0036VO> data = hM_P0036Service.searchList2(searchMap);
         resultMap.put("Data", data);
         
         
@@ -195,7 +195,7 @@ public class HM_P0036ControllerImpl  implements HM_P0036Controller{
 
 		
 
-		List<HM_P0036VO> data = hM_P0036Service.searchList(searchMap);
+		List<HM_P0036VO> data = hM_P0036Service.searchList3(searchMap);
         resultMap.put("Data", data);
         
         

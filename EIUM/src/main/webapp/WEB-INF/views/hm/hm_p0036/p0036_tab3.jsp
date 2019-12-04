@@ -104,6 +104,8 @@ border-radius: 2px;
 <script>
 	/*Sheet 기본 설정 */
 	function LoadPage() {
+		$("#date").datepicker().datepicker("setDate", new Date());
+		$("#date2").datepicker().datepicker("setDate", new Date());
 		
 		mySheet.RemoveAll();
 		//아이비시트 초기화
@@ -133,10 +135,17 @@ border-radius: 2px;
 	function doAction(sAction) {
 		switch(sAction){
 		case "search": // 조회
-			var param = FormQueryStringEnc(document.frm);
-			mySheet.DoSearch("${contextPath}/hm/p0036/searchList3.do",param);
+			if($("#date").val()=='' || $("#date2").val()==''){
+				alert('기준일은 필수항목 입니다');
+			}else if($("#date").val() > $("#date2").val()){
+				alert("기준일을 확인하여 주십시오");
+			}else{
+				var param = FormQueryStringEnc(document.frm);
+				mySheet.DoSearch("${contextPath}/hm/p0036/searchList3.do",param);
 
+			}
 			break;
+			
 		case "reload": //초기화
 			//조회 데이터 삭제
 			mySheet.RemoveAll();
@@ -256,7 +265,7 @@ function pay_type(rowData){
 		
 		기준일<input id="date"type="text"  class="Datepicker">~<input id="date2"type="text"  class="Datepicker">
 		
-		퇴사자포함<input type="checkbox" id ="resigner" value="1">
+
 		</div>
 		</div>	
 		</div>
