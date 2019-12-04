@@ -39,4 +39,12 @@ public interface HM_P0036Controller {
 
 	Map searchList_p06(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
+	ModelAndView tabInit3(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	ModelAndView tabInit4(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	Map searchList2(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	Map searchList3(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
 }

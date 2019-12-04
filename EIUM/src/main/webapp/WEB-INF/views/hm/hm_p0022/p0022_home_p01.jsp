@@ -103,7 +103,7 @@ function LoadPage(){
 		{Header:"NO",Type:"Seq",Width:70,SaveName:"seq",Align:"Center"},
 		{Header:"사원코드",Type:"Text",Width:70,SaveName:"employee_CODE",Align:"Center"},
 		{Header:"사원명",Type:"Text",Width:70,SaveName:"employee_NAME",Align:"Center"},
-		{Header:"재직상태",Type:"Text",Width:70,SaveName:"work_STATUS",Align:"Center",Hidden:1},
+		{Header:"재직상태",Type:"Text",Width:70,SaveName:"work_STATUS_NAME",Align:"Center",Hidden:1},
 		{Header:"입사일",Type:"Text",Width:70,SaveName:"employee_JOIN_DATE",Align:"Center",Hidden:1},
 		{Header:"사업장명",Type:"Text",Width:70,SaveName:"site_NAME",Align:"Center",Hidden:1},
 		{Header:"사업장명",Type:"Text",Width:70,SaveName:"site_CODE",Align:"Center",Hidden:1},

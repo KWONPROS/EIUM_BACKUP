@@ -71,13 +71,13 @@ function PageLoad(){
 		],
 		contents:[{
 			type:"iframe",	
+			contents:"searchInit1.do"
+		},{
+			type:"iframe",	
 			contents:"searchInit2.do"
 		},{
 			type:"iframe",	
 			contents:"searchInit3.do"
-		},{
-			type:"iframe",	
-			contents:"searchInit4.do"
 		}
 		]
 	});

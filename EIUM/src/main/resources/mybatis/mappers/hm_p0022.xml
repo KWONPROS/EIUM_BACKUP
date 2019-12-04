@@ -83,7 +83,7 @@ HAH.APPOINT_CODE,
 HAH.START_DATE,
 HAH.END_DATE,
 AI.HR_APPOINT_INDEX_NAME,
-EW.WORK_STATUS,
+ws.work_status_name,
 EW.EMPLOYEE_JOIN_DATE,
 S.SITE_NAME,
 D.DEPARTMENT_NAME,
@@ -109,7 +109,8 @@ FROM HR_APPOINT_HISTORY HAH,
     JOB_DIS JD,
     PAY_TYPE PT,
     PAY_GRADE PG,
-    OUT_REASON ORN
+    OUT_REASON ORN,
+    work_status ws
 
 
 WHERE HAH.APPOINT_EMPLOYEE_CODE = E.EMPLOYEE_CODE(+)
@@ -125,10 +126,11 @@ AND EW.PAY_TYPE_CODE = PT.PAY_TYPE_CODE(+)
 AND EW.PAY_GRADE_CODE = PG.PAY_GRADE_CODE(+)
 AND EW.OUT_REASON_CODE = ORN.OUT_REASON_CODE(+)
 AND HAH.APPOINT_CODE = #{appointCode}
+AND EW.work_status_code = ws.work_status_code(+)
  
 			]]>
 	</select>
-	
+
 	
 	
 	<select  id="appointList3" resultMap="P0022resultVO" parameterType="java.util.Map">
@@ -246,7 +248,7 @@ AND e.employee_name = #{E_id jdbcType=VARCHAR}
        SELECT
 EW.EMPLOYEE_CODE,
 E.EMPLOYEE_NAME,
-EW.WORK_STATUS,
+WS.WORK_STATUS_NAME,
 EW.EMPLOYEE_JOIN_DATE,
 S.SITE_NAME,
 S.SITE_CODE,
@@ -278,7 +280,8 @@ FROM EMPLOYEE_WORK EW,
     JOB_DIS JD,
     PAY_TYPE PT,
     PAY_GRADE PG,
-    OUT_REASON ORN  
+    OUT_REASON ORN,
+    work_status ws
 
 WHERE EW.EMPLOYEE_CODE = E.EMPLOYEE_CODE(+)
 AND D.SITE_CODE = S.SITE_CODE(+)
@@ -290,6 +293,7 @@ AND EW.JOB_DIS_CODE = JD.JOB_DIS_CODE(+)
 AND EW.PAY_TYPE_CODE = PT.PAY_TYPE_CODE(+)
 AND EW.PAY_GRADE_CODE = PG.PAY_GRADE_CODE(+)
 AND EW.OUT_REASON_CODE = ORN.OUT_REASON_CODE(+)
+AND EW.work_status_code = WS.work_status_code(+)
 		]]>
 	<choose>
 	<when test="E_id != '' and E_id != null">
@@ -339,7 +343,6 @@ AND site_name = #{E_id jdbcType=VARCHAR}
 	</select>
 	
 
-
 	<select  id="homeEmployeeSearch" resultMap="P0022resultVO" parameterType="java.util.Map">
 	    <![CDATA[
 	SELECT HA.EMPLOYEE_CODE,E.EMPLOYEE_NAME,D.DEPARTMENT_NAME,DT.DUTY_NAME
@@ -380,7 +383,7 @@ AND site_name = #{E_id jdbcType=VARCHAR}
 	<insert id="insertData2" parameterType="java.util.Map">
 
 	insert into hr_appoint_history(appoint_history_code, appoint_index_code , appoint_employee_code , appoint_code , start_date , end_date , work_status ,join_date , site_code , department_code , job_class_code , position_code , duty_code , job_dis_code , pay_type_code , pay_grade_code , out_reason_code  )
-	values (APPOINT_HISTORY_CODE_SEQ.nextval , #{hr_APPOINT_INDEX_NAME,jdbcType=VARCHAR} ,#{employee_CODE,jdbcType=VARCHAR},#{appointCode,jdbcType=VARCHAR},#{start_DATE,jdbcType=VARCHAR},#{end_DATE,jdbcType=VARCHAR},#{work_STATUS,jdbcType=VARCHAR},#{employee_JOIN_DATE,jdbcType=VARCHAR} ,#{site_CODE,jdbcType=VARCHAR} , #{department_CODE,jdbcType=VARCHAR} ,#{job_CLASS_NAME,jdbcType=VARCHAR} ,#{position_NAME,jdbcType=VARCHAR}, #{duty_NAME,jdbcType=VARCHAR} , #{job_DIS_NAME,jdbcType=VARCHAR} ,#{pay_TYPE_NAME,jdbcType=VARCHAR} , #{pay_GRADE_NAME,jdbcType=VARCHAR},#{out_REASON_NAME,jdbcType=VARCHAR})
+	values (APPOINT_HISTORY_CODE_SEQ.nextval , #{hr_APPOINT_INDEX_NAME,jdbcType=VARCHAR} ,#{employee_CODE,jdbcType=VARCHAR},#{appointCode,jdbcType=VARCHAR},#{start_DATE,jdbcType=VARCHAR},#{end_DATE,jdbcType=VARCHAR},#{work_STATUS_NAME,jdbcType=VARCHAR},#{employee_JOIN_DATE,jdbcType=VARCHAR} ,#{site_CODE,jdbcType=VARCHAR} , #{department_CODE,jdbcType=VARCHAR} ,#{job_CLASS_NAME,jdbcType=VARCHAR} ,#{position_NAME,jdbcType=VARCHAR}, #{duty_NAME,jdbcType=VARCHAR} , #{job_DIS_NAME,jdbcType=VARCHAR} ,#{pay_TYPE_NAME,jdbcType=VARCHAR} , #{pay_GRADE_NAME,jdbcType=VARCHAR},#{out_REASON_NAME,jdbcType=VARCHAR})
  
 	 </insert>	
 	

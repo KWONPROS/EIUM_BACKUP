@@ -39,11 +39,11 @@ AND etl.employee_training_code=#{eduCode}
 		SCORE=#{score},
 		TOTAL=#{total},
 		ASSESSMENT_DESC=#{assessment_DESC}
-
+		
 		
 		
 		where employee_CODE=#{employee_CODE}
-
+		and EMPLOYEE_TRAINING_CODE=#{eduCode}
 	</update>	
 		
 
