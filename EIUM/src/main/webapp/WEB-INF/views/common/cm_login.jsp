@@ -147,7 +147,7 @@ right: 15px;
 	</video>
 	<div class="login-container">
 			<div class="login-form">
-				<form name="form"  method="post" action="${contextPath}/login/Login.do">
+				<form name="form"  method="post" action="${contextPath}/login/LoginCheck.do">
 				<h3><img class="logo" alt="logo" src="${contextPath}/resources/image/EIUM_logo.png"> EIUM</h3>
 				
 					<h3 id="languages" >

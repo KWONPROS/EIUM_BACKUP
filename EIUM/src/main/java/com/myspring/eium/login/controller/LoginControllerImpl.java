@@ -58,7 +58,7 @@ public class LoginControllerImpl   implements LoginController {
 
 	
 	@Override
-	@RequestMapping(value = "/login/Login.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/login/LoginCheck.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public ModelAndView appointList(@ModelAttribute("login") LoginVO login, RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
@@ -78,7 +78,7 @@ public class LoginControllerImpl   implements LoginController {
 	
 		List<LoginVO> data = loginService.searchList(searchMap);
 
-    	if(data != null) {
+    	if(data != null && data.isEmpty() != true) {
     		HttpSession session = request.getSession();
     		for(i=0; i<data.size(); i++) {
     			accessMap.put(data.get(i).getMenu_code() , i);
@@ -90,7 +90,6 @@ public class LoginControllerImpl   implements LoginController {
    		for(int j =0; j<accessRange.size(); j++) {
     			System.out.println(j+"번째 메뉴 : "+menuList.get(j));
     			System.out.println(j+"번째 접근권한 : "+accessRange.get(j));
-    			
     		}
     
    		
@@ -102,7 +101,9 @@ public class LoginControllerImpl   implements LoginController {
     		session.setAttribute("isLogOn", true);
     		
     		mav.setViewName("redirect:/main.do");
-    		}else {
+    		}
+    	
+    	else {
     		rAttr.addAttribute("result", "loginFailed");
     		mav.setViewName("redirect:/login.do");
     		}
