@@ -126,7 +126,7 @@ text-decoration: none;
 }
 </style>
 <meta charset="UTF-8">
-<title>헤더</title>
+<title>헤더</title>  
 </head>
 <body>
 
