@@ -70,8 +70,15 @@
 		<result property="account_NUMBER_2" column="ACCOUNT_NUMBER_2" />
 		<result property="account_NAME_2" column="ACCOUNT_NAME_2" />
 
+        <result property="contract_START_MONTH" column="CONTRACT_START_MONTH" />
+        <result property="contract_END_MONTH" column="CONTRACT_END_MONTH" />
+        <result property="contract_YEAR_PAY" column="CONTRACT_YEAR_PAY" />
+        <result property="contract_MONTH_PAY" column="CONTRACT_MONTH_PAY" />
+        <result property="contract_DAY_PAY" column="CONTRACT_DAY_PAY" />
+        <result property="contract_TIME_PAY" column="CONTRACT_TIME_PAY" />
 
 	</resultMap>
+	
 	<select id="searchList" resultMap="P0004resultVO"
 		parameterType="java.util.Map"> 
       <![CDATA[
@@ -198,6 +205,23 @@
 		${command}_NAME
 		from ${command}
 
+	</select>
+	
+	
+	<resultMap id="P0004resultVO2" type="HM_P0004VO">
+		<result property="employee_CODE" column="EMPLOYEE_CODE" />
+        <result property="contract_START_MONTH" column="CONTRACT_START_MONTH" />
+        <result property="contract_END_MONTH" column="CONTRACT_END_MONTH" />
+        <result property="contract_YEAR_PAY" column="CONTRACT_YEAR_PAY" />
+        <result property="contract_MONTH_PAY" column="CONTRACT_MONTH_PAY" />
+        <result property="contract_DAY_PAY" column="CONTRACT_DAY_PAY" />
+        <result property="contract_TIME_PAY" column="CONTRACT_TIME_PAY" />
+	</resultMap>
+	
+	<select id="searchContract" resultMap="P0004resultVO2" parameterType="java.util.Map">
+		SELECT employee_code, contract_start_month, contract_end_month, contract_year_pay, contract_month_pay, contract_day_pay, contract_time_pay
+        FROM contract
+        WHERE employee_code = #{empCode}
 	</select>
 
 	<update id="updateData" parameterType="java.util.Map">
@@ -418,4 +442,32 @@
 		where
 		TRIM(EMPLOYEE_CODE) = #{emp_CODE}
 	</delete>
+	
+	<insert id="insertContract" parameterType="java.util.Map">
+		INSERT INTO contract(EMPLOYEE_CODE, CONTRACT_START_MONTH, CONTRACT_END_MONTH, CONTRACT_YEAR_PAY, CONTRACT_MONTH_PAY, CONTRACT_DAY_PAY, CONTRACT_TIME_PAY)
+        VALUES(#{empCode}, #{contract_START_MONTH}, #{contract_END_MONTH}, #{contract_YEAR_PAY}, #{contract_MONTH_PAY}, #{contract_DAY_PAY}, #{contract_TIME_PAY})
+	</insert>
+	
+	<update id="updateContract" parameterType="java.util.Map">
+		update contract
+		set
+		EMPLOYEE_CODE = #{empCode}
+		,CONTRACT_START_MONTH= #{contract_START_MONTH}
+		,CONTRACT_END_MONTH= #{contract_END_MONTH}
+		,CONTRACT_YEAR_PAY= #{contract_YEAR_PAY}
+		,CONTRACT_MONTH_PAY= #{contract_MONTH_PAY}
+		,CONTRACT_DAY_PAY= #{contract_DAY_PAY}
+		,CONTRACT_TIME_PAY= #{contract_TIME_PAY}
+		where
+		TRIM(EMPLOYEE_CODE) = #{empCode}
+		and CONTRACT_START_MONTH = #{contract_START_MONTH}
+	</update>
+	
+	<delete id="deleteContract" parameterType="java.util.Map">
+		delete contract
+		where
+		TRIM(EMPLOYEE_CODE) = #{empCode}
+		and CONTRACT_START_MONTH = #{contract_START_MONTH}
+	</delete>
+	
 </mapper>

@@ -30,51 +30,33 @@ public class HM_P0029ServiceImpl implements HM_P0029Service {
 	private HM_P0029DAO p0029DAO;
 
 	@Override
-	public List<HM_P0029VO> searchList(Map<String, Object> searchMap) throws DataAccessException {
-		List<HM_P0029VO> list =  p0029DAO.searchList(searchMap); 
-		return list;
-	}
-	@Override
 	public List<HM_P0029VO> searchList2(Map<String, Object> searchMap) throws DataAccessException {
 		List<HM_P0029VO> list =  p0029DAO.searchList2(searchMap); 
 		return list;
 	}
-	
-
 	@Override
-	public void saveData(Map<String, String[]> dataMap)  throws DataAccessException  {
-		String[] status = dataMap.get("STATUS");
-		int length = status.length; 
-		int i = 0;
-		
-		for(String str : status) {
-			Map<String, String> row = getRow(dataMap, length, i); 
-			if("I".equals(str)) { 
-				p0029DAO.insertData(row);
-			}else if("U".equals(str)) { 
-				p0029DAO.updateData(row);
-			}else if("D".equals(str)) { 
-				p0029DAO.deleteData(row);
-			}
-			i++;
-		}
+	public List<HM_P0029VO> searchList_site(Map<String, Object> searchMap) throws DataAccessException {
+		List<HM_P0029VO> list = p0029DAO.searchList_site(searchMap);
+		return list;
 	}
 	@Override
-	public void saveFile(Map<String,Object> dataMap)  throws DataAccessException  {
-		p0029DAO.saveFile(dataMap);
+	public List<HM_P0029VO> searchList_TN(Map<String, Object> searchMap) throws DataAccessException {
+		List<HM_P0029VO> list =  p0029DAO.searchList_TN(searchMap); 
+		return list;
 	}
-
-	
-	private Map<String, String> getRow(Map<String, String[]> dataMap, int length, int index) {
-		Map<String, String> row = new HashMap<String, String>();
-		for(String name : dataMap.keySet()) {
-			String[] data = dataMap.get(name);
-			if(length == data.length) {
-				row.put(name, data[index]);
-			}
-		}		
-		return row;
-	}	
-	
-	
+	@Override
+	public List<HM_P0029VO> searchList_BN(Map<String, Object> searchMap) throws DataAccessException {
+		List<HM_P0029VO> list =  p0029DAO.searchList_BN(searchMap); 
+		return list;
+	}
+	@Override
+	public List<HM_P0029VO> searchList_LI(Map<String, Object> searchMap) throws DataAccessException {
+		List<HM_P0029VO> list =  p0029DAO.searchList_LI(searchMap); 
+		return list;
+	}
+	@Override
+	public List<HM_P0029VO> searchList_LA(Map<String, Object> searchMap) throws DataAccessException {
+		List<HM_P0029VO> list =  p0029DAO.searchList_LA(searchMap); 
+		return list;
+	}
 }

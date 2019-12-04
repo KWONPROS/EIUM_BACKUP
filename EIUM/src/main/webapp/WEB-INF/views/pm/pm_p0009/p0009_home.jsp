@@ -167,7 +167,7 @@ var graphColors = (function() {
 	function mySheet_OnSearchEnd(code, msg) {
 
 		var subPieData=[],genPieData=[];
-		var barNames=[],barBasic_SALARY=[],barPosition_SALARY=[],barBonus_SALARY=[],barTotal_SALARY=[]
+		var barNames=[],barBasic_SALARY=[],barPosition_SALARY=[],barBonus_SALARY=[],barTotal_SALARY=[];
 		
 		var subrow = mySheet.FindSubSumRow().split("|");
 		var colorSelect=0;
@@ -194,8 +194,7 @@ var graphColors = (function() {
 				});	  				
 			}
 		} 
-		 
-		 
+				
 		// 막대
 			Highcharts.chart('payByType', {
 			    title: {

@@ -144,13 +144,13 @@ var data = {Data:[
 	{menuCode:"M017",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0033/searchInit.do", TITLE:"인사고과/상벌현황"},
 	</c:if>
 	<c:if test="${menu_code eq 'M018'}">
-	{menuCode:"M018",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"사원입퇴사현황"},
+	{menuCode:"M018",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0036/searchInit.do", TITLE:"사원입퇴사현황"},
 	</c:if>
 	<c:if test="${menu_code eq 'M019'}">
 	{menuCode:"M019",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0035/searchInit.do", TITLE:"책정임금현황"},
 	</c:if>
 	<c:if test="${menu_code eq 'M020'}">
-	{menuCode:"M020",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"근속년수현황"},
+	{menuCode:"M020",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0039/searchInit.do", TITLE:"근속년수현황"},
 	</c:if>
 	<c:if test="${menu_code eq 'M021'}">
 	{menuCode:"M021",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0040/searchInit.do", TITLE:"교육현황"},

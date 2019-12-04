@@ -24,7 +24,8 @@
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script type="text/javascript" src="${contextPath}/resources/js/jquery.mtz.monthpicker.js"></script>
 <script language="javascript">
-
+var data;
+var standardDate;
 var graphColors = (function() {
 	var colors = [];
 	colors[0]="#1ABC9C";
@@ -41,7 +42,7 @@ var graphColors = (function() {
 		var colWidth = (function(){
 			var width = $("#mySheet").width();
 
-			return (width/6);
+			return (width/7);
 		}());
 		//컬러 fnction
 		$("#mySheet3").width($("#mySheet").width()-$("#mySheet2").width()-60);
@@ -61,12 +62,14 @@ var graphColors = (function() {
 		initSheet.Cols = [		
 			{Header:"상태",Type:"Status",SaveName:"STATUS" ,Hidden:1},
 	        {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",Hidden:1},	
-	        {Header:"비교연월",Type:"Text",SaveName:"department_CODE",MinWidth:colWidth,KeyField:1,Edit:0,Align:"Center"},	
-	        {Header:"인원",Type:"Text",SaveName:"department_NAME",MinWidth:0.5*colWidth,KeyField:1,Edit:0,Align:"Center"},	
-	        {Header:"기본급",Type:"AutoSum",SaveName:"basic_SALARY",MinWidth:colWidth,KeyField:1,Edit:0,Align:"Center"},	
-	        {Header:"직책수당",Type:"AutoSum",SaveName:"position_SALARY",MinWidth:colWidth,KeyField:1,Edit:0,Align:"Right"},	
-			{Header:"상여금",Type:"AutoSum",SaveName:"bonus_SALARY",MinWidth:colWidth,Edit:0,Align:"Right"},			
-			{Header:"지급합계",Type:"AutoSum" ,CalcLogic:' (|4| + |5|+ |6|) ', SaveName:"total_SALARY",MinWidth:1.5*colWidth,Edit:0,Align:"Right"}
+	        {Header:"비교연월",Type:"Text",SaveName:"payment_DATE",MinWidth:colWidth,KeyField:1,Edit:0,Align:"Center"},	
+	        {Header:"인원",Type:"Text",SaveName:"employee_COUNT",MinWidth:0.5*colWidth,KeyField:1,Edit:0,Align:"Center"},	
+	        {Header:"기본급",Type:"AutoSum",EmptyToReplaceChar:'0',SaveName:"basic_SALARY",MinWidth:colWidth,KeyField:1,Edit:0,Align:"Right"},	
+	        {Header:"직책수당",Type:"AutoSum",EmptyToReplaceChar:'0',SaveName:"position_SALARY",MinWidth:colWidth,KeyField:1,Edit:0,Align:"Right"},	
+			{Header:"상여금",Type:"AutoSum",EmptyToReplaceChar:'0',SaveName:"bonus_SALARY",MinWidth:colWidth,Edit:0,Align:"Right"},			
+			{Header:"식대",Type:"AutoSum",EmptyToReplaceChar:'0',SaveName:"food_SALARY",MinWidth:colWidth,Edit:0,Align:"Right"},			
+			{Header:"지급합계",Type:"AutoSum" ,EmptyToReplaceChar:'0',CalcLogic:' (|4| + |5|+ |6|) ', SaveName:"total_SALARY",MinWidth:1.5*colWidth,Edit:0,Align:"Right"},
+			{Header:"지급코드",Type:"text" , SaveName:"payment_CODE",Edit:0,Hidden:1}
 			
 		];   
 		IBS_InitSheet( mySheet , initSheet);
@@ -84,14 +87,27 @@ var graphColors = (function() {
 	        {Header:"사원코드",Type:"Text",SaveName:"employee_CODE",MinWidth:100,Edit:0,Align:"Center"},	
 	        {Header:"사원명",Type:"Text",SaveName:"employee_NAME",MinWidth:130,Edit:0,Align:"Center"},	
 	        {Header:"부서명",Type:"Text",SaveName:"department_NAME",MinWidth:130,Edit:0,Align:"Center"},	
-			{Header:"부서코드",Type:"Text",SaveName:"department_CODE",Edit:0,Hidden:1}			
-					
+			{Header:"부서코드",Type:"Text",SaveName:"department_CODE",Edit:0,Hidden:1}	,	
+			
+			{Header:"기본급",Type:"Text",SaveName:"basic_SALARY",Edit:0,Hidden:1}		,	
+			{Header:"직책수당",Type:"Text",SaveName:"position_SALARY",Edit:0,Hidden:1}	,		
+			{Header:"상여금",Type:"Text",SaveName:"bonus_SALARY",Edit:0,Hidden:1}		,	
+			{Header:"식대",Type:"Text",SaveName:"food_SALARY",Edit:0,Hidden:1}		,	
+			
+			{Header:"기본급연합계",Type:"Text",SaveName:"total_basic_SALARY",Edit:0,Hidden:1}		,	
+			{Header:"직책수당연합계",Type:"Text",SaveName:"total_position_SALARY",Edit:0,Hidden:1}	,		
+			{Header:"상여금연합계",Type:"Text",SaveName:"total_bonus_SALARY",Edit:0,Hidden:1}	,			
+			{Header:"식대연합계",Type:"Text",SaveName:"total_food_SALARY",Edit:0,Hidden:1},				
+			{Header:"전체합",Type:"Text",CalcLogic:' (|6| + |7|+ |8|+ |9|) ',SaveName:"total_sum",Edit:0,Hidden:1}
+
 		];   
 		IBS_InitSheet( mySheet2 , initSheet2);
   
+		
 		mySheet2.SetSheetHeight(200);
 		
-		//아이비시트2
+		
+		//아이비시트3
 		mySheet3.RemoveAll();
 		var initSheet3 = {};
 		initSheet3.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0,SumPosition:1};
@@ -99,10 +115,10 @@ var graphColors = (function() {
 		initSheet3.Cols = [		
 			{Header:"상태",Type:"Status",SaveName:"STATUS" ,Hidden:1},
 	        {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",Hidden:1},	
-	        {Header:"지급구분",Type:"Text",SaveName:"department_CODE",MinWidth:colWidth3,KeyField:1,Edit:0,Align:"Center"},	
-	        {Header:"해당 월",Type:"AutoSum",SaveName:"department_NAME",MinWidth:colWidth3,KeyField:1,Edit:0,Align:"Center"},	
-	        {Header:"평균(1년)",Type:"AutoSum",SaveName:"basic_SALARY",MinWidth:colWidth3,KeyField:1,Edit:0,Align:"Center"},	
-	        {Header:"합계(1년)",Type:"AutoSum",SaveName:"position_SALARY",MinWidth:colWidth3,KeyField:1,Edit:0,Align:"Right"},	
+	        {Header:"지급구분",Type:"Text",SaveName:"payment_RECEIPT_ITEM",MinWidth:colWidth3,KeyField:1,Edit:0,Align:"Center"},	
+	        {Header:"해당 월",Type:"AutoSum",EmptyToReplaceChar:'0',SaveName:"this_Month",MinWidth:colWidth3,KeyField:1,Edit:0,Align:"Right"},	
+	        {Header:"평균(1년)",Type:"AutoSum",PointCount:0,CalcLogic:' (|5|/12) ',SaveName:"average_Year",MinWidth:colWidth3,KeyField:1,Edit:0,Align:"Right"},	
+	        {Header:"합계(1년)",Type:"AutoSum",EmptyToReplaceChar:'0',SaveName:"total_Year",MinWidth:colWidth3,KeyField:1,Edit:0,Align:"Right"},	
 
 		];   
 		IBS_InitSheet( mySheet3 , initSheet3);
@@ -110,11 +126,7 @@ var graphColors = (function() {
 		mySheet3.SetSheetHeight(200);
 
 
-		
-		
-		  
-		
-		
+	
 		
 		(function selectSite() {
 			
@@ -146,7 +158,7 @@ var graphColors = (function() {
 	    };
 	     
 	    /* MonthPicker Set */
-	    $('input[name=monthpicker]').monthpicker(options);
+	    $('input[class=monthpicker]').monthpicker(options);
 	     
 	    /* 버튼 클릭시 MonthPicker Show */
 	    $('img[name=btn_monthpicker]').on('click', function () {
@@ -163,7 +175,6 @@ var graphColors = (function() {
 	    	}
 	    	});
 
-	    mySheet.DoSearch("${contextPath}/pm/p0009/searchList.do");	    
 	}//LoadPage
 
 	
@@ -202,9 +213,7 @@ var graphColors = (function() {
 		switch (sAction) {
 		case "search": //조회
 			var param = FormQueryStringEnc(document.frm);
-			console.log(param);
-		
-			mySheet.DoSearch("${contextPath}/pm/p0009/searchList.do",param);
+			mySheet.DoSearch("${contextPath}/pm/p0010/searchList.do",param);
 			break;
 
 		case "reload": //초기화		
@@ -214,173 +223,273 @@ var graphColors = (function() {
 		}
 	}
 
+	function mySheet_OnClick(Row, Col) {
+		var param = FormQueryStringEnc(document.frm);
+		mySheet2.DoSearch("${contextPath}/pm/p0010/searchList2.do",param+"&payment_CODE="+mySheet.GetCellValue(Row,9)+"&payment_DATE="+mySheet.GetCellValue(Row,2));
+		standardDate= mySheet.GetCellValue(Row,2);
+	}
+	
+	function mySheet2_OnClick(Row, Col) {
+		
+		
+		data= {Data:[
+				{payment_RECEIPT_ITEM:"기본급",this_Month:mySheet2.GetCellValue(Row,6),total_Year:mySheet2.GetCellValue(Row,10)},
+				{payment_RECEIPT_ITEM:"직책수당",this_Month:mySheet2.GetCellValue(Row,7),total_Year:mySheet2.GetCellValue(Row,11)},
+				{payment_RECEIPT_ITEM:"상여",this_Month:mySheet2.GetCellValue(Row,8),total_Year:mySheet2.GetCellValue(Row,12)},
+				{payment_RECEIPT_ITEM:"식대",this_Month:mySheet2.GetCellValue(Row,9),total_Year:mySheet2.GetCellValue(Row,13)}
+				]};
+ 		mySheet3.LoadSearchData(data);
+ 		
+ 			
+ 		$.ajax({
+            url : "${contextPath}/pm/p0010/searchList3.do",
+            type : "get",
+            data : {"employee_CODE":mySheet2.GetCellValue(Row,2), "payment_DATE":standardDate},
+            dataType: 'json',
+            success : function (graph3result) {
+            	var barNames=[],barBasic_SALARY=[],barPosition_SALARY=[],barBonus_SALARY=[],barTotal_SALARY=[];	
+            	for(var i=0;i<graph3result['Data'].length;i++){
+            		barNames.push(graph3result['Data'][i].payment_DATE);
+            		barBasic_SALARY.push(parseInt(graph3result['Data'][i].basic_SALARY));
+            		barPosition_SALARY.push(parseInt(graph3result['Data'][i].position_SALARY));
+            		barBonus_SALARY.push(parseInt(graph3result['Data'][i].bonus_SALARY));
+            		barTotal_SALARY.push(parseInt(graph3result['Data'][i].total_SALARY));	
+            	}
+            	makeGraph3(barNames,barBasic_SALARY,barPosition_SALARY,barBonus_SALARY,barTotal_SALARY);	
+            },
+            error : function (graph3result) {
+            }      
+        });
+			
+	}
+	function makeGraph3(barNames,barBasic_SALARY,barPosition_SALARY,barBonus_SALARY,barTotal_SALARY){
+		// 막대		
+		Highcharts.chart('graph3', {
+		    title: {
+		    	text : '사원별 지급액 추이',
+				verticalAlign : 'bottom',
+				align: 'center',
+				x: 30,
+				style : {
+					color : '#111820',
+					fontFamily : 'san-serif',
+					fontSize : '18px',
+					fontWeight: 'bold'
+
+				}
+		    },
+		    legend: {
+			    align: 'left',
+			    layout: 'vertical',
+			    verticalAlign: 'bottom',
+			    x: 0,
+			    y: -50
+			},
+		    xAxis: {
+		        categories: barNames,
+		        title: {
+		            text: '비교연월'
+		        }
+			},
+			  
+		    yAxis: [{ // Primary yAxis
+		        labels: {
+		        	format: '{value:,.0f}'
+		        },
+		        title: {
+		            text: '금액',
+		        }
+		    }],
+		    
+		
+		    series: [{
+		        type: 'column',
+		        color: graphColors[0],
+		        name: '기본급',
+		        data: barBasic_SALARY
+		    }, {
+		        type: 'column', 
+		        color: graphColors[1],
+		        name: '직책수당',
+		        data: barPosition_SALARY
+		        
+		    }, {
+		        type: 'column', 
+		        color: graphColors[2],
+		        name: '상여',
+		        data: barBonus_SALARY
+		        
+		    }, {
+		        type: 'spline', 
+		        color: '#212121',
+		        name: '합계',
+		        data: barTotal_SALARY,
+		        marker: {
+		            lineWidth: 2,
+		            lineColor: '#212121'
+		        }
+		    }]
+		});
+		}
 
 	// 저장완료 후 처리할 작업
+
 	function mySheet_OnSearchEnd(code, msg) {
 
-		var subPieData=[],genPieData=[];
-		var barNames=[],barBasic_SALARY=[],barPosition_SALARY=[],barBonus_SALARY=[],barTotal_SALARY=[]
-		
-		var subrow = mySheet.FindSubSumRow().split("|");
-		var colorSelect=0;
-		 for(var i = 1; i<=mySheet.GetDataLastRow();i++){
-			 if(subrow.includes(i.toString())){		
-				subPieData.push({		//파이소계행
-					name: mySheet.GetCellValue(i-1,3),
-					y: mySheet.GetCellValue(i,9),
-					color: graphColors[colorSelect]
-				})
-					colorSelect++;
-			}else{
-				//막대그래프
-				barNames.push(mySheet.GetCellValue(i,5));
-				barBasic_SALARY.push(mySheet.GetCellValue(i,6));
-				barPosition_SALARY.push(mySheet.GetCellValue(i,7));
-				barBonus_SALARY.push(mySheet.GetCellValue(i,8));
-				barTotal_SALARY.push(mySheet.GetCellValue(i,9));
-				
-				genPieData.push({			//파이일반행
-					name: mySheet.GetCellValue(i,5),
-					y: mySheet.GetCellValue(i,9),
-					color: graphColors[colorSelect]
-				});	  				
-			}
-		} 
-		 
-		 
-		// 막대
-			Highcharts.chart('payByType', {
-			    title: {
-			    	text : '지급구분 사원별 지급액',
-					verticalAlign : 'bottom',
-					align: 'center',
-					x: 30,
-					style : {
-						color : '#111820',
-						fontFamily : 'san-serif',
-						fontSize : '18px',
-						fontWeight: 'bold'
+		var graph1_categories = [], data1 = [], data2 = [], data3 = [], data4 = [];
+		for (var i = 1; i <= mySheet.GetDataLastRow(); i++) {
+			graph1_categories.push(mySheet.GetCellValue(i, 2));
 
-					}
-			    },
-			    legend: {
-				    align: 'left',
-				    layout: 'vertical',
-				    verticalAlign: 'bottom',
-				    x: 0,
-				    y: -50
-				},
-			    xAxis: {
-			        categories: barNames
-				},
-				  
-			    yAxis: [{ // Primary yAxis
-			        labels: {
-			        	format: '{value:,.0f}'
-			        },
-			        title: {
-			            text: '금액',
-			        }
-			    }],
-			    
-			
-			    series: [{
-			        type: 'column',
-			        color: graphColors[0],
-			        name: '기본급',
-			        data: barBasic_SALARY
-			    }, {
-			        type: 'column', 
-			        color: graphColors[1],
-			        name: '직책수당',
-			        data: barPosition_SALARY
-			        
-			    }, {
-			        type: 'column', color: graphColors[2],
-			        name: '상여',
-			        data: barBonus_SALARY
-			        
-			    }, {
-			        type: 'spline', color: '#212121',
-			        name: '합계',
-			        data: barTotal_SALARY,
-			        marker: {
-			            lineWidth: 2,
-			            lineColor: '#212121'
-			         
-			        }
-			    }]
-			});
-				 
-		 Highcharts.chart('payByDep', {
-			
-			    chart: {
-			        type: 'pie'
-			    },
-			    title: {
-			        text: '부서별 지급액',
-			        verticalAlign : 'bottom',
-					align: 'center',
-					style : {
-						color : '#111820',
-						fontFamily : 'san-serif',
-						fontSize : '18px',
-						fontWeight: 'bold'
-					}
-			    },
-			    legend: {
-				    align: 'left',
-				    layout: 'vertical',
-				    verticalAlign: 'bottom',
-				    x: -20,
-				    y: -40,  
-				    floating:true
-				},
-			    plotOptions: {
-			    	pie: {
-			            allowPointSelect: true,
-			            cursor: 'pointer',
-			            dataLabels: {
-			                enabled: false
-			            }    
-			        }
-			    },
-			    tooltip: {
-			        valueSuffix: '원'
-			    },
-			    series: [{
-			        name: '금액',
-			        data: subPieData,
-			        size: '60%',
-			        id: 'subPieData',
-			        showInLegend: true
-			    }, {
-			        name: '금액',
-			        data: genPieData,
-			        size: '80%',
-			        innerSize: '60%',
-			        showInLegend: false,
-			        id: 'genPieData'
-			    }],
-			  
-			});	
-		
+			for (var j = mySheet.SaveNameCol("basic_SALARY"); j <= mySheet.SaveNameCol("food_SALARY"); j++) {
+				if (j == mySheet.SaveNameCol("basic_SALARY")) {
+					data1.push(mySheet.GetCellValue(i, j));
+				} else if (j == mySheet.SaveNameCol("position_SALARY")) {
+					data2.push(mySheet.GetCellValue(i, j));
+				} else if (j == mySheet.SaveNameCol("bonus_SALARY")) {
+					data3.push(mySheet.GetCellValue(i, j));
+				} else {
+					data4.push(mySheet.GetCellValue(i, j));
+				}
+			}
+		}
+
+		Highcharts.chart('graph1', {
+			chart : {
+				type : 'bar'
+			},
+			title : {
+				text : '비교연원별 지급액 추이',
+				verticalAlign : 'bottom',
+				align : 'center',
+				style : {
+					color : '#111820',
+					fontFamily : 'san-serif',
+					fontSize : '18px',
+					fontWeight : 'bold'
+				}
+			},
+			xAxis : {
+				categories : graph1_categories
+			},
+			legend : {
+				align : 'right',
+				layout : 'vertical',
+				verticalAlign : 'top'
+			},
+			yAxis : {
+				visible : false
+			},
+			plotOptions : {
+				series : {
+					stacking : 'normal'
+				}
+			},
+			series : [ {
+				name : "기본급",
+				data : data1,
+				color : graphColors[3]
+			}, {
+				name : "직책수당",
+				data : data2,
+				color : graphColors[0]
+
+			}, {
+				name : "상여",
+				data : data3,
+				color : graphColors[2]
+			}, {
+				name : "식대",
+				data : data4,
+				color : graphColors[1]
+			} ]
+		});
+
 	}
 	
 	
-	 function payPopup() {
-		 var monthpicker = $('input[name=monthpicker]').val();
-		 if(monthpicker==""){
-			 alert("귀속년월을 지정해주세요.");
-			 return;
-		 }
-		 var url = '${contextPath}/pm/p0001/searchPaymentdate.do?monthpicker='+monthpicker;
-
-		 window.open(url, "a", "width=342,height=520,resizable = no, scrollbars = no");
-	  
-	  }
-	 function setPayment(){}
+	// 저장완료 후 처리할 작업
+	function mySheet2_OnSearchEnd(code, msg) {
 	
+		var arr=[];var colorSelect=0;
+		for (var i = 1; i <= mySheet2.GetDataLastRow(); i++) {
+			arr.push({
+				name: mySheet2.GetCellValue(i,4),
+				y: parseInt(mySheet2.GetCellValue(i,14)),
+				color: graphColors[colorSelect]
+			});
+			colorSelect++;
+		}  
+
+			var resultArr = [];
+
+			for(var i = 0; i < arr.length; i++){
+			  var idx = getKeyIndex(resultArr, arr[i]);
+			  
+			  if(idx > -1){
+				resultArr[idx].y += arr[i].y;
+			  }else{
+			    resultArr.push(arr[i]);
+			  }
+			}
+
+			function getKeyIndex(arr, obj){
+			  for(var i = 0; i < arr.length; i++){
+				if(arr[i].name === obj.name){
+					return i;
+				}
+			  }
+			  
+			  return -1;
+			}
+			
+		Highcharts.chart('graph2', {
+
+			chart : {
+				type : 'pie'
+			},
+			title : {
+				text : '부서별 지급액',
+				verticalAlign : 'bottom',
+				align : 'center',
+				style : {
+					color : '#111820',
+					fontFamily : 'san-serif',
+					fontSize : '18px',
+					fontWeight : 'bold'
+				}
+			},
+			legend : {
+				align : 'right',
+				layout : 'vertical',
+				verticalAlign : 'bottom',
+				x : -20,
+				y : -40,
+				floating : true
+			},
+			plotOptions : {
+				pie : {
+					allowPointSelect : true,
+					cursor : 'pointer',
+					dataLabels : {
+						enabled : false
+					}
+				}
+			},
+			tooltip : {
+				valueSuffix : '원'
+			},
+			 series: [{
+				 	name: '금액',
+				 	innerSize: '40%',
+				 	 size: '100%',    
+				 	 showInLegend: true,
+			        data: resultArr
+			    }]
+		}); 
+
+	}
+	
+
 </script>
 <style type="text/css">
 .title {
@@ -483,12 +592,11 @@ padding: 30px 0 0 30px;
 	position:relative;
 	top:-110px;
 	left:50px;
-	width: 350px;
+	width: 400px;
 	height: 260px;
 	z-index:10;
 }
 .graph2 {
-background:gray;
 	position:relative;
 	top:-370px;
 	left:450px;
@@ -501,7 +609,7 @@ position:relative;
 	top:-630px;
 	left:900px;
 	width: 750px;
-	height: 310px;
+	height: 260px;
 }
 
 </style>
@@ -523,10 +631,10 @@ position:relative;
 
 	<div id="searchBar">
 		<form name="frm">
-			<span class="searchBarTitle">조회기간</span> <input id="searchDate1" name="monthpicker"
+			<span class="searchBarTitle">조회기간</span> <input id="searchDate1" class="monthpicker"
 				type="text" style="width: 100px;"> <img name="btn_monthpicker"
 				src="${contextPath}/resources/image/icons/icon_calendar.png">
-				~ <input id="searchDate2" name="monthpicker"type="text" style="width: 100px;"> 
+				~ <input id="searchDate2" class="monthpicker"type="text" style="width: 100px;"> 
 				<img name="btn_monthpicker" src="${contextPath}/resources/image/icons/icon_calendar.png">
 			
 			 <span class="searchBarTitle">사업장구분</span> <select id="searchSite"
@@ -544,9 +652,9 @@ position:relative;
 	<div id="mySheet2"><script>createIBSheet("mySheet2", "100%", "100%");</script></div>
 	<div id="mySheet3"><script>createIBSheet("mySheet3", "100%", "100%");</script></div>
     
-    <div id='payByDep' class="graph1"></div>
-    <div id='' class="graph2"></div>
-    <div id='payByType' class='graph3'></div>
+    <div id='graph1' class="graph1"></div>
+    <div id='graph2' class="graph2"></div>
+    <div id='graph3' class='graph3'></div>
 </body>
 
 </html>

@@ -13,7 +13,7 @@
 
 	<select id="searchList" resultMap="p0005Result">
       <![CDATA[
-         select AUTHORITY_CODE, AUTHORITY_NAME from ACCESS_AUTHORITY
+         select AUTHORITY_CODE, AUTHORITY_NAME from ACCESS_AUTHORITY order by AUTHORITY_CODE
       ]]>
 	</select>
 	

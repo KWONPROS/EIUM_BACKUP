@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.myspring.eium.hm.hm_p0029.dao.HM_P0029DAO;
 import com.myspring.eium.hm.hm_p0029.service.HM_P0029Service;
 import com.myspring.eium.hm.hm_p0029.vo.HM_P0029VO;
+import com.myspring.eium.hm.hm_p0033.vo.HM_P0033VO;
 
 
 @Controller
@@ -38,7 +39,7 @@ public class HM_P0029ControllerImpl implements HM_P0029Controller {
 	HM_P0029DAO p0029dao;
 
 	
-	
+	//탭
 	@Override
 	@RequestMapping(value = "/hm/p0029/searchInit.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -48,96 +49,80 @@ public class HM_P0029ControllerImpl implements HM_P0029Controller {
 		return mav;
 	} 
 	
+	//교육 탭
 	@Override
-	@RequestMapping(value = "/hm/p0033/searchInit_TN.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/hm/p0029/searchInit_TN.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchInit_TN(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("hm/hm_p0033/p0033_TN");
+		ModelAndView mav = new ModelAndView("hm/hm_p0029/p0029_TN");
 	
 		return mav;
 	} 
 	
+	//출장 탭
 	@Override
-	@RequestMapping(value = "/hm/p0033/searchInit_BN.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/hm/p0029/searchInit_BN.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchInit_BN(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("hm/hm_p0033/p0033_BN");
+		ModelAndView mav = new ModelAndView("hm/hm_p0029/p0029_BN");
 	
 		return mav;
 	} 
 	
+	//자격/면허 탭
 	@Override
-	@RequestMapping(value = "/hm/p0033/searchInit_LI.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/hm/p0029/searchInit_LI.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchInit_LI(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("hm/hm_p0033/p0033_LI");
+		ModelAndView mav = new ModelAndView("hm/hm_p0029/p0029_LI");
 	
 		return mav;
 	} 
 	
+	//어학시험 탭
 	@Override
-	@RequestMapping(value = "/hm/p0033/searchInit_LA.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/hm/p0029/searchInit_LA.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchInit_LA(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("hm/hm_p0033/p0033_LA");
+		ModelAndView mav = new ModelAndView("hm/hm_p0029/p0029_LA");
 	
 		return mav;
 	} 
 	//4가지 모델엔 뷰
-	@Override
-	@RequestMapping(value = "/hm/p0029/searchList.do", method = { RequestMethod.GET, RequestMethod.POST })
-	@ResponseBody
-	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-		Map<String, Object> searchMap = new HashMap<String, Object>();
-		Map<String, Object> resultMap = new HashMap<String, Object>(); 
-		searchMap.put("command", request.getParameter("command"));
-		searchMap.put("condition", request.getParameter("condition"));
-		List<HM_P0029VO> data = p0029Service.searchList(searchMap);
-        resultMap.put("Data", data);
-    	System.out.println("resultMap::::"+resultMap);
-    	
-        return resultMap;
-	}
-		
-	@Override
-	@RequestMapping(value = "/hm/p0029/saveData.do", method = { RequestMethod.GET, RequestMethod.POST })
-	@ResponseBody
-	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-		Map<String, String[]> dataMap = new HashMap<String, String[]>(); 
-		Map<String, Object> resultMap = new HashMap<String, Object>(); 
-		
 	
-		Enumeration enu = request.getParameterNames();
-		while (enu.hasMoreElements()) {
-			String name = (String) enu.nextElement();
-			String[] values = request.getParameterValues(name);
-			dataMap.put(name, values);
-		}
-		
-		Map<String, String> result = new HashMap<String, String>();
-		try {
-			p0029Service.saveData(dataMap);	
-			result.put("Code","0");
-			result.put("Message","저장성공");
-		}catch(Exception e) {
-			result.put("Code","-1");
-			result.put("Message","저장실패");
-			e.printStackTrace();
-		}
-		
-		resultMap.put("Result", result);         
-        return resultMap;
-	}
-	
+	//사업장 조회 모델엔뷰
 	@Override
-	@RequestMapping(value = "/hm/p0029/findAddress.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView findAddress(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView mav = new ModelAndView("/hm/hm_p0029/p0029_home_p01");
+	@RequestMapping(value = "/hm/p0029/search_Site.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView search_Site(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("hm/hm_p0029/p0029_SearchSite");
 		return mav;
-
 	}
+	
+	//사업장 팝업 리스트 조회
+	@Override
+	@RequestMapping(value = "/hm/p0029/searchList_site.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map searchList_site(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>(); 
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+
+		List<HM_P0029VO> data = p0029Service.searchList_site(searchMap);
+		
+        resultMap.put("Data", data);
+        return resultMap;
+	}
+	//부서 팝업
+	@Override
+	@RequestMapping(value = "/hm/p0029/search_Dept.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView search_Dept(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("hm/hm_p0029/p0029_SearchDept");
+		return mav;
+	}
+	
+	//table로 팝업창 조회
 	@Override
 	@RequestMapping(value = "/hm/p0029/findPopup.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView findPopup(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -146,6 +131,7 @@ public class HM_P0029ControllerImpl implements HM_P0029Controller {
 		mav.addObject("index", request.getParameter("index"));
 		return mav;
 	}
+	//팝업 조회 맵 리스트
 	@Override
 	@RequestMapping(value = "/hm/p0029/searchList2.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
@@ -162,36 +148,66 @@ public class HM_P0029ControllerImpl implements HM_P0029Controller {
 	}
 	
 	@Override
-    @RequestMapping(value="/hm/p0029/saveFile.do", method = { RequestMethod.GET, RequestMethod.POST })
-    public void saveFile(HM_P0029VO VO, ModelAndView mav, HttpServletRequest request, HttpServletResponse response) throws Exception{
-		Map<String, Object> dataMap = new HashMap<String, Object>(); 
-		
-        dataMap.put("emp_CODE",VO.getEmp_CODE());
-        dataMap.put("picture",VO.getPicture().getBytes());
-        
-		try {
-			p0029Service.saveFile(dataMap);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	
-    }
-	
-	@Override
-	@RequestMapping(value = "/hm/p0029/getByteImage.do")
+	@RequestMapping(value = "/hm/p0029/searchList_TN.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
-	public ResponseEntity<byte[]> getByteImage(HttpServletRequest request, HttpServletResponse response)throws Exception {
-		
+	public Map searchList_TN(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
 		Map<String, Object> searchMap = new HashMap<String, Object>();
-		searchMap.put("emp_CODE",request.getParameter("empCode"));
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+		searchMap.put("command", request.getParameter("command"));
+		searchMap.put("condition", request.getParameter("condition"));
+		List<HM_P0029VO> data = p0029Service.searchList_TN(searchMap);
+        resultMap.put("Data", data);
+    	System.out.println("resultMap::::"+resultMap);
+    	
+        return resultMap;
+	}
 		
-		Map<String, Object> map = p0029dao.getByteImage(searchMap);
-		
-		byte[] imageContent = (byte[]) map.get("picture");
-
-		final HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.IMAGE_PNG);
-		return new ResponseEntity<byte[]>(imageContent, headers, HttpStatus.OK);
+	@Override
+	@RequestMapping(value = "/hm/p0029/searchList_BN.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map searchList_BN(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+		searchMap.put("command", request.getParameter("command"));
+		searchMap.put("condition", request.getParameter("condition"));
+		List<HM_P0029VO> data = p0029Service.searchList_BN(searchMap);
+        resultMap.put("Data", data);
+    	System.out.println("resultMap::::"+resultMap);
+    	
+        return resultMap;
 	}
 	
+	@Override
+	@RequestMapping(value = "/hm/p0029/searchList_LI.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map searchList_LI(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+		searchMap.put("command", request.getParameter("command"));
+		searchMap.put("condition", request.getParameter("condition"));
+		List<HM_P0029VO> data = p0029Service.searchList_LI(searchMap);
+        resultMap.put("Data", data);
+    	System.out.println("resultMap::::"+resultMap);
+    	
+        return resultMap;
+	}
+	
+	@Override
+	@RequestMapping(value = "/hm/p0029/searchList_LA.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map searchList_LA(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+		searchMap.put("command", request.getParameter("command"));
+		searchMap.put("condition", request.getParameter("condition"));
+		List<HM_P0029VO> data = p0029Service.searchList_LA(searchMap);
+        resultMap.put("Data", data);
+    	System.out.println("resultMap::::"+resultMap);
+    	
+        return resultMap;
+	}
 }

@@ -79,7 +79,7 @@ function PageLoad(){
 		
 	<div class="title">
 		<header>
-			<i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 등록정보관리 :
+			<i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 인사관리 :
 			교육현황
 		</header>
 	</div>

@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.myspring.eium.hm.hm_p0018.vo.HM_P0018VO;
 import com.myspring.eium.hm.hm_p0040.service.HM_P0040Service;
 import com.myspring.eium.hm.hm_p0040.vo.HM_P0040VO;
 

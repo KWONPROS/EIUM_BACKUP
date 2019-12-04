@@ -82,6 +82,14 @@ public class HM_P0004VO {
 	private String bank_NAME_2;
 	private String account_NUMBER_2;
 	private String account_NAME_2;
+	
+	private String employee_CODE;
+	private String contract_START_MONTH;
+	private String contract_END_MONTH;
+	private String contract_YEAR_PAY;
+	private String contract_MONTH_PAY;
+	private String contract_DAY_PAY;
+	private String contract_TIME_PAY;
 	public String getEmp_CODE() {
 		return emp_CODE;
 	}
@@ -466,8 +474,49 @@ public class HM_P0004VO {
 	public void setAccount_NAME_2(String account_NAME_2) {
 		this.account_NAME_2 = account_NAME_2;
 	}
-	
+	public String getContract_START_MONTH() {
+		return contract_START_MONTH;
+	}
+	public void setContract_START_MONTH(String contract_START_MONTH) {
+		this.contract_START_MONTH = contract_START_MONTH;
+	}
+	public String getContract_END_MONTH() {
+		return contract_END_MONTH;
+	}
+	public void setContract_END_MONTH(String contract_END_MONTH) {
+		this.contract_END_MONTH = contract_END_MONTH;
+	}
+	public String getContract_YEAR_PAY() {
+		return contract_YEAR_PAY;
+	}
+	public void setContract_YEAR_PAY(String contract_YEAR_PAY) {
+		this.contract_YEAR_PAY = contract_YEAR_PAY;
+	}
+	public String getContract_MONTH_PAY() {
+		return contract_MONTH_PAY;
+	}
+	public void setContract_MONTH_PAY(String contract_MONTH_PAY) {
+		this.contract_MONTH_PAY = contract_MONTH_PAY;
+	}
+	public String getContract_DAY_PAY() {
+		return contract_DAY_PAY;
+	}
+	public void setContract_DAY_PAY(String contract_DAY_PAY) {
+		this.contract_DAY_PAY = contract_DAY_PAY;
+	}
+	public String getContract_TIME_PAY() {
+		return contract_TIME_PAY;
+	}
+	public void setContract_TIME_PAY(String contract_TIME_PAY) {
+		this.contract_TIME_PAY = contract_TIME_PAY;
+	}
+	public String getEmployee_CODE() {
+		return employee_CODE;
+	}
+	public void setEmployee_CODE(String employee_CODE) {
+		this.employee_CODE = employee_CODE;
+	}
 
 	
-	
+
 }

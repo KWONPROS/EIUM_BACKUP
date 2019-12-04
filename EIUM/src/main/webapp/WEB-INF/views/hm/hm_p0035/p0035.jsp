@@ -12,29 +12,56 @@
 <script src="${contextPath}/resources/ibsheet/ibsheet.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibleaders.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+<link rel="stylesheet"href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css"	type="text/css" />
+<script type="text/javascript" src="${contextPath}/resources/js/jquery.mtz.monthpicker.js"></script>
 <script type="text/javascript">
 	var pageheightoffset = 200; //시트높이 계산용
 
 	//sheet 기본설정
 	function LoadPage() {
+		
+		/* MonthPicker 옵션 */
+	    var options = {
+	        pattern: 'yyyy/mm',  
+	        buttonImage: "${contextPath}/resources/image/icons/icon_calendar.png", 
+	        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']
+	    };
+	     
+	    /* MonthPicker Set */
+	    $('input[class=monthpicker]').monthpicker(options);
+	     
+	    /* 버튼 클릭시 MonthPicker Show */
+	    $('img[name=btn_monthpicker]').on('click', function () {
+	        $(this).prev().monthpicker('show');    	
+	        	
+
+	    });
+	    
+	    $("#searchDate2").change(function() {
+	    	if($("#searchDate1").val()>$("#searchDate2").val()){
+	    		alert("종료일이 시작일 보다 커야합니다.");
+	    		$(this).val("");
+	    		return;
+	    	}
+	    	});
 
 		mySheet.RemoveAll();
 		//아이비시트 초기화
 		var initSheet = {};
 		initSheet.Cfg = { SearchMode : smLazyLoad, ToolTip : 1, MouseHoverMode : 2 };
 		initSheet.HeaderMode = { Sort : 1, ColMove : 1, ColResize : 10, HeaderCheck : 1 };
-		initSheet.Cols = [ { "Header" : "사원코드", "SaveName" : "employee_CODE", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "사원명", "SaveName" : "employee_NAME", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "부서", "SaveName" : "department_NAME", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "직책", "SaveName" : "duty_NAME", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "입사일", "SaveName" : "employee_JOIN_DATE", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "직종", "SaveName" : "job_CLASS_NAME", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "급여형태", "SaveName" : "pay_TYPE_NAME", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "지급일자", "SaveName" : "payment_DATE", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "연봉", "SaveName" : "year", "Type" : "Text", "Width" : 100, "Align" : "Center", "CalcLogic" : "|9|*12" },
-			               { "Header" : "월급", "SaveName" : "payment_RECEIPT_PRICE", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "일급", "SaveName" : "month", "Type" : "Text", "Width" : 100, "Align" : "Center", "CalcLogic" : "|9|*12" },
-			               { "Header" : "시급","SaveName" : "time","Type" : "Text","Width" : 100,"Align" : "Center" }
+		initSheet.Cols = [ { "Header" : "사원코드", "SaveName" : "employee_CODE", "Type" : "Text", "Width" : 100, "Align" : "Center", "UpdateEdit":0 },
+			               { "Header" : "사원명", "SaveName" : "employee_NAME", "Type" : "Text", "Width" : 100, "Align" : "Center", "UpdateEdit":0 },
+			               { "Header" : "부서", "SaveName" : "department_NAME", "Type" : "Text", "Width" : 100, "Align" : "Center", "UpdateEdit":0 },
+			               { "Header" : "직책", "SaveName" : "duty_NAME", "Type" : "Text", "Width" : 100, "Align" : "Center", "UpdateEdit":0 },
+			               { "Header" : "입사일", "SaveName" : "employee_JOIN_DATE", "Type" : "Text", "Width" : 100, "Align" : "Center", "UpdateEdit":0 },
+			               { "Header" : "직종", "SaveName" : "job_CLASS_NAME", "Type" : "Text", "Width" : 100, "Align" : "Center", "UpdateEdit":0 },
+			               { "Header" : "급여형태", "SaveName" : "pay_TYPE_NAME", "Type" : "Text", "Width" : 100, "Align" : "Center", "UpdateEdit":0 },
+			               { "Header" : "계약시작월", "SaveName" : "contract_START_MONTH", "Type" : "Date", "Width" : 100, "Align" : "Center", "Format" : "Ym", "UpdateEdit":0 },
+			               { "Header" : "연봉", "SaveName" : "contract_YEAR_PAY", "Type" : "Text", "Width" : 100, "Align" : "Center", "UpdateEdit":0 },
+			               { "Header" : "월급", "SaveName" : "contract_MONTH_PAY", "Type" : "Text", "Width" : 100, "Align" : "Center", "UpdateEdit":0 },
+			               { "Header" : "일급", "SaveName" : "contract_DAY_PAY", "Type" : "Text", "Width" : 100, "Align" : "Center", "UpdateEdit":0 },
+			               { "Header" : "시급","SaveName" : "contract_TIME_PAY","Type" : "Text","Width" : 100, "Align" : "Center", "UpdateEdit":0 }
 		                 ];
 
 		IBS_InitSheet(mySheet, initSheet);
@@ -51,12 +78,9 @@
 			break;
 		case "reset":
 			mySheet.RemoveAll();
-			$("select#SiteList option[name='1']").remove();
-			$("select#DeptList option[class='1']").remove();
-			$('#SiteList').val(selectSite());
-			$('#Employee_Select').val('');
-			$('#p_text').val('');
-			$('#p_text').attr('placeholder', "내용을 입력해주세요.");
+			$("form").each(function() {  
+	            this.reset();
+	         });  
 			break;
 
 		}
@@ -217,7 +241,7 @@ background-color: #2C3E50;
 		<button type="button" onclick="doAction('search')" class="IBbutton">조회</button>
 		</div>
 
-		<div class="title"> 
+		<div class="title">
         <header> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 인사관리 : 책정임금현황</header>
         </div>
         
@@ -227,12 +251,18 @@ background-color: #2C3E50;
 			<option value="" selected>전체</option>
 		</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 부서 : <select id="DeptList">
 			<option value="" selected>전체</option>
-		</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <select id="Employee_Select">
-		    <option value="" selected>구분</option>
-			<option value="employee_name">사원명</option>
-			<option value="employee_code">사원코드</option>
 		</select>
-		<input type="text" id="p_text" placeholder="내용을 입력해주세요.">
+		<br>
+		<span class="searchBarTitle">계약시작월</span> <input id="searchDate1" class="monthpicker"
+				type="text" style="width: 100px;"> <img name="btn_monthpicker"
+				src="${contextPath}/resources/image/icons/icon_calendar.png">
+				~ <input id="searchDate2" class="monthpicker"type="text" style="width: 100px;"> 
+				<img name="btn_monthpicker" src="${contextPath}/resources/image/icons/icon_calendar.png">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		퇴사자<select id="resigner">
+		<option value='0'selected>0.제외</option>
+		<option value='1'>1.포함</option>
+		</select>
         </div>
 		</div>
 

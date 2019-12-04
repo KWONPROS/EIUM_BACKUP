@@ -64,7 +64,8 @@ FROM HR_APPOINT_HISTORY HAH,
     JOB_DIS JD,
     PAY_TYPE PT,
     PAY_GRADE PG,
-    OUT_REASON ORN
+    OUT_REASON ORN,
+    HR_APPOINT AP
 
 
 WHERE HAH.APPOINT_EMPLOYEE_CODE = E.EMPLOYEE_CODE(+)
@@ -79,7 +80,9 @@ AND EW.JOB_DIS_CODE = JD.JOB_DIS_CODE(+)
 AND EW.PAY_TYPE_CODE = PT.PAY_TYPE_CODE(+)
 AND EW.PAY_GRADE_CODE = PG.PAY_GRADE_CODE(+)
 AND EW.OUT_REASON_CODE = ORN.OUT_REASON_CODE(+)
-    
+AND HAH.appoint_code = AP.appoint_CODE(+)
+AND AP.APPOINT_YN = '마감완료'
+   
 			]]>
 				<choose>
 	<when test="data != '' and date2 !='' and appoint_index !='' and employee !='' and department !='' ">
