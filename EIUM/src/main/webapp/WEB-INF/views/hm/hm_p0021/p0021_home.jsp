@@ -119,8 +119,8 @@ function setPopupValue(){
 			break;
 		case "save": //저장
 
-			
-			mySheet2.DoSave("${contextPath}/hm/p0021/saveData.do");	
+			var param = FormQueryStringEnc(document.frm);
+			mySheet2.DoSave("${contextPath}/hm/p0021/saveData.do",param);	
 
 	
 		

@@ -126,15 +126,15 @@ text-decoration: none;
 }
 </style>
 <meta charset="UTF-8">
-<title>헤더</title>
+<title>헤더</title>  
 </head>
 <body>
 
 	<div class="currentInfo">
 		<span id="headerinfo" class="user">
-		사용자 : ${sessionScope.login.employee_name}</span> <span
-			id="headerinfo" class="company">회사 : ${sessionScope.login.company_name}</span> <span
-			id="headerinfo" class="logindate">접속일시 : <b id="systemClock"></b>
+		<spring:message code="lo_myemployee_name" /> : ${sessionScope.login.employee_name}</span> <span
+			id="headerinfo" class="company"><spring:message code="lo_mycompany" /> : ${sessionScope.login.company_name}</span> <span
+			id="headerinfo" class="logindate"><spring:message code="lo_mytime" /> : <b id="systemClock"></b>
 		</span>
 	</div>
 

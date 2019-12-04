@@ -23,4 +23,8 @@ public interface HM_P0036DAO {
 
 	List<HM_P0036VO> searchList_p05(Map<String, Object> searchMap) throws DataAccessException;
 
+	List<HM_P0036VO> searchList2(Map<String, Object> searchMap) throws DataAccessException;
+
+	List<HM_P0036VO> searchList3(Map<String, Object> searchMap) throws DataAccessException;
+
 }

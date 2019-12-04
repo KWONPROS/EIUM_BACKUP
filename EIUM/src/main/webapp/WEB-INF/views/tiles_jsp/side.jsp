@@ -2,11 +2,11 @@
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
-
 <title>side</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -47,128 +47,128 @@
 
 </style>
 <meta charset="UTF-8">
+<jsp:include page="/WEB-INF/views/locale.jsp" /> 
 <title>사이드 메뉴</title>
-
 <script> //메뉴트리
 var data = {Data:[
-	{menuCode:"m000",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"등록정보관리"},
+	{menuCode:"m000",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:lo_RegistrationInformationManagement},
 	
 	<c:forEach items="${sessionScope.menu_code}" begin="0" end="35" step="1" var="menu_code" varStatus="status">
 	<c:if test="${menu_code eq 'M001'}">
-	{menuCode:"M001",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0001/searchInit.do",TITLE:"회사등록"},
+	{menuCode:"M001",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0001/searchInit.do",TITLE:lo_Companyregistration},
 	</c:if>
 	<c:if test="${menu_code eq 'M002'}">
-	{menuCode:"M002",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0002/searchInit.do", TITLE:"사업장등록"},
+	{menuCode:"M002",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0002/searchInit.do", TITLE:lo_Siteregistration},
 	</c:if>
 	<c:if test="${menu_code eq 'M003'}">
-	{menuCode:"M003",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0003/searchInit.do", TITLE:"부서등록"},
+	{menuCode:"M003",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0003/searchInit.do", TITLE:lo_Departmentregistration},
 	</c:if>
 	<c:if test="${menu_code eq 'M004'}">
-	{menuCode:"M004",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0004/searchInit.do", TITLE:"사원등록"},
+	{menuCode:"M004",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0004/searchInit.do", TITLE:lo_Employeeregistration},
 	</c:if>
 	<c:if test="${menu_code eq 'M005'}">
-	{menuCode:"M005",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0005/searchInit.do", TITLE:"권한관리"},
+	{menuCode:"M005",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0005/searchInit.do", TITLE:lo_Authoritymanagement},
 	</c:if>
 	<c:if test="${menu_code eq 'M006'}">
-	{menuCode:"M006",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0006/searchInit.do", TITLE:"계정별권한설정"},
+	{menuCode:"M006",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"sm/p0006/searchInit.do", TITLE:lo_Setpermissionsbyaccount},
 	</c:if>
 	</c:forEach>
 	
-	{menuCode:"m06",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"기초환경설정"},
+	{menuCode:"m06",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:lo_Environmentsetting},
 	
 	<c:forEach items="${sessionScope.menu_code}" begin="0" end="35" step="1" var="menu_code" varStatus="status">
 	<c:if test="${menu_code eq 'M007'}">
-	{menuCode:"M007",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0001/searchInit.do", TITLE:"호봉테이블등록 "},
+	{menuCode:"M007",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0001/searchInit.do", TITLE:lo_PayrollTableRegistration},
 	</c:if>
 	<c:if test="${menu_code eq 'M008'}">
-	{menuCode:"M008",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0002/searchInit.do", TITLE:"지급일등록"},
+	{menuCode:"M008",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0002/searchInit.do", TITLE:lo_Paymentdateregistration},
 	</c:if>
 	<c:if test="${menu_code eq 'M009'}">
-	{menuCode:"M009",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0003/searchInit.do", TITLE:"인사기초코드등록 "},
+	{menuCode:"M009",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0003/searchInit.do", TITLE:lo_PersonnelBasicCodeRegistration},
 	</c:if>
 	</c:forEach>
 	
-	{menuCode:"m10",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"인사관리"},
+	{menuCode:"m10",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:lo_HRmanagement},
 	
 	<c:forEach items="${sessionScope.menu_code}" begin="0" end="35" step="1" var="menu_code" varStatus="status">
 	<c:if test="${menu_code eq 'M010'}">
-	{menuCode:"M010",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0004/searchInit.do", TITLE:"인사정보등록"},
+	{menuCode:"M010",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0004/searchInit.do", TITLE:lo_PersonnelInformationRegistration},
 	</c:if>
 	<c:if test="${menu_code eq 'M011'}">
-	{menuCode:"M011",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0007/searchInit.do", TITLE:"인사기록카드"},
+	{menuCode:"M011",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0007/searchInit.do", TITLE:lo_PersonnelRecordCard},
 	</c:if>
 	<c:if test="${menu_code eq 'M012'}">
-	{menuCode:"M012",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0018/searchInit.do", TITLE:"교육관리"},
+	{menuCode:"M012",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0018/searchInit.do", TITLE:lo_EducationManagement},
 	</c:if>
 	<c:if test="${menu_code eq 'M013'}">
-	{menuCode:"M013",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0021/searchInit.do", TITLE:"교육평가"},
+	{menuCode:"M013",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0021/searchInit.do", TITLE:lo_EducationalEvaluation},
 	</c:if>
 	<c:if test="${menu_code eq 'M014'}">
-	{menuCode:"M014",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0022/searchInit.do", TITLE:"인사발령"},
+	{menuCode:"M014",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0022/searchInit.do", TITLE:lo_Personnelappointment},
 	</c:if>
 	<c:if test="${menu_code eq 'M015'}">
-	{menuCode:"M015",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0023/searchInit.do", TITLE:"인사발령조회"},
+	{menuCode:"M015",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0023/searchInit.do", TITLE:lo_Personnelappointmentinquiry},
 	</c:if>
 	<c:if test="${menu_code eq 'M016'}">
-	{menuCode:"M016",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0029/searchInit.do", TITLE:"사원정보현황"},
+	{menuCode:"M016",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0029/searchInit.do", TITLE:lo_EmployeeInformation},
 	</c:if>
 	<c:if test="${menu_code eq 'M017'}">
-	{menuCode:"M017",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0033/searchInit.do", TITLE:"인사고과/상벌현황"},
+	{menuCode:"M017",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0033/searchInit.do", TITLE:lo_HRnRewards},
 	</c:if>
 	<c:if test="${menu_code eq 'M018'}">
-	{menuCode:"M018",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0036/searchInit.do", TITLE:"사원입퇴사현황"},
+	{menuCode:"M018",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0036/searchInit.do", TITLE:lo_EmployeeLeavingStatus},
 	</c:if>
 	<c:if test="${menu_code eq 'M019'}">
-	{menuCode:"M019",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0035/searchInit.do", TITLE:"책정임금현황"},
+	{menuCode:"M019",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0035/searchInit.do", TITLE:lo_Pricingwage},
 	</c:if>
 	<c:if test="${menu_code eq 'M020'}">
-	{menuCode:"M020",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0039/searchInit.do", TITLE:"근속년수현황"},
+	{menuCode:"M020",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0039/searchInit.do", TITLE:lo_YearsofService},
 	</c:if>
 	<c:if test="${menu_code eq 'M021'}">
-	{menuCode:"M021",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0040/searchInit.do", TITLE:"교육현황"},
+	{menuCode:"M021",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"hm/p0040/searchInit.do", TITLE:lo_EducationStatus},
 	</c:if>
 	</c:forEach>
 	
-	{menuCode:"m25",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"급여관리"},
+	{menuCode:"m25",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:lo_Payrollmanagement},
 	
 	<c:forEach items="${sessionScope.menu_code}" begin="0" end="35" step="1" var="menu_code" varStatus="status">
 	<c:if test="${menu_code eq 'M022'}">
-	{menuCode:"M022",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"pm/p0001/searchInit.do", TITLE:"급여입력및계산"},
+	{menuCode:"M022",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"pm/p0001/searchInit.do", TITLE:lo_Salaryinputandcalculation},
 	</c:if>
 	<c:if test="${menu_code eq 'M023'}">
-	{menuCode:"M023",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"pm/p0002/searchInit.do", TITLE:"급여대장"},
+	{menuCode:"M023",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"pm/p0002/searchInit.do", TITLE:lo_Payroll},
 	</c:if>
 	<c:if test="${menu_code eq 'M024'}">
-	{menuCode:"M024",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"pm/p0003/searchInit.do", TITLE:"급여명세"},
+	{menuCode:"M024",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"pm/p0003/searchInit.do", TITLE:lo_Salaryspecification},
 	</c:if>
 	<c:if test="${menu_code eq 'M025'}">
-	{menuCode:"M025",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"pm/p0004/searchInit.do", TITLE:"급상여이체현황"},
+	{menuCode:"M025",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"pm/p0004/searchInit.do", TITLE:lo_TransferStatus},
 	</c:if>
 	<c:if test="${menu_code eq 'M026'}">
-	{menuCode:"M026",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"pm/p0009/searchInit.do", TITLE:"월별지급현황"},
+	{menuCode:"M026",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"pm/p0009/searchInit.do", TITLE:lo_MonthlyPaymentStatus},
 	</c:if>
 	<c:if test="${menu_code eq 'M027'}">
-	{menuCode:"M027",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"pm/p0010/searchInit.do", TITLE:"사원임금통계"},
+	{menuCode:"M027",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"pm/p0010/searchInit.do", TITLE:lo_EmployeeWageStatistics},
 	</c:if>
 	</c:forEach>
 	
-	{menuCode:"m32",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"근태관리"},
+	{menuCode:"m32",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:lo_TnAManagement},
 	
 	<c:forEach items="${sessionScope.menu_code}" begin="0" end="35" step="1" var="menu_code" varStatus="status">
 	<c:if test="${menu_code eq 'M028'}">
-	{menuCode:"M028",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"wm/p0001/searchInit.do", TITLE:"근태입력"},
+	{menuCode:"M028",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"wm/p0001/searchInit.do", TITLE:lo_TnAinput},
 	</c:if>
 	<c:if test="${menu_code eq 'M029'}">
-	{menuCode:"M029",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"wm/p0002/searchInit.do", TITLE:"휴가관리"},
+	{menuCode:"M029",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"wm/p0002/searchInit.do", TITLE:lo_VacationManagement},
 	</c:if>
 	<c:if test="${menu_code eq 'M030'}">
-	{menuCode:"M030",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"wm/p0003/searchInit.do", TITLE:"휴가내역"},
+	{menuCode:"M030",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"wm/p0003/searchInit.do", TITLE:lo_VacationHistory},
 	</c:if>
 	<c:if test="${menu_code eq 'M031'}">
-	{menuCode:"M031",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"wm/p0004/searchInit.do", TITLE:"출장관리"},
+	{menuCode:"M031",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"wm/p0004/searchInit.do", TITLE:lo_TravelManagement},
 	</c:if>
 	<c:if test="${menu_code eq 'M032'}">
-	{menuCode:"M032",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"wm/p0005/searchInit.do", TITLE:"출장조회"}
+	{menuCode:"M032",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"wm/p0005/searchInit.do", TITLE:lo_Businesstripinquiry}
 	</c:if>
 	</c:forEach>
 	]};
@@ -302,7 +302,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-
+ 
 	<div id="sidexx">
 		<div class="logobox">
 			<a href="${contextPath}/main.do"> <img class="logo"
@@ -310,7 +310,7 @@ $(document).ready(function(){
 
 			<form class="sideSearchBar" action="javascript:submitMenu();">		
 				<div class="input-group mb-3 input-group-sm">
-					<input type="search" placeholder="메뉴 입력.."
+					<input type="search" placeholder=<spring:message code="lo_searchmenu"  text="메뉴 검색.."/>
 						aria-describedby="button-addon5" id="searchInput"class="form-control">
 					<div class="input-group-append">
 						<button id="button-addon5" type="submit" class="btn btn-secondary">

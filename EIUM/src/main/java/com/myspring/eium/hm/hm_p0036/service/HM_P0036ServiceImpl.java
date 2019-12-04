@@ -29,6 +29,16 @@ public class HM_P0036ServiceImpl implements HM_P0036Service{
 		return list;
 	}
 	@Override
+	public List<HM_P0036VO> searchList2(Map<String, Object> searchMap) throws DataAccessException {
+		List<HM_P0036VO> list =  hM_P0036DAO.searchList2(searchMap); 
+		return list;
+	}
+	@Override
+	public List<HM_P0036VO> searchList3(Map<String, Object> searchMap) throws DataAccessException {
+		List<HM_P0036VO> list =  hM_P0036DAO.searchList3(searchMap); 
+		return list;
+	}
+	@Override
 	public List<HM_P0036VO> searchList_p01(Map<String, Object> searchMap) throws DataAccessException {
 		List<HM_P0036VO> list =  hM_P0036DAO.searchList_p01(searchMap); 
 		return list;

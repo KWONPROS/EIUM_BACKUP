@@ -164,6 +164,8 @@ public class PM_P0002ControllerImpl implements PM_P0002Controller {
 		System.out.println(x);
 		searchMap.put("y", request.getParameter("y"));
 		System.out.println(y);
+		searchMap.put("total", request.getParameter("total"));
+
 
 		List<PM_P0002VO> data = p0002Service.searchReceipt(searchMap);
 		

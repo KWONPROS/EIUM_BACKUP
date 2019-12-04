@@ -25,6 +25,19 @@ public class HM_P0036DAOImpl implements HM_P0036DAO{
 		return list;
 	}
 	@Override
+	public List<HM_P0036VO> searchList2(Map<String, Object> searchMap) throws DataAccessException {
+		List<HM_P0036VO> list = sqlSession.selectList("mapper.hm_p0036.searchList2", searchMap);
+
+		return list;
+	}
+	@Override
+	public List<HM_P0036VO> searchList3(Map<String, Object> searchMap) throws DataAccessException {
+		List<HM_P0036VO> list = sqlSession.selectList("mapper.hm_p0036.searchList3", searchMap);
+
+		return list;
+	}
+	
+	@Override
 	public List<HM_P0036VO> searchList_p01(Map<String, Object> searchMap) throws DataAccessException {
 		List<HM_P0036VO> list = sqlSession.selectList("mapper.hm_p0036.searchList_p01", searchMap);
 

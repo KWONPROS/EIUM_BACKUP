@@ -51,7 +51,6 @@
 		initSheet2.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:0};
 		initSheet2.HeaderMode = {Sort:1, ColMove:0, ColResize:0, HeaderCheck:1};
 		initSheet2.Cols = [
-       		{Header:"급여계산서고유번호",Type:"Text",SaveName:"payment_receipt_code",MinWidth:70, Align:"Center",Hidden:"1", Edit: 0},
 	        {Header:"지급항목",Type:"Combo", MinWidth:70, SaveName:"payment_receipt_item", ComboText:"|기본급|상여급", ComboCode:"|기본급|상여급", Edit: 0},
 			{Header:"총액",Type:"AutoSum", Format:"Integer", SaveName:"payment_receipt_price", MinWidth:70, Align:"Center", Edit: 0}
 			
@@ -72,7 +71,8 @@
 	        {Header:"NO",Type:"Seq",SaveName:"NUMBER",MinWidth:50, Align:"Center" },	
 	        {Header:"코드",Type:"Text",SaveName:"department_code", MinWidth:50,  Align:"Center", KeyField:1, Edit: 0},	
 	        {Header:"부서명",Type:"Text",SaveName:"department_name", MinWidth:120, Align:"Center", Edit: 0},
-			{Header:"인원수",Type:"Text",SaveName:"payment_code", MinWidth:120, Align:"Center", Edit: 0},
+			{Header:"지급고유번호",Type:"Text",SaveName:"payment_code", MinWidth:120, Align:"Center", Hidden:"1"},
+			{Header:"인원수",Type:"Text",SaveName:"employee_code", MinWidth:120, Align:"Center", Edit: 0}
 		];   
 		IBS_InitSheet( mySheet3 , initSheet3);
   
@@ -88,7 +88,8 @@
 	        {Header:"NO",Type:"Seq",SaveName:"NUMBER",MinWidth:50, Align:"Center" },	
 	        {Header:"코드",Type:"Text",SaveName:"site_code", MinWidth:50,  Align:"Center", KeyField:1, Edit: 0},	
 	        {Header:"사업장명",Type:"Text",SaveName:"site_name", MinWidth:120, Align:"Center", Edit: 0},
-			{Header:"인원수",Type:"Text",SaveName:"payment_code", MinWidth:120, Align:"Center", Edit: 0},
+			{Header:"지급고유번호",Type:"Text",SaveName:"payment_code", MinWidth:120, Align:"Center", Hidden:"1"},
+			{Header:"인원수",Type:"Text",SaveName:"employee_code", MinWidth:120, Align:"Center", Edit: 0}
 		];   
 		IBS_InitSheet( mySheet4 , initSheet4);
   
@@ -105,7 +106,8 @@
 	        {Header:"NO",Type:"Seq",SaveName:"NUMBER",MinWidth:50, Align:"Center" },	
 	        {Header:"코드",Type:"Text",SaveName:"job_class_code", MinWidth:50,  Align:"Center", KeyField:1, Edit: 0},	
 	        {Header:"직종명",Type:"Text",SaveName:"job_class_name", MinWidth:120, Align:"Center", Edit: 0},
-			{Header:"인원수",Type:"Text",SaveName:"payment_code", MinWidth:120, Align:"Center", Edit: 0},
+			{Header:"지급고유번호",Type:"Text",SaveName:"payment_code", MinWidth:120, Align:"Center", Hidden:"1"},
+			{Header:"인원수",Type:"Text",SaveName:"employee_code", MinWidth:120, Align:"Center", Edit: 0}
 		];   
 		IBS_InitSheet( mySheet5 , initSheet5);
   
@@ -179,28 +181,28 @@
 	//로우 클릭시
 function mySheet1_OnClick(Row, Col) { 
 			x = "x=" + mySheet1.GetCellValue(Row, 1);
-			var param = "x="+mySheet1.GetCellValue(Row, 1)+"&y="+mySheet1.GetCellValue(Row, 3);
+			var param = "x="+mySheet1.GetCellValue(Row, 1)+"&y="+mySheet1.GetCellValue(Row, 3) +"&p="+FormQueryStringEnc(document.frm);
 			mySheet2.DoSearch("${contextPath}/pm/p0002/searchReceipt.do", param);
 
 	}
 	
 function mySheet3_OnClick(Row, Col) { 
 	x = "x=" + mySheet3.GetCellValue(Row, 1);
-	var param = "x="+mySheet3.GetCellValue(Row, 1)+"&y="+mySheet3.GetCellValue(Row, 3);
+	var param = "x="+mySheet3.GetCellValue(Row, 1)+"&y="+mySheet3.GetCellValue(Row, 3) +"&p="+FormQueryStringEnc(document.frm);
 	mySheet2.DoSearch("${contextPath}/pm/p0002/searchReceipt.do", param);
 
 }
 
 function mySheet4_OnClick(Row, Col) { 
 	x = "x=" + mySheet4.GetCellValue(Row, 1);
-	var param = "x="+mySheet4.GetCellValue(Row, 1)+"&y="+mySheet4.GetCellValue(Row, 3);
+	var param = "x="+mySheet4.GetCellValue(Row, 1)+"&y="+mySheet4.GetCellValue(Row, 3) +"&p="+FormQueryStringEnc(document.frm);
 	mySheet2.DoSearch("${contextPath}/pm/p0002/searchReceipt.do", param);
 
 }
 
 function mySheet5_OnClick(Row, Col) { 
 	x = "x=" + mySheet5.GetCellValue(Row, 1);
-	var param = "x="+mySheet5.GetCellValue(Row, 1)+"&y="+mySheet5.GetCellValue(Row, 3);
+	var param = "x="+mySheet5.GetCellValue(Row, 1)+"&y="+mySheet5.GetCellValue(Row, 3) +"&p="+FormQueryStringEnc(document.frm);
 	mySheet2.DoSearch("${contextPath}/pm/p0002/searchReceipt.do", param);
 
 }

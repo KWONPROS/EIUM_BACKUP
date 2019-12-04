@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />	
 <!DOCTYPE html>
 <html>
@@ -10,7 +11,6 @@
 <script src='${contextPath}/resources/fullcalendar/core/main.js'></script>
 <script src='${contextPath}/resources/fullcalendar/interaction/main.js'></script>
 <script src='${contextPath}/resources/fullcalendar/daygrid/main.js'></script>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <script src="https://code.highcharts.com/highcharts.js"></script>

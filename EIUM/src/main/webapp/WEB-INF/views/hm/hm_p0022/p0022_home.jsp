@@ -86,7 +86,7 @@ initSheet.Cols = [
          {Header:"시작일자",Type:"Date",SaveName:"start_DATE",Align:"Center",Width:100,Format:"Ymd"},         
          {Header:"종료일자",Type:"Date",SaveName:"end_DATE",Align:"Center",Width:100,Format:"Ymd"},
          {Header:"발령구분",Type:"Combo",SaveName:"hr_APPOINT_INDEX_NAME",Align:"Center",Width:100,"ComboText":"|채용|승진|이동|파견|파견복귀|휴직|복직|퇴직|보직|보직해제|조직개편|계약연장|정직|정직해제", "ComboCode":"|100|1|2|3|4|5|6|7|8|9|10|11|12|13"},
-         {Header:"재직상태",Type:"Combo",SaveName:"work_STATUS",Align:"Center",Width:100,"ComboText":"|재직|휴직|정직|퇴직", "ComboCode":"|재직|휴직|정직|퇴직"},
+         {Header:"재직상태",Type:"Combo",SaveName:"work_STATUS_NAME",Align:"Center",Width:100,"ComboText":"|재직|파견|휴직|정직|퇴직", "ComboCode":"|J01|J02|J03|J04|J05"},
          {Header:"입사일자",Type:"Date",SaveName:"employee_JOIN_DATE",Align:"Center",Width:100,Format:"Ymd"},
          {Header:"사업장",Type:"Popup",SaveName:"site_NAME",Align:"Center",Width:100},
          {Header:"사업장코드",Type:"Text",SaveName:"site_CODE",Align:"Center",Width:100,Hidden:1},
