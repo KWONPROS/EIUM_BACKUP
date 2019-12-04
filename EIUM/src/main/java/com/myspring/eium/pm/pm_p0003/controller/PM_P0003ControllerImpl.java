@@ -88,14 +88,14 @@ public class PM_P0003ControllerImpl implements PM_P0003Controller {
 		HttpSession session = request.getSession(); 
 		LoginVO loginvo = new LoginVO();
 		loginvo = (LoginVO)session.getAttribute("login"); 
-		System.out.println("ë¡œê·¸ì¸ì•„ì´ë””ëŠ”"+loginvo.getEmployee_name());
-		System.out.println("ë¶€ì„œëª…ì€"+loginvo.getDepartment_name());
+		System.out.println("·Î±×ÀÎ¾ÆÀÌµğ´Â"+loginvo.getEmployee_name());
+		System.out.println("ºÎ¼­¸íÀº"+loginvo.getDepartment_name());
 		
 		Map<String, Object> accessMap = new HashMap<String, Object>();
 		ArrayList<String> accessRange = new ArrayList<String>();		
 		accessRange = (ArrayList<String>) session.getAttribute("access_range"); 
 		accessMap = (Map<String, Object>) session.getAttribute("accessnum");		
-		int n =  (int) accessMap.get("M024");
+		int n =  (Integer) accessMap.get("M024");
 		System.out.println(accessRange.get(n));
 
 		
@@ -214,7 +214,7 @@ public class PM_P0003ControllerImpl implements PM_P0003Controller {
 
 		
 		
-		// ì €ì¥ Data ì¶”ì¶œí•˜ê¸°
+		// ÀúÀå Data ÃßÃâÇÏ±â
 		Enumeration enu = request.getParameterNames();
 		while (enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
@@ -227,10 +227,10 @@ public class PM_P0003ControllerImpl implements PM_P0003Controller {
 		try {
 			p0003Service.saveData(dataMap, user, x, y);	
 			result.put("Code","0");
-			result.put("Message","ì €ì¥ë˜ì—ˆìŠµë‹ˆë‹¤");
+			result.put("Message","ÀúÀåµÇ¾ú½À´Ï´Ù");
 		}catch(Exception e) {                                                               
 			result.put("Code","-1");
-			result.put("Message","ì €ì¥ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤");
+			result.put("Message","ÀúÀå¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù");
 			e.printStackTrace();
 		}
 		
