@@ -1,4 +1,4 @@
-package com.myspring.eium.pm.pm_p0003.service;
+package com.myspring.eium.pm.pm_p0004.service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,43 +10,49 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.myspring.eium.pm.pm_p0003.dao.PM_P0003DAO;
-import com.myspring.eium.pm.pm_p0003.vo.PM_P0003VO;
+import com.myspring.eium.pm.pm_p0004.dao.PM_P0004DAO;
+import com.myspring.eium.pm.pm_p0004.vo.PM_P0004VO;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
-public class PM_P0003ServiceImpl implements PM_P0003Service {
+public class PM_P0004ServiceImpl implements PM_P0004Service {
 	@Autowired
-	private PM_P0003DAO p0003DAO;
+	private PM_P0004DAO p0004DAO;
 
 	@Override
-	public List<PM_P0003VO> searchTypeList(Map<String, Object> searchMap) throws DataAccessException {
-		List<PM_P0003VO> list =  p0003DAO.typeList(searchMap); 
+	public List<PM_P0004VO> searchTypeList(Map<String, Object> searchMap) throws DataAccessException {
+		List<PM_P0004VO> list =  p0004DAO.typeList(searchMap); 
 		return list;
 	}
 	
 	
 	
 	@Override
-	public List<PM_P0003VO> paygrade_searchData(Map<String, Object> searchMap) throws DataAccessException {
-		List<PM_P0003VO> list =  p0003DAO.paygradeList(searchMap); 
+	public List<PM_P0004VO> paygrade_searchData(Map<String, Object> searchMap) throws DataAccessException {
+		List<PM_P0004VO> list =  p0004DAO.paygradeList(searchMap); 
 		return list;
 	}
 	@Override
-	public List<PM_P0003VO> paydate_searchList(Map<String, Object> searchMap) throws DataAccessException {
-		List<PM_P0003VO> list =  p0003DAO.paydate_searchList(searchMap); 
-		return list;
-	}
-	
-	@Override
-	public List<PM_P0003VO> searchList(Map<String, Object> searchMap) throws DataAccessException {
-		List<PM_P0003VO> list =  p0003DAO.searchList(searchMap); 
+	public List<PM_P0004VO> paydate_searchList(Map<String, Object> searchMap) throws DataAccessException {
+		List<PM_P0004VO> list =  p0004DAO.paydate_searchList(searchMap); 
 		return list;
 	}
 	
 	@Override
-	public List<PM_P0003VO> searchReceipt(Map<String, Object> searchMap) throws DataAccessException {
-		List<PM_P0003VO> list =  p0003DAO.searchReceipt(searchMap); 
+	public List<PM_P0004VO> searchList(Map<String, Object> searchMap) throws DataAccessException {
+		List<PM_P0004VO> list =  p0004DAO.searchList(searchMap); 
+		return list;
+	}
+	
+	@Override
+	public List<PM_P0004VO> searchReceipt(Map<String, Object> searchMap) throws DataAccessException {
+		List<PM_P0004VO> list =  p0004DAO.searchReceipt(searchMap); 
+		return list;
+	}
+	
+	@Override
+	public List<PM_P0004VO> BankList(Map<String, Object> searchMap) throws DataAccessException {
+		List<PM_P0004VO> list =  p0004DAO.BankList(searchMap); 
 		return list;
 	}
 
@@ -59,11 +65,11 @@ public class PM_P0003ServiceImpl implements PM_P0003Service {
 		for(String str : status) {
 			Map<String, String> row = getRow(dataMap, length, i, user, x, y); // ���� Index�� Row Map
 			if("I".equals(str)) { // �߰�
-				p0003DAO.insertData(row);
+				p0004DAO.insertData(row);
 			}else if("U".equals(str)) { // ����
-				p0003DAO.updateData(row);
+				p0004DAO.updateData(row);
 			}else if("D".equals(str)) { // ����
-				p0003DAO.deleteData(row);
+				p0004DAO.deleteData(row);
 			}
 			i++;
 		}

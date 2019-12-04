@@ -18,33 +18,67 @@ public class PM_P0003VO {
 	private String pay_grade_name;
 	private String salary;
 	private String job_class_name;
-	private String bank_name;
-	private String account_name_1;
-	private String account_number_1;
+	private String weekday_normal_work_time;
+	private String weekday_extension_work_time;
+	private String weekday_night_work_time;
+	private String holiday_normal_work_time;
+	private String holiday_extension_work_time;
+	private String holiday_night_work_time;
+	private String accessRange;
+	private String loginName;
 	private String user;
 	
 
 	
 	
 
-	public String getBank_name() {
-		return bank_name;
+	public String getAccessRange() {
+		return accessRange;
 	}
-	public void setBank_name(String bank_name) {
-		this.bank_name = bank_name;
+	public void setAccessRange(String accessRange) {
+		this.accessRange = accessRange;
 	}
-	
-	public String getAccount_name_1() {
-		return account_name_1;
+	public String getLoginName() {
+		return loginName;
 	}
-	public void setAccount_name_1(String account_name_1) {
-		this.account_name_1 = account_name_1;
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
 	}
-	public String getAccount_number_1() {
-		return account_number_1;
+	public String getWeekday_normal_work_time() {
+		return weekday_normal_work_time;
 	}
-	public void setAccount_number_1(String account_number_1) {
-		this.account_number_1 = account_number_1;
+	public void setWeekday_normal_work_time(String weekday_normal_work_time) {
+		this.weekday_normal_work_time = weekday_normal_work_time;
+	}
+	public String getWeekday_extension_work_time() {
+		return weekday_extension_work_time;
+	}
+	public void setWeekday_extension_work_time(String weekday_extension_work_time) {
+		this.weekday_extension_work_time = weekday_extension_work_time;
+	}
+	public String getWeekday_night_work_time() {
+		return weekday_night_work_time;
+	}
+	public void setWeekday_night_work_time(String weekday_night_work_time) {
+		this.weekday_night_work_time = weekday_night_work_time;
+	}
+	public String getHoliday_normal_work_time() {
+		return holiday_normal_work_time;
+	}
+	public void setHoliday_normal_work_time(String holiday_normal_work_time) {
+		this.holiday_normal_work_time = holiday_normal_work_time;
+	}
+	public String getHoliday_extension_work_time() {
+		return holiday_extension_work_time;
+	}
+	public void setHoliday_extension_work_time(String holiday_extension_work_time) {
+		this.holiday_extension_work_time = holiday_extension_work_time;
+	}
+	public String getHoliday_night_work_time() {
+		return holiday_night_work_time;
+	}
+	public void setHoliday_night_work_time(String holiday_night_work_time) {
+		this.holiday_night_work_time = holiday_night_work_time;
 	}
 	public String getPosition_name() {
 		return position_name;

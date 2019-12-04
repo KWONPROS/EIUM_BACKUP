@@ -177,6 +177,8 @@ public class HM_P0033ControllerImpl implements HM_P0033Controller {
 		searchMap.put("employee_code", request.getParameter("Pemployee_code"));
 		searchMap.put("date", request.getParameter("date"));
 		searchMap.put("date2", request.getParameter("date2"));
+		searchMap.put("access_range", request.getParameter("access_range"));
+
 
 
 		System.out.println(request.getParameter("Phr_assessment_code"));

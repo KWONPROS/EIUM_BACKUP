@@ -56,7 +56,11 @@ public class HM_P0007ControllerImpl implements HM_P0007Controller {
 		request.setCharacterEncoding("utf-8");
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
-					//testetstettt
+
+
+		searchMap.put("access_range", request.getParameter("access_range"));
+		searchMap.put("Semployee_name", request.getParameter("Semployee_name"));
+		searchMap.put("Sdepartment_name", request.getParameter("Sdepartment_name"));
 		
 		
 		List<HM_P0007VO> data = hM_P0007Service.searchList(searchMap);

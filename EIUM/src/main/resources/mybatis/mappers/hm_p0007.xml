@@ -27,14 +27,40 @@
 	</resultMap> 
  
 	<select id="searchList" resultMap="P0007resultVO" parameterType="java.util.Map"> 
+	<choose>	
+	
+	  <when test= " access_range =='사원' ">	
+      <![CDATA[
+         select e.employee_code, e.employee_name, eh.hobby, eh.special_ability, eh.height, eh.weight, eh.blood_type, eh.handicapped_yn, eh.marriage_yn, eh.religion, eh.military_type, eh.military_number, eh.discharge_yn, eh.residential_division, eh.picture
+         from employee e, employee_hr_info eh
+         where e.employee_code = eh.employee_code
+         and e.employee_name = #{Semployee_name}
+         order by e.employee_code
+      ]]>
+      </when>
+      
+      <when test= " access_range =='부서' ">	
+      <![CDATA[
+         select e.employee_code, e.employee_name, eh.hobby, eh.special_ability, eh.height, eh.weight, eh.blood_type, eh.handicapped_yn, eh.marriage_yn, eh.religion, eh.military_type, eh.military_number, eh.discharge_yn, eh.residential_division, eh.picture
+         from employee e, employee_hr_info eh, department d, employee_work ew
+         where e.employee_code = eh.employee_code
+         and e.employee_code = ew.employee_code
+         and ew.department_code = d.department_code
+         and d.department_name = #{Sdepartment_name}
+         order by e.employee_code
+      ]]>
+      </when>
+      
+      <when test= " access_range =='사업장' ">	
       <![CDATA[
          select e.employee_code, e.employee_name, eh.hobby, eh.special_ability, eh.height, eh.weight, eh.blood_type, eh.handicapped_yn, eh.marriage_yn, eh.religion, eh.military_type, eh.military_number, eh.discharge_yn, eh.residential_division, eh.picture
          from employee e, employee_hr_info eh
          where e.employee_code = eh.employee_code
          order by e.employee_code
       ]]>
+      </when>
       
-      
+      	</choose>
 	</select>
 	
 

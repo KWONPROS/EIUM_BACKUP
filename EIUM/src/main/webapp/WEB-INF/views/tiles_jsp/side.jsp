@@ -167,10 +167,10 @@ var data = {Data:[
 	{menuCode:"M023",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"pm/p0002/searchInit.do", TITLE:"급여대장"},
 	</c:if>
 	<c:if test="${menu_code eq 'M024'}">
-	{menuCode:"M024",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"03/pivot.html", TITLE:"급여명세"},
+	{menuCode:"M024",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"pm/p0003/searchInit.do", TITLE:"급여명세"},
 	</c:if>
 	<c:if test="${menu_code eq 'M025'}">
-	{menuCode:"M025",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"pm/p0003/searchInit.do", TITLE:"급상여이체현황"},
+	{menuCode:"M025",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"pm/p0004/searchInit.do", TITLE:"급상여이체현황"},
 	</c:if>
 	<c:if test="${menu_code eq 'M026'}">
 	{menuCode:"M026",Level:1,FontColor:"#212121", BackColor:"#E0E0E0",URL:"pm/p0009/searchInit.do", TITLE:"월별지급현황"},

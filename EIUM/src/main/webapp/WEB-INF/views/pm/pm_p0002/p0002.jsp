@@ -29,21 +29,21 @@
 	function LoadPage() {
 		
 		//아이비시트1 
-		mySheet.RemoveAll();
-		var initSheet = {};
-		initSheet.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0};
-		initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
-		initSheet.Cols = [		
+		mySheet1.RemoveAll();
+		var initSheet1 = {};
+		initSheet1.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0};
+		initSheet1.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
+		initSheet1.Cols = [		
 	        {Header:"NO",Type:"Seq",SaveName:"NUMBER",MinWidth:50, Align:"Center" },	
 	        {Header:"사원코드",Type:"Text",SaveName:"employee_code", MinWidth:50,  Align:"Center", KeyField:1, Edit: 0},	
 	        {Header:"사원명",Type:"Text",SaveName:"employee_name", MinWidth:120, Align:"Center", Edit: 0},
 			{Header:"지급고유번호",Type:"Text",SaveName:"payment_code", MinWidth:120, Align:"Center", Hidden:"1"},
 	        {Header:"부서",Type:"Text",SaveName:"department_name", MinWidth:120, Align:"Center", Edit: 0}
 		];   
-		IBS_InitSheet( mySheet , initSheet);
+		IBS_InitSheet( mySheet1 , initSheet1);
   
-		mySheet.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
-		mySheet.SetSheetHeight(250);
+		mySheet1.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
+		mySheet1.SetSheetHeight(250);
 		
 		//아이비시트2------------------------------------------------------
 		mySheet2.RemoveAll();
@@ -61,8 +61,57 @@
 		  
 		mySheet2.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
 		mySheet2.SetSheetHeight(250);
+
+
+		
+		mySheet3.RemoveAll();
+		var initSheet3 = {};
+		initSheet3.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0};
+		initSheet3.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
+		initSheet3.Cols = [		
+	        {Header:"NO",Type:"Seq",SaveName:"NUMBER",MinWidth:50, Align:"Center" },	
+	        {Header:"코드",Type:"Text",SaveName:"department_code", MinWidth:50,  Align:"Center", KeyField:1, Edit: 0},	
+	        {Header:"부서명",Type:"Text",SaveName:"department_name", MinWidth:120, Align:"Center", Edit: 0},
+			{Header:"인원수",Type:"Text",SaveName:"payment_code", MinWidth:120, Align:"Center", Edit: 0},
+		];   
+		IBS_InitSheet( mySheet3 , initSheet3);
+  
+		mySheet3.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
+		mySheet3.SetSheetHeight(250);
+		mySheet3.SetVisible(0); 
+		
+		mySheet4.RemoveAll();
+		var initSheet4 = {};
+		initSheet4.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0};
+		initSheet4.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
+		initSheet4.Cols = [		
+	        {Header:"NO",Type:"Seq",SaveName:"NUMBER",MinWidth:50, Align:"Center" },	
+	        {Header:"코드",Type:"Text",SaveName:"site_code", MinWidth:50,  Align:"Center", KeyField:1, Edit: 0},	
+	        {Header:"사업장명",Type:"Text",SaveName:"site_name", MinWidth:120, Align:"Center", Edit: 0},
+			{Header:"인원수",Type:"Text",SaveName:"payment_code", MinWidth:120, Align:"Center", Edit: 0},
+		];   
+		IBS_InitSheet( mySheet4 , initSheet4);
+  
+		mySheet4.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
+		mySheet4.SetSheetHeight(250);
+		mySheet4.SetVisible(0); 
 		
 		
+		mySheet5.RemoveAll();
+		var initSheet5 = {};
+		initSheet5.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0};
+		initSheet5.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
+		initSheet5.Cols = [		
+	        {Header:"NO",Type:"Seq",SaveName:"NUMBER",MinWidth:50, Align:"Center" },	
+	        {Header:"코드",Type:"Text",SaveName:"job_class_code", MinWidth:50,  Align:"Center", KeyField:1, Edit: 0},	
+	        {Header:"직종명",Type:"Text",SaveName:"job_class_name", MinWidth:120, Align:"Center", Edit: 0},
+			{Header:"인원수",Type:"Text",SaveName:"payment_code", MinWidth:120, Align:"Center", Edit: 0},
+		];   
+		IBS_InitSheet( mySheet5 , initSheet5);
+  
+		mySheet5.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
+		mySheet5.SetSheetHeight(250);
+ 		mySheet5.SetVisible(0); 
 		
 		/* MonthPicker 옵션 */
 	    options = {
@@ -90,8 +139,24 @@
 		switch (sAction) {
 		case "search": //조회
 			var param = FormQueryStringEnc(document.frm);
-			mySheet.DoSearch("${contextPath}/pm/p0002/searchList.do", param);
-			//조회조건에 맞도록 조회하기
+			var total = $('#total').val();
+			
+			if(total =='emp' ){
+				mySheet1.DoSearch("${contextPath}/pm/p0002/searchList.do", param);
+			}
+			
+			if(total =='dep' ){
+				mySheet3.DoSearch("${contextPath}/pm/p0002/searchList.do", param);
+			}
+			
+			if(total =='sit' ){
+				mySheet4.DoSearch("${contextPath}/pm/p0002/searchList.do", param);
+			}
+			
+			if(total =='job' ){
+				mySheet5.DoSearch("${contextPath}/pm/p0002/searchList.do", param);
+			}
+	
 			break;
 
 		case "reload": //초기화
@@ -141,7 +206,7 @@ function mySheet_OnClick(Row, Col) {
 	 
 
 	
-	 
+
 
 	// 저장완료 후 처리할 작업
 	// code: 0(저장성공), -1(저장실패)
@@ -233,6 +298,46 @@ function mySheet_OnClick(Row, Col) {
 				});
 
 	};
+	
+	
+	
+function selectDivision() {
+		
+		var total = $('#total').val();
+		console.log(total);
+		
+		if(total =='emp' ){
+			mySheet1.SetVisible(1);
+			mySheet3.SetVisible(0); 
+			mySheet4.SetVisible(0); 
+			mySheet5.SetVisible(0); 
+		}
+		
+		if(total =='dep' ){
+			mySheet1.SetVisible(0);
+			mySheet3.SetVisible(1); 
+			mySheet4.SetVisible(0); 
+			mySheet5.SetVisible(0); 
+		}
+		
+		if(total =='sit' ){
+			mySheet1.SetVisible(0);
+			mySheet3.SetVisible(0); 
+			mySheet4.SetVisible(1); 
+			mySheet5.SetVisible(0); 
+		}
+		
+		if(total =='job' ){
+			mySheet1.SetVisible(0);
+			mySheet3.SetVisible(0); 
+			mySheet4.SetVisible(0); 
+			mySheet5.SetVisible(1); 
+		}
+			
+	
+
+
+	};
 </script>
 <style type="text/css">
 
@@ -286,8 +391,8 @@ function mySheet_OnClick(Row, Col) {
 }
 
 .right{
-	position: relative;
-	top: -140px;
+	position: absolute;
+ 	 top : 240px;
  	left: 450px;
 	width: 750px;
 	
@@ -317,6 +422,25 @@ function mySheet_OnClick(Row, Col) {
 	margin-bottom: 50px;
 	
 }
+
+ .sheet2 {
+ 	position: absolute;
+ 	top : 120px;
+ 
+ }
+ 
+ .sheet3 {
+ 	position: absolute;
+  	top : 120px;
+ 
+ }
+ 
+ .sheet4 {
+ 	position: absolute;
+ 	 top : 120px;
+ 	
+ 
+ }
 
 .left input{
 	height: 22px;
@@ -384,19 +508,50 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 		  지급일: <a href="javascript:showPopup();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a><input type="text" id="Ppayment_date"><br><br>
 		 사업장구분: <select id="searchSite" onchange="selectType()">
 			<option value="all" selected>전체</option>
-			</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		  
 		  부서: <select id="searchTYPE">
 		  	<option value="all" selected>전체</option>
+		</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		
+		  집계: <select id="total"  onchange="selectDivision()">
+		  	<option value="emp" selected>1.사원별</option>
+		  	<option value="dep">2.부서별</option>
+		  	<option value="sit">3.사업장별</option>
+		  	<option value="job">4.직종별</option>
+		  	
 		</select> 
 		</div>
 		<input type="hidden" id="Ppayment_code">
 		<input type="hidden" id="Ppayment_des_name">
 		
+		
+		<script>		
+		createIBSheet("mySheet1", "100%", "100%");
 
-		<script>
-		createIBSheet("mySheet", "100%", "100%");
 		selectSite();
 		</script>
+		
+		
+		<div class = sheet2>
+		<script>
+		createIBSheet("mySheet3", "100%", "100%");
+		</script>
+		</div>
+		
+		<div class = sheet3>
+		<script>
+		createIBSheet("mySheet4", "100%", "100%");
+		</script>
+		</div>
+
+
+		<div class = sheet4>
+		<script>
+		createIBSheet("mySheet5", "100%", "100%");
+		</script>
+		</div>
+		
 	</div>
 	
 	<div class="right">

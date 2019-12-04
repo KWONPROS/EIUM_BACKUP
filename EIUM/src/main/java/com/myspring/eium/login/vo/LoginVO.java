@@ -7,17 +7,34 @@ public class LoginVO {
 	 private String employee_id;
 	 private String employee_name;
 	 private String employee_password;
-	 
-	 private String company_name;
-	 
-	 private String employee_code;
-	 
+	 private String department_name;
+	 private String company_name; 
+	 private String employee_code;	 
 	 private String authority_code;
 	 private String authority_name;
-	 
 	 private String menu_code;
+	 private String access_range;
 	 private String access_grant;
 	
+	 
+	 
+	 
+	public String getDepartment_name() {
+		return department_name;
+	}
+
+	public void setDepartment_name(String department_name) {
+		this.department_name = department_name;
+	}
+
+	public String getAccess_range() {
+		return access_range;
+	}
+
+	public void setAccess_range(String access_range) {
+		this.access_range = access_range;
+	}
+
 	public LoginVO() {
 	}
 

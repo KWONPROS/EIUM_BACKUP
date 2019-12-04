@@ -308,7 +308,8 @@ function mySheet_OnClick(Row, Col) {
 	function doAction(sAction) {
 		switch (sAction) {
 		case "search": //조회
-			mySheet.DoSearch("${contextPath}/hm/p0007/searchList.do");
+			var param = FormQueryStringEnc(document.frm);
+			mySheet.DoSearch("${contextPath}/hm/p0007/searchList.do", param);
 			break;
 
 		case "reload": //초기화
@@ -663,6 +664,8 @@ border : none;
 </style>
 </head>
 <body onload="LoadPage()" style="overflow-x: hidden">
+<form name="frm">
+<c:set var="num" scope="request" value="${sessionScope.accessnum['M011']}"/>
 	<div class="leftbuttons">
 		<a href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
 	</div>
@@ -705,7 +708,6 @@ border : none;
 		<div id="tab_contents" class="ib-tab-contents" >
 		
 			<div class="ib-tab-contents__item" style="background: none;">
-					    <form name="form" id="form" method="post">
 			
 				<div id='ib-container1'>
 
@@ -765,7 +767,6 @@ border : none;
    </tr>
 </table>
 				</div>
-				    </form>
 				
 			</div>
 			<div class="ib-tab-contents__item">
@@ -819,7 +820,9 @@ border : none;
 
 		</div>
 	</div>
-		
-
+	<input type="hidden" id="Semployee_name" value="${sessionScope.login.employee_name}" >
+	<input type="hidden" id="Sdepartment_name" value="${sessionScope.login.department_name}" >
+    <input type="hidden" id="access_range" value="${sessionScope.access_range[num]}" >
+</form>
 </body>
 </html>
