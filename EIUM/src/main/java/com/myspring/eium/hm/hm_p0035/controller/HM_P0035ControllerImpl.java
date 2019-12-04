@@ -48,8 +48,9 @@ public class HM_P0035ControllerImpl implements HM_P0035Controller{
 
 		searchMap.put("SiteList", request.getParameter("SiteList"));
 		searchMap.put("DeptList", request.getParameter("DeptList"));
-		searchMap.put("Employee_Select", request.getParameter("Employee_Select"));
-		searchMap.put("p_text", request.getParameter("p_text"));
+		searchMap.put("searchDate1", request.getParameter("searchDate1"));
+		searchMap.put("searchDate2", request.getParameter("searchDate2"));
+		searchMap.put("resigner", request.getParameter("resigner"));
 		
 		List<HM_P0035VO> data = HM_P0035Service.searchList(searchMap);
         resultMap.put("Data", data);
