@@ -54,12 +54,6 @@ public class PM_P0003DAOImpl implements PM_P0003DAO {
 		return list;
 	}
 	
-	@Override
-	public List<PM_P0003VO> BankList(Map<String, Object> searchMap) throws DataAccessException {
-		List<PM_P0003VO> list = sqlSession.selectList("mapper.pm_p0003.BankList", searchMap);
-		return list;
-	}
-	
 
 
 	@Override

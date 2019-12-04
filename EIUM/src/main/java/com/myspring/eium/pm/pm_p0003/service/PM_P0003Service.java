@@ -14,6 +14,5 @@ public interface PM_P0003Service {
 	public List<PM_P0003VO> searchList(Map<String, Object> searchMap) throws DataAccessException;
 	public List<PM_P0003VO> searchReceipt(Map<String, Object> searchMap)throws DataAccessException;
 	public List<PM_P0003VO> paygrade_searchData(Map<String, Object> searchMap)throws DataAccessException;
-	public List<PM_P0003VO> BankList(Map<String, Object> searchMap)throws DataAccessException;
 
 }

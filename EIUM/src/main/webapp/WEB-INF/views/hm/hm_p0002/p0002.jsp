@@ -115,6 +115,8 @@ function setJob_class(){
 		case "save2": // 저장
 			var tempStr2 = mySheet2.GetSaveString();
 			mySheet2.DoSave("${contextPath}/hm/p0002/saveSelect.do");
+            doAction("search");
+
 			break;
 			
 		case "insert":
@@ -133,11 +135,11 @@ function setJob_class(){
 		mySheet2.DataInsert(-1);
 	}
 	
-	function mySheet_OnClick(Row, Col) {
+/* 	function mySheet_OnClick(Row, Col) {
 			  x = "x=" + mySheet.GetCellValue(Row, 2);			  
 			mySheet2.DoSearch("${contextPath}/hm/p0002/searchSelect.do", x);
 			
-	}
+	} */
 	
 	function mySheet2_OnKeyUp(Row, Col, KeyCode, Shift) {
 		//if (Modify == 1) { 인사코드 부분 - 수정 가능일시이니까 / 인사기록카드에서는 상관x
@@ -151,6 +153,12 @@ function setJob_class(){
 	            doAction("insert2");
 	         }
 		}
+		
+		
+	function mySheet_OnDblClick(Row,Col,Value){
+		  x = "x=" + mySheet.GetCellValue(Row, 2);			  
+			mySheet2.DoSearch("${contextPath}/hm/p0002/searchSelect.do", x);
+	}
 
 	
 	
@@ -327,9 +335,13 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 		</header>
 	</div>
 	<div class="left">
-			<span class="yearMonth">귀속연월</span> 
+	
+	<div id="searchBar">
+           <span class="yearMonth">귀속연월</span> 
 			<input id="monthpicker" type="text">
 			<img id="btn_monthpicker"  src="${contextPath}/resources/image/icons/icon_calendar.png">
+		</div>
+			
 
 		<script>createIBSheet("mySheet", "100%", "100%");</script>
 	</div>

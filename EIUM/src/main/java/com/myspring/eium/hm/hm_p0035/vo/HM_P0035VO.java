@@ -14,8 +14,11 @@ public class HM_P0035VO {
 	private String EMPLOYEE_JOIN_DATE;
 	private String JOB_CLASS_NAME;
 	private String PAY_TYPE_NAME;
-	private String PAYMENT_DATE;
-	private String PAYMENT_RECEIPT_PRICE;
+	private String CONTRACT_START_MONTH;
+	private String CONTRACT_YEAR_PAY;
+	private String CONTRACT_MONTH_PAY;
+	private String CONTRACT_DAY_PAY;
+	private String CONTRACT_TIME_PAY;
 	
 	private String INT_USER_ID;
 	private Date INT_DATE;
@@ -91,22 +94,6 @@ public class HM_P0035VO {
 		PAY_TYPE_NAME = pAY_TYPE_NAME;
 	}
 
-	public String getPAYMENT_DATE() {
-		return PAYMENT_DATE;
-	}
-
-	public void setPAYMENT_DATE(String pAYMENT_DATE) {
-		PAYMENT_DATE = pAYMENT_DATE;
-	}
-
-	public String getPAYMENT_RECEIPT_PRICE() {
-		return PAYMENT_RECEIPT_PRICE;
-	}
-
-	public void setPAYMENT_RECEIPT_PRICE(String pAYMENT_RECEIPT_PRICE) {
-		PAYMENT_RECEIPT_PRICE = pAYMENT_RECEIPT_PRICE;
-	}
-
 	public String getINT_USER_ID() {
 		return INT_USER_ID;
 	}
@@ -169,6 +156,46 @@ public class HM_P0035VO {
 
 	public void setDEPARTMENT_NAME(String dEPARTMENT_NAME) {
 		DEPARTMENT_NAME = dEPARTMENT_NAME;
+	}
+
+	public String getCONTRACT_START_MONTH() {
+		return CONTRACT_START_MONTH;
+	}
+
+	public void setCONTRACT_START_MONTH(String cONTRACT_START_MONTH) {
+		CONTRACT_START_MONTH = cONTRACT_START_MONTH;
+	}
+
+	public String getCONTRACT_YEAR_PAY() {
+		return CONTRACT_YEAR_PAY;
+	}
+
+	public void setCONTRACT_YEAR_PAY(String cONTRACT_YEAR_PAY) {
+		CONTRACT_YEAR_PAY = cONTRACT_YEAR_PAY;
+	}
+
+	public String getCONTRACT_MONTH_PAY() {
+		return CONTRACT_MONTH_PAY;
+	}
+
+	public void setCONTRACT_MONTH_PAY(String cONTRACT_MONTH_PAY) {
+		CONTRACT_MONTH_PAY = cONTRACT_MONTH_PAY;
+	}
+
+	public String getCONTRACT_DAY_PAY() {
+		return CONTRACT_DAY_PAY;
+	}
+
+	public void setCONTRACT_DAY_PAY(String cONTRACT_DAY_PAY) {
+		CONTRACT_DAY_PAY = cONTRACT_DAY_PAY;
+	}
+
+	public String getCONTRACT_TIME_PAY() {
+		return CONTRACT_TIME_PAY;
+	}
+
+	public void setCONTRACT_TIME_PAY(String cONTRACT_TIME_PAY) {
+		CONTRACT_TIME_PAY = cONTRACT_TIME_PAY;
 	}
 
 }

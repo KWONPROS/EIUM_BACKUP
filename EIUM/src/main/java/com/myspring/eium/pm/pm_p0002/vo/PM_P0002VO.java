@@ -13,58 +13,45 @@ public class PM_P0002VO {
 	private String payment_code;
 	private String payment_date;
 	private String payment_des_name;
+	private String department_code;
 	private String department_name;
+	private String site_code;
+	private String site_name;
+	private String job_class_code;
+	private String job_class_name;
 	private String position_name;
 	private String pay_grade_name;
 	private String salary;
-	private String job_class_name;
-	private String weekday_normal_work_time;
-	private String weekday_extension_work_time;
-	private String weekday_night_work_time;
-	private String holiday_normal_work_time;
-	private String holiday_extension_work_time;
-	private String holiday_night_work_time;
 	private String user;
 	
 
 	
 	
 
-	public String getWeekday_normal_work_time() {
-		return weekday_normal_work_time;
+
+	public String getDepartment_code() {
+		return department_code;
 	}
-	public void setWeekday_normal_work_time(String weekday_normal_work_time) {
-		this.weekday_normal_work_time = weekday_normal_work_time;
+	public void setDepartment_code(String department_code) {
+		this.department_code = department_code;
 	}
-	public String getWeekday_extension_work_time() {
-		return weekday_extension_work_time;
+	public String getSite_code() {
+		return site_code;
 	}
-	public void setWeekday_extension_work_time(String weekday_extension_work_time) {
-		this.weekday_extension_work_time = weekday_extension_work_time;
+	public void setSite_code(String site_code) {
+		this.site_code = site_code;
 	}
-	public String getWeekday_night_work_time() {
-		return weekday_night_work_time;
+	public String getSite_name() {
+		return site_name;
 	}
-	public void setWeekday_night_work_time(String weekday_night_work_time) {
-		this.weekday_night_work_time = weekday_night_work_time;
+	public void setSite_name(String site_name) {
+		this.site_name = site_name;
 	}
-	public String getHoliday_normal_work_time() {
-		return holiday_normal_work_time;
+	public String getJob_class_code() {
+		return job_class_code;
 	}
-	public void setHoliday_normal_work_time(String holiday_normal_work_time) {
-		this.holiday_normal_work_time = holiday_normal_work_time;
-	}
-	public String getHoliday_extension_work_time() {
-		return holiday_extension_work_time;
-	}
-	public void setHoliday_extension_work_time(String holiday_extension_work_time) {
-		this.holiday_extension_work_time = holiday_extension_work_time;
-	}
-	public String getHoliday_night_work_time() {
-		return holiday_night_work_time;
-	}
-	public void setHoliday_night_work_time(String holiday_night_work_time) {
-		this.holiday_night_work_time = holiday_night_work_time;
+	public void setJob_class_code(String job_class_code) {
+		this.job_class_code = job_class_code;
 	}
 	public String getPosition_name() {
 		return position_name;

@@ -24,7 +24,6 @@ public interface PM_P0003DAO {
 	public void deleteData(Map<String, String> row) throws DataAccessException;
 	public List<PM_P0003VO> searchReceipt(Map<String, Object> searchMap)throws DataAccessException;
 	public List<PM_P0003VO> paygradeList(Map<String, Object> searchMap)throws DataAccessException;
-	public List<PM_P0003VO> BankList(Map<String, Object> searchMap)throws DataAccessException;
 
 	
 	 

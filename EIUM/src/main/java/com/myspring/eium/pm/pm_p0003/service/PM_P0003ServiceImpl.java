@@ -49,12 +49,6 @@ public class PM_P0003ServiceImpl implements PM_P0003Service {
 		List<PM_P0003VO> list =  p0003DAO.searchReceipt(searchMap); 
 		return list;
 	}
-	
-	@Override
-	public List<PM_P0003VO> BankList(Map<String, Object> searchMap) throws DataAccessException {
-		List<PM_P0003VO> list =  p0003DAO.BankList(searchMap); 
-		return list;
-	}
 
 	@Override
 	public void saveData(Map<String, String[]> dataMap, String user,String x, String y)  throws DataAccessException  {

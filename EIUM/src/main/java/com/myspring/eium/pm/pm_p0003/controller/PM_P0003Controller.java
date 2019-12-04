@@ -10,7 +10,6 @@ public interface PM_P0003Controller {
 	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map payment_searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map searchTypeList(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public Map bankList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map searchReceipt(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map paygrade_searchData(HttpServletRequest request, HttpServletResponse response) throws Exception;

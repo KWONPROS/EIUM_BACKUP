@@ -84,12 +84,14 @@ public class PM_P0002ControllerImpl implements PM_P0002Controller {
 		searchMap.put("searchSite", request.getParameter("searchSite"));
 		searchMap.put("searchTYPE", request.getParameter("searchTYPE"));
 		searchMap.put("searchDetail", request.getParameter("searchDetail"));
+		searchMap.put("total", request.getParameter("total"));
 
 
 		System.out.println(request.getParameter("Ppayment_code"));
 		System.out.println(request.getParameter("searchSite"));
 		System.out.println(request.getParameter("searchTYPE"));
 		System.out.println(request.getParameter("searchDetail"));
+		System.out.println(request.getParameter("total"));
 
 		List<PM_P0002VO> data = p0002Service.searchList(searchMap);
 		
