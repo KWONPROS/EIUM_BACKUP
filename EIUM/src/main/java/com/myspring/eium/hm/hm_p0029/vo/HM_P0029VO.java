@@ -26,7 +26,7 @@ public class HM_P0029VO {
 	private String country_NAME;
 	private String area;
 	private String START_DATE;
-	private String end_DATE;
+	private String END_DATE;
 	private String flight_COST;
 	private String total_COST;
 	private String purpose;
@@ -132,11 +132,12 @@ public class HM_P0029VO {
 	public void setSTART_DATE(String sTART_DATE) {
 		START_DATE = sTART_DATE;
 	}
-	public String getEnd_DATE() {
-		return end_DATE;
+	
+	public String getEND_DATE() {
+		return END_DATE;
 	}
-	public void setEnd_DATE(String end_DATE) {
-		this.end_DATE = end_DATE;
+	public void setEND_DATE(String eND_DATE) {
+		END_DATE = eND_DATE;
 	}
 	public String getFlight_COST() {
 		return flight_COST;

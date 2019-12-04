@@ -39,8 +39,8 @@
 			 	{Header:"사원코드",Type:"Text",SaveName:"employee_CODE",  Align:"Center", Edit: 0,Hidden:1},	
 		        {Header:"사원명",Type:"Text",SaveName:"employee_NAME", Width:180,  Align:"Center", Edit: 0},	
 		        {Header:"자격종류",Type:"Text",SaveName:"license_NAME", Width:180, Align:"Center", Edit: 0},
-				{Header:"취득일",Type:"Text",SaveName:"start_date", Width:180, Align:"Center", Edit: 0},
-				{Header:"만료일",Type:"Text",SaveName:"end_date", Width:190, Align:"Center", Edit: 0},
+				{Header:"취득일",Type:"Text",SaveName:"start_DATE", Width:180, Align:"Center", Edit: 0},
+				{Header:"만료일",Type:"Text",SaveName:"end_DATE", Width:190, Align:"Center", Edit: 0},
 				{Header:"자격증번호",Type:"Text",SaveName:"license_NUMBER", Width:190, Align:"Center", Edit: 0},
 				{Header:"발행기관",Type:"Text",SaveName:"institute", Width:200, Align:"Center", Edit: 0},
 				{Header:"수당여부",Type:"Text",SaveName:"bonus", Width:200, Align:"Center", Edit: 0},
@@ -231,8 +231,8 @@ background-color: #2C3E50;
 					<option selected >1. 사업장</option>
 					<option >2. 부서</option>
 				</select>
-				<input type="text" id="Psite_code" style="width: 60px;"><a href="javascript:showPopup_option();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
-				<input type="text" id="Psite_name">
+				<input type="text" id="Poption_code" style="width: 60px;"><a href="javascript:showPopup_option();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
+				<input type="text" id="Poption_name">
 				<span class="searchBarTitle">재직구분</span>
 				<input type="text" id="WORK_STATUS_CODE" style="width: 60px;"><a href="javascript:findPopup('WORK_STATUS');"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
 				<input type="text" id="WORK_STATUS_NAME" style="width: 60px;">

@@ -112,7 +112,6 @@
 	 function showPopup_option() { //조회조건
 		 var selectItem = $("#searchList option").index($("#searchList option:selected"));
 
-		alert(selectItem);
 		 if(selectItem == "0"){
 			 var url = '${contextPath}/hm/p0029/search_Site.do';
 			 window.open(url, "a", "width=600, height=500, left=100, top=50");
