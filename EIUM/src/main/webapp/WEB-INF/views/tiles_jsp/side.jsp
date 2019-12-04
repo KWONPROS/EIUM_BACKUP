@@ -2,70 +2,44 @@
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-  request.setCharacterEncoding("UTF-8");
-%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
 
 <title>side</title>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="${contextPath}/resources/sheet/ibleaders.js"></script>
 <script src="${contextPath}/resources/sheet/ibsheetinfo.js"></script>
 <script src="${contextPath}/resources/sheet/ibsheet.js"></script>
-<link href="${contextPath}/resources/tab/css/ibtab-style.css"
-	rel="stylesheet">
-<script src="${contextPath}/resources/tab/js/ibtab.js"
-	type="text/javascript"></script>
-<script src="${contextPath}/resources/tab/js/ibtabinfo.js"
-	type="text/javascript"></script>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="${contextPath}/resources/tab/css/ibtab-style.css"rel="stylesheet">
+<script src="${contextPath}/resources/tab/js/ibtab.js"type="text/javascript"></script>
+<script src="${contextPath}/resources/tab/js/ibtabinfo.js"type="text/javascript"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <style type="text/css">
-
 /* 배너단 */
 .logobox {
 	background-color: #212121;
-	padding: 10px;
-	padding-bottom: 15px;
+	height: 140px;
+	padding: 10px 0px 10px 10px;
 }
-
 .logobox .logo {
 	width: auto;
 	height: 80px;
 }
 .logobox .sideSearchBar {
 	width: 170px;
-	vertical-align: middle;
-	white-space: nowrap;
 	position: relative;
-}
-.logobox .sideSearchBar input#search {
-	width: 170px;
-	height: 30px;
-	background: #ffffff;
-	border: none;
-	font-size: 10pt;
-	color: #63717f;
-	padding-left: 35px;
-	border-radius: 5px;
-}
-.sideSearchBar .icon {
-	position: absolute;
-	margin-left: -160px;
-	margin-top: 3px;
-	z-index: 1;
-	color: #4f5b66;
+	bottom:-10px;
 }
 
 /* 트리메뉴 */
-
 #sidexx {
-
 	width: 190px;
 	height: 100%;
 	background-color: #212121;
@@ -76,8 +50,6 @@
 <title>사이드 메뉴</title>
 
 <script> //메뉴트리
-
-//데이터는 서버로 옮겨야 함
 var data = {Data:[
 	{menuCode:"m000",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:"등록정보관리"},
 	
@@ -200,15 +172,14 @@ var data = {Data:[
 	</c:if>
 	</c:forEach>
 	]};
-
-
 $(document).ready(function(){	
+	
+	
 	
 	var sheetHeight = $(window).height();	//높이 자동계산
 	createIBSheet2(document.getElementById("sideMenu"),"leftMenu","100%",(sheetHeight-173)+"px");
 	leftMenu.CustomScroll =3;	//스크롤 모양
 	leftMenu.SetTheme("LGY2","LightGray2");
-
 	leftMenu.NoTreeLines = 1; //트리모양
 	var ibdata = {};
 	ibdata.Cfg = {SizeMode:"sizeAdvancedAuto",DataRowHeight:30, MouseHoverMode:2,DragMode:-1};
@@ -261,8 +232,12 @@ $(document).ready(function(){
 					width:"0px"
 				}
 			});
+    	
+    	
+    	
+    	 
+    	
 });
-
  function leftMenu_OnClick(r,c,v){
 	 if(leftMenu.IsHaveChild(r)){	//트리 펼침여부
 		leftMenu.SetRowExpanded(r  ,  !(leftMenu.GetRowExpanded(r)));
@@ -271,7 +246,6 @@ $(document).ready(function(){
 	//이미 열린 텝인지 확인
 	var obj = tabMenu.findTabId(leftMenu.GetCellValue(r,"menuCode"));
 	//없으면 undefined가 리턴됨.
-
 	if(obj){
 		tabMenu.goToTab(obj.getIndex());
 		return;
@@ -294,18 +268,37 @@ $(document).ready(function(){
 			    style : {
 						btnClose:true
 					}
-
 			  },
 			  contents: {
 			    type:"iframe",	
 				contents:leftMenu.GetCellValue(r,"URL")
 			  }
 			});
-
 	}
-
 }
+ function leftMenu_OnSearchEnd(code,msg){
+	 var menulist=activeSearch();
+	 $("#searchInput").autocomplete({source: menulist});
+ }
 
+ function activeSearch(){
+	 var menulist=[];
+	 for(var i =0; i<leftMenu.GetDataLastRow();i++){	 
+			 menulist.push(leftMenu.GetCellValue(i,0));
+	 } 
+	return menulist;	  
+ }
+ function submitMenu(){
+	 for(var i =0; i<leftMenu.GetDataLastRow();i++){
+		 if($("#searchInput").val()==leftMenu.GetCellValue(i,0)){
+			 leftMenu_OnClick(i,0,$("#searchInput").val());
+		 }
+		 
+ } 
+ }
+ 
+ 
+ 
 </script>
 </head>
 <body>
@@ -315,11 +308,18 @@ $(document).ready(function(){
 			<a href="${contextPath}/main.do"> <img class="logo"
 				src="${contextPath}/resources/image/EIUM_banner.png" /></a>
 
-			<div class="sideSearchBar">
-				<input type="search" id="search" placeholder="찾을 메뉴 입력..." /> <span
-					class="icon"><i class="fa fa-search"></i></span>
-			</div>
-			
+			<form class="sideSearchBar" action="javascript:submitMenu();">		
+				<div class="input-group mb-3 input-group-sm">
+					<input type="search" placeholder="메뉴 입력.."
+						aria-describedby="button-addon5" id="searchInput"class="form-control">
+					<div class="input-group-append">
+						<button id="button-addon5" type="submit" class="btn btn-secondary">
+							<i class="fa fa-search"></i>
+						</button>
+					</div>
+				</div>
+			</form >
+
 		</div>
 		<div id="sideMenu"></div>
 		

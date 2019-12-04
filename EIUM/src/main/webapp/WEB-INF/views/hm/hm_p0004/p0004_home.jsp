@@ -12,7 +12,7 @@
 <link href="${contextPath}/resources/tab/css/ibtab-style.css" rel="stylesheet">
 <script src="${contextPath}/resources/tab/js/ibtab.js" type="text/javascript"></script>
 <script src="${contextPath}/resources/tab/js/ibtabinfo.js" type="text/javascript"></script>
-
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
@@ -131,6 +131,7 @@
 		         ];
 		   createIBSheet2($("#yogi")[0],"mySheet2", "850px", "300px");
 		   IBS_InitSheet(mySheet2,initSheet2);
+		   mySheet2.SetWaitImageVisible(0);
 		  
 				
 		
