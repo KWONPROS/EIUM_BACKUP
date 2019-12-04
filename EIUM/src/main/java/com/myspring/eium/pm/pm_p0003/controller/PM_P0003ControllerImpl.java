@@ -1,6 +1,7 @@
 package com.myspring.eium.pm.pm_p0003.controller;
 
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.bind.ParseConversionEvent;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,7 +63,6 @@ public class PM_P0003ControllerImpl implements PM_P0003Controller {
 	public ModelAndView paymentdateSerch_init(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		dateMap.put("date", request.getParameter("monthpicker"));
-		System.out.println("1");
 		System.out.println(request.getParameter("monthpicker"));
 		
 		ModelAndView mav = new ModelAndView("pm/pm_p0003/p0003_Payment_date");
@@ -79,26 +80,48 @@ public class PM_P0003ControllerImpl implements PM_P0003Controller {
 		request.setCharacterEncoding("utf-8");
 		Map<String, Object> searchMap = new HashMap<String, Object>(); 
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+		
+		
+
+
+		
+		HttpSession session = request.getSession(); 
+		LoginVO loginvo = new LoginVO();
+		loginvo = (LoginVO)session.getAttribute("login"); 
+		System.out.println("·Î±×ÀÎ¾ÆÀÌµğ´Â"+loginvo.getEmployee_name());
+		System.out.println("ºÎ¼­¸íÀº"+loginvo.getDepartment_name());
+		
+		Map<String, Object> accessMap = new HashMap<String, Object>();
+		ArrayList<String> accessRange = new ArrayList<String>();		
+		accessRange = (ArrayList<String>) session.getAttribute("access_range"); 
+		accessMap = (Map<String, Object>) session.getAttribute("accessnum");		
+		int n =  (Integer) accessMap.get("M024");
+		System.out.println(accessRange.get(n));
+
+		
+				
 
 		searchMap.put("Ppayment_code", request.getParameter("Ppayment_code"));
-		searchMap.put("searchBank", request.getParameter("searchBank"));
 		searchMap.put("searchSite", request.getParameter("searchSite"));
 		searchMap.put("searchTYPE", request.getParameter("searchTYPE"));
+		searchMap.put("searchDetail", request.getParameter("searchDetail"));
+		searchMap.put("access_range", request.getParameter("access_range"));
+		searchMap.put("Semployee_name", request.getParameter("Semployee_name"));
+		searchMap.put("Sdepartment_name", request.getParameter("Sdepartment_name"));
 
-
-		System.out.println(request.getParameter("Ppayment_code"));
-		System.out.println(request.getParameter("searchBank"));
-		System.out.println(request.getParameter("searchSite"));
-		System.out.println(request.getParameter("searchTYPE"));
-
-
+		System.out.println("Ppayment_code:"+request.getParameter("Ppayment_code"));
+		System.out.println("searchSite:"+request.getParameter("searchSite"));
+		System.out.println("searchTYPE:"+request.getParameter("searchTYPE"));
+		System.out.println("searchDetail:"+request.getParameter("searchDetail"));
+		System.out.println("access_range:"+request.getParameter("access_range"));
+		System.out.println("Semployee_name:"+request.getParameter("Semployee_name"));
+		System.out.println("Sdepartment_name:"+request.getParameter("Sdepartment_name"));
+		
 		List<PM_P0003VO> data = p0003Service.searchList(searchMap);
 		
         resultMap.put("Data", data);
         return resultMap;
 	}
-	
-	
 	
 
 	
@@ -131,7 +154,7 @@ public class PM_P0003ControllerImpl implements PM_P0003Controller {
         resultMap.put("Data", data);
         return resultMap;
 	}
-	
+
 	@Override
 	@RequestMapping(value = "pm/p0003/TypeList.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
@@ -145,21 +168,6 @@ public class PM_P0003ControllerImpl implements PM_P0003Controller {
 		System.out.println(request.getParameter("searchSite"));
 		//?????? ???
 		List<PM_P0003VO> data = p0003Service.searchTypeList(searchMap);
-        resultMap.put("Data", data);
-       
-        return resultMap;
-	}
-	
-	@Override
-	@RequestMapping(value = "pm/p0003/BankList.do", method = { RequestMethod.GET, RequestMethod.POST })
-	@ResponseBody
-	public Map bankList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-		Map<String, Object> searchMap = new HashMap<String, Object>(); // ???????
-		Map<String, Object> resultMap = new HashMap<String, Object>(); // ??????
-		
-
-		List<PM_P0003VO> data = p0003Service.BankList(searchMap);
         resultMap.put("Data", data);
        
         return resultMap;
@@ -180,6 +188,8 @@ public class PM_P0003ControllerImpl implements PM_P0003Controller {
 		System.out.println(x);
 		searchMap.put("y", request.getParameter("y"));
 		System.out.println(y);
+		
+
 
 		List<PM_P0003VO> data = p0003Service.searchReceipt(searchMap);
 		
@@ -204,7 +214,7 @@ public class PM_P0003ControllerImpl implements PM_P0003Controller {
 
 		
 		
-		// ì €ì¥ Data ì¶”ì¶œí•˜ê¸°
+		// ÀúÀå Data ÃßÃâÇÏ±â
 		Enumeration enu = request.getParameterNames();
 		while (enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
@@ -217,10 +227,10 @@ public class PM_P0003ControllerImpl implements PM_P0003Controller {
 		try {
 			p0003Service.saveData(dataMap, user, x, y);	
 			result.put("Code","0");
-			result.put("Message","ì €ì¥ë˜ì—ˆìŠµë‹ˆë‹¤");
+			result.put("Message","ÀúÀåµÇ¾ú½À´Ï´Ù");
 		}catch(Exception e) {                                                               
 			result.put("Code","-1");
-			result.put("Message","ì €ì¥ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤");
+			result.put("Message","ÀúÀå¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù");
 			e.printStackTrace();
 		}
 		

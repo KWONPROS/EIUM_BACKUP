@@ -10,7 +10,7 @@
 <script src='${contextPath}/resources/fullcalendar/core/main.js'></script>
 <script src='${contextPath}/resources/fullcalendar/interaction/main.js'></script>
 <script src='${contextPath}/resources/fullcalendar/daygrid/main.js'></script>
-
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -46,7 +46,7 @@
     });
 
     calendar.render();
-    
+  
 
   
   
@@ -318,7 +318,11 @@ body ::-webkit-scrollbar-thumb {  background: rgba(0,0,0,.1);  }
 
 	<div id='topright' class="topright">
 		<div id='vacation' class="vacation" style="color: white;">
-			<a class="plusbutton" href="javascript:createTab(34,0,'휴가관리');">+</a>
+		    <c:forEach items="${sessionScope.menu_code}" begin="0" end="35" step="1" var="menu_code" varStatus="status">
+		       <c:if test="${menu_code eq 'M029'}">
+		       <a class="plusbutton" href="javascript:createTab(${status.count + 5}, 0,'휴가관리');">+</a>
+		       </c:if>
+		    </c:forEach>
 			<div class="boardtitle" style="border-bottom-color: white;">휴가</div>
 			<div class="divboard">
 
@@ -342,7 +346,11 @@ body ::-webkit-scrollbar-thumb {  background: rgba(0,0,0,.1);  }
 
 		</div>
 		<div id='business' class="business" style="color: white;">
-			<a class="plusbutton" href="javascript:createTab(36,0,'출장관리');">+</a>
+		    <c:forEach items="${sessionScope.menu_code}" begin="0" end="35" step="1" var="menu_code" varStatus="status">
+		       <c:if test="${menu_code eq 'M031'}">
+		       <a class="plusbutton" href="javascript:createTab(${status.count + 5}, 0,'출장관리');">+</a>
+		       </c:if>
+		    </c:forEach>
 			<div class="boardtitle" style="border-bottom-color: white;">출장</div>
 			<div class="divboard">
 				<table class="boardtable" id="noticetable">

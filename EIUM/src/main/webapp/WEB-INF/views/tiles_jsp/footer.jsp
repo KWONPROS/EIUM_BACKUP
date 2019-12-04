@@ -5,7 +5,6 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>하단 부분</title>
   <style>
     #copyrightText {
      font-size:10px;

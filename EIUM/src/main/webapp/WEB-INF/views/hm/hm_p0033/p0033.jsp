@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -197,6 +198,7 @@ background-color: #2C3E50;
 
 </head>
 <body onload="LoadPage()">
+<c:set var="num" scope="request" value="${sessionScope.accessnum['M017']}"/>
 	<form name="frm">
         <div class="leftbuttons">
 		<button type="button" onclick="doAction('down')" class="IBbutton">엑셀</button>
@@ -213,7 +215,10 @@ background-color: #2C3E50;
         <div class="left">
         <div id="searchBar">
             &nbsp;&nbsp; 
-            고과명 : <input type="text" id="Phr_assessment_name"><a href="javascript:showPopup1();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
+            
+            
+
+            ${sessionScope.access_range[num]}, 고과명 : <input type="text" id="Phr_assessment_name"><a href="javascript:showPopup1();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
            사업장 : <input type="text" id="Psite_name"><a href="javascript:showPopup2();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
            <br><br>
@@ -226,6 +231,7 @@ background-color: #2C3E50;
         </div>
 		</div>
 
+
 		<div style="position: absolute; top: 220px; left: 70px;">
 			<script type="text/javascript">
 				createIBSheet("mySheet", "1500px", "600px");
@@ -234,6 +240,9 @@ background-color: #2C3E50;
       <input type="hidden" id="Psite_code" >
       <input type="hidden" id="Pemployee_code" >
       <input type="hidden" id="Phr_assessment_code" >
+
+      <input type="hidden" id="access_num" value="${sessionScope.accessnum['M017']}" >
+      <input type="hidden" id="access_range" value="${sessionScope.access_range}" >
       
 
 	</form>
