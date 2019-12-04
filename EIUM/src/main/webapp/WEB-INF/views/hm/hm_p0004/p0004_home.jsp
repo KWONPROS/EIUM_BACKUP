@@ -79,7 +79,7 @@
 			{Header:"직책이름",Type:"Text",SaveName:"duty_NAME", Hidden:1},			
 			{Header:"직무코드",Type:"Text",SaveName:"job_DIS_CODE", Hidden:1},			
 			{Header:"직무이름",Type:"Text",SaveName:"job_DIS_NAME", Hidden:1},			//40				
-			{Header:"재직구분",Type:"Text",SaveName:"work_STATUS", Hidden:1},			
+			{Header:"재직구분",Type:"Text",SaveName:"work_STATUS_NAME", Hidden:1},			
 			{Header:"수습적용",Type:"Text",SaveName:"probation_YN", Hidden:1},			
 			{Header:"수습만료일",Type:"Text",SaveName:"probation_DATE", Hidden:1},			
 			{Header:"근속기간포함",Type:"Text",SaveName:"work_INCLUDE_YN", Hidden:1},			
@@ -203,9 +203,9 @@
 	            mySheet.SetCellValue($('input[name=myRow]').val(),26,$('input[name=hireNum]').val()); 
 	            
 	         	//재직정보
-	            mySheet.SetCellValue($('input[name=myRow]').val(),27,$('input[name=employee_JOIN_DATE]').val());
+	         /*   mySheet.SetCellValue($('input[name=myRow]').val(),27,$('input[name=employee_JOIN_DATE]').val());
 	            mySheet.SetCellValue($('input[name=myRow]').val(),28,$('input[name=employee_RESIGNATION_DATE]').val());
-	        /*     mySheet.SetCellValue($('input[name=myRow]').val(),31,$('input[name=department_CODE]').val());
+	             mySheet.SetCellValue($('input[name=myRow]').val(),31,$('input[name=department_CODE]').val());
 	            mySheet.SetCellValue($('input[name=myRow]').val(),32,$('input[name=department_NAME]').val()); 
 	            mySheet.SetCellValue($('input[name=myRow]').val(),33,$('input[name=position_CODE]').val()); 
 	            mySheet.SetCellValue($('input[name=myRow]').val(),34,$('input[name=position_NAME]').val()); 
@@ -216,8 +216,8 @@
 	            mySheet.SetCellValue($('input[name=myRow]').val(),41,$('input[name=duty_CODE]').val()); 
 	            mySheet.SetCellValue($('input[name=myRow]').val(),42,$('input[name=duty_NAME]').val()); 
 	            mySheet.SetCellValue($('input[name=myRow]').val(),43,$('input[name=job_DIS_CODE]').val()); 
-	            mySheet.SetCellValue($('input[name=myRow]').val(),44,$('input[name=job_DIS_NAME]').val());  */
-	            mySheet.SetCellValue($('input[name=myRow]').val(),41,$('select[name=work_STATUS]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),44,$('input[name=job_DIS_NAME]').val()); 
+	            mySheet.SetCellValue($('input[name=myRow]').val(),41,$('input[name=work_STATUS_NAME]').val());  */
 	            mySheet.SetCellValue($('input[name=myRow]').val(),42,$('select[name=probation_YN]').val()); 
 	            mySheet.SetCellValue($('input[name=myRow]').val(),43,$('input[name=probation_DATE]').val()); 
 	            mySheet.SetCellValue($('input[name=myRow]').val(),44,$('select[name=work_INCLUDE_YN]').val()); 
@@ -297,7 +297,7 @@
 		      $('input[name=duty_NAME]').val(mySheet.GetCellValue(Row,38));
 		      $('input[name=job_DIS_CODE]').val(mySheet.GetCellValue(Row,39));
 		      $('input[name=job_DIS_NAME]').val(mySheet.GetCellValue(Row,40));
-		      $('select[name=work_STATUS]').val(mySheet.GetCellValue(Row,41));
+		      $('input[name=work_STATUS_NAME]').val(mySheet.GetCellValue(Row,41));
 		      $('select[name=probation_YN]').val(mySheet.GetCellValue(Row,42));
 		      $('input[name=probation_DATE]').val(mySheet.GetCellValue(Row,43));
 		      $('select[name=work_INCLUDE_YN]').val(mySheet.GetCellValue(Row,44));
@@ -756,25 +756,14 @@ text-decoration: none;
 							<td class="tg-au0w" rowspan="5"></td>
 							<td class="tg-8thm">입사일자</td>
 							<td class="tg-v9i9" rowspan="5"></td>
-							<td class="tg-v9i9"><input type="text"
-								name="employee_JOIN_DATE" class="Datepicker"
-								style="width: 230px;" readonly placeholder="____-__-__"></td>
+							<td class="tg-v9i9"><input type="text" name="employee_JOIN_DATE" style="width: 255px;"placeholder="____-__-__" readonly></td>
 							<td class="tg-8thm">퇴사일자</td>
 							<td class="tg-v9i9" rowspan="5"></td>
-							<td class="tg-v9i9"><input type="text"
-								name="employee_RESIGNATION_DATE" class="Datepicker"
-								style="width: 230px;"readonly placeholder="____-__-__"></td>
+							<td class="tg-v9i9"><input type="text" name="employee_RESIGNATION_DATE" style="width: 255px;"placeholder="____-__-__" readonly></td>
 						</tr>
 						<tr>
 							<td class="tg-8thm">재직구분</td>
-							<td class="tg-v9i9"><select name="work_STATUS"
-								style="width: 255px;">
-									<option value='재직'>1. 재직</option>
-									<option value='파견'>2. 파견</option>
-									<option value='휴직'>3. 휴직</option>
-									<option value='대기'>4. 대기</option>
-									<option value='퇴직'>5. 퇴직</option>
-							</select></td>
+							<td class="tg-v9i9"><input name="work_STATUS_NAME" style="width: 255px;" readonly></td>
 							<td class="tg-8thm"></td>
 							<td class="tg-v9i9"></td>
 						</tr>

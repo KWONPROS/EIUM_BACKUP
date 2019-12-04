@@ -1,12 +1,7 @@
 package com.myspring.eium.hm.hm_p0004.vo;
 
-
-
-
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-
-import oracle.sql.BLOB;
 
 @Component
 public class HM_P0004VO {
@@ -57,7 +52,8 @@ public class HM_P0004VO {
 	private String duty_NAME;
 	private String job_DIS_CODE;
 	private String job_DIS_NAME;
-	private String work_STATUS;
+	private String work_STATUS_CODE;
+	private String work_STATUS_NAME;
 	private String probation_YN;
 	private String probation_DATE;
 	private String work_INCLUDE_YN;
@@ -90,6 +86,19 @@ public class HM_P0004VO {
 	private String contract_MONTH_PAY;
 	private String contract_DAY_PAY;
 	private String contract_TIME_PAY;
+	
+	public String getWork_STATUS_CODE() {
+		return work_STATUS_CODE;
+	}
+	public void setWork_STATUS_CODE(String work_STATUS_CODE) {
+		this.work_STATUS_CODE = work_STATUS_CODE;
+	}
+	public String getWork_STATUS_NAME() {
+		return work_STATUS_NAME;
+	}
+	public void setWork_STATUS_NAME(String work_STATUS_NAME) {
+		this.work_STATUS_NAME = work_STATUS_NAME;
+	}
 	public String getEmp_CODE() {
 		return emp_CODE;
 	}
@@ -336,12 +345,7 @@ public class HM_P0004VO {
 	public void setJob_DIS_NAME(String job_DIS_NAME) {
 		this.job_DIS_NAME = job_DIS_NAME;
 	}
-	public String getWork_STATUS() {
-		return work_STATUS;
-	}
-	public void setWork_STATUS(String work_STATUS) {
-		this.work_STATUS = work_STATUS;
-	}
+
 	public String getProbation_YN() {
 		return probation_YN;
 	}
