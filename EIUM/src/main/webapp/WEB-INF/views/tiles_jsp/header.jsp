@@ -11,7 +11,7 @@
 <html>
 <head>
 <title>header</title>
-
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="${contextPath}/resources/sheet/ibleaders.js"></script>
 <script src="${contextPath}/resources/sheet/ibsheetinfo.js"></script>
@@ -97,25 +97,25 @@ $(document).ready(function(){printClock();});
 	margin-right: 15px;
 	margin-left: 15px;
 }
-
-.homelogin A:link {
-	color: #212121;
-	text-decoration: none;
+.homelogin A{
+cursor: pointer;
+text-decoration: none;
 }
 
-.homelogin A:visited {
+.homelogin a:link {
 	color: #212121;
-	text-decoration: none;
 }
 
-.homelogin A:active {
+.homelogin a:visited {
+	color: #212121;
+}
+
+.homelogin a:active {
 	bacolor: #FF6000;
-	text-decoration: none;
 }
 
-.homelogin A:hover {
+.homelogin a:hover {
 	color: #FF6000;
-	text-decoration: none;
 }
 
 #cc {
@@ -139,9 +139,8 @@ $(document).ready(function(){printClock();});
 	</div>
 
 	<div class="homelogin">
-		<a onclick="tabMenu.goToFirstTab()"><span id="headerinfo" class="icon"><i
-				class="fa fa-home"> Home</i></span></a> <a href="${contextPath}/login.do"><span id="headerinfo"
-			class="icon"><i class="fa fa-share-square-o"> Logout</i></span></a>
+		<a href="javascript:tabMenu.goToFirstTab()"><span id="headerinfo" class="icon"><i class="fa fa-home"> Home</i></span></a> 
+		<a href="${contextPath}/login.do"><span id="headerinfo"class="icon"><i class="fa fa-share-square-o"> Logout</i></span></a>
 	</div>
 
 	<div id="cc">
