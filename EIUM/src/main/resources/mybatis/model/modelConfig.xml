@@ -42,6 +42,7 @@
 				<typeAlias type="com.myspring.eium.hm.hm_p0029.vo.HM_P0029VO" alias="HM_P0029VO" />
 				<typeAlias type="com.myspring.eium.hm.hm_p0033.vo.HM_P0033VO" alias="HM_P0033VO" />
 				<typeAlias type="com.myspring.eium.hm.hm_p0035.vo.HM_P0035VO" alias="HM_P0035VO" />
+				<typeAlias type="com.myspring.eium.hm.hm_p0036.vo.HM_P0036VO" alias="HM_P0036VO" />
 				<typeAlias type="com.myspring.eium.hm.hm_p0039.vo.HM_P0039VO" alias="HM_P0039VO" />
 				<typeAlias type="com.myspring.eium.hm.hm_p0040.vo.HM_P0040VO" alias="HM_P0040VO" />
 				
