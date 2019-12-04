@@ -151,7 +151,7 @@ public void setAppoint_EMPLOYEE_CODE(String appoint_EMPLOYEE_CODE) {
 String employee_NAME;
 String hr_APPOINT_INDEX_NAME;
 String appoint_INDEX_NAME;
-String work_STATUS;
+String work_STATUS_NAME;
 String join_DATE;
 String employee_JOIN_DATE;
 String site_CODE;
@@ -163,11 +163,12 @@ public String getSite_CODE() {
 public void setSite_CODE(String site_CODE) {
 	this.site_CODE = site_CODE;
 }
-public String getWork_STATUS() {
-	return work_STATUS;
+
+public String getWork_STATUS_NAME() {
+	return work_STATUS_NAME;
 }
-public void setWork_STATUS(String work_STATUS) {
-	this.work_STATUS = work_STATUS;
+public void setWork_STATUS_NAME(String work_STATUS_NAME) {
+	this.work_STATUS_NAME = work_STATUS_NAME;
 }
 public String getEmployee_JOIN_DATE() {
 	return employee_JOIN_DATE;

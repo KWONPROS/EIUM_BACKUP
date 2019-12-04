@@ -53,31 +53,88 @@
 	]]> 
 	</select>
 	
-<select id = "searchReceipt" resultMap="P0002resultVO" parameterType="java.util.Map">
-		
+<select id = "searchReceipt" resultMap="P0002resultVO" parameterType="java.util.Map">	
+		<choose>	
+			<when test= " total == 'emp'">	
+			<![CDATA[		
 		select  payment_receipt_item, payment_receipt_price
 		from payment_receipt
 		where payment_code =  #{y}
 		and employee_code =  #{x}
+		]]> 
+   		    </when>
+   		</choose>
+   		
+   		
+   		<choose>	
+			<when test= " total == 'dep'">	
+			<![CDATA[		
+		select  p.payment_receipt_item as payment_receipt_item, sum(p.payment_receipt_price) as payment_receipt_price
+		from payment_receipt p, employee_work ew, department d
+        where p.employee_code = ew.employee_code
+        and ew.department_code = d.department_code
+        and p.payment_code = #{y}
+		and d.department_code = #{x}
+		group by p.payment_receipt_item
+		]]> 
+   		    </when>
+   	    </choose> 
+   		    
+   		    
+   		<choose>	
+			<when test= " total == 'sit'">	
+			<![CDATA[		
+		select  p.payment_receipt_item as payment_receipt_item , sum(p.payment_receipt_price) as payment_receipt_price
+		from payment_receipt p, employee_work ew, department d, site s
+        where p.employee_code = ew.employee_code
+        and ew.department_code = d.department_code
+        and d.site_code = s.site_code
+		and p.payment_code =  #{y}
+		and s.site_code =  #{x}
+		group by p.payment_receipt_item
+		
+		]]> 
+   		    </when>
+   		</choose>  
+   		
+   		
+   		<choose>	
+			<when test= " total == 'job'">	
+			<![CDATA[		
+		select  p.payment_receipt_item as payment_receipt_item, sum(p.payment_receipt_price) as payment_receipt_price
+		from payment_receipt p, employee_work ew, job_class j
+        where p.employee_code = ew.employee_code
+        and ew.job_class_code = j.job_class_code
+		and p.payment_code =  #{y}
+		and j.job_class_code =  #{x}
+		group by p.payment_receipt_item
+		
+		]]> 
+   		    </when>
+   		</choose> 
+   		    
+   		    
+   		    
 </select>
 		
 	
 	<select id = "searchList" resultMap="P0002resultVO" parameterType="java.util.Map">
 	<choose>	
-			<when test= " total='emp' and searchSite  =='all' and searchTYPE == 'all'">	
+			<when test= " total == 'emp' and searchSite  =='all' and searchTYPE == 'all'">	
 			<![CDATA[		
  			select distinct ew.employee_code, e.employee_name, p.payment_code, d.department_name
 			from payment p, selection_of_payment sp, employee_work ew, employee e, department d, site s
 			where p.payment_code = sp.payment_code
 			and sp.job_class_code = ew.job_class_code
 			and sp.site_code = d.site_code
+			and sp.site_code = s.site_code
 			and ew.department_code =d.department_code
 			and ew.employee_code =e.employee_code
 			and p.payment_code = #{Ppayment_code}
 			]]> 
    		    </when>
    		    
-   		    <when test= " total='emp' and searchSite  =='all' and searchTYPE != 'all'">
+   		    <when test= " total == 'emp' and searchSite  =='all' and searchTYPE != 'all'">
    		    <![CDATA[		
  			select distinct ew.employee_code, e.employee_name, p.payment_code, d.department_name
 			from payment p, selection_of_payment sp, employee_work ew, employee e, department d, site s
@@ -91,13 +148,14 @@
  			]]> 
 			</when>
 			
-			<when test= " total='emp' and searchSite  !='all' and searchTYPE == 'all'">	
+			<when test= " total =='emp' and searchSite  !='all' and searchTYPE == 'all'">	
 			<![CDATA[		
   			select distinct ew.employee_code, e.employee_name, p.payment_code, d.department_name
 			from payment p, selection_of_payment sp, employee_work ew, employee e, department d, site s
 			where p.payment_code = sp.payment_code
 			and sp.job_class_code = ew.job_class_code
 			and sp.site_code = d.site_code
+			and sp.site_code = s.site_code			
 			and ew.department_code =d.department_code
 			and ew.employee_code =e.employee_code
 			and p.payment_code = #{Ppayment_code}
@@ -105,13 +163,14 @@
 			]]> 
    		    </when>
    		    
-   		    <when test= " total='emp' and searchSite  !='all' and searchTYPE != 'all'">	
+   		    <when test= " total =='emp' and searchSite  !='all' and searchTYPE != 'all'">	
 			<![CDATA[		
  			 			select distinct ew.employee_code, e.employee_name, p.payment_code, d.department_name
 			from payment p, selection_of_payment sp, employee_work ew, employee e, department d, site s
 			where p.payment_code = sp.payment_code
 			and sp.job_class_code = ew.job_class_code
 			and sp.site_code = d.site_code
+			and sp.site_code = s.site_code
 			and ew.department_code =d.department_code
 			and ew.employee_code =e.employee_code
 			and p.payment_code = #{Ppayment_code}
@@ -124,59 +183,220 @@
    		    
    		    
    		    
-   		    <when test= " total='dep' and searchSite  =='all' and searchTYPE == 'all'">	
+   		    <when test= " total == 'dep' and searchSite  =='all' and searchTYPE == 'all'">	
 			<![CDATA[		
- 			select distinct d.department_code , d.department_name, count(ew.employee_code), p.payment_code  
+			select distinct d.department_code, d.department_name, count(ew.employee_code) as employee_code , p.payment_code
 			from payment p, selection_of_payment sp, employee_work ew, employee e, department d, site s
-			where p.payment_code = sp.payment_code
+			where ew.department_code = d.department_code
+			and p.payment_code = sp.payment_code
 			and sp.job_class_code = ew.job_class_code
 			and sp.site_code = d.site_code
+			and sp.site_code = s.site_code
 			and ew.department_code =d.department_code
 			and ew.employee_code =e.employee_code
 			and p.payment_code = #{Ppayment_code}
+			group by d.department_code, d.department_name, p.payment_code			
 			]]> 
    		    </when>
    		    
-   		    <when test= " total='dep' and searchSite  =='all' and searchTYPE != 'all'">
+   		    <when test= " total == 'dep' and searchSite  =='all' and searchTYPE != 'all'">
    		    <![CDATA[		
- 			select distinct d.department_code , d.department_name, count(ew.employee_code), p.payment_code  
+			select distinct d.department_code, d.department_name, count(ew.employee_code) as employee_code , p.payment_code
 			from payment p, selection_of_payment sp, employee_work ew, employee e, department d, site s
-			where p.payment_code = sp.payment_code
+			where ew.department_code = d.department_code
+			and p.payment_code = sp.payment_code
 			and sp.job_class_code = ew.job_class_code
 			and sp.site_code = d.site_code
+			and sp.site_code = s.site_code
 			and ew.department_code =d.department_code
 			and ew.employee_code =e.employee_code
 			and p.payment_code = #{Ppayment_code}
- 			and d.department_name =  #{searchTYPE} 
+ 			and d.department_name =  #{searchTYPE}
+			group by d.department_code, d.department_name, p.payment_code 			 
  			]]> 
 			</when>
 			
-			<when test= " total='dep' and searchSite  !='all' and searchTYPE == 'all'">	
+			<when test= " total == 'dep' and searchSite  !='all' and searchTYPE == 'all'">	
 			<![CDATA[		
-  			select distinct  d.department_code , d.department_name, count(ew.employee_code), p.payment_code 
+			select distinct d.department_code, d.department_name, count(ew.employee_code) as employee_code , p.payment_code
 			from payment p, selection_of_payment sp, employee_work ew, employee e, department d, site s
-			where p.payment_code = sp.payment_code
+			where ew.department_code = d.department_code
+			and p.payment_code = sp.payment_code
 			and sp.job_class_code = ew.job_class_code
 			and sp.site_code = d.site_code
+			and sp.site_code = s.site_code
 			and ew.department_code =d.department_code
 			and ew.employee_code =e.employee_code
 			and p.payment_code = #{Ppayment_code}
 			and s.site_name = #{searchSite}
-			]]> 
+			group by d.department_code, d.department_name, p.payment_code
+						]]> 
    		    </when>
    		    
-   		    <when test= " total='dep' and searchSite  !='all' and searchTYPE != 'all'">	
+   		    <when test= " total == 'dep' and searchSite  !='all' and searchTYPE != 'all'">	
 			<![CDATA[		
- 			select distinct  d.department_code , d.department_name, count(ew.employee_code),  p.payment_code
+			select distinct d.department_code, d.department_name, count(ew.employee_code) as employee_code , p.payment_code
 			from payment p, selection_of_payment sp, employee_work ew, employee e, department d, site s
-			where p.payment_code = sp.payment_code
+			where ew.department_code = d.department_code
+			and p.payment_code = sp.payment_code
 			and sp.job_class_code = ew.job_class_code
 			and sp.site_code = d.site_code
+			and sp.site_code = s.site_code
 			and ew.department_code =d.department_code
 			and ew.employee_code =e.employee_code
 			and p.payment_code = #{Ppayment_code}
 			and s.site_name = #{searchSite}
 			and d.department_name =  #{searchTYPE} 
+			group by d.department_code, d.department_name, p.payment_code			
+			]]> 
+   		    </when>
+   		       
+   		    <when test= " total == 'sit' and searchSite  =='all' and searchTYPE == 'all'">	
+			<![CDATA[		
+			select distinct s.site_code, s.site_name, count(ew.employee_code) as employee_code , p.payment_code
+			from payment p, selection_of_payment sp, employee_work ew, employee e, department d, site s
+			where ew.department_code = d.department_code
+			and p.payment_code = sp.payment_code
+			and sp.job_class_code = ew.job_class_code
+			and sp.site_code = d.site_code
+			and sp.site_code = s.site_code
+			and ew.department_code =d.department_code
+			and ew.employee_code =e.employee_code
+			and p.payment_code = #{Ppayment_code}
+ 			group by s.site_code, s.site_name, p.payment_code	
+			
+			]]> 
+   		    </when>
+   		    
+   		    <when test= " total == 'sit' and searchSite  =='all' and searchTYPE != 'all'">
+   		    <![CDATA[		
+			select distinct s.site_code, s.site_name, count(ew.employee_code) as employee_code , p.payment_code
+			from payment p, selection_of_payment sp, employee_work ew, employee e, department d, site s
+			where ew.department_code = d.department_code
+			and p.payment_code = sp.payment_code
+			and sp.job_class_code = ew.job_class_code
+			and sp.site_code = d.site_code
+			and sp.site_code = s.site_code
+			and ew.department_code =d.department_code
+			and ew.employee_code =e.employee_code
+			and p.payment_code = #{Ppayment_code}
+ 			and d.department_name =  #{searchTYPE}
+ 			group by s.site_code, s.site_name, p.payment_code	
+ 			 
+ 			]]> 
+			</when>
+			
+			<when test= " total == 'sit' and searchSite  !='all' and searchTYPE == 'all'">	
+			<![CDATA[		
+			select distinct s.site_code, s.site_name, count(ew.employee_code) as employee_code , p.payment_code
+			from payment p, selection_of_payment sp, employee_work ew, employee e, department d, site s
+			where ew.department_code = d.department_code
+			and p.payment_code = sp.payment_code
+			and sp.job_class_code = ew.job_class_code
+			and sp.site_code = d.site_code
+			and sp.site_code = s.site_code
+			and ew.department_code =d.department_code
+			and ew.employee_code =e.employee_code
+			and p.payment_code = #{Ppayment_code}
+			and s.site_name = #{searchSite}
+ 			group by s.site_code, s.site_name, p.payment_code	
+			]]> 
+   		    </when>
+   		    
+   		    <when test= " total == 'sit' and searchSite  !='all' and searchTYPE != 'all'">	
+			<![CDATA[		
+			select distinct s.site_code, s.site_name, count(ew.employee_code) as employee_code, p.payment_code
+			from payment p, selection_of_payment sp, employee_work ew, employee e, department d, site s
+			where ew.department_code = d.department_code
+			and p.payment_code = sp.payment_code
+			and sp.job_class_code = ew.job_class_code
+			and sp.site_code = d.site_code
+			and sp.site_code = s.site_code
+			and ew.department_code =d.department_code
+			and ew.employee_code =e.employee_code
+			and p.payment_code = #{Ppayment_code}
+			and s.site_name = #{searchSite}
+			and d.department_name =  #{searchTYPE} 
+ 			group by s.site_code, s.site_name, p.payment_code	
+			
+			]]> 
+   		    </when>
+   		    
+   		    
+   		    
+   		    
+   		    
+   		    <when test= " total == 'job' and searchSite  =='all' and searchTYPE == 'all'">	
+			<![CDATA[		
+			select distinct j.job_class_code, j.job_class_name, count(ew.employee_code) as employee_code, p.payment_code
+			from payment p, selection_of_payment sp, employee_work ew, employee e, department d, site s, job_class j
+			where ew.department_code = d.department_code
+			and p.payment_code = sp.payment_code
+			and sp.job_class_code = ew.job_class_code
+			and sp.job_class_code = j.job_class_code
+			and sp.site_code = d.site_code
+			and sp.site_code = s.site_code
+			and ew.department_code =d.department_code
+			and ew.employee_code =e.employee_code
+			and p.payment_code = #{Ppayment_code}
+ 			group by j.job_class_code, j.job_class_name, p.payment_code	
+			
+			]]> 
+   		    </when>
+   		    
+   		    <when test= " total == 'job' and searchSite  =='all' and searchTYPE != 'all'">
+   		    <![CDATA[		
+			select distinct j.job_class_code, j.job_class_name, count(ew.employee_code) as employee_code, p.payment_code
+			from payment p, selection_of_payment sp, employee_work ew, employee e, department d, site s, job_class j
+			where ew.department_code = d.department_code
+			and p.payment_code = sp.payment_code
+			and sp.job_class_code = ew.job_class_code
+			and sp.job_class_code = j.job_class_code
+			and sp.site_code = d.site_code
+			and sp.site_code = s.site_code
+			and ew.department_code =d.department_code
+			and ew.employee_code =e.employee_code
+			and p.payment_code = #{Ppayment_code}
+ 			and d.department_name =  #{searchTYPE}
+ 			group by j.job_class_code, j.job_class_name, p.payment_code	
+ 			 
+ 			]]> 
+			</when>
+			
+			<when test= " total == 'job' and searchSite  !='all' and searchTYPE == 'all'">	
+			<![CDATA[		
+			select distinct j.job_class_code, j.job_class_name, count(ew.employee_code) as employee_code, p.payment_code
+			from payment p, selection_of_payment sp, employee_work ew, employee e, department d, site s, job_class j
+			where ew.department_code = d.department_code
+			and p.payment_code = sp.payment_code
+			and sp.job_class_code = ew.job_class_code
+			and sp.job_class_code = j.job_class_code
+			and sp.site_code = d.site_code
+			and sp.site_code = s.site_code
+			and ew.department_code =d.department_code
+			and ew.employee_code =e.employee_code
+			and p.payment_code = #{Ppayment_code}
+			and s.site_name = #{searchSite}
+ 			group by j.job_class_code, j.job_class_name, p.payment_code	
+			]]> 
+   		    </when>
+   		    
+   		    <when test= " total == 'job' and searchSite  !='all' and searchTYPE != 'all'">	
+			<![CDATA[		
+			select distinct j.job_class_code, j.job_class_name, count(ew.employee_code) as employee_code, p.payment_code
+			from payment p, selection_of_payment sp, employee_work ew, employee e, department d, site s, job_class j
+			where ew.department_code = d.department_code
+			and p.payment_code = sp.payment_code
+			and sp.job_class_code = ew.job_class_code
+			and sp.job_class_code = j.job_class_code
+			and sp.site_code = d.site_code
+			and sp.site_code = s.site_code
+			and ew.department_code =d.department_code
+			and ew.employee_code =e.employee_code
+			and p.payment_code = #{Ppayment_code}
+			and s.site_name = #{searchSite}
+			and d.department_name =  #{searchTYPE} 
+ 			group by j.job_class_code, j.job_class_name, p.payment_code	
 			
 			]]> 
    		    </when>

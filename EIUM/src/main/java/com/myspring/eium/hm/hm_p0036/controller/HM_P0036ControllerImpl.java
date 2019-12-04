@@ -38,14 +38,29 @@ public class HM_P0036ControllerImpl  implements HM_P0036Controller{
 		return mav;
 	}
 	@Override
-	@RequestMapping(value = "hm/p0036/searchInit2.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "hm/p0036/searchInit1.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView tabInit2(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		ModelAndView mav = new ModelAndView("hm/hm_p0036/p0036_tab1");
 	
 		return mav;
 	}
-
+	@Override
+	@RequestMapping(value = "hm/p0036/searchInit2.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView tabInit3(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("hm/hm_p0036/p0036_tab2");
+	
+		return mav;
+	}
+	@Override
+	@RequestMapping(value = "hm/p0036/searchInit3.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView tabInit4(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("hm/hm_p0036/p0036_tab3");
+	
+		return mav;
+	}
 	
 	@Override
 	@RequestMapping(value = "hm/p0036/job_class_p01.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -118,8 +133,65 @@ public class HM_P0036ControllerImpl  implements HM_P0036Controller{
 		searchMap.put("work_type", request.getParameter("work_type"));
 		searchMap.put("pay_type", request.getParameter("pay_type"));
 		searchMap.put("resigner", request.getParameter("resigner"));
-		System.out.println("+++++++++++++"+request.getParameter("resigner"));
+
+
 		
+
+		List<HM_P0036VO> data = hM_P0036Service.searchList(searchMap);
+        resultMap.put("Data", data);
+        
+        
+        return resultMap;
+	}
+	@Override
+	@RequestMapping(value = "/hm/p0036/searchList2.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map searchList2(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>(); // 검색조건
+		Map<String, Object> resultMap = new HashMap<String, Object>(); // 조회결과
+		
+		searchMap.put("date", request.getParameter("date"));
+		searchMap.put("date2", request.getParameter("date2"));
+		searchMap.put("site", request.getParameter("site"));
+		searchMap.put("department", request.getParameter("department"));
+		searchMap.put("job_class", request.getParameter("job_class"));
+		searchMap.put("position", request.getParameter("position"));
+		searchMap.put("duty", request.getParameter("duty"));
+		searchMap.put("job_dis", request.getParameter("job_dis"));
+		searchMap.put("work_type", request.getParameter("work_type"));
+		searchMap.put("pay_type", request.getParameter("pay_type"));
+		searchMap.put("resigner", request.getParameter("resigner"));
+	
+
+		
+
+		List<HM_P0036VO> data = hM_P0036Service.searchList(searchMap);
+        resultMap.put("Data", data);
+        
+        
+        return resultMap;
+	}
+	@Override
+	@RequestMapping(value = "/hm/p0036/searchList3.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map searchList3(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>(); // 검색조건
+		Map<String, Object> resultMap = new HashMap<String, Object>(); // 조회결과
+		
+		searchMap.put("date", request.getParameter("date"));
+		searchMap.put("date2", request.getParameter("date2"));
+		searchMap.put("site", request.getParameter("site"));
+		searchMap.put("department", request.getParameter("department"));
+		searchMap.put("job_class", request.getParameter("job_class"));
+		searchMap.put("position", request.getParameter("position"));
+		searchMap.put("duty", request.getParameter("duty"));
+		searchMap.put("job_dis", request.getParameter("job_dis"));
+		searchMap.put("work_type", request.getParameter("work_type"));
+		searchMap.put("pay_type", request.getParameter("pay_type"));
+		searchMap.put("resigner", request.getParameter("resigner"));
+	
 
 		
 
