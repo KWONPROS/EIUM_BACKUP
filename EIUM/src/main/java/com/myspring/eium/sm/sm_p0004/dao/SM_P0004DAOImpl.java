@@ -83,6 +83,8 @@ public class SM_P0004DAOImpl implements SM_P0004DAO {
 		sqlSession.update("mapper.sm_p0004.deleteData18", row);
 		sqlSession.update("mapper.sm_p0004.deleteData19", row);
 		sqlSession.update("mapper.sm_p0004.deleteData20", row);
+		sqlSession.update("mapper.sm_p0004.deleteData21", row);
+		sqlSession.update("mapper.sm_p0004.deleteData22", row);
 
 
 	}
