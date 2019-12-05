@@ -11,6 +11,8 @@ import oracle.sql.BLOB;
 @Component
 public class HM_P0029VO {
 	//교육 파트 VO
+	private String site_CODE;
+	private String site_NAME;
 	private String employee_TRAINING_CODE;
 	private String employee_TRAINING_NAME;
 	private String employee_CODE;
@@ -21,10 +23,10 @@ public class HM_P0029VO {
 	
 	//출장 파트 VO
 	private String business_TRIP_CODE;
-	private String country;
+	private String country_NAME;
 	private String area;
-	private String start_DATE;
-	private String end_DATE;
+	private String START_DATE;
+	private String END_DATE;
 	private String flight_COST;
 	private String total_COST;
 	private String purpose;
@@ -46,6 +48,20 @@ public class HM_P0029VO {
 	private String percent;
 	
 	//교육 파트 GET, SET
+	
+	
+	public String getSite_CODE() {
+		return site_CODE;
+	}
+	public void setSite_CODE(String site_CODE) {
+		this.site_CODE = site_CODE;
+	}
+	public String getSite_NAME() {
+		return site_NAME;
+	}
+	public void setSite_NAME(String site_NAME) {
+		this.site_NAME = site_NAME;
+	}
 	public String getEmployee_TRAINING_CODE() {
 		return employee_TRAINING_CODE;
 	}
@@ -96,11 +112,12 @@ public class HM_P0029VO {
 	public void setBusiness_TRIP_CODE(String business_TRIP_CODE) {
 		this.business_TRIP_CODE = business_TRIP_CODE;
 	}
-	public String getCountry() {
-		return country;
+	
+	public String getCountry_NAME() {
+		return country_NAME;
 	}
-	public void setCountry(String country) {
-		this.country = country;
+	public void setCountry_NAME(String country_NAME) {
+		this.country_NAME = country_NAME;
 	}
 	public String getArea() {
 		return area;
@@ -108,17 +125,19 @@ public class HM_P0029VO {
 	public void setArea(String area) {
 		this.area = area;
 	}
-	public String getStart_DATE() {
-		return start_DATE;
+	
+	public String getSTART_DATE() {
+		return START_DATE;
 	}
-	public void setStart_DATE(String start_DATE) {
-		this.start_DATE = start_DATE;
+	public void setSTART_DATE(String sTART_DATE) {
+		START_DATE = sTART_DATE;
 	}
-	public String getEnd_DATE() {
-		return end_DATE;
+	
+	public String getEND_DATE() {
+		return END_DATE;
 	}
-	public void setEnd_DATE(String end_DATE) {
-		this.end_DATE = end_DATE;
+	public void setEND_DATE(String eND_DATE) {
+		END_DATE = eND_DATE;
 	}
 	public String getFlight_COST() {
 		return flight_COST;

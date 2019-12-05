@@ -67,4 +67,10 @@ public class WM_P0004ServiceImpl implements WM_P0004Service {
 		return row;
 	}
 
+	public List<WM_P0004VO> searchCountryList(Map<String, Object> searchMap) {
+		List<WM_P0004VO> list=WM_P0004DAO.searchCountryList(searchMap);
+
+		return list;
+	}
+
 }

@@ -20,8 +20,9 @@
 	var pageheightoffset = 200; //시트높이 계산용
 	
 	function setSite(){
-		site_code=document.getElementById("Psite_code").value;
-		site_name=document.getElementById("Psite_name").value;
+		site_code=document.getElementById("Poption_code").value;
+		site_name=document.getElementById("Poption_name").value;
+		$("#Poption_code_temp").val($("#searchList option").index($("#searchList option:selected")));
 	};
 
 	//sheet 기본설정
@@ -41,7 +42,13 @@
 		  });
 		});
 
-
+		 $("#date_end").change(function() {
+		    	if($("#date_start").val()>$("#date_end").val()){
+		    		alert("종료일이 시작일 보다 커야합니다.");
+		    		$(this).val("");
+		    		return;
+		    	}
+		 });
 		mySheet.RemoveAll();
 		//아이비시트 초기화
 		var initSheet = {};
@@ -51,7 +58,7 @@
 			 	{Header:"NO",Type:"Seq",SaveName:"NUMBER",Width:70, Align:"Center" },
 		        {Header:"사원코드",Type:"Text",SaveName:"employee_CODE", Width:180, Align:"Center", Edit: 0},
 				{Header:"사원명",Type:"Text",SaveName:"employee_NAME", Width:180, Align:"Center", Edit: 0},
-				{Header:"출장국가",Type:"Text",SaveName:"country", Width:180, Align:"Center", Edit: 0},
+				{Header:"출장국가",Type:"Text",SaveName:"country_NAME", Width:180, Align:"Center", Edit: 0},
 				{Header:"출장지",Type:"Text",SaveName:"area", Width:180, Align:"Center", Edit: 0},
 				{Header:"시작일",Type:"Text",SaveName:"start_DATE", Width:180, Align:"Center", Edit: 0},
 				{Header:"종료일",Type:"Text",SaveName:"end_DATE", Width:190, Align:"Center", Edit: 0},
@@ -73,6 +80,9 @@
 		mySheet.SetColEditable(5, 0);
 		mySheet.SetColEditable(6, 0);
 		mySheet.SetColEditable(7, 0);
+		mySheet.SetColEditable(8, 0);
+		mySheet.SetColEditable(9, 0);
+		mySheet.SetColEditable(10, 0);
 	}
 
 	function doAction(sAction) {
@@ -83,31 +93,30 @@
 			break;
 		case "reset":
 			mySheet.RemoveAll();
-		    $('#date').attr('value', "");
-		    $('#date2').attr('value', "");
-		    $('#Select').attr('value', "");
-		    $('#p_text').attr('value', "");
-		    $('#p_text').attr('placeholder', "내용을 입력해주세요.");
+			$("form").each(function() {  
+	            this.reset();
+	         });  
 			break;
 		}
 	}
 	
 	 //조회조건 팝업(과거)
 	 function showPopup_option() { //조회조건
-		 var selectItem = $("#searchList").val();
+		 var selectItem = $("#searchList option").index($("#searchList option:selected"));
 		 
-		 if(selectItem == "1. 사업장"){
+		 if(selectItem == "0"){
 			 var url = '${contextPath}/hm/p0029/search_Site.do';
 			 window.open(url, "a", "width=600, height=500, left=100, top=50");
-		 }else if(selectItem == "2. 부서"){
+		 }else if(selectItem == "1"){
 			 var url = '${contextPath}/hm/p0029/search_Dept.do';
 			 window.open(url, "a", "width=600, height=500, left=100, top=50");
 		 }
 	  
 	  }
 	 function departmentValue(rowData){
-		 $("#Psite_name").val(rowData.department_NAME);
-		 $("#Psite_code").val(rowData.department_CODE);
+		 $("#Poption_name").val(rowData.department_NAME);
+		 $("#Poption_code").val(rowData.department_CODE);
+		 $("#Poption_code_temp").val($("#searchList option").index($("#searchList option:selected")));
 	 }
 	 /* function showPopup_work(){ //재직구분
 		 var url = '${contextPath}/hm/p0029/search_Work.do';
@@ -243,8 +252,8 @@ background-color: #2C3E50;
 					<option selected >1. 사업장</option>
 					<option >2. 부서</option>
 				</select>
-				<input type="text" id="Psite_code" style="width: 60px;"><a href="javascript:showPopup_option();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
-				<input type="text" id="Psite_name">
+				<input type="text" id="Poption_code" style="width: 60px;"><a href="javascript:showPopup_option();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
+				<input type="text" id="Poption_name">
 				<span class="searchBarTitle">재직구분</span>
 				<input type="text" id="WORK_STATUS_CODE" style="width: 60px;"><a href="javascript:findPopup('WORK_STATUS');"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
 				<input type="text" id="WORK_STATUS_NAME" style="width: 60px;">
@@ -253,19 +262,13 @@ background-color: #2C3E50;
 				<input type="text" id="POSITION_NAME" style="width: 60px;">
 				<div class="otherline">
 				<span class="searchBarTitle">기간</span>
-				<input type="text" id="date" class="Datepicker">
-             ~ <input type="text" id="date2" class="Datepicker">
+				<input type="text" id="date_start" class="Datepicker">
+             ~ <input type="text" id="date_end" class="Datepicker">
              	<span class="searchBarTitle">출장국가</span>
 				<input type="text" id="COUNTRY_CODE" style="width: 60px;"><a href="javascript:findPopup('COUNTRY');"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
 				<input type="text" id="COUNTRY_NAME">
+				<span class="searchBarTitle">퇴사자포함</span><input type="checkbox" id ="resigner" value="1">
 				</div>
-           <%--  고과명 : <input type="text" id="Phr_assessment_name"><a href="javascript:showPopup1();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
-           사업장 : <input type="text" id="Psite_name"><a href="javascript:showPopup2();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
-           <br><br>
-            사원명 : <input type="text" id="Pemployee_name"><a href="javascript:showPopup3();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
-            고과일자 : <input type="text" id="date" c lass="Datepicker">
-             ~ <input type="text" id="date2" class="Datepicker"> --%>
-           
         </div>
 		</div>
 
@@ -274,7 +277,7 @@ background-color: #2C3E50;
 				createIBSheet("mySheet", "1500px", "600px");
 			</script>
 		</div>
-      <input type="hidden" id="Psite_code" >
+      <input type="hidden" id="Poption_code_temp" >
       
 
 	</form>

@@ -20,28 +20,14 @@
 	var pageheightoffset = 200; //시트높이 계산용
 	
 	function setSite(){
-		site_code=document.getElementById("Psite_code").value;
-		site_name=document.getElementById("Psite_name").value;
+		site_code=document.getElementById("Poption_code").value;
+		site_name=document.getElementById("Poption_name").value;
+		$("#Poption_code_temp").val($("#searchList option").index($("#searchList option:selected")));
 	};
 
 	//sheet 기본설정
 	function LoadPage() {
 		
-		  //달력 API
-		$(function() {
-		    $( ".Datepicker" ).datepicker({
-		    	dateFormat: "yy-mm-dd",
-		    	showOn: "both", 
-		        buttonImage: "${contextPath}/resources/image/icons/icon_calendar.png", 
-		        buttonImageOnly: true , 
-		         dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
-		         dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], 
-		         monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
-		         monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
-		  });
-		});
-
-
 		mySheet.RemoveAll();
 		//아이비시트 초기화
 		var initSheet = {};
@@ -52,8 +38,8 @@
 			 	{Header:"사원코드",Type:"Text",SaveName:"employee_CODE",  Align:"Center", Edit: 0,Hidden:1},	
 		        {Header:"사원명",Type:"Text",SaveName:"employee_NAME", Width:180,  Align:"Center", Edit: 0},	
 		        {Header:"어학시험명",Type:"Text",SaveName:"language_NAME", Width:180, Align:"Center", Edit: 0},
-				{Header:"유효기간 시작일",Type:"Text",SaveName:"start_date", Width:180, Align:"Center", Edit: 0},
-				{Header:"유효기간 만료일",Type:"Text",SaveName:"end_date", Width:190, Align:"Center", Edit: 0},
+				{Header:"유효기간 시작일",Type:"Text",SaveName:"start_DATE", Width:180, Align:"Center", Edit: 0},
+				{Header:"유효기간 만료일",Type:"Text",SaveName:"end_DATE", Width:190, Align:"Center", Edit: 0},
 				{Header:"점수",Type:"Text",SaveName:"grade", Width:190, Align:"Center", Edit: 0},
 				{Header:"백분율",Type:"Text",SaveName:"percent", Width:200, Align:"Center", Edit: 0},
 				{Header:"주관기간",Type:"Text",SaveName:"institute", Width:200, Align:"Center", Edit: 0},
@@ -72,6 +58,8 @@
 		mySheet.SetColEditable(5, 0);
 		mySheet.SetColEditable(6, 0);
 		mySheet.SetColEditable(7, 0);
+		mySheet.SetColEditable(8, 0);
+		mySheet.SetColEditable(9, 0);
 	}
 
 	function doAction(sAction) {
@@ -82,31 +70,30 @@
 			break;
 		case "reset":
 			mySheet.RemoveAll();
-		    $('#date').attr('value', "");
-		    $('#date2').attr('value', "");
-		    $('#Select').attr('value', "");
-		    $('#p_text').attr('value', "");
-		    $('#p_text').attr('placeholder', "내용을 입력해주세요.");
+			$("form").each(function() {  
+	            this.reset();
+	         });  
 			break;
 		}
 	}
 	
 	 //조회조건 팝업(과거)
 	 function showPopup_option() { //조회조건
-		 var selectItem = $("#searchList").val();
+		 var selectItem = $("#searchList option").index($("#searchList option:selected"));
 		 
-		 if(selectItem == "1. 사업장"){
+		 if(selectItem == "0"){
 			 var url = '${contextPath}/hm/p0029/search_Site.do';
 			 window.open(url, "a", "width=600, height=500, left=100, top=50");
-		 }else if(selectItem == "2. 부서"){
+		 }else if(selectItem == "1"){
 			 var url = '${contextPath}/hm/p0029/search_Dept.do';
 			 window.open(url, "a", "width=600, height=500, left=100, top=50");
 		 }
 	  
 	  }
 	 function departmentValue(rowData){
-		 $("#Psite_name").val(rowData.department_NAME);
-		 $("#Psite_code").val(rowData.department_CODE);
+		 $("#Poption_name").val(rowData.department_NAME);
+		 $("#Poption_code").val(rowData.department_CODE);
+		 $("#Poption_code_temp").val($("#searchList option").index($("#searchList option:selected")));
 	 }
 	 /* function showPopup_work(){ //재직구분
 		 var url = '${contextPath}/hm/p0029/search_Work.do';
@@ -242,8 +229,8 @@ background-color: #2C3E50;
 					<option selected >1. 사업장</option>
 					<option >2. 부서</option>
 				</select>
-				<input type="text" id="Psite_code" style="width: 60px;"><a href="javascript:showPopup_option();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
-				<input type="text" id="Psite_name">
+				<input type="text" id="Poption_code" style="width: 60px;"><a href="javascript:showPopup_option();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
+				<input type="text" id="Poption_name">
 				<span class="searchBarTitle">재직구분</span>
 				<input type="text" id="WORK_STATUS_CODE" style="width: 60px;"><a href="javascript:findPopup('WORK_STATUS');"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
 				<input type="text" id="WORK_STATUS_NAME" style="width: 60px;">
@@ -254,6 +241,7 @@ background-color: #2C3E50;
              	<span class="searchBarTitle">어학시험명</span>
 				<input type="text" id="LANGUAGE_CODE" style="width: 60px;"><a href="javascript:findPopup('LANGUAGE');"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
 				<input type="text" id="LANGUAGE_NAME">
+				<span class="searchBarTitle">퇴사자포함</span><input type="checkbox" id ="resigner" value="1">
 				</div>
            
         </div>
@@ -264,7 +252,7 @@ background-color: #2C3E50;
 				createIBSheet("mySheet", "1500px", "600px");
 			</script>
 		</div>
-      <input type="hidden" id="Psite_code" >
+      <input type="hidden" id="Poption_code_temp" >
       
 
 	</form>

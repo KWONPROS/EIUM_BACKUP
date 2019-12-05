@@ -39,8 +39,9 @@ function mySheet1_OnDblClick(Row, Col, Value){
 
 		 document.getElementById("Csite_code").setAttribute('value', site_CODE);
 		 document.getElementById("Csite_name").setAttribute('value', site_NAME);
-		 opener.document.getElementById("Psite_code").value=document.getElementById("Csite_code").value;
-		 opener.document.getElementById("Psite_name").value=document.getElementById("Csite_name").value;
+		 opener.document.getElementById("Poption_code").value=document.getElementById("Csite_code").value;
+		 opener.document.getElementById("Poption_name").value=document.getElementById("Csite_name").value;
+		 
 		 opener.setSite();
 
 

@@ -28,6 +28,12 @@ public class WM_P0004DAOImpl implements WM_P0004DAO {
 	}
 	
 	@Override
+	public List<WM_P0004VO> searchCountryList(Map<String, Object> searchMap) throws DataAccessException {
+		List<WM_P0004VO> list = sqlSession.selectList("mapper.wm_p0004.searchCountryList", searchMap);
+		return list;
+	}
+	
+	@Override
 	public void updateData(Map<String, String> row) throws DataAccessException {
 	
 		for(String key : row.keySet()){

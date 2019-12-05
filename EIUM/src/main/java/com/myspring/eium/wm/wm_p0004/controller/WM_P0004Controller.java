@@ -18,5 +18,7 @@ public interface WM_P0004Controller {
 	public ModelAndView employeeSearch_init(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map employeeSearch_p01(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public Map countrySearch_p01(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	ModelAndView countrySearch_init(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 }
