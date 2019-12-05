@@ -16,7 +16,8 @@ public class WM_P0004VO {
 	private String BUSINESS_TRIP_CODE;
     private String START_DATE;
     private String END_DATE;
-    private String COUNTRY;
+    private String COUNTRY_CODE;
+    private String COUNTRY_NAME;
     private String AREA;
     private String FLIGHT_COST;
     private String SELF_BURDEN;
@@ -38,7 +39,7 @@ public class WM_P0004VO {
 	}
 
 	public WM_P0004VO(String EMPLOYEE_CODE, String EMPLOYEE_NAME, String DEPARTMENT_CODE, String DEPARTMENT_NAME, String POSITION_CODE, String POSITION_NAME,
-			          String BUSINESS_TRIP_CODE, String START_DATE, String END_DATE, String COUNTRY, String AREA, String FLIGHT_COST, String SELF_BURDEN, String COMPANY_BURDEN, String ECT_COST, String TOTAL_COST, String PURPOSE,
+			          String BUSINESS_TRIP_CODE, String START_DATE, String END_DATE, String COUNTRY_CODE, String COUNTRY_NAME, String AREA, String FLIGHT_COST, String SELF_BURDEN, String COMPANY_BURDEN, String ECT_COST, String TOTAL_COST, String PURPOSE,
 			          String INT_USER_ID, Date INT_DATE, String UPT_USER_ID, Date UPT_DATE, String SITE_CODE, String SITE_NAME) {
 		
 		this.EMPLOYEE_CODE = EMPLOYEE_CODE;
@@ -50,7 +51,8 @@ public class WM_P0004VO {
 		this.BUSINESS_TRIP_CODE = BUSINESS_TRIP_CODE;
 		this.START_DATE = START_DATE;
 		this.END_DATE = END_DATE;
-		this.COUNTRY = COUNTRY;
+		this.COUNTRY_CODE = COUNTRY_CODE;
+		this.COUNTRY_NAME = COUNTRY_NAME;
 		this.AREA = AREA;
 		this.FLIGHT_COST = FLIGHT_COST;
 		this.SELF_BURDEN = SELF_BURDEN;
@@ -134,12 +136,20 @@ public class WM_P0004VO {
 		END_DATE = eND_DATE;
 	}
 
-	public String getCOUNTRY() {
-		return COUNTRY;
+	public String getCOUNTRY_CODE() {
+		return COUNTRY_CODE;
 	}
 
-	public void setCOUNTRY(String cOUNTRY) {
-		COUNTRY = cOUNTRY;
+	public void setCOUNTRY_CODE(String cOUNTRY_CODE) {
+		COUNTRY_CODE = cOUNTRY_CODE;
+	}
+
+	public String getCOUNTRY_NAME() {
+		return COUNTRY_NAME;
+	}
+
+	public void setCOUNTRY_NAME(String cOUNTRY_NAME) {
+		COUNTRY_NAME = cOUNTRY_NAME;
 	}
 
 	public String getAREA() {

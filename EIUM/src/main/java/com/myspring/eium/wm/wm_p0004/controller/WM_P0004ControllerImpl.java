@@ -50,6 +50,15 @@ public class WM_P0004ControllerImpl implements WM_P0004Controller{
 	} 
 	
 	@Override
+	@RequestMapping(value = "wm/p0004/countrySearch_Init.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView countrySearch_init(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("/wm/wm_p0004/p0004_countrySearch_p01");
+	
+		return mav;
+	} 
+	
+	@Override
 	@RequestMapping(value = "/wm/p0004/searchList.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -117,6 +126,24 @@ public class WM_P0004ControllerImpl implements WM_P0004Controller{
 		
 		//������ ��ȸ
 		List<WM_P0004VO> data = WM_P0004Service.searchEmployeeList(searchMap);
+        resultMap.put("Data", data);
+       
+        return resultMap;
+	}
+
+	@Override
+	@RequestMapping(value = "wm/p0004/countrySearch_p01.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map countrySearch_p01(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>(); // �˻�����
+		Map<String, Object> resultMap = new HashMap<String, Object>(); // ��ȸ���
+		
+		// �˻����Ǽ���
+		searchMap.put("p_id", request.getParameter("p_id"));
+		
+		//������ ��ȸ
+		List<WM_P0004VO> data = WM_P0004Service.searchCountryList(searchMap);
         resultMap.put("Data", data);
        
         return resultMap;

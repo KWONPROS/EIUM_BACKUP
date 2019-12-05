@@ -53,13 +53,14 @@
 			               { "Header" : "직급", "SaveName" : "position_NAME", "Type" : "Text", "Width" : 100, "Align" : "Center" },
 			               { "Header" : "시작일", "SaveName" : "start_DATE", "Type" : "Date", "Width" : 100, "Align" : "Center", "Format":"Ymd" },
 			               { "Header" : "종료일", "SaveName" : "end_DATE", "Type" : "Date", "Width" : 100, "Align" : "Center", "Format":"Ymd" },
-			               { "Header" : "출장국가", "SaveName" : "country", "Type" : "Text", "Width" : 100, "Align" : "Center" },
+			               { "Header" : "국가코드", "SaveName" : "country_CODE", "Type" : "Text", "Width" : 100, "Align" : "Center", "Hidden" : 1 },
+			               { "Header" : "출장국가", "SaveName" : "country_NAME", "Type" : "Popup", "Width" : 100, "Align" : "Center" },
 			               { "Header" : "출장지", "SaveName" : "area", "Type" : "Text", "Width" : 100, "Align" : "Center" },
 			               { "Header" : "항공료", "SaveName" : "flight_COST", "Type" : "Text", "Width" : 100, "Align" : "Center" },
 			               { "Header" : "본인부담", "SaveName" : "self_BURDEN", "Type" : "Text", "Width" : 100, "Align" : "Center" },
 			               { "Header" : "회사부담", "SaveName" : "company_BURDEN", "Type" : "Text", "Width" : 100, "Align" : "Center" },
 			               { "Header" : "기타비용", "SaveName" : "ect_COST", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "총비용", "SaveName" : "total_COST", "Type" : "Text", "Width" : 100, "Align" : "Center", "CalcLogic":"|12|+|13|+|14|" },
+			               { "Header" : "총비용", "SaveName" : "total_COST", "Type" : "Text", "Width" : 100, "Align" : "Center", "CalcLogic":"|13|+|14|+|15|" },
 			               { "Header" : "목적", "SaveName" : "purpose", "Type" : "Text", "Width" : 100, "Align" : "Center" }
 		                 ];
 
@@ -70,7 +71,7 @@
 		mySheet.SetColEditable(4,0);
 		mySheet.SetColEditable(5,0);
 		mySheet.SetColEditable(6,0);
-		mySheet.SetColEditable(15,0);
+		mySheet.SetColEditable(16,0);
 		
 	}
 
@@ -105,9 +106,18 @@
 		window.name = "parent";
 		window.open("${contextPath}/wm/p0004/employeeSearch_Init.do", "a", "width=500, height=700, left=100, top=50");
 		}
+		
+		if(Col=="10"){
+			window.name = "parent2";
+			window.open("${contextPath}/wm/p0004/countrySearch_Init.do", "a", "width=500, height=700, left=100, top=50");
+		}
 	}
 	
 	function GetData(x){
+		mySheet.SetRowData(mySheet.GetSelectRow(),x);
+	}
+	
+	function GetData2(x){
 		mySheet.SetRowData(mySheet.GetSelectRow(),x);
 	}
 	
@@ -179,7 +189,6 @@ background-color: #2C3E50;
 <body onload="LoadPage()">
 	<form name="frm">
         <div class="leftbuttons">  
-		<button type="button" onclick="doAction('print')" class="IBbutton">인쇄</button>
 		<button type="button" onclick="doAction('down')" class="IBbutton">엑셀</button>
         </div> 
         

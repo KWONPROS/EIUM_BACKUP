@@ -51,7 +51,7 @@
 			               { "Header" : "직급", "SaveName" : "position_NAME", "Type" : "Text", "Width" : 100, "Align" : "Center" },
 			               { "Header" : "시작일", "SaveName" : "start_DATE", "Type" : "Text", "Width" : 100, "Align" : "Center", "Format":"Ymd" },
 			               { "Header" : "종료일", "SaveName" : "end_DATE", "Type" : "Text", "Width" : 100, "Align" : "Center", "Format":"Ymd" },
-			               { "Header" : "출장국가", "SaveName" : "country", "Type" : "Text", "Width" : 100, "Align" : "Center" },
+			               { "Header" : "출장국가", "SaveName" : "country_NAME", "Type" : "Text", "Width" : 100, "Align" : "Center" },
 			               { "Header" : "출장지", "SaveName" : "area", "Type" : "Text", "Width" : 100, "Align" : "Center" },
 			               { "Header" : "항공료", "SaveName" : "flight_COST", "Type" : "Text", "Width" : 100, "Align" : "Center" },
 			               { "Header" : "본인부담", "SaveName" : "self_BURDEN", "Type" : "Text", "Width" : 100, "Align" : "Center" },
