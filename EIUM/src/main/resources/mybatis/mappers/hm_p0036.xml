@@ -232,7 +232,7 @@
     AND ew.job_dis_code = jd.job_dis_code(+)
     AND ew.work_type_code = wt.work_type_code(+)
     AND ew.pay_type_code = pt.pay_type_code(+)
-    AND ROUND(MOD(MOD(MONTHS_BETWEEN(SYSDATE,employee_join_date)/12, 1)*12, 1)*(365/12),0) > '0';
+    AND ROUND(MOD(MOD(MONTHS_BETWEEN(SYSDATE,employee_join_date)/12, 1)*12, 1)*(365/12),0) > '0'
 	<choose>
 	<when test="resigner == null ">
 	 AND ew.employee_resignation_date is null 
