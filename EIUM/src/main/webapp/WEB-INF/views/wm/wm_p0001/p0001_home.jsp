@@ -345,13 +345,13 @@
 			
 			//총 정상 근무일 : T_NO_COUNT
 			//총 연장 근무일 : T_EX_COUNT
-			var T_week_NO_TIME = mySheet2.ComputeSum("|12|"); //총 평일 정상 근무시간
-			var T_week_EX_TIME = mySheet2.ComputeSum("|13|"); //총 평일 연장 근무시간
-			var T_week_NI_TIME = mySheet2.ComputeSum("|14|"); //총 평일 야간 근무시간
+			var T_week_NO_TIME = mySheet2.ComputeSum("|13|"); //총 평일 정상 근무시간
+			var T_week_EX_TIME = mySheet2.ComputeSum("|14|"); //총 평일 연장 근무시간
+			var T_week_NI_TIME = mySheet2.ComputeSum("|15|"); //총 평일 야간 근무시간
 			
-			var T_holi_NO_TIME = mySheet2.ComputeSum("|15|"); //총 휴일 정상 근무시간
-			var T_holi_EX_TIME = mySheet2.ComputeSum("|16|"); //총 휴일 연장 근무시간
-			var T_holi_NI_TIME = mySheet2.ComputeSum("|17|"); //총 휴일 야간 근무시간
+			var T_holi_NO_TIME = mySheet2.ComputeSum("|16|"); //총 휴일 정상 근무시간
+			var T_holi_EX_TIME = mySheet2.ComputeSum("|17|"); //총 휴일 연장 근무시간
+			var T_holi_NI_TIME = mySheet2.ComputeSum("|18|"); //총 휴일 야간 근무시간
 			
 			var T_week_count = 0, T_holi_count = 0, T_week_NO_DAY = 0, T_week_EX_DAY = 0, T_holi_NO_DAY = 0, T_holi_EX_DAY = 0, T_NO_COUNT = 0, T_EX_COUNT = 0;
 			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("weekday_NORMAL_WORK_TIME"), T_week_NO_TIME);

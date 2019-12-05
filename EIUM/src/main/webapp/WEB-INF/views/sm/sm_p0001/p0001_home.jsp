@@ -22,7 +22,7 @@
 		mySheet.RemoveAll();
 		//아이비시트 초기화
 		var initSheet = {};
-		initSheet.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:0}
+		initSheet.Cfg = {SearchMode:smLazyLoad, ToolTip : 1, MouseHoverMode : 2, sizeMode:0}
 		initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 		initSheet.Cols = [
 				{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
@@ -75,8 +75,8 @@
 	function doAction(sAction) {
 		switch(sAction){
 		case "search": // 조회
-			var param = FormQueryStringEnc(document.frm);
-			mySheet.DoSearch("${contextPath}/sm/p0001/searchList.do", param);
+			
+			mySheet.DoSearch("${contextPath}/sm/p0001/searchList.do");
 			//mySheet.DoSearch("transaction_data2.json");
 			break;
 		case "reload": //초기화
@@ -101,13 +101,7 @@
 			mySheet.SetCellValue($('input[name=myRow]').val(),19,$('input[name=company_CLOSEBUSINESS_DATE]').val());
 			mySheet.SetCellValue($('input[name=myRow]').val(),20,$('select[name=company_BUSINESS_YN]').val()); 
 			
-			var tempStr = mySheet.GetSaveString();
-			alert("서버로 전달되는 문자열 확인 : " + tempStr);
 			mySheet.DoSave("${contextPath}/sm/p0001/saveData.do");		
-			break;
-		case "save2": //저장 JSON
-		//저장 문자열 추출
-			alert("저장될 문자열:" + JSON.stringify(mySheet.GetSaveJson()));
 			break;
 		case "insert": //신규행 추가
 			var row = mySheet.DataInsert(-1);
@@ -155,7 +149,20 @@
 	
 	//Formating
 	   $(document).ready(function () {
-	   
+	   		//주민등록번호
+	   		 $(function () {    
+	                  $('input[name=company_REPRESENTATIVE_NUMBER]').keydown(function (event) {
+	                   var key = event.charCode || event.keyCode || 0;
+	                   $text = $(this); 
+	                   if (key !== 8 && key !== 9) {
+	                       if ($text.val().length === 6) {
+	                           $text.val($text.val() + '-');
+	                       }
+	                     
+	                   }
+	                   return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
+	               })
+	         });
 	        //사업자등록번호
 	         $(function () {    
 	                  $('input[name=company_RESISTRATION_NUMBER]').keydown(function (event) {
@@ -197,14 +204,14 @@
 	              if ($text.val().length === 2) {
 	                    $text.val($text.val() + '-');
 	                }
-	                if ($text.val().length === 6) {
+	                if ($text.val().length === 7) {
 	                    $text.val($text.val() + '-');
 	                }
 	           }else{
 	              if ($text.val().length === 3) {
 	                    $text.val($text.val() + '-');
 	                }
-	                if ($text.val().length === 8) {
+	                if ($text.val().length === 7) {
 	                    $text.val($text.val() + '-');
 	                }
 	           }
@@ -228,6 +235,7 @@
 		document.form.company_ADDRESS.value = roadAddrPart1;	
 		document.form.company_ADDRESS_DETAIL.value = addrDetail;	
 	}
+	
 </script>
 
 <style type="text/css">
@@ -378,7 +386,7 @@ width: 80%;
 			</tr>
 			<tr>
 				<td class="tg-8thm">주민등록번호</td>
-				<td class="tg-v9i9"><input type="text" name="company_REPRESENTATIVE_NUMBER" style="background: #F8FAE6;"></td>
+				<td class="tg-v9i9"><input type="text" name="company_REPRESENTATIVE_NUMBER" maxlength="14" placeholder="______-_______" style="background: #F8FAE6;"></td>
 			</tr>
 			<tr>
 				<td class="tg-8thm">본점우편번호</td>
@@ -394,11 +402,11 @@ width: 80%;
 			</tr>
 			<tr>
 				<td class="tg-8thm">본점전화번호</td>
-				<td class="tg-v9i9"><input type="text" name="company_CONTACT" id="site_CONTACT" placeholder="__-___-____" class="companyNUM" maxlength="13"></td>
+				<td class="tg-v9i9"><input type="text" name="company_CONTACT" id="company_CONTACT" placeholder="__-____-____" class="companyNUM" maxlength="12"></td>
 			</tr>
 			<tr>
 				<td class="tg-8thm">본점FAX</td>
-				<td class="tg-v9i9"><input type="text" name="company_FAX" id="site_FAX" placeholder="__-___-____" class="siteNUM" maxlength="13" ></td>
+				<td class="tg-v9i9"><input type="text" name="company_FAX" id="company_FAX" placeholder="__-____-____" class="companyNUM" maxlength="12" ></td>
 			</tr>
 			<tr>
 				<td class="tg-8thm">업태</td>
