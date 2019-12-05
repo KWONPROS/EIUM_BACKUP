@@ -94,6 +94,9 @@
 		case "insert":
 		    var row = mySheet.DataInsert();
 		    break;
+		case "down":
+			mySheet.Down2Excel();
+		    break;
 		}
 	}
 	
