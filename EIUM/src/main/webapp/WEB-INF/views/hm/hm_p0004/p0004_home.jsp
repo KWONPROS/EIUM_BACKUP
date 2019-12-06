@@ -111,7 +111,7 @@
 		IBS_InitSheet( mySheet , initSheet);
   
 		mySheet.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
-		mySheet.SetSheetHeight(600);
+		mySheet.SetSheetHeight(620);
 	
 		
 		   //아이비시트 초기화
@@ -458,9 +458,9 @@
 	
 .right {
 	position: relative;
-	top: -560px;
+	top: -580px;
 	left: 500px;
-	height: 700px;
+	height: 710px;
 	width: 1000px;
 	background: #EBEBEB;
 	border-radius: 5px;
