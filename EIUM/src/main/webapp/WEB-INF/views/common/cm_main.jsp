@@ -327,7 +327,7 @@ body ::-webkit-scrollbar-thumb {  background: rgba(0,0,0,.1);  }
 		       <c:if test="${menu_code eq 'M029'}">
 		       <a class="plusbutton" href="javascript:createTab(${status.count + 5}, 0,'휴가관리');">+</a>
 		       </c:if>
-		    </c:forEach>
+		    </c:forEach>  
 			<div class="boardtitle" style="border-bottom-color: white;">휴가</div>
 			<div class="divboard">
 
