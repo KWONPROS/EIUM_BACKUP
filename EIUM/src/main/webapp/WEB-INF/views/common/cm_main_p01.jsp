@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <style>
@@ -22,21 +23,29 @@ textarea {
 	var board_CODE = 0;
 	var hrefId = "";
 	var endinput = "<div class='input-group date' id='endDate'><input type='text' class='form-control' /> <span class='input-group-addon'> <span class='glyphicon glyphicon-calendar'></span></span></div>";
-	var option1 = '<option disabled selected>분류 선택</option>	<option value="인사발령">인사발령</option><option value="교육">교육</option><option value="기타">기타</option>'
-	var option2 = '<option disabled selected>분류 선택</option>	<option value="개인">개인</option><option value="팀">팀</option><option value="기타">기타</option>'
-	var option3 = '<option disabled selected>분류 선택</option>	<option value="생일">생일</option><option value="결혼">결혼</option><option value="조사">조사</option>'
-	var btnEdit = '<button id="modalDelete" type="button" class="btn btn-danger">삭제</button><button id="modalSubmit" type="button" class="btn btn-primary">저장</button>';
-    var btnClose = '<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>';
+	var option1 = '<option disabled selected><spring:message code="lo_typeselect"/></option>	<option value="인사발령"><spring:message code="lo_Personnelappointment"/></option><option value="교육"><spring:message code="lo_EducationManagement"/></option><option value="기타"><spring:message code="lo_etc"/></option>'
+	var option2 = '<option disabled selected><spring:message code="lo_typeselect"/></option>	<option value="개인"><spring:message code="lo_personal"/></option><option value="팀"><spring:message code="lo_team"/></option><option value="기타"><spring:message code="lo_etc"/></option>'
+	var option3 = '<option disabled selected><spring:message code="lo_typeselect"/></option>	<option value="생일"><spring:message code="lo_birthday"/></option><option value="결혼"><spring:message code="lo_marrige"/></option><option value="조사"><spring:message code="lo_funeral"/></option>'
+	var btnEdit = '<button id="modalDelete" type="button" class="btn btn-danger"><spring:message code="lo_delete"/></button><button id="modalSubmit" type="button" class="btn btn-primary"><spring:message code="lo_save"/></button>';
+    var btnClose = '<button type="button" class="btn btn-default" data-dismiss="modal"><spring:message code="lo_close"/></button>';
 
 	
 	
 	$(document).ready(function() {
 
+		 var locale2;
+		   if("${pageContext.response.locale.language}"=="cn"){
+			   locale2="en"
+		   }else{
+			   locale2="${pageContext.response.locale.language}";
+		   }
+		
 		//달력
 		function initCalendar() {
 	        $('#startDate').datetimepicker({
 	        	 viewMode: 'days',
-	             format: 'YYYY-MM-DD'
+	             format: 'YYYY-MM-DD',
+	             locale:locale2
 	        });
 	        $('#endDate').datetimepicker({
 	        	viewMode: 'days',
@@ -165,7 +174,7 @@ textarea {
 				url : '${contextPath}/cm/board.do?board_CODE='+ board_CODE,
 				type : 'GET',
 			});
-			alert("게시글이 삭제되었습니다.");
+			alert('<spring:message code="lo_deleted"/>');
 			location.reload();
 			
 		})
@@ -198,7 +207,7 @@ textarea {
 				data : JSON.stringify(data)
 				
 			})
-				alert("저장되었습니다.");
+				alert('<spring:message code="lo_saved"/>');
 			 location.reload(); 
 		});
 
@@ -219,15 +228,15 @@ textarea {
 			<div class="modal-body">
 				<table class="table">
 					<tr>
-						<td>제목</td>
+						<td><spring:message code="lo_title"/></td>
 						<td><input class="form-control" id="title" name="title"type="text"></td>
 					</tr>
 					<tr>
-						<td>작성자</td>
+						<td><spring:message code="lo_user"/></td>
 						<td><input class="form-control" id="empNAME" type="text"></td>
 					</tr>
 					<tr>
-						<td>분류</td>
+						<td><spring:message code="lo_type"/></td>
 						<td><input type="hidden" id="board_DES"><select
 							class="form-control" id="board_DES_DES" >
 		
@@ -235,7 +244,7 @@ textarea {
 								</td>
 					</tr>
 					<tr>
-						<td>날짜</td>
+						<td><spring:message code="lo_date"/></td>
 						<td>
 							<div class='col-md-5' style="padding-left: 0;">
 								<div class="form-group">
@@ -253,7 +262,7 @@ textarea {
 						</td>
 					</tr>
 					<tr>
-						<td>내용</td>
+						<td><spring:message code="lo_contents"/></td>
 						<td><textarea class="form-control" id="contents" rows="10"></textarea>
 						</td>
 					</tr>

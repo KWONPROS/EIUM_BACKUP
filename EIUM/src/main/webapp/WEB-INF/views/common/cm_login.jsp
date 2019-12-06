@@ -63,6 +63,7 @@ function fn_findPWD(){
 }
 
 .login-form .btnSubmit {
+	height:30px;
 	font-weight: 600;
 	color: #fff;
 	background-color: #0062cc;
@@ -160,9 +161,9 @@ right: 15px;
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="ID" value="" name="employee_id"/><br>
 						<input type="password" class="form-control" placeholder="Password" value="" name="employee_password"/><br> 
-						<a onclick="fn_findID()" class="Forget"><spring:message code="findId"  text="ID 찾기"/></a><br> 
-						<a onclick="fn_findPWD()" class="Forget"><spring:message code="findPwd"  text="비밀번호 찾기" /></a>
-						<input type="submit" class="btnSubmit" value="다음" />  
+						<a onclick="fn_findID()" class="Forget"><spring:message code="findId"/></a><br> 
+						<a onclick="fn_findPWD()" class="Forget"><spring:message code="findPwd"/></a>
+						<input type="submit" class="btnSubmit" value="<spring:message code="lo_next"/>" />  
 					</div>
 					
 					

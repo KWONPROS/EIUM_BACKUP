@@ -60,6 +60,10 @@ var lo_TravelManagement='<spring:message code="lo_TravelManagement"  text="출�
 var lo_Businesstripinquiry='<spring:message code="lo_Businesstripinquiry"  text="출장조회"/>';
 var lo_manytabs='<spring:message code="lo_manytabs"  text="탭이 너무 많습니다. 하나 닫을까요?"/>';
 
+var lo_vacation='<spring:message code="lo_vacation"  text="휴가"/>';
+var lo_business='<spring:message code="lo_business"  text="출장"/>';
+var lo_event='<spring:message code="lo_event"  text="경조사"/>';
+
 
 
 

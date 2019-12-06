@@ -17,14 +17,16 @@
 		<result property="board_END_DATE" column="BOARD_END_DATE" />
 		<result property="board_CONTENT" column="BOARD_CONTENT" />
 		<result property="board_CODE" column="BOARD_CODE" />
-		
-		
+
+
 		<result property="vacation_CODE" column="VACATION_CODE" />
 		<result property="vacation_TYPE" column="VACATION_TYPE" />
 		<result property="vacation_END_DATE" column="VACATION_END_DATE" />
-		<result property="vacation_START_DATE" column="VACATION_START_DATE" />
-		
-		<result property="business_TRIP_CODE" column="BUSINESS_TRIP_CODE" />
+		<result property="vacation_START_DATE"
+			column="VACATION_START_DATE" />
+
+		<result property="business_TRIP_CODE"
+			column="BUSINESS_TRIP_CODE" />
 		<result property="purpose" column="PURPOSE" />
 		<result property="end_DATE" column="END_DATE" />
 		<result property="start_DATE" column="START_DATE" />
@@ -57,7 +59,21 @@
       ]]>
 	</select>
 
-<select id="findvacation" resultMap="resultVO"
+	<select id="findVacationAuth" resultType="java.lang.String"
+		parameterType="java.util.HashMap"> 
+      <![CDATA[
+        select 
+        a.access_range
+		
+		from menu_by_authority a, user_auth b
+		
+		where a.authority_code=b.authority_code
+		and a.menu_code= 'M029'
+		and b.employee_id = #{emp_id}
+      
+      ]]>
+	</select>
+	<select id="findAllVacation" resultMap="resultVO"
 		parameterType="java.util.HashMap"> 
       <![CDATA[
          select 
@@ -69,29 +85,78 @@
          
          from  VACATION_CHANGE_HISTORY A, EMPLOYEE B
          where A.EMPLOYEE_CODE = B.EMPLOYEE_CODE
-      
-         
+    
       ]]>
 	</select>
-	
-<select id="findbusiness" resultMap="resultVO"
+	<select id="findLimitedVacation" resultMap="resultVO"
 		parameterType="java.util.HashMap"> 
       <![CDATA[
-         select 
-         A.BUSINESS_TRIP_CODE,
+        select 
+         B.EMPLOYEE_NAME,
+         A.VACATION_CODE,
+         A.VACATION_TYPE,
+         to_char(to_date(A.VACATION_START_DATE,'YYYYmmdd'),'YYYY-mm-dd') AS VACATION_START_DATE,
+         to_char(to_date(A.VACATION_END_DATE,'YYYYmmdd'),'YYYY-mm-dd') AS VACATION_END_DATE
+         
+         from  VACATION_CHANGE_HISTORY A, EMPLOYEE B,employee_work c
+         where A.EMPLOYEE_CODE = B.EMPLOYEE_CODE
+         and C.EMPLOYEE_CODE= B.EMPLOYEE_CODE
+         and C.DEPARTMENT_CODE= (select X.DEPARTMENT_CODE
+                                FROM employee_work X,account Y
+                                where X.employee_code=Y.employee_code
+                                and Y.employee_id=#{emp_id})
+      ]]>
+	</select>
+
+
+<select id="findBusinessAuth" resultType="java.lang.String"
+		parameterType="java.util.HashMap"> 
+      <![CDATA[
+        select 
+        a.access_range
+		
+		from menu_by_authority a, user_auth b
+		
+		where a.authority_code=b.authority_code
+		and a.menu_code= 'M031'
+		and b.employee_id = #{emp_id}
+      
+      ]]>
+	</select>
+	<select id="findAllBusiness" resultMap="resultVO"
+		parameterType="java.util.HashMap"> 
+      <![CDATA[
+          select 
+         A.Business_Trip_CODE,
          B.EMPLOYEE_NAME,
          A.PURPOSE,
          to_char(to_date(A.START_DATE,'YYYYmmdd'),'YYYY-mm-dd') AS START_DATE,
          to_char(to_date(A.END_DATE,'YYYYmmdd'),'YYYY-mm-dd') AS END_DATE
 
-         from  EMPLOYEE_BUSINESS_TRIP A, EMPLOYEE B
+         from  EMPLOYEE_Business_Trip A, EMPLOYEE B
          where A.EMPLOYEE_CODE = B.EMPLOYEE_CODE
-      
-         
+    
       ]]>
 	</select>
+	<select id="findLimitedBusiness" resultMap="resultVO"
+		parameterType="java.util.HashMap"> 
+      <![CDATA[
+        select 
+         A.Business_Trip_CODE,
+         B.EMPLOYEE_NAME,
+         A.PURPOSE,
+         to_char(to_date(A.START_DATE,'YYYYmmdd'),'YYYY-mm-dd') AS START_DATE,
+         to_char(to_date(A.END_DATE,'YYYYmmdd'),'YYYY-mm-dd') AS END_DATE
 
-
+         from  EMPLOYEE_Business_Trip A, EMPLOYEE B,employee_work c
+         where A.EMPLOYEE_CODE = B.EMPLOYEE_CODE
+          and C.EMPLOYEE_CODE= B.EMPLOYEE_CODE
+         and C.DEPARTMENT_CODE= (select X.DEPARTMENT_CODE
+                                FROM employee_work X,account Y
+                                where X.employee_code=Y.employee_code
+                                and Y.employee_id=#{emp_id})
+      ]]>
+	</select>
 
 
 	<select id="findboard" resultMap="resultVO"
