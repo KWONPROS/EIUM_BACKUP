@@ -20,6 +20,45 @@
 	type="text/javascript"></script>
 
 <script>
+$(document).ready(function(){
+    $("#eduCode").keypress(function (e) {
+     if (e.which == 13){
+     	var param = FormQueryStringEnc(document.frm);
+     	
+     	$.ajax({
+
+			url : "${contextPath}/hm/p0018/autocomplete.do",//목록을 조회 할 url
+
+			type : "POST",
+			
+			data:param,
+			
+			dataType : "JSON",
+
+			success : function(data) {
+		
+			if(data.Data.length==1){
+				
+				$("#eduCode").val(data.Data[0].employee_TRAINING_CODE);
+				$("#eduName").val(data.Data[0].employee_TRAINING_NAME);
+			}else{
+				window.open("${contextPath}/hm/p0018/home2_p01.do?eduCode="+$("#eduCode").val(), "a", "width=600, height=500, left=100, top=50");
+			}
+			
+			},
+
+			error : function(jqxhr, status, error) {
+
+				alert("에러");
+
+			}
+
+		}); 
+
+            
+     }
+ });
+});
 	/*Sheet 기본 설정 */
 	
 	function setEdu(){
@@ -273,7 +312,7 @@ border-radius: 2px;
   
 	
 	<form name="frm" >
-	교육코드<input type="text" id="eduCode" value="" onChange="LoadPage()"><a href="javascript:showPopup();" ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a> <input type="text" id="eduName">
+	교육코드<input type="text" id="eduCode" value="" onChange="LoadPage()"><a href="javascript:showPopup();" ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a> <input type="text" id="eduName" disabled>
 	</form>
 	<input type="hidden" id="PeduCode">
 	<input type="hidden" id="PeduName">
