@@ -19,6 +19,7 @@
 	//주민등록번호 FORMAT형식 맞추기!!!
 	/*Sheet 기본 설정 */
 	function LoadPage() {
+		mySheet.SetWaitImageVisible(0); 
 		mySheet.RemoveAll();
 		//아이비시트 초기화
 		var initSheet = {};
@@ -105,6 +106,9 @@
 			break;
 		case "insert": //신규행 추가
 			var row = mySheet.DataInsert(-1);
+			break;
+		case "excel":
+			mySheet.Down2Excel();
 			break;
 		}
 			
