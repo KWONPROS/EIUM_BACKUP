@@ -9,11 +9,10 @@
     #copyrightText {
      font-size:10px;
       text-align:center;
-     
     }
   </style>
 </head>
 <body>
-<p id="copyrightText"> Copyright 2019. INSSA All Pictures Cannot Be Copied With Our Permission.</p>
+<div id="copyrightText"> Copyright 2019. INSSA All Pictures Cannot Be Copied With Our Permission.</div>
 </body>
 </html>

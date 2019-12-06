@@ -48,7 +48,6 @@
 </style>
 <meta charset="UTF-8">
 <jsp:include page="/WEB-INF/views/locale.jsp" /> 
-<title>사이드 메뉴</title>
 <script> //메뉴트리
 var data = {Data:[
 	{menuCode:"m000",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:lo_RegistrationInformationManagement},
@@ -173,11 +172,9 @@ var data = {Data:[
 	</c:forEach>
 	]};
 $(document).ready(function(){	
-	
-	
-	
+		
 	var sheetHeight = $(window).height();	//높이 자동계산
-	createIBSheet2(document.getElementById("sideMenu"),"leftMenu","100%",(sheetHeight-173)+"px");
+	createIBSheet2(document.getElementById("sideMenu"),"leftMenu","100%",(sheetHeight-155)+"px");
 	leftMenu.CustomScroll =3;	//스크롤 모양
 	leftMenu.SetTheme("LGY2","LightGray2");
 	leftMenu.NoTreeLines = 1; //트리모양
@@ -204,6 +201,7 @@ $(document).ready(function(){
 			widthTabBar: "100%",
 			heightTabBar:"45px",
 			heightContents:"100%",
+			
 			 themes: {
 			  tabs: "material_black",
 			  contents: "",
@@ -252,7 +250,7 @@ $(document).ready(function(){
 	}
 	//전체 열린 텝의 개수가 15개 이상이면 경고 발생
 	if(tabMenu.tabs.getCountTab()>15){
-		if(confirm("탭이 너무 많습니다. 하나 닫을까요?")){
+		if(confirm(lo_manytabs)){
 			tabMenu.removeTab(1);		
 		}
 	}
@@ -310,11 +308,11 @@ $(document).ready(function(){
 
 			<form class="sideSearchBar" action="javascript:submitMenu();">		
 				<div class="input-group mb-3 input-group-sm">
-					<input type="search" placeholder=<spring:message code="lo_searchmenu"  text="메뉴 검색.."/>
+					<input type="search" placeholder=<spring:message code="lo_searchmenu" />
 						aria-describedby="button-addon5" id="searchInput"class="form-control">
 					<div class="input-group-append">
 						<button id="button-addon5" type="submit" class="btn btn-secondary">
-							<i class="fa fa-search"></i>
+							<i class="fa fa-search"></i>  
 						</button>
 					</div>
 				</div>

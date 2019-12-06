@@ -33,11 +33,17 @@
  //달력
    document.addEventListener('DOMContentLoaded', function() {  
     
+	   var locale;
+	   if("${pageContext.response.locale}"=="cn"){
+		   locale="zh-cn"
+	   }else{
+		   locale="${pageContext.response.locale}";
+	   }
 	   
 	  var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
       plugins: [  'dayGrid', 'list' ],
-      locale:'ko',
+      locale:locale,
       height:400,
       editable: false,
       selectable: false,
@@ -48,7 +54,6 @@
     calendar.render();
   
 
-  
   
 	// 현재인원 그래프
 		Highcharts.chart('circlegraph', {

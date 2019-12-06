@@ -58,6 +58,7 @@ var lo_VacationManagement='<spring:message code="lo_VacationManagement"  text="�
 var lo_VacationHistory='<spring:message code="lo_VacationHistory"  text="휴가내역"/>';
 var lo_TravelManagement='<spring:message code="lo_TravelManagement"  text="출장관리"/>';
 var lo_Businesstripinquiry='<spring:message code="lo_Businesstripinquiry"  text="출장조회"/>';
+var lo_manytabs='<spring:message code="lo_manytabs"  text="탭이 너무 많습니다. 하나 닫을까요?"/>';
 
 
 
