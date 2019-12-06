@@ -329,7 +329,7 @@ body ::-webkit-scrollbar-thumb {  background: rgba(0,0,0,.1);  }
 		       </c:if>
 		    </c:forEach>  
 			<div class="boardtitle" style="border-bottom-color: white;">휴가</div>
-			<div class="divboard">
+			<div class="divboard">  
 
 				<table class="boardtable" id="vacationtable">
 					<c:forEach var="vacation" items="${vacationList}">
