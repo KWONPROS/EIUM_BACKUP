@@ -26,14 +26,14 @@ function LoadPage(){
    initSheet.Cols=[
 	   {Header:"상태",SaveName:"sStatus",Type:"Status",align:"Center",width:50},
 	   {Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck"},
-	   {Header:"사원코드",SaveName:"employee_code",Type:"Text",width:100, KeyField:1, UpdateEdit:"0"},
+	   {Header:"사원코드",SaveName:"employee_code",Type:"Text",width:100, Align:"Center" , KeyField:1, UpdateEdit:"0"},
 	   {Header:"사원명",SaveName:"employee_name",Type:"Text",width:100, KeyField:1 },
 	   {Header:"입사일",Type:"Date", Align:"Center", SaveName:"employee_join_date", Format:"yyyy-MM-dd", MinWidth:110},
 	   {Header:"퇴사일",Type:"Date", Align:"Center", SaveName:"employee_resignation_date", Format:"yyyy-MM-dd", MinWidth:110},
-	   {Header:"사용자여부",Type:"Combo", MinWidth:70, SaveName:"employee_available_yn", ComboText:"Y|N", ComboCode:"Y|N",PopupText:"Y|N"},
-	   {Header:"아이디",SaveName:"employee_id",type:"Text",width:100, KeyField:1, UpdateEdit:"0"},
-	   {Header:"암호",SaveName:"employee_password",type:"Text", KeyField:1, width:100},
-	   {Header:"전화번호",Type:"Text", Align:"Center", SaveName:"contact", Format:"PhoneNo", MinWidth:120},
+	   {Header:"사용자여부",Type:"Combo", MinWidth:70, Align:"Center", SaveName:"employee_available_yn", ComboText:"Y|N", ComboCode:"Y|N"},
+	   {Header:"아이디",SaveName:"employee_id", Align:"Center",type:"Text",width:100, KeyField:1, UpdateEdit:"0"},
+	   {Header:"암호",SaveName:"employee_password", Align:"Center",type:"Text", KeyField:1, width:100},
+	   {Header:"전화번호",Type:"Text", Align:"Center", Align:"Center", SaveName:"contact", Format:"PhoneNo", MinWidth:120},
 	      ];
    
   
@@ -106,6 +106,17 @@ function selectDepart(){
 	  });
 
 	};
+	
+	
+	function mySheet_OnSaveEnd(code, msg) {
+		if (msg != "") {
+			alert(msg);
+			//번호 다시 매기기
+			//mySheet.ReNumberSeq();
+		}
+	}
+	
+
 
    </script>
 <style type="text/css">

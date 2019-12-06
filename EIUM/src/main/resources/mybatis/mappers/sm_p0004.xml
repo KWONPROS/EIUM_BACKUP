@@ -54,7 +54,7 @@
 	</insert>	
 			<insert id="insertData5" parameterType="java.util.Map">
 
-		insert into employee_work(employee_code, employee_join_date, employee_resignation_date, int_user_id, int_date) values(#{employee_code}, to_date(' #{employee_join_date}',YYYY-MM-DD), to_date('#{employee_resignation_date}',YYYY-MM-DD), , #{user}, sysdate)	
+		insert into employee_work(employee_code, employee_join_date, employee_resignation_date, int_user_id, int_date) values(#{employee_code}, #{employee_join_date}, #{employee_resignation_date}, #{user}, sysdate)	
 	</insert>
 	
 				
@@ -164,42 +164,54 @@
 	</delete>
 	
 	<delete id="deleteData13" parameterType="java.util.Map">
-		delete employee_training_assessment
-		where employee_code = #{employee_code}
-	</delete>
-	
-	<delete id="deleteData14" parameterType="java.util.Map">
 		delete employee_training_list
 		where employee_code = #{employee_code}
 	</delete>
 	
-	<delete id="deleteData15" parameterType="java.util.Map">
+	<delete id="deleteData14" parameterType="java.util.Map">
 		delete salary_deposit
 		where employee_code = #{employee_code}
 	</delete>
 	
-	<delete id="deleteData16" parameterType="java.util.Map">
+	<delete id="deleteData15" parameterType="java.util.Map">
 		delete payment_receipt
 		where employee_code = #{employee_code}
 	</delete>
 	
-	<delete id="deleteData17" parameterType="java.util.Map">
+	<delete id="deleteData16" parameterType="java.util.Map">
 		delete working_status
 		where employee_code = #{employee_code}
 	</delete>
 	
-	<delete id="deleteData18" parameterType="java.util.Map">
+	<delete id="deleteData17" parameterType="java.util.Map">
 		delete total_working_status
 		where employee_code = #{employee_code}
 	</delete>
 	
-		<delete id="deleteData19" parameterType="java.util.Map">
+		<delete id="deleteData18" parameterType="java.util.Map">
 		delete employee_work
 		where employee_code = #{employee_code}
 	</delete>
 	
-		<delete id="deleteData20" parameterType="java.util.Map">
+		<delete id="deleteData19" parameterType="java.util.Map">
 		delete vacation_remain
 		where employee_code = #{employee_code}
-	</delete>	
+	</delete>
+	
+		<delete id="deleteData20" parameterType="java.util.Map">
+		delete board
+		where employee_id = #{employee_id}
+	</delete>
+	
+			<delete id="deleteData21" parameterType="java.util.Map">
+		delete contract
+		where employee_code = #{employee_code}
+	</delete>
+	
+		<delete id="deleteData22" parameterType="java.util.Map">
+		delete user_auth
+		where employee_id = #{employee_id}
+		
+		
+	</delete>				
 </mapper>

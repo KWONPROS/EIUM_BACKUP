@@ -110,12 +110,12 @@ function setJob_class(){
 		case "save": // 저장
 			var tempStr = mySheet.GetSaveString();
 			mySheet.DoSave("${contextPath}/hm/p0002/saveData.do");
+            doAction("search");
 			break;
 			
 		case "save2": // 저장
 			var tempStr2 = mySheet2.GetSaveString();
 			mySheet2.DoSave("${contextPath}/hm/p0002/saveSelect.do");
-            doAction("search");
 
 			break;
 			
