@@ -20,4 +20,8 @@ public interface HM_P0018Service {
 
 	public List<HM_P0018VO> employeeSearch(Map<String, Object> searchMap) throws DataAccessException;
 
+	List<HM_P0018VO> autocomplete(Map<String, Object> searchMap) throws DataAccessException;
+
+	List<HM_P0018VO> searchList2(Map<String, Object> searchMap) throws DataAccessException;
+
 }

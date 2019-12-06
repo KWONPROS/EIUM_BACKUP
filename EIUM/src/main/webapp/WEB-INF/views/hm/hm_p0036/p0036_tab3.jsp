@@ -15,7 +15,8 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
-	
+<script language="javascript" src="${contextPath}/resources/ibsheet/ibexcel.js"></script> 
+
 <style type="text/css">
 .IBbutton {
    font-size: 13px;
@@ -110,7 +111,7 @@ border-radius: 2px;
 		mySheet.RemoveAll();
 		//아이비시트 초기화
 		var initSheet = {};
-		initSheet.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:3,}
+		initSheet.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:3, "Down2Excel_Url" : "../jsp/Down2Excel.jsp" }
 		initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 		initSheet.Cols = [
 			{Header:"NO",Type:"Seq",SaveName:"SEQ",Edit:0,Width:"80"},
@@ -150,6 +151,9 @@ border-radius: 2px;
 			//조회 데이터 삭제
 			mySheet.RemoveAll();
 
+			break;
+		case "down":
+			mySheet.Down2Excel({FileName:'excel',SheetName:'sheet-test'});
 			break;
 	}
 	}

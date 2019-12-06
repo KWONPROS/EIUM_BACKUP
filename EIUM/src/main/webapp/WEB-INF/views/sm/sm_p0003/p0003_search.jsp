@@ -69,10 +69,10 @@ function LoadPage(){
 		{Header:"삭제	",Type:"DelCheck",Width:60,SaveName:"Delete",Align:"Center"},
 		{Header:"부서코드",Type:"Text",Width:100,SaveName:"department_CODE",Align:"Center",UpdateEdit:0},
 		{Header:"부서명",Type:"Text",Width:100,SaveName:"department_NAME",Align:"Center"},
-		{Header:"사업장코드",Type:"Popup",Width:120,SaveName:"site_CODE",Align:"Center"}, 
-		{Header:"사업장이름",Type:"Text",Width:120,SaveName:"site_NAME",Align:"Center"}, 
+		{Header:"사업장코드",Type:"Popup",Width:120,SaveName:"site_CODE",Align:"Center",UpdateEdit:0}, 
+		{Header:"사업장이름",Type:"Text",Width:120,SaveName:"site_NAME",Align:"Center",UpdateEdit:0}, 
 		{Header:"부문코드",Type:"Popup",Width:60,SaveName:"sector_CODE",Align:"Center"}, 
-		{Header:"부문명",Type:"Text",Width:150,SaveName:"sector_NAME",Align:"Center"},
+		{Header:"부문명",Type:"Text",Width:150,SaveName:"sector_NAME",Align:"Center",UpdateEdit:0},
 		{Header:"사용기간",Type:"Date",Width:120,SaveName:"department_TERM",Align:"Center"},
 		];
 	IBS_InitSheet(mySheet,initSheet);
@@ -116,18 +116,15 @@ function doAction(sAction){
 		break;
 	case "save":
 		mySheet.DoSave("${contextPath}/sm/p0003/saveData.do")
-		var tempStr = mySheet.GetSaveString();
-		alert("서버로 전달되는 문자열 확인 :"+tempStr);
 
 		break;
-	case "save2":
-		//저장 문자열 추출
-		alert("저장될 문자열:"+ JSON.stringify(mySheet.GetSaveJson()));
-		break;				
 	case "insert":
 		
 		//신규행 추가
 		var row = mySheet.DataInsert(-1);
+		break;
+	case "down":
+		mySheet.Down2Excel();	
 		break;
 	
 	
@@ -205,19 +202,21 @@ $.ajax({
 		</select>
       </form>
         
-        <button class="right" onClick="showPopup()">부문등록</button>
-		
+
              <div class="rightbuttons">
-                <a href="javascript:doAction('reload')" class="IBbutton" >초기화</a>
-                <a href="javascript:doAction('insert')" class="IBbutton">추가</a>
+                <a href="javascript:showPopup()" class="IBbutton">부문등록</a>
+                <a href="javascript:doAction('reload')" class="IBbutton">초기화</a>
                 <a href="javascript:doAction('search')" class="IBbutton">조회</a>
+                <a href="javascript:doAction('insert')" class="IBbutton">추가</a>
                 <a href="javascript:doAction('save')" class="IBbutton">저장</a>
-                <a href="javascript:doAction('save2')" class="IBbutton">저장 JSON</a> 
             </div>
             
             <div class="clear hidden"></div>  
 
 <br>
+        <div class="leftbuttons">  
+		<button type="button" onclick="doAction('down')" class="IBbutton">엑셀</button>
+        </div> 
             <div class="left">
 				<script>
 					createIBSheet("mySheet", "100%", "500px");

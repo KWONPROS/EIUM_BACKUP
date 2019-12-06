@@ -28,8 +28,8 @@
 			    <![CDATA[
 			    select EMPLOYEE_TRAINING_CODE,EMPLOYEE_TRAINING_NAME,EMPLOYEE_TRAINING_START_DATE,EMPLOYEE_TRAINING_END_DATE,EMPLOYEE_TRAINING_DATE_COUNT,EMPLOYEE_TRAINING_GOAL,EMPLOYEE_TRAINING_LOCATION,EMPLOYEE_TRAINING_TEACHER,EMPLOYEE_TRAINING_INSITUTION,EMPLOYEE_TRAINING_TIME,EMPLOYEE_TRAINING_PEOPLE,EMPLOYEE_TRAINING_IN_OUT   
     	  	    from EMPLOYEE_TRAINING
-				where EMPLOYEE_TRAINING_CODE = #{eduCode,jdbcType=VARCHAR}
-				      ]]>
+    	  	    where employee_training_code = #{eduCode}
+								      ]]>
 			</when>
 			<otherwise>
 			     <![CDATA[
@@ -38,9 +38,27 @@
       ]]>
 			</otherwise>
 			</choose>
-
 	
-			
+	</select>
+	
+	<select id="searchList2" resultMap="P0018resultVO" parameterType="java.util.Map"> 
+			<choose>
+			<when test= "eduCode != ''  and  eduCode != null">
+			    <![CDATA[
+			    select EMPLOYEE_TRAINING_CODE,EMPLOYEE_TRAINING_NAME   
+    	  	    from EMPLOYEE_TRAINING
+    	  	   where employee_training_code LIKE  '%' || #{eduCode,jdbcType=VARCHAR} || '%'
+								      ]]>
+			</when>
+			<otherwise>
+						    <![CDATA[
+			    select EMPLOYEE_TRAINING_CODE,EMPLOYEE_TRAINING_NAME   
+    	  	    from EMPLOYEE_TRAINING
+
+								      ]]>
+			</otherwise>
+			</choose>
+		
 	</select>
 	
 	
@@ -89,7 +107,14 @@
 			]]>
 	</select>
 	
-
+ 
+	<select id="autocomplete" resultMap="P0018resultVO" parameterType="java.util.Map"> 
+    <![CDATA[
+	select employee_training_code , employee_training_name
+	from employee_training
+	where employee_training_code LIKE  '%' || #{eduCode} || '%'
+			]]>
+	</select>
 	
 	<update id="emplyoeeListupdateData" parameterType="java.util.Map">
 		update EMPLOYEE_TRAINING_LIST

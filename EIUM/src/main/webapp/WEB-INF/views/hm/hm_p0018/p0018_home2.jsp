@@ -22,6 +22,46 @@
 <script>
 	/*Sheet 기본 설정 */
 	
+	$(document).ready(function(){
+	       $("#eduCode").keypress(function (e) {
+	        if (e.which == 13){
+	        	var param = FormQueryStringEnc(document.frm);
+	        	
+	        	$.ajax({
+
+				url : "${contextPath}/hm/p0018/autocomplete.do",//목록을 조회 할 url
+
+				type : "POST",
+				
+				data:param,
+				
+				dataType : "JSON",
+
+				success : function(data) {
+			
+				if(data.Data.length==1){
+					
+					$("#eduCode").val(data.Data[0].employee_TRAINING_CODE);
+					$("#eduName").val(data.Data[0].employee_TRAINING_NAME);
+				}else{
+					window.open("${contextPath}/hm/p0018/home2_p01.do?eduCode="+$("#eduCode").val(), "a", "width=600, height=500, left=100, top=50");
+				}
+				
+				},
+
+				error : function(jqxhr, status, error) {
+
+					alert("에러");
+
+				}
+
+			}); 
+
+	               
+	        }
+	    });
+	});
+	
 	function setEdu(){
 	
 	 eduName=document.getElementById("PeduName").value;
@@ -41,7 +81,7 @@ function setPopupValue(){
 };
 
 
-	function LoadPage() {
+function LoadPage() {
 		mySheet.RemoveAll();
 		//아이비시트 초기화
 		var initSheet = {};
@@ -64,10 +104,7 @@ function setPopupValue(){
 
 				];
 			IBS_InitSheet(mySheet, initSheet);
-			if($("#eduCode").val()!=""){
-			var param = FormQueryStringEnc(document.frm);
-			mySheet.DoSearch("${contextPath}/hm/p0018/searchList.do",param);
-			}
+
 			mySheet.SetEditableColorDiff(1); //편집불가능한 셀 표시 구분
 			/* mySheet.SetSheetHeight(1000); */
 
@@ -90,10 +127,7 @@ function setPopupValue(){
 
 					];
 				IBS_InitSheet(mySheet2,initSheet2);
-				if($("#eduCode").val()!=""){
-				var param = FormQueryStringEnc(document.frm);
-				mySheet2.DoSearch("${contextPath}/hm/p0018/emplyoeeListSearch.do",param);
-				}
+			
 
 				
 				mySheet2.SetEditableColorDiff(1); //편집불가능한 셀 표시 구분
@@ -118,7 +152,13 @@ function setPopupValue(){
 			var param ="param="+mySheet.GetCellValue(1,0);
 			mySheet2.DoSave("${contextPath}/hm/p0018/emplyoeeListsaveData.do",param);	
 
-			break;
+			break;	
+		case "search":
+			var param = FormQueryStringEnc(document.frm);
+			mySheet.DoSearch("${contextPath}/hm/p0018/searchList.do",param);
+			mySheet2.DoSearch("${contextPath}/hm/p0018/emplyoeeListSearch.do",param);
+			
+
 		
 		case "insert": //신규행 추가
 			var row = mySheet2.DataInsert(-1);
@@ -262,13 +302,14 @@ border-radius: 2px;
 
     <div class="rightbuttons">
 	  <a href="javascript:doAction('reload')"  class="IBbutton">초기화</a>
+	  <a href="javascript:doAction('search')"  class="IBbutton">조회</a>
 	  <a href="javascript:doAction('insert')"  class="IBbutton">사원추가</a>
 	  <a href="javascript:doAction('save')" class="IBbutton">저장</a>
 	</div>
   
 	
 	<form name="frm" >
-	교육코드<input type="text" id="eduCode" value="" onChange="LoadPage()"><a href="javascript:showPopup();" ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a> <input type="text" id="eduName">
+	교육코드<input type="text" id="eduCode" value="" onChange="LoadPage()" ><a href="javascript:showPopup();" ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a> <input type="text" id="eduName" disabled>
 	</form>
 	<input type="hidden" id="PeduCode">
 	<input type="hidden" id="PeduName">

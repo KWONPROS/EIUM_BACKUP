@@ -149,9 +149,12 @@ border-radius: 2px;
 	            this.reset();
 	         });  
 			break;
-	}
+		case "down":
+			mySheet.Down2Excel();	
+			break;
 	}
 
+	}
 
 	
 	//달력 API
