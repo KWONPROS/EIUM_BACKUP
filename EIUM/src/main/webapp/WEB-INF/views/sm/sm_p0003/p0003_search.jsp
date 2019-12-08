@@ -10,7 +10,8 @@
    margin-top:40px;
    margin:-15px;
    position: absolute;
-   right: 0px;
+   right:80px;
+   top:30px;
 }
  .IBbutton {
    font-size: 13px;
@@ -38,8 +39,27 @@
 }
 .left{
 position: absolute;
-top: 130px;
+top: 250px;
 left: 40px;
+}
+#searchBar {
+	background: #EBEBEB;
+	padding: 10px 30px;
+	margin-bottom: 20px;
+	border-radius: 5px;
+	font-size: 12px;
+	border-radius:5px;
+	position:relative;
+	top:150px;
+	width:1000px;
+}
+.leftbuttons{
+   margin-top:40px;
+   margin:10px;
+   position: absolute;
+   left: 0px;
+   top:0px;
+
 }
 .right{
  position: absolute;
@@ -196,10 +216,11 @@ $.ajax({
 
      
      <form name='frm'>
-     
+     <div id="searchBar">
         사업장: <select id="SiteList">
         <option value="" selected>전체</option>
 		</select>
+	</div>
       </form>
         
 
