@@ -174,7 +174,17 @@ var graphColors = (function() {
 	    		return;
 	    	}
 	    	});
-
+	    $("#searchDate1").change(function() {
+	    	if($("#searchDate2").val()!=""){
+	    		if($("#searchDate1").val()>$("#searchDate2").val()){
+	    			alert("종료일이 시작일 보다 커야합니다.");
+	    			$(this).val("");
+	    			return;
+	    		}
+	    		
+	    	}
+	    	});
+	    
 	}//LoadPage
 
 	
@@ -218,6 +228,13 @@ var graphColors = (function() {
 
 		case "reload": //초기화		
 			mySheet.RemoveAll();
+			mySheet2.RemoveAll();
+			mySheet3.RemoveAll();
+	 		$('#searchBar').find('input','select').val(''); 
+	 		$("#graph1").empty();
+	 		$("#graph2").empty();
+	 		$("#graph3").empty();
+	
 			break;
 
 		}
@@ -335,7 +352,9 @@ var graphColors = (function() {
 	// 저장완료 후 처리할 작업
 
 	function mySheet_OnSearchEnd(code, msg) {
-
+		if(mySheet.GetCellValue(1,4)==null||mySheet.GetCellValue(1,4)==""){
+			return false;
+		}
 		var graph1_categories = [], data1 = [], data2 = [], data3 = [], data4 = [];
 		for (var i = 1; i <= mySheet.GetDataLastRow(); i++) {
 			graph1_categories.push(mySheet.GetCellValue(i, 2));
