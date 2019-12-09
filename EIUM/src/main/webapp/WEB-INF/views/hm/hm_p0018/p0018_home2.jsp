@@ -7,7 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>회사등록</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibsheetinfo.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibsheet.js"></script>
@@ -90,7 +91,6 @@ function LoadPage() {
 		initSheet.Cols = [
 
 				{Header:"교육코드",Type:"Text",SaveName:"employee_TRAINING_CODE", Align:"Center",Width:100,UpdateEdit:0},
-<<<<<<< HEAD
 				{Header:"교육명",Type:"Text",SaveName:"employee_TRAINING_NAME", Align:"Center",Width:100,UpdateEdit:0},			
 				{Header:"시작일",Type:"Date",SaveName:"employee_TRAINING_START_DATE", Edit: 1, Align:"Center",Format:"Ymd",Width:100,UpdateEdit:0},			
 				{Header:"종료일",Type:"Date",SaveName:"employee_TRAINING_END_DATE",Format:"Ymd",Width:100,UpdateEdit:0,Align:"Center"},			
@@ -101,8 +101,7 @@ function LoadPage() {
 				{Header:"교육기관",Type:"Text",SaveName:"employee_TRAINING_INSITUTION",Width:100,UpdateEdit:0,Align:"Center"},			
 				{Header:"교육시간",Type:"Text",SaveName:"employee_TRAINING_TIME",Width:100,UpdateEdit:0,Align:"Center"},			
 				{Header:"대상인원",Type:"Text",SaveName:"employee_TRAINING_PEOPLE",Width:100,UpdateEdit:0,Align:"Center"},			
-				{Header:"사내외구분",Type:"Text",SaveName:"employee_TRAINING_IN_OUT",Width:100,UpdateEdit:0,Align:"Center"},			
-=======
+
 				{Header:"교육명",Type:"Text",SaveName:"employee_TRAINING_NAME", Align:"Center",Width:100},			
 				{Header:"시작일",Type:"Date",SaveName:"employee_TRAINING_START_DATE", Edit: 1, Align:"Center",Format:"Ymd",Width:100},			
 				{Header:"종료일",Type:"Date",SaveName:"employee_TRAINING_END_DATE",Format:"Ymd",Width:100},			
@@ -114,7 +113,7 @@ function LoadPage() {
 				{Header:"교육시간",Type:"Text",SaveName:"employee_TRAINING_TIME",Width:100},			
 				{Header:"대상인원",Type:"Text",SaveName:"employee_TRAINING_PEOPLE",Width:100},			
 				{Header:"사내외구분",Type:"Text",SaveName:"employee_TRAINING_IN_OUT",Width:100},			
->>>>>>> refs/remotes/origin/master
+
 
 				];
 			IBS_InitSheet(mySheet, initSheet);
@@ -223,7 +222,6 @@ function LoadPage() {
 </script>
 
 <style type="text/css">
-
 .IBbutton {
 	font-size: 13px;
 	margin-left: 5px;
@@ -233,14 +231,15 @@ function LoadPage() {
 	border-radius: 7px;
 	text-decoration: none;
 }
+
 .IBbutton:hover {
 	background-color: #2C3E50;
 }
 
-.left{
-position: absolute;
-top: 145px;
-left: 50px;
+.left {
+	position: absolute;
+	top: 145px;
+	left: 50px;
 }
 
 .rightbuttons {
@@ -249,38 +248,43 @@ left: 50px;
 	position: absolute;
 	right: 30px;
 }
-.right{
-position: relative;
-top: 150px;
-left: 600px;
-width: 700px;
-background: #EDF0F5;
-border-radius: 10px;
+
+.right {
+	position: relative;
+	top: 150px;
+	left: 600px;
+	width: 700px;
+	background: #EDF0F5;
+	border-radius: 10px;
 }
 
-.right table{
-font-size:13px;
-font-weight:bold;
-position: relative;
-left: 40px;
-padding: 20px;
+.right table {
+	font-size: 13px;
+	font-weight: bold;
+	position: relative;
+	left: 40px;
+	padding: 20px;
 }
-.right table tr td:nth-child(1){
-text-align:right;
+
+.right table tr td:nth-child(1) {
+	text-align: right;
 }
-.right table tr td:nth-child(2){
-width: 20px;
-height: 25px;
+
+.right table tr td:nth-child(2) {
+	width: 20px;
+	height: 25px;
 }
-.right table tr td:nth-child(3) input{
-width: 130px;
-height: 20px;
-padding-left: 10px;
-margin-right:10px;
-box-sizing: border-box;
-border: 1px solid #CCCCCC;
-border-radius: 2px;
-} 
+
+.right table tr td:nth-child(3) input {
+	width: 130px;
+	height: 20px;
+	padding-left: 10px;
+	margin-right: 10px;
+	box-sizing: border-box;
+	border: 1px solid #CCCCCC;
+	border-radius: 2px;
+}
+
 .title {
 	width: 100%;
 	color: #2C3E50;
@@ -294,8 +298,6 @@ border-radius: 2px;
 	position: absolute;
 	top: 50px;
 }
-
-
 </style>
 
 </head>
@@ -318,16 +320,19 @@ border-radius: 2px;
 
 
 
-    <div class="rightbuttons">
-	  <a href="javascript:doAction('reload')"  class="IBbutton">초기화</a>
-	  <a href="javascript:doAction('search')"  class="IBbutton">조회</a>
-	  <a href="javascript:doAction('insert')"  class="IBbutton">사원추가</a>
-	  <a href="javascript:doAction('save')" class="IBbutton">저장</a>
+	<div class="rightbuttons">
+		<a href="javascript:doAction('reload')" class="IBbutton">초기화</a> <a
+			href="javascript:doAction('search')" class="IBbutton">조회</a> <a
+			href="javascript:doAction('insert')" class="IBbutton">사원추가</a> <a
+			href="javascript:doAction('save')" class="IBbutton">저장</a>
 	</div>
-  
-	
-	<form name="frm" >
-	교육코드<input type="text" id="eduCode" value="" onChange="LoadPage()" ><a href="javascript:showPopup();" ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a> <input type="text" id="eduName" disabled>
+
+
+	<form name="frm">
+		교육코드<input type="text" id="eduCode" value="" onChange="LoadPage()"><a
+			href="javascript:showPopup();"><img
+			src="${contextPath}/resources/image/icons/icon_plus.png"></a> <input
+			type="text" id="eduName" disabled>
 	</form>
 	<input type="hidden" id="PeduCode">
 	<input type="hidden" id="PeduName">
