@@ -34,10 +34,10 @@
    document.addEventListener('DOMContentLoaded', function() {  
     
 	   var locale;
-	   if("${pageContext.response.locale}"=="cn"){
+	   if("${pageContext.response.locale.language}"=="cn"){
 		   locale="zh-cn"
 	   }else{
-		   locale="${pageContext.response.locale}";
+		   locale="${pageContext.response.locale.language}";
 	   }
 	   
 	  var calendarEl = document.getElementById('calendar');

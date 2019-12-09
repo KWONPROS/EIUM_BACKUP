@@ -255,7 +255,6 @@ background-color: #2C3E50;
 <body onload="LoadPage()">
 	<form name="frm">
         <div class="leftbuttons">  
-		<button type="button" onclick="doAction('print')" class="IBbutton">인쇄</button>
 		<button type="button" onclick="doAction('down')" class="IBbutton">엑셀</button>
         </div> 
         

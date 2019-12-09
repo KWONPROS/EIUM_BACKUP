@@ -315,8 +315,7 @@ width: 80%;
 
 
  <div class="leftbuttons">
-      <a href="javascript:doAction('print')" class="IBbutton">인쇄</a> <a
-         href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
+      <a href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
    </div> 
 
 
