@@ -4,21 +4,31 @@ import org.springframework.stereotype.Component;
 @Component
 public class SM_P0002VO {
 	
-	private String site_CODE="";
-	private String site_NAME="";
-	private String site_RESISTRATION_NUMBER="";
-	private String site_CORPARATION_NUMBER="";
-	private String site_REPRESENTATIVE_NAME="";
-	private String site_ZIP_CODE="";
-	private String site_ADDRESS="";
-	private String site_ADDRESS_DETAIL="";
-	private String site_CONTACT="";
-	private String site_FAX="";
-	private String site_CATEGORY="";
-	private String site_TYPE="";
-	private String site_OPENBUSINESS_DATE="";
-	private String site_CLOSEBUSINESS_DATE="";
-	private String site_BUSINESS_AVAILABLE="";
+	private String site_CODE ;
+	private String site_NAME ;
+	private String site_RESISTRATION_NUMBER ;
+	private String site_CORPARATION_NUMBER ;
+	private String site_REPRESENTATIVE_NAME ;
+	private String site_ZIP_CODE ;
+	private String site_ADDRESS ;
+	private String site_ADDRESS_DETAIL ;
+	private String site_CONTACT ;
+	private String site_FAX ;
+	private String site_CATEGORY ;
+	private String site_TYPE ;
+	private String site_OPENBUSINESS_DATE ;
+	private String site_CLOSEBUSINESS_DATE ;
+	private String site_BUSINESS_AVAILABLE ;
+	private String company_CODE ;
+	
+	
+	
+	public String getCompany_CODE() {
+		return company_CODE;
+	}
+	public void setCompany_CODE(String company_CODE) {
+		this.company_CODE = company_CODE;
+	}
 	public String getSite_CODE() {
 		return site_CODE;
 	}

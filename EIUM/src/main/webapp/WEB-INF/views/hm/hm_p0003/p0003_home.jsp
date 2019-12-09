@@ -72,7 +72,6 @@
 		
 				var tempStr = mySheet2.GetSaveString();
 				tempStr= tempStr+"&table_NAME="+mySheet2.GetCellValue(0,2);
-				alert("서버로 전달되는 문자열 확인 :"+tempStr);
 				mySheet2.DoSave("${contextPath}/hm/p0003/saveData.do",tempStr);
 				break;			
 			case "insert": //신규행 추가

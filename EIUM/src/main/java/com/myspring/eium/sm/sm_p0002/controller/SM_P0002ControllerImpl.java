@@ -58,7 +58,7 @@ public class SM_P0002ControllerImpl implements SM_P0002Controller {
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
 				
-		
+		searchMap.put("param", request.getParameter("param"));
 		
 		List<SM_P0002VO> data = sM_P0002Service.searchList(searchMap);
 
@@ -88,10 +88,10 @@ public class SM_P0002ControllerImpl implements SM_P0002Controller {
 		try {
 			sM_P0002Service.saveData(dataMap);	
 			result.put("Code","0");
-			result.put("Message","저장성공");
+			result.put("Message","���옣�꽦怨�");
 		}catch(Exception e) {
 			result.put("Code","-1");
-			result.put("Message","저장실패");
+			result.put("Message","���옣�떎�뙣");
 			e.printStackTrace();
 		}
 		
@@ -106,5 +106,23 @@ public class SM_P0002ControllerImpl implements SM_P0002Controller {
 		ModelAndView mav = new ModelAndView("/sm/sm_p0002/p0002_home_p01");
 		return mav;
 
+	}
+	@Override
+	@RequestMapping(value = "/sm/p0002/findPopup.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView findPopup(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView("/sm/sm_p0002/p0002_home_p02");
+		return mav;
+	}
+	@Override
+	@RequestMapping(value = "/sm/p0002/searchList2.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map searchList2(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+		List<SM_P0002VO> data = sM_P0002Service.searchList2(searchMap);
+
+        resultMap.put("Data", data);
+        return resultMap;
 	}
 }
