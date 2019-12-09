@@ -76,16 +76,16 @@
 	<select id="findAllVacation" resultMap="resultVO"
 		parameterType="java.util.HashMap"> 
       <![CDATA[
-         select 
+    select 
          B.EMPLOYEE_NAME,
          A.VACATION_CODE,
          A.VACATION_TYPE,
          to_char(to_date(A.VACATION_START_DATE,'YYYYmmdd'),'YYYY-mm-dd') AS VACATION_START_DATE,
          to_char(to_date(A.VACATION_END_DATE,'YYYYmmdd'),'YYYY-mm-dd') AS VACATION_END_DATE
          
-         from  VACATION_CHANGE_HISTORY A, EMPLOYEE B
-         where A.EMPLOYEE_CODE = B.EMPLOYEE_CODE
-    
+	from  VACATION_CHANGE_HISTORY A, EMPLOYEE B
+	where A.EMPLOYEE_CODE = B.EMPLOYEE_CODE
+	order by A.VACATION_CODE desc
       ]]>
 	</select>
 	<select id="findLimitedVacation" resultMap="resultVO"
@@ -105,6 +105,7 @@
                                 FROM employee_work X,account Y
                                 where X.employee_code=Y.employee_code
                                 and Y.employee_id=#{emp_id})
+        order by A.VACATION_CODE desc
       ]]>
 	</select>
 
@@ -135,7 +136,7 @@
 
          from  EMPLOYEE_Business_Trip A, EMPLOYEE B
          where A.EMPLOYEE_CODE = B.EMPLOYEE_CODE
-    
+    	 order by A.BUSINESS_TRIP_CODE desc
       ]]>
 	</select>
 	<select id="findLimitedBusiness" resultMap="resultVO"
@@ -155,6 +156,7 @@
                                 FROM employee_work X,account Y
                                 where X.employee_code=Y.employee_code
                                 and Y.employee_id=#{emp_id})
+         order by A.BUSINESS_TRIP_CODE desc
       ]]>
 	</select>
 
@@ -162,7 +164,7 @@
 	<select id="findboard" resultMap="resultVO"
 		parameterType="java.util.HashMap"> 
       <![CDATA[
-         select 
+        select 
          	A.BOARD_DES,
 			A.BOARD_DES_DES,
 			A.BOARD_TITLE,
@@ -172,48 +174,47 @@
 			A.EMPLOYEE_ID,
 			B.EMPLOYEE_NAME,
 			A.BOARD_CODE
-         
-         from  (select BOARD_DES,
-			BOARD_DES_DES,
-			BOARD_TITLE,
-            BOARD_CONTENT,
-			BOARD_START_DATE,
-			BOARD_END_DATE,
-			EMPLOYEE_ID,
-			BOARD_CODE
-            from board 
-            WHERE BOARD_DES='TODO'
-            AND EMPLOYEE_ID=#{emp_id}
+
+from  (select BOARD_DES,
+        BOARD_DES_DES,
+        BOARD_TITLE,
+        BOARD_CONTENT,
+        BOARD_START_DATE,
+        BOARD_END_DATE,
+        EMPLOYEE_ID,
+        BOARD_CODE
+        from board 
+        WHERE BOARD_DES='TODO'
+        AND EMPLOYEE_ID=#{emp_id}
             
-            UNION
-            select BOARD_DES,
-			BOARD_DES_DES,
-			BOARD_TITLE,
-            BOARD_CONTENT,
-			BOARD_START_DATE,
-			BOARD_END_DATE,
-			EMPLOYEE_ID,
-			BOARD_CODE
-            from board 
-            WHERE BOARD_DES='EVENT'
+        UNION
+        select BOARD_DES,
+        BOARD_DES_DES,
+        BOARD_TITLE,
+        BOARD_CONTENT,
+        BOARD_START_DATE,
+        BOARD_END_DATE,
+        EMPLOYEE_ID,
+        BOARD_CODE
+        from board 
+        WHERE BOARD_DES='EVENT'
             
-            UNION
-            select BOARD_DES,
-			BOARD_DES_DES,
-			BOARD_TITLE,
-            BOARD_CONTENT,
-			BOARD_START_DATE,
-			BOARD_END_DATE,
-			EMPLOYEE_ID,
-			BOARD_CODE
-            from board 
-            WHERE BOARD_DES='NOTICE'
-            )A
-         
-         
-         , EMPLOYEE B, ACCOUNT C
-         where C.EMPLOYEE_CODE = B.EMPLOYEE_CODE
-         AND C.EMPLOYEE_ID = A.EMPLOYEE_ID
+        UNION
+        select BOARD_DES,
+        BOARD_DES_DES,
+        BOARD_TITLE,
+        BOARD_CONTENT,
+        BOARD_START_DATE,
+        BOARD_END_DATE,
+        EMPLOYEE_ID,
+        BOARD_CODE
+        from board 
+        WHERE BOARD_DES='NOTICE') A
+
+        , EMPLOYEE B, ACCOUNT C
+where C.EMPLOYEE_CODE = B.EMPLOYEE_CODE
+AND C.EMPLOYEE_ID = A.EMPLOYEE_ID
+order by A.BOARD_CODE desc
  
          
       ]]>
@@ -248,7 +249,7 @@
 		 ]]>
 	</insert>
 	<update id="updateData" parameterType="java.util.Map">
-	  <![CDATA[
+
 		update BOARD
 		set
 		BOARD_DES=#{board_DES},
@@ -260,11 +261,10 @@
 		<if test="board_END_DATE!=null and !board_END_DATE.equals('')">
 		,BOARD_END_DATE=REPLACE(#{board_END_DATE},' ','')
 		</if>
-		
 		where
-		BOARD_CODE=#{board_CODE}  
+		BOARD_CODE=#{board_CODE}
 
-]]>
+
 	</update>
 	<delete id="deleteData" parameterType="java.util.Map">
 		  <![CDATA[

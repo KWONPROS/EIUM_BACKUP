@@ -16,4 +16,6 @@ public interface SM_P0002Service {
 	 public List<SM_P0002VO> searchList(Map<String, Object> searchMap) throws DataAccessException;
 
 	public void saveData(Map<String, String[]> dataMap)  throws DataAccessException ;
+
+	public List<SM_P0002VO> searchList2(Map<String, Object> searchMap) throws DataAccessException;
 }

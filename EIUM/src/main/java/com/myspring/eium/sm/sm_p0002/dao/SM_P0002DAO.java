@@ -13,5 +13,7 @@ public interface SM_P0002DAO {
 	public void updateData(Map<String, String> row) throws DataAccessException;
 
 	public void deleteData(Map<String, String> row) throws DataAccessException;
+
+	List<SM_P0002VO> searchList2(Map<String, Object> searchMap) throws DataAccessException;
 	 
 }

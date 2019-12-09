@@ -245,9 +245,7 @@
 	             
 	            //사진전송
 	            sendData();
-	                      
-	            var tempStr = mySheet.GetSaveString();
-	            alert("서버로 전달되는 문자열 확인 :"+tempStr);
+
 	            mySheet.DoSave("${contextPath}/hm/p0004/saveData.do");
 	            mySheet2.DoSave("${contextPath}/hm/p0004/saveData2.do",empCode);
 	            break;      

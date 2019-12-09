@@ -16,4 +16,6 @@ public interface SM_P0002Controller {
 	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;	
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView findAddress(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView findPopup(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public Map searchList2(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

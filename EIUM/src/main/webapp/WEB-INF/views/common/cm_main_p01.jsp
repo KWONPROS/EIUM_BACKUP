@@ -26,7 +26,8 @@ textarea {
 	var option1 = '<option disabled selected><spring:message code="lo_typeselect"/></option>	<option value="인사발령"><spring:message code="lo_Personnelappointment"/></option><option value="교육"><spring:message code="lo_EducationManagement"/></option><option value="기타"><spring:message code="lo_etc"/></option>'
 	var option2 = '<option disabled selected><spring:message code="lo_typeselect"/></option>	<option value="개인"><spring:message code="lo_personal"/></option><option value="팀"><spring:message code="lo_team"/></option><option value="기타"><spring:message code="lo_etc"/></option>'
 	var option3 = '<option disabled selected><spring:message code="lo_typeselect"/></option>	<option value="생일"><spring:message code="lo_birthday"/></option><option value="결혼"><spring:message code="lo_marrige"/></option><option value="조사"><spring:message code="lo_funeral"/></option>'
-	var btnEdit = '<button id="modalDelete" type="button" class="btn btn-danger"><spring:message code="lo_delete"/></button><button id="modalSubmit" type="button" class="btn btn-primary"><spring:message code="lo_save"/></button>';
+	var btnDelete = '<button id="modalDelete" type="button" class="btn btn-danger"><spring:message code="lo_delete"/></button>';
+	var btnSubmit = '<button id="modalSubmit" type="button" class="btn btn-primary"><spring:message code="lo_save"/></button>';
     var btnClose = '<button type="button" class="btn btn-default" data-dismiss="modal"><spring:message code="lo_close"/></button>';
 
 	
@@ -95,7 +96,7 @@ textarea {
 			        break;
 				}
 			$("#empNAME").val('${sessionScope.login.employee_name}');
-			$('.modal-footer').html(btnEdit+btnClose);
+			$('.modal-footer').html(btnSubmit+btnClose);
 			$("#endinput").html(endinput);
 			initCalendar();
 			
@@ -160,7 +161,7 @@ textarea {
 			$("#myModal").find("input,textarea,select").attr('readonly', true);		
 			$('.modal-footer').html(btnClose);
 			}else{
-				$('.modal-footer').html(btnEdit+btnClose);
+				$('.modal-footer').html(btnDelete+btnSubmit+btnClose);
 			}
 
 
@@ -187,7 +188,6 @@ textarea {
 			} else if (action == 'modify') {
 				url = 'board.do';
 			}
-
 			var data = {
 				
 				"board_CODE" : board_CODE,
@@ -199,7 +199,10 @@ textarea {
 				"board_TITLE" : $("#title").val()
 				
 			};
-
+			if(!nullcheck(data)){
+				return false;
+			}
+			
 			$.ajax({
 				url : url,
 				contentType: 'application/json',
@@ -208,11 +211,23 @@ textarea {
 				
 			})
 				alert('<spring:message code="lo_saved"/>');
-			 location.reload(); 
+			  location.reload(); 
 		});
 
 	});
 	
+	function nullcheck(data){
+
+	for ( var i in data) {
+			if (i != 'board_CODE') {
+				if (data[i] == null || data[i] == "") {
+					alert('<spring:message code="lo_invalid"/>');
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 </script>
 
 <!-- Modal -->

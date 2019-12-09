@@ -436,8 +436,7 @@ border : none;
 </head>
 <body onload="LoadPage()" style="overflow-x: hidden">
 	<div class="leftbuttons">
-		<a href="javascript:doAction('print')" class="IBbutton">인쇄</a> <a
-			href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
+		 <a href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
 	</div>
 	<div class="rightbuttons">
 		<a href="javascript:doAction('reload')" class="IBbutton">초기화</a> <a

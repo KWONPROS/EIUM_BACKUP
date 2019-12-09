@@ -28,6 +28,12 @@ public class SM_P0002ServiceImpl implements SM_P0002Service {
 	}
 
 	@Override
+	public List<SM_P0002VO> searchList2(Map<String, Object> searchMap) throws DataAccessException {
+		List<SM_P0002VO> list =  sM_P0002DAO.searchList2(searchMap); 
+		return list;
+	}
+	
+	@Override
 	public void saveData(Map<String, String[]> dataMap)  throws DataAccessException  {
 		String[] status = dataMap.get("STATUS");
 		int length = status.length; 
@@ -56,4 +62,5 @@ public class SM_P0002ServiceImpl implements SM_P0002Service {
 		}		
 		return row;
 	}	
+
 }

@@ -17,6 +17,7 @@ var pageheightoffset = 200; //시트높이 계산용
 
 //sheet 기본설정
 function LoadPage(){
+   mySheet.SetWaitImageVisible(0);
 	
    mySheet.RemoveAll();
    mySheet2.RemoveAll();
@@ -131,6 +132,15 @@ function doAction(sAction){
 .IBbutton:hover {
 background-color: #2C3E50;
 }
+.right{
+ position: relative;
+ width:830px;
+top: -570px;
+left: 390px; 
+padding: 0 0 0 30px;
+border-left: 2px solid #C3C3C3;
+margin-left: 15px;
+}
 	
 	</style>
 </head>
@@ -159,7 +169,7 @@ createIBSheet("mySheet", "1500px", "600px");
 </script>
 </div>
 
-<div style="position:absolute; top:140px; left:500px;">
+<div class="right" style="position:absolute; top:140px; left:500px;">
 <script>
 createIBSheet("mySheet2", "1500px", "600px");
 </script>
