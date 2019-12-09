@@ -21,6 +21,7 @@
 
 	//sheet 기본설정
 	function LoadPage() {
+		mySheet.SetWaitImageVisible(0);
 		
 		/* MonthPicker 옵션 */
 	    options = {
@@ -48,19 +49,19 @@
 		initSheet.Cfg = { SearchMode : smLazyLoad, ToolTip : 1, MouseHoverMode : 2 };
 		initSheet.HeaderMode = { Sort : 1, ColMove : 1, ColResize : 10, HeaderCheck : 1 };
 		initSheet.Cols = [ 
-			               { "Header":"상태","SaveName":"sStatus","Type":"Status","Align":"Center","Width":50 },
-			               { "Header":"삭제","SaveName":"DEL_CHK","Type":"DelCheck" },
+			               { "Header":"상태","SaveName":"sStatus","Type":"Status","Align":"Center","Width":60 },
+			               { "Header":"삭제","SaveName":"DEL_CHK","Type":"DelCheck","Width":60 },
 			               { "Header" : "휴가고유코드", "SaveName" : "vacation_CODE", "Type" : "Text", "Width" : 100, "Align" : "Center", "Hidden" : 1 }, 
 			               { "Header" : "사원코드", "SaveName" : "employee_CODE", "Type" : "Popup", "Width" : 100, "Align" : "Center" }, 
-			               { "Header" : "사원명", "SaveName" : "employee_NAME", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "부서명", "SaveName" : "department_NAME", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "직급", "SaveName" : "position_NAME", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "신청 전 잔여일수", "SaveName" : "before_VACATION_REMAIN_DATE", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "근태종류", "SaveName" : "vacation_TYPE", "Type" : "Combo", "Width" : 100, "Align" : "Center", "ComboText":"|연차|특별휴가|경조휴가", "ComboCode":"|연차|특별휴가|경조휴가", "UpdateEdit":0 },
-			               { "Header" : "시작일", "SaveName" : "vacation_START_DATE", "Type" : "Date", "Width" : 100, "Align" : "Center", "Format":"Ymd" },
-			               { "Header" : "종료일", "SaveName" : "vacation_END_DATE", "Type" : "Date", "Width" : 100, "Align" : "Center", "Format":"Ymd" },
-			               { "Header" : "신청일수", "SaveName" : "vacation_APPLY_DATE", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "신청 후 잔여일수", "SaveName" : "after_VACATION_REMAIN_DATE", "Type" : "Text", "Width" : 100, "Align" : "Center" } 
+			               { "Header" : "사원명", "SaveName" : "employee_NAME", "Type" : "Text", "Width" : 100, "Align" : "Center","UpdateEdit":0 },
+			               { "Header" : "부서명", "SaveName" : "department_NAME", "Type" : "Text", "Width" : 100, "Align" : "Center","UpdateEdit":0 },
+			               { "Header" : "직급", "SaveName" : "position_NAME", "Type" : "Text", "Width" : 100, "Align" : "Center","UpdateEdit":0 },
+			               { "Header" : "신청 전 잔여일수", "SaveName" : "before_VACATION_REMAIN_DATE", "Type" : "Text", "Width" : 110, "Align" : "Center" },
+			               { "Header" : "근태종류", "SaveName" : "vacation_TYPE", "Type" : "Combo", "Width" : 130, "Align" : "Center", "ComboText":"연차|특별휴가|경조휴가", "ComboCode":"연차|특별휴가|경조휴가"},
+			               { "Header" : "시작일", "SaveName" : "vacation_START_DATE", "Type" : "Date", "Width" : 150, "Align" : "Center", "Format":"Ymd" },
+			               { "Header" : "종료일", "SaveName" : "vacation_END_DATE", "Type" : "Date", "Width" : 150, "Align" : "Center", "Format":"Ymd" },
+			               { "Header" : "신청일수", "SaveName" : "vacation_APPLY_DATE", "Type" : "Text", "Width" : 110, "Align" : "Center" },
+			               { "Header" : "신청 후 잔여일수", "SaveName" : "after_VACATION_REMAIN_DATE", "Type" : "Text", "Width" : 110, "Align" : "Center" } 
 		                 ];
 
 		IBS_InitSheet(mySheet, initSheet);
@@ -91,8 +92,11 @@
 			mySheet.DoSave("${contextPath}/wm/p0002/saveData.do");
 			break;
 		case "insert":
-		    var row = mySheet.DataInsert();
+		    var row = mySheet.DataInsert(1);
 		    break;
+		case "down":
+	        mySheet.Down2Excel();
+	        break;
 		}
 	}
 	
@@ -155,6 +159,25 @@
 				mySheet.SetCellBackColor(Row, 12, "yellow"); 
 			}			
 			}
+		
+		if(Col == 10){
+			if(mySheet.GetCellValue(Row,9) != '' && mySheet.GetCellValue(Row,10) < mySheet.GetCellValue(Row,9)) {
+				alert('시작일보다 종료일이 크거나 같아야합니다.');
+				mySheet.SetCellValue(Row,10,'');
+				mySheet.SetCellValue(Row,11,'');
+				mySheet.SetCellValue(Row,12,'');
+				mySheet.SetCellBackColor(Row, 12, "white"); 
+			}
+		}
+		if(Col == 9){
+			if(mySheet.GetCellValue(Row,10) != '' && mySheet.GetCellValue(Row,10) < mySheet.GetCellValue(Row,9)) {
+				alert('시작일보다 종료일이 크거나 같아야합니다.');
+				mySheet.SetCellValue(Row,9,'');
+				mySheet.SetCellValue(Row,11,'');
+				mySheet.SetCellValue(Row,12,'');
+				mySheet.SetCellBackColor(Row, 12, "white"); 
+			}
+		}
 		
 	}
 	
@@ -230,6 +253,21 @@
 .IBbutton:hover {
 background-color: #2C3E50;
 }
+.left {
+	position: relative;
+	top: 130px;
+	left: 60px;
+	width: 1000px;
+}
+.searchBarTitle {
+	background: #5E5E5E;
+	padding: 4px;
+	color: white;
+	border-radius: 5px;
+	margin: 0 5px 0 70px;
+	vertical-align: middle;
+	margin-left: 120px;
+}
 #searchBar {
 	background: #EBEBEB;
 	padding: 10px 30px;
@@ -237,13 +275,17 @@ background-color: #2C3E50;
 	border-radius: 5px;
 	font-size: 12px;
 	border-radius:5px;
+	width: 1225px;
 }
-.left {
-	position: relative;
-	top: 130px;
-	left: 60px;
-	width: 1000px;
+#searchBar input, select {
+	height: 24px;
+	border-radius: 3px;
+	border: none;
+	padding-left: 5px;
+	vertical-align: middle;
+	text-align: center;
 }
+
 .ui-datepicker{ font-size: 12px; width: 160px; }
 .ui-datepicker select.ui-datepicker-month{ width:30%; font-size: 11px; }
 .ui-datepicker select.ui-datepicker-year{ width:40%; font-size: 11px; }
@@ -271,13 +313,14 @@ background-color: #2C3E50;
         
         <div class="left">
         <div id="searchBar">
-            &nbsp;&nbsp; 귀속연월 : <input type="text" id="date"><img id="btn_monthpicker" src="${contextPath}/resources/image/icons/icon_calendar.png">
-		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 근태종류 : <select id="vacaTYPE">
+            <span class="searchBarTitle">귀속연월</span> <input type="text" id="date"><img id="btn_monthpicker" src="${contextPath}/resources/image/icons/icon_calendar.png">
+		    <span class="searchBarTitle">근태종류</span> <select id="vacaTYPE">
 			<option value="" selected>전체</option>
 			<option value="연차" >연차</option>
 			<option value="특별휴가" >특별휴가</option>
 			<option value="경조휴가" >경조휴가</option>
-		</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 조회조건 : <select id="Select">
+		</select>
+		<span class="searchBarTitle">조회조건</span> <select id="Select">
 		    <option value="" selected>구분</option>
 			<option value="사업장">사업장</option>
 			<option value="부서">부서</option>
