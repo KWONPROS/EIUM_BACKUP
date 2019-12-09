@@ -18,6 +18,7 @@
 	//sheet 기본설정
 	function LoadPage() {
 		mySheet.SetWaitImageVisible(0);
+		mySheet2.SetWaitImageVisible(0);
 
 		mySheet.RemoveAll();
 		mySheet2.RemoveAll();
@@ -39,16 +40,16 @@
 			"SaveName" : "employee_ID",
 			"Type" : "Text",
 			"Width" : 150,
-			"Align" : "Center"
+			"Align" : "Center","UpdateEdit":0
 		}, {
 			"Header" : "사원명",
 			"SaveName" : "employee_NAME",
 			"Type" : "Text",
 			"Width" : 150,
-			"Align" : "Center"
+			"Align" : "Center","UpdateEdit":0
 		},
-        { "Header" : "부서명", "SaveName" : "department_NAME", "Type" : "Text", "Width" : 150, "Align" : "Center" },
-        { "Header" : "직급", "SaveName" : "position_NAME", "Type" : "Text", "Width" : 150, "Align" : "Center" }
+        { "Header" : "부서명", "SaveName" : "department_NAME", "Type" : "Text", "Width" : 150, "Align" : "Center","UpdateEdit":0 },
+        { "Header" : "직급", "SaveName" : "position_NAME", "Type" : "Text", "Width" : 150, "Align" : "Center","UpdateEdit":0 }
         ];
 
 		var initSheet2 = {};
