@@ -24,8 +24,8 @@
 		initSheet.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0,MouseHoverMode:2, MergeSheet:msHeaderOnly};
 		initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:10,HeaderCheck:1};
 		initSheet.Cols = [
-			{Header:"대상직급|직급코드",Type:"Text",SaveName:"position_CODE",MinWidth:170,KeyField:1, Align:"Center", Edit:0},
-			{Header:"대상직급|직급명",Type:"Text",SaveName:"position_NAME",MinWidth:240,KeyField:1, Align:"Center", Edit:0}		
+			{Header:"대상직급|직급코드",Type:"Text",SaveName:"position_CODE",Width:130,KeyField:1, Align:"Center", Edit:0},
+			{Header:"대상직급|직급명",Type:"Text",SaveName:"position_NAME",Width:220,KeyField:1, Align:"Center", Edit:0}		
 		];   
 		IBS_InitSheet( mySheet , initSheet);
   
@@ -42,16 +42,16 @@
 			{Header:"tmp직급코드|직급코드",Type:"Text",SaveName:"temp_POSITION_CODE", Hidden: 1},
 			{Header:"tmp호봉코드|호봉코드",Type:"Text",SaveName:"temp_PAY_GRADE_CODE", Hidden: 1},
 			{Header:"호봉코드|호봉코드",Type:"Text",SaveName:"pay_GRADE_CODE", Hidden: 1},
-	        {Header:"호봉|호봉",Type:"Text",SaveName:"pay_GRADE_NAME",MinWidth:90 ,KeyField:1, Align:"Center","UpdateEdit":0},			
-			{Header:"호봉테이블|기본급",Type:"Int",SaveName:"salary",MinWidth:140 , Align:"Center"},
-			{Header:"합계|합계",Type:"Int",SaveName:"tot_salary",MinWidth:140 , Align:"Center", CalcLogic:"|4|"},
+	        {Header:"호봉|호봉",Type:"Text",SaveName:"pay_GRADE_NAME",Width:160 ,KeyField:1, Align:"Center","UpdateEdit":0},			
+			{Header:"호봉테이블|기본급",Type:"Int",SaveName:"salary",Width:250 , Align:"Right"},
+			{Header:"합계|합계",Type:"Int",SaveName:"tot_salary",Width:350 , Align:"Right", CalcLogic:"|4|"},
 			{Header:"상태|상태",Type:"Status",SaveName:"STATUS", Align:"Center", Hidden: 1},
 	        {Header:"삭제|삭제",Type:"DelCheck",SaveName:"DEL_CHK", Hidden: 1}
 		];   
 		IBS_InitSheet( mySheet2 , initSheet2);
   
 		mySheet2.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
-		mySheet2.SetSheetHeight(700);
+		mySheet2.SetSheetHeight(385);
 		
 		
 		//아이비시트3 -----------------------------------------------------------------------------------------------------
@@ -62,13 +62,13 @@
 		initSheet3.Cols = [
 	     	{Header:"상태|상태",Type:"Status",SaveName:"STATUS",MinWidth:60, Align:"Center"},
 	        {Header:"삭제|삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:60},	
-			{Header:"호봉이력|적용시작연월",Type:"Date",SaveName:"start_DATE",MinWidth:100, Align:"Center", Format:"Ym"},
-	        {Header:"호봉이력|적용종료연월",Type:"Date",SaveName:"end_DATE",MinWidth:100, Align:"Center", Format:"Ym", Edit:"0"}			
+			{Header:"호봉이력|적용시작연월",Type:"Date",SaveName:"start_DATE",MinWidth:145, Align:"Center", Format:"Ym"},
+	        {Header:"호봉이력|적용종료연월",Type:"Date",SaveName:"end_DATE",MinWidth:145, Align:"Center", Format:"Ym", Edit:"0"}			
 		];   
 		IBS_InitSheet( mySheet3 , initSheet3);
   
 		mySheet3.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
-		mySheet3.SetSheetHeight(700);
+		mySheet3.SetSheetHeight(285);
 		
 		mySheet.DoSearch("${contextPath}/hm/p0001/searchList.do");
 	}
@@ -303,26 +303,26 @@ background-color: #2C3E50;
 }
 #mySheet{
 position: relative;
-top: 130px;
+top: 120px;
 left: 40px;
-width:410px;
-padding: 15px 30px 0 0;
+width:350px;
+padding: 0px 30px 0 0;
 border-right: 2px solid #C3C3C3;
 }
+
 #mySheet3{
  position: relative;
-top: -585px;
-left: 490px; 
-width:320px;
-padding: 15px 30px 0 0;
-border-right: 2px solid #C3C3C3;
+top: -580px;
+left: 420px;
+width:760px;
+padding: 0 0 15px 30px;
+border-bottom: 2px solid #C3C3C3;
 }
 #mySheet2{
 position: relative;
-top:  -1300px;
-left: 850px;
-padding: 15px 30px 0 0;
-border-right: 2px solid #C3C3C3;
+top:  -565px;
+left: 420px;
+padding: 0 0 0 30px;
 } 
 
 </style>
