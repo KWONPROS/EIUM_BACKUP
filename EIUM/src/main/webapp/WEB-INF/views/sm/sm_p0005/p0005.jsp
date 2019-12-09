@@ -17,6 +17,7 @@ var pageheightoffset = 200; //시트높이 계산용
 
 //sheet 기본설정
 function LoadPage(){
+   mySheet.SetWaitImageVisible(0);
 	
    mySheet.RemoveAll();
    mySheet2.RemoveAll();
