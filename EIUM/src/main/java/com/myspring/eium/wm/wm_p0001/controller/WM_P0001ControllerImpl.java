@@ -1,6 +1,7 @@
 package com.myspring.eium.wm.wm_p0001.controller;
 
 
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,8 +26,11 @@ import com.myspring.eium.wm.wm_p0001.vo.WM_P0001VO;
 
 
 
-
-
+/*@Component
+public class LogProcesser{
+	
+}
+*/
 
 
 @Controller
@@ -262,6 +268,15 @@ public class WM_P0001ControllerImpl implements WM_P0001Controller {
         return resultMap;
 	}
 	
+	
+	//10초마다 함수 호출
+	/*
+	 * @Scheduled(fixedRate = 100000) public void handle() throws Exception {
+	 * System.out.
+	 * println("===============================================>> LogProcessor.handle(): "
+	 * + new Date()); WM_P0001ControllerImpl WPControllerImpl = new
+	 * WM_P0001ControllerImpl(); WPControllerImpl.SUM_saveData(request, response); }
+	 */
 	/*
 	 * @Override
 	 * 
@@ -297,5 +312,5 @@ public class WM_P0001ControllerImpl implements WM_P0001Controller {
 	 * System.out.println("WM-P0001ControllerImpl-WS_YN_updateData-resultMap::::" +
 	 * resultMap); return resultMap; }
 	 */
-
+	
 }

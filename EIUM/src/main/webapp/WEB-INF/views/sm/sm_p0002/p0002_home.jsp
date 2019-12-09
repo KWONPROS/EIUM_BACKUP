@@ -263,8 +263,8 @@ left: 60px;
 position: relative;
 top: -470px;
 left: 500px;
-width: 900px;
-height: 550px;
+height: 710px;
+	width: 1000px;
 background: #EBEBEB;
 border-radius: 10px;
 }
@@ -282,7 +282,10 @@ text-align: center;
 color:white;
 padding: 10px;0px;10px;0px;
 }
-
+.right .tg{
+height: 80%;
+width: 90%;
+}
 
 .right .tg input,select{
 height: 22px;

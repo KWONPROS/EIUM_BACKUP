@@ -79,6 +79,9 @@
 		case "insert": //신규행 추가
 			var row = mySheet.DataInsert(-1);
 			break;
+		case "down":
+			mySheet.Down2Excel();	
+			break;
 		}
 	}
 	
@@ -173,6 +176,14 @@ left: 50px;
 	position: absolute;
 	right: 30px;
 }
+.leftbuttons{
+   margin-top:40px;
+   margin:10px;
+   position: absolute;
+   left: 0px;
+   top:0px;
+
+}
 .right{
 position: relative;
 top: 150px;
@@ -229,9 +240,14 @@ border-radius: 2px;
 	  <a href="javascript:doAction('insert')"  class="IBbutton">추가</a>
 	  <a href="javascript:doAction('search')" class="IBbutton">조회</a>
 	  <a href="javascript:doAction('save')" class="IBbutton">저장</a>
+<<<<<<< HEAD
 	 
+=======
+>>>>>>> refs/remotes/origin/master
 	</div>
-
+    <div class="leftbuttons">  
+			<button type="button" onclick="doAction('down')" class="IBbutton">엑셀</button>
+	</div>
 	<div class="clear hidden"></div>
 	<div class="left">
 	<div class="ib_product">

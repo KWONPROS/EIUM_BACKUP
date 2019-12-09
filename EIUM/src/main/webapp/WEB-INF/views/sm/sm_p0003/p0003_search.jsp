@@ -6,6 +6,26 @@
 <html>
 <head>
 <style type="text/css">
+<<<<<<< HEAD
+=======
+.rightbuttons{
+   margin-top:40px;
+   margin:-15px;
+   position: absolute;
+   right:80px;
+   top:30px;
+}
+ .IBbutton {
+   font-size: 13px;
+   margin-left: 5px;
+   background-color: #2B69A0;
+   color: white;
+   padding: 5px 15px;
+   border-radius: 7px;
+   text-decoration: none;   
+}
+
+>>>>>>> refs/remotes/origin/master
 .title {
  	width:100%;
 	color: #2C3E50;
@@ -19,6 +39,7 @@
 	position: absolute;
 	top: 50px;
 }
+<<<<<<< HEAD
 .leftbuttons{
 	margin-top:40px;
 	margin:10px;
@@ -48,7 +69,31 @@ background-color: #2C3E50;
 .sheet{
 position: relative;
 top: 200px;
+=======
+.left{
+position: absolute;
+top: 250px;
+>>>>>>> refs/remotes/origin/master
 left: 40px;
+}
+#searchBar {
+	background: #EBEBEB;
+	padding: 10px 30px;
+	margin-bottom: 20px;
+	border-radius: 5px;
+	font-size: 12px;
+	border-radius:5px;
+	position:relative;
+	top:150px;
+	width:1000px;
+}
+.leftbuttons{
+   margin-top:40px;
+   margin:10px;
+   position: absolute;
+   left: 0px;
+   top:0px;
+
 }
 .right{
  position: relative;
@@ -217,11 +262,19 @@ $.ajax({
 	</div>
 
      <form name='frm'>
+<<<<<<< HEAD
     <div class= "site">
+=======
+     <div id="searchBar">
+>>>>>>> refs/remotes/origin/master
         사업장: <select id="SiteList">
         <option value="" selected>전체</option>
 		</select>
+<<<<<<< HEAD
 		</div>
+=======
+	</div>
+>>>>>>> refs/remotes/origin/master
       </form>
         
 

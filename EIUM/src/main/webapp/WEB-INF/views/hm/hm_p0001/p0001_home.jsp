@@ -14,6 +14,9 @@
 <script language="javascript">
 	/*Sheet 기본 설정 */
 	function LoadPage() {
+		mySheet.SetWaitImageVisible(0); 
+		mySheet2.SetWaitImageVisible(0); 
+		mySheet3.SetWaitImageVisible(0); 
 		
 		//아이비시트1 
 		mySheet.RemoveAll();
@@ -21,51 +24,51 @@
 		initSheet.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0,MouseHoverMode:2, MergeSheet:msHeaderOnly};
 		initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:10,HeaderCheck:1};
 		initSheet.Cols = [
-			{Header:"대상직급|직급코드",Type:"Text",SaveName:"position_CODE",MinWidth:80,KeyField:1, Align:"Center"},
-			{Header:"대상직급|직급명",Type:"Text",SaveName:"position_NAME",MinWidth:170,KeyField:1, Align:"Center"}		
+			{Header:"대상직급|직급코드",Type:"Text",SaveName:"position_CODE",MinWidth:170,KeyField:1, Align:"Center", Edit:0},
+			{Header:"대상직급|직급명",Type:"Text",SaveName:"position_NAME",MinWidth:240,KeyField:1, Align:"Center", Edit:0}		
 		];   
 		IBS_InitSheet( mySheet , initSheet);
   
 		mySheet.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
-		mySheet.SetSheetHeight(440);
+		mySheet.SetSheetHeight(700);
 		
 		
 		//아이비시트2 -----------------------------------------------------------------------------------------------------
 		mySheet2.RemoveAll();
 		var initSheet2 = {};
-		initSheet2.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0,MergeSheet:msHeaderOnly};
+		initSheet2.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0,MergeSheet:msHeaderOnly,MouseHoverMode:2};
 		initSheet2.HeaderMode = {Sort:1,ColMove:1,ColResize:10,HeaderCheck:1};
 		initSheet2.Cols = [
 			{Header:"tmp직급코드|직급코드",Type:"Text",SaveName:"temp_POSITION_CODE", Hidden: 1},
 			{Header:"tmp호봉코드|호봉코드",Type:"Text",SaveName:"temp_PAY_GRADE_CODE", Hidden: 1},
 			{Header:"호봉코드|호봉코드",Type:"Text",SaveName:"pay_GRADE_CODE", Hidden: 1},
-	        {Header:"호봉|호봉",Type:"Text",SaveName:"pay_GRADE_NAME",MinWidth:50 ,KeyField:1, Align:"Center","UpdateEdit":0},			
-			{Header:"호봉테이블|기본급",Type:"Int",SaveName:"salary",MinWidth:90 , Align:"Center"},
-			{Header:"합계|합계",Type:"Int",SaveName:"tot_salary",MinWidth:90 , Align:"Center", CalcLogic:"|4|"},
-			{Header:"상태|상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center", Hidden: 1},
-	        {Header:"삭제|삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50, Hidden: 1}
+	        {Header:"호봉|호봉",Type:"Text",SaveName:"pay_GRADE_NAME",MinWidth:90 ,KeyField:1, Align:"Center","UpdateEdit":0},			
+			{Header:"호봉테이블|기본급",Type:"Int",SaveName:"salary",MinWidth:140 , Align:"Center"},
+			{Header:"합계|합계",Type:"Int",SaveName:"tot_salary",MinWidth:140 , Align:"Center", CalcLogic:"|4|"},
+			{Header:"상태|상태",Type:"Status",SaveName:"STATUS", Align:"Center", Hidden: 1},
+	        {Header:"삭제|삭제",Type:"DelCheck",SaveName:"DEL_CHK", Hidden: 1}
 		];   
 		IBS_InitSheet( mySheet2 , initSheet2);
   
 		mySheet2.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
-		mySheet2.SetSheetHeight(330);
+		mySheet2.SetSheetHeight(700);
 		
 		
 		//아이비시트3 -----------------------------------------------------------------------------------------------------
 		mySheet3.RemoveAll();
 		var initSheet3 = {};
-		initSheet3.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0,MergeSheet:msHeaderOnly};
+		initSheet3.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0,MergeSheet:msHeaderOnly,MouseHoverMode:2};
 		initSheet3.HeaderMode = {Sort:1,ColMove:1,ColResize:10,HeaderCheck:1};
 		initSheet3.Cols = [
-	     	{Header:"상태|상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
-	        {Header:"삭제|삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},	
-			{Header:"호봉이력|적용시작연월",Type:"Date",SaveName:"start_DATE",MinWidth:80, Align:"Center", Format:"Ym"},
-	        {Header:"호봉이력|적용종료연월",Type:"Date",SaveName:"end_DATE",MinWidth:80, Align:"Center", Format:"Ym", Edit:"0"}			
+	     	{Header:"상태|상태",Type:"Status",SaveName:"STATUS",MinWidth:60, Align:"Center"},
+	        {Header:"삭제|삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:60},	
+			{Header:"호봉이력|적용시작연월",Type:"Date",SaveName:"start_DATE",MinWidth:100, Align:"Center", Format:"Ym"},
+	        {Header:"호봉이력|적용종료연월",Type:"Date",SaveName:"end_DATE",MinWidth:100, Align:"Center", Format:"Ym", Edit:"0"}			
 		];   
 		IBS_InitSheet( mySheet3 , initSheet3);
   
 		mySheet3.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
-		mySheet3.SetSheetHeight(200);
+		mySheet3.SetSheetHeight(700);
 		
 		mySheet.DoSearch("${contextPath}/hm/p0001/searchList.do");
 	}
@@ -93,6 +96,14 @@
 			case "insert": //신규행 추가
 				var row = mySheet3.DataInsert();
 				break;
+				
+			case "excel":
+				mySheet.Down2ExcelBuffer(true);  
+			    mySheet.Down2Excel();
+			    mySheet2.Down2Excel();
+			    mySheet3.Down2Excel();
+			    mySheet.Down2ExcelBuffer(false); 
+			     break;
 		}
 	}
 	
@@ -290,21 +301,30 @@
 .IBbutton:hover {
 background-color: #2C3E50;
 }
-.left{
+#mySheet{
 position: relative;
 top: 130px;
 left: 40px;
+width:410px;
+padding: 15px 30px 0 0;
+border-right: 2px solid #C3C3C3;
 }
-.right{
+#mySheet3{
  position: relative;
-top: -330px;
-left: 330px; 
+top: -585px;
+left: 490px; 
+width:320px;
+padding: 15px 30px 0 0;
+border-right: 2px solid #C3C3C3;
 }
-.bottom{
+#mySheet2{
 position: relative;
-top:  -310px;
-left: 320px;
-}
+top:  -1300px;
+left: 850px;
+padding: 15px 30px 0 0;
+border-right: 2px solid #C3C3C3;
+} 
+
 </style>
 </head>
 <body onload="LoadPage()" style="overflow-x: hidden">
@@ -324,8 +344,8 @@ left: 320px;
 <div class="title"> 
 <header> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 기초환경설정 : 호봉테이블등록</header>
 </div>
-	<div class="left"><script>createIBSheet("mySheet", "1000px", "300px");</script></div>
-	<div class="right"><script>createIBSheet("mySheet2", "1500px", "300px");</script></div>
-	<div class="bottom"><script>createIBSheet("mySheet3", "1500px", "300px");</script></div>
+	<div id="mySheet"><script>createIBSheet("mySheet", "1000px", "100%");</script></div>
+	<div id="mySheet3"><script>createIBSheet("mySheet3", "1500px", "100%");</script></div>
+	<div id="mySheet2"><script>createIBSheet("mySheet2", "1500px", "100%");</script></div>
 </body>
 </html>
