@@ -30,7 +30,7 @@
 		initSheet.Cols = [
 				{Header:"상태",Type:"Status",SaveName:"STATUS", Align:"Center"},
 				{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK"},
-				{Header:"교육코드",Type:"Text",SaveName:"employee_TRAINING_CODE", Align:"Center",Width:100},
+				{Header:"교육코드",Type:"Text",SaveName:"employee_TRAINING_CODE", Align:"Center",Width:100,UpdateEdit:0},
 				{Header:"교육명",Type:"Text",SaveName:"employee_TRAINING_NAME", Align:"Center",Width:100},			
 				{Header:"시작일",Type:"Date",SaveName:"employee_TRAINING_START_DATE", Edit: 1, Align:"Center",Format:"Ymd",Width:100},			
 				{Header:"종료일",Type:"Date",SaveName:"employee_TRAINING_END_DATE",Format:"Ymd",Width:100},			
@@ -72,14 +72,10 @@
 			mySheet.SetCellValue($('input[name=myRow]').val(),11,$('input[name=employee_TRAINING_TIME]').val());
 			mySheet.SetCellValue($('input[name=myRow]').val(),12,$('input[name=employee_TRAINING_PEOPLE]').val());
 			mySheet.SetCellValue($('input[name=myRow]').val(),13,$('select[name=employee_TRAINING_IN_OUT]').val());
-			var tempStr = mySheet.GetSaveString();
-			alert("서버로 전달되는 문자열 확인 : " + tempStr);
+
 			mySheet.DoSave("${contextPath}/hm/p0018/saveData.do");		
 			break;
-		case "save2": //저장 JSON
-		//저장 문자열 추출
-			alert("저장될 문자열:" + JSON.stringify(mySheet.GetSaveJson()));
-			break;
+
 		case "insert": //신규행 추가
 			var row = mySheet.DataInsert(-1);
 			break;
@@ -89,7 +85,7 @@
 	//로우 클릭시
 	function mySheet_OnClick(Row, Col){
 		//alert("row"+Row+"col"+Col);
-console.log(Row,Col);
+
 		if(Row!=0){
 			$('input[name=myRow]').val(Row);
 			$('input[name=employee_TRAINING_DATE_COUNT]').val(mySheet.GetCellValue(Row,6));
@@ -233,7 +229,7 @@ border-radius: 2px;
 	  <a href="javascript:doAction('insert')"  class="IBbutton">추가</a>
 	  <a href="javascript:doAction('search')" class="IBbutton">조회</a>
 	  <a href="javascript:doAction('save')" class="IBbutton">저장</a>
-	  <a href="javascript:doAction('save2')" class="IBbutton">저장 JSON</a> 
+	 
 	</div>
 
 	<div class="clear hidden"></div>
@@ -282,7 +278,7 @@ border-radius: 2px;
 			<tr>
 				<td>교육시간</td>
 				<td></td>
-				<td><input type="text" name="employee_TRAINING_TIME" maxlength="5" placeholder="___:__" >시간</td>
+				<td><input type="text" name="employee_TRAINING_TIME" maxlength="5" >시간</td>
 			</tr>
 			<tr>
 				<td>대상인원</td>

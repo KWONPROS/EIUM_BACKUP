@@ -89,23 +89,23 @@ function LoadPage() {
 		initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:1,HeaderCheck:1};
 		initSheet.Cols = [
 
-				{Header:"교육코드",Type:"Text",SaveName:"employee_TRAINING_CODE", Align:"Center",Width:100},
-				{Header:"교육명",Type:"Text",SaveName:"employee_TRAINING_NAME", Align:"Center",Width:100},			
-				{Header:"시작일",Type:"Date",SaveName:"employee_TRAINING_START_DATE", Edit: 1, Align:"Center",Format:"Ymd",Width:100},			
-				{Header:"종료일",Type:"Date",SaveName:"employee_TRAINING_END_DATE",Format:"Ymd",Width:100},			
-				{Header:"교육일수",Type:"Text",SaveName:"employee_TRAINING_DATE_COUNT",Width:100},
-				{Header:"교육목적",Type:"Text",SaveName:"employee_TRAINING_GOAL",Width:100},
-				{Header:"교육장소",Type:"Text",SaveName:"employee_TRAINING_LOCATION",Width:100},			
-				{Header:"담당강사",Type:"Text",SaveName:"employee_TRAINING_TEACHER",Width:100},			
-				{Header:"교육기관",Type:"Text",SaveName:"employee_TRAINING_INSITUTION",Width:100 },			
-				{Header:"교육시간",Type:"Text",SaveName:"employee_TRAINING_TIME",Width:100},			
-				{Header:"대상인원",Type:"Text",SaveName:"employee_TRAINING_PEOPLE",Width:100},			
-				{Header:"사내외구분",Type:"Text",SaveName:"employee_TRAINING_IN_OUT",Width:100},			
+				{Header:"교육코드",Type:"Text",SaveName:"employee_TRAINING_CODE", Align:"Center",Width:100,UpdateEdit:0},
+				{Header:"교육명",Type:"Text",SaveName:"employee_TRAINING_NAME", Align:"Center",Width:100,UpdateEdit:0},			
+				{Header:"시작일",Type:"Date",SaveName:"employee_TRAINING_START_DATE", Edit: 1, Align:"Center",Format:"Ymd",Width:100,UpdateEdit:0},			
+				{Header:"종료일",Type:"Date",SaveName:"employee_TRAINING_END_DATE",Format:"Ymd",Width:100,UpdateEdit:0,Align:"Center"},			
+				{Header:"교육일수",Type:"Text",SaveName:"employee_TRAINING_DATE_COUNT",Width:100,UpdateEdit:0,Align:"Center"},
+				{Header:"교육목적",Type:"Text",SaveName:"employee_TRAINING_GOAL",Width:100,UpdateEdit:0,Align:"Center"},
+				{Header:"교육장소",Type:"Text",SaveName:"employee_TRAINING_LOCATION",Width:100,UpdateEdit:0,Align:"Center"},			
+				{Header:"담당강사",Type:"Text",SaveName:"employee_TRAINING_TEACHER",Width:100,UpdateEdit:0,Align:"Center"},			
+				{Header:"교육기관",Type:"Text",SaveName:"employee_TRAINING_INSITUTION",Width:100,UpdateEdit:0,Align:"Center"},			
+				{Header:"교육시간",Type:"Text",SaveName:"employee_TRAINING_TIME",Width:100,UpdateEdit:0,Align:"Center"},			
+				{Header:"대상인원",Type:"Text",SaveName:"employee_TRAINING_PEOPLE",Width:100,UpdateEdit:0,Align:"Center"},			
+				{Header:"사내외구분",Type:"Text",SaveName:"employee_TRAINING_IN_OUT",Width:100,UpdateEdit:0,Align:"Center"},			
 
 				];
 			IBS_InitSheet(mySheet, initSheet);
 
-			mySheet.SetEditableColorDiff(1); //편집불가능한 셀 표시 구분
+			; //편집불가능한 셀 표시 구분
 			/* mySheet.SetSheetHeight(1000); */
 
 			
@@ -118,12 +118,12 @@ function LoadPage() {
 			initSheet2.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 			initSheet2.Cols = [
 					{Header:"상태",Type:"Status",SaveName:"STATUS", Align:"Center"},
-					{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK"},
+					{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",Align:"Center"},
 					{Header:"사원코드",Type:"Popup",SaveName:"employee_CODE",Align:"Center",Width:100},
 					{Header:"사원명",Type:"Text",SaveName:"employee_NAME",Align:"Center",InsertEdit:0,Width:100},			
-					{Header:"부서",Type:"Text",SaveName:"department_NAME",InsertEdit:0,Width:100},			
-					{Header:"직책",Type:"Text",SaveName:"position_NAME",InsertEdit:0,Width:100}	,
-					{Header:"교육코드",Type:"Text",SaveName:"EMPLOYEE_TRAINING_CODE",Hidden:1}	
+					{Header:"부서",Type:"Text",SaveName:"department_NAME",InsertEdit:0,Width:100,Align:"Center"},			
+					{Header:"직책",Type:"Text",SaveName:"position_NAME",InsertEdit:0,Width:100,Align:"Center"},
+					{Header:"교육코드",Type:"Text",SaveName:"EMPLOYEE_TRAINING_CODE",Hidden:1,Align:"Center"}	
 
 					];
 				IBS_InitSheet(mySheet2,initSheet2);
@@ -154,12 +154,16 @@ function LoadPage() {
 
 			break;	
 		case "search":
+
+			if($("#eduCode").val() != '' ){
 			var param = FormQueryStringEnc(document.frm);
 			mySheet.DoSearch("${contextPath}/hm/p0018/searchList.do",param);
 			mySheet2.DoSearch("${contextPath}/hm/p0018/emplyoeeListSearch.do",param);
-			
+			}else{
+				alert("교육코드를 입력하세요.");
+			}
 
-		
+		break;
 		case "insert": //신규행 추가
 			var row = mySheet2.DataInsert(-1);
 			break;

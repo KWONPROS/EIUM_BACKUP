@@ -206,41 +206,37 @@ function setPopupValue(){
 </script>
 
 <style type="text/css">
-
 .IBbutton {
-	font-size: 13px;
-	margin-left: 5px;
-	background-color: #2B69A0;
-	color: white;
-	padding: 5px 15px;
-	border-radius: 7px;
-	text-decoration: none;
+   font-size: 13px;
+   margin-left: 5px;
+   border:0;
+   background-color: #2B69A0;
+   color: white;
+   padding: 5px 15px;
+   border-radius: 7px;
+   text-decoration: none;   
 }
 .IBbutton:hover {
 	background-color: #2C3E50;
 }
-
 .left{
 position: absolute;
 top: 145px;
 left: 50px;
 }
-
-.rightbuttons {
-	margin-top: 50px;
-	margin: 11px;
-	position: absolute;
-	right: 30px;
+.rightbuttons{
+   margin-top:40px;
+   margin:10px;
+   position: absolute;
+   right: 0px;
 }
 .right{
 position: relative;
 top: 150px;
 left: 600px;
 width: 700px;
-background: #EDF0F5;
-border-radius: 10px;
-}
 
+}
 .right table{
 font-size:13px;
 font-weight:bold;
@@ -265,19 +261,33 @@ border: 1px solid #CCCCCC;
 border-radius: 2px;
 } 
 .title {
-	width: 100%;
-	color: #2C3E50;
-	font-weight: bold;
-	font-size: 20px;
-	padding-left: 30px;
-	padding-bottom: 10px;
-	padding-top: 20px;
-	border-top: thin solid #5E5E5E;
-	border-bottom: thin dashed #5E5E5E;
-	position: absolute;
-	top: 50px;
-}
+    width:100%;
+   color: #2C3E50;
+   font-weight: bold;
+   font-size: 20px;
+   padding-left : 30px;
+   padding-bottom: 10px;
+   padding-top:20px;
+   border-top: thin solid #5E5E5E;
+   border-bottom: thin dashed #5E5E5E;
+   position: absolute;
+   top: 50px;
 
+}
+#searchBar {
+	background: #EBEBEB;
+	padding: 10px 30px;
+	margin-bottom: 20px;
+	border-radius: 5px;
+	font-size: 12px;
+	border-radius:5px;
+}
+.leftbuttons{
+   margin-top:40px;
+   margin:10px;
+   position: absolute;
+   left: 0px;
+}
 
 </style>
 
@@ -310,10 +320,12 @@ border-radius: 2px;
 	  <a href="javascript:doAction('save')" class="IBbutton">저장</a>
 	</div>
   
-	
+	<div id="searchBar">
 	<form name="frm" >
 	교육코드<input type="text" id="eduCode" value="" onChange="LoadPage()"><a href="javascript:showPopup();" ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a> <input type="text" id="eduName" disabled>
 	</form>
+	</div>
+	
 	<input type="hidden" id="PeduCode">
 	<input type="hidden" id="PeduName">
 	<input type="hidden" id="Pcode">

@@ -98,7 +98,8 @@
 	and ew.department_code=d.department_code
 	and ew.position_code=p.position_code
 	and EMPLOYEE_TRAINING_CODE=#{eduCode}
-			]]>
+	ORDER BY el.EMPLOYEE_CODE
+	 			]]>
 	</select>
 	
  

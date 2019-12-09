@@ -6,22 +6,6 @@
 <html>
 <head>
 <style type="text/css">
-.rightbuttons{
-   margin-top:40px;
-   margin:-15px;
-   position: absolute;
-   right: 0px;
-}
- .IBbutton {
-   font-size: 13px;
-   margin-left: 5px;
-   background-color: #2B69A0;
-   color: white;
-   padding: 5px 15px;
-   border-radius: 7px;
-   text-decoration: none;   
-}
-
 .title {
  	width:100%;
 	color: #2C3E50;
@@ -34,18 +18,53 @@
 	border-bottom: thin dashed #5E5E5E;
 	position: absolute;
 	top: 50px;
-
 }
-.left{
-position: absolute;
-top: 130px;
+.leftbuttons{
+	margin-top:40px;
+	margin:10px;
+	position: absolute;
+	left: 0px;
+	top:5px;
+}
+.rightbuttons{
+	margin-top:40px;
+	margin:10px;
+	position: absolute;
+	right:5px;
+	top:5px;
+}
+ .IBbutton {
+	font-size: 13px;
+	margin-left: 5px;
+	background-color: #2B69A0;
+	color: white;
+	padding: 5px 15px;
+	border-radius: 7px;
+	text-decoration: none;	
+}
+.IBbutton:hover {
+background-color: #2C3E50;
+}
+.sheet{
+position: relative;
+top: 200px;
 left: 40px;
 }
 .right{
- position: absolute;
-top: 130px;
+ position: relative;
+top: -330px;
 left: 330px; 
 }
+.bottom{
+position: relative;
+top:  -310px;
+left: 320px;
+}
+.site{
+position:relative;
+top:150px;
+}
+
 </style>
 <meta charset="UTF-8">
 <title>부서등록</title>
@@ -69,7 +88,7 @@ function LoadPage(){
 		{Header:"삭제	",Type:"DelCheck",Width:60,SaveName:"Delete",Align:"Center"},
 		{Header:"부서코드",Type:"Text",Width:100,SaveName:"department_CODE",Align:"Center",UpdateEdit:0},
 		{Header:"부서명",Type:"Text",Width:100,SaveName:"department_NAME",Align:"Center"},
-		{Header:"사업장코드",Type:"Popup",Width:120,SaveName:"site_CODE",Align:"Center",UpdateEdit:0}, 
+		{Header:"사업장코드",Type:"Popup",Width:120,SaveName:"site_CODE",Align:"Center"}, 
 		{Header:"사업장이름",Type:"Text",Width:120,SaveName:"site_NAME",Align:"Center",UpdateEdit:0}, 
 		{Header:"부문코드",Type:"Popup",Width:60,SaveName:"sector_CODE",Align:"Center"}, 
 		{Header:"부문명",Type:"Text",Width:150,SaveName:"sector_NAME",Align:"Center",UpdateEdit:0},
@@ -190,16 +209,19 @@ $.ajax({
 </head>
 <body onload="LoadPage()">
 
-<div class="title"> 
-<header> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 등록정보관리 : 부서등록</header>
-</div>
+	<div class="title">
+		<header>
+			<i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 등록정보관리 :
+			부서등록
+		</header>
+	</div>
 
-     
      <form name='frm'>
-     
+    <div class= "site">
         사업장: <select id="SiteList">
         <option value="" selected>전체</option>
 		</select>
+		</div>
       </form>
         
 
@@ -213,15 +235,14 @@ $.ajax({
             
             <div class="clear hidden"></div>  
 
-<br>
         <div class="leftbuttons">  
 		<button type="button" onclick="doAction('down')" class="IBbutton">엑셀</button>
         </div> 
-            <div class="left">
+        
+            <div class="sheet">
 				<script>
 					createIBSheet("mySheet", "100%", "500px");
 					selectSite();
-
 				</script>
 				
             </div>
