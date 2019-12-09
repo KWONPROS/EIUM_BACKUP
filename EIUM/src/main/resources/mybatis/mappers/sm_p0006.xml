@@ -57,7 +57,7 @@
                 where A.EMPLOYEE_CODE = E.EMPLOYEE_CODE and EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE(+) and D.SITE_CODE = S.SITE_CODE and E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE and EW.POSITION_CODE = P.POSITION_CODE(+)
 				and S.SITE_NAME = #{SiteList,jdbcType=VARCHAR}
 				and D.DEPARTMENT_NAME = #{DeptList,jdbcType=VARCHAR}
-				and E.EMPLOYEE_NAME = #{p_text,jdbcType=VARCHAR}
+				and E.EMPLOYEE_NAME LIKE <![CDATA['%'||#{p_text,jdbcType=VARCHAR}||'%']]>
 				order by A.EMPLOYEE_ID
 			</when> <!-- 사업장 부서 사원명 -->
 			
@@ -65,7 +65,7 @@
                 where A.EMPLOYEE_CODE = E.EMPLOYEE_CODE and EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE(+) and D.SITE_CODE = S.SITE_CODE and E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE and EW.POSITION_CODE = P.POSITION_CODE(+)
 				and S.SITE_NAME = #{SiteList,jdbcType=VARCHAR}
 				and D.DEPARTMENT_NAME = #{DeptList,jdbcType=VARCHAR}
-				and A.EMPLOYEE_CODE = #{p_text,jdbcType=VARCHAR}
+				and A.EMPLOYEE_CODE LIKE <![CDATA['%'||#{p_text,jdbcType=VARCHAR}||'%']]>
 				order by A.EMPLOYEE_ID
 			</when> <!-- 사업장 부서 사원코드 -->
             
@@ -79,14 +79,14 @@
 			<when test= " Employee_Select.equals('employee_name') and p_text != '' and p_text != null and SiteList != ''  and  SiteList != null "> 
                 where A.EMPLOYEE_CODE = E.EMPLOYEE_CODE and EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE(+) and D.SITE_CODE = S.SITE_CODE and E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE and EW.POSITION_CODE = P.POSITION_CODE(+)
                 and S.SITE_NAME = #{SiteList,jdbcType=VARCHAR}
-				and E.EMPLOYEE_NAME = #{p_text,jdbcType=VARCHAR}
+				and E.EMPLOYEE_NAME LIKE <![CDATA['%'||#{p_text,jdbcType=VARCHAR}||'%']]>
 				order by A.EMPLOYEE_ID
 			</when> <!-- 사업장 null 사원명 -->
 			
 			<when test= " Employee_Select.equals('employee_code') and p_text != '' and p_text != null and SiteList != ''  and  SiteList != null "> 
                 where A.EMPLOYEE_CODE = E.EMPLOYEE_CODE and EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE(+) and D.SITE_CODE = S.SITE_CODE and E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE and EW.POSITION_CODE = P.POSITION_CODE(+)
                 and S.SITE_NAME = #{SiteList,jdbcType=VARCHAR}
-				and A.EMPLOYEE_CODE = #{p_text,jdbcType=VARCHAR}
+				and A.EMPLOYEE_CODE LIKE <![CDATA['%'||#{p_text,jdbcType=VARCHAR}||'%']]>
 				order by A.EMPLOYEE_ID
 			</when> <!-- 사업장 null 사원코드 -->
 			
@@ -98,13 +98,13 @@
 
             <when test= " Employee_Select.equals('employee_code') and p_text != '' and p_text != null "> 
                 where A.EMPLOYEE_CODE = E.EMPLOYEE_CODE and EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE(+) and D.SITE_CODE = S.SITE_CODE and E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE and EW.POSITION_CODE = P.POSITION_CODE(+)
-				and A.EMPLOYEE_CODE = #{p_text,jdbcType=VARCHAR}
+				and A.EMPLOYEE_CODE LIKE <![CDATA['%'||#{p_text,jdbcType=VARCHAR}||'%']]>
 				order by A.EMPLOYEE_ID
 			</when> <!-- null null 사원코드 -->
 			
 			<when test= " Employee_Select.equals('employee_name') and p_text != '' and p_text != null "> 
                 where A.EMPLOYEE_CODE = E.EMPLOYEE_CODE and EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE(+) and D.SITE_CODE = S.SITE_CODE and E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE and EW.POSITION_CODE = P.POSITION_CODE(+)
-				and E.EMPLOYEE_NAME = #{p_text,jdbcType=VARCHAR}
+				and E.EMPLOYEE_NAME LIKE <![CDATA['%'||#{p_text,jdbcType=VARCHAR}||'%']]>
 				order by A.EMPLOYEE_ID
 			</when> <!-- null null 사원명 -->
 		

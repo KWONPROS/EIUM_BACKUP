@@ -269,7 +269,7 @@ background-color: #2C3E50;
 	border-radius: 5px;
 	margin: 0 5px 0 70px;
 	vertical-align: middle;
-	margin-left: 150px;
+	margin-left: 120px;
 }
 #searchBar {
 	background: #EBEBEB;
