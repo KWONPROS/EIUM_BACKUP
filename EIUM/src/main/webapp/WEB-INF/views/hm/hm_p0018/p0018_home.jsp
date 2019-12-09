@@ -24,6 +24,7 @@
 	/*Sheet 기본 설정 */
 	function LoadPage() {
 		mySheet.RemoveAll();
+		mySheet.SetWaitImageVisible(0);
 		//아이비시트 초기화
 		var initSheet = {};
 		initSheet.Cfg = {
@@ -319,6 +320,7 @@
 	position: absolute;
 	top: 50px;
 }
+
 </style>
 
 </head>
@@ -383,7 +385,7 @@
 					<td>교육시간</td>
 					<td></td>
 					<td><input type="text" name="employee_TRAINING_TIME"
-						maxlength="5">시간</td>
+						maxlength="5" placeholder="ex)3H30M => 3.3">시간</td>
 				</tr>
 				<tr>
 					<td>대상인원</td>

@@ -83,6 +83,8 @@ function setPopupValue(){
 
 
 function LoadPage() {
+		mySheet.SetWaitImageVisible(0);
+		mySheet2.SetWaitImageVisible(0);
 		mySheet.RemoveAll();
 		//아이비시트 초기화
 		var initSheet = {};
@@ -179,6 +181,12 @@ function LoadPage() {
 		break;
 		case "insert": //신규행 추가
 			var row = mySheet2.DataInsert(-1);
+			break;
+		case "down":
+			mySheet.Down2ExcelBuffer(true);
+			mySheet.Down2Excel();
+			mySheet2.Down2Excel();
+			mySheet2.Down2ExcelBuffer(false);
 			break;
 		}
 	
@@ -298,6 +306,43 @@ function LoadPage() {
 	position: absolute;
 	top: 50px;
 }
+.rightbuttons {
+	margin-top: 50px;
+	margin: 20px;
+	position: absolute;
+	right: 30px;
+}
+#searchBar {
+	background: #EBEBEB;
+	padding: 10px 30px;
+	margin-bottom: 20px;
+	border-radius: 5px;
+	font-size: 12px;
+	border-radius:5px;
+	position:relative;
+	top:30px;
+	width:1300px;
+	left:50px;
+	
+}
+.leftbuttons {
+	margin-top: 40px;
+	margin: 10px;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+
+.sheet1{
+position:absolute;
+top:150px;
+height: auto;
+}
+.sheet2{
+position:absolute;
+top:460px;
+ height: auto;
+}
 </style>
 
 </head>
@@ -307,11 +352,17 @@ function LoadPage() {
 
 
 
-	<div class="left">
+	<div class="sheet1">
 		<script>
 			//IBSheet 객체 생성 (객체 id, 너비, 높이)
 			createIBSheet("mySheet", "1500px", "304px");
-			createIBSheet("mySheet2", "1000px", "304px");
+			
+		</script>
+	</div>
+	<div class="sheet2">
+		<script>
+			//IBSheet 객체 생성 (객체 id, 너비, 높이)
+			createIBSheet("mySheet2", "1500px", "304px");
 			
 		</script>
 	</div>
@@ -326,14 +377,19 @@ function LoadPage() {
 			href="javascript:doAction('insert')" class="IBbutton">사원추가</a> <a
 			href="javascript:doAction('save')" class="IBbutton">저장</a>
 	</div>
+	<div id="leftbuttons">
+		<button type="button" onclick="doAction('down')" class="IBbutton">엑셀</button>
+	</div>
 
-
-	<form name="frm">
-		교육코드<input type="text" id="eduCode" value="" onChange="LoadPage()"><a
-			href="javascript:showPopup();"><img
-			src="${contextPath}/resources/image/icons/icon_plus.png"></a> <input
-			type="text" id="eduName" disabled>
-	</form>
+	<div id="searchBar">
+		<form name="frm">
+			교육코드<input type="text" id="eduCode" value="" onChange="LoadPage()"><a
+				href="javascript:showPopup();"><img
+				src="${contextPath}/resources/image/icons/icon_plus.png"></a> <input
+				type="text" id="eduName" disabled>
+		</form>
+	</div>
+	
 	<input type="hidden" id="PeduCode">
 	<input type="hidden" id="PeduName">
 	<input type="hidden" id="Pcode">

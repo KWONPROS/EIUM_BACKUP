@@ -75,14 +75,14 @@
 	left: 40px;
 }
 
-#searchBar {
+.searchBar {
 	background: #EBEBEB;
 	padding: 10px 30px;
 	margin-bottom: 20px;
 	border-radius: 5px;
 	font-size: 12px;
 	border-radius: 5px;
-	position: relative;
+	position: absolute;
 	top: 300px;
 	width: 100px;
 }
@@ -111,6 +111,7 @@
 	position: relative;
 	top: 300px;
 }
+
 </style>
 <meta charset="UTF-8">
 <title>부서등록</title>
@@ -143,6 +144,8 @@ function LoadPage(){
 	IBS_InitSheet(mySheet,initSheet);
 	mySheet.SetEditableColorDiff(1);
 	mySheet.SetActionMenu("엑셀 파일 저장")
+	mySheet.SetWaitImageVisible(0);
+
 
 }
 
@@ -190,6 +193,7 @@ function doAction(sAction){
 		break;
 	case "down":
 		mySheet.Down2Excel();	
+		
 		break;
 	
 	
@@ -262,9 +266,10 @@ $.ajax({
 		</header>
 	</div>
 
-     <form name='frm'>
+	<form name="frm">
 
-		<div id="searchBar">
+		<div class="searchBar"
+			style="background: #EBEBEB; padding: 10px 30px; margin-bottom: 20px; border-radius: 5px; font-size: 12px; border-radius: 5px; position: absolute; top: 120px; width: 200px;">
 			사업장: <select id="SiteList">
 				<option value="" selected>전체</option>
 			</select>
@@ -272,19 +277,19 @@ $.ajax({
 
 
 	</form>
-        
 
-             <div class="rightbuttons">
-                <a href="javascript:showPopup()" class="IBbutton">부문등록</a>
-                <a href="javascript:doAction('reload')" class="IBbutton">초기화</a>
-                <a href="javascript:doAction('search')" class="IBbutton">조회</a>
-                <a href="javascript:doAction('insert')" class="IBbutton">추가</a>
-                <a href="javascript:doAction('save')" class="IBbutton">저장</a>
-            </div>
-            
-            <div class="clear hidden"></div>  
 
-        <div class="leftbuttons">  
+	<div class="rightbuttons">
+		<a href="javascript:showPopup()" class="IBbutton">부문등록</a> <a
+			href="javascript:doAction('reload')" class="IBbutton">초기화</a> <a
+			href="javascript:doAction('search')" class="IBbutton">조회</a> <a
+			href="javascript:doAction('insert')" class="IBbutton">추가</a> <a
+			href="javascript:doAction('save')" class="IBbutton">저장</a>
+	</div>
+
+	<div class="clear hidden"></div>
+
+	<div class="leftbuttons">  
 		<button type="button" onclick="doAction('down')" class="IBbutton">엑셀</button>
         </div> 
         

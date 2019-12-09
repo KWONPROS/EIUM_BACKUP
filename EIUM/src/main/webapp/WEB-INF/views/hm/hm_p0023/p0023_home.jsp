@@ -18,6 +18,13 @@
 	
 
 <style>
+.rightbuttons {
+	margin-top: 50px;
+	margin: 20px;
+	position: absolute;
+	right: 30px;
+	top:0px;
+}
 div.sheet_search{
 border:1px solid#dbdbdb;
 background:#f9f9f9;
@@ -81,14 +88,39 @@ ul, ol {
 	border-top: thin solid #5E5E5E;
 	border-bottom: thin dashed #5E5E5E;
 	top: 50px;
+	position:relative;
 
 }
-
+.leftbuttons {
+	margin-top: 40px;
+	margin: 10px;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+.sheet1{
+position:relative;
+top:180px;
+}
+#searchBar {
+	background: #EBEBEB;
+	padding: 10px 30px;
+	margin-bottom: 20px;
+	border-radius: 5px;
+	font-size: 12px;
+	border-radius:5px;
+	position:relative;
+	top:120px;
+	width:1300px;
+	left:15px;
+	
+}
 
 </style>
 
 <script>
 function LoadPage() {
+	mySheet1.SetWaitImageVisible(0);
 //달력 API
 $(function() {
   $( ".Datepicker" ).datepicker({
@@ -116,7 +148,7 @@ initSheet.Cols = [
       {Header:"시작일자",Type:"Date",SaveName:"start_DATE",Align:"Center",Width:100,Format:"Ymd"},         
       {Header:"종료일자",Type:"Date",SaveName:"end_DATE",Align:"Center",Width:100,Format:"Ymd"},
       {Header:"발령구분",Type:"Text",SaveName:"hr_APPOINT_INDEX_NAME",Align:"Center",Width:100},
-      {Header:"재직상태",Type:"Text",SaveName:"work_STATUS",Align:"Center",Width:100},
+      {Header:"재직상태",Type:"Text",SaveName:"work_STATUS_NAME",Align:"Center",Width:100},
       {Header:"입사일자",Type:"Text",SaveName:"employee_JOIN_DATE",Align:"Center",Width:100,Format:"Ymd"},
       {Header:"사업장",Type:"Text",SaveName:"site_NAME",Align:"Center",Width:100},
       {Header:"사업장코드",Type:"Text",SaveName:"site_CODE",Align:"Center",Width:100,Hidden:1},
@@ -146,11 +178,14 @@ function doAction(sAction) {
 		break;
 	case "reset":
 		mySheet1.RemoveAll();
-	    $('#date').attr('value', "");
-	    $('#date2').attr('value', "");
-	    $('#p_text').attr('value', "");
-	    $('#p_text').attr('placeholder', "사원의 이름을 입력해주세요.");
+		$("form").each(function() {  
+            this.reset();
+		});
+        break;
+	case "down":
+		mySheet1.Down2Excel();
 		break;
+
 	}
 	
 
@@ -187,11 +222,11 @@ function departmentValue(rowData){
 <form name="frm" >
 
 
-
-"발령일시작일"
+<div id="searchBar">
+발령일시작일
 
 <input id="date"type="text"  class="Datepicker">
-"~"
+~
 <input  id="date2"type="text" class="Datepicker">
 
 <span>발령구분</span>
@@ -222,14 +257,19 @@ function departmentValue(rowData){
 <input id="EmplCode" type="hidden">
 <a href="javascript:goPopup2()" >사원검색</a>
 
-
-<a href="javascript:doAction('search')" class="IBbutton">조회</a>
-
+</div>
 </form>
-
-<script type="text/javascript">
-createIBSheet("mySheet1","100%","40%");
-</script>
-
+	<div class="rightbuttons">
+		<a href="javascript:doAction('reset')" class="IBbutton">초기화</a> <a
+			href="javascript:doAction('search')" class="IBbutton">조회</a>
+	</div>
+	<div class="leftbuttons">
+		<button type="button" onclick="doAction('down')" class="IBbutton">엑셀</button>
+	</div>
+	<div class="sheet1">
+		<script type="text/javascript">
+			createIBSheet("mySheet1", "100%", "40%");
+		</script>
+	</div>
 </body>
 </html>

@@ -81,6 +81,8 @@ function setPopupValue(){
 
 
 	function LoadPage() {
+		mySheet.SetWaitImageVisible(0);
+		mySheet2.SetWaitImageVisible(0);
 		mySheet.RemoveAll();
 		//아이비시트 초기화
 		var initSheet = {};
@@ -88,18 +90,18 @@ function setPopupValue(){
 		initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 		initSheet.Cols = [
 
-				{Header:"교육코드",Type:"Text",SaveName:"employee_TRAINING_CODE", Align:"Center"},
-				{Header:"교육명",Type:"Text",SaveName:"employee_TRAINING_NAME",Align:"Center"},			
-				{Header:"시작일",Type:"Text",SaveName:"employee_TRAINING_START_DATE", Edit: 1, Align:"Center",Format:"Ymd"},			
-				{Header:"종료일",Type:"Text",SaveName:"employee_TRAINING_END_DATE",Format:"Ymd"},			
-				{Header:"교육일수",Type:"Text",SaveName:"employee_TRAINING_DATE_COUNT"},
-				{Header:"교육목적",Type:"Text",SaveName:"employee_TRAINING_GOAL"},
-				{Header:"교육장소",Type:"Text",SaveName:"employee_TRAINING_LOCATION"},			
-				{Header:"담당강사",Type:"Text",SaveName:"employee_TRAINING_TEACHER"},			
-				{Header:"교육기관",Type:"Text",SaveName:"employee_TRAINING_INSITUTION" },			
-				{Header:"교육시간",Type:"Text",SaveName:"employee_TRAINING_TIME"},			
-				{Header:"대상인원",Type:"Text",SaveName:"employee_TRAINING_PEOPLE"},			
-				{Header:"사내외구분",Type:"Text",SaveName:"employee_TRAINING_IN_OUT"},			
+				{Header:"교육코드",Type:"Text",SaveName:"employee_TRAINING_CODE", Align:"Center",Width:80},
+				{Header:"교육명",Type:"Text",SaveName:"employee_TRAINING_NAME",Align:"Center",Width:80},			
+				{Header:"시작일",Type:"Text",SaveName:"employee_TRAINING_START_DATE", Edit: 1, Align:"Center",Format:"Ymd",Width:80},			
+				{Header:"종료일",Type:"Text",SaveName:"employee_TRAINING_END_DATE",Format:"Ymd",Width:80},			
+				{Header:"교육일수",Type:"Text",SaveName:"employee_TRAINING_DATE_COUNT",Width:80},
+				{Header:"교육목적",Type:"Text",SaveName:"employee_TRAINING_GOAL",Width:80},
+				{Header:"교육장소",Type:"Text",SaveName:"employee_TRAINING_LOCATION",Width:80},			
+				{Header:"담당강사",Type:"Text",SaveName:"employee_TRAINING_TEACHER",Width:80},			
+				{Header:"교육기관",Type:"Text",SaveName:"employee_TRAINING_INSITUTION",Width:80},			
+				{Header:"교육시간",Type:"Text",SaveName:"employee_TRAINING_TIME",Width:80},
+				{Header:"대상인원",Type:"Text",SaveName:"employee_TRAINING_PEOPLE",Width:80},	
+				{Header:"사내외구분",Type:"Text",SaveName:"employee_TRAINING_IN_OUT",Width:80},	
 
 				];
 			IBS_InitSheet(mySheet, initSheet);
@@ -119,17 +121,17 @@ function setPopupValue(){
 			initSheet2.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:3}
 			initSheet2.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 			initSheet2.Cols = [
-					{Header:"상태",Type:"Status",SaveName:"STATUS", Align:"Center"},
-					{Header:"사원코드",Type:"Text",SaveName:"employee_CODE", Align:"Center"},
-					{Header:"사원명",Type:"Text",SaveName:"employee_NAME", Align:"Center",InsertEdit:0},			
-					{Header:"부서",Type:"Text",SaveName:"department_NAME",InsertEdit:0},			
-					{Header:"직책",Type:"Text",SaveName:"position_NAME",InsertEdit:0},
-					{Header:"이수여부",Type:"Combo",SaveName:"finish_YN",InsertEdit:0,"ComboText":"Y|N", "ComboCode":"Y|N"},
-					{Header:"출석점수",Type:"Text",SaveName:"attendence_SCORE",InsertEdit:0},
-					{Header:"태도점수",Type:"Text",SaveName:"attitude_SCORE",InsertEdit:0},
-					{Header:"평가점수",Type:"Text",SaveName:"score",InsertEdit:0}	,
-					{Header:"합계",Type:"Text",SaveName:"total",InsertEdit:0,CalcLogic:"|6|+|7|+|8|"},
-					{Header:"교육평가",Type:"Text",SaveName:"assessment_DESC",InsertEdit:0},
+					{Header:"상태",Type:"Status",SaveName:"STATUS", Align:"Center",Width:80},
+					{Header:"사원코드",Type:"Text",SaveName:"employee_CODE", Align:"Center",Width:80},
+					{Header:"사원명",Type:"Text",SaveName:"employee_NAME", Align:"Center",InsertEdit:0,Width:80},	
+					{Header:"부서",Type:"Text",SaveName:"department_NAME",InsertEdit:0,Width:80},
+					{Header:"직책",Type:"Text",SaveName:"position_NAME",InsertEdit:0,Width:80},
+					{Header:"이수여부",Type:"Combo",SaveName:"finish_YN",InsertEdit:0,"ComboText":"Y|N", "ComboCode":"Y|N",Width:80},
+					{Header:"출석점수",Type:"Text",SaveName:"attendence_SCORE",InsertEdit:0,Width:80},
+					{Header:"태도점수",Type:"Text",SaveName:"attitude_SCORE",InsertEdit:0,Width:80},
+					{Header:"평가점수",Type:"Text",SaveName:"score",InsertEdit:0,Width:80},
+					{Header:"합계",Type:"Text",SaveName:"total",InsertEdit:0,CalcLogic:"|6|+|7|+|8|",Width:80},
+					{Header:"교육평가",Type:"Text",SaveName:"assessment_DESC",InsertEdit:0,Width:80},
 
 					];
 				IBS_InitSheet(mySheet2,initSheet2);
@@ -160,12 +162,18 @@ function setPopupValue(){
 
 			var param = FormQueryStringEnc(document.frm);
 			mySheet2.DoSave("${contextPath}/hm/p0021/saveData.do",param);	
+			break;
+			
+		case "down":
+			mySheet.Down2ExcelBuffer(true);
+			mySheet.Down2Excel();
+			mySheet2.Down2Excel();
+			mySheet2.Down2ExcelBuffer(false);
+			break;
+		}
 
-	
-		
-	
 	}
-	}
+	
 
 	
 	// 조회완료 후 처리할 작업
@@ -229,6 +237,7 @@ left: 50px;
    margin:10px;
    position: absolute;
    right: 0px;
+   top:0px;
 }
 .right{
 position: relative;
@@ -281,12 +290,24 @@ border-radius: 2px;
 	border-radius: 5px;
 	font-size: 12px;
 	border-radius:5px;
+	position:absolute;
+	top:150px;
+	width:1000px;
 }
 .leftbuttons{
    margin-top:40px;
    margin:10px;
    position: absolute;
    left: 0px;
+   top:0px;
+}
+.sheet1{
+position:relative;
+top:220px;
+}
+.sheet2{
+position:relative;
+top:250px;
 }
 
 </style>
@@ -302,24 +323,30 @@ border-radius: 2px;
 	</div>
 
 
-	<div class="clear hidden"></div>
-	<div class="left">
+
+	<div class="sheet1">
 		<script>
 			//IBSheet 객체 생성 (객체 id, 너비, 높이)
-			createIBSheet("mySheet", "100%", "200px");
-			createIBSheet("mySheet2", "100%", "200px");
-			
+			createIBSheet("mySheet", "1200px", "200px");
+		</script>
+	</div>
+
+	<div class="sheet2">
+		<script>
+			createIBSheet("mySheet2", "1000px", "200px");
 		</script>
 	</div>
 
 
 
 
-    <div class="rightbuttons">
+	<div class="rightbuttons">
 	  <a href="javascript:doAction('reload')"  class="IBbutton">초기화</a>
 	  <a href="javascript:doAction('save')" class="IBbutton">저장</a>
 	</div>
-  
+  	<div class="leftbuttons">
+		<button type="button" onclick="doAction('down')" class="IBbutton">엑셀</button>
+	</div>
 	<div id="searchBar">
 	<form name="frm" >
 	교육코드<input type="text" id="eduCode" value="" onChange="LoadPage()"><a href="javascript:showPopup();" ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a> <input type="text" id="eduName" disabled>

@@ -104,8 +104,13 @@ border-radius: 2px;
 <script>
 	/*Sheet 기본 설정 */
 	function LoadPage() {
-		$("#date").datepicker().datepicker("setDate", new Date());
-		$("#date2").datepicker().datepicker("setDate", new Date());
+		var now = new Date();
+		var firstDate, lastDate;
+		firstDate = new Date(now.getFullYear(), now.getMonth(), 1);
+		lastDate = new Date(now.getFullYear(), now.getMonth()+1, 0);
+		$("#date").datepicker().datepicker("setDate", firstDate);
+		$("#date2").datepicker().datepicker("setDate", lastDate);
+		
 		mySheet.RemoveAll();
 		//아이비시트 초기화
 		var initSheet = {};
@@ -145,6 +150,9 @@ border-radius: 2px;
 		
 		case "reload": //초기화
 			//조회 데이터 삭제
+			$("form").each(function() {  
+	            this.reset();
+	         });  
 			mySheet.RemoveAll();
 
 			break;
@@ -159,7 +167,7 @@ border-radius: 2px;
 	//달력 API
 	$(function() {
 	  $( ".Datepicker" ).datepicker({
-	  	dateFormat: "yymmdd",
+	  	dateFormat: "yy-mm-dd",
 	  	showOn: "both", 
 	      buttonImage: "${contextPath}/resources/image/icons/icon_calendar.png", 
 	      buttonImageOnly: true , 

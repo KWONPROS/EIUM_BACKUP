@@ -18,8 +18,62 @@
 	
 
 <style>
+.IBbutton {
+	font-size: 13px;
+	margin-left: 5px;
+	background-color: #2B69A0;
+	color: white;
+	padding: 5px 15px;
+	border-radius: 7px;
+	text-decoration: none;
+}
+.IBbutton:hover {
+	background-color: #2C3E50;
+}
+.left{
+position: absolute;
+top: 145px;
+left: 50px;
+}
+.rightbuttons {
+	margin-top: 50px;
+	margin: 20px;
+	position: absolute;
+	right: 30px;
+	top:0px;
+}
+.right{
+position: relative;
+top: 150px;
+left: 600px;
+width: 700px;
+
+}
+.right table{
+font-size:13px;
+font-weight:bold;
+position: relative;
+left: 40px;
+padding: 20px;
+}
+.right table tr td:nth-child(1){
+text-align:right;
+}
+.right table tr td:nth-child(2){
+width: 20px;
+height: 25px;
+}
+.right table tr td:nth-child(3) input{
+width: 130px;
+height: 20px;
+padding-left: 10px;
+margin-right:10px;
+box-sizing: border-box;
+border: 1px solid #CCCCCC;
+border-radius: 2px;
+} 
 .title {
-		width: 100%;
+	width: 100%;
 	color: #2C3E50;
 	font-weight: bold;
 	font-size: 20px;
@@ -28,14 +82,47 @@
 	padding-top: 20px;
 	border-top: thin solid #5E5E5E;
 	border-bottom: thin dashed #5E5E5E;
+	position: absolute;
 	top: 50px;
+}
 
+.sheet1{
+position:relative;
+top:110px;
+height: auto;
+}
+.sheet2{
+position:relative;
+top:130px;
+ height: auto;
+}
+#searchBar {
+	background: #EBEBEB;
+	padding: 10px 30px;
+	margin-bottom: 20px;
+	border-radius: 5px;
+	font-size: 12px;
+	border-radius:5px;
+	position:relative;
+	top:120px;
+	width:1300px;
+	left:15px;
+	
+}
+.leftbuttons {
+	margin-top: 40px;
+	margin: 10px;
+	position: absolute;
+	left: 0px;
+	top: 0px;
 }
 
 </style>
 
 <script>
 function LoadPage() {
+	mySheet1.SetWaitImageVisible(0);
+	mySheet2.SetWaitImageVisible(0);
 //달력 API
 $(function() {
   $( ".Datepicker" ).datepicker({
@@ -49,6 +136,14 @@ $(function() {
        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
 });
 });
+$("#date2").change(function() {
+	if($("#date").val()>$("#date2").val()){
+		alert("종료일이 시작일 보다 커야합니다.");
+		$(this).val("");
+		return;
+	}
+	});
+
 
 mySheet1.RemoveAll();
 //아이비시트 초기화
@@ -159,9 +254,6 @@ function mySheet1_OnClick(Row,Col){
 	function magam(appointCode){
 	
 		var dataMap = JSON.parse(mySheet2.GetSearchData("${contextPath}/hm/p0022/appointList3.do",appointCode));
-		
-		console.log(dataMap);
-		console.log(dataMap.Data[0].employee_CODE);
 		for(var i in dataMap.Data){
 			var send = {"Status":"U","employee_JOIN_DATE":dataMap.Data[i].employee_JOIN_DATE,"department_CODE":dataMap.Data[i].department_CODE,"job_CLASS_CODE":dataMap.Data[i].job_CLASS_CODE,"position_CODE":dataMap.Data[i].position_CODE,"duty_CODE":dataMap.Data[i].duty_CODE,"job_DIS_CODE":dataMap.Data[i].job_DIS_CODE,"pay_TYPE_CODE":dataMap.Data[i].pay_TYPE_CODE,"pay_GRADE_CODE":dataMap.Data[i].pay_GRADE_CODE,"out_REASON_CODE":dataMap.Data[i].out_REASON_CODE,"employee_CODE":dataMap.Data[i].employee_CODE,"work_STATUS":dataMap.Data[i].work_STATUS}
 
@@ -194,12 +286,13 @@ function doAction(sAction) {
 	    mySheet2.RemoveAll();
 		break;
 	case "reset":
-		mySheet.RemoveAll();
-	    $('#date').attr('value', "");
-	    $('#date2').attr('value', "");
-	    $('#p_text').attr('value', "");
-	    $('#p_text').attr('placeholder', "사원의 이름을 입력해주세요.");
-		break;
+		mySheet1.RemoveAll();
+		mySheet2.RemoveAll();
+		$("form").each(function() {  
+            this.reset();
+		});
+		
+	    break;
 	case "insert1":
 		mySheet1.DataInsert(-1);
 		break;
@@ -210,8 +303,14 @@ function doAction(sAction) {
 		mySheet1.DoSave("${contextPath}/hm/p0022/saveData1.do");		
 		break;
 	case "save2": //저장
-		console.log(appointCode);
 		mySheet2.DoSave("${contextPath}/hm/p0022/saveData2.do",appointCode);		
+		break;
+	case "down":
+
+		mySheet1.Down2ExcelBuffer(true);
+		mySheet1.Down2Excel();
+		mySheet2.Down2Excel();
+		mySheet2.Down2ExcelBuffer(false);
 		break;
 	}
 }
@@ -289,53 +388,43 @@ function mySheet1_OnSaveEnd(){
 			인사발령
 		</header>
 	</div>
+	<div class="rightbuttons">
+		<a href="javascript:doAction('search')" class="IBbutton">조회</a> <a
+			href="javascript:doAction('reset')" class="IBbutton">초기화</a>
+	</div>
+	<div class="leftbuttons">
+		<button type="button" onclick="doAction('down')" class="IBbutton">엑셀</button>
+	</div>
+	<div id="searchBar">
+		<form name="frm">
 
-<form name="frm" >
+			발령일 <input id="date" type="text" class="Datepicker"> ~ <input
+				id="date2" type="text" class="Datepicker"> <span>제목</span> <input
+				id="title" type="text" class="" style="width: 160px"> <span>작성자</span>
+			<input id="masterEmpl" type="text"> <input
+				id="masterEmplCode" type="hidden"> <a
+				href="javascript:goPopup()"><img
+				src="${contextPath}/resources/image/icons/icon_plus.png"></a>
 
-
-
-"발령일"
-
-<input id="date"type="text"  class="Datepicker">
-"~"
-<input  id="date2"type="text" class="Datepicker">
-
-<span>제목</span>
-<input id = "title"  type="text" class="" style="width: 160px">
-
-<span>작성자</span>
-<input id="masterEmpl" type="text" >
-<input id="masterEmplCode" type="hidden">
-<a href="javascript:goPopup()" >사원검색</a>
-
-
-<a href="javascript:doAction('search')" class="IBbutton">조회</a>
-
-</form>
-
-
-발령제목
-
-<a href="javascript:doAction('insert1')" class="IBbutton">입력</a>
-<a href="javascript:doAction('save1')" class="IBbutton">저장</a>
+		</form>
+	</div>
+	<div class="sheet1">
+		발령제목 <a href="javascript:doAction('insert1')" class="IBbutton">입력</a>
+		<a href="javascript:doAction('save1')" class="IBbutton">저장</a>
+		<script type="text/javascript">
+			createIBSheet("mySheet1", "100%", "30%");
+		</script>
+	</div>
 
 
-<script type="text/javascript"> 
-createIBSheet("mySheet1","100%","30%");
-</script>
-
-
-
-발령후내역
-<div id="option">
-	<a href="javascript:doAction('insert2')" class="IBbutton">입력</a>
-	<a href="javascript:doAction('save2')" class="IBbutton">저장</a>
-</div>
-
-<script type="text/javascript">
-createIBSheet("mySheet2","100%","40%");
-</script>
-
+	<div class="sheet2">
+		발령후내역
+			<a href="javascript:doAction('insert2')" class="IBbutton">입력</a>
+			<a href="javascript:doAction('save2')" class="IBbutton">저장</a>
+		<script type="text/javascript">
+			createIBSheet("mySheet2", "100%", "40%");
+		</script>
+	</div>
 
 
 </body>
