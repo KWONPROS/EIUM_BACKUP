@@ -279,7 +279,7 @@ background-color: #2C3E50;
 	border-radius: 5px;
 	font-size: 12px;
 	border-radius:5px;
-	width: 1000px;
+	width: 1045px;
 }
 #searchBar input, select {
 	height: 24px;
@@ -294,6 +294,15 @@ background-color: #2C3E50;
 	top: 130px;
 	left: 60px;
 	width: 800px;
+}
+.right{
+ position: relative;
+ width:830px;
+top: -570px;
+left: 390px; 
+padding: 0 0 0 30px;
+border-left: 2px solid #C3C3C3;
+margin-left: 15px;
 }
 	
 	</style>
@@ -339,7 +348,7 @@ background-color: #2C3E50;
 			</script>
 		</div>
 
-		<div style="position: absolute; top: 220px; left: 685px;">
+		<div class="right" style="position: absolute; top: 220px; left: 685px;">
 			<script>
 				createIBSheet("mySheet2", "1500px", "600px");
 			</script>
