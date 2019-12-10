@@ -134,7 +134,27 @@
 		   mySheet2.SetWaitImageVisible(0);
 		  
 				
-		
+		 //주민등록번호
+			$(function() {
+				$('input[name=rrNumber]')
+						.keydown(
+								function(event) {
+									var key = event.charCode
+											|| event.keyCode || 0;
+									$text = $(this);
+									if (key !== 8 && key !== 9) {
+										if ($text.val().length === 6) {
+											$text.val($text.val()
+													+ '-');
+										}
+
+									}
+									return (key == 8
+											|| key == 9
+											|| key == 46
+											|| (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
+								})
+			});
 		
 		
 		//달력 API
@@ -668,7 +688,7 @@ text-decoration: none;
 							<tr>
 								<td class="tg-8thm">주민등록번호</td>
 								<td class="tg-v9i9" colspan="3"><input type="text"
-									id="rrNumber" name="rrNumber" style="width: 350px;" placeholder="______-_______"></td>
+									id="rrNumber" name="rrNumber" style="width: 350px;"maxlength="14" placeholder="______-_______"></td>
 							</tr>
 							<tr>
 								<td class="tg-8thm">성별</td>
