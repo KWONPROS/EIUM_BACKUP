@@ -225,6 +225,10 @@
 			$('#Employee_Select').val('');
 			$('#p_text').val('');
 			$('#p_text').attr('placeholder', "사원명or사원코드");
+			
+			$("#WORK_TIME").each(function() {  
+				this.reset();  
+	         });  
 			break;
 		case "save": // 저장
 			mySheet2.DoSave("${contextPath}/wm/p0001/saveData.do", "p_emp_code=" + mySheet.GetCellValue(mySheet.GetSelectRow(),0));
@@ -1999,7 +2003,7 @@
 		if(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_START_TIME"))<="0900" && mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_END_TIME"))>="1800"){ //정상출근
 			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "00");
 		}else if(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_START_TIME"))=="0900" && mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0900" && mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_END_TIME"))<"1800"){ //조퇴
-			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "02");
+			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "02"); 
 		}else if(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_START_TIME"))>"0900"){ //지각
 			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "01");
 		}
@@ -2010,13 +2014,13 @@
 	}
 	function mySheet2_OnChange(Row, Col){
 		//출근, 조퇴, 외출 프로세스
-		if(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_START_TIME"))<="0900" && mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_END_TIME"))>="1800"){ //정상출근
+		/* if(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_START_TIME"))<="0900" && mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_END_TIME"))>="1800"){ //정상출근
 			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "00");
 		}else if(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_START_TIME"))=="0900" && mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0900" && mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_END_TIME"))<"1800"){ //조퇴
-			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "02");
+			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "02"); 
 		}else if(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_START_TIME"))>"0900"){ //지각
 			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "01");
-		}
+		} */
 		
 		
 		///////////////////////////////////////////////////////////////////평일 휴일 정상근무 휴일정상근무 프로세스
@@ -2410,7 +2414,9 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 		
 	</div>
 	
+	<form id=WORK_TIME>
 	<div class="right_end">
+	
 		<table>
 			<tr>
 				<td>평일정상근무시간</td>
@@ -2442,28 +2448,9 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 				<td></td>
 				<td><input type="text" name="holiday_NIGHT_WORK_TIME" maxlength="5" class="WORK_TIME" placeholder="__:__" >시간</td>
 			</tr>
-			<!-- <tr>
-				<td>평일</td>
-				<td></td>
-				<td><input type="text" name="weekday" maxlength="2" class="WORK_TIME" placeholder="__" >일</td>
-			</tr>
-			<tr>
-				<td>휴일</td>
-				<td></td>
-				<td><input type="text" name="holiday" maxlength="2" class="WORK_TIME" placeholder="__" >일</td>
-			</tr>
-			<tr>
-				<td>총정상근무일</td>
-				<td></td>
-				<td><input type="text" name="normal_WORK_DAY" maxlength="2" class="WORK_TIME" placeholder="__" >일</td>
-			</tr>
-			<tr>
-				<td>총연장근무일</td>
-				<td></td>
-				<td><input type="text" name="extension_WORK_DAY" maxlength="2" class="WORK_TIME" placeholder="__" >일</td>
-			</tr> -->
 		</table>
 	</div>
+	</form>
 	<div class="bottom">
 		<script>createIBSheet("mySheet3", "100%", "100%");</script>
 	</div>
