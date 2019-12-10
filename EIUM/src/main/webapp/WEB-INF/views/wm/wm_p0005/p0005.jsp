@@ -106,7 +106,7 @@
 		    $('#p_text').attr('placeholder', "사원의 이름을 입력해주세요.");
 			break;
 		case "down":
-			var param = { HiddenColumn : 1 };
+			var param = { Mode : -1 };
 	        mySheet.Down2Excel(param);
 		    break;
 		}

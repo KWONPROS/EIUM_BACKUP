@@ -104,7 +104,7 @@
 		    var row = mySheet.DataInsert(1);
 		    break;
 		case "down":
-			var param = { HiddenColumn : 1 };
+			var param = { Mode : -1 };
 	        mySheet.Down2Excel(param);
 		    break;
 		}

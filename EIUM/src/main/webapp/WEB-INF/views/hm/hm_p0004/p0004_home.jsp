@@ -124,10 +124,10 @@
 		         {Header:"사원코드",Type:"Text",SaveName:"employee_CODE",Align:"Center",Width:100,InsertEdit:0, Hidden:1},    
 		         {Header:"계약시작월",Type:"Date",SaveName:"contract_START_MONTH",Align:"Center",Width:100,Format:"Ym"},         
 		         {Header:"계약종료월",Type:"Date",SaveName:"contract_END_MONTH",Align:"Center",Width:100,Format:"Ym"},
-		         {Header:"연봉",Type:"Text",SaveName:"contract_YEAR_PAY",Align:"Center",Width:200},         
-		         {Header:"월급",Type:"Text",SaveName:"contract_MONTH_PAY",Align:"Center",Width:150},         
-		         {Header:"일급",Type:"Text",SaveName:"contract_DAY_PAY",Align:"Center",Width:105},       
-		         {Header:"시급",Type:"Text",SaveName:"contract_TIME_PAY",Align:"Center",Width:100}
+		         {Header:"연봉",Type:"Int",SaveName:"contract_YEAR_PAY",Align:"Center",Width:200,Format:"Integer"},         
+		         {Header:"월급",Type:"Int",SaveName:"contract_MONTH_PAY",Align:"Center",Width:150,Format:"Integer"},         
+		         {Header:"일급",Type:"Int",SaveName:"contract_DAY_PAY",Align:"Center",Width:105,Format:"Integer"},       
+		         {Header:"시급",Type:"Int",SaveName:"contract_TIME_PAY",Align:"Center",Width:100,Format:"Integer"}
 		         ];
 		   createIBSheet2($("#yogi")[0],"mySheet2", "850px", "300px");
 		   IBS_InitSheet(mySheet2,initSheet2);
