@@ -143,7 +143,7 @@ var graphColors = (function() {
 							}
 						},
 						error : function(jqxhr, status, error) {
-							alert("에러");
+							
 						}
 					});
 		})();
@@ -213,7 +213,7 @@ var graphColors = (function() {
 						}
 					},
 					error : function(jqxhr, status, error) {
-						alert("에러");
+			
 					}
 				});
 	};
@@ -222,8 +222,14 @@ var graphColors = (function() {
 	function doAction(sAction) {
 		switch (sAction) {
 		case "excel":
-			var params = { FileName : "사원임금동계.xls", SheetName : "Sheet1"} ;
-			mySheet.Down2Excel(params);
+			var param1 = { Mode : -1,FileName : "사원임금통계.xls", SheetName : "Sheet1"} ;
+			mySheet.Down2ExcelBuffer(true);  
+	          mySheet.Down2Excel(param1); 
+	      	var param2 = {Mode : -1,  FileName : "사원임금통계.xls", SheetName : "Sheet2"} ;
+	           mySheet2.Down2Excel(param2);
+	      	var param3 = {Mode : -1,  FileName : "사원임금통계.xls", SheetName : "Sheet3"} ;
+	           mySheet3.Down2Excel(param3);
+	           mySheet3.Down2ExcelBuffer(false); 
 			break;
 		case "search": //조회
 			var param = FormQueryStringEnc(document.frm);

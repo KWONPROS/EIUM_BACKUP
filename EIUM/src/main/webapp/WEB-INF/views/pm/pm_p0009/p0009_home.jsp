@@ -92,7 +92,7 @@ var graphColors = (function() {
 							}
 						},
 						error : function(jqxhr, status, error) {
-							alert("에러");
+
 						}
 					});
 		})();
@@ -144,7 +144,7 @@ var graphColors = (function() {
 						}
 					},
 					error : function(jqxhr, status, error) {
-						alert("에러");
+					
 					}
 				});
 	};
@@ -153,6 +153,7 @@ var graphColors = (function() {
 	function doAction(sAction) {
 		switch (sAction) {
 		case "excel":
+			
 			var params = { FileName : "월별지급현황.xls", SheetName : "Sheet1"} ;
 			mySheet.Down2Excel(params);
 			break;
