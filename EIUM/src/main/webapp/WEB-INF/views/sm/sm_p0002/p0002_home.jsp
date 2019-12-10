@@ -100,7 +100,7 @@
                  mySheet.SetCellValue($('input[name=myRow]').val(),12,nullcheck($('input[name=site_CATEGORY]').val()));
                  mySheet.SetCellValue($('input[name=myRow]').val(),13,nullcheck($('input[name=site_TYPE]').val()));
                  mySheet.SetCellValue($('input[name=myRow]').val(),14,nullcheck($('input[name=site_OPENBUSINESS_DATE]').val()));
-                 mySheet.SetCellValue($('input[name=myRow]').val(),15,nullcheck($('input[name=site_CLOSEBUSINESS_DATE]').val()));
+                 mySheet.SetCellValue($('input[name=myRow]').val(),15,$('input[name=site_CLOSEBUSINESS_DATE]').val());
                  mySheet.SetCellValue($('input[name=myRow]').val(),16,nullcheck($('select[name=site_BUSINESS_AVAILABLE]').val())); 
          	
 				           

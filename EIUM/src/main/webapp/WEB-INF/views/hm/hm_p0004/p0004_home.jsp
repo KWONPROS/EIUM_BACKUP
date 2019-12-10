@@ -162,18 +162,20 @@
 	//사원검색 조건
 	function searchCondition(){
 		 var cond =document.getElementById("condition").value;
-		 
-		 mySheet.DoSearch('${contextPath}/hm/p0004/searchList.do','condition='+cond);
+		 var command =$('input[name="emp_radio"]:checked').val();	 
+		 mySheet.DoSearch('${contextPath}/hm/p0004/searchList.do','condition='+cond+"&command="+command);
 	   }
 	
 	/*Sheet 각종 처리*/
 	function doAction(sAction) {
 		switch (sAction) {
 		case "search": //조회
-			mySheet.DoSearch("${contextPath}/hm/p0004/searchList.do");		
+			searchCondition();
 			break;
 		 case "reload": //초기화
 	            mySheet.RemoveAll();
+	            mySheet2.RemoveAll();
+		 		$('.right').find('input','select').val(''); 
 	            break;
 		 case "insert": //초기화
 			    var row = mySheet2.DataInsert();
@@ -365,7 +367,29 @@
 			}
 		});
 	}
+	
+	//사진전송
+	function sendData() {	
+		var data = new FormData();
+		data.append("emp_CODE", mySheet.GetCellValue($('input[name=myRow]').val(),2))
+		data.append("picture", $('#inpicture')[0].files[0])
+		$.ajax({
+			url : "${contextPath}/hm/p0004/saveFile.do",
+			type : "POST",
+			dataType : 'json',
+			data : data,
+			processData : false,
+			contentType : false,
+			type : 'POST',
+			success : function(data) {
+			}
+		});
+	}
 	function selectPicture() {
+		if(mySheet.GetCellValue(1,3)==-1){
+			alert("조회 후 등록해주세요.");
+			return false;
+		}
 		$("#inpicture").click();
 		var ext = $("#inpicture").val().split(".").pop().toLowerCase();
 		if (ext.length > 0) {
@@ -379,11 +403,25 @@
 	function readURL(input) {
 		if (input.files && input.files[0]) {
 			var reader = new FileReader();
-			reader.onload = function(e) {
-				$('#uploadedImg').attr('src', e.target.result);
-			}
 			reader.readAsDataURL(input.files[0]);
+			reader.onload = function(e) {
+				//Initiate the JavaScript Image object.
+                var image = new Image();
+                //Set the Base64 string return from FileReader as source.
+                image.src = e.target.result;
+                image.onload = function () {
+                    //Determine the Height and Width.
+                    var height = this.height;
+                    var width = this.width;
+                    if (height > 219 || width > 252) {
+                        alert("사진이 너무 큽니다");
+                        return false;
+                    }
+                    $('#uploadedImg').attr('src', e.target.result);
+                    return true;		
+			};
 		}
+	}
 	}
 	
 </script>
@@ -571,18 +609,12 @@ text-decoration: none;
 	</div>
 	<div class="left">
 		<form id="searchBar" action="javascript:searchCondition();">
-			조회기준 <input type="radio" id="emp_radio" name="emp_radio"
-				onclick="mySheet.DoSearch('${contextPath}/hm/p0004/searchList.do','command=doWork');"
-				value="doWork">재직 <input type="radio" id="emp_radio"
-				name="emp_radio"
-				onclick="mySheet.DoSearch('${contextPath}/hm/p0004/searchList.do','command=noWork');"
-				value="noWork">퇴직 <input type="radio" id="emp_radio"
-				name="emp_radio"
-				onclick="mySheet.DoSearch('${contextPath}/hm/p0004/searchList.do');"
-				checked="checked"> 전체<br> 사원검색 <input type="text"
-				name="condition" id="condition" placeholder="사원번호"> <input
-				type="submit" value="조회"
-				style="background-color: #5E5E5E; color: white;">
+			조회기준 
+			<input type="radio" name="emp_radio" value="doWork" onclick="searchCondition();"> 재직 
+			<input type="radio" name="emp_radio" value="noWork" onclick="searchCondition();">퇴직 
+			<input type="radio" name="emp_radio" value="" checked="checked" onclick="searchCondition();"> 전체<br> 
+			사원검색 <input type="text" name="condition" id="condition" placeholder="사원번호"> 
+			<input type="submit" value="조회" style="background-color: #5E5E5E; color: white;">
 		</form>
 
 		<script>createIBSheet("mySheet", "100%", "100%");</script>
@@ -613,8 +645,7 @@ text-decoration: none;
 								<th class="tg-lu1x" rowspan="8"><i
 									class="fa fa-address-book" aria-hidden="true"></i><br>개<br>인<br>정<br>보</th>
 								<th class="tg-au0w" rowspan="18"></th>
-								<td class="tg-dm68" rowspan="7"><img id=uploadedImg alt="" src="" 
-									></td>
+								<td class="tg-dm68" rowspan="7"><img id=uploadedImg alt="" src="" ></td>
 										
 								<th class="tg-au0w" rowspan="8"></th>
 
@@ -807,63 +838,63 @@ text-decoration: none;
 							<td class="tg-v9i9" colspan="4"><input type="text"
 								id="DEPARTMENT_CODE" name="department_CODE" style="width: 50px;" readonly>
 								<input type="text" id="DEPARTMENT_NAME" name="department_NAME"
-								style="width: 272px;"></td>
+								style="width: 272px;"readonly></td>
 						</tr>
 						<tr>
 							<td class="tg-8thm">고용형태</td>
 							<td class="tg-v9i9" colspan="4"><input type="text"
 								id="WORK_TYPE_CODE" name="work_TYPE_CODE" style="width: 50px;" readonly>
 								<input type="text" id="WORK_TYPE_NAME" name="work_TYPE_NAME"
-								style="width: 272px;"></td>
+								style="width: 272px;"readonly></td>
 						</tr>
 						<tr>
 							<td class="tg-8thm">직종</td>
 							<td class="tg-v9i9" colspan="4"><input type="text"
 								id="JOB_CLASS_CODE" name="job_CLASS_CODE" style="width: 50px;" readonly>
 								<input type="text" id="JOB_CLASS_NAME" name="job_CLASS_NAME"
-								style="width: 272px;"></td>
+								style="width: 272px;"readonly></td>
 						</tr>
 						<tr>
 							<td class="tg-8thm">급여형태</td>
 							<td class="tg-v9i9" colspan="4"><input type="text"
 								id="PAY_TYPE_CODE" name="pay_TYPE_CODE" style="width: 50px;" readonly>
 								<input type="text" id="PAY_TYPE_NAME" name="pay_TYPE_NAME"
-								style="width: 272px;"></td>
+								style="width: 272px;"readonly></td>
 						</tr>
 						<tr>
 							<td class="tg-8thm">직급</td>
 							<td class="tg-v9i9" colspan="4"><input type="text"
 								id="POSITION_CODE" name="position_CODE" style="width: 50px;" readonly>
 								<input type="text" id="POSITION_NAME" name="position_NAME"
-								style="width: 272px;"></td>
+								style="width: 272px;"readonly></td>
 						</tr>
 						<tr>
 							<td class="tg-8thm">직책</td>
 							<td class="tg-v9i9" colspan="4"><input type="text"
 								id="DUTY_CODE" name="duty_CODE" style="width: 50px;" readonly>
 								<input type="text" id="DUTY_NAME" name="duty_NAME"
-								style="width: 272px;"></td>
+								style="width: 272px;"readonly></td>
 						</tr>
 						<tr>
 							<td class="tg-8thm">직무</td>
 							<td class="tg-v9i9" colspan="4"><input type="text"
 								id="JOB_DIS_CODE" name="job_DIS_CODE" style="width: 50px;" readonly>
 								<input type="text" id="JOB_DIS_NAME" name="job_DIS_NAME"
-								style="width: 272px;"></td>
+								style="width: 272px;"readonly></td>
 						</tr>
 						<tr>
 							<td class="tg-8thm">분류코드</td>
 							<td class="tg-v9i9" colspan="4"><input type="text"
 								id="D_CODE_CODE" name="d_CODE_CODE" style="width: 50px;" readonly>
 								<input type="text" id="D_CODE_NAME" name="d_CODE_NAME"
-								style="width: 272px;"></td>
+								style="width: 272px;"readonly></td>
 						</tr>
 						<tr>
 							<td class="tg-8thm">퇴직사유</td>
 							<td class="tg-v9i9" colspan="4"><input type="text"
 								id="OUT_REASON_CODE" name="out_REASON_CODE" style="width: 50px;" readonly>
 								<input type="text" id="OUT_REASON_NAME" name="out_REASON_NAME"
-								style="width: 272px;"></td>
+								style="width: 272px;"readonly></td>
 						</tr>
 					</table>
 

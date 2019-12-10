@@ -22,6 +22,8 @@
 <script language="javascript">
 
 function LoadPage() {
+mySheet.SetWaitImageVisible(0);
+
 //탭
  createIBTab($('#tab1')[0], $('#tab_contents')[0], 'myTabs', {
 	 themes: {
