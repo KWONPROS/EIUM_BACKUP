@@ -42,24 +42,27 @@
 			Header : "상태",
 			Type : "Status",
 			SaveName : "STATUS",
-			Align : "Center"
+			Align : "Center",
+			Width:60
 		}, {
 			Header : "삭제",
 			Type : "DelCheck",
-			SaveName : "DEL_CHK"
+			SaveName : "DEL_CHK",
+			Width:60
 		}, {
 			Header : "교육코드",
 			Type : "Text",
 			SaveName : "employee_TRAINING_CODE",
 			Align : "Center",
 			Width : 100,
-			UpdateEdit : 0
+			UpdateEdit : 0,
+			Width:160
 		}, {
 			Header : "교육명",
 			Type : "Text",
 			SaveName : "employee_TRAINING_NAME",
 			Align : "Center",
-			Width : 100
+			Width:160
 		}, {
 			Header : "시작일",
 			Type : "Date",
@@ -67,18 +70,20 @@
 			Edit : 1,
 			Align : "Center",
 			Format : "Ymd",
-			Width : 100
+			Width:190
 		}, {
 			Header : "종료일",
 			Type : "Date",
 			SaveName : "employee_TRAINING_END_DATE",
 			Format : "Ymd",
-			Width : 100
+			Align:"Center",
+			Width : 190
 		}, {
 			Header : "교육일수",
 			Type : "Text",
 			SaveName : "employee_TRAINING_DATE_COUNT",
 			Hidden : 1
+		
 		}, {
 			Header : "교육목적",
 			Type : "Text",
@@ -89,6 +94,7 @@
 			Type : "Text",
 			SaveName : "employee_TRAINING_LOCATION",
 			Hidden : 1
+			
 		}, {
 			Header : "담당강사",
 			Type : "Text",
@@ -237,13 +243,15 @@
 
 <style type="text/css">
 .IBbutton {
+	
 	font-size: 13px;
-	margin-left: 5px;
-	background-color: #2B69A0;
-	color: white;
-	padding: 5px 15px;
-	border-radius: 7px;
-	text-decoration: none;
+    margin-left: 5px;
+    border: 0;
+    background-color: #2B69A0;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 7px;
+    text-decoration: none;
 }
 
 .IBbutton:hover {
@@ -252,36 +260,40 @@
 
 .left {
 	position: absolute;
-	top: 145px;
-	left: 50px;
+	top: 120px;
+	left: 85px;	
 }
 
 .rightbuttons {
 	margin-top: 50px;
 	margin: 20px;
 	position: absolute;
-	right: 30px;
-}
+	right: 5px;
+	boder-right:1px solid #C3C3C3;
+	top:0px;
+	}
 
 .leftbuttons {
 	margin-top: 40px;
 	margin: 10px;
 	position: absolute;
 	left: 0px;
-	top: 0px;
+	top: 5px;
 }
 
 .right {
 	position: relative;
-	top: 150px;
-	left: 600px;
-	width: 700px;
+	top: 110px;
+	left: 960px;
+	width: 450px;
+	height:505px;
 	background: #EDF0F5;
 	border-radius: 10px;
+
 }
 
 .right table {
-	font-size: 13px;
+	font-size: 14px;
 	font-weight: bold;
 	position: relative;
 	left: 40px;
@@ -293,8 +305,8 @@
 }
 
 .right table tr td:nth-child(2) {
-	width: 20px;
-	height: 25px;
+	width: 40px;
+	height: 50px;
 }
 
 .right table tr td:nth-child(3) input {
@@ -308,7 +320,7 @@
 }
 
 .title {
-	width: 100%;
+	width: 1635px;
 	color: #2C3E50;
 	font-weight: bold;
 	font-size: 20px;
@@ -316,7 +328,6 @@
 	padding-bottom: 10px;
 	padding-top: 20px;
 	border-top: thin solid #5E5E5E;
-	border-bottom: thin dashed #5E5E5E;
 	position: absolute;
 	top: 50px;
 }
@@ -335,18 +346,20 @@
 			href="javascript:doAction('save')" class="IBbutton">저장</a>
 
 	</div>
+	<div class="title"></div>
 	<div class="leftbuttons">
 		<button type="button" onclick="doAction('down')" class="IBbutton">엑셀</button>
 	</div>
 	<div class="clear hidden"></div>
-	<div class="left">
-		<div class="ib_product">
+	<div class="left" >
+		<div style="padding-right: 30px;border-right: 2px solid #C3C3C3;margin-right: 15px;">
 			<script>
 				//IBSheet 객체 생성 (객체 id, 너비, 높이)
-				createIBSheet("mySheet", "100%", "304px");
+				createIBSheet("mySheet", "100%", "500px");
 			</script>
 		</div>
 	</div>
+
 
 
 
@@ -356,7 +369,6 @@
 		<div class="right">
 			<table>
 				<tr>
-
 					<td>교육일수</td>
 					<td><input type="hidden" name="myRow"></td>
 					<td><input type="text" name="employee_TRAINING_DATE_COUNT">일</td>
@@ -404,6 +416,7 @@
 				</tr>
 			</table>
 		</div>
+	
 	</form>
 
 </body>

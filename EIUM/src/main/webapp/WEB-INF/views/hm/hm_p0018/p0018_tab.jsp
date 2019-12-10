@@ -20,6 +20,11 @@
 	top: 50px;
 
 }
+.main_content2{
+padding:0px 20px 20px 20px; background:#fff; _background:none;
+
+}
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="${contextPath}/resources/css/style.css">
@@ -84,7 +89,7 @@ function PageLoad(){
 		</header>
 	</div>
   	  		
-       <div class="main_content">
+       <div class="main_content2">
 
 
              <div id="tab" class="ib-tab-tabs">

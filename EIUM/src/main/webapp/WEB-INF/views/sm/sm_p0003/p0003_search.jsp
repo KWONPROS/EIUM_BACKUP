@@ -2,9 +2,12 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
+
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <style type="text/css">
 .rightbuttons {
 	margin-top: 40px;
@@ -16,12 +19,13 @@
 
 .IBbutton {
 	font-size: 13px;
-	margin-left: 5px;
-	background-color: #2B69A0;
-	color: white;
-	padding: 5px 15px;
-	border-radius: 7px;
-	text-decoration: none;
+    margin-left: 5px;
+    border: 0;
+    background-color: #2B69A0;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 7px;
+    text-decoration: none;
 }
 
 .title {
@@ -70,22 +74,10 @@
 
 .sheet {
 	position: relative;
-	top: 200px; . left { position : absolute;
-	top: 250px;
-	left: 40px;
+	top:180px; 
+	left:50px;
 }
 
-.searchBar {
-	background: #EBEBEB;
-	padding: 10px 30px;
-	margin-bottom: 20px;
-	border-radius: 5px;
-	font-size: 12px;
-	border-radius: 5px;
-	position: absolute;
-	top: 300px;
-	width: 100px;
-}
 
 .leftbuttons {
 	margin-top: 40px;
@@ -111,6 +103,23 @@
 	position: relative;
 	top: 300px;
 }
+#SiteList{
+    height: 22px;
+    border-radius: 3px;
+    border: none;
+    vertical-align: middle;
+    text-align: center;
+    padding-left:10px;
+	width:200px
+}
+span{
+    background: #5E5E5E;
+    padding: 5px 5px;
+    color: white;
+    border-radius: 5px;
+    margin-right:10px;
+    vertical-align: middle;
+}
 
 </style>
 <meta charset="UTF-8">
@@ -120,6 +129,8 @@
 <script src="${contextPath}/resources/ibsheet/ibleaders.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>  
 <script type="text/javascript">
+
+
 var pageheightoffset = 200; //시트높이 계산용
 
 
@@ -133,13 +144,13 @@ function LoadPage(){
 	initSheet.Cols=[
 		{Header:"상태",Type:"Status",Width:60,SaveName:"Status",Align:"Center"},
 		{Header:"삭제	",Type:"DelCheck",Width:60,SaveName:"Delete",Align:"Center"},
-		{Header:"부서코드",Type:"Text",Width:100,SaveName:"department_CODE",Align:"Center",UpdateEdit:0},
-		{Header:"부서명",Type:"Text",Width:100,SaveName:"department_NAME",Align:"Center"},
-		{Header:"사업장코드",Type:"Popup",Width:120,SaveName:"site_CODE",Align:"Center"}, 
-		{Header:"사업장이름",Type:"Text",Width:120,SaveName:"site_NAME",Align:"Center",UpdateEdit:0}, 
-		{Header:"부문코드",Type:"Popup",Width:60,SaveName:"sector_CODE",Align:"Center"}, 
-		{Header:"부문명",Type:"Text",Width:150,SaveName:"sector_NAME",Align:"Center",UpdateEdit:0},
-		{Header:"사용기간",Type:"Date",Width:120,SaveName:"department_TERM",Align:"Center"},
+		{Header:"부서코드",Type:"Text",Width:190,SaveName:"department_CODE",Align:"Center",UpdateEdit:0},
+		{Header:"부서명",Type:"Text",Width:190,SaveName:"department_NAME",Align:"Center"},
+		{Header:"사업장코드",Type:"Popup",Width:190,SaveName:"site_CODE",Align:"Center"}, 
+		{Header:"사업장이름",Type:"Text",Width:190,SaveName:"site_NAME",Align:"Center",UpdateEdit:0}, 
+		{Header:"부문코드",Type:"Popup",Width:190,SaveName:"sector_CODE",Align:"Center"}, 
+		{Header:"부문명",Type:"Text",Width:190,SaveName:"sector_NAME",Align:"Center",UpdateEdit:0},
+		{Header:"사용기간",Type:"Date",Width:190,SaveName:"department_TERM",Align:"Center"},
 		];
 	IBS_InitSheet(mySheet,initSheet);
 	mySheet.SetEditableColorDiff(1);
@@ -269,8 +280,8 @@ $.ajax({
 	<form name="frm">
 
 		<div class="searchBar"
-			style="background: #EBEBEB; padding: 10px 30px; margin-bottom: 20px; border-radius: 5px; font-size: 12px; border-radius: 5px; position: absolute; top: 120px; width: 200px;">
-			사업장: <select id="SiteList">
+			style="background: #EBEBEB; padding: 10px 30px; margin-bottom: 20px; border-radius: 5px; font-size: 12px; border-radius: 5px; position: absolute; top: 135px; left:55px; width:1395px;">
+			<span>사업장</span> <select id="SiteList">
 				<option value="" selected>전체</option>
 			</select>
 		</div>
@@ -295,7 +306,7 @@ $.ajax({
         
             <div class="sheet">
 				<script>
-					createIBSheet("mySheet", "100%", "500px");
+					createIBSheet("mySheet", "1500px", "580px");
 					selectSite();
 				</script>
 				

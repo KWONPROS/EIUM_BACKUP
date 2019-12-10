@@ -132,8 +132,8 @@ function LoadPage() {
 			initSheet2.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:3}
 			initSheet2.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 			initSheet2.Cols = [
-					{Header:"상태",Type:"Status",SaveName:"STATUS", Align:"Center"},
-					{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",Align:"Center"},
+					{Header:"상태",Type:"Status",SaveName:"STATUS", Align:"Center",Width:60},
+					{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",Align:"Center",Width:60},
 					{Header:"사원코드",Type:"Popup",SaveName:"employee_CODE",Align:"Center",Width:100},
 					{Header:"사원명",Type:"Text",SaveName:"employee_NAME",Align:"Center",InsertEdit:0,Width:100},			
 					{Header:"부서",Type:"Text",SaveName:"department_NAME",InsertEdit:0,Width:100,Align:"Center"},			
@@ -231,13 +231,14 @@ function LoadPage() {
 
 <style type="text/css">
 .IBbutton {
-	font-size: 13px;
-	margin-left: 5px;
-	background-color: #2B69A0;
-	color: white;
-	padding: 5px 15px;
-	border-radius: 7px;
-	text-decoration: none;
+    font-size: 13px;
+    margin-left: 5px;
+    border: 0;
+    background-color: #2B69A0;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 7px;
+    text-decoration: none;
 }
 
 .IBbutton:hover {
@@ -293,8 +294,24 @@ function LoadPage() {
 	border-radius: 2px;
 }
 
+
+.rightbuttons {
+	margin-top: 50px;
+	margin: 20px;
+	position: absolute;
+	right: 5px;
+	boder-right:1px solid #C3C3C3;
+	top:0px;
+	}
+.leftbuttons {
+    margin-top: 40px;
+    margin: 10px;
+    position: absolute;
+    left: 0px;
+    top: 5px;
+}
 .title {
-	width: 100%;
+	width: 1635px;
 	color: #2C3E50;
 	font-weight: bold;
 	font-size: 20px;
@@ -302,15 +319,8 @@ function LoadPage() {
 	padding-bottom: 10px;
 	padding-top: 20px;
 	border-top: thin solid #5E5E5E;
-	border-bottom: thin dashed #5E5E5E;
 	position: absolute;
 	top: 50px;
-}
-.rightbuttons {
-	margin-top: 50px;
-	margin: 20px;
-	position: absolute;
-	right: 30px;
 }
 #searchBar {
 	background: #EBEBEB;
@@ -319,30 +329,58 @@ function LoadPage() {
 	border-radius: 5px;
 	font-size: 12px;
 	border-radius:5px;
-	position:relative;
-	top:30px;
-	width:1300px;
-	left:50px;
+	position:absolute;
+	top:65px;
+	width:1500px;
+	left:20px;
 	
 }
-.leftbuttons {
-	margin-top: 40px;
-	margin: 10px;
+
+
+.right {
+	position: relative;
+	top: 113px;
+	left: 1050px;
+	width: 450px;
+	height:505px;
+	background: #EDF0F5;
+	border-radius: 10px;
+
+}
+.left {
 	position: absolute;
-	left: 0px;
-	top: 0px;
+	top: 120px;
+	left: 20px;
+	padding-right:18px;
+	border-right:2px solid #C3C3C3;
+	
+}
+span{
+    background: #5E5E5E;
+    padding: 5px 5px;
+    color: white;
+    border-radius: 5px;
+    margin-right:10px;
+}
+img{
+margin-left:5px;
+margin-right:5px;
+vertical-align: middle;
+}
+#eduCode{
+    height: 22px;
+    border-radius: 3px;
+    border: none;
+    padding-left: 5px;
+    vertical-align: middle;
+    text-align: center;
+    width:200px;
+}
+#eduName{
+border-radius:3px;
+width:200px;
 }
 
-.sheet1{
-position:absolute;
-top:150px;
-height: auto;
-}
-.sheet2{
-position:absolute;
-top:460px;
- height: auto;
-}
 </style>
 
 </head>
@@ -352,17 +390,20 @@ top:460px;
 
 
 
-	<div class="sheet1">
+	<div class="left">
 		<script>
 			//IBSheet 객체 생성 (객체 id, 너비, 높이)
-			createIBSheet("mySheet", "1500px", "304px");
+			createIBSheet("mySheet", "1000px", "500px");
 			
 		</script>
 	</div>
-	<div class="sheet2">
+	<div class="title"></div>
+
+	
+	<div class="right">
 		<script>
 			//IBSheet 객체 생성 (객체 id, 너비, 높이)
-			createIBSheet("mySheet2", "1500px", "304px");
+			createIBSheet("mySheet2", "550px", "500px");
 			
 		</script>
 	</div>
@@ -377,16 +418,17 @@ top:460px;
 			href="javascript:doAction('insert')" class="IBbutton">사원추가</a> <a
 			href="javascript:doAction('save')" class="IBbutton">저장</a>
 	</div>
-	<div id="leftbuttons">
+	
+	<div class="leftbuttons">
 		<button type="button" onclick="doAction('down')" class="IBbutton">엑셀</button>
 	</div>
 
 	<div id="searchBar">
 		<form name="frm">
-			교육코드<input type="text" id="eduCode" value="" onChange="LoadPage()"><a
-				href="javascript:showPopup();"><img
-				src="${contextPath}/resources/image/icons/icon_plus.png"></a> <input
-				type="text" id="eduName" disabled>
+			<span>교육코드</span>
+			<input type="text" id="eduCode" value="" onChange="LoadPage()">
+			<a href="javascript:showPopup();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a> 
+			<input type="text" id="eduName" disabled>
 		</form>
 	</div>
 	
