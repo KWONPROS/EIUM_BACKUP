@@ -95,7 +95,8 @@
 		    var row = mySheet.DataInsert(1);
 		    break;
 		case "down":
-	        mySheet.Down2Excel();
+			var param = { HiddenColumn : 1 };
+	        mySheet.Down2Excel(param);
 	        break;
 		}
 	}

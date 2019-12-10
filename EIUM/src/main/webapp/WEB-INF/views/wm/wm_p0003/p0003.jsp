@@ -97,7 +97,8 @@
 		    $('#p_text').attr('placeholder', "내용을 입력해주세요.");
 			break;
 		case "down":
-	        mySheet.Down2Excel();
+			var param = { HiddenColumn : 1 };
+	        mySheet.Down2Excel(param);
 	        break;
 		}
 	}

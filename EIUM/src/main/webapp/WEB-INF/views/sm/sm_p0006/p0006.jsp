@@ -128,8 +128,9 @@
 			break;
 	    case "down":
 	    	mySheet.Down2ExcelBuffer(true);  
-	        mySheet.Down2Excel();
-	        mySheet2.Down2Excel();
+	    	var param = { HiddenColumn : 1 };
+	    	mySheet.Down2Excel(param); 
+	        mySheet2.Down2Excel(param);
 	        mySheet.Down2ExcelBuffer(false); 
 	        break;
 
