@@ -90,7 +90,7 @@
 				/* var tempStr = mySheet3.GetSaveString();
 				/* tempStr = tempStr + "&p_position_CODE="+mySheet2.GetCellValue(0,0); */
 				//alert("서버로 전달되는 문자열 확인 :"+tempStr);  */
-				mySheet3.DoSave("${contextPath}/hm/p0001/DATE_deleteData.do", "p_position_CODE=" + mySheet2.GetCellValue(0,0)); 
+				
 				break;
 				
 			case "insert": //신규행 추가
@@ -129,6 +129,11 @@
 				mySheet2.RemoveAll();
 			}else{
 				mySheet2.DoSearch("${contextPath}/hm/p0001/searchList2.do", "position_CODE=" + mySheet.GetCellValue(mySheet.GetSelectRow(), 0) + "&start_DATE=" + mySheet3.GetCellValue(mySheet3.GetSelectRow(), 2));
+				/* alert(mySheet3.GetCellValue(mySheet3.GetSelectRow(),0)); */
+				if(mySheet3.GetSelectRow() == mySheet3.GetDataLastRow()-1 && mySheet3.GetCellText(mySheet3.GetSelectRow(),1) == 1){
+					mySheet3.DoSave("${contextPath}/hm/p0001/DATE_deleteData.do", "p_position_CODE=" + mySheet2.GetCellValue(0,0)); 
+					mySheet3.SetCellValue(mySheet3.GetSelectRow(), 1, "R");
+				}
 			}
 		}
 	}
@@ -213,7 +218,7 @@
 	function mySheet3_OnSaveEnd(code,msg){
 		
 		if(code == 0){
-			alert("저장성공!!");	
+			/* alert("저장성공!!"); */	
 			mySheet3.DataInsert(-1);
 			mySheet3.SetEditEnterBehavior("down");
 
@@ -228,7 +233,7 @@
 	}
 	function mySheet2_OnSaveEnd(code, msg){
 		if(code == 0){
-			alert("저장성공!!");
+			/* alert("저장성공!!"); */
 			mySheet2.SetEditEnterBehavior("down");
 			mySheet2.SetWaitImageVisible(0);
 		}else if(code == -1){
@@ -255,7 +260,7 @@
 	}
 	
 	function mySheet2_OnAfterEdit(Row, Col) {
-		mySheet2.DoSave("${contextPath}/hm/p0001/SALARY_saveData.do", "p_position_CODE=" + mySheet2.GetCellValue(0,0) + "&PP_START_DATE=" + mySheet3.GetCellValue(mySheet3.GetSelectRow()-1, 2)); //호봉이력 연월 저장
+		mySheet2.DoSave("${contextPath}/hm/p0001/SALARY_saveData.do", "p_position_CODE=" + mySheet2.GetCellValue(0,0) + "&PP_START_DATE=" + mySheet3.GetCellValue(mySheet3.GetDataLastRow()-1, 2)); //호봉이력 연월 저장
 		/* var tempStr2 = mySheet2.GetSaveString();
 		tempStr2 = tempStr2 + "&p_position_CODE="+mySheet2.GetCellValue(0,0) + "&PP_START_DATE=" + mySheet3.GetCellValue(mySheet3.GetSelectRow(), 2);
 		alert("서버로 전달되는 문자열 확인 :"+tempStr2);  */
@@ -337,8 +342,7 @@ padding: 0 0 0 30px;
 
 
 	<div class="rightbuttons">  
-		<a href="javascript:doAction('reload')" class="IBbutton">초기화</a> <a
-			href="javascript:doAction('save')" class="IBbutton">저장</a>
+		<a href="javascript:doAction('reload')" class="IBbutton">초기화</a> 
 	</div>
 
 <div class="title"> 
