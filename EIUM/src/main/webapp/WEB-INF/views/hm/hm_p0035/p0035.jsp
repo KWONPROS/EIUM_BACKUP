@@ -19,6 +19,7 @@
 
 	//sheet 기본설정
 	function LoadPage() {
+		mySheet.SetWaitImageVisible(0);
 		
 		/* MonthPicker 옵션 */
 	    var options = {
@@ -82,6 +83,9 @@
 	            this.reset();
 	         });  
 			break;
+	    case "down":
+	        mySheet.Down2Excel();
+	        break;
 
 		}
 
@@ -212,6 +216,15 @@
 .IBbutton:hover {
 background-color: #2C3E50;
 }
+.searchBarTitle {
+	background: #5E5E5E;
+	padding: 4px;
+	color: white;
+	border-radius: 5px;
+	margin: 0 5px 0 70px;
+	vertical-align: middle;
+	margin-left: 85px;
+}
 #searchBar {
 	background: #EBEBEB;
 	padding: 10px 30px;
@@ -219,6 +232,15 @@ background-color: #2C3E50;
 	border-radius: 5px;
 	font-size: 12px;
 	border-radius:5px;
+	width: 1144px;
+}
+#searchBar input, select {
+	height: 24px;
+	border-radius: 3px;
+	border: none;
+	padding-left: 5px;
+	vertical-align: middle;
+	text-align: center;
 }
 .left {
 	position: relative;
@@ -247,19 +269,18 @@ background-color: #2C3E50;
         
         <div class="left">
         <div id="searchBar">
-            &nbsp;&nbsp; 사업장 : <select id="SiteList" onchange="selectDept()">
-			<option value="" selected>전체</option>
-		</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 부서 : <select id="DeptList">
+        <span class="searchBarTitle">사업장</span> <select id="SiteList" onchange="selectDept()">
 			<option value="" selected>전체</option>
 		</select>
-		<br>
+		<span class="searchBarTitle">부서</span> <select id="DeptList">
+			<option value="" selected>전체</option>
+		</select>
 		<span class="searchBarTitle">계약시작월</span> <input id="searchDate1" class="monthpicker"
 				type="text" style="width: 100px;"> <img name="btn_monthpicker"
 				src="${contextPath}/resources/image/icons/icon_calendar.png">
 				~ <input id="searchDate2" class="monthpicker"type="text" style="width: 100px;"> 
 				<img name="btn_monthpicker" src="${contextPath}/resources/image/icons/icon_calendar.png">
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		퇴사자<select id="resigner">
+		<span class="searchBarTitle">퇴사자</span> <select id="resigner">
 		<option value='0'selected>0.제외</option>
 		<option value='1'>1.포함</option>
 		</select>

@@ -17,6 +17,8 @@
 
 	//sheet 기본설정
 	function LoadPage() {
+		mySheet.SetWaitImageVisible(0);
+		mySheet2.SetWaitImageVisible(0);
 
 		mySheet.RemoveAll();
 		mySheet2.RemoveAll();
@@ -37,15 +39,18 @@
 			"Header" : "계정ID",
 			"SaveName" : "employee_ID",
 			"Type" : "Text",
-			"Width" : 100,
-			"Align" : "Center"
+			"Width" : 150,
+			"Align" : "Center","UpdateEdit":0
 		}, {
 			"Header" : "사원명",
 			"SaveName" : "employee_NAME",
 			"Type" : "Text",
-			"Width" : 100,
-			"Align" : "Center"
-		} ];
+			"Width" : 150,
+			"Align" : "Center","UpdateEdit":0
+		},
+        { "Header" : "부서명", "SaveName" : "department_NAME", "Type" : "Text", "Width" : 150, "Align" : "Center","UpdateEdit":0 },
+        { "Header" : "직급", "SaveName" : "position_NAME", "Type" : "Text", "Width" : 150, "Align" : "Center","UpdateEdit":0 }
+        ];
 
 		var initSheet2 = {};
 		initSheet2.Cfg = {
@@ -63,7 +68,7 @@
 			"SaveName" : "sStatus",
 			"Type" : "Status",
 			"Align" : "Center",
-			"Width" : 100,
+			"Width" : 60,
 			"ColMerge" : 0
 		}, {
 			"Header" : "권한코드",
@@ -77,14 +82,14 @@
 			"Header" : "권한명",
 			"SaveName" : "authority_NAME",
 			"Type" : "Text",
-			"Width" : 100,
+			"Width" : 230,
 			"Align" : "Center",
 			"UpdateEdit" : 0
 		}, {
 			"Header" : "권한부여",
 			"SaveName" : "authority_GRANT",
 			"Type" : "CheckBox",
-			"Width" : 100,
+			"Width" : 150,
 			"Align" : "Center"
 		} ];
 		IBS_InitSheet(mySheet, initSheet);
@@ -105,6 +110,7 @@
 		case "search":
 			var param = FormQueryStringEnc(document.frm);
 		    mySheet.DoSearch("${contextPath}/sm/p0006/searchList.do", param);
+		    mySheet2.RemoveAll();
 			break;
 		case "reset":
 			mySheet.RemoveAll();
@@ -120,6 +126,12 @@
 			mySheet2.DoSave("${contextPath}/sm/p0006_01/saveData.do", x);
 			mySheet2.RemoveAll();
 			break;
+	    case "down":
+	    	mySheet.Down2ExcelBuffer(true);  
+	        mySheet.Down2Excel();
+	        mySheet2.Down2Excel();
+	        mySheet.Down2ExcelBuffer(false); 
+	        break;
 
 		}
 
@@ -250,6 +262,19 @@
 .IBbutton:hover {
 background-color: #2C3E50;
 }
+
+.searchBarTitle {
+	background: #5E5E5E;
+	padding: 4px;
+	color: white;
+	border-radius: 5px;
+	margin: 0 5px 0 70px;
+	vertical-align: middle;
+	margin-left: 140px;
+}
+.searchBarTitle2 {
+    margin-left: 140px;
+}
 #searchBar {
 	background: #EBEBEB;
 	padding: 10px 30px;
@@ -257,12 +282,30 @@ background-color: #2C3E50;
 	border-radius: 5px;
 	font-size: 12px;
 	border-radius:5px;
+	width: 1045px;
+}
+#searchBar input, select {
+	height: 24px;
+	border-radius: 3px;
+	border: none;
+	padding-left: 5px;
+	vertical-align: middle;
+	text-align: center;
 }
 .left {
 	position: relative;
 	top: 130px;
 	left: 60px;
 	width: 800px;
+}
+.right{
+ position: relative;
+ width:830px;
+top: -570px;
+left: 390px; 
+padding: 0 0 0 30px;
+border-left: 2px solid #C3C3C3;
+margin-left: 15px;
 }
 	
 	</style>
@@ -286,11 +329,13 @@ background-color: #2C3E50;
         
         <div class="left">
         <div id="searchBar">
-            &nbsp;&nbsp; 사업장 : <select id="SiteList" onchange="selectDept()">
+            <span class="searchBarTitle">사업장</span> <select id="SiteList"  onchange="selectDept()">
 			<option value="" selected>전체</option>
-		</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 부서 : <select id="DeptList">
+		</select>
+		<span class="searchBarTitle">부서</span><select id="DeptList">
 			<option value="" selected>전체</option>
-		</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <select id="Employee_Select">
+		</select>
+		<select class="searchBarTitle2" id="Employee_Select">
 		    <option value="" selected>구분</option>
 			<option value="employee_name">사원명</option>
 			<option value="employee_code">사원코드</option>
@@ -306,7 +351,7 @@ background-color: #2C3E50;
 			</script>
 		</div>
 
-		<div style="position: absolute; top: 220px; left: 560px;">
+		<div class="right" style="position: absolute; top: 220px; left: 685px;">
 			<script>
 				createIBSheet("mySheet2", "1500px", "600px");
 			</script>

@@ -15,6 +15,7 @@
 
 function LoadPage(){
 	mySheet.RemoveAll();
+
 	//아이비시트 초기화
 	var initSheet = {};
 	initSheet.Cfg={SearchMode:smLazyLoad,ToolTip:1};
@@ -30,7 +31,8 @@ function LoadPage(){
 	mySheet.SetEditableColorDiff(1);
 
 	mySheet.SetColEditable(2,0);
-	mySheet.DoSearch("${contextPath}/hm/p0018/home2Search_p01.do")
+	var param = FormQueryStringEnc(document.frm);
+	mySheet.DoSearch("${contextPath}/hm/p0018/home2Search_p01.do",param)
 
 
 }
@@ -63,9 +65,11 @@ function mySheet_OnDblClick(Row, Col, Value) {
 <body onload="LoadPage()">
 				<script>
 					createIBSheet("mySheet", "100%", "500px");
-			
 				</script>
 	<input type="hidden" id="CeduCode">
 	<input type="hidden" id="CeduName">
+	<form name="frm">
+	<input type="hidden" id="eduCode" value = <%=request.getParameter("eduCode")%>>
+	</form>
 </body>
 </html>

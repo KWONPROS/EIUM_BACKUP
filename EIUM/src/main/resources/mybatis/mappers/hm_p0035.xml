@@ -58,7 +58,7 @@
                 AND ew.duty_code = du.duty_code(+)
                 AND ew.job_class_code = j.job_class_code(+)
                 AND ew.pay_type_code = pt.pay_type_code(+)
-                AND de.site_code = s.site_code
+                AND de.site_code = s.site_code(+)
                 AND ew.employee_code = c.employee_code
                 
     <choose>
@@ -87,9 +87,11 @@
 	
 	<choose>
 	 <when test="resigner == 0 " >
-	  AND ew.employee_resignation_date is null 
+	  AND ew.employee_resignation_date is null
 	  </when>  
 	</choose>
+	
+	ORDER BY ew.employee_code
 
 	</select>
 </mapper>

@@ -40,6 +40,8 @@
 		<result column="FINAL_EDU_NAME" property="admin_LIST_NAME" />
 		<result column="OUT_REASON_CODE" property="admin_LIST_CODE" />
 		<result column="OUT_REASON_NAME" property="admin_LIST_NAME" />
+		<result column="COUNTRY_CODE" property="admin_LIST_CODE" />
+		<result column="COUNTRY_NAME" property="admin_LIST_NAME" />
 
 	</resultMap>
 

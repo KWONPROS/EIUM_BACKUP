@@ -107,10 +107,10 @@ public class HM_P0018ControllerImpl implements HM_P0018Controller{
 		request.setCharacterEncoding("utf-8");
 		Map<String, Object> searchMap = new HashMap<String, Object>(); // 검색조건
 		Map<String, Object> resultMap = new HashMap<String, Object>(); // 조회결과
-		
+		searchMap.put("eduCode", request.getParameter("eduCode"));
 
 		//데이터 조회
-		List<HM_P0018VO> data = hM_P0018Service.searchList(searchMap);
+		List<HM_P0018VO> data = hM_P0018Service.searchList2(searchMap);
         resultMap.put("Data", data);
         
         
@@ -143,7 +143,7 @@ public class HM_P0018ControllerImpl implements HM_P0018Controller{
 		Map<String, Object> resultMap = new HashMap<String, Object>(); // 조회결과
 		
 		searchMap.put("eduCode", request.getParameter("eduCode"));
-		System.out.println("컨트롤러######"+request.getParameter("eduCode"));
+
 		List<HM_P0018VO> data = hM_P0018Service.emplyoeeListSearch(searchMap);
         resultMap.put("Data", data);
         
@@ -151,6 +151,23 @@ public class HM_P0018ControllerImpl implements HM_P0018Controller{
         return resultMap;
 	}
 	
+	
+	@Override
+	@RequestMapping(value = "/hm/p0018/autocomplete.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map autocomplete(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>(); // 검색조건
+		Map<String, Object> resultMap = new HashMap<String, Object>(); // 조회결과
+		
+		searchMap.put("eduCode", request.getParameter("eduCode"));
+		System.out.println("autocomplete 컨트롤러######"+request.getParameter("eduCode"));
+		List<HM_P0018VO> data = hM_P0018Service.autocomplete(searchMap);
+	    resultMap.put("Data", data);
+	    
+	    
+	    return resultMap;
+	}
 
 	
 	

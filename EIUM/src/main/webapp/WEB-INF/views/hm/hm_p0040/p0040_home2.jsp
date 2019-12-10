@@ -31,7 +31,7 @@
 }
 .left{
 position: absolute;
-top: 145px;
+top: 230px;
 left: 50px;
 }
 .rightbuttons {
@@ -39,11 +39,12 @@ left: 50px;
 	margin: 20px;
 	position: absolute;
 	right: 30px;
+	top:0px;
 }
 .right{
 position: relative;
-top: 150px;
-left: 600px;
+top: 160px;
+left: 300px;
 width: 700px;
 
 }
@@ -83,60 +84,182 @@ border-radius: 2px;
 	position: absolute;
 	top: 50px;
 }
+#searchBar {
+	background: #EBEBEB;
+	padding: 10px 30px;
+	margin-bottom: 20px;
+	border-radius: 5px;
+	font-size: 12px;
+	border-radius:5px;
+	position:relative;
+	top:80px;
+	width:1300px;
+	left:50px;
+	
+}
+
+.leftbuttons {
+	margin-top: 40px;
+	margin: 10px;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
 </style>
 	
 <script>
+
+
+
 	/*Sheet 기본 설정 */
 	function LoadPage() {
+		mySheet.SetWaitImageVisible(0);
+		mySheet2.SetWaitImageVisible(0);
+		$("#date2").change(function() {
+			if ($("#date").val() > $("#date2").val()) {
+				alert("종료일이 시작일 보다 커야합니다.");
+				$(this).val("");
+				return;
+			}
+		});
 		mySheet.RemoveAll();
 		//아이비시트 초기화
 		var initSheet = {};
-		initSheet.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:3}
-		initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
-		initSheet.Cols = [
-				{Header:"코드",Type:"Text",SaveName:"employee_TRAINING_CODE",Edit:0},
-				{Header:"교육명",Type:"Text",SaveName:"employee_TRAINING_NAME",Edit:0}
-				];
-			IBS_InitSheet(mySheet, initSheet);
-			
-			mySheet.SetEditableColorDiff(0); //편집불가능한 셀 표시 구분
-			/* mySheet.SetSheetHeight(1000); */
-			
-			//탭
-			
-			mySheet.RemoveAll();
+		initSheet.Cfg = {
+			SearchMode : smLazyLoad,
+			ToolTip : 1,
+			sizeMode : 3
+		}
+		initSheet.HeaderMode = {
+			Sort : 1,
+			ColMove : 0,
+			ColResize : 0,
+			HeaderCheck : 1
+		};
+		initSheet.Cols = [ {
+			Header : "코드",
+			Type : "Text",
+			SaveName : "employee_TRAINING_CODE",
+			Edit : 0,
+			Width : 100
+		}, {
+			Header : "교육명",
+			Type : "Text",
+			SaveName : "employee_TRAINING_NAME",
+			Edit : 0,
+			Width : 100
+		} ];
+		IBS_InitSheet(mySheet, initSheet);
+
+		mySheet.SetEditableColorDiff(0); //편집불가능한 셀 표시 구분
+		/* mySheet.SetSheetHeight(1000); */
+
+		//탭
+		mySheet.RemoveAll();
 		//아이비시트 초기화
 		var initSheet2 = {};
-		initSheet2.Cfg = {SearchMode:smLazyLoad, ToolTip:1, szeMode:3}
-		initSheet2.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
-		initSheet2.Cols = [
-				{Header:"사원코드",Type:"Text",SaveName:"employee_CODE",Edit:0},
-				{Header:"사원명",Type:"Text",SaveName:"employee_NAME",Edit:0},
-				{Header:"시작일",Type:"Text",SaveName:"employee_TRAINING_START_DATE",Edit:0},
-				{Header:"종료일",Type:"Text",SaveName:"employee_TRAINING_END_DATE",Edit:0},
-				{Header:"교육시간",Type:"Text",SaveName:"employee_TRAINING_TIME",Edit:0},
-				{Header:"교육일수",Type:"Text",SaveName:"employee_TRAINING_DATE_COUNT",Edit:0},
-				{Header:"이수여부",Type:"Combo",SaveName:"finish_YN","ComboText":"이수|미이수", "ComboCode":"Y|N",Edit:0},
-				{Header:"출석점수",Type:"Text",SaveName:"attendence_SCORE",Edit:0},
-				{Header:"태도점수",Type:"Text",SaveName:"attitude_SCORE",Edit:0},
-				{Header:"평가점수",Type:"Text",SaveName:"score",Edit:0},
-				{Header:"합계",Type:"Text",SaveName:"total",Edit:0},
-				{Header:"교육평가",Type:"Text",SaveName:"assessment_DESC",Edit:0},	
-				];
-			IBS_InitSheet(mySheet2, initSheet2);
-			
-			mySheet.SetEditableColorDiff(1); //편집불가능한 셀 표시 구분
-			/* mySheet.SetSheetHeight(1000); */
-			
-			//탭
+		initSheet2.Cfg = {
+			SearchMode : smLazyLoad,
+			ToolTip : 1,
+			szeMode : 3
 		}
-	
+		initSheet2.HeaderMode = {
+			Sort : 1,
+			ColMove : 0,
+			ColResize : 0,
+			HeaderCheck : 1
+		};
+		initSheet2.Cols = [ {
+			Header : "사원코드",
+			Type : "Text",
+			SaveName : "employee_CODE",
+			Edit : 0,
+			Width : 100
+		}, {
+			Header : "사원명",
+			Type : "Text",
+			SaveName : "employee_NAME",
+			Edit : 0,
+			Width : 100
+		}, {
+			Header : "시작일",
+			Type : "Text",
+			SaveName : "employee_TRAINING_START_DATE",
+			Edit : 0,
+			Width : 100
+		}, {
+			Header : "종료일",
+			Type : "Text",
+			SaveName : "employee_TRAINING_END_DATE",
+			Edit : 0,
+			Width : 100
+		}, {
+			Header : "교육시간",
+			Type : "Text",
+			SaveName : "employee_TRAINING_TIME",
+			Edit : 0,
+			Width : 100
+		}, {
+			Header : "교육일수",
+			Type : "Text",
+			SaveName : "employee_TRAINING_DATE_COUNT",
+			Edit : 0,
+			Width : 100
+		}, {
+			Header : "이수여부",
+			Type : "Combo",
+			SaveName : "finish_YN",
+			"ComboText" : "이수|미이수",
+			"ComboCode" : "Y|N",
+			Edit : 0,
+			Width : 100
+		}, {
+			Header : "출석점수",
+			Type : "Text",
+			SaveName : "attendence_SCORE",
+			Edit : 0,
+			Width : 100
+		}, {
+			Header : "태도점수",
+			Type : "Text",
+			SaveName : "attitude_SCORE",
+			Edit : 0,
+			Width : 100
+		}, {
+			Header : "평가점수",
+			Type : "Text",
+			SaveName : "score",
+			Edit : 0,
+			Width : 100
+		}, {
+			Header : "합계",
+			Type : "Text",
+			SaveName : "total",
+			Edit : 0,
+			Width : 100
+		}, {
+			Header : "교육평가",
+			Type : "Text",
+			SaveName : "assessment_DESC",
+			Edit : 0,
+			Width : 100
+		}, ];
+		IBS_InitSheet(mySheet2, initSheet2);
+
+		mySheet.SetEditableColorDiff(1); //편집불가능한 셀 표시 구분
+		/* mySheet.SetSheetHeight(1000); */
+
+		//탭
+	}
+
 	/*Sheet 각종 처리*/
 	function doAction(sAction) {
-		switch(sAction){
+		switch (sAction) {
 		case "search": // 조회
 			var param = FormQueryStringEnc(document.frm);
-			mySheet.DoSearch("${contextPath}/hm/p0040/searchTraining.do",param);
+			mySheet
+					.DoSearch("${contextPath}/hm/p0040/searchTraining.do",
+							param);
 
 			break;
 		case "reload": //초기화
@@ -147,53 +270,67 @@ border-radius: 2px;
 			$("#date2").val('');
 			$("#site").val('');
 			$("#department").val('');
-			
-			break;
-	}
-	}
-	
-	//로우 클릭시
-	function mySheet_OnClick(Row, Col){
-		var param = "param="+mySheet.GetCellValue(Row,0);
-		mySheet2.DoSearch("${contextPath}/hm/p0040/searchEmployeeList.do",param);
 
-		
+			break;
+		case "down":
+
+			mySheet.Down2ExcelBuffer(true);
+			mySheet.Down2Excel();
+			mySheet2.Down2Excel();
+			mySheet2.Down2ExcelBuffer(false);
+			break;
+		}
+	}
+
+	//로우 클릭시
+	function mySheet_OnClick(Row, Col) {
+		var param = "param=" + mySheet.GetCellValue(Row, 0);
+		mySheet2.DoSearch("${contextPath}/hm/p0040/searchEmployeeList.do",
+				param);
+
 	}
 
 	// 조회완료 후 처리할 작업
 	function mySheet_OnSearchEnd() {
-      
+
 	}
-	
+
 	//달력 API
 	$(function() {
-	  $( ".Datepicker" ).datepicker({
-	  	dateFormat: "yymmdd",
-	  	showOn: "both", 
-	      buttonImage: "${contextPath}/resources/image/icons/icon_calendar.png", 
-	      buttonImageOnly: true , 
-	       dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
-	       dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], 
-	       monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
-	       monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+		$(".Datepicker")
+				.datepicker(
+						{
+							dateFormat : "yymmdd",
+							showOn : "both",
+							buttonImage : "${contextPath}/resources/image/icons/icon_calendar.png",
+							buttonImageOnly : true,
+							dayNames : [ '월요일', '화요일', '수요일', '목요일', '금요일',
+									'토요일', '일요일' ],
+							dayNamesMin : [ '월', '화', '수', '목', '금', '토', '일' ],
+							monthNamesShort : [ '1', '2', '3', '4', '5', '6',
+									'7', '8', '9', '10', '11', '12' ],
+							monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월',
+									'7월', '8월', '9월', '10월', '11월', '12월' ]
+						});
 	});
-	});
-	
-function siteSearch(){
-	window.open("${contextPath}/hm/p0040/siteSearch_p01.do", "a", "width=500, height=700, left=100, top=50 location=0");
-	
-}
-function departmentSearch(){
-	window.open("${contextPath}/hm/p0040/departmentSearch_p02.do", "a", "width=500, height=700, left=100, top=50 location=0");
-}
-	
-function siteValue(rowData){
-	console.log("dddd"+rowData.site_NAME);
-	$("#site").val(rowData.site_NAME);
-}
-function departmentValue(rowData){
-	$("#department").val(rowData.department_NAME);
-}	
+
+	function siteSearch() {
+		window.open("${contextPath}/hm/p0040/siteSearch_p01.do", "a",
+				"width=500, height=700, left=100, top=50 location=0");
+
+	}
+	function departmentSearch() {
+		window.open("${contextPath}/hm/p0040/departmentSearch_p02.do", "a",
+				"width=500, height=700, left=100, top=50 location=0");
+	}
+
+	function siteValue(rowData) {
+		console.log("dddd" + rowData.site_NAME);
+		$("#site").val(rowData.site_NAME);
+	}
+	function departmentValue(rowData) {
+		$("#department").val(rowData.department_NAME);
+	}
 </script>
 
 </head>
@@ -204,18 +341,21 @@ function departmentValue(rowData){
 <form name="frm" >
 
 
-
+<div id="searchBar">
 교육기간
 
 <input id="date"type="text"  class="Datepicker">
 ~
 <input  id="date2"type="text" class="Datepicker">
+</div>
 
-
-
+<div class="rightbuttons">
 <a href="javascript:doAction('reload')" class="IBbutton">초기화</a>
 <a href="javascript:doAction('search')" class="IBbutton">조회</a>
-
+</div>
+	<div class="leftbuttons">
+		<button type="button" onclick="doAction('down')" class="IBbutton">엑셀</button>
+	</div>
 </form>
 
 	<div class="left">
@@ -223,7 +363,6 @@ function departmentValue(rowData){
 		<script>
 			//IBSheet 객체 생성 (객체 id, 너비, 높이)
 			createIBSheet("mySheet", "100%", "304px");
-
 		</script>
 	</div>
 	</div>
@@ -238,7 +377,7 @@ function departmentValue(rowData){
 	<div class="right">
 	
 	<script>
-	createIBSheet("mySheet2", "100%", "304px");
+	createIBSheet("mySheet2","1200px", "304px");
 	</script>
 	
 	</div>

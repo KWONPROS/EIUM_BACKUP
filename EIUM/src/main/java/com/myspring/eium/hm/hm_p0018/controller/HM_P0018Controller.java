@@ -37,4 +37,6 @@ public interface HM_P0018Controller {
 
 
 	Map emplyoeeListsaveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	Map autocomplete(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

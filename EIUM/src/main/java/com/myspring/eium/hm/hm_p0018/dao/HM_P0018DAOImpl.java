@@ -25,6 +25,13 @@ public class HM_P0018DAOImpl implements HM_P0018DAO{
 	}
 	
 	@Override
+	public List<HM_P0018VO> searchList2(Map<String, Object> searchMap) throws DataAccessException {
+		List<HM_P0018VO> list = sqlSession.selectList("mapper.hm_p0018.searchList2", searchMap);
+		System.out.println("dao searcmap 에듀코드############"+searchMap.get("eduCode"));
+		return list;
+	}
+	
+	@Override
 	public List<HM_P0018VO> emplyoeeListSearch(Map<String, Object> searchMap) throws DataAccessException {
 		List<HM_P0018VO> list = sqlSession.selectList("mapper.hm_p0018.emplyoeeListSearch", searchMap);
 
@@ -38,7 +45,13 @@ public class HM_P0018DAOImpl implements HM_P0018DAO{
 		return list;
 	}
 		
+	@Override
+	public List<HM_P0018VO> autocomplete(Map<String, Object> searchMap) throws DataAccessException {
+		List<HM_P0018VO> list = sqlSession.selectList("mapper.hm_p0018.autocomplete", searchMap);
 
+		return list;
+	}
+		
 	@Override
 	public void insertData(Map<String, String> row) {
 		sqlSession.update("mapper.hm_p0018.insertData", row);

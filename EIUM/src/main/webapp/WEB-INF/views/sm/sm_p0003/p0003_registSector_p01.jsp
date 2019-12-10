@@ -45,10 +45,7 @@ function doAction(sAction){
 		mySheet.RemoveAll();
 		break;
 	case "save":
-		mySheet.DoSave("${contextPath}/sm/p0003/saveDatapopup.do")
-		var tempStr = mySheet.GetSaveString();
-		alert("서버로 전달되는 문자열 확인 :"+tempStr);
-
+		mySheet.DoSave("${contextPath}/sm/p0003/saveDatapopup.do");
 		break;
 			
 	case "insert":

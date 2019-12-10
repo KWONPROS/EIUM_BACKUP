@@ -59,9 +59,12 @@ var graphColors = (function() {
 	        {Header:"사원코드",Type:"Text",SaveName:"employee_CODE",MinWidth:0.75*colWidth,KeyField:1,Edit:0,Align:"Center"},	
 	        {Header:"사원명",Type:"Text",SaveName:"employee_NAME",MinWidth:colWidth,KeyField:1,Edit:0,Align:"Center"},	
 			{Header:"기본급",Type:"AutoSum",SaveName:"basic_SALARY",MinWidth:colWidth,Edit:0,Align:"Right"},			
-			{Header:"칙책수당",Type:"AutoSum",SaveName:"position_SALARY",MinWidth:colWidth,Edit:0,Align:"Right"},
+			{Header:"직책수당",Type:"AutoSum",SaveName:"position_SALARY",MinWidth:colWidth,Edit:0,Align:"Right"},
 			{Header:"상여",Type:"AutoSum",SaveName:"bonus_SALARY",MinWidth:colWidth,Edit:0,AutoSum:1,Align:"Right"},
 			{Header:"지급합계",Type:"AutoSum" ,CalcLogic:' (|6| + |7|+ |8|) ', SaveName:"total_SALARY",MinWidth:1.5*colWidth,Edit:0,Align:"Right"},
+			{Header:"payment_DATE1",Type:"Text", SaveName:"payment_DATE1",Hidden:1},
+			{Header:"payment_DATE2",Type:"Text", SaveName:"payment_DATE2",Hidden:1},
+			{Header:"payment_DES_NAME",Type:"Text", SaveName:"payment_DES_NAME",Hidden:1}
 			
 		];   
 		IBS_InitSheet( mySheet , initSheet);
@@ -155,8 +158,11 @@ var graphColors = (function() {
 			mySheet.DoSearch("${contextPath}/pm/p0009/searchList.do",param);
 			break;
 
-		case "reload": //초기화		
+		case "reload": //초기화	
 			mySheet.RemoveAll();
+	 		$('#searchBar').find('input','select').val(''); 
+	 		$("#payByDep").empty();
+	 		$("#payByType").empty();
 			break;
 
 		}
@@ -165,7 +171,12 @@ var graphColors = (function() {
 
 	// 저장완료 후 처리할 작업
 	function mySheet_OnSearchEnd(code, msg) {
-
+		
+		$("input[name=payment_DATE1]").val(mySheet.GetCellValue(1,10));
+		$("#Ppayment_date").val(mySheet.GetCellValue(1,11));
+		$("#Ppayment_des_name").val(mySheet.GetCellValue(1,12));
+	
+		
 		var subPieData=[],genPieData=[];
 		var barNames=[],barBasic_SALARY=[],barPosition_SALARY=[],barBonus_SALARY=[],barTotal_SALARY=[];
 		
@@ -447,7 +458,7 @@ position:relative;
 	<div id="searchBar">
 		<form name="frm">
 			<span class="searchBarTitle">귀속연월</span> <input id="monthpicker"
-				type="text" style="width: 100px;"> <img id="btn_monthpicker"
+				type="text" style="width: 100px;" name="payment_DATE1"> <img id="btn_monthpicker"
 				src="${contextPath}/resources/image/icons/icon_calendar.png">
 			<span class="searchBarTitle">지급일</span> 
 			<input type="hidden" id="Ppayment_code">

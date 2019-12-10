@@ -21,6 +21,7 @@
 
 	//sheet 기본설정
 	function LoadPage() {
+		mySheet.SetWaitImageVisible(0);
 		
 		  //달력 API
 		$(function() {
@@ -35,6 +36,14 @@
 		         monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
 		  });
 		});
+		  
+		$("#date2").change(function() {
+	    	if($("#date").val()>$("#date2").val()){
+	    		alert("종료일이 시작일 보다 커야합니다.");
+	    		$(this).val("");
+	    		return;
+	    	}
+	    	});
 
 
 		mySheet.RemoveAll();
@@ -43,17 +52,17 @@
 		initSheet.Cfg = { SearchMode : smLazyLoad, ToolTip : 1, MouseHoverMode : 2 };
 		initSheet.HeaderMode = { Sort : 1, ColMove : 1, ColResize : 10, HeaderCheck : 1 };
 		initSheet.Cols = [ 
-			               { "Header" : "휴가고유코드", "SaveName" : "vacation_CODE", "Type" : "Text", "Width" : 100, "Align" : "Center", "Hidden" : 1 }, 
-			               { "Header" : "사원코드", "SaveName" : "employee_CODE", "Type" : "Text", "Width" : 100, "Align" : "Center" }, 
-			               { "Header" : "사원명", "SaveName" : "employee_NAME", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "부서명", "SaveName" : "department_NAME", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "직급", "SaveName" : "position_NAME", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "신청 전 잔여일수", "SaveName" : "before_VACATION_REMAIN_DATE", "Type" : "Text", "Width" : 100, "Align" : "Center", "Hidden" : 1 },
-			               { "Header" : "근태종류", "SaveName" : "vacation_TYPE", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "시작일", "SaveName" : "vacation_START_DATE", "Type" : "Text", "Width" : 100, "Align" : "Center", "Format":"Ymd" },
-			               { "Header" : "종료일", "SaveName" : "vacation_END_DATE", "Type" : "Text", "Width" : 100, "Align" : "Center", "Format":"Ymd" },
-			               { "Header" : "신청일수", "SaveName" : "vacation_APPLY_DATE", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "신청 후 잔여일수", "SaveName" : "after_VACATION_REMAIN_DATE", "Type" : "Text", "Width" : 100, "Align" : "Center", "CalcLogic":"|7|-|11|", "Hidden" : 1 } 
+			               { "Header" : "휴가고유코드", "SaveName" : "vacation_CODE", "Type" : "Text", "Width" : 150, "Align" : "Center", "Hidden" : 1 }, 
+			               { "Header" : "사원코드", "SaveName" : "employee_CODE", "Type" : "Text", "Width" : 150, "Align" : "Center" }, 
+			               { "Header" : "사원명", "SaveName" : "employee_NAME", "Type" : "Text", "Width" : 150, "Align" : "Center" },
+			               { "Header" : "부서명", "SaveName" : "department_NAME", "Type" : "Text", "Width" : 150, "Align" : "Center" },
+			               { "Header" : "직급", "SaveName" : "position_NAME", "Type" : "Text", "Width" : 150, "Align" : "Center" },
+			               { "Header" : "신청 전 잔여일수", "SaveName" : "before_VACATION_REMAIN_DATE", "Type" : "Text", "Width" : 150, "Align" : "Center", "Hidden" : 1 },
+			               { "Header" : "근태종류", "SaveName" : "vacation_TYPE", "Type" : "Text", "Width" : 150, "Align" : "Center" },
+			               { "Header" : "시작일", "SaveName" : "vacation_START_DATE", "Type" : "Text", "Width" : 150, "Align" : "Center", "Format":"Ymd" },
+			               { "Header" : "종료일", "SaveName" : "vacation_END_DATE", "Type" : "Text", "Width" : 150, "Align" : "Center", "Format":"Ymd" },
+			               { "Header" : "신청일수", "SaveName" : "vacation_APPLY_DATE", "Type" : "Text", "Width" : 150, "Align" : "Center" },
+			               { "Header" : "신청 후 잔여일수", "SaveName" : "after_VACATION_REMAIN_DATE", "Type" : "Text", "Width" : 150, "Align" : "Center", "CalcLogic":"|7|-|11|", "Hidden" : 1 } 
 		                 ];
 
 		IBS_InitSheet(mySheet, initSheet);
@@ -87,6 +96,9 @@
 		    $('#p_text').attr('value', "");
 		    $('#p_text').attr('placeholder', "내용을 입력해주세요.");
 			break;
+		case "down":
+	        mySheet.Down2Excel();
+	        break;
 		}
 	}
 	
@@ -135,6 +147,15 @@
 .IBbutton:hover {
 background-color: #2C3E50;
 }
+.searchBarTitle {
+	background: #5E5E5E;
+	padding: 4px;
+	color: white;
+	border-radius: 5px;
+	margin: 0 5px 0 70px;
+	vertical-align: middle;
+	margin-left: 120px;
+}
 #searchBar {
 	background: #EBEBEB;
 	padding: 10px 30px;
@@ -142,6 +163,15 @@ background-color: #2C3E50;
 	border-radius: 5px;
 	font-size: 12px;
 	border-radius:5px;
+	width: 1145px;
+}
+#searchBar input, select {
+	height: 24px;
+	border-radius: 3px;
+	border: none;
+	padding-left: 5px;
+	vertical-align: middle;
+	text-align: center;
 }
 .left {
 	position: relative;
@@ -174,9 +204,9 @@ background-color: #2C3E50;
         
         <div class="left">
         <div id="searchBar">
-            &nbsp;&nbsp; 사용일자 : <input type="text" id="date" class="Datepicker">
+            <span class="searchBarTitle">사용일자</span> <input type="text" id="date" class="Datepicker">
              ~ <input type="text" id="date2" class="Datepicker">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 조회조건 : <select id="Select">
+            <span class="searchBarTitle">조회조건</span> <select id="Select">
 		    <option value="" selected>구분</option>
 			<option value="사원명">사원명</option>
 			<option value="부서">부서</option>

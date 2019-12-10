@@ -26,6 +26,11 @@ public class HM_P0018ServiceImpl implements HM_P0018Service {
 		return list;
 	}
 	@Override
+	public List<HM_P0018VO> searchList2(Map<String, Object> searchMap) throws DataAccessException {
+		List<HM_P0018VO> list =  hM_P0018DAO.searchList2(searchMap); 
+		return list;
+	}
+	@Override
 	public List<HM_P0018VO> emplyoeeListSearch(Map<String, Object> searchMap) throws DataAccessException {
 		List<HM_P0018VO> list =  hM_P0018DAO.emplyoeeListSearch(searchMap); 
 		return list;
@@ -33,6 +38,11 @@ public class HM_P0018ServiceImpl implements HM_P0018Service {
 	@Override
 	public List<HM_P0018VO> employeeSearch(Map<String, Object> searchMap) throws DataAccessException {
 		List<HM_P0018VO> list =  hM_P0018DAO.employeeSearch(searchMap); 
+		return list;
+	}
+	@Override
+	public List<HM_P0018VO> autocomplete(Map<String, Object> searchMap) throws DataAccessException {
+		List<HM_P0018VO> list =  hM_P0018DAO.autocomplete(searchMap); 
 		return list;
 	}
 

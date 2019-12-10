@@ -7,7 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>회사등록</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibsheetinfo.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibsheet.js"></script>
@@ -21,6 +22,46 @@
 
 <script>
 	/*Sheet 기본 설정 */
+	
+	$(document).ready(function(){
+	       $("#eduCode").keypress(function (e) {
+	        if (e.which == 13){
+	        	var param = FormQueryStringEnc(document.frm);
+	        	
+	        	$.ajax({
+
+				url : "${contextPath}/hm/p0018/autocomplete.do",//목록을 조회 할 url
+
+				type : "POST",
+				
+				data:param,
+				
+				dataType : "JSON",
+
+				success : function(data) {
+			
+				if(data.Data.length==1){
+					
+					$("#eduCode").val(data.Data[0].employee_TRAINING_CODE);
+					$("#eduName").val(data.Data[0].employee_TRAINING_NAME);
+				}else{
+					window.open("${contextPath}/hm/p0018/home2_p01.do?eduCode="+$("#eduCode").val(), "a", "width=600, height=500, left=100, top=50");
+				}
+				
+				},
+
+				error : function(jqxhr, status, error) {
+
+					alert("에러");
+
+				}
+
+			}); 
+
+	               
+	        }
+	    });
+	});
 	
 	function setEdu(){
 	
@@ -41,7 +82,9 @@ function setPopupValue(){
 };
 
 
-	function LoadPage() {
+function LoadPage() {
+		mySheet.SetWaitImageVisible(0);
+		mySheet2.SetWaitImageVisible(0);
 		mySheet.RemoveAll();
 		//아이비시트 초기화
 		var initSheet = {};
@@ -49,7 +92,18 @@ function setPopupValue(){
 		initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:1,HeaderCheck:1};
 		initSheet.Cols = [
 
-				{Header:"교육코드",Type:"Text",SaveName:"employee_TRAINING_CODE", Align:"Center",Width:100},
+				{Header:"교육코드",Type:"Text",SaveName:"employee_TRAINING_CODE", Align:"Center",Width:100,UpdateEdit:0},
+				{Header:"교육명",Type:"Text",SaveName:"employee_TRAINING_NAME", Align:"Center",Width:100,UpdateEdit:0},			
+				{Header:"시작일",Type:"Date",SaveName:"employee_TRAINING_START_DATE", Edit: 1, Align:"Center",Format:"Ymd",Width:100,UpdateEdit:0},			
+				{Header:"종료일",Type:"Date",SaveName:"employee_TRAINING_END_DATE",Format:"Ymd",Width:100,UpdateEdit:0,Align:"Center"},			
+				{Header:"교육일수",Type:"Text",SaveName:"employee_TRAINING_DATE_COUNT",Width:100,UpdateEdit:0,Align:"Center"},
+				{Header:"교육목적",Type:"Text",SaveName:"employee_TRAINING_GOAL",Width:100,UpdateEdit:0,Align:"Center"},
+				{Header:"교육장소",Type:"Text",SaveName:"employee_TRAINING_LOCATION",Width:100,UpdateEdit:0,Align:"Center"},			
+				{Header:"담당강사",Type:"Text",SaveName:"employee_TRAINING_TEACHER",Width:100,UpdateEdit:0,Align:"Center"},			
+				{Header:"교육기관",Type:"Text",SaveName:"employee_TRAINING_INSITUTION",Width:100,UpdateEdit:0,Align:"Center"},			
+				{Header:"교육시간",Type:"Text",SaveName:"employee_TRAINING_TIME",Width:100,UpdateEdit:0,Align:"Center"},			
+				{Header:"대상인원",Type:"Text",SaveName:"employee_TRAINING_PEOPLE",Width:100,UpdateEdit:0,Align:"Center"},			
+
 				{Header:"교육명",Type:"Text",SaveName:"employee_TRAINING_NAME", Align:"Center",Width:100},			
 				{Header:"시작일",Type:"Date",SaveName:"employee_TRAINING_START_DATE", Edit: 1, Align:"Center",Format:"Ymd",Width:100},			
 				{Header:"종료일",Type:"Date",SaveName:"employee_TRAINING_END_DATE",Format:"Ymd",Width:100},			
@@ -62,13 +116,11 @@ function setPopupValue(){
 				{Header:"대상인원",Type:"Text",SaveName:"employee_TRAINING_PEOPLE",Width:100},			
 				{Header:"사내외구분",Type:"Text",SaveName:"employee_TRAINING_IN_OUT",Width:100},			
 
+
 				];
 			IBS_InitSheet(mySheet, initSheet);
-			if($("#eduCode").val()!=""){
-			var param = FormQueryStringEnc(document.frm);
-			mySheet.DoSearch("${contextPath}/hm/p0018/searchList.do",param);
-			}
-			mySheet.SetEditableColorDiff(1); //편집불가능한 셀 표시 구분
+
+			; //편집불가능한 셀 표시 구분
 			/* mySheet.SetSheetHeight(1000); */
 
 			
@@ -81,19 +133,16 @@ function setPopupValue(){
 			initSheet2.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 			initSheet2.Cols = [
 					{Header:"상태",Type:"Status",SaveName:"STATUS", Align:"Center"},
-					{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK"},
+					{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",Align:"Center"},
 					{Header:"사원코드",Type:"Popup",SaveName:"employee_CODE",Align:"Center",Width:100},
 					{Header:"사원명",Type:"Text",SaveName:"employee_NAME",Align:"Center",InsertEdit:0,Width:100},			
-					{Header:"부서",Type:"Text",SaveName:"department_NAME",InsertEdit:0,Width:100},			
-					{Header:"직책",Type:"Text",SaveName:"position_NAME",InsertEdit:0,Width:100}	,
-					{Header:"교육코드",Type:"Text",SaveName:"EMPLOYEE_TRAINING_CODE",Hidden:1}	
+					{Header:"부서",Type:"Text",SaveName:"department_NAME",InsertEdit:0,Width:100,Align:"Center"},			
+					{Header:"직책",Type:"Text",SaveName:"position_NAME",InsertEdit:0,Width:100,Align:"Center"},
+					{Header:"교육코드",Type:"Text",SaveName:"EMPLOYEE_TRAINING_CODE",Hidden:1,Align:"Center"}	
 
 					];
 				IBS_InitSheet(mySheet2,initSheet2);
-				if($("#eduCode").val()!=""){
-				var param = FormQueryStringEnc(document.frm);
-				mySheet2.DoSearch("${contextPath}/hm/p0018/emplyoeeListSearch.do",param);
-				}
+			
 
 				
 				mySheet2.SetEditableColorDiff(1); //편집불가능한 셀 표시 구분
@@ -118,10 +167,26 @@ function setPopupValue(){
 			var param ="param="+mySheet.GetCellValue(1,0);
 			mySheet2.DoSave("${contextPath}/hm/p0018/emplyoeeListsaveData.do",param);	
 
-			break;
-		
+			break;	
+		case "search":
+
+			if($("#eduCode").val() != '' ){
+			var param = FormQueryStringEnc(document.frm);
+			mySheet.DoSearch("${contextPath}/hm/p0018/searchList.do",param);
+			mySheet2.DoSearch("${contextPath}/hm/p0018/emplyoeeListSearch.do",param);
+			}else{
+				alert("교육코드를 입력하세요.");
+			}
+
+		break;
 		case "insert": //신규행 추가
 			var row = mySheet2.DataInsert(-1);
+			break;
+		case "down":
+			mySheet.Down2ExcelBuffer(true);
+			mySheet.Down2Excel();
+			mySheet2.Down2Excel();
+			mySheet2.Down2ExcelBuffer(false);
 			break;
 		}
 	
@@ -165,7 +230,6 @@ function setPopupValue(){
 </script>
 
 <style type="text/css">
-
 .IBbutton {
 	font-size: 13px;
 	margin-left: 5px;
@@ -175,14 +239,15 @@ function setPopupValue(){
 	border-radius: 7px;
 	text-decoration: none;
 }
+
 .IBbutton:hover {
 	background-color: #2C3E50;
 }
 
-.left{
-position: absolute;
-top: 145px;
-left: 50px;
+.left {
+	position: absolute;
+	top: 145px;
+	left: 50px;
 }
 
 .rightbuttons {
@@ -191,38 +256,43 @@ left: 50px;
 	position: absolute;
 	right: 30px;
 }
-.right{
-position: relative;
-top: 150px;
-left: 600px;
-width: 700px;
-background: #EDF0F5;
-border-radius: 10px;
+
+.right {
+	position: relative;
+	top: 150px;
+	left: 600px;
+	width: 700px;
+	background: #EDF0F5;
+	border-radius: 10px;
 }
 
-.right table{
-font-size:13px;
-font-weight:bold;
-position: relative;
-left: 40px;
-padding: 20px;
+.right table {
+	font-size: 13px;
+	font-weight: bold;
+	position: relative;
+	left: 40px;
+	padding: 20px;
 }
-.right table tr td:nth-child(1){
-text-align:right;
+
+.right table tr td:nth-child(1) {
+	text-align: right;
 }
-.right table tr td:nth-child(2){
-width: 20px;
-height: 25px;
+
+.right table tr td:nth-child(2) {
+	width: 20px;
+	height: 25px;
 }
-.right table tr td:nth-child(3) input{
-width: 130px;
-height: 20px;
-padding-left: 10px;
-margin-right:10px;
-box-sizing: border-box;
-border: 1px solid #CCCCCC;
-border-radius: 2px;
-} 
+
+.right table tr td:nth-child(3) input {
+	width: 130px;
+	height: 20px;
+	padding-left: 10px;
+	margin-right: 10px;
+	box-sizing: border-box;
+	border: 1px solid #CCCCCC;
+	border-radius: 2px;
+}
+
 .title {
 	width: 100%;
 	color: #2C3E50;
@@ -236,8 +306,43 @@ border-radius: 2px;
 	position: absolute;
 	top: 50px;
 }
+.rightbuttons {
+	margin-top: 50px;
+	margin: 20px;
+	position: absolute;
+	right: 30px;
+}
+#searchBar {
+	background: #EBEBEB;
+	padding: 10px 30px;
+	margin-bottom: 20px;
+	border-radius: 5px;
+	font-size: 12px;
+	border-radius:5px;
+	position:relative;
+	top:30px;
+	width:1300px;
+	left:50px;
+	
+}
+.leftbuttons {
+	margin-top: 40px;
+	margin: 10px;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
 
-
+.sheet1{
+position:absolute;
+top:150px;
+height: auto;
+}
+.sheet2{
+position:absolute;
+top:460px;
+ height: auto;
+}
 </style>
 
 </head>
@@ -247,11 +352,17 @@ border-radius: 2px;
 
 
 
-	<div class="left">
+	<div class="sheet1">
 		<script>
 			//IBSheet 객체 생성 (객체 id, 너비, 높이)
 			createIBSheet("mySheet", "1500px", "304px");
-			createIBSheet("mySheet2", "1000px", "304px");
+			
+		</script>
+	</div>
+	<div class="sheet2">
+		<script>
+			//IBSheet 객체 생성 (객체 id, 너비, 높이)
+			createIBSheet("mySheet2", "1500px", "304px");
 			
 		</script>
 	</div>
@@ -260,16 +371,25 @@ border-radius: 2px;
 
 
 
-    <div class="rightbuttons">
-	  <a href="javascript:doAction('reload')"  class="IBbutton">초기화</a>
-	  <a href="javascript:doAction('insert')"  class="IBbutton">사원추가</a>
-	  <a href="javascript:doAction('save')" class="IBbutton">저장</a>
+	<div class="rightbuttons">
+		<a href="javascript:doAction('reload')" class="IBbutton">초기화</a> <a
+			href="javascript:doAction('search')" class="IBbutton">조회</a> <a
+			href="javascript:doAction('insert')" class="IBbutton">사원추가</a> <a
+			href="javascript:doAction('save')" class="IBbutton">저장</a>
 	</div>
-  
+	<div id="leftbuttons">
+		<button type="button" onclick="doAction('down')" class="IBbutton">엑셀</button>
+	</div>
+
+	<div id="searchBar">
+		<form name="frm">
+			교육코드<input type="text" id="eduCode" value="" onChange="LoadPage()"><a
+				href="javascript:showPopup();"><img
+				src="${contextPath}/resources/image/icons/icon_plus.png"></a> <input
+				type="text" id="eduName" disabled>
+		</form>
+	</div>
 	
-	<form name="frm" >
-	교육코드<input type="text" id="eduCode" value="" onChange="LoadPage()"><a href="javascript:showPopup();" ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a> <input type="text" id="eduName">
-	</form>
 	<input type="hidden" id="PeduCode">
 	<input type="hidden" id="PeduName">
 	<input type="hidden" id="Pcode">

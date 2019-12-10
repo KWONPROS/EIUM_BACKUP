@@ -125,10 +125,10 @@ body {
 						</c:when>
 					</c:choose>
 
-					<input type="text" name="EMPLOYEE_CODE" class="form-control" placeholder="사원번호" value="" /><br>
-					<input type="text" name="EMAIL" class="form-control" placeholder="이메일" value="" /><br>
+					<input type="text" name="EMPLOYEE_CODE" class="form-control" placeholder="Employee Code" value="" /><br>
+					<input type="text" name="EMAIL" class="form-control" placeholder="E-Mail" value="" /><br>
 
-					<input type="submit" class="btnSubmit" value="다음" />
+					<input type="submit" class="btnSubmit" value="<spring:message code="lo_next" />" />
 				</div>
 
 

@@ -28,7 +28,6 @@
 select DEPARTMENT_CODE,DEPARTMENT_NAME,DEPARTMENT_TERM,d.SITE_CODE,SITE_NAME,d.SECTOR_CODE,SECTOR_NAME
 from department d , sector s , site si
 
-
       ]]>
 
 			<choose>
@@ -43,6 +42,7 @@ from department d , sector s , site si
 			</otherwise>
 			</choose>
 			
+		order by department_code
 
 
 	</select>
@@ -51,6 +51,7 @@ from department d , sector s , site si
 	  <![CDATA[
     select SITE_NAME,SITE_CODE
     FROM SITE  
+	order by site_code
 	
       ]]>
 	</select>
@@ -97,6 +98,7 @@ from department d , sector s , site si
       <![CDATA[
     	 select SECTOR_CODE, SECTOR_NAME, SECTOR_TERM
          from   SECTOR
+         order by sector_code
       ]]>
 
 	</select>

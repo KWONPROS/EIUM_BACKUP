@@ -27,6 +27,7 @@
 	    <result property="pay_TYPE_NAME" column="pay_TYPE_NAME" />
 	    <result property="pay_GRADE_NAME" column="pay_GRADE_NAME" />
 	    <result property="out_REASON_NAME" column="out_REASON_NAME" />
+        <result property="work_STATUS_NAME" column="work_STATUS_NAME" />
 	    
 	</resultMap> 
 
@@ -38,7 +39,7 @@ HAH.APPOINT_CODE,
 HAH.START_DATE,
 HAH.END_DATE,
 AI.HR_APPOINT_INDEX_NAME,
-EW.WORK_STATUS,
+WS.WORK_STATUS_NAME,
 EW.EMPLOYEE_JOIN_DATE,
 S.SITE_NAME,
 D.DEPARTMENT_NAME,
@@ -65,7 +66,8 @@ FROM HR_APPOINT_HISTORY HAH,
     PAY_TYPE PT,
     PAY_GRADE PG,
     OUT_REASON ORN,
-    HR_APPOINT AP
+    HR_APPOINT AP,
+    WORK_STATUS ws
 
 
 WHERE HAH.APPOINT_EMPLOYEE_CODE = E.EMPLOYEE_CODE(+)
@@ -81,6 +83,7 @@ AND EW.PAY_TYPE_CODE = PT.PAY_TYPE_CODE(+)
 AND EW.PAY_GRADE_CODE = PG.PAY_GRADE_CODE(+)
 AND EW.OUT_REASON_CODE = ORN.OUT_REASON_CODE(+)
 AND HAH.appoint_code = AP.appoint_CODE(+)
+AND EW.work_status_code = ws.work_status_code(+)
 AND AP.APPOINT_YN = '마감완료'
    
 			]]>
@@ -132,7 +135,5 @@ AND AP.APPOINT_YN = '마감완료'
 	
 	</choose>
 	</select>
-
-	
 
 </mapper>

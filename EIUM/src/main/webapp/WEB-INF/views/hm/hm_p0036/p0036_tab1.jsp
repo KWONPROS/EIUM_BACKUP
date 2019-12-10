@@ -104,6 +104,12 @@ border-radius: 2px;
 <script>
 	/*Sheet 기본 설정 */
 	function LoadPage() {
+		var now = new Date();
+		var firstDate, lastDate;
+		firstDate = new Date(now.getFullYear(), now.getMonth(), 1);
+		lastDate = new Date(now.getFullYear(), now.getMonth()+1, 0);
+		$("#date").datepicker().datepicker("setDate", firstDate);
+		$("#date2").datepicker().datepicker("setDate", lastDate);
 		
 		mySheet.RemoveAll();
 		//아이비시트 초기화
@@ -149,9 +155,12 @@ border-radius: 2px;
 	            this.reset();
 	         });  
 			break;
-	}
+		case "down":
+			mySheet.Down2Excel();	
+			break;
 	}
 
+	}
 
 	
 	//달력 API
@@ -167,6 +176,7 @@ border-radius: 2px;
 	       monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
 	});
 	});
+	
 	
 function siteSearch(){
 	window.open("${contextPath}/hm/p0040/siteSearch_p01.do", "a", "width=500, height=700, left=100, top=50 location=0");

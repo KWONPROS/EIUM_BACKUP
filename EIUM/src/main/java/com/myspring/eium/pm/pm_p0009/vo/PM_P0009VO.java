@@ -14,6 +14,36 @@ public class PM_P0009VO {
 	private String  basic_SALARY;
 	private String  position_SALARY;
 	private String  bonus_SALARY;
+	private String  payment_CODE;
+	private String  payment_DATE1;
+	private String  payment_DATE2;
+	private String  payment_DES_NAME;
+	
+	
+	public String getPayment_CODE() {
+		return payment_CODE;
+	}
+	public void setPayment_CODE(String payment_CODE) {
+		this.payment_CODE = payment_CODE;
+	}
+	public String getPayment_DATE1() {
+		return payment_DATE1;
+	}
+	public void setPayment_DATE1(String payment_DATE1) {
+		this.payment_DATE1 = payment_DATE1;
+	}
+	public String getPayment_DATE2() {
+		return payment_DATE2;
+	}
+	public void setPayment_DATE2(String payment_DATE2) {
+		this.payment_DATE2 = payment_DATE2;
+	}
+	public String getPayment_DES_NAME() {
+		return payment_DES_NAME;
+	}
+	public void setPayment_DES_NAME(String payment_DES_NAME) {
+		this.payment_DES_NAME = payment_DES_NAME;
+	}
 	public String getEmployee_CODE() {
 		return employee_CODE;
 	}

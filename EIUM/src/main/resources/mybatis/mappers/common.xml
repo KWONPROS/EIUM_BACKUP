@@ -17,14 +17,16 @@
 		<result property="board_END_DATE" column="BOARD_END_DATE" />
 		<result property="board_CONTENT" column="BOARD_CONTENT" />
 		<result property="board_CODE" column="BOARD_CODE" />
-		
-		
+
+
 		<result property="vacation_CODE" column="VACATION_CODE" />
 		<result property="vacation_TYPE" column="VACATION_TYPE" />
 		<result property="vacation_END_DATE" column="VACATION_END_DATE" />
-		<result property="vacation_START_DATE" column="VACATION_START_DATE" />
-		
-		<result property="business_TRIP_CODE" column="BUSINESS_TRIP_CODE" />
+		<result property="vacation_START_DATE"
+			column="VACATION_START_DATE" />
+
+		<result property="business_TRIP_CODE"
+			column="BUSINESS_TRIP_CODE" />
 		<result property="purpose" column="PURPOSE" />
 		<result property="end_DATE" column="END_DATE" />
 		<result property="start_DATE" column="START_DATE" />
@@ -57,47 +59,112 @@
       ]]>
 	</select>
 
-<select id="findvacation" resultMap="resultVO"
+	<select id="findVacationAuth" resultType="java.lang.String"
 		parameterType="java.util.HashMap"> 
       <![CDATA[
-         select 
+        select 
+        a.access_range
+		
+		from menu_by_authority a, user_auth b
+		
+		where a.authority_code=b.authority_code
+		and a.menu_code= 'M029'
+		and b.employee_id = #{emp_id}
+      
+      ]]>
+	</select>
+	<select id="findAllVacation" resultMap="resultVO"
+		parameterType="java.util.HashMap"> 
+      <![CDATA[
+    select 
          B.EMPLOYEE_NAME,
          A.VACATION_CODE,
          A.VACATION_TYPE,
          to_char(to_date(A.VACATION_START_DATE,'YYYYmmdd'),'YYYY-mm-dd') AS VACATION_START_DATE,
          to_char(to_date(A.VACATION_END_DATE,'YYYYmmdd'),'YYYY-mm-dd') AS VACATION_END_DATE
          
-         from  VACATION_CHANGE_HISTORY A, EMPLOYEE B
-         where A.EMPLOYEE_CODE = B.EMPLOYEE_CODE
-      
-         
+	from  VACATION_CHANGE_HISTORY A, EMPLOYEE B
+	where A.EMPLOYEE_CODE = B.EMPLOYEE_CODE
+	order by A.VACATION_CODE desc
       ]]>
 	</select>
-	
-<select id="findbusiness" resultMap="resultVO"
+	<select id="findLimitedVacation" resultMap="resultVO"
 		parameterType="java.util.HashMap"> 
       <![CDATA[
-         select 
-         A.BUSINESS_TRIP_CODE,
+        select 
+         B.EMPLOYEE_NAME,
+         A.VACATION_CODE,
+         A.VACATION_TYPE,
+         to_char(to_date(A.VACATION_START_DATE,'YYYYmmdd'),'YYYY-mm-dd') AS VACATION_START_DATE,
+         to_char(to_date(A.VACATION_END_DATE,'YYYYmmdd'),'YYYY-mm-dd') AS VACATION_END_DATE
+         
+         from  VACATION_CHANGE_HISTORY A, EMPLOYEE B,employee_work c
+         where A.EMPLOYEE_CODE = B.EMPLOYEE_CODE
+         and C.EMPLOYEE_CODE= B.EMPLOYEE_CODE
+         and C.DEPARTMENT_CODE= (select X.DEPARTMENT_CODE
+                                FROM employee_work X,account Y
+                                where X.employee_code=Y.employee_code
+                                and Y.employee_id=#{emp_id})
+        order by A.VACATION_CODE desc
+      ]]>
+	</select>
+
+
+<select id="findBusinessAuth" resultType="java.lang.String"
+		parameterType="java.util.HashMap"> 
+      <![CDATA[
+        select 
+        a.access_range
+		
+		from menu_by_authority a, user_auth b
+		
+		where a.authority_code=b.authority_code
+		and a.menu_code= 'M031'
+		and b.employee_id = #{emp_id}
+      
+      ]]>
+	</select>
+	<select id="findAllBusiness" resultMap="resultVO"
+		parameterType="java.util.HashMap"> 
+      <![CDATA[
+          select 
+         A.Business_Trip_CODE,
          B.EMPLOYEE_NAME,
          A.PURPOSE,
          to_char(to_date(A.START_DATE,'YYYYmmdd'),'YYYY-mm-dd') AS START_DATE,
          to_char(to_date(A.END_DATE,'YYYYmmdd'),'YYYY-mm-dd') AS END_DATE
 
-         from  EMPLOYEE_BUSINESS_TRIP A, EMPLOYEE B
+         from  EMPLOYEE_Business_Trip A, EMPLOYEE B
          where A.EMPLOYEE_CODE = B.EMPLOYEE_CODE
-      
-         
+    	 order by A.BUSINESS_TRIP_CODE desc
       ]]>
 	</select>
+	<select id="findLimitedBusiness" resultMap="resultVO"
+		parameterType="java.util.HashMap"> 
+      <![CDATA[
+        select 
+         A.Business_Trip_CODE,
+         B.EMPLOYEE_NAME,
+         A.PURPOSE,
+         to_char(to_date(A.START_DATE,'YYYYmmdd'),'YYYY-mm-dd') AS START_DATE,
+         to_char(to_date(A.END_DATE,'YYYYmmdd'),'YYYY-mm-dd') AS END_DATE
 
-
+         from  EMPLOYEE_Business_Trip A, EMPLOYEE B,employee_work c
+         where A.EMPLOYEE_CODE = B.EMPLOYEE_CODE
+          and C.EMPLOYEE_CODE= B.EMPLOYEE_CODE
+         and C.DEPARTMENT_CODE= (select X.DEPARTMENT_CODE
+                                FROM employee_work X,account Y
+                                where X.employee_code=Y.employee_code
+                                and Y.employee_id=#{emp_id})
+         order by A.BUSINESS_TRIP_CODE desc
+      ]]>
+	</select>
 
 
 	<select id="findboard" resultMap="resultVO"
 		parameterType="java.util.HashMap"> 
       <![CDATA[
-         select 
+        select 
          	A.BOARD_DES,
 			A.BOARD_DES_DES,
 			A.BOARD_TITLE,
@@ -107,48 +174,47 @@
 			A.EMPLOYEE_ID,
 			B.EMPLOYEE_NAME,
 			A.BOARD_CODE
-         
-         from  (select BOARD_DES,
-			BOARD_DES_DES,
-			BOARD_TITLE,
-            BOARD_CONTENT,
-			BOARD_START_DATE,
-			BOARD_END_DATE,
-			EMPLOYEE_ID,
-			BOARD_CODE
-            from board 
-            WHERE BOARD_DES='TODO'
-            AND EMPLOYEE_ID=#{emp_id}
+
+from  (select BOARD_DES,
+        BOARD_DES_DES,
+        BOARD_TITLE,
+        BOARD_CONTENT,
+        BOARD_START_DATE,
+        BOARD_END_DATE,
+        EMPLOYEE_ID,
+        BOARD_CODE
+        from board 
+        WHERE BOARD_DES='TODO'
+        AND EMPLOYEE_ID=#{emp_id}
             
-            UNION
-            select BOARD_DES,
-			BOARD_DES_DES,
-			BOARD_TITLE,
-            BOARD_CONTENT,
-			BOARD_START_DATE,
-			BOARD_END_DATE,
-			EMPLOYEE_ID,
-			BOARD_CODE
-            from board 
-            WHERE BOARD_DES='EVENT'
+        UNION
+        select BOARD_DES,
+        BOARD_DES_DES,
+        BOARD_TITLE,
+        BOARD_CONTENT,
+        BOARD_START_DATE,
+        BOARD_END_DATE,
+        EMPLOYEE_ID,
+        BOARD_CODE
+        from board 
+        WHERE BOARD_DES='EVENT'
             
-            UNION
-            select BOARD_DES,
-			BOARD_DES_DES,
-			BOARD_TITLE,
-            BOARD_CONTENT,
-			BOARD_START_DATE,
-			BOARD_END_DATE,
-			EMPLOYEE_ID,
-			BOARD_CODE
-            from board 
-            WHERE BOARD_DES='NOTICE'
-            )A
-         
-         
-         , EMPLOYEE B, ACCOUNT C
-         where C.EMPLOYEE_CODE = B.EMPLOYEE_CODE
-         AND C.EMPLOYEE_ID = A.EMPLOYEE_ID
+        UNION
+        select BOARD_DES,
+        BOARD_DES_DES,
+        BOARD_TITLE,
+        BOARD_CONTENT,
+        BOARD_START_DATE,
+        BOARD_END_DATE,
+        EMPLOYEE_ID,
+        BOARD_CODE
+        from board 
+        WHERE BOARD_DES='NOTICE') A
+
+        , EMPLOYEE B, ACCOUNT C
+where C.EMPLOYEE_CODE = B.EMPLOYEE_CODE
+AND C.EMPLOYEE_ID = A.EMPLOYEE_ID
+order by A.BOARD_CODE desc
  
          
       ]]>
@@ -183,7 +249,7 @@
 		 ]]>
 	</insert>
 	<update id="updateData" parameterType="java.util.Map">
-	  <![CDATA[
+
 		update BOARD
 		set
 		BOARD_DES=#{board_DES},
@@ -195,11 +261,10 @@
 		<if test="board_END_DATE!=null and !board_END_DATE.equals('')">
 		,BOARD_END_DATE=REPLACE(#{board_END_DATE},' ','')
 		</if>
-		
 		where
-		BOARD_CODE=#{board_CODE}  
+		BOARD_CODE=#{board_CODE}
 
-]]>
+
 	</update>
 	<delete id="deleteData" parameterType="java.util.Map">
 		  <![CDATA[

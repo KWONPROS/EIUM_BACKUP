@@ -21,6 +21,11 @@ public class SM_P0002DAOImpl implements SM_P0002DAO {
 		List<SM_P0002VO> list = sqlSession.selectList("mapper.sm_p0002.searchList", searchMap);
 		return list;
 	}
+	@Override
+	public List<SM_P0002VO> searchList2(Map<String, Object> searchMap) throws DataAccessException {
+		List<SM_P0002VO> list = sqlSession.selectList("mapper.sm_p0002.searchList2", searchMap);
+		return list;
+	}
 
 	@Override
 	public void insertData(Map<String, String> row) throws DataAccessException {

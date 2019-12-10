@@ -104,10 +104,10 @@ body {
 				</h3>
 
 				<h3>
-					<spring:message code="findResult" text="이메일로 발송하였습니다." />
+					<spring:message code="lo_findResult"/>
 				</h3>
 
-					<input type="submit" onClick='window.close()' class="btnSubmit" value="창 닫기" />
+					<input type="submit" onClick='window.close()' class="btnSubmit" value="<spring:message code="lo_close" />" />
 			</form>
 		</div>
 	</div>

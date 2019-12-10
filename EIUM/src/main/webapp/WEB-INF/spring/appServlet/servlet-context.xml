@@ -5,9 +5,14 @@
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:context="http://www.springframework.org/schema/context"
+	
+	xmlns:task="http://www.springframework.org/schema/task"
+	
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+  	  http://www.springframework.org/schema/task
+      http://www.springframework.org/schema/task/spring-task.xsd">
 
 	<annotation-driven />
 	<resources mapping="/resources/**" location="/resources/" />
@@ -36,6 +41,11 @@
         <beans:property name="maxUploadSize" value="100000000" />
         <beans:property name="maxInMemorySize" value="100000000" />  
     </beans:bean>
+    
+   <!-- batch -->
+     <task:annotation-driven executor="executor" scheduler="scheduler"/>
+     <task:scheduler id="scheduler" pool-size="10" />
+     <task:executor id="executor" keep-alive="5" pool-size="10-20" queue-capacity="10" rejection-policy="ABORT"/>      
 
 	<mvc:interceptors>
 		<beans:bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">

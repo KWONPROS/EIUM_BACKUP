@@ -51,10 +51,6 @@ public class HomeController {
 
 	@RequestMapping(value = "/login.do", method =  RequestMethod.GET)
 	public String Login( Locale locale,HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("loclae+++"+locale);		
-		HttpSession session = request.getSession();
-		session.invalidate();
-		
 
 		return "common/cm_login";
 	}

@@ -104,6 +104,7 @@ border-radius: 2px;
 <script>
 	/*Sheet 기본 설정 */
 	function LoadPage() {
+		mySheet.SetWaitImageVisible(0);
 		$("#date").datepicker().datepicker("setDate", new Date());
 		mySheet.RemoveAll();
 		//아이비시트 초기화
@@ -112,12 +113,12 @@ border-radius: 2px;
 		initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 		initSheet.Cols = [
 			{Header:"NO",Type:"Seq",SaveName:"SEQ",Edit:0},
-			{Header:"사원코드",Type:"Text",SaveName:"employee_CODE",Edit:0,Width:"100"},
-			{Header:"사원명",Type:"Text",SaveName:"employee_NAME",Edit:0,Width:"100"},
-			{Header:"부서",Type:"Text",SaveName:"department_NAME",Edit:0,Width:"100"},
-			{Header:"직책",Type:"Text",SaveName:"duty_NAME",Edit:0,Width:"100"},
-			{Header:"입사일",Type:"Text",SaveName:"employee_JOIN_DATE",Edit:0,Width:"100"},
-			{Header:"년수",Type:"Text",SaveName:"working_YEARS",Edit:0,Width:"100"},
+			{Header:"사원코드",Type:"Text",SaveName:"employee_CODE",Edit:0,Width:"100",Align:"Center"},
+			{Header:"사원명",Type:"Text",SaveName:"employee_NAME",Edit:0,Width:"100",Align:"Center"},
+			{Header:"부서",Type:"Text",SaveName:"department_NAME",Edit:0,Width:"100",Align:"Center"},
+			{Header:"직책",Type:"Text",SaveName:"duty_NAME",Edit:0,Width:"100",Align:"Center"},
+			{Header:"입사일",Type:"Text",SaveName:"employee_JOIN_DATE",Edit:0,Width:"100",Align:"Center"},
+			{Header:"년수",Type:"Text",SaveName:"working_YEARS",Edit:0,Width:"100",Align:"Center"},
 				];
 			IBS_InitSheet(mySheet, initSheet);
 			
@@ -136,12 +137,15 @@ border-radius: 2px;
 		case "reload": //초기화
 			//조회 데이터 삭제
 			mySheet.RemoveAll();
-			mySheet2.RemoveAll();
-			$("#date").val('');
-			$("#date2").val('');
-			$("#site").val('');
-			$("#department").val('');
+
 			
+			$("form").each(function() {  
+	            this.reset();
+	         });  
+
+			break;
+		case "down":
+			mySheet.Down2Excel();
 			break;
 	}
 	}
@@ -207,7 +211,7 @@ function departmentValue(rowData){
 				근속년수현황
 			</header>
 		</div>
-		
+
 	   <div class="left">
        <div id="searchBar">
 		 사업장<input type="text" id="site">

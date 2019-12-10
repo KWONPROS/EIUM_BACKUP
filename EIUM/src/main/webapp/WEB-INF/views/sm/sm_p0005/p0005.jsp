@@ -17,6 +17,7 @@ var pageheightoffset = 200; //시트높이 계산용
 
 //sheet 기본설정
 function LoadPage(){
+   mySheet.SetWaitImageVisible(0);
 	
    mySheet.RemoveAll();
    mySheet2.RemoveAll();
@@ -25,23 +26,23 @@ function LoadPage(){
    initSheet.Cfg={SearchMode:smLazyLoad,ToolTip:1,MouseHoverMode:2};
    initSheet.HeaderMode = {Sort:1,ColMove:1,ColResize:10,HeaderCheck:1};
    initSheet.Cols=[
-	    {"Header":"상태","SaveName":"sStatus","Type":"Status","Align":"Center","Width":50},
-	    {"Header":"삭제","SaveName":"DEL_CHK","Type":"DelCheck"},
-		{"Header":"권한코드","SaveName":"authority_CODE","Type":"Text","Width":100,"Align":"Center","UpdateEdit":0},
-		{"Header":"권한명","SaveName":"authority_NAME","Type":"Text","Width":100,"Align":"Center"}
+	    {"Header":"상태","SaveName":"sStatus","Type":"Status","Align":"Center","Width":60},
+	    {"Header":"삭제","SaveName":"DEL_CHK","Type":"DelCheck","Width":60},
+		{"Header":"권한코드","SaveName":"authority_CODE","Type":"Text","Width":150,"Align":"Center","UpdateEdit":0, "KeyField":1 },
+		{"Header":"권한명","SaveName":"authority_NAME","Type":"Text","Width":150,"Align":"Center"}
       ];
    
    var initSheet2 = {};
    initSheet2.Cfg={SearchMode:smLazyLoad, ToolTip:1,  MergeSheet:msPrevColumnMerge + msHeaderOnly};
    initSheet2.HeaderMode = {Sort:1,ColMove:1,ColResize:10,HeaderCheck:1};
    initSheet2.Cols=[
-	    {"Header":"상태","SaveName":"sStatus","Type":"Status","Align":"Center","Width":100,"ColMerge":0},
+	    {"Header":"상태","SaveName":"sStatus","Type":"Status","Align":"Center","Width":60,"ColMerge":0},
 		{"Header":"사용가능한메뉴","SaveName":"access_GRANT","Type":"CheckBox","Width":50,"Align":"Center","ColMerge":0},
-		{"Header":"사용가능한메뉴","SaveName":"menu_NAME","Type":"Text","Width":130,"Align":"Center","ColMerge":0},
-		{"Header":"조회권한","SaveName":"access_RANGE","Type":"Combo", "ComboText":"사업장|부서|사원", "ComboCode":"사업장|부서|사원", "Width":100,"ColMerge":0},
-		{"Header":"추가","SaveName":"access_INSERT","Type":"CheckBox","Width":100,"ColMerge":0},
-		{"Header":"수정","SaveName":"access_UPDATE","Type":"CheckBox","Width":100,"ColMerge":0},
-		{"Header":"삭제","SaveName":"access_DELETE","Type":"CheckBox","Width":100,"ColMerge":0},
+		{"Header":"사용가능한메뉴","SaveName":"menu_NAME","Type":"Text","Width":200,"Align":"Center","ColMerge":0},
+		{"Header":"조회권한","SaveName":"access_RANGE","Type":"Combo", "ComboText":"사업장|부서|사원", "ComboCode":"사업장|부서|사원", "Width":150,"ColMerge":0,"Align":"Center"},
+		{"Header":"추가","SaveName":"access_INSERT","Type":"CheckBox","Width":120,"ColMerge":0},
+		{"Header":"수정","SaveName":"access_UPDATE","Type":"CheckBox","Width":120,"ColMerge":0},
+		{"Header":"삭제","SaveName":"access_DELETE","Type":"CheckBox","Width":120,"ColMerge":0}
       ];
    
 
@@ -77,11 +78,15 @@ function doAction(sAction){
 		  mySheet2.DoSave("${contextPath}/sm/p0005_01/saveData.do", x);
 		  mySheet2.RemoveAll();
 	      break;
-      
    case "insert":
-      var row = mySheet.DataInsert();
-      break;
-   
+	      var row = mySheet.DataInsert(-1);
+	      break;
+   case "down":
+		  mySheet.Down2ExcelBuffer(true);  
+		  mySheet.Down2Excel();
+		  mySheet2.Down2Excel();
+		  mySheet.Down2ExcelBuffer(false); 
+		  break;
    }
   
    
@@ -127,6 +132,15 @@ function doAction(sAction){
 .IBbutton:hover {
 background-color: #2C3E50;
 }
+.right{
+ position: relative;
+ width:830px;
+top: -570px;
+left: 390px; 
+padding: 0 0 0 30px;
+border-left: 2px solid #C3C3C3;
+margin-left: 15px;
+}
 	
 	</style>
 </head>
@@ -155,7 +169,7 @@ createIBSheet("mySheet", "1500px", "600px");
 </script>
 </div>
 
-<div style="position:absolute; top:140px; left:445px;">
+<div class="right" style="position:absolute; top:140px; left:500px;">
 <script>
 createIBSheet("mySheet2", "1500px", "600px");
 </script>

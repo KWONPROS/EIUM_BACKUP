@@ -22,8 +22,8 @@
 		initSheet.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0};
 		initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 		initSheet.Cols = [		
-			{Header:"코드",Type:"Text",SaveName:"admin_CODE",MinWidth:80,KeyField:1, Align:"Center"},
-			{Header:"관리항목명",Type:"Text",SaveName:"admin_NAME",MinWidth:170,KeyField:1, Align:"Center"},			
+			{Header:"코드",Type:"Text",SaveName:"admin_CODE",MinWidth:100,KeyField:1,Edit:0, Align:"Center"},
+			{Header:"관리항목명",Type:"Text",SaveName:"admin_NAME",MinWidth:200,KeyField:1,Edit:0, Align:"Center"},			
 			{Header:"테이블물리명",Type:"Text",SaveName:"admin_LIST_NAME" ,Hidden:1}			
 		];   
 		IBS_InitSheet( mySheet , initSheet);
@@ -39,11 +39,11 @@
 		initSheet2.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 		initSheet2.Cols = [
 			
-	     	{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
-	        {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},	
+	     	{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:60, Align:"Center"},
+	        {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:60},	
 	        {Header:"테이블물리명",Type:"Text",SaveName:"t_NAME"   ,Hidden:1 } ,	
-			{Header:"코드",Type:"Text",SaveName:"admin_LIST_CODE",MinWidth:120,KeyField:1, Align:"Center",Edit:0},			
-			{Header:"관리내역명",Type:"Text",SaveName:"admin_LIST_NAME",MinWidth:170}					
+			{Header:"코드",Type:"Text",SaveName:"admin_LIST_CODE",MinWidth:100,KeyField:1, Align:"Center",Edit:0},			
+			{Header:"관리내역명",Type:"Text",SaveName:"admin_LIST_NAME",MinWidth:600, Align:"Center"}					
 
 			
 		];   
@@ -72,7 +72,6 @@
 		
 				var tempStr = mySheet2.GetSaveString();
 				tempStr= tempStr+"&table_NAME="+mySheet2.GetCellValue(0,2);
-				alert("서버로 전달되는 문자열 확인 :"+tempStr);
 				mySheet2.DoSave("${contextPath}/hm/p0003/saveData.do",tempStr);
 				break;			
 			case "insert": //신규행 추가
@@ -146,14 +145,19 @@ background-color: #2C3E50;
 }
 .left{
 position: relative;
+width:300px;
 top: 130px;
 left: 60px;
+padding: 0 30px 0 0;
+border-right: 2px solid #C3C3C3;
 }
 .right{
  position: relative;
+ width:830px;
 top: -570px;
-left: 500px; 
-
+left: 390px; 
+padding: 0 0 0 30px;
+border-left: 2px solid #C3C3C3;
 }
 
 
@@ -164,10 +168,8 @@ left: 500px;
 
 
  <div class="leftbuttons">
-		<a href="javascript:doAction('print')" class="IBbutton">인쇄</a> <a
-			href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
+		 <a href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
 	</div> 
-
 
 	<div class="rightbuttons">  
 		<a href="javascript:doAction('reload')" class="IBbutton">초기화</a> <a

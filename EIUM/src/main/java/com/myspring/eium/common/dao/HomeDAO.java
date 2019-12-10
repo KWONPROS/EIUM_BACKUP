@@ -1,10 +1,10 @@
 package com.myspring.eium.common.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 import com.myspring.eium.common.vo.HomeVO;
 
@@ -27,11 +27,23 @@ public class HomeDAO{
 	}
 	
 	public List<HomeVO> findvacation(String emp_id){
-		List<HomeVO> list = sqlSession.selectList("mapper.common.findvacation",emp_id);
+		String answer =  sqlSession.selectOne("mapper.common.findVacationAuth",emp_id);
+		List<HomeVO> list = new ArrayList<HomeVO>();
+		if("사업장".equals(answer)) {
+			list = sqlSession.selectList("mapper.common.findAllVacation",emp_id);			
+		}else {
+			list = sqlSession.selectList("mapper.common.findLimitedVacation",emp_id);		
+		}
 		return list;
 	}
 	public List<HomeVO> findbusiness(String emp_id){
-		List<HomeVO> list = sqlSession.selectList("mapper.common.findbusiness",emp_id);
+		String answer =  sqlSession.selectOne("mapper.common.findBusinessAuth",emp_id);
+		List<HomeVO> list = new ArrayList<HomeVO>();
+		if("사업장".equals(answer)) {
+			list = sqlSession.selectList("mapper.common.findAllBusiness",emp_id);			
+		}else {
+			list = sqlSession.selectList("mapper.common.findLimitedBusiness",emp_id);		
+		}
 		return list;
 	}
 	public List<HomeVO> findboard(String emp_id){

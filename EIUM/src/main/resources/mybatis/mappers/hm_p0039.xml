@@ -35,8 +35,7 @@
     AND ew.duty_code = dt.duty_code(+)
     AND ew.department_code =d.department_code(+)
     AND d.site_code = s.site_code(+)
-    AND ROUND(MOD(MOD(MONTHS_BETWEEN(#{date}, employee_join_date)/12, 1)*12, 1)*(365/12),0) > '0' 
-
+    AND ROUND(MOD(MOD(MONTHS_BETWEEN(#{date}, employee_join_date)/12, 1)*12, 1)*(365/12),0) > '0'
     <choose>
 	<when test="site != null and site !='' ">
 	AND s.site_name = #{site}
@@ -62,7 +61,7 @@
 	      ]]>
 	</when>
 	</choose>
-	
+	order by ew.employee_code
 	
 </select>
 	

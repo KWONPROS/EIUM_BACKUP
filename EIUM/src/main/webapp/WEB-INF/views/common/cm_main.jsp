@@ -34,10 +34,10 @@
    document.addEventListener('DOMContentLoaded', function() {  
     
 	   var locale;
-	   if("${pageContext.response.locale}"=="cn"){
+	   if("${pageContext.response.locale.language}"=="cn"){
 		   locale="zh-cn"
 	   }else{
-		   locale="${pageContext.response.locale}";
+		   locale="${pageContext.response.locale.language}";
 	   }
 	   
 	  var calendarEl = document.getElementById('calendar');
@@ -325,10 +325,10 @@ body ::-webkit-scrollbar-thumb {  background: rgba(0,0,0,.1);  }
 		<div id='vacation' class="vacation" style="color: white;">
 		    <c:forEach items="${sessionScope.menu_code}" begin="0" end="35" step="1" var="menu_code" varStatus="status">
 		       <c:if test="${menu_code eq 'M029'}">
-		       <a class="plusbutton" href="javascript:createTab(${status.count + 5}, 0,'휴가관리');">+</a>
+		       <a class="plusbutton" href="javascript:createTab(${status.count + 5}, 0,'<spring:message code="lo_VacationManagement"  text="휴가관리"/>');">+</a>
 		       </c:if>
 		    </c:forEach>  
-			<div class="boardtitle" style="border-bottom-color: white;">휴가</div>
+			<div class="boardtitle" style="border-bottom-color: white;"><spring:message code="lo_vacation"  text="휴가"/></div>
 			<div class="divboard">  
   
 				<table class="boardtable" id="vacationtable">
@@ -353,10 +353,10 @@ body ::-webkit-scrollbar-thumb {  background: rgba(0,0,0,.1);  }
 		<div id='business' class="business" style="color: white;">
 		    <c:forEach items="${sessionScope.menu_code}" begin="0" end="35" step="1" var="menu_code" varStatus="status">
 		       <c:if test="${menu_code eq 'M031'}">
-		       <a class="plusbutton" href="javascript:createTab(${status.count + 5}, 0,'출장관리');">+</a>
+		       <a class="plusbutton" href="javascript:createTab(${status.count + 5}, 0,'<spring:message code="lo_TravelManagement"  text="출장관리"/>');">+</a>
 		       </c:if>
 		    </c:forEach>
-			<div class="boardtitle" style="border-bottom-color: white;">출장</div>
+			<div class="boardtitle" style="border-bottom-color: white;"><spring:message code="lo_business"  text="출장"/></div>
 			<div class="divboard">
 				<table class="boardtable" id="noticetable">
 					<c:forEach var="business" items="${businessList}">
@@ -378,8 +378,13 @@ body ::-webkit-scrollbar-thumb {  background: rgba(0,0,0,.1);  }
 
 		</div>
 		<div id='events' class="events" style="color: #111820;">
-			<a class="goModal" href=""id="hrefevent">+</a>
-			<div class="boardtitle" style="border-bottom-color: #111820;">경조사</div>
+		 	<c:forEach items="${sessionScope.menu_code}" begin="0" end="35" step="1" var="menu_code" varStatus="status">
+		      <c:if test="${menu_code eq 'M031'}">
+		       <a class="goModal" href=""id="hrefevent">+</a>
+		       </c:if>
+		    </c:forEach>
+				
+			<div class="boardtitle" style="border-bottom-color: #111820;"><spring:message code="lo_event"  text="경조사"/></div>
 			<div class="divboard">
 				<table class="boardtable" id="eventtable">
 
@@ -411,7 +416,13 @@ body ::-webkit-scrollbar-thumb {  background: rgba(0,0,0,.1);  }
 	</div>
 	<div id='bottomleft' class="bottomleft">
 		<div id='notice' class="notice" style="color: white;">
-			<a class="goModal" href="" id="hrefnotice">+</a>
+		<c:forEach items="${sessionScope.menu_code}" begin="0" end="35" step="1" var="menu_code" varStatus="status">
+		      <c:if test="${menu_code eq 'M031'}">
+		      <a class="goModal" href="" id="hrefnotice">+</a>
+		       </c:if>
+		    </c:forEach>
+				
+			
 			<div class="boardtitle" style="border-bottom-color: white;">Notice</div>
 			<div class="divboard">
 				<table class="boardtable" id="noticetable">

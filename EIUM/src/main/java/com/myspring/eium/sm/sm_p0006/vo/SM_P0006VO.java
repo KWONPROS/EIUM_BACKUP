@@ -20,12 +20,15 @@ public class SM_P0006VO {
 	private String DEPARTMENT_CODE;
 	private String DEPARTMENT_NAME;
 	
+	private String POSITION_CODE;
+	private String POSITION_NAME;
+	
 	public SM_P0006VO() {
 
 	}
 
 	public SM_P0006VO(String EMPLOYEE_ID, String EMPLOYEE_CODE, String EMPLOYEE_NAME, String INT_USER_ID,
-			Date INT_DATE, String UPT_USER_ID, Date UPT_DATE, String SITE_CODE, String SITE_NAME, String DEPARTMENT_CODE, String DEPARTMENT_NAME) {
+			Date INT_DATE, String UPT_USER_ID, Date UPT_DATE, String SITE_CODE, String SITE_NAME, String DEPARTMENT_CODE, String DEPARTMENT_NAME, String POSITION_CODE, String POSITION_NAME) {
 		
 		this.EMPLOYEE_ID = EMPLOYEE_ID;
 		this.EMPLOYEE_CODE = EMPLOYEE_CODE;
@@ -40,6 +43,9 @@ public class SM_P0006VO {
 		
 		this.DEPARTMENT_CODE = DEPARTMENT_CODE;
 		this.DEPARTMENT_NAME = DEPARTMENT_NAME;
+		
+		this.POSITION_CODE = POSITION_CODE;
+		this.POSITION_NAME = POSITION_NAME;
 	
 	}
 
@@ -131,5 +137,20 @@ public class SM_P0006VO {
 		DEPARTMENT_NAME = dEPARTMENT_NAME;
 	}
 
+	public String getPOSITION_CODE() {
+		return POSITION_CODE;
+	}
+
+	public void setPOSITION_CODE(String pOSITION_CODE) {
+		POSITION_CODE = pOSITION_CODE;
+	}
+
+	public String getPOSITION_NAME() {
+		return POSITION_NAME;
+	}
+
+	public void setPOSITION_NAME(String pOSITION_NAME) {
+		POSITION_NAME = pOSITION_NAME;
+	}
 
 }
