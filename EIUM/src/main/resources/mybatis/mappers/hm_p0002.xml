@@ -56,6 +56,7 @@
          where sp.site_code = s.site_code
          and sp.job_class_code = j.job_class_code
          and sp.payment_code =#{x}
+         order by sp.selection_of_payment_code
       ]]>
 	</select>
 		
@@ -64,6 +65,7 @@
       <![CDATA[
       select site_code, site_name
       from site
+      order by site_code
       ]]>
 	</select>
 	
@@ -71,6 +73,7 @@
       <![CDATA[
       select job_class_code, job_class_name
       from job_class
+      order by job_class_code
       ]]>
 	</select>
 	<!-- /////////////////////////////POSITION///////////////////////////////////// -->	

@@ -73,6 +73,7 @@
 			and pr.employee_code = ew.employee_code				
 			and ew.department_code =d.department_code
 			and p.payment_code = #{Ppayment_code}
+			order by e.employee_code
 			]]> 
    		    </when>
    		    

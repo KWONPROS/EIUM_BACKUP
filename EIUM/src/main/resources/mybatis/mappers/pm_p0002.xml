@@ -131,6 +131,7 @@
 			and ew.department_code =d.department_code
 			and ew.employee_code =e.employee_code
 			and p.payment_code = #{Ppayment_code}
+			order by ew.employee_code
 			]]> 
    		    </when>
    		    
@@ -145,6 +146,7 @@
 			and ew.employee_code =e.employee_code
 			and p.payment_code = #{Ppayment_code}
  			and d.department_name =  #{searchTYPE} 
+			order by ew.employee_code
  			]]> 
 			</when>
 			
@@ -160,6 +162,7 @@
 			and ew.employee_code =e.employee_code
 			and p.payment_code = #{Ppayment_code}
 			and s.site_name = #{searchSite}
+			order by ew.employee_code
 			]]> 
    		    </when>
    		    
@@ -176,6 +179,7 @@
 			and p.payment_code = #{Ppayment_code}
 			and s.site_name = #{searchSite}
 			and d.department_name =  #{searchTYPE} 
+			order by ew.employee_code
 			
 			]]> 
    		    </when>
@@ -196,6 +200,7 @@
 			and ew.employee_code =e.employee_code
 			and p.payment_code = #{Ppayment_code}
 			group by d.department_code, d.department_name, p.payment_code			
+			order by d.department_code
 			]]> 
    		    </when>
    		    
@@ -213,6 +218,7 @@
 			and p.payment_code = #{Ppayment_code}
  			and d.department_name =  #{searchTYPE}
 			group by d.department_code, d.department_name, p.payment_code 			 
+			order by d.department_code
  			]]> 
 			</when>
 			
@@ -230,6 +236,7 @@
 			and p.payment_code = #{Ppayment_code}
 			and s.site_name = #{searchSite}
 			group by d.department_code, d.department_name, p.payment_code
+			order by d.department_code
 						]]> 
    		    </when>
    		    
@@ -248,6 +255,7 @@
 			and s.site_name = #{searchSite}
 			and d.department_name =  #{searchTYPE} 
 			group by d.department_code, d.department_name, p.payment_code			
+			order by d.department_code
 			]]> 
    		    </when>
    		       
@@ -264,6 +272,7 @@
 			and ew.employee_code =e.employee_code
 			and p.payment_code = #{Ppayment_code}
  			group by s.site_code, s.site_name, p.payment_code	
+			order by s.site_code
 			
 			]]> 
    		    </when>
@@ -282,6 +291,7 @@
 			and p.payment_code = #{Ppayment_code}
  			and d.department_name =  #{searchTYPE}
  			group by s.site_code, s.site_name, p.payment_code	
+			order by s.site_code
  			 
  			]]> 
 			</when>
@@ -300,6 +310,7 @@
 			and p.payment_code = #{Ppayment_code}
 			and s.site_name = #{searchSite}
  			group by s.site_code, s.site_name, p.payment_code	
+			order by s.site_code
 			]]> 
    		    </when>
    		    
@@ -318,6 +329,7 @@
 			and s.site_name = #{searchSite}
 			and d.department_name =  #{searchTYPE} 
  			group by s.site_code, s.site_name, p.payment_code	
+			order by s.site_code
 			
 			]]> 
    		    </when>
@@ -340,6 +352,7 @@
 			and ew.employee_code =e.employee_code
 			and p.payment_code = #{Ppayment_code}
  			group by j.job_class_code, j.job_class_name, p.payment_code	
+			order by j.job_class_code
 			
 			]]> 
    		    </when>
@@ -359,6 +372,7 @@
 			and p.payment_code = #{Ppayment_code}
  			and d.department_name =  #{searchTYPE}
  			group by j.job_class_code, j.job_class_name, p.payment_code	
+ 			order by j.job_class_code
  			 
  			]]> 
 			</when>
@@ -378,6 +392,7 @@
 			and p.payment_code = #{Ppayment_code}
 			and s.site_name = #{searchSite}
  			group by j.job_class_code, j.job_class_name, p.payment_code	
+			order by j.job_class_code
 			]]> 
    		    </when>
    		    
@@ -397,6 +412,7 @@
 			and s.site_name = #{searchSite}
 			and d.department_name =  #{searchTYPE} 
  			group by j.job_class_code, j.job_class_name, p.payment_code	
+			order by j.job_class_code
 			
 			]]> 
    		    </when>

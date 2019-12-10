@@ -32,7 +32,7 @@ public class SM_P0004ControllerImpl implements SM_P0004Controller{
 	
 	@Override
 	@RequestMapping(value = "sm/p0004/searchInit.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView form5(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView init(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		ModelAndView mav = new ModelAndView("/sm/sm_p0004/p0004");
 	
@@ -103,90 +103,5 @@ public class SM_P0004ControllerImpl implements SM_P0004Controller{
         return resultMap;
 	}
 	
-	@Override
-	@RequestMapping(value = "sm/p0004/DepartList.do", method = { RequestMethod.GET, RequestMethod.POST })
-	@ResponseBody
-	public Map searchDepartmentList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-		Map<String, Object> searchMap = new HashMap<String, Object>(); // �˻�����
-		Map<String, Object> resultMap = new HashMap<String, Object>(); // ��ȸ���
-		
-		// �˻����Ǽ���
-		searchMap.put("department_code", request.getParameter("department_code"));
-		
-		//������ ��ȸ
-		List<SM_P0004VO> data = p0004ServiceImpl.searchDepartmentList(searchMap);
-        resultMap.put("Data", data);
-       
-        return resultMap;
-	}
 	
-	
-	@Override
-	@RequestMapping(value = "sm/p0004/department_Search.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView departmentSerch_init(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("/sm/sm_p0004/p0004_departmentSearch");
-	
-		return mav;
-	} 
-
-	
-	@Override
-	@RequestMapping(value = "sm/p0004/department_search1.do", method = { RequestMethod.GET, RequestMethod.POST })
-	@ResponseBody
-	public Map departmentSearch(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-		Map<String, Object> searchMap = new HashMap<String, Object>(); // �˻�����
-		Map<String, Object> resultMap = new HashMap<String, Object>(); // ��ȸ���
-		
-		searchMap.put("department_code", request.getParameter("department_code"));
-		System.out.println(request.getParameter("department_code"));
-		//������ ��ȸ
-		List<SM_P0004VO> data = p0004ServiceImpl.searchDepartmentList(searchMap);
-        resultMap.put("Data", data);
-       
-        return resultMap;
-	}
-	
-	
-//	private String getViewName(HttpServletRequest request) throws Exception {
-//		String contextPath = request.getContextPath();
-//		String uri = (String) request.getAttribute("javax.servlet.include.request_uri");
-//		if (uri == null || uri.trim().equals("")) {
-//			uri = request.getRequestURI();
-//		}
-//
-//		int begin = 0;
-//		if (!((contextPath == null) || ("".equals(contextPath)))) {
-//			begin = contextPath.length();
-//		}
-//
-//		int end;
-//		if (uri.indexOf(";") != -1) {
-//			end = uri.indexOf(";");
-//		} else if (uri.indexOf("?") != -1) {
-//			end = uri.indexOf("?");
-//		} else {
-//			end = uri.length();
-//		}
-//
-//		String viewName = uri.substring(begin, end);
-//		if (viewName.indexOf(".") != -1) {
-//			viewName = viewName.substring(0, viewName.lastIndexOf("."));
-//		}
-//		if (viewName.lastIndexOf("/") != -1) {
-//			viewName = viewName.substring(viewName.lastIndexOf("/",1), viewName.length());
-//		}
-//		return viewName;
-//	}
-	
-	/*@RequestMapping(value = "/sm/p0004.do", method =  RequestMethod.GET)
-	public ModelAndView registEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = getViewName(request);
-		System.out.println(viewName);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
-		return mav;
-	}*/
 }

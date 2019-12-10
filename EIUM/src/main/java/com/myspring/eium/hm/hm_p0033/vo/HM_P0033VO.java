@@ -17,6 +17,7 @@ public class HM_P0033VO {
 	private String hr_assessment_score;
 	private String hr_assessment_grade;
 	private String hr_rnp_index;
+	private String hr_rnp_code;
 	private String hr_rnp_name;
 	private String hr_rnp_date;
 	private String hr_rnp_history;
@@ -33,6 +34,12 @@ public class HM_P0033VO {
 
 	
 
+	public String getHr_rnp_code() {
+		return hr_rnp_code;
+	}
+	public void setHr_rnp_code(String hr_rnp_code) {
+		this.hr_rnp_code = hr_rnp_code;
+	}
 	public String getHr_rnp_index() {
 		return hr_rnp_index;
 	}

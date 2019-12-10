@@ -41,7 +41,7 @@
 			{Header:"계좌번호",Type:"Text",SaveName:"account_number_1", MinWidth:180, Align:"Center", Edit: 0},
 			{Header:"예금주명",Type:"Text",SaveName:"account_name_1", MinWidth:120, Align:"Center", Edit: 0},
 			{Header:"지급구분",Type:"Text",SaveName:"payment_receipt_item", MinWidth:120, Align:"Center", Edit: 0},
-			{Header:"실지급액",Type:"Text",SaveName:"payment_receipt_price", MinWidth:120, Align:"Center", Edit: 0},
+			{Header:"실지급액",Type:"Int",SaveName:"payment_receipt_price", MinWidth:120, Align:"Center", Edit: 0},
 			{Header:"지급일자",Type:"Text",SaveName:"payment_date", MinWidth:120, Align:"Center", Format:"Ymd", Edit: 0 }
 		];   
 		IBS_InitSheet( mySheet , initSheet);
@@ -86,15 +86,14 @@
 
 		case "reload": //초기화
 			mySheet.RemoveAll();
-			mySheet2.RemoveAll();
-			break;
+			$('#monthpicker').attr('value', "");
+			$('#Ppayment_date').attr('value', "");
+			$('#searchBank').find('option:first').attr('selected', 'selected');
+			$('#searchSite').find('option:first').attr('selected', 'selected');
+			$('#searchTYPE').find('option:first').attr('selected', 'selected');
 			
-		case "insert":
-			var row = mySheet2.DataInsert(-1);
-		      break;      
-		      
-		      
 
+			break;
 		}
 	}
 	
@@ -135,13 +134,7 @@ function mySheet_OnClick(Row, Col) {
 
 	// 저장완료 후 처리할 작업
 	// code: 0(저장성공), -1(저장실패)
-	function mySheet_OnSaveEnd(code, msg) {
-		if (msg != "") {
-			alert(msg);
-			//번호 다시 매기기
-			//mySheet.ReNumberSeq();
-		}
-	}
+	
 	  
 	function selectBank() {
 
@@ -392,9 +385,7 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 	</div>
 	<div class="rightbuttons">
 		<a href="javascript:doAction('reload')" class="IBbutton">초기화</a> 
-		<a href="javascript:doAction('insert')" class="IBbutton">추가</a>
-		<a href="javascript:doAction('search')" class="IBbutton">조회</a> <a
-			href="javascript:doAction('save')" class="IBbutton">저장</a>
+		<a href="javascript:doAction('search')" class="IBbutton">조회</a>
 	</div>
 
 	<div class="title">

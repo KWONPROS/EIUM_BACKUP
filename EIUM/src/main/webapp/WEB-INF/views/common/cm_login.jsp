@@ -142,9 +142,21 @@ right: 15px;
 </head>
 
 <body>
+<script>
+console.log(${msg});
+var bool = ${msg};
+console.log(bool);
+if(bool!= null && !bool.equals('')){
+	alert("${msg}");
+}
+</script>
+
 	<video id="video" preload="auto" autoplay="autoplay" loop="loop" muted="muted" >
 		<source src="${contextPath}/resources/image/init_background.mp4">
 	</video>
+	
+
+
 	<div class="login-container">
 			<div class="login-form">
 				<form name="form"  method="post" action="${contextPath}/login/LoginCheck.do">
@@ -164,8 +176,9 @@ right: 15px;
 						<a onclick="fn_findPWD()" class="Forget"><spring:message code="findPwd"  text="비밀번호 찾기" /></a>
 						<input type="submit" class="btnSubmit" value="다음" />  
 					</div>
-					
-					
+
+
+
 				</form>
 			</div>
 	</div>

@@ -52,6 +52,14 @@
 		         monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
 		         monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
 		  });
+		    
+		    $("#date2").change(function() {
+		    	if($("#date").val()>$("#date2").val()){
+		    		alert("종료일이 시작일 보다 커야합니다.");
+		    		$(this).val("");
+		    		return;
+		    	}
+		    	});
 		});
 
 
@@ -95,11 +103,11 @@
 			break;
 		case "reset":
 			mySheet.RemoveAll();
-		    $('#date').attr('value', "");
-		    $('#date2').attr('value', "");
-		    $('#Select').attr('value', "");
-		    $('#p_text').attr('value', "");
-		    $('#p_text').attr('placeholder', "내용을 입력해주세요.");
+			$('#Phr_rnp_name').attr('value', "");
+			$('#Psite_name').attr('value', "");
+			$('#Pemployee_name').attr('value', "");
+			$('#date').attr('value', "");
+			$('#date2').attr('value', "");
 			break;
 		}
 	}

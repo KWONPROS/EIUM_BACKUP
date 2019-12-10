@@ -1,17 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<c:set var="contextPath"  value="${pageContext.request.contextPath}" />
+   pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<c:set var="contextPath"  value="${pageContext.request.contextPath}" />   
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibsheetinfo.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibsheet.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibleaders.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
 
-<script type="text/javascript">
+<script language="javascript">
 var pageheightoffset = 200; //시트높이 계산용
 
 
@@ -28,8 +32,6 @@ function LoadPage(){
 	   {Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck"},
 	   {Header:"사원코드",SaveName:"employee_code",Type:"Text",width:100, Align:"Center" , KeyField:1, UpdateEdit:"0"},
 	   {Header:"사원명",SaveName:"employee_name",Type:"Text",width:100, KeyField:1 },
-	   {Header:"입사일",Type:"Date", Align:"Center", SaveName:"employee_join_date", Format:"yyyy-MM-dd", MinWidth:110},
-	   {Header:"퇴사일",Type:"Date", Align:"Center", SaveName:"employee_resignation_date", Format:"yyyy-MM-dd", MinWidth:110},
 	   {Header:"사용자여부",Type:"Combo", MinWidth:70, Align:"Center", SaveName:"employee_available_yn", ComboText:"Y|N", ComboCode:"Y|N"},
 	   {Header:"아이디",SaveName:"employee_id", Align:"Center",type:"Text",width:100, KeyField:1, UpdateEdit:"0"},
 	   {Header:"암호",SaveName:"employee_password", Align:"Center",type:"Text", KeyField:1, width:100},
@@ -134,8 +136,6 @@ function selectDepart(){
 	top: 50px;
 }
 
-
-
 .leftbuttons {
 	margin-top: 40px;
 	margin: 10px;
@@ -162,7 +162,22 @@ function selectDepart(){
 
 .IBbutton:hover {
 	background-color: #2C3E50;
-} 
+}
+
+.innerheader{
+font-size:14px;
+border-radius:3px;
+position:relative;
+margin:20px;
+top:20px;
+left:10px;
+background: #333333;
+width: 100px;
+text-align: center;
+color:white;
+padding: 10px;0px;10px;0px;
+}
+ 
 </style> 
 </head>
 <body onload="LoadPage()">
@@ -175,9 +190,9 @@ function selectDepart(){
 
 
    <div class="rightbuttons">
-      <a href="javascript:doAction('reload')" class="IBbutton">초기화</a> <a
-         href="javascript:doAction('insert')" class="IBbutton">추가</a> <a
+      <a href="javascript:doAction('reload')" class="IBbutton">초기화</a><a
          href="javascript:doAction('search')" class="IBbutton">조회</a> <a
+         href="javascript:doAction('insert')" class="IBbutton">추가</a>  <a
          href="javascript:doAction('save')" class="IBbutton">저장</a>
    </div>
 

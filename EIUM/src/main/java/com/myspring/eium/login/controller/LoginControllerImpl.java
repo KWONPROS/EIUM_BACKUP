@@ -75,8 +75,13 @@ public class LoginControllerImpl   implements LoginController {
 	
 		searchMap.put("employee_id", login.getEmployee_id());
 		searchMap.put("employee_password", login.getEmployee_password());
-	
+		
 		List<LoginVO> data = loginService.searchList(searchMap);
+		
+		if(data.get(0).getAccess_grant() != null && !data.get(0).getAccess_grant().equals("")) {
+			
+		}
+		
 
     	if(data != null && data.isEmpty() != true) {
     		HttpSession session = request.getSession();
@@ -88,7 +93,7 @@ public class LoginControllerImpl   implements LoginController {
     			 accessRange.add(data.get(i).getAccess_range());
 
     		}
-    		
+    		menuList.sort(null);
     
    		
     		session.setAttribute("accessnum", accessMap);
@@ -102,8 +107,9 @@ public class LoginControllerImpl   implements LoginController {
     		}
     	
     	else {
-    		rAttr.addAttribute("result", "loginFailed");
-    		mav.setViewName("redirect:/login.do");
+    		
+            mav.addObject("msg", "로그인에 실패하였습니다.");
+            mav.setViewName("redirect:/login.do");
     		}
     	return mav;
 	}

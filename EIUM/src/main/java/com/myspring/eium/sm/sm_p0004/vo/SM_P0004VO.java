@@ -7,8 +7,6 @@ public class SM_P0004VO {
 	private String employee_code;
 	private String employee_name;
 	private String employee_id;
-	private String employee_join_date;
-	private String employee_resignation_date;
 	private String employee_available_yn;
 	private String employee_password;
 	private String access_range;
@@ -58,30 +56,6 @@ public class SM_P0004VO {
 	public void setEmployee_name(String employee_name) {
 		this.employee_name = employee_name;
 	}
-
-
-	public String getEmployee_join_date() {
-		return employee_join_date;
-	}
-
-
-
-	public void setEmployee_join_date(String employee_join_date) {
-		this.employee_join_date = employee_join_date;
-	}
-
-
-
-	public String getEmployee_resignation_date() {
-		return employee_resignation_date;
-	}
-
-
-
-	public void setEmployee_resignation_date(String employee_resignation_date) {
-		this.employee_resignation_date = employee_resignation_date;
-	}
-
 
 
 	public String getEmployee_available_yn() {

@@ -116,6 +116,10 @@ function setPaygrade(){
 		case "reload": //초기화
 			mySheet.RemoveAll();
 			mySheet2.RemoveAll();
+			$('#monthpicker').attr('value', "");
+			$('#Ppayment_date').attr('value', "");
+			$('#searchSite').find('option:first').attr('selected', 'selected');
+			$('#searchTYPE').find('option:first').attr('selected', 'selected');
 			break;
 			
 		case "insert":
@@ -417,9 +421,9 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 	</div>
 	<div class="rightbuttons">
 		<a href="javascript:doAction('reload')" class="IBbutton">초기화</a> 
+		<a href="javascript:doAction('search')" class="IBbutton">조회</a>
 		<a href="javascript:doAction('insert')" class="IBbutton">추가</a>
-		<a href="javascript:doAction('search')" class="IBbutton">조회</a> <a
-			href="javascript:doAction('save')" class="IBbutton">저장</a>
+		<a href="javascript:doAction('save')" class="IBbutton">저장</a>
 	</div>
 
 	<div class="title">

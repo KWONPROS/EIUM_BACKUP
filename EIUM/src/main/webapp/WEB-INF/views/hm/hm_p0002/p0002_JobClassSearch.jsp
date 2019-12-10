@@ -36,23 +36,16 @@ function LoadPage(){
 
 function mySheet2_OnDblClick(Row, Col, Value) { 
 
-	 var selectRowJson = mySheet2.GetRowData(Row);
-	 var job_class_code=selectRowJson.job_class_code;
-	 var job_class_name=selectRowJson.job_class_name;
-
-		 document.getElementById("Cjob_class_code").setAttribute('value', job_class_code);
-		 document.getElementById("Cjob_class_name").setAttribute('value', job_class_name);
-		 opener.document.getElementById("Pjob_class_code").value=document.getElementById("Cjob_class_code").value;
-		 opener.document.getElementById("Pjob_class_name").value=document.getElementById("Cjob_class_name").value;
-		 opener.setJob_class();
-
-
+	var rowData=mySheet2.GetRowData(Row);
+	
+	 window.opener.job_classValue(rowData);
 	
 	    
 	self.close(); 
 	
 	return false; //창을 닫는 경우에는 false를 리턴해 줘야 함. }
 }
+
 
 </script>
 </head>

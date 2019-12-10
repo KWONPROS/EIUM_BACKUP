@@ -29,19 +29,23 @@
    </resultMap> -->
 
 	<select id="searchList" resultType="loginVO"  parameterType="java.util.Map" >
-      <![CDATA[
+
       	select ac.employee_id, e.employee_name, d.department_name, s.site_name, c.company_name, u.authority_code, m.menu_code, m.access_range
          from account ac, employee e, employee_work ew, DEPARTMENT d, SITE s, COMPANY c, user_auth u, menu_by_authority m
-         where ac.employee_code = e.employee_code
-         and ew.EMPLOYEE_CODE = e.employee_code
-         and ew.DEPARTMENT_CODE = d.DEPARTMENT_CODE
-         and d.site_code = s.site_code
-         and s.company_code = c.company_code
-         and ac.employee_id = u.employee_id 
-         and u.authority_code = m.authority_code
-         and ac.employee_id = #{employee_id} and ac.employee_password = #{employee_password} 
-         and m.access_grant = '1' order by m.menu_code
-      ]]>
+		where ac.employee_code = e.employee_code
+		and ew.employee_code = e.employee_code
+		and ew.department_code = d.department_code(+)
+		and d.site_code = s.site_code(+)
+		and s.company_code = c.company_code(+)
+		and ac.employee_id  = u.employee_id(+)
+		and u.authority_code = m.authority_code(+)
+        and ac.employee_id = #{employee_id} and ac.employee_password = #{employee_password}
+        and m.access_grant = '1'
+        <choose>
+			<when test= " menu_code != ''  and  menu_code != null">
+         order by m.menu_code
+        </when>
+ 		</choose>
 	 </select>	
 
 	<!-- <select id="selectAllLoginList" resultMap="loginResult">

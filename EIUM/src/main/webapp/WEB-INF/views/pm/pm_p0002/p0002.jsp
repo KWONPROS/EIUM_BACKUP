@@ -162,8 +162,18 @@
 			break;
 
 		case "reload": //초기화
-			mySheet.RemoveAll();
+			mySheet1.RemoveAll();
 			mySheet2.RemoveAll();
+			mySheet3.RemoveAll();
+			mySheet4.RemoveAll();
+			mySheet5.RemoveAll();
+			total = $('#total').val("emp");
+			selectDivision();
+			$('#monthpicker').attr('value', "");
+			$('#Ppayment_date').attr('value', "");
+			$('#searchSite').find('option:first').attr('selected', 'selected');
+			$('#searchTYPE').find('option:first').attr('selected', 'selected');
+			$('#total').find('option:first').attr('selected', 'selected');
 			break;
 			
 		case "insert":
@@ -229,16 +239,6 @@ function mySheet5_OnClick(Row, Col) {
 	
 
 
-	// 저장완료 후 처리할 작업
-	// code: 0(저장성공), -1(저장실패)
-	function mySheet_OnSaveEnd(code, msg) {
-		if (msg != "") {
-			alert(msg);
-			//번호 다시 매기기
-			//mySheet.ReNumberSeq();
-		}
-	}
-	  
 	function selectSite() {
 
 		$.ajax({
@@ -324,11 +324,12 @@ function mySheet5_OnClick(Row, Col) {
 	
 function selectDivision() {
 		
-		var total = $('#total').val();
+		total = $('#total').val();
 		console.log(total);
 		
 		if(total =='emp' ){
 			mySheet1.SetVisible(1);
+			mySheet2.RemoveAll();
 			mySheet3.SetVisible(0); 
 			mySheet4.SetVisible(0); 
 			mySheet5.SetVisible(0); 
@@ -336,6 +337,7 @@ function selectDivision() {
 		
 		if(total =='dep' ){
 			mySheet1.SetVisible(0);
+			mySheet2.RemoveAll();
 			mySheet3.SetVisible(1); 
 			mySheet4.SetVisible(0); 
 			mySheet5.SetVisible(0); 
@@ -343,6 +345,7 @@ function selectDivision() {
 		
 		if(total =='sit' ){
 			mySheet1.SetVisible(0);
+			mySheet2.RemoveAll();
 			mySheet3.SetVisible(0); 
 			mySheet4.SetVisible(1); 
 			mySheet5.SetVisible(0); 
@@ -350,6 +353,7 @@ function selectDivision() {
 		
 		if(total =='job' ){
 			mySheet1.SetVisible(0);
+			mySheet2.RemoveAll();
 			mySheet3.SetVisible(0); 
 			mySheet4.SetVisible(0); 
 			mySheet5.SetVisible(1); 
@@ -511,9 +515,7 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 	</div>
 	<div class="rightbuttons">
 		<a href="javascript:doAction('reload')" class="IBbutton">초기화</a> 
-		<a href="javascript:doAction('insert')" class="IBbutton">추가</a>
-		<a href="javascript:doAction('search')" class="IBbutton">조회</a> <a
-			href="javascript:doAction('save')" class="IBbutton">저장</a>
+		<a href="javascript:doAction('search')" class="IBbutton">조회</a>
 	</div>
 
 	<div class="title">

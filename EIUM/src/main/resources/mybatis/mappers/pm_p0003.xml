@@ -73,6 +73,7 @@
 			and ew.department_code =d.department_code
 			and ew.employee_code =e.employee_code
 			and p.payment_code = #{Ppayment_code}
+			order by ew.employee_code
 			]]> 
    		    </when>
    		    
@@ -87,7 +88,9 @@
 			and ew.department_code =d.department_code
 			and ew.employee_code =e.employee_code
 			and p.payment_code = #{Ppayment_code}
- 			and d.department_name =  #{searchTYPE} 
+ 			and d.department_name =  #{searchTYPE}
+ 			order by ew.employee_code
+ 			 
  			]]> 
 			</when>
 			
@@ -103,6 +106,7 @@
 			and ew.employee_code =e.employee_code
 			and p.payment_code = #{Ppayment_code}
 			and s.site_name = #{searchSite}
+			order by ew.employee_code
 			]]> 
    		    </when>
    		    
@@ -118,7 +122,8 @@
 			and ew.employee_code =e.employee_code
 			and p.payment_code = #{Ppayment_code}
 			and s.site_name = #{searchSite}
-			and d.department_name =  #{searchTYPE} 
+			and d.department_name =  #{searchTYPE}
+			order by ew.employee_code 
 			
 			]]> 
    		    </when>		
@@ -136,6 +141,7 @@
             and sp.site_code = s.site_code
 			and p.payment_code = #{Ppayment_code}
 			and e.employee_name = #{Semployee_name}
+			order by ew.employee_code
 			]]> 
    		    </when>
    		    
@@ -152,6 +158,7 @@
 			and p.payment_code = #{Ppayment_code}
  			and d.department_name =  #{searchTYPE} 
  			and e.employee_name = #{Semployee_name}
+ 			order by ew.employee_code
  			
  			]]> 
 			</when>
@@ -169,6 +176,7 @@
 			and p.payment_code = #{Ppayment_code}
 			and s.site_name = #{searchSite}
 			and e.employee_name = #{Semployee_name}
+			order by ew.employee_code
 			
 			]]> 
    		    </when>
@@ -187,6 +195,7 @@
 			and s.site_name = #{searchSite}
 			and d.department_name =  #{searchTYPE} 
 			and e.employee_name = #{Semployee_name}
+			order by ew.employee_code
 			
 			
 			]]> 
@@ -205,7 +214,8 @@
             and sp.site_code = s.site_code
 			and ew.employee_code =e.employee_code
 			and p.payment_code = #{Ppayment_code}
-			and d.department_name =  #{Sdepartment_name} 
+			and d.department_name =  #{Sdepartment_name}
+			order by ew.employee_code 
 			
 			]]> 
    		    </when>
@@ -221,7 +231,8 @@
 			and d.site_code = s.site_code
             and sp.site_code = s.site_code
 			and p.payment_code = #{Ppayment_code}
- 			and d.department_name =  #{Sdepartment_name} 
+ 			and d.department_name =  #{Sdepartment_name}
+ 			order by ew.employee_code
  			]]> 
 			</when>
 			
@@ -237,7 +248,8 @@
             and sp.site_code = s.site_code
 			and p.payment_code = #{Ppayment_code}
 			and s.site_name = #{searchSite}
-			and d.department_name =  #{Sdepartment_name} 
+			and d.department_name =  #{Sdepartment_name}
+			order by ew.employee_code
 			
 			]]> 
    		    </when>
@@ -254,7 +266,8 @@
             and sp.site_code = s.site_code
 			and p.payment_code = #{Ppayment_code}
 			and s.site_name = #{searchSite}
- 			and d.department_name =  #{Sdepartment_name} 
+ 			and d.department_name =  #{Sdepartment_name}
+ 			order by ew.employee_code
 			
 			]]> 
    		    </when>	

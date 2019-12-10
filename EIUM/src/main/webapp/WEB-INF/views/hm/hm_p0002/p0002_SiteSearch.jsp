@@ -34,19 +34,13 @@ function LoadPage(){
 
 }
 
+
+
 function mySheet3_OnDblClick(Row, Col, Value) { 
 
-	 var selectRowJson = mySheet3.GetRowData(Row);
-	 var site_code=selectRowJson.site_code;
-	 var site_name=selectRowJson.site_name;
-
-		 document.getElementById("Csite_code").setAttribute('value', site_code);
-		 document.getElementById("Csite_name").setAttribute('value', site_name);
-		 opener.document.getElementById("Psite_code").value=document.getElementById("Csite_code").value;
-		 opener.document.getElementById("Psite_name").value=document.getElementById("Csite_name").value;
-		 opener.setSite();
-
-
+	var rowData=mySheet3.GetRowData(Row);
+	
+	 window.opener.siteValue(rowData);
 	
 	    
 	self.close(); 

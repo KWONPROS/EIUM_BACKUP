@@ -15,5 +15,4 @@ public interface SM_P0004Service {
 	 
 	 public List<SM_P0004VO> searchList(Map<String, Object> searchMap) throws DataAccessException;
      public void saveData(Map<String, String[]> dataMap, String user)  throws DataAccessException;
-     public List<SM_P0004VO> searchDepartmentList(Map<String, Object> searchMap) throws DataAccessException;
 }

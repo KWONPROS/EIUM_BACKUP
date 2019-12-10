@@ -57,7 +57,6 @@ public class SM_P0004DAOImpl implements SM_P0004DAO {
 		sqlSession.update("mapper.sm_p0004.updateData1", row);
 		sqlSession.update("mapper.sm_p0004.updateData2", row);
 		sqlSession.update("mapper.sm_p0004.updateData3", row);
-		sqlSession.update("mapper.sm_p0004.updateData4", row);
 
 	}
 
@@ -89,12 +88,5 @@ public class SM_P0004DAOImpl implements SM_P0004DAO {
 
 	}
 	
-
-	
-	@Override
-	public List<SM_P0004VO> searchDepartmentList(Map<String, Object> searchMap) throws DataAccessException {
-		List<SM_P0004VO> list = sqlSession.selectList("mapper.sm_p0004.searchDepartmentList", searchMap);
-		return list;
-	}
 
 }

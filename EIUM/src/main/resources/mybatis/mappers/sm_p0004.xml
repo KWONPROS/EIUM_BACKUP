@@ -7,9 +7,7 @@
 	<resultMap id="p0004Result" type="SM_P0004VO">
 		<result property="employee_code" column="employee_code" />
         <result property="employee_name" column="employee_name" />
-         <result property="employee_id" column="employee_id" />
-        <result property="employee_join_date" column="employee_join_date" />
-        <result property="employee_resignation_date" column="employee_resignation_date" />
+        <result property="employee_id" column="employee_id" />
         <result property="employee_available_yn" column="employee_available_yn" />
         <result property="employee_id" column="employee_password" />
         <result property="employee_password" column="employee_password" />
@@ -24,11 +22,10 @@
 
 	<select id="selectAllp0004List" resultMap="p0004Result">
       <![CDATA[
-         select e.employee_code, e.employee_name, ew.employee_join_date, ew.employee_resignation_date, e.employee_available_yn, ac.employee_id , ac.employee_password, ei.contact
-         from employee e, account ac, employee_hr_info ei, employee_work ew
-         where e.employee_code = ei.employee_code
-         and e.employee_code = ac.employee_code
-         and e.employee_code = ew.employee_code
+         select e.employee_code, e.employee_name, e.employee_available_yn, ac.employee_id , ac.employee_password, ei.contact
+         from employee e, account ac, employee_hr_info ei
+         where e.employee_code = ei.employee_code(+)
+         and e.employee_code = ac.employee_code(+)
       ]]>
 	</select>
 	
@@ -54,7 +51,7 @@
 	</insert>	
 			<insert id="insertData5" parameterType="java.util.Map">
 
-		insert into employee_work(employee_code, employee_join_date, employee_resignation_date, int_user_id, int_date) values(#{employee_code}, #{employee_join_date}, #{employee_resignation_date}, #{user}, sysdate)	
+		insert into employee_work(employee_code, int_user_id, int_date) values(#{employee_code}, #{user}, sysdate)	
 	</insert>
 	
 				
@@ -89,15 +86,7 @@
 			, upt_date = sysdate
 		where employee_code = #{employee_code, jdbcType=VARCHAR}
 	</update>
-	
-		<update id="updateData4" parameterType="java.util.Map">
-		update employee_work
-		set employee_join_date = #{employee_join_date, jdbcType=VARCHAR}
-			, employee_resignation_date = #{employee_resignation_date, jdbcType=VARCHAR}
-			, upt_user_id = #{user, jdbcType=VARCHAR}
-			, upt_date = sysdate
-		where employee_code = #{employee_code, jdbcType=VARCHAR}
-	</update>
+
 	
 	
 	

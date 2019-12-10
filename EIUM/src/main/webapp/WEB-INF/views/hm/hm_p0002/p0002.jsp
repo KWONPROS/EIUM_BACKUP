@@ -18,26 +18,7 @@
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script type="text/javascript" src="${contextPath}/resources/js/jquery.mtz.monthpicker.js"></script>
 <script language="javascript">
-function setSite(){
-	
-	 site_code=document.getElementById("Psite_code").value;
-	 site_name=document.getElementById("Psite_name").value;
-	mySheet2.SetCellText(row,col-1,site_code);
-	mySheet2.SetCellText(row,col,site_name);
 
-
-	
-};
-function setJob_class(){
-	
-	job_class_code=document.getElementById("Pjob_class_code").value;
-	job_class_name=document.getElementById("Pjob_class_name").value;
-	mySheet2.SetCellText(row,col-1,job_class_code);
-	mySheet2.SetCellText(row,col,job_class_name);
-
-
-	
-}; 
 	/*Sheet 기본 설정 */
 	function LoadPage() {
 		
@@ -67,9 +48,9 @@ function setJob_class(){
 		{Header:"삭제|삭제",Type:"DelCheck",Width:70,SaveName:"Delete",Align:"Center"},
 		{Header:"지급선정고유번호",Type:"Text",Width:120,SaveName:"selection_of_payment_code", Align:"Center",Hidden:"1"}, 
 		{Header:"직급직종및급여형태|사업장코드",Type:"Text",Width:120,SaveName:"site_code", Align:"Center", Hidden:"1"}, 
-		{Header:"직급직종및급여형태|사업장",Type:"Text",Width:120,SaveName:"site_name", Align:"Center",InsertEdit:"0", UpdateEdit:"0"}, 
+		{Header:"직급직종및급여형태|사업장",Type:"Popup",Width:120,SaveName:"site_name", Align:"Center"}, 
 		{Header:"직급직종및급여형태|직종코드",Type:"Text",Width:120,SaveName:"job_class_code", Align:"Center", Hidden:"1"}, 
-		{Header:"직급직종및급여형태|직종",Type:"Text",Width:120,SaveName:"job_class_name" , Align:"Center",InsertEdit:"0", UpdateEdit:"0"}
+		{Header:"직급직종및급여형태|직종",Type:"Popup",Width:120,SaveName:"job_class_name" , Align:"Center"}
 		];
 		IBS_InitSheet(mySheet2, initSheet2);
   
@@ -106,6 +87,8 @@ function setJob_class(){
 
 		case "reload": //초기화
 			mySheet.RemoveAll();
+			mySheet2.RemoveAll();
+			$('#monthpicker').attr('value', "");
 			break;
 		case "save": // 저장
 			var tempStr = mySheet.GetSaveString();
@@ -162,7 +145,7 @@ function setJob_class(){
 
 	
 	
-	function mySheet2_OnDblClick(Row,Col,Value){
+/* 	function mySheet2_OnDblClick(Row,Col,Value){
 		row=Row;
 		col=Col;
 		
@@ -175,8 +158,28 @@ function setJob_class(){
 			
 		window.open("${contextPath}/hm/p0002/jobclass_Search.do", "a", "width=500, height=700, left=100, top=50"); 
 		}
+	} */
+	
+	function mySheet2_OnPopupClick(Row,Col,Value){
+		
+		if(Col=="4"){
+			
+		window.open("${contextPath}/hm/p0002/site_Search.do", "a", "width=500, height=700, left=100, top=50"); 
+		}
+		
+		if(Col=="6"){
+			
+		window.open("${contextPath}/hm/p0002/jobclass_Search.do", "a", "width=500, height=700, left=100, top=50"); 
+		}
 	}
 	
+	
+	function siteValue(rowData){
+		mySheet2.SetRowData(mySheet2.GetSelectRow(),rowData);
+	}
+	function job_classValue(rowData){
+		mySheet2.SetRowData(mySheet2.GetSelectRow(),rowData);
+	}
 	
 	
 	// 저장완료 후 처리할 작업
@@ -322,8 +325,8 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 	</div>
 	<div class="rightbuttons">
 		<a href="javascript:doAction('reload')" class="IBbutton">초기화</a> 
+		<a href="javascript:doAction('search')" class="IBbutton">조회</a> 		
 		<a href="javascript:doAction('insert')" class="IBbutton">추가</a>
-		<a href="javascript:doAction('search')" class="IBbutton">조회</a> 
 		<a href="javascript:doAction('save')" class="IBbutton">지급 저장</a>
 		<a href="javascript:doAction('save2')" class="IBbutton">지급구분 저장</a>
 		
@@ -354,9 +357,5 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 	
 
 </form>
-<input type="hidden" id="Psite_code">
-<input type="hidden" id="Psite_name">
-<input type="hidden" id="Pjob_class_code">
-<input type="hidden" id="Pjob_class_name">
 </body>
 </html>
