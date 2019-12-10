@@ -112,7 +112,7 @@
   
 		mySheet.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
 		mySheet.SetSheetHeight(620);
-	
+		mySheet.SetWaitImageVisible(0);
 		
 		   //아이비시트 초기화
 		   var initSheet2 = {};
@@ -189,6 +189,14 @@
 	/*Sheet 각종 처리*/
 	function doAction(sAction) {
 		switch (sAction) {
+		case "excel":
+			var sums;
+			for(var i=1;i<63;i++){
+				sums+=i+"|";
+			}sums+=++i;
+			var params = { FileName : "인사정보등록.xls", SheetName : "Sheet1",DownCols:sums} ;
+			mySheet.Down2Excel(params);
+			break;
 		case "search": //조회
 			searchCondition();
 			break;

@@ -60,6 +60,7 @@
   
       mySheet.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
       mySheet.SetSheetHeight(620);
+      mySheet.SetWaitImageVisible(0);
       
     //달력 API
 		$(function() {
@@ -80,6 +81,10 @@
    /*Sheet 각종 처리*/
    function doAction(sAction) {
       switch(sAction) {
+     	 case "excel":
+			var params = { FileName : "사업장등록.xls", SheetName : "Sheet1"} ;
+			mySheet.Down2Excel(params);
+			break;
          case "search": //조회
             mySheet.DoSearch("${contextPath}/sm/p0002/searchList.do", "param="+$("#company_CODE").val());
             break;

@@ -75,7 +75,8 @@ var graphColors = (function() {
             "SumCols": "6|7|8|9",
             "CaptionText" : "소계"
         }]);
-
+		mySheet.SetWaitImageVisible(0);
+		
 		(function selectSite() {
 			
 			$.ajax({
@@ -151,6 +152,10 @@ var graphColors = (function() {
 	/*Sheet 각종 처리*/
 	function doAction(sAction) {
 		switch (sAction) {
+		case "excel":
+			var params = { FileName : "월별지급현황.xls", SheetName : "Sheet1"} ;
+			mySheet.Down2Excel(params);
+			break;
 		case "search": //조회
 			var param = FormQueryStringEnc(document.frm);
 			console.log(param);

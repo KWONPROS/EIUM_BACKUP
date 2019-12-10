@@ -75,7 +75,7 @@ var graphColors = (function() {
 		IBS_InitSheet( mySheet , initSheet);
   
 		mySheet.SetSheetHeight(165);
-		
+		mySheet.SetWaitImageVisible(0);
 		//아이비시트2
 		mySheet2.RemoveAll();
 		var initSheet2 = {};
@@ -105,7 +105,7 @@ var graphColors = (function() {
   
 		
 		mySheet2.SetSheetHeight(200);
-		
+		mySheet2.SetWaitImageVisible(0);
 		
 		//아이비시트3
 		mySheet3.RemoveAll();
@@ -124,7 +124,7 @@ var graphColors = (function() {
 		IBS_InitSheet( mySheet3 , initSheet3);
   
 		mySheet3.SetSheetHeight(200);
-
+		mySheet3.SetWaitImageVisible(0);
 
 	
 		
@@ -221,6 +221,10 @@ var graphColors = (function() {
 	/*Sheet 각종 처리*/
 	function doAction(sAction) {
 		switch (sAction) {
+		case "excel":
+			var params = { FileName : "사원임금동계.xls", SheetName : "Sheet1"} ;
+			mySheet.Down2Excel(params);
+			break;
 		case "search": //조회
 			var param = FormQueryStringEnc(document.frm);
 			mySheet.DoSearch("${contextPath}/pm/p0010/searchList.do",param);
