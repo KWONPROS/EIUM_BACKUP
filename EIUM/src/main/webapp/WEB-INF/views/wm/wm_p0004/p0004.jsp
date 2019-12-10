@@ -21,6 +21,7 @@
 
 	//sheet 기본설정
 	function LoadPage() {
+		mySheet.SetWaitImageVisible(0);
 		
 		  //달력 API
 		$(function() {
@@ -35,6 +36,14 @@
 		         monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
 		  });
 		});
+		  
+		$("#date2").change(function() {
+	    	if($("#date").val()>$("#date2").val()){
+	    		alert("종료일이 시작일 보다 커야합니다.");
+	    		$(this).val("");
+	    		return;
+	    	}
+	    	});
 	    
 
 
@@ -56,11 +65,11 @@
 			               { "Header" : "국가코드", "SaveName" : "country_CODE", "Type" : "Text", "Width" : 100, "Align" : "Center", "Hidden" : 1 },
 			               { "Header" : "출장국가", "SaveName" : "country_NAME", "Type" : "Popup", "Width" : 100, "Align" : "Center" },
 			               { "Header" : "출장지", "SaveName" : "area", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "항공료", "SaveName" : "flight_COST", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "본인부담", "SaveName" : "self_BURDEN", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "회사부담", "SaveName" : "company_BURDEN", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "기타비용", "SaveName" : "ect_COST", "Type" : "Text", "Width" : 100, "Align" : "Center" },
-			               { "Header" : "총비용", "SaveName" : "total_COST", "Type" : "Text", "Width" : 100, "Align" : "Center", "CalcLogic":"|13|+|14|+|15|" },
+			               { "Header" : "항공료", "SaveName" : "flight_COST", "Type" : "Int", "Width" : 100, "Align" : "Center", "Format":"Integer" },
+			               { "Header" : "본인부담", "SaveName" : "self_BURDEN", "Type" : "Int", "Width" : 100, "Align" : "Center", "Format":"Integer" },
+			               { "Header" : "회사부담", "SaveName" : "company_BURDEN", "Type" : "Int", "Width" : 100, "Align" : "Center", "Format":"Integer" },
+			               { "Header" : "기타비용", "SaveName" : "ect_COST", "Type" : "Int", "Width" : 100, "Align" : "Center", "Format":"Integer" },
+			               { "Header" : "총비용", "SaveName" : "total_COST", "Type" : "Int", "Width" : 100, "Align" : "Center", "CalcLogic":"|13|+|14|+|15|" },
 			               { "Header" : "목적", "SaveName" : "purpose", "Type" : "Text", "Width" : 100, "Align" : "Center" }
 		                 ];
 
@@ -92,7 +101,7 @@
 			mySheet.DoSave("${contextPath}/wm/p0004/saveData.do");
 			break;
 		case "insert":
-		    var row = mySheet.DataInsert();
+		    var row = mySheet.DataInsert(1);
 		    break;
 		case "down":
 			mySheet.Down2Excel();
@@ -124,6 +133,21 @@
 		mySheet.SetRowData(mySheet.GetSelectRow(),x);
 	}
 	
+	function mySheet_OnChange(Row,Col){
+		
+		if(Col == 8){
+			if(mySheet.GetCellValue(Row,7) != '' && mySheet.GetCellValue(Row,8) < mySheet.GetCellValue(Row,7)) {
+				alert('시작일보다 종료일이 크거나 같아야합니다.');
+				mySheet.SetCellValue(Row,8,'');
+			}
+		}
+		if(Col == 7){
+			if(mySheet.GetCellValue(Row,8) != '' && mySheet.GetCellValue(Row,8) < mySheet.GetCellValue(Row,7)) {
+				alert('시작일보다 종료일이 크거나 같아야합니다.');
+				mySheet.SetCellValue(Row,7,'');
+			}
+		}
+	}
 	
 </script>
 
@@ -167,19 +191,38 @@
 .IBbutton:hover {
 background-color: #2C3E50;
 }
-#searchBar {
-	background: #EBEBEB;
-	padding: 10px 30px;
-	margin-bottom: 20px;
-	border-radius: 5px;
-	font-size: 12px;
-	border-radius:5px;
-}
 .left {
 	position: relative;
 	top: 130px;
 	left: 60px;
 	width: 900px;
+}
+.searchBarTitle {
+	background: #5E5E5E;
+	padding: 4px;
+	color: white;
+	border-radius: 5px;
+	margin: 0 5px 0 70px;
+	vertical-align: middle;
+	margin-left: 200px;
+}
+#searchBar {
+	background: #EBEBEB;
+	padding: 20px 20px;
+	margin-bottom: 20px;
+	border-radius: 5px;
+	font-size: 12px;
+	border-radius:5px;
+	width: 1474px;
+}
+#searchBar input, select {
+	height: 24px;
+	border-radius: 3px;
+	border: none;
+	padding-left: 5px;
+	vertical-align: middle;
+	text-align: center;
+	width: 200px;
 }
 .ui-datepicker{ font-size: 12px; width: 160px; }
 .ui-datepicker select.ui-datepicker-month{ width:30%; font-size: 11px; }
@@ -208,10 +251,9 @@ background-color: #2C3E50;
         
         <div class="left">
         <div id="searchBar">
-            &nbsp;&nbsp; 조회기간 : <input type="text" id="date" class="Datepicker">
+            <span class="searchBarTitle">조회기간</span> <input type="text" id="date" class="Datepicker">
              ~ <input type="text" id="date2" class="Datepicker">
-		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-		       사원명 : <input type="text" id="p_text" placeholder="사원의 이름을 입력해주세요.">
+		    <span class="searchBarTitle">사원명</span> <input type="text" id="p_text" placeholder="사원의 이름을 입력해주세요.">
         </div>
 		</div>
 

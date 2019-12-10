@@ -270,19 +270,16 @@ background-color: #2C3E50;
 	border-radius: 5px;
 	margin: 0 5px 0 70px;
 	vertical-align: middle;
-	margin-left: 140px;
-}
-.searchBarTitle2 {
-    margin-left: 140px;
+	margin-left: 130px;
 }
 #searchBar {
 	background: #EBEBEB;
-	padding: 10px 30px;
+	padding: 20px 20px;
 	margin-bottom: 20px;
 	border-radius: 5px;
 	font-size: 12px;
 	border-radius:5px;
-	width: 1045px;
+	width: 1065px;
 }
 #searchBar input, select {
 	height: 24px;
@@ -335,7 +332,7 @@ margin-left: 15px;
 		<span class="searchBarTitle">부서</span><select id="DeptList">
 			<option value="" selected>전체</option>
 		</select>
-		<select class="searchBarTitle2" id="Employee_Select">
+		<span class="searchBarTitle">조회조건</span><select id="Employee_Select">
 		    <option value="" selected>구분</option>
 			<option value="employee_name">사원명</option>
 			<option value="employee_code">사원코드</option>

@@ -158,12 +158,12 @@ background-color: #2C3E50;
 }
 #searchBar {
 	background: #EBEBEB;
-	padding: 10px 30px;
+	padding: 20px 20px;
 	margin-bottom: 20px;
 	border-radius: 5px;
 	font-size: 12px;
 	border-radius:5px;
-	width: 1145px;
+	width: 1165px;
 }
 #searchBar input, select {
 	height: 24px;

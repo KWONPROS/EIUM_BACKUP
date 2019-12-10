@@ -59,10 +59,10 @@
 			               { "Header" : "직종", "SaveName" : "job_CLASS_NAME", "Type" : "Text", "Width" : 100, "Align" : "Center", "UpdateEdit":0 },
 			               { "Header" : "급여형태", "SaveName" : "pay_TYPE_NAME", "Type" : "Text", "Width" : 100, "Align" : "Center", "UpdateEdit":0 },
 			               { "Header" : "계약시작월", "SaveName" : "contract_START_MONTH", "Type" : "Date", "Width" : 100, "Align" : "Center", "Format" : "Ym", "UpdateEdit":0 },
-			               { "Header" : "연봉", "SaveName" : "contract_YEAR_PAY", "Type" : "Text", "Width" : 100, "Align" : "Center", "UpdateEdit":0 },
-			               { "Header" : "월급", "SaveName" : "contract_MONTH_PAY", "Type" : "Text", "Width" : 100, "Align" : "Center", "UpdateEdit":0 },
-			               { "Header" : "일급", "SaveName" : "contract_DAY_PAY", "Type" : "Text", "Width" : 100, "Align" : "Center", "UpdateEdit":0 },
-			               { "Header" : "시급","SaveName" : "contract_TIME_PAY","Type" : "Text","Width" : 100, "Align" : "Center", "UpdateEdit":0 }
+			               { "Header" : "연봉", "SaveName" : "contract_YEAR_PAY", "Type" : "Int", "Width" : 100, "Align" : "Center", "UpdateEdit":0, "Format":"Integer" },
+			               { "Header" : "월급", "SaveName" : "contract_MONTH_PAY", "Type" : "Int", "Width" : 100, "Align" : "Center", "UpdateEdit":0, "Format":"Integer" },
+			               { "Header" : "일급", "SaveName" : "contract_DAY_PAY", "Type" : "Int", "Width" : 100, "Align" : "Center", "UpdateEdit":0, "Format":"Integer" },
+			               { "Header" : "시급","SaveName" : "contract_TIME_PAY","Type" : "Int","Width" : 100, "Align" : "Center", "UpdateEdit":0, "Format":"Integer" }
 		                 ];
 
 		IBS_InitSheet(mySheet, initSheet);
@@ -227,12 +227,12 @@ background-color: #2C3E50;
 }
 #searchBar {
 	background: #EBEBEB;
-	padding: 10px 30px;
+	padding: 20px 20px;
 	margin-bottom: 20px;
 	border-radius: 5px;
 	font-size: 12px;
 	border-radius:5px;
-	width: 1144px;
+	width: 1165px;
 }
 #searchBar input, select {
 	height: 24px;
@@ -248,6 +248,11 @@ background-color: #2C3E50;
 	left: 60px;
 	width: 800px;
 }
+
+.ui-datepicker{ font-size: 12px; width: 160px; }
+.ui-datepicker select.ui-datepicker-month{ width:30%; font-size: 11px; }
+.ui-datepicker select.ui-datepicker-year{ width:40%; font-size: 11px; }
+#searchBar img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 	
 	</style>
 

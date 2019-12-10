@@ -101,7 +101,6 @@
 	}
 	
 	function mySheet_OnChange(Row,Col){
-		console.log(Col);
 		var sd=mySheet.GetCellValue(Row,9);
 	    var ed=mySheet.GetCellValue(Row,10);
 	
@@ -270,12 +269,12 @@ background-color: #2C3E50;
 }
 #searchBar {
 	background: #EBEBEB;
-	padding: 10px 30px;
+	padding: 20px 20px;
 	margin-bottom: 20px;
 	border-radius: 5px;
 	font-size: 12px;
 	border-radius:5px;
-	width: 1225px;
+	width: 1243px;
 }
 #searchBar input, select {
 	height: 24px;
