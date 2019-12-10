@@ -21,6 +21,7 @@ var pageheightoffset = 200; //시트높이 계산용
 
 //sheet 기본설정
 function LoadPage(){
+	   mySheet.SetWaitImageVisible(0);
    
    mySheet.RemoveAll();
    //아이비시트 초기화
@@ -63,8 +64,16 @@ function doAction(sAction){
    case "insert":
       var row = mySheet.DataInsert(-1);
       break;
+      
+   case "down":
+		  mySheet.Down2Excel();
+
+		  break;
+	
    
    }
+   
+
 }
    
    
@@ -185,7 +194,7 @@ padding: 10px;0px;10px;0px;
 
 <!--    <form name="frm"> -->
   <div class="leftbuttons">
-      <a href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
+      <a href="javascript:doAction('down')" class="IBbutton">엑셀</a>
    </div> 
 
 

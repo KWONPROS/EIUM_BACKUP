@@ -27,7 +27,13 @@
 
 
 	function LoadPage() {
+		mySheet1.SetWaitImageVisible(0);
+		mySheet3.SetWaitImageVisible(0);
+		mySheet4.SetWaitImageVisible(0);
+		mySheet5.SetWaitImageVisible(0);
+
 		
+
 		//아이비시트1 
 		mySheet1.RemoveAll();
 		var initSheet1 = {};
@@ -178,7 +184,42 @@
 			
 		case "insert":
 			var row = mySheet2.DataInsert(-1);
-		      break;      
+		      break;
+		      
+		case "down":
+			
+		total = $('#total').val();
+		if(total =='emp' ){
+			mySheet1.Down2ExcelBuffer(true);  
+		     mySheet1.Down2Excel();
+		     mySheet2.Down2Excel();
+		     mySheet1.Down2ExcelBuffer(false); 
+		     break;
+		}
+		
+		if(total =='dep' ){
+			mySheet3.Down2ExcelBuffer(true);  
+		     mySheet3.Down2Excel();
+		     mySheet2.Down2Excel();
+		     mySheet3.Down2ExcelBuffer(false); 
+		     break;
+		}
+		
+		if(total =='sit' ){
+			mySheet4.Down2ExcelBuffer(true);  
+		     mySheet4.Down2Excel();
+		     mySheet2.Down2Excel();
+		     mySheet4.Down2ExcelBuffer(false); 
+		     break;
+		}
+		
+		if(total =='job' ){
+			mySheet5.Down2ExcelBuffer(true);  
+		     mySheet5.Down2Excel();
+		     mySheet2.Down2Excel();
+		     mySheet5.Down2ExcelBuffer(false); 
+		     break;
+		}
 		      
 		      
 
@@ -511,7 +552,7 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 <form name="frm">
 
 	<div class="leftbuttons">
-		<a href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
+		<a href="javascript:doAction('down')" class="IBbutton">엑셀</a>
 	</div>
 	<div class="rightbuttons">
 		<a href="javascript:doAction('reload')" class="IBbutton">초기화</a> 

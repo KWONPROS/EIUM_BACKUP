@@ -19,6 +19,7 @@
 <script type="text/javascript">
 	var pageheightoffset = 200; //시트높이 계산용
 	
+	
 	function setSite(){
 		site_code=document.getElementById("Psite_code").value;
 		site_name=document.getElementById("Psite_name").value;
@@ -39,6 +40,7 @@
 
 	//sheet 기본설정
 	function LoadPage() {
+		mySheet.SetWaitImageVisible(0);
 		
 		  //달력 API
 		$(function() {
@@ -77,7 +79,7 @@
 				{Header:"포상/징계일자",Type:"Text",SaveName:"hr_rnp_date", MinWidth:120, Align:"Center", Edit: 0},
 				{Header:"포상/징계내역",Type:"Text",SaveName:"hr_rnp_history", MinWidth:120, Align:"Center", Edit: 0},
 				{Header:"사행처",Type:"Text",SaveName:"hr_rnp_institute", MinWidth:80, Align:"Center", Edit: 0},
-				{Header:"금액",Type:"Text",SaveName:"hr_rnp_cost", MinWidth:80, Align:"Center", Edit: 0},
+				{Header:"금액",Type:"Int",SaveName:"hr_rnp_cost", MinWidth:80, Align:"Center", Edit: 0},
 		                 ];
 
 		IBS_InitSheet(mySheet, initSheet);
@@ -109,6 +111,11 @@
 			$('#date').attr('value', "");
 			$('#date2').attr('value', "");
 			break;
+			
+		  case "down":
+		 	mySheet.Down2Excel();
+			break;		
+			  
 		}
 	}
 	

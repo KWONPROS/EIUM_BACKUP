@@ -27,6 +27,8 @@
 
 
 	function LoadPage() {
+		mySheet.SetWaitImageVisible(0);
+
 		
 		//아이비시트1 
 		mySheet.RemoveAll();
@@ -94,6 +96,10 @@
 			
 
 			break;
+			
+		 case "down":
+		     mySheet.Down2Excel();
+		    break;
 		}
 	}
 	
@@ -381,7 +387,7 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 <body onload="LoadPage()" >
 <form name="frm">
 	<div class="leftbuttons">
-		<a href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
+		<a href="javascript:doAction('down')" class="IBbutton">엑셀</a>
 	</div>
 	<div class="rightbuttons">
 		<a href="javascript:doAction('reload')" class="IBbutton">초기화</a> 

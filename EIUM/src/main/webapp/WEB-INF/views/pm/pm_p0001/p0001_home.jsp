@@ -36,6 +36,7 @@ function setPaygrade(){
 
 	/*Sheet 기본 설정 */
 	function LoadPage() {
+		mySheet.SetWaitImageVisible(0);
 		
 		//아이비시트1 
 		mySheet.RemoveAll();
@@ -131,6 +132,13 @@ function setPaygrade(){
 		    	 var tempStr = mySheet2.GetSaveString();
 		    	 mySheet2.DoSave("${contextPath}/pm/p0001/saveData.do");
 			break;
+			
+		     case "down":        
+		     mySheet.Down2ExcelBuffer(true);  
+		     mySheet.Down2Excel();
+		     mySheet2.Down2Excel();
+		     mySheet.Down2ExcelBuffer(false); 
+		     break;
 
 		}
 	}
@@ -417,7 +425,7 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 <form name="frm">
 
 	<div class="leftbuttons">
-		<a href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
+		<a href="javascript:doAction('down')" class="IBbutton">엑셀</a>
 	</div>
 	<div class="rightbuttons">
 		<a href="javascript:doAction('reload')" class="IBbutton">초기화</a> 

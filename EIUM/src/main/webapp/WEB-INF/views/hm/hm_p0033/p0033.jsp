@@ -40,6 +40,7 @@
 
 	//sheet 기본설정
 	function LoadPage() {
+		mySheet.SetWaitImageVisible(0);
 		
 		  //달력 API
 		$(function() {
@@ -114,6 +115,10 @@
 			$('#date').attr('value', "");
 			$('#date2').attr('value', "");
 			break;
+			
+		case "down":
+		    mySheet.Down2Excel();
+		    break;
 		}
 	}
 	
