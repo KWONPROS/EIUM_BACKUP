@@ -77,7 +77,7 @@
 	function doAction(sAction) {
 		switch (sAction) {
 		case "search":
-			var param = FormQueryStringEnc(document.frm);
+			param = FormQueryStringEnc(document.frm);
 		    mySheet.DoSearch("${contextPath}/wm/p0002/searchList.do", param);
 			break;
 		case "reset":
@@ -95,8 +95,8 @@
 		    var row = mySheet.DataInsert(1);
 		    break;
 		case "down":
-			var param = { Mode : -1 };
-	        mySheet.Down2Excel(param);
+			var param2 = { Mode : -1 };
+	        mySheet.Down2Excel(param2);
 	        break;
 		}
 	}
@@ -181,9 +181,6 @@
 		
 	}
 	
-
-
-	
 	function mySheet_OnPopupClick(Row,Col) {
 		row=Row;
 		col=Col;
@@ -208,7 +205,22 @@
 		if(vacationremainDate== ""){
 			mySheet.SetCellValue(row,7,"12");
 			}
-		}
+	}
+	
+	function mySheet_OnSearchEnd(){
+		var duprows = mySheet.ColValueDupRows("3",{"IncludeDelRow" : 1, "IncludeFirstRow" : 0});
+		
+		arrRow = duprows.split(",");
+		for(idx=0; idx<arrRow.length; idx++){
+			mySheet.SetRowEditable(arrRow[idx],0);
+			mySheet.SetRowBackColor(arrRow[idx],"#C0C0C0");
+		}	
+	}
+	
+	
+	function mySheet_OnSaveEnd(){
+		mySheet.DoSearch("${contextPath}/wm/p0002/searchList.do", param);
+	}
 	
 	
 </script>
