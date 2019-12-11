@@ -31,11 +31,13 @@ function LoadPage(){
    initSheet.Cols=[
 	   {Header:"상태",SaveName:"sStatus",Type:"Status",align:"Center",width:50},
 	   {Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck"},
-	   {Header:"사원코드",SaveName:"employee_code",Type:"Text",width:100, Align:"Center" , KeyField:1, UpdateEdit:"0"},
-	   {Header:"사원명",SaveName:"employee_name",Type:"Text",width:100, KeyField:1 },
+	   {Header:"사원코드",SaveName:"employee_code",Type:"Text",MinWidth:100, Align:"Center" , KeyField:1, UpdateEdit:"0"},
+	   {Header:"사원명",SaveName:"employee_name",Type:"Text",MinWidth:100, KeyField:1 },
+	   {Header:"회사코드", Type:"Popup", SaveName:"company_code",MinWidth:100, Align:"Center" , KeyField:1},
+	   {Header:"회사명",SaveName:"company_name",Type:"Text",MinWidth:100, KeyField:1, Align:"Center", UpdateEdit:"0", InsertEdit:"0" },
 	   {Header:"사용자여부",Type:"Combo", MinWidth:70, Align:"Center", SaveName:"employee_available_yn", ComboText:"Y|N", ComboCode:"Y|N"},
-	   {Header:"아이디",SaveName:"employee_id", Align:"Center",type:"Text",width:100, KeyField:1, UpdateEdit:"0"},
-	   {Header:"암호",SaveName:"employee_password", Align:"Center",type:"Text", KeyField:1, width:100},
+	   {Header:"아이디",SaveName:"employee_id", Align:"Center",type:"Text",MinWidth:100, KeyField:1, UpdateEdit:"0"},
+	   {Header:"암호",SaveName:"employee_password", Align:"Center",type:"Text", KeyField:1, MinWidth:100},
 	   {Header:"전화번호",Type:"Text", Align:"Center", Align:"Center", SaveName:"contact", Format:"PhoneNo", MinWidth:120},
 	      ];
    
@@ -51,7 +53,7 @@ function LoadPage(){
 function doAction(sAction){
    switch(sAction){
    case "search":
-      mySheet.DoSearch("${contextPath}/sm/p0004search.do");
+      mySheet.DoSearch("${contextPath}/sm/p0004/search.do");
       break;
    case "reload":
       mySheet.RemoveAll();
@@ -75,49 +77,6 @@ function doAction(sAction){
    
 
 }
-   
-   
-  
-   
-
-
-function selectDepart(){
-	
-
-	$.ajax({
-		
-	    url:"${contextPath}/sm/p0004/DepartList.do",//목록을 조회 할 url
-
-
-	    type:"POST",
-
-	    dataType:"JSON",
-
-	    success:function(data){    
-
-	      for(var i = 0; i < data['Data'].length ; i++){
-		
-	    
-	        var option = "<option value='" + data['Data'][i].department_code + "'>" +data['Data'][i].department_code+ "</option>";        
-
-	        //대상 콤보박스에 추가
-
-	        $('#DepartList').append(option);
-
-	      }
-
-	    },
-
-	    error:function(jqxhr, status, error){
-
-	      alert("에러");
-
-	    }
-
-	  });
-
-	};
-	
 	
 	function mySheet_OnSaveEnd(code, msg) {
 		if (msg != "") {
@@ -126,6 +85,22 @@ function selectDepart(){
 			//mySheet.ReNumberSeq();
 		}
 	}
+	
+	function mySheet_OnPopupClick(Row,Col,Value){
+		
+		if(Col=="4"){
+			
+		window.open("${contextPath}/sm/p0004/company_Search.do", "a", "width=500, height=700, left=100, top=50"); 
+		}
+		
+		
+	}
+	
+	
+	function companyValue(rowData){
+		mySheet.SetRowData(mySheet.GetSelectRow(),rowData);
+	}
+
 	
 
 

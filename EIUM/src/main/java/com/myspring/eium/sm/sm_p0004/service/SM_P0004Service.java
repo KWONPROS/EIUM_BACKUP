@@ -14,5 +14,7 @@ public interface SM_P0004Service {
 //	 public p0005VO login(p0005VO p0005VO) throws Exception;
 	 
 	 public List<SM_P0004VO> searchList(Map<String, Object> searchMap) throws DataAccessException;
+	 public List<SM_P0004VO> companyList(Map<String, Object> searchMap) throws DataAccessException;
+
      public void saveData(Map<String, String[]> dataMap, String user)  throws DataAccessException;
 }

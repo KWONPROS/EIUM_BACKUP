@@ -40,6 +40,12 @@ public class SM_P0004DAOImpl implements SM_P0004DAO {
 		List<SM_P0004VO> list = sqlSession.selectList("mapper.sm_p0004.selectAllp0004List", searchMap);
 		return list;
 	}
+	
+	@Override
+	public List<SM_P0004VO> companyList(Map<String, Object> searchMap) throws DataAccessException {
+		List<SM_P0004VO> list = sqlSession.selectList("mapper.sm_p0004.companyList", searchMap);
+		return list;
+	}
 
 	@Override
 	public void insertData(Map<String, String> row) throws DataAccessException {

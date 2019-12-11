@@ -37,10 +37,19 @@ public class SM_P0004ControllerImpl implements SM_P0004Controller{
 		ModelAndView mav = new ModelAndView("/sm/sm_p0004/p0004");
 	
 		return mav;
+	}
+	
+	@Override
+	@RequestMapping(value = "sm/p0004/company_Search.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView company_Search(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("/sm/sm_p0004/p0004_companySearch");
+	
+		return mav;
 	} 
 	
 	@Override
-	@RequestMapping(value = "/sm/p0004search.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/sm/p0004/search.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
@@ -58,6 +67,30 @@ public class SM_P0004ControllerImpl implements SM_P0004Controller{
 				
 		//데이터 조회
 		List<SM_P0004VO> data = p0004ServiceImpl.searchList(searchMap);
+		resultMap.put("Data", data);
+        
+        return resultMap;
+	}
+	
+	@Override
+	@RequestMapping(value = "/sm/p0004/company_list.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map company_list(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		
+/*		String i =loginVO.getEmployee_name();
+		System.out.println(i);*/
+		
+
+		Map<String, Object> searchMap = new HashMap<String, Object>(); // 검색조건
+		Map<String, Object> resultMap = new HashMap<String, Object>(); // 조회결과
+		
+
+	
+
+				
+		//데이터 조회
+		List<SM_P0004VO> data = p0004ServiceImpl.companyList(searchMap);
 		resultMap.put("Data", data);
         
         return resultMap;

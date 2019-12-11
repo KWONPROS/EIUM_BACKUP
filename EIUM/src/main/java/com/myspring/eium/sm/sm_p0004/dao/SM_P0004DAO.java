@@ -20,6 +20,8 @@ public interface SM_P0004DAO {
 
 	public void deleteData(Map<String, String> row) throws DataAccessException;
 
+	public List<SM_P0004VO> companyList(Map<String, Object> searchMap)throws DataAccessException;
+
 
 
 }

@@ -22,10 +22,20 @@
 
 	<select id="selectAllp0004List" resultMap="p0004Result">
       <![CDATA[
-         select e.employee_code, e.employee_name, e.employee_available_yn, ac.employee_id , ac.employee_password, ei.contact
-         from employee e, account ac, employee_hr_info ei
+         select distinct e.employee_code, e.employee_name, e.employee_available_yn, ac.employee_id , ac.employee_password, ei.contact, ew.company_code, c.company_name
+         from employee e, account ac, employee_hr_info ei, employee_work ew, company c
          where e.employee_code = ei.employee_code(+)
          and e.employee_code = ac.employee_code(+)
+         and e.employee_code = ew.employee_code
+         and ew.company_code = c.company_code 
+      ]]>
+	</select>
+	
+		<select id="companyList" resultMap="p0004Result">
+      <![CDATA[
+         select company_code, company_name
+         from company
+         order by company_code
       ]]>
 	</select>
 	

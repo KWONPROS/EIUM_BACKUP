@@ -70,6 +70,11 @@ public class SM_P0004ServiceImpl implements SM_P0004Service {
 		}		
 		return row;
 	}
+
+	public List<SM_P0004VO> companyList(Map<String, Object> searchMap)throws DataAccessException {
+		List<SM_P0004VO> list =  p0004DAO.companyList(searchMap);
+		return list;
+	}
 	
 
 	
