@@ -42,15 +42,18 @@ public class WM_P0001ServiceImpl implements WM_P0001Service {
 		String[] status = dataMap.get("STATUS");
 		int length = status.length; // row수
 		int i = 0;
-		
+		System.out.println("^^^^^^^^^^^^^");
 		for(String str : status) {
 			Map<String, String> row = getRow(dataMap, length, i, P_EMPLOYEE_CODE, u); 
 			if("I".equals(str)) { // 추가
 				p0001DAO.insertData(row);
+				System.out.println("^^^^^^^^^insert");
 			}else if("U".equals(str)) { // 수정
 				p0001DAO.updateData(row);
+				System.out.println("^^^^^^^^^update");
 			}else if("D".equals(str)) { // 삭제
 				p0001DAO.deleteData(row);
+				System.out.println("^^^^^^^^^delete");
 			}
 			i++;
 		}

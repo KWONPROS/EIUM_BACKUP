@@ -108,14 +108,14 @@
 			{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK", Hidden:1},
 			
 			//평일
-			{Header:"평일정상근무시간(시간)",Type:"Text",SaveName:"weekday_NORMAL_WORK_TIME", Width:160,Edit:1,Align:"Center"},	
-			{Header:"평일연장근무시간(시간)",Type:"Text",SaveName:"weekday_EXTENSION_WORK_TIME", Width:160,Edit:1,Align:"Center"},			
-			{Header:"평일야간근무시간(시간)",Type:"Text",SaveName:"weekday_NIGHT_WORK_TIME", Width:160,Edit:1,Align:"Center"},
+			{Header:"평일정상근무시간(분)",Type:"Text",SaveName:"weekday_NORMAL_WORK_TIME", Width:160,Edit:1,Align:"Center"},	
+			{Header:"평일연장근무시간(분)",Type:"Text",SaveName:"weekday_EXTENSION_WORK_TIME", Width:160,Edit:1,Align:"Center"},			
+			{Header:"평일야간근무시간(분)",Type:"Text",SaveName:"weekday_NIGHT_WORK_TIME", Width:160,Edit:1,Align:"Center"},
 			
 			//휴일
-			{Header:"휴일정상근무시간(시간)",Type:"Text",SaveName:"holiday_NORMAL_WORK_TIME", Width:160,Edit:1,Align:"Center"},	
-			{Header:"휴일연장근무시간(시간)",Type:"Text",SaveName:"holiday_EXTENSION_WORK_TIME", Width:160,Edit:1,Align:"Center"},			
-			{Header:"휴일야간근무시간(시간)",Type:"Text",SaveName:"holiday_NIGHT_WORK_TIME", Width:160,Edit:1,Align:"Center"},
+			{Header:"휴일정상근무시간(분)",Type:"Text",SaveName:"holiday_NORMAL_WORK_TIME", Width:160,Edit:1,Align:"Center"},	
+			{Header:"휴일연장근무시간(분)",Type:"Text",SaveName:"holiday_EXTENSION_WORK_TIME", Width:160,Edit:1,Align:"Center"},			
+			{Header:"휴일야간근무시간(분)",Type:"Text",SaveName:"holiday_NIGHT_WORK_TIME", Width:160,Edit:1,Align:"Center"},
 			//etc
 			{Header:"평일(일)",Type:"Text",SaveName:"weekday",Edit:0, Width:105,Align:"Center"},	
 			{Header:"휴일(일)",Type:"Text",SaveName:"holiday",Edit:0, Width:105,Align:"Center"},			
