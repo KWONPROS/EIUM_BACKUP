@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.myspring.eium.hm.hm_p0001.service.HM_P0001Service;
 import com.myspring.eium.hm.hm_p0001.vo.HM_P0001VO;
 import com.myspring.eium.hm.hm_p0001.vo.HM_P0001_01VO;
+import com.myspring.eium.login.vo.LoginVO;
 
 @Controller
 public class HM_P0001ControllerImpl implements HM_P0001Controller {
@@ -92,6 +94,12 @@ public class HM_P0001ControllerImpl implements HM_P0001Controller {
 		Map<String, String[]> dataMap = new HashMap<String, String[]>();
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 
+		HttpSession session = request.getSession(); 
+		LoginVO loginvo = new LoginVO();
+		loginvo = (LoginVO)session.getAttribute("login"); 
+		String user= (loginvo.getEmployee_id());
+		System.out.println("####################"+loginvo.getEmployee_id());
+		
 		String p_position_CODE = request.getParameter("p_position_CODE");
 		System.out.println("p_position_CODE : " + p_position_CODE);
 		String PP_START_DATE = request.getParameter("PP_START_DATE");
@@ -107,7 +115,7 @@ public class HM_P0001ControllerImpl implements HM_P0001Controller {
 		Map<String, String> result = new HashMap<String, String>();
 
 		try {
-			p0001Service.saveData(dataMap, p_position_CODE, PP_START_DATE);
+			p0001Service.saveData(dataMap, p_position_CODE, PP_START_DATE, user);
 			result.put("Code", "0");
 			result.put("Message", "저장성공");
 		} catch (Exception e) {
@@ -129,6 +137,12 @@ public class HM_P0001ControllerImpl implements HM_P0001Controller {
 		Map<String, String[]> dataMap = new HashMap<String, String[]>();
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 
+		HttpSession session = request.getSession(); 
+		LoginVO loginvo = new LoginVO();
+		loginvo = (LoginVO)session.getAttribute("login"); 
+		String user= (loginvo.getEmployee_id());
+		System.out.println("####################"+loginvo.getEmployee_id());
+		
 		String p_position_CODE = request.getParameter("p_position_CODE");
 		System.out.println("p_position_CODE : " + p_position_CODE);
 		String PP_START_DATE = request.getParameter("PP_START_DATE");
@@ -144,7 +158,7 @@ public class HM_P0001ControllerImpl implements HM_P0001Controller {
 		Map<String, String> result = new HashMap<String, String>();
 
 		try {
-			p0001Service.SALARY_saveData(dataMap, p_position_CODE, PP_START_DATE);
+			p0001Service.SALARY_saveData(dataMap, p_position_CODE, PP_START_DATE, user);
 			result.put("Code", "0");
 			result.put("Message", "저장성공");
 		} catch (Exception e) {
@@ -165,10 +179,17 @@ public class HM_P0001ControllerImpl implements HM_P0001Controller {
 		Map<String, String[]> dataMap = new HashMap<String, String[]>();
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 
+		HttpSession session = request.getSession(); 
+		LoginVO loginvo = new LoginVO();
+		loginvo = (LoginVO)session.getAttribute("login"); 
+		String user= (loginvo.getEmployee_id());
+		System.out.println("####################"+loginvo.getEmployee_id());
+		
 		String p_position_CODE = request.getParameter("p_position_CODE");
 		System.out.println("p_position_CODE : " + p_position_CODE);
 		String PP_START_DATE = request.getParameter("PP_START_DATE");
 		System.out.println("PP_START_DATE : " + PP_START_DATE);
+		
 		
 		Enumeration enu = request.getParameterNames();
 		while (enu.hasMoreElements()) {
@@ -180,7 +201,7 @@ public class HM_P0001ControllerImpl implements HM_P0001Controller {
 		Map<String, String> result = new HashMap<String, String>();
 
 		try {
-			p0001Service.DATE_deleteData(dataMap, p_position_CODE, PP_START_DATE);
+			p0001Service.DATE_deleteData(dataMap, p_position_CODE, PP_START_DATE, user);
 			result.put("Code", "0");
 			result.put("Message", "저장성공");
 		} catch (Exception e) {

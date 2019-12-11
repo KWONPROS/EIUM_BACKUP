@@ -37,7 +37,7 @@
 
 	//sheet 기본설정
 	function LoadPage() {
-
+		mySheet.SetWaitImageVisible(0); 
 		//달력 API
 		$(function() {
 			$(".Datepicker")
@@ -180,6 +180,11 @@
 
 			$("input:checkbox[id='resigner']").prop("checked", false);
 			break;
+			
+		case "down":
+			var param = { Mode : -1 };
+			mySheet.Down2Excel(param);
+	        break;
 		}
 	}
 
@@ -190,10 +195,10 @@
 
 		if (selectItem == "0") {
 			var url = '${contextPath}/hm/p0029/search_Site.do';
-			window.open(url, "a", "width=600, height=500, left=100, top=50");
+			window.open(url, "a", "width=650, height=550, left=100, top=50");
 		} else if (selectItem == "1") {
 			var url = '${contextPath}/hm/p0029/search_Dept.do';
-			window.open(url, "a", "width=600, height=500, left=100, top=50");
+			window.open(url, "a", "width=800, height=600, left=100, top=50");
 		}
 
 	}
@@ -205,14 +210,6 @@
 						$("#searchList option").index(
 								$("#searchList option:selected")));
 	}
-	/* function showPopup_work(){ //재직구분
-	 var url = '${contextPath}/hm/p0029/search_Work.do';
-	 window.open(url, "a", "width=600, height=500, left=100, top=50");
-	}
-	function showPopup_position(){ //직급
-	 var url = '${contextPath}/hm/p0029/search_Position.do';
-	 window.open(url, "a", "width=600, height=500, left=100, top=50");
-	} */
 
 	//팝업 도움 코드
 	function findPopup(tablename) {
@@ -286,7 +283,7 @@
 	padding: 4px;
 	color: white;
 	border-radius: 5px;
-	margin: 0 5px 0 80px;
+	margin: 0 10px 0 80px;
 	vertical-align: middle;
 }
 
@@ -420,7 +417,6 @@ label{
 	width: 40%;
 	font-size: 11px;
 }
-/* #searchBar img {vertical-align: middle; padding: 0px 5px 0px 2px; } */
 </style>
 
 </head>
@@ -440,32 +436,32 @@ label{
 
 		<div class="left">
 			<div id="searchBar">
-				<span class="searchBarTitle">조회조건</span> <select id="searchList">
+				<span class="searchBarTitle" style="margin-left:110px;">조회조건</span> <select id="searchList">
 					<option selected>1. 사업장</option>
 					<option>2. 부서</option>
 				</select> <input type="text" id="Poption_code" style="width: 60px;"><a
 					href="javascript:showPopup_option();"><img
 					src="${contextPath}/resources/image/icons/icon_plus.png"></a> <input
-					type="text" id="Poption_name"> <span class="searchBarTitle">재직구분</span>
+					type="text" id="Poption_name"> <span class="searchBarTitle" style="margin-left:110px;">재직구분</span>
 				<input type="text" id="WORK_STATUS_CODE" style="width: 60px;"><a
 					href="javascript:findPopup('WORK_STATUS');"><img
 					src="${contextPath}/resources/image/icons/icon_plus.png"></a> <input
 					type="text" id="WORK_STATUS_NAME" style="width: 60px;"> <span
-					class="searchBarTitle">직급</span> <input type="text"
+					class="searchBarTitle" style="margin-left:135px;margin-right:10px;padding:4px 22px 4px 22px">직급</span> <input type="text"
 					id="POSITION_CODE" style="width: 60px;"><a
 					href="javascript:findPopup('POSITION');"><img
 					src="${contextPath}/resources/image/icons/icon_plus.png"></a> <input
 					type="text" id="POSITION_NAME" style="width: 60px;">
 				<div class="otherline">
-					<span class="searchBarTitle">기간</span> <input type="text"
-						id="date_start" class="Datepicker"> ~ <input type="text"
+					<span class="searchBarTitle" style="margin-left:100px;margin-right:10px;padding:4px 16px 4px 16px">기간</span> <input type="text"
+						id="date_start" class="Datepicker"> ~ &nbsp&nbsp<input type="text"
 						id="date_end" class="Datepicker"> <span
-						class="searchBarTitle">교육명</span> <input type="text"
+						class="searchBarTitle" style="margin-left:35px;padding:4px 10px 4px 10px">교육명</span> <input type="text"
 						id="EMPLOYEE_TRAINING_CODE" style="width: 60px;"><a
 						href="javascript:findPopup('EMPLOYEE_TRAINING');"><img
 						src="${contextPath}/resources/image/icons/icon_plus.png"></a> <input
 						type="text" id="EMPLOYEE_TRAINING_NAME"> <span
-						class="searchBarTitle">퇴사자포함</span>
+						class="searchBarTitle" style="margin-left:25px;margin-right:10px;padding:4px 4px 4px 4px">퇴사자포함</span>
 					<div class="checks etrans">
 						<input type="checkbox" id="resigner" value="1"><label for="resigner"></label> 
 					</div>

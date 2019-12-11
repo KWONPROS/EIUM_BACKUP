@@ -27,22 +27,22 @@
 
 	//sheet 기본설정
 	function LoadPage() {
-		
+		mySheet.SetWaitImageVisible(0); 
 		mySheet.RemoveAll();
 		//아이비시트 초기화
 		var initSheet = {};
 		initSheet.Cfg = { SearchMode : smLazyLoad, ToolTip : 1, MouseHoverMode:2};
 		initSheet.HeaderMode = { Sort : 1, ColMove : 1, ColResize : 10, HeaderCheck : 1 };
 		initSheet.Cols = [ 
-			 	{Header:"NO",Type:"Seq",SaveName:"NUMBER",Width:70, Align:"Center" },
+			 	{Header:"NO",Type:"Seq",SaveName:"NUMBER",Width:60, Align:"Center" },
 			 	{Header:"사원코드",Type:"Text",SaveName:"employee_CODE",  Align:"Center", Edit: 0,Hidden:1},	
 		        {Header:"사원명",Type:"Text",SaveName:"employee_NAME", Width:180,  Align:"Center", Edit: 0},	
 		        {Header:"어학시험명",Type:"Text",SaveName:"language_NAME", Width:180, Align:"Center", Edit: 0},
-				{Header:"유효기간 시작일",Type:"Text",SaveName:"start_DATE", Width:180, Align:"Center", Edit: 0},
-				{Header:"유효기간 만료일",Type:"Text",SaveName:"end_DATE", Width:190, Align:"Center", Edit: 0},
+				{Header:"유효기간 시작일",Type:"Date",SaveName:"start_DATE", Width:190, Align:"Center", Edit: 0},
+				{Header:"유효기간 만료일",Type:"Date",SaveName:"end_DATE", Width:190, Align:"Center", Edit: 0},
 				{Header:"점수",Type:"Text",SaveName:"grade", Width:190, Align:"Center", Edit: 0},
 				{Header:"백분율",Type:"Text",SaveName:"percent", Width:200, Align:"Center", Edit: 0},
-				{Header:"주관기간",Type:"Text",SaveName:"institute", Width:200, Align:"Center", Edit: 0},
+				{Header:"주관기간",Type:"Text",SaveName:"institute", Width:210, Align:"Center", Edit: 0},
 				{Header:"어학시험코드",Type:"Text",SaveName:"language_CODE", Width:200, Align:"Center", Edit: 0, Hidden:1}
 		];
 
@@ -50,6 +50,7 @@
 		mySheet.SetEditableColorDiff(1);
 		mySheet.SetActionMenu("엑셀 파일 저장");
 		mySheet.SetSelectionMode(1);
+		mySheet.SetSheetHeight(550);
 		mySheet.SetColEditable(0, 0);
 		mySheet.SetColEditable(1, 0);
 		mySheet.SetColEditable(2, 0);
@@ -74,6 +75,10 @@
 	            this.reset();
 	         });  
 			break;
+		case "down":
+			var param = { Mode : -1 };
+			mySheet.Down2Excel(param);
+	        break;
 		}
 	}
 	
@@ -95,14 +100,6 @@
 		 $("#Poption_code").val(rowData.department_CODE);
 		 $("#Poption_code_temp").val($("#searchList option").index($("#searchList option:selected")));
 	 }
-	 /* function showPopup_work(){ //재직구분
-		 var url = '${contextPath}/hm/p0029/search_Work.do';
-		 window.open(url, "a", "width=600, height=500, left=100, top=50");
-	 }
-	 function showPopup_position(){ //직급
-		 var url = '${contextPath}/hm/p0029/search_Position.do';
-		 window.open(url, "a", "width=600, height=500, left=100, top=50");
-	 } */
 
 	 //팝업 도움 코드
 	 function findPopup(tablename){
@@ -157,7 +154,7 @@ background-color: #2C3E50;
 }
 #searchBar {
 	background: #EBEBEB;
-	padding: 15px 125px;
+	padding: 15px 0px;
 	margin-bottom: 30px;
 	border-radius: 5px;
 	font-size: 12px;
@@ -168,7 +165,7 @@ background-color: #2C3E50;
 	padding: 4px;
 	color: white;
 	border-radius: 5px;
-	margin: 0 5px 0 70px;
+	margin: 0 10px 0 80px;
 	vertical-align: middle;
 }
 .left{
@@ -199,6 +196,91 @@ background-color: #2C3E50;
 .otherline{
 	padding: 10px 10px 0px 10px;
 }
+.checks{
+	display: inline-block;
+}
+.checks input[type="checkbox"] {  /* 실제 체크박스는 화면에서 숨김 */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip:rect(0,0,0,0);
+  border: 0
+}
+
+.checks input[type="checkbox"] + label {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.checks input[type="checkbox"] + label:before {  /* 가짜 체크박스 */
+  content: ' ';
+  display: inline-block;
+  width: 21px;  /* 체크박스의 너비를 지정 */
+  height: 21px;  /* 체크박스의 높이를 지정 */
+  line-height: 21px; /* 세로정렬을 위해 높이값과 일치 */
+  margin: -2px 8px 0 0;
+  text-align: center; 
+  vertical-align: middle;
+  background: #fafafa;
+  border: 1px solid #5E5E5E;
+  border-radius : 3px;
+  box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+}
+
+.checks.etrans input[type="checkbox"] + label {
+  padding-left: 30px;
+}
+.checks.etrans input[type="checkbox"] + label:before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-top: -14px;
+  opacity: .6;
+  box-shadow: none;
+  border-color: #5E5E5E;
+  -webkit-transition: all .12s, border-color .08s;
+  transition: all .12s, border-color .08s;
+}
+
+.checks.etrans input[type="checkbox"]:checked + label:before {
+  position: absolute;
+  content: "";
+  width: 10px;
+  top: -5px;
+  left: 5px;
+  border-radius: 0;
+  opacity:1; 
+  background: transparent;
+  border-color:transparent #5E5E5E #5E5E5E transparent;
+  border-top-color:transparent;
+  border-left-color:transparent;
+  -ms-transform:rotate(45deg);
+  -webkit-transform:rotate(45deg);
+  transform:rotate(45deg);
+}
+
+.no-csstransforms .checks.etrans input[type="checkbox"]:checked + label:before {
+  /*content:"\2713";*/
+  content: "\2714";
+  top: 0;
+  left: 0;
+  width: 21px;
+  line-height: 21px;
+  color: #6cc0e5;
+  text-align: center;
+  border: 1px solid #6cc0e5;
+}
+
+label{
+	display: inline-block;
+}
 .ui-datepicker{ font-size: 12px; width: 160px; }
 .ui-datepicker select.ui-datepicker-month{ width:30%; font-size: 11px; }
 .ui-datepicker select.ui-datepicker-year{ width:40%; font-size: 11px; }
@@ -224,24 +306,24 @@ background-color: #2C3E50;
         
         <div class="left">
         <div id="searchBar">
-       <span class="searchBarTitle">조회조건</span>
+       <span class="searchBarTitle" style="margin-left:110px;margin-right: 10px;padding: 4px 10px 4px 10px;">조회조건</span>
 				<select id="searchList" >
 					<option selected >1. 사업장</option>
 					<option >2. 부서</option>
 				</select>
 				<input type="text" id="Poption_code" style="width: 60px;"><a href="javascript:showPopup_option();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
 				<input type="text" id="Poption_name">
-				<span class="searchBarTitle">재직구분</span>
+				<span class="searchBarTitle" style="margin-left:110px;">재직구분</span>
 				<input type="text" id="WORK_STATUS_CODE" style="width: 60px;"><a href="javascript:findPopup('WORK_STATUS');"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
 				<input type="text" id="WORK_STATUS_NAME" style="width: 60px;">
-				<span class="searchBarTitle">직급</span>
+				<span class="searchBarTitle" style="margin-left:135px;margin-right:10px;padding:4px 22px 4px 22px">직급</span>
 				<input type="text" id="POSITION_CODE" style="width: 60px;"><a href="javascript:findPopup('POSITION');"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
 				<input type="text" id="POSITION_NAME" style="width: 60px;">
 				<div class="otherline">
-             	<span class="searchBarTitle">어학시험명</span>
+             	<span class="searchBarTitle" style="margin-left:100px;margin-right:10px;padding:4px 4px 4px 4px">어학시험명</span>
 				<input type="text" id="LANGUAGE_CODE" style="width: 60px;"><a href="javascript:findPopup('LANGUAGE');"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
 				<input type="text" id="LANGUAGE_NAME">
-				<span class="searchBarTitle">퇴사자포함</span><input type="checkbox" id ="resigner" value="1">
+				<span class="searchBarTitle" style="margin-left:570px;margin-right:13px;padding:4px 4px 4px 4px">퇴사자포함</span><div class="checks etrans"><input type="checkbox" id ="resigner" value="1"><label for="resigner"></label></div>
 				</div>
            
         </div>

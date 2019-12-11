@@ -26,16 +26,18 @@ function LoadPage(){
 	initSheet.Cfg={SearchMode:smLazyLoad,ToolTip:1};
 	initSheet.HeaderMode = {Sort:1,ColMove:1,ColResize:1,HeaderCheck:1};
 	initSheet.Cols=[
-		{Header:"NO",Type:"Seq",Width:100,SaveName:"seq",Align:"Center"},
-		{Header:"부서코드",Type:"Text",Width:250,SaveName:"department_CODE",Align:"Center"},
-		{Header:"부서명",Type:"Text",Width:250,SaveName:"department_NAME",Align:"Center"},
+		{Header:"NO",Type:"Seq",Width:60,SaveName:"seq",Align:"Center"},
+		{Header:"사업장코드",Type:"Text",Width:150,SaveName:"site_CODE",Align:"Center"},
+		{Header:"사업장명",Type:"Text",Width:170,SaveName:"site_NAME",Align:"Center"},
+		{Header:"부서코드",Type:"Text",Width:150,SaveName:"department_CODE",Align:"Center"},
+		{Header:"부서명",Type:"Text",Width:170,SaveName:"department_NAME",Align:"Center"},
 		];
 	IBS_InitSheet(mySheet,initSheet);
 	mySheet.SetEditableColorDiff(1);
 
 	mySheet.SetColEditable(2,0);
 	var param=FormQueryStringEnc(document.frm);
-	mySheet.DoSearch("${contextPath}/hm/p0022/homeSearch_p05.do",param);
+	mySheet.DoSearch("${contextPath}/sm/p0003/searchList.do",param);
 }
 
 
@@ -48,7 +50,7 @@ function doAction(sAction) {
 	
 	case "search": //조회
 		var param=FormQueryStringEnc(document.frm);
-		mySheet.DoSearch("${contextPath}/hm/p0022/homeSearch_p05.do",param);
+		mySheet.DoSearch("${contextPath}/sm/p0003/searchList.do",param);
 		break;
 	
 	case "reload": //초기화
@@ -67,42 +69,7 @@ function mySheet_OnDblClick(Row,Col){
 	self.close();
 }
 
-function selectSite() {
 
-	$.ajax({
-
-				url : "${contextPath}/sm/p0006/SiteList.do",//목록을 조회 할 url
-
-				type : "POST",
-
-				dataType : "JSON",
-
-				success : function(data) {
-
-					for (var i = 0; i < data['Data'].length; i++) {
-						
-						
-
-						var option = "<option name='1' value='" + data['Data'][i].site_NAME + "'>"
-								+ data['Data'][i].site_NAME + "</option>";
-
-						//대상 콤보박스에 추가
-
-						$('#SiteList').append(option);
-
-					}
-
-				},
-
-				error : function(jqxhr, status, error) {
-
-					alert("에러");
-
-				}
-
-			});
-
-};
 
 
 </script>
@@ -130,18 +97,10 @@ function selectSite() {
 }
 .left{
 	position: relative;
-	top: 50px;
+	top: 10px;
 	left: 30px;
 	width: 600px;
 }
-
-.rightbuttons {
-	margin-top: 50px;
-	margin: 20px;
-	position: absolute;
-	right: 30px;
-}
-
 .title {
 	width: 100%;
 	color: #2C3E50;
@@ -166,34 +125,21 @@ function selectSite() {
 
 </head>
 <body onLoad="LoadPage()">
-	
-    <div class="rightbuttons">
-	  <a href="javascript:doAction('reload')"  class="IBbutton">초기화</a>
-	  <a href="javascript:doAction('search')"  class="IBbutton">조회</a>
-
-	</div>
-
-
+	<form name="frm">
 	<div class="clear hidden"></div>
 	
 	<div class="left">
-<form name="frm">
- <div id="searchBar">
-<span class="kindofsearch">사업장</span>
-<select id="SiteList">
-<option value="">전체</option>
-</select>
-</div>
 
-<div style="position: absolute; top: 60px; left: 0px;">
-	<div class="ib_product">
+ 
+<div style="position: absolute; top: 0px; left: 0px;">
+	<div>
 	<script>
-		createIBSheet("mySheet", "100%", "400px");
-		selectSite();
+		createIBSheet("mySheet", "100%", "550px");
 	</script>
 	</div>
 	</div>
-</form>
 	</div>
+</form>
+	
 </body>
 </html>

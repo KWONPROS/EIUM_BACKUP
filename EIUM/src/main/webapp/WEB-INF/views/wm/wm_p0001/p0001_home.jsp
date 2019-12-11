@@ -22,6 +22,9 @@
 
 	/*Sheet 기본 설정 */
 	function LoadPage() {
+		mySheet.SetWaitImageVisible(0); 
+		mySheet2.SetWaitImageVisible(0); 
+		mySheet3.SetWaitImageVisible(0); 
 		
 		/* MonthPicker 옵션 */
 	    options = {
@@ -482,6 +485,15 @@
 				alert("@@@@@"+count_array[j]);
 			} 
 			break; */
+			
+			case "excel": //엑셀
+				var param = { Mode : -1 };
+				mySheet.Down2ExcelBuffer(true);  
+			    mySheet.Down2Excel(param);
+			    mySheet2.Down2Excel(param);
+			    mySheet3.Down2Excel(param);
+			    mySheet.Down2ExcelBuffer(false); 
+	        break;
 		}
 	}
 	

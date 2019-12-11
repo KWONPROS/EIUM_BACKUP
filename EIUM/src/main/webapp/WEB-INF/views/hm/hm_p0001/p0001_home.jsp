@@ -98,10 +98,11 @@
 				break;
 				
 			case "excel":
+				var param = { Mode : -1 };
 				mySheet.Down2ExcelBuffer(true);  
-			    mySheet.Down2Excel();
-			    mySheet2.Down2Excel();
-			    mySheet3.Down2Excel();
+			    mySheet.Down2Excel(param);
+			    mySheet2.Down2Excel(param);
+			    mySheet3.Down2Excel(param);
 			    mySheet.Down2ExcelBuffer(false); 
 			     break;
 		}

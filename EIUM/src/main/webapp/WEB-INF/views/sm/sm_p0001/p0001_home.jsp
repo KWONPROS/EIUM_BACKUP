@@ -56,7 +56,7 @@
 			SaveName : "company_CODE",
 			MinWidth : 80,
 			KeyField : 1,
-			Edit: 0,
+			Edit : 0,
 			Align : "Center"
 		}, {
 			Header : "회사명",
@@ -249,9 +249,11 @@
 			break;
 		case "insert": //신규행 추가
 			var row = mySheet.DataInsert(-1);
+			mySheet.SetCellEditable(mySheet.GetSelectRow(), mySheet.SaveNameCol("company_CODE"), 1);
 			break;
 		case "excel":
-			mySheet.Down2Excel();
+			var param = { Mode : -1 };
+			mySheet.Down2Excel(param);
 			break;
 		}
 

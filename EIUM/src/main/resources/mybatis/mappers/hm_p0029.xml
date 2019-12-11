@@ -41,27 +41,32 @@
 		and EW.employee_code = E.employee_code
 		and D.DEPARTMENT_CODE = EW.DEPARTMENT_CODE
 		and D.SITE_CODE = S.SITE_CODE
+		
 
 		<choose>
 			<when
 				test="Poption_code_temp == 0 and Poption_code != null and Poption_code !='' ">
 				AND S.site_code = #{Poption_code}
+				order by ET.EMPLOYEE_TRAINING_CODE
 			</when>
 		</choose>
 		<choose>
 			<when
 				test="Poption_code_temp == 1 and Poption_code != null and Poption_code !='' ">
 				AND D.department_code = #{Poption_code}
+				order by ET.EMPLOYEE_TRAINING_CODE
 			</when>
 		</choose>
 		<choose>
 			<when test="WORK_STATUS_CODE != null and WORK_STATUS_CODE !='' ">
 				AND EW.WORK_STATUS_CODE = #{WORK_STATUS_CODE}
+				order by ET.EMPLOYEE_TRAINING_CODE
 			</when>
 		</choose>
 		<choose>
 			<when test="POSITION_CODE != null and POSITION_CODE !='' ">
 				AND EW.POSITION_CODE = #{POSITION_CODE}
+				order by ET.EMPLOYEE_TRAINING_CODE
 			</when>
 		</choose>
 		<choose>
@@ -71,34 +76,40 @@
 				#{date_start}
 				and TO_DATE(ET.EMPLOYEE_TRAINING_END_DATE, 'YYYY-MM-DD') <![CDATA[<=]]>
 				#{date_end}
+				order by ET.EMPLOYEE_TRAINING_CODE
 			</when>
 		</choose>
 		<choose>
 			<when test="date_start != null and date_start !='' ">
 				and TO_DATE(ET.EMPLOYEE_TRAINING_START_DATE, 'YYYY-MM-DD') <![CDATA[>=]]>
 				#{date_start}
+				order by ET.EMPLOYEE_TRAINING_CODE
 			</when>
 		</choose>
 		<choose>
 			<when test="date_end != null and date_end !='' ">
 				and TO_DATE(ET.EMPLOYEE_TRAINING_END_DATE, 'YYYY-MM-DD') <![CDATA[<=]]>
 				#{date_end}
+				order by ET.EMPLOYEE_TRAINING_CODE
 			</when>
 		</choose>
 		<choose>
 			<when
 				test="EMPLOYEE_TRAINING_CODE != null and EMPLOYEE_TRAINING_CODE !='' ">
 				AND ETL.EMPLOYEE_TRAINING_CODE = #{EMPLOYEE_TRAINING_CODE}
+				order by ET.EMPLOYEE_TRAINING_CODE
 			</when>
 		</choose>
 		<choose>
 			<when test="resigner == null">
 				AND EW.EMPLOYEE_RESIGNATION_DATE IS NULL
+				order by ET.EMPLOYEE_TRAINING_CODE
 			</when>
 		</choose>
 		<choose>
 			<when test="resigner == 1">
 				AND 1=1
+				order by ET.EMPLOYEE_TRAINING_CODE
 			</when>
 		</choose>
 	</select>
@@ -174,6 +185,7 @@
 				AND 1=1
 			</when>
 		</choose>
+		order by EBT.BUSINESS_TRIP_CODE
 	</select>
 
 	<select id="searchList_LI" resultMap="P0029resultVO"
@@ -226,6 +238,7 @@
 				AND 1=1
 			</when>
 		</choose>
+		order by L.LICENSE_CODE
 	</select>
 
 	<select id="searchList_LA" resultMap="P0029resultVO"
@@ -281,5 +294,6 @@
 				AND 1=1
 			</when>
 		</choose>
+		order by LA.LANGUAGE_CODE
 	</select>
 </mapper>

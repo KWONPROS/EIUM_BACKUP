@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myspring.eium.login.vo.LoginVO;
 import com.myspring.eium.wm.wm_p0001.service.WM_P0001Service;
 import com.myspring.eium.wm.wm_p0001.vo.WM_P0001VO;
 
@@ -130,6 +132,12 @@ public class WM_P0001ControllerImpl implements WM_P0001Controller {
 		Map<String, String[]> dataMap = new HashMap<String, String[]>(); // 占쏙옙占쏙옙占쏙옙Data
 		Map<String, Object> resultMap = new HashMap<String, Object>(); // 처占쏙옙占쏙옙占�
 		
+		HttpSession session = request.getSession(); 
+		LoginVO loginvo = new LoginVO();
+		loginvo = (LoginVO)session.getAttribute("login"); 
+		String user= (loginvo.getEmployee_id());
+		System.out.println("####################"+loginvo.getEmployee_id());
+		
 		String P_EMPLOYEE_CODE = request.getParameter("p_emp_code");
 		System.out.println("P_EMPLOYEE_CODE : " + P_EMPLOYEE_CODE);
 		
@@ -143,7 +151,7 @@ public class WM_P0001ControllerImpl implements WM_P0001Controller {
 		
 		Map<String, String> result = new HashMap<String, String>();
 		try {
-			p0001Service.saveData(dataMap, P_EMPLOYEE_CODE);	
+			p0001Service.saveData(dataMap, P_EMPLOYEE_CODE, user);	
 			result.put("Code","0");
 			result.put("Message","저장되었습니다");
 		}catch(Exception e) {                                                               
@@ -165,6 +173,12 @@ public class WM_P0001ControllerImpl implements WM_P0001Controller {
 		Map<String, String[]> dataMap = new HashMap<String, String[]>(); // 占쏙옙占쏙옙占쏙옙Data
 		Map<String, Object> resultMap = new HashMap<String, Object>(); // 처占쏙옙占쏙옙占�
 		
+		HttpSession session = request.getSession(); 
+		LoginVO loginvo = new LoginVO();
+		loginvo = (LoginVO)session.getAttribute("login"); 
+		String user= (loginvo.getEmployee_id());
+		System.out.println("####################"+loginvo.getEmployee_id());
+		
 		String PP_EMPLOYEE_CODE = request.getParameter("PP_EMP_CODE");
 		System.out.println("PP_EMPLOYEE_CODE : " + PP_EMPLOYEE_CODE);
 		
@@ -180,7 +194,7 @@ public class WM_P0001ControllerImpl implements WM_P0001Controller {
 		
 		Map<String, String> result = new HashMap<String, String>();
 		try {
-			p0001Service.TWS_saveData(dataMap, PP_EMPLOYEE_CODE, P_WS_MONTH);	
+			p0001Service.TWS_saveData(dataMap, PP_EMPLOYEE_CODE, P_WS_MONTH, user);	
 			result.put("Code","0");
 			result.put("Message","저장되었습니다");
 		}catch(Exception e) {                                                               
@@ -202,6 +216,12 @@ public class WM_P0001ControllerImpl implements WM_P0001Controller {
 		Map<String, String[]> dataMap = new HashMap<String, String[]>(); // 占쏙옙占쏙옙占쏙옙Data
 		Map<String, Object> resultMap = new HashMap<String, Object>(); // 처占쏙옙占쏙옙占�
 		
+		HttpSession session = request.getSession(); 
+		LoginVO loginvo = new LoginVO();
+		loginvo = (LoginVO)session.getAttribute("login"); 
+		String user= (loginvo.getEmployee_id());
+		System.out.println("####################"+loginvo.getEmployee_id());
+		
 		String PP_EMPLOYEE_CODE = request.getParameter("PP_EMP_CODE");
 		System.out.println("PP_EMPLOYEE_CODE : " + PP_EMPLOYEE_CODE);
 		
@@ -217,7 +237,7 @@ public class WM_P0001ControllerImpl implements WM_P0001Controller {
 		
 		Map<String, String> result = new HashMap<String, String>();
 		try {
-			p0001Service.SUM_saveData(dataMap, PP_EMPLOYEE_CODE, P_WS_MONTH);	
+			p0001Service.SUM_saveData(dataMap, PP_EMPLOYEE_CODE, P_WS_MONTH, user);	
 			result.put("Code","0");
 			result.put("Message","저장되었습니다");
 		}catch(Exception e) {                                                               
@@ -239,6 +259,12 @@ public class WM_P0001ControllerImpl implements WM_P0001Controller {
 		Map<String, String[]> dataMap = new HashMap<String, String[]>(); // 占쏙옙占쏙옙占쏙옙Data
 		Map<String, Object> resultMap = new HashMap<String, Object>(); // 처占쏙옙占쏙옙占�
 		
+		HttpSession session = request.getSession(); 
+		LoginVO loginvo = new LoginVO();
+		loginvo = (LoginVO)session.getAttribute("login"); 
+		String user= (loginvo.getEmployee_id());
+		System.out.println("####################"+loginvo.getEmployee_id());
+		
 		String PP_EMPLOYEE_CODE = request.getParameter("PP_EMP_CODE");
 		System.out.println("PP_EMPLOYEE_CODE : " + PP_EMPLOYEE_CODE);
 		
@@ -254,7 +280,7 @@ public class WM_P0001ControllerImpl implements WM_P0001Controller {
 		
 		Map<String, String> result = new HashMap<String, String>();
 		try {
-			p0001Service.WS_YN_rollbackData(dataMap, PP_EMPLOYEE_CODE, P_WS_MONTH);	
+			p0001Service.WS_YN_rollbackData(dataMap, PP_EMPLOYEE_CODE, P_WS_MONTH, user);	
 			result.put("Code","0");
 			result.put("Message","저장되었습니다");
 		}catch(Exception e) {                                                               

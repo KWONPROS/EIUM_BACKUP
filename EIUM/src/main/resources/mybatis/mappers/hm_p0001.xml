@@ -58,8 +58,8 @@
 	<!--//////////////////////////////////INSERT 문(호봉테이블 이력 start_date, end_date 입력)///////////////////////////// -->
 	
 	<insert id="insertData" parameterType="java.util.Map">
-		insert into PAY_GRADE_TABLE(POSITION_CODE, PAY_GRADE_CODE, START_DATE, END_DATE) 
-		select P.POSITION_CODE, PG.PAY_GRADE_CODE, #{start_DATE} AS START_DATE, '999912'  AS END_DATE
+		insert into PAY_GRADE_TABLE(POSITION_CODE, PAY_GRADE_CODE, START_DATE, END_DATE, int_user_id, int_date) 
+		select P.POSITION_CODE, PG.PAY_GRADE_CODE, #{start_DATE} AS START_DATE, '999912'  AS END_DATE, #{user}, sysdate
 		from POSITION P, PAY_GRADE PG
 		where TRIM(P.POSITION_CODE) = #{p_position_CODE}
 	</insert>	
@@ -69,7 +69,8 @@
 		update PAY_GRADE_TABLE
 		set  
 		     SALARY = #{salary}
-		   
+		   	 , upt_user_id = #{user, jdbcType=VARCHAR} 
+         	 , upt_date = sysdate 
 		where TRIM(POSITION_CODE) = #{p_position_CODE}
 		AND TRIM(PAY_GRADE_CODE) = #{pay_GRADE_CODE}
 		AND TRIM(START_DATE) = #{PP_START_DATE ,jdbcType=VARCHAR}
@@ -81,6 +82,8 @@
 		update PAY_GRADE_TABLE
 		set
 			END_DATE = TO_CHAR(ADD_MONTHS(TO_DATE(#{PP_START_DATE ,jdbcType=VARCHAR}, 'YYYYMM'), -1), 'YYYYMM')
+			, upt_user_id = #{user, jdbcType=VARCHAR} 
+         	, upt_date = sysdate
 		where TRIM(POSITION_CODE) = #{p_position_CODE ,jdbcType=VARCHAR} 
 		AND TRIM(START_DATE) = #{start_DATE ,jdbcType=VARCHAR}
 	</update>
@@ -99,6 +102,8 @@
 		UPDATE PAY_GRADE_TABLE             
 			set 
     	END_DATE = '999912'
+    	, upt_user_id = #{user, jdbcType=VARCHAR} 
+        , upt_date = sysdate
 		where TRIM(POSITION_CODE) = #{p_position_CODE}
 		AND TRIM(END_DATE) = TO_CHAR(ADD_MONTHS(TO_DATE(#{start_DATE ,jdbcType=VARCHAR}, 'YYYYMM'),-1), 'YYYYMM')
 	</update>
