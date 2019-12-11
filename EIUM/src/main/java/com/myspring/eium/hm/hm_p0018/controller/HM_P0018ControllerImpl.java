@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.eium.hm.hm_p0018.service.HM_P0018Service;
 import com.myspring.eium.hm.hm_p0018.vo.HM_P0018VO;
+import com.myspring.eium.login.vo.LoginVO;
 
 
 @Controller
@@ -192,8 +194,11 @@ public class HM_P0018ControllerImpl implements HM_P0018Controller{
 		Map<String, String[]> dataMap = new HashMap<String, String[]>(); 
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
 		String param=request.getParameter("param");
-		System.out.println("컨트롤러 param$$$$$$$$$$$$$$$$$$");
 		
+		  HttpSession session = request.getSession(); LoginVO loginvo = new LoginVO();
+		  loginvo = (LoginVO)session.getAttribute("login"); 
+		  String user= (loginvo.getEmployee_id());
+
 		Enumeration enu = request.getParameterNames();
 		while (enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
@@ -203,7 +208,7 @@ public class HM_P0018ControllerImpl implements HM_P0018Controller{
 		
 		Map<String, String> result = new HashMap<String, String>();
 		try {
-			hM_P0018Service.emplyoeeListsaveData(dataMap,param);	
+			hM_P0018Service.emplyoeeListsaveData(dataMap,param,user);	
 			result.put("Code","0");
 			result.put("Message","저장성공");
 		}catch(Exception e) {
@@ -225,7 +230,10 @@ public class HM_P0018ControllerImpl implements HM_P0018Controller{
 		Map<String, String[]> dataMap = new HashMap<String, String[]>(); 
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
 
-		
+		  HttpSession session = request.getSession(); LoginVO loginvo = new LoginVO();
+		  loginvo = (LoginVO)session.getAttribute("login"); 
+		  String user= (loginvo.getEmployee_id());
+
 		Enumeration enu = request.getParameterNames();
 		while (enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
@@ -235,7 +243,7 @@ public class HM_P0018ControllerImpl implements HM_P0018Controller{
 		
 		Map<String, String> result = new HashMap<String, String>();
 		try {
-			hM_P0018Service.saveData(dataMap);	
+			hM_P0018Service.saveData(dataMap,user);	
 			result.put("Code","0");
 			result.put("Message","저장성공");
 		}catch(Exception e) {

@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myspring.eium.login.vo.LoginVO;
 import com.myspring.eium.sm.sm_p0003.service.SM_P0003Service;
 import com.myspring.eium.sm.sm_p0003.vo.SM_P0003VO;
 
@@ -77,6 +79,13 @@ public class SM_P0003ControllerImpl implements SM_P0003Controller{
 		Map<String, String[]> dataMap = new HashMap<String, String[]>(); // ������Daa
 		Map<String, Object> resultMap = new HashMap<String, Object>(); // ó�����
 		
+		
+		  HttpSession session = request.getSession(); LoginVO loginvo = new LoginVO();
+		  loginvo = (LoginVO)session.getAttribute("login"); 
+		  String user= (loginvo.getEmployee_id());
+		  System.out.println("####################"+loginvo.getEmployee_id());
+		 
+
 		// ���� Data �����ϱ�
 		Enumeration enu = request.getParameterNames();
 		while (enu.hasMoreElements()) {
@@ -87,7 +96,7 @@ public class SM_P0003ControllerImpl implements SM_P0003Controller{
 		
 		Map<String, String> result = new HashMap<String, String>();
 		try {
-			sM_P0003Service.saveData(dataMap);	
+			sM_P0003Service.saveData(dataMap,user);	
 			result.put("Code","0");
 			result.put("Message","저장성공");
 		}catch(Exception e) {
@@ -147,7 +156,13 @@ public class SM_P0003ControllerImpl implements SM_P0003Controller{
 		Map<String, String[]> dataMap = new HashMap<String, String[]>(); // ������Daa
 		Map<String, Object> resultMap = new HashMap<String, Object>(); // ó�����
 		
-		// ���� Data �����ϱ�
+		
+		  HttpSession session = request.getSession(); LoginVO
+		  loginvo = new LoginVO();
+		  loginvo = (LoginVO)session.getAttribute("login"); 
+		  String user= (loginvo.getEmployee_id());
+		  System.out.println("####################"+loginvo.getEmployee_id());
+		 
 		Enumeration enu = request.getParameterNames();
 		while (enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
@@ -157,7 +172,7 @@ public class SM_P0003ControllerImpl implements SM_P0003Controller{
 		
 		Map<String, String> result = new HashMap<String, String>();
 		try {
-			sM_P0003Service.saveDatapopup(dataMap);	
+			sM_P0003Service.saveDatapopup(dataMap,user);	
 			result.put("Code","0");
 			result.put("Message","저장성공");
 		}catch(Exception e) {

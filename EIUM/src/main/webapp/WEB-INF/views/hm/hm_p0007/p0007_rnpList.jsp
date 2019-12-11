@@ -31,25 +31,16 @@ function LoadPage(){
 	mySheet2.SetColEditable(0,0);
 	mySheet2.SetColEditable(1,0);
 
-	mySheet2.DoSearch("${contextPath}/hm/p0033/hr_rnp_List.do")
+	mySheet2.DoSearch("${contextPath}/hm/p0007/rnp_List.do")
 
 
 }
 
 function mySheet2_OnDblClick(Row, Col, Value) { 
 
-	 var selectRowJson = mySheet2.GetRowData(Row);
-	 var hr_assessment_code=selectRowJson.rnp_code;
-	 var hr_assessment_name=selectRowJson.rnp_name;
-	 
-
-		 document.getElementById("Chr_rnp_code").setAttribute('value', hr_assessment_code);
-		 document.getElementById("Chr_rnp_name").setAttribute('value', hr_assessment_name);
-		 opener.document.getElementById("Phr_rnp_code").value=document.getElementById("Chr_rnp_code").value;
-		 opener.document.getElementById("Phr_rnp_name").value=document.getElementById("Chr_rnp_name").value;
-		 opener.setHrrnp();
-
-
+	var rowData=mySheet2.GetRowData(Row);
+	
+	 window.opener.rnpValue(rowData);
 	
 	    
 	self.close(); 
@@ -65,8 +56,8 @@ function mySheet2_OnDblClick(Row, Col, Value) {
 					LoadPage(); 	
 			
 				</script>
-	<input type="hidden" id="Chr_rnp_code">
-	<input type="hidden" id="Chr_rnp_name">
+	<input type="hidden" id="Crnp_code">
+	<input type="hidden" id="Crnp_name">
 
 </body>
 </html>

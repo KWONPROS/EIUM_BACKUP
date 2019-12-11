@@ -55,13 +55,13 @@ public class HM_P0018ServiceImpl implements HM_P0018Service {
 	
 	
 	@Override
-	public void saveData(Map<String, String[]> dataMap) throws DataAccessException {
+	public void saveData(Map<String, String[]> dataMap,String u) throws DataAccessException {
 		String[] status = dataMap.get("STATUS");
 		int length = status.length; // row수
 		int i = 0;
 		
 		for(String str : status) {
-			Map<String, String> row = getRow(dataMap, length, i); // 현재 Index의 Row Map
+			Map<String, String> row = getRow(dataMap, length, i,u); // 현재 Index의 Row Map
 			if("I".equals(str)) { // 추가
 				hM_P0018DAO.insertData(row);
 			}else if("U".equals(str)) { // 수정
@@ -74,14 +74,14 @@ public class HM_P0018ServiceImpl implements HM_P0018Service {
 	}
 	
 	@Override
-	public void emplyoeeListsaveData(Map<String, String[]> dataMap,String param) throws DataAccessException {
+	public void emplyoeeListsaveData(Map<String, String[]> dataMap,String param,String u) throws DataAccessException {
 		String[] status = dataMap.get("STATUS");
 		int length = status.length; // row수
 		int i = 0;
-		System.out.println("service param%%%%%%%%%%%%%%%%"+param);
+
 		
 		for(String str : status) {
-			Map<String, String> row = getRow2(dataMap, length, i,param); // 현재 Index의 Row Map
+			Map<String, String> row = getRow2(dataMap, length, i,param,u); // 현재 Index의 Row Map
 			if("I".equals(str)) { // 추가
 				hM_P0018DAO.emplyoeeListinsertData(row);
 			}else if("U".equals(str)) { // 수정
@@ -93,25 +93,27 @@ public class HM_P0018ServiceImpl implements HM_P0018Service {
 		}
 	}
 	
-	private Map getRow(Map<String, String[]> dataMap, int length, int index) {
+	private Map getRow(Map<String, String[]> dataMap, int length, int index,String u) {
 		Map<String, String> row = new HashMap<String, String>();
 		for(String name : dataMap.keySet()) {
 			String[] data = dataMap.get(name);
 			if(length == data.length) {
 				row.put(name, data[index]);
+				row.put("user", u);
 
 			}
 		}		
 		return row;
 	}
 
-	private Map getRow2(Map<String, String[]> dataMap, int length, int index,String param) {
+	private Map getRow2(Map<String, String[]> dataMap, int length, int index,String param,String u) {
 		Map<String, String> row = new HashMap<String, String>();
 		for(String name : dataMap.keySet()) {
 			String[] data = dataMap.get(name);
 			if(length == data.length) {
 				row.put(name, data[index]);
 				row.put("employee_TRAINING_CODE", param);
+				row.put("user",u);
 			}
 		}		
 		return row;

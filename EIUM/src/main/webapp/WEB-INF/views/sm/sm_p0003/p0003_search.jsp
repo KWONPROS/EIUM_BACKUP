@@ -320,7 +320,7 @@ $.ajax({
         
             <div class="sheet">
 				<script>
-					createIBSheet("mySheet", "1500px", "620px");
+					createIBSheet("mySheet", "1500px", "600px");
 					selectSite();
 				</script>
 				

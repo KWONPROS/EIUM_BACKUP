@@ -20,7 +20,7 @@
 	top: 50px;
 }
 .main_content2{
-padding:10px 20px 20px 20px; background:#fff; _background:none;
+padding:0px 20px 20px 20px; background:#fff; _background:none;
 
 }
 
@@ -44,7 +44,7 @@ function PageLoad(){
 	contents = document.getElementById("tab_contents");
 	createIBTab(tabBar,contents,"myTabs",{
 		widthTabBar: "100%",
-		heightContents:($(window).height()-200) + "px"
+		heightContents:($(window).height()-150) + "px"
     });
 	
 	myTabs.setOptions({

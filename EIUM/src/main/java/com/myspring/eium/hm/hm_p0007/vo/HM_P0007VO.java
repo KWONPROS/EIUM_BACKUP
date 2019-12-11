@@ -20,16 +20,71 @@ public class HM_P0007VO {
 	private String hr_appoint_title;
 	private String hr_appoint_history;
 	private String hr_appoint_before_info;
-	private MultipartFile picture;
 	private String height;
 	private String weight;
 	private String blood_type;
 	private String handicapped_yn;
 	private String hobby;
 	private String special_ability;
+	private String license_code;
+	private String license_name;
+	private String assessment_code;
+	private String assessment_name;
+	private String rnp_code;
+	private String rnp_name;
+	private String language_code;
+	private String language_name;
 
 	
 	
+	public String getLicense_code() {
+		return license_code;
+	}
+	public void setLicense_code(String license_code) {
+		this.license_code = license_code;
+	}
+	public String getLicense_name() {
+		return license_name;
+	}
+	public void setLicense_name(String license_name) {
+		this.license_name = license_name;
+	}
+	public String getAssessment_code() {
+		return assessment_code;
+	}
+	public void setAssessment_code(String assessment_code) {
+		this.assessment_code = assessment_code;
+	}
+	public String getAssessment_name() {
+		return assessment_name;
+	}
+	public void setAssessment_name(String assessment_name) {
+		this.assessment_name = assessment_name;
+	}
+	public String getRnp_code() {
+		return rnp_code;
+	}
+	public void setRnp_code(String rnp_code) {
+		this.rnp_code = rnp_code;
+	}
+	public String getRnp_name() {
+		return rnp_name;
+	}
+	public void setRnp_name(String rnp_name) {
+		this.rnp_name = rnp_name;
+	}
+	public String getLanguage_code() {
+		return language_code;
+	}
+	public void setLanguage_code(String language_code) {
+		this.language_code = language_code;
+	}
+	public String getLanguage_name() {
+		return language_name;
+	}
+	public void setLanguage_name(String language_name) {
+		this.language_name = language_name;
+	}
 	public String getHobby() {
 		return hobby;
 	}
@@ -42,12 +97,7 @@ public class HM_P0007VO {
 	public void setSpecial_ability(String special_ability) {
 		this.special_ability = special_ability;
 	}
-	public MultipartFile getPicture() {
-		return picture;
-	}
-	public void setPicture(MultipartFile picture) {
-		this.picture = picture;
-	}
+
 	public String getHr_appoint_number() {
 		return hr_appoint_number;
 	}

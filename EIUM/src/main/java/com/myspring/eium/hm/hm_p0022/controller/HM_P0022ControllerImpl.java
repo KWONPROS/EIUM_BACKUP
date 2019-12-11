@@ -1,6 +1,5 @@
 package com.myspring.eium.hm.hm_p0022.controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -9,23 +8,20 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.myspring.eium.hm.hm_p0001.controller.HM_P0001ControllerImpl;
-import com.myspring.eium.hm.hm_p0021.vo.HM_P0021VO;
 import com.myspring.eium.hm.hm_p0022.service.HM_P0022Service;
 import com.myspring.eium.hm.hm_p0022.vo.HM_P0022VO;
+import com.myspring.eium.login.vo.LoginVO;
 
 @Controller
 public class HM_P0022ControllerImpl implements HM_P0022Controller{
@@ -261,22 +257,23 @@ public class HM_P0022ControllerImpl implements HM_P0022Controller{
 		Map<String, String[]> dataMap = new HashMap<String, String[]>(); 
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
 
+		  HttpSession session = request.getSession(); LoginVO loginvo = new LoginVO();
+		  loginvo = (LoginVO)session.getAttribute("login"); 
+		  String user= (loginvo.getEmployee_id());
 		
 		Enumeration enu = request.getParameterNames();
 		while (enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
 			String[] values = request.getParameterValues(name);
 			dataMap.put(name, values);
-			System.out.println("dddd네임"+name);
-			System.out.println("벨류####"+Arrays.toString(values));
+
 		}
 
-		logger.info("나는 스테이터스야야"+dataMap.get("Status"));
-		logger.info("나는세이브1 데이터맵"+dataMap.toString());
+
 		
 		Map<String, String> result = new HashMap<String, String>();
 		try {
-			hM_P0022Service.saveData1(dataMap);	
+			hM_P0022Service.saveData1(dataMap,user);	
 			result.put("Code","0");
 			result.put("Message","저장성공");
 		}catch(Exception e) {
@@ -297,7 +294,10 @@ public class HM_P0022ControllerImpl implements HM_P0022Controller{
 		Map<String, String[]> dataMap = new HashMap<String, String[]>(); 
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
 
-		
+		  HttpSession session = request.getSession(); LoginVO loginvo = new LoginVO();
+		  loginvo = (LoginVO)session.getAttribute("login"); 
+		  String user= (loginvo.getEmployee_id());
+		  
 		Enumeration enu = request.getParameterNames();
 		while (enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
@@ -308,7 +308,7 @@ public class HM_P0022ControllerImpl implements HM_P0022Controller{
 		
 		Map<String, String> result = new HashMap<String, String>();
 		try {
-			hM_P0022Service.saveData2(dataMap);	
+			hM_P0022Service.saveData2(dataMap,user);	
 			result.put("Code","0");
 			result.put("Message","저장성공");
 		}catch(Exception e) {
@@ -328,7 +328,9 @@ public class HM_P0022ControllerImpl implements HM_P0022Controller{
 		request.setCharacterEncoding("utf-8");
 		Map<String, String[]> dataMap = new HashMap<String, String[]>(); 
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
-
+		  HttpSession session = request.getSession(); LoginVO loginvo = new LoginVO();
+		  loginvo = (LoginVO)session.getAttribute("login"); 
+		  String user= (loginvo.getEmployee_id());
 		
 		Enumeration enu = request.getParameterNames();
 		while (enu.hasMoreElements()) {
@@ -337,10 +339,10 @@ public class HM_P0022ControllerImpl implements HM_P0022Controller{
 			dataMap.put(name, values);
 		}
 		
-		logger.info("나는세이브3"+dataMap.toString());
+
 		Map<String, String> result = new HashMap<String, String>();
 		try {
-			hM_P0022Service.saveData3(dataMap);	
+			hM_P0022Service.saveData3(dataMap,user);	
 			result.put("Code","0");
 			result.put("Message","저장성공");
 		}catch(Exception e) {
@@ -363,21 +365,23 @@ public class HM_P0022ControllerImpl implements HM_P0022Controller{
 		Map<String, String[]> dataMap = new HashMap<String, String[]>(); 
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
 
-		
+		  HttpSession session = request.getSession(); LoginVO loginvo = new LoginVO();
+		  loginvo = (LoginVO)session.getAttribute("login"); 
+		  String user= (loginvo.getEmployee_id());
+		  
 		Enumeration enu = request.getParameterNames();
 		while (enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
 			String []values = request.getParameterValues(name);
 			dataMap.put(name, values);
-			System.out.println("dddd네임"+name);
-			System.out.println("벨류####"+Arrays.toString(values));
+
 		}
-		logger.info("dataMap%%%%%%"+dataMap.toString());
+
 
 
 		Map<String, String> result = new HashMap<String, String>();
 		try {
-			hM_P0022Service.saveData4(dataMap);	
+			hM_P0022Service.saveData4(dataMap,user);	
 			result.put("Code","0");
 			result.put("Message","저장성공");
 		}catch(Exception e) {

@@ -293,7 +293,7 @@ function pay_type(rowData){
 
 <div class="sheet1">
 <script>
-createIBSheet("mySheet", "1500px", "350px");
+createIBSheet("mySheet", "1500px", "480px");
 </script>
 </div>
 </form>

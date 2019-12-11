@@ -78,7 +78,7 @@
 		}, {
 			"Header" : "권한부여",
 			"SaveName" : "authority_GRANT",
-			"Type" : "CheckBox",
+			"Type" : "Radio",
 			"Width" : 250,
 			"Align" : "Center"
 		} ];

@@ -13,7 +13,6 @@
         <result property="military_number" column="military_number" />
         <result property="discharge_yn" column="discharge_yn" />
         <result property="residential_division" column="residential_division" />
-        <result property="picture" column="picture" />
         <result property="handicapped_yn" column="handicapped_yn" />
         <result property="height" column="height" />
         <result property="weight" column="weight" />
@@ -31,7 +30,7 @@
 	
 	  <when test= " access_range =='사원' ">	
       <![CDATA[
-         select e.employee_code, e.employee_name, eh.hobby, eh.special_ability, eh.height, eh.weight, eh.blood_type, eh.handicapped_yn, eh.marriage_yn, eh.religion, eh.military_type, eh.military_number, eh.discharge_yn, eh.residential_division, eh.picture
+         select e.employee_code, e.employee_name, eh.hobby, eh.special_ability, eh.height, eh.weight, eh.blood_type, eh.handicapped_yn, eh.marriage_yn, eh.religion, eh.military_type, eh.military_number, eh.discharge_yn, eh.residential_division
          from employee e, employee_hr_info eh
          where e.employee_code = eh.employee_code
          and e.employee_name = #{Semployee_name}
@@ -41,7 +40,7 @@
       
       <when test= " access_range =='부서' ">	
       <![CDATA[
-         select e.employee_code, e.employee_name, eh.hobby, eh.special_ability, eh.height, eh.weight, eh.blood_type, eh.handicapped_yn, eh.marriage_yn, eh.religion, eh.military_type, eh.military_number, eh.discharge_yn, eh.residential_division, eh.picture
+         select e.employee_code, e.employee_name, eh.hobby, eh.special_ability, eh.height, eh.weight, eh.blood_type, eh.handicapped_yn, eh.marriage_yn, eh.religion, eh.military_type, eh.military_number, eh.discharge_yn, eh.residential_division
          from employee e, employee_hr_info eh, department d, employee_work ew
          where e.employee_code = eh.employee_code
          and e.employee_code = ew.employee_code
@@ -53,7 +52,7 @@
       
       <when test= " access_range =='사업장' ">	
       <![CDATA[
-         select e.employee_code, e.employee_name, eh.hobby, eh.special_ability, eh.height, eh.weight, eh.blood_type, eh.handicapped_yn, eh.marriage_yn, eh.religion, eh.military_type, eh.military_number, eh.discharge_yn, eh.residential_division, eh.picture
+         select e.employee_code, e.employee_name, eh.hobby, eh.special_ability, eh.height, eh.weight, eh.blood_type, eh.handicapped_yn, eh.marriage_yn, eh.religion, eh.military_type, eh.military_number, eh.discharge_yn, eh.residential_division
          from employee e, employee_hr_info eh
          where e.employee_code = eh.employee_code
          order by e.employee_code
@@ -61,6 +60,38 @@
       </when>
       
       	</choose>
+	</select>
+	
+	<select id="licenseList" resultMap="P0007resultVO" parameterType="java.util.Map"> 
+	 <![CDATA[
+         select license_code, license_name
+         from license
+         order by license_code
+      ]]>	
+	</select>
+	
+		<select id="assessmentList" resultMap="P0007resultVO" parameterType="java.util.Map"> 
+	 <![CDATA[
+         select assessment_code, assessment_name
+         from assessment
+         order by assessment_code
+      ]]>	
+	</select>
+	
+		<select id="rnpList" resultMap="P0007resultVO" parameterType="java.util.Map"> 
+	 <![CDATA[
+         select rnp_code, rnp_name
+         from rnp
+         order by rnp_code
+      ]]>	
+	</select>
+	
+		<select id="languageList" resultMap="P0007resultVO" parameterType="java.util.Map"> 
+	 <![CDATA[
+        select language_code, language_name
+         from language
+         order by language_code
+      ]]>	
 	</select>
 	
 
@@ -383,7 +414,7 @@
 
 	<select id="searchBusiness_trip" resultMap="p0007_08resultVO">
       <![CDATA[
-          select e.business_trip_code, country_name, e.area, e.start_date, e.end_date, e.flight_cost, e.self_burden, e.company_burden, e.ect_cost, e.total_cost, e.purpose
+          select e.business_trip_code, c.country_name, e.area, e.start_date, e.end_date, e.flight_cost, e.self_burden, e.company_burden, e.ect_cost, e.total_cost, e.purpose
          from employee_business_trip e , country c
          where e.country_code = c.country_code
          and e.employee_code = #{x}
@@ -551,16 +582,6 @@
 	</select>
 	
 	
-	<resultMap id="clobMap" type="java.util.HashMap">
-		<result property="picture" column="picture" javaType="[B"
-			jdbcType="BLOB" />
-	</resultMap>
-	
-	
-	<select id="getByteImage" parameterType="java.util.Map" resultMap="clobMap">
-		select picture
-		from employee_hr_info
-		where TRIM(employee_code) = #{employee_code}
-	</select>
+
 
 </mapper>

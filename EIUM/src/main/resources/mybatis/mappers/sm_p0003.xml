@@ -58,8 +58,8 @@ from department d , sector s , site si
 	
 	
 	<insert id="insertData" parameterType="java.util.Map">
-	insert into DEPARTMENT(DEPARTMENT_CODE,DEPARTMENT_NAME,DEPARTMENT_TERM,SITE_CODE,SECTOR_CODE)
-	values(#{department_CODE}, #{department_NAME}, #{department_TERM},#{site_CODE},#{sector_CODE})
+	insert into DEPARTMENT(DEPARTMENT_CODE,DEPARTMENT_NAME,DEPARTMENT_TERM,SITE_CODE,SECTOR_CODE,int_user_id, int_date)
+	values(#{department_CODE}, #{department_NAME}, #{department_TERM},#{site_CODE},#{sector_CODE},#{user},sysdate)
 	</insert>	
 	
 	
@@ -71,6 +71,8 @@ from department d , sector s , site si
 		   , SECTOR_CODE=#{sector_CODE}
 		   , DEPARTMENT_TERM=#{department_TERM}
 		   , SITE_CODE=#{site_CODE}
+		   , upt_user_id = #{user, jdbcType=VARCHAR}
+		   , upt_date = sysdate
 
 		where DEPARTMENT_CODE = #{department_CODE}
 	</update>	
@@ -104,7 +106,7 @@ from department d , sector s , site si
 	</select>
 	
 		<insert id="insertDataPopup" parameterType="java.util.Map">
-		insert into SECTOR(SECTOR_CODE, SECTOR_NAME, SECTOR_TERM) values(#{sector_CODE}, #{sector_NAME}, #{sector_TERM})
+		insert into SECTOR(SECTOR_CODE, SECTOR_NAME, SECTOR_TERM,int_user_id, int_date) values(#{sector_CODE}, #{sector_NAME}, #{sector_TERM},#{user},sysdate)
 	</insert>	
 	
 	
@@ -114,6 +116,8 @@ from department d , sector s , site si
 		set SECTOR_CODE=#{sector_CODE}
 		   , SECTOR_NAME=#{sector_NAME}
 		   , SECTOR_TERM=#{sector_TERM}
+		   , upt_user_id = #{user, jdbcType=VARCHAR}
+	       , upt_date = sysdate
 		   
 
 

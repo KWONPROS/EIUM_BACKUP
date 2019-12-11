@@ -21,8 +21,9 @@ function LoadPage(){
 	initSheet.HeaderMode = {Sort:1,ColMove:1,ColResize:1,HeaderCheck:1};
 	initSheet.Cols=[
 
-		{Header:"상벌코드",Type:"Text",Width:100,SaveName:"rnp_code",Align:"Center"},
-		{Header:"포상/징계명",Type:"Text",Width:100,SaveName:"rnp_name",Align:"Center"}
+		{Header:"자격면허코드",Type:"Text",Width:100,SaveName:"license_code",Align:"Center"},
+		{Header:"자격면허명",Type:"Text",Width:100,SaveName:"license_name",Align:"Center"},
+
 
 		];
 	IBS_InitSheet(mySheet2,initSheet);
@@ -30,26 +31,18 @@ function LoadPage(){
 
 	mySheet2.SetColEditable(0,0);
 	mySheet2.SetColEditable(1,0);
-
-	mySheet2.DoSearch("${contextPath}/hm/p0033/hr_rnp_List.do")
+	mySheet2.SetColEditable(2,0);
+	mySheet2.SetColEditable(3,0);
+	mySheet2.DoSearch("${contextPath}/hm/p0007/license_List.do")
 
 
 }
 
 function mySheet2_OnDblClick(Row, Col, Value) { 
 
-	 var selectRowJson = mySheet2.GetRowData(Row);
-	 var hr_assessment_code=selectRowJson.rnp_code;
-	 var hr_assessment_name=selectRowJson.rnp_name;
-	 
-
-		 document.getElementById("Chr_rnp_code").setAttribute('value', hr_assessment_code);
-		 document.getElementById("Chr_rnp_name").setAttribute('value', hr_assessment_name);
-		 opener.document.getElementById("Phr_rnp_code").value=document.getElementById("Chr_rnp_code").value;
-		 opener.document.getElementById("Phr_rnp_name").value=document.getElementById("Chr_rnp_name").value;
-		 opener.setHrrnp();
-
-
+	var rowData=mySheet2.GetRowData(Row);
+	
+	 window.opener.licenseValue(rowData);
 	
 	    
 	self.close(); 
@@ -65,8 +58,8 @@ function mySheet2_OnDblClick(Row, Col, Value) {
 					LoadPage(); 	
 			
 				</script>
-	<input type="hidden" id="Chr_rnp_code">
-	<input type="hidden" id="Chr_rnp_name">
+	<input type="hidden" id="Clicense_code">
+	<input type="hidden" id="Clicense_name">
 
 </body>
 </html>

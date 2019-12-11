@@ -8,6 +8,7 @@ public class HM_P0007_08VO {
 	private String business_trip_code;
 	private String employee_code;
 	private String country_code;
+	private String country_name;
 	private String area;
 	private String start_date;
 	private String end_date;
@@ -20,6 +21,24 @@ public class HM_P0007_08VO {
 	private String user;
 
 	
+
+
+
+
+	public String getCountry_name() {
+		return country_name;
+	}
+
+
+
+
+
+
+	public void setCountry_name(String country_name) {
+		this.country_name = country_name;
+	}
+
+
 
 
 

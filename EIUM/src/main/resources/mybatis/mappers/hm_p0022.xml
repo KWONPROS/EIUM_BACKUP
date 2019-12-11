@@ -5,7 +5,9 @@
 
 <mapper namespace="mapper.hm_p0022">
 	<resultMap id="P0022resultVO" type="HM_P0022VO">
+	
 		<result property="appoint_DATE" column="appoint_DATE" />
+	
         <result property="appoint_CODE" column="appoint_CODE" />
         <result property="appoint_TITLE" column="appoint_TITLE" />
         <result property="appoint_YN" column="appoint_YN" />
@@ -36,7 +38,9 @@
 	    <result property="job_DIS_CODE" column="job_DIS_CODE" />
 	    <result property="pay_TYPE_CODE" column="pay_TYPE_CODE" />
 	    <result property="pay_GRADE_CODE" column="pay_GRADE_CODE" />
-	    <result property="out_REASON_CODE" column="out_REASON_CODE" />	    
+	    <result property="out_REASON_CODE" column="out_REASON_CODE" />	
+	    
+
 	</resultMap> 
 
 	<select  id="appointList" resultMap="P0022resultVO" parameterType="java.util.Map">
@@ -358,18 +362,21 @@ AND site_name = #{E_id jdbcType=VARCHAR}
 
 
 	<insert id="insertData1" parameterType="java.util.Map">
-	insert into HR_APPOINT(APPOINT_CODE,APPOINT_DATE,APPOINT_TITLE,APPOINT_YN,MASTEREMPLOYEE_CODE)
-	values(#{appoint_CODE,jdbcType=VARCHAR}, #{appoint_DATE,jdbcType=VARCHAR}, #{appoint_TITLE,jdbcType=VARCHAR},'마감',#{masterEmployee_CODE,jdbcType=VARCHAR})
+	insert into HR_APPOINT(APPOINT_CODE,APPOINT_DATE,APPOINT_TITLE,APPOINT_YN,MASTEREMPLOYEE_CODE,int_user_id, int_date)
+	values(#{appoint_CODE,jdbcType=VARCHAR}, #{appoint_DATE,jdbcType=VARCHAR}, #{appoint_TITLE,jdbcType=VARCHAR},'마감',#{masterEmployee_CODE,jdbcType=VARCHAR},#{user},sysdate)
 	</insert>	
 	
-	
+
 
 	<update id="updateData1" parameterType="java.util.Map">
 		update HR_APPOINT
-		set  HR_APPOINT_TITLE=#{hr_APPOINT_TITLE}
-		   , HR_APPOINT_DATE=#{hr_APPOINT_DATE}
-		   , HR_APPOINT_MASTER_CODE=#{hr_APPOINT_MASTER_CODE}
-		where HR_APPOINT_NUMBER = #{hr_APPOINT_NUMBER}
+		set  APPOINT_TITLE=#{appoint_TITLE, jdbcType=VARCHAR}
+		   , APPOINT_DATE=#{appoint_DATE, jdbcType=VARCHAR}
+		   , MASTEREMPLOYEE_CODE=#{masterEmployee_CODE, jdbcType=VARCHAR}
+		   , upt_user_id = #{user, jdbcType=VARCHAR}
+		   , upt_date = sysdate
+		 
+		where appoint_CODE = #{appoint_CODE}
 	</update>	
 	
 	
@@ -382,8 +389,8 @@ AND site_name = #{E_id jdbcType=VARCHAR}
 	
 	<insert id="insertData2" parameterType="java.util.Map">
 
-	insert into hr_appoint_history(appoint_history_code, appoint_index_code , appoint_employee_code , appoint_code , start_date , end_date , work_status_code ,join_date , site_code , department_code , job_class_code , position_code , duty_code , job_dis_code , pay_type_code , pay_grade_code , out_reason_code  )
-	values (APPOINT_HISTORY_CODE_SEQ.nextval , #{hr_APPOINT_INDEX_NAME,jdbcType=VARCHAR} ,#{employee_CODE,jdbcType=VARCHAR},#{appointCode,jdbcType=VARCHAR},#{start_DATE,jdbcType=VARCHAR},#{end_DATE,jdbcType=VARCHAR},#{work_STATUS_CODE,jdbcType=VARCHAR},#{employee_JOIN_DATE,jdbcType=VARCHAR} ,#{site_CODE,jdbcType=VARCHAR} , #{department_CODE,jdbcType=VARCHAR} ,#{job_CLASS_NAME,jdbcType=VARCHAR} ,#{position_NAME,jdbcType=VARCHAR}, #{duty_NAME,jdbcType=VARCHAR} , #{job_DIS_NAME,jdbcType=VARCHAR} ,#{pay_TYPE_NAME,jdbcType=VARCHAR} , #{pay_GRADE_NAME,jdbcType=VARCHAR},#{out_REASON_NAME,jdbcType=VARCHAR})
+	insert into hr_appoint_history(appoint_history_code, appoint_index_code , appoint_employee_code , appoint_code , start_date , end_date , work_status_code ,join_date , site_code , department_code , job_class_code , position_code , duty_code , job_dis_code , pay_type_code , pay_grade_code , out_reason_code ,int_user_id, int_date)
+	values (APPOINT_HISTORY_CODE_SEQ.nextval , #{hr_APPOINT_INDEX_NAME,jdbcType=VARCHAR} ,#{employee_CODE,jdbcType=VARCHAR},#{appointCode,jdbcType=VARCHAR},#{start_DATE,jdbcType=VARCHAR},#{end_DATE,jdbcType=VARCHAR},#{work_STATUS_CODE,jdbcType=VARCHAR},#{employee_JOIN_DATE,jdbcType=VARCHAR} ,#{site_CODE,jdbcType=VARCHAR} , #{department_CODE,jdbcType=VARCHAR} ,#{job_CLASS_NAME,jdbcType=VARCHAR} ,#{position_NAME,jdbcType=VARCHAR}, #{duty_NAME,jdbcType=VARCHAR} , #{job_DIS_NAME,jdbcType=VARCHAR} ,#{pay_TYPE_NAME,jdbcType=VARCHAR} , #{pay_GRADE_NAME,jdbcType=VARCHAR},#{out_REASON_NAME,jdbcType=VARCHAR},#{user},sysdate)
  
 	 </insert>	
 	
@@ -399,6 +406,8 @@ AND site_name = #{E_id jdbcType=VARCHAR}
 	<update id="updateData3" parameterType="java.util.Map">
 		update HR_APPOINT
 		set  APPOINT_YN=#{appoint_YN}   
+			, upt_user_id = #{user, jdbcType=VARCHAR}
+			, upt_date = sysdate
 		where APPOINT_CODE = #{appoint_CODE}
 	</update>	
 	
@@ -407,7 +416,7 @@ AND site_name = #{E_id jdbcType=VARCHAR}
 	<update id="updateData4" parameterType="java.util.Map">
 	 update EMPLOYEE_WORK 
  	 set EMPLOYEE_JOIN_DATE = #{employee_JOIN_DATE,jdbcType=VARCHAR}, DEPARTMENT_CODE = #{department_CODE,jdbcType=VARCHAR}, JOB_CLASS_CODE = #{job_CLASS_CODE,jdbcType=VARCHAR}, POSITION_CODE = #{position_CODE,jdbcType=VARCHAR}, DUTY_CODE = #{duty_CODE,jdbcType=VARCHAR},
-     JOB_DIS_CODE = #{job_DIS_CODE,jdbcType=VARCHAR}, PAY_TYPE_CODE = #{pay_TYPE_CODE,jdbcType=VARCHAR}, PAY_GRADE_CODE = #{pay_GRADE_CODE,jdbcType=VARCHAR}, OUT_REASON_CODE = #{out_REASON_CODE,jdbcType=VARCHAR},work_STATUS = #{work_STATUS}
+     JOB_DIS_CODE = #{job_DIS_CODE,jdbcType=VARCHAR}, PAY_TYPE_CODE = #{pay_TYPE_CODE,jdbcType=VARCHAR}, PAY_GRADE_CODE = #{pay_GRADE_CODE,jdbcType=VARCHAR}, OUT_REASON_CODE = #{out_REASON_CODE,jdbcType=VARCHAR},work_STATUS = #{work_STATUS},upt_user_id = #{user, jdbcType=VARCHAR},upt_date = sysdate
      where EMPLOYEE_CODE = #{employee_CODE,jdbcType=VARCHAR}
 
 	</update>

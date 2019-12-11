@@ -8,7 +8,8 @@ public class HM_P0033VO {
 	private String employee_code;
 	private String employee_name;
 	private String hr_assessment_code;
-	private String hr_assessment_name;
+	private String assessment_code;
+	private String assessment_name;
 	private String hr_assessment_test_start_date;
 	private String hr_assessment_test_end_date;
 	private String hr_assessment_date;
@@ -18,7 +19,8 @@ public class HM_P0033VO {
 	private String hr_assessment_grade;
 	private String hr_rnp_index;
 	private String hr_rnp_code;
-	private String hr_rnp_name;
+	private String rnp_code;
+	private String rnp_name;
 	private String hr_rnp_date;
 	private String hr_rnp_history;
 	private String hr_rnp_institute;
@@ -34,11 +36,30 @@ public class HM_P0033VO {
 
 	
 
+	
+	public String getHr_assessment_code() {
+		return hr_assessment_code;
+	}
+	public void setHr_assessment_code(String hr_assessment_code) {
+		this.hr_assessment_code = hr_assessment_code;
+	}
+	public String getAssessment_name() {
+		return assessment_name;
+	}
+	public void setAssessment_name(String assessment_name) {
+		this.assessment_name = assessment_name;
+	}
 	public String getHr_rnp_code() {
 		return hr_rnp_code;
 	}
 	public void setHr_rnp_code(String hr_rnp_code) {
 		this.hr_rnp_code = hr_rnp_code;
+	}
+	public String getRnp_name() {
+		return rnp_name;
+	}
+	public void setRnp_name(String rnp_name) {
+		this.rnp_name = rnp_name;
 	}
 	public String getHr_rnp_index() {
 		return hr_rnp_index;
@@ -46,12 +67,7 @@ public class HM_P0033VO {
 	public void setHr_rnp_index(String hr_rnp_index) {
 		this.hr_rnp_index = hr_rnp_index;
 	}
-	public String getHr_rnp_name() {
-		return hr_rnp_name;
-	}
-	public void setHr_rnp_name(String hr_rnp_name) {
-		this.hr_rnp_name = hr_rnp_name;
-	}
+
 	public String getHr_rnp_date() {
 		return hr_rnp_date;
 	}
@@ -82,18 +98,20 @@ public class HM_P0033VO {
 	public void setDepartment_name(String department_name) {
 		this.department_name = department_name;
 	}
-	public String getHr_assessment_code() {
-		return hr_assessment_code;
+	
+	public String getAssessment_code() {
+		return assessment_code;
 	}
-	public void setHr_assessment_code(String hr_assessment_code) {
-		this.hr_assessment_code = hr_assessment_code;
+	public void setAssessment_code(String assessment_code) {
+		this.assessment_code = assessment_code;
 	}
-	public String getHr_assessment_name() {
-		return hr_assessment_name;
+	public String getRnp_code() {
+		return rnp_code;
 	}
-	public void setHr_assessment_name(String hr_assessment_name) {
-		this.hr_assessment_name = hr_assessment_name;
+	public void setRnp_code(String rnp_code) {
+		this.rnp_code = rnp_code;
 	}
+
 	public String getHr_assessment_test_start_date() {
 		return hr_assessment_test_start_date;
 	}

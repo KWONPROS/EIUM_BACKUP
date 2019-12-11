@@ -83,13 +83,13 @@ public class HM_P0022ServiceImpl implements HM_P0022Service{
 	
 
 	@Override
-	public void saveData1(Map<String, String[]> dataMap) throws DataAccessException {
+	public void saveData1(Map<String, String[]> dataMap,String u) throws DataAccessException {
 		String[] status = dataMap.get("Status");
 		int length = status.length; // row수
 		int i = 0;
 		
 		for(String str : status) {
-			Map<String, String> row = getRow(dataMap, length, i); // 현재 Index의 Row Map
+			Map<String, String> row = getRow(dataMap, length, i,u); // 현재 Index의 Row Map
 			if("I".equals(str)) { // 추가
 				hM_P0022DAO.insertData1(row);
 			}else if("U".equals(str)) { // 수정
@@ -102,13 +102,13 @@ public class HM_P0022ServiceImpl implements HM_P0022Service{
 	}
 	
 	@Override
-	public void saveData2(Map<String, String[]> dataMap) throws DataAccessException {
+	public void saveData2(Map<String, String[]> dataMap,String u) throws DataAccessException {
 		String[] status = dataMap.get("Status");
 		int length = status.length; // row수
 		int i = 0;
 		
 		for(String str : status) {
-			Map<String, String> row = getRow(dataMap, length, i); // 현재 Index의 Row Map
+			Map<String, String> row = getRow(dataMap, length, i,u); // 현재 Index의 Row Map
 			if("I".equals(str)) { // 추가
 				hM_P0022DAO.insertData2(row);
 			}else if("U".equals(str)) { // 수정
@@ -120,13 +120,13 @@ public class HM_P0022ServiceImpl implements HM_P0022Service{
 		}
 	}
 	@Override
-	public void saveData3(Map<String, String[]> dataMap) throws DataAccessException {
+	public void saveData3(Map<String, String[]> dataMap,String u) throws DataAccessException {
 		String[] status = dataMap.get("Status");
 		int length = status.length; // row수
 		int i = 0;
 		
 		for(String str : status) {
-			Map<String, String> row = getRow(dataMap, length, i); // 현재 Index의 Row Map
+			Map<String, String> row = getRow(dataMap, length, i,u); // 현재 Index의 Row Map
 				if("U".equals(str)) { // 수정
 				hM_P0022DAO.updateData3(row);
 			}
@@ -134,20 +134,14 @@ public class HM_P0022ServiceImpl implements HM_P0022Service{
 		}
 	}
 	@Override
-	public void saveData4(Map<String, String[]> dataMap) throws DataAccessException {
+	public void saveData4(Map<String, String[]> dataMap,String u) throws DataAccessException {
 		String[] status = dataMap.get("Status");
 		int length = status.length; // row수
 		int i = 0;
 		
 		for(String str : status) {
-			Map<String, String> row = getRow(dataMap, length, i); // 현재 Index의 Row Map
-		       for(String key : row.keySet()){
-		    	   
-		            String value = row.get(key);
-		 
-		            System.out.println("잉잉service"+key+" : "+value);
-		 
-		        }
+			Map<String, String> row = getRow(dataMap, length, i,u); // 현재 Index의 Row Map
+
 				if("U".equals(str)) { // 수정
 				hM_P0022DAO.updateData4(row);
 			}
@@ -160,12 +154,13 @@ public class HM_P0022ServiceImpl implements HM_P0022Service{
 	
 	
 	
-	private Map getRow(Map<String, String[]> dataMap, int length, int index) {
+	private Map getRow(Map<String, String[]> dataMap, int length, int index,String u) {
 		Map<String, String> row = new HashMap<String, String>();
 		for(String name : dataMap.keySet()) {
 			String[] data = dataMap.get(name);
 			if(length == data.length) {
 				row.put(name, data[index]);
+				row.put("user", u);
 
 			}
 		}		

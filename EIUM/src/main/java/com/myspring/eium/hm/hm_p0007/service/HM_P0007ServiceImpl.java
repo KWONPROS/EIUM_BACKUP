@@ -26,6 +26,30 @@ public class HM_P0007ServiceImpl implements HM_P0007Service {
 	private HM_P0007DAO p0007DAO;
 
 	@Override
+	public List<HM_P0007VO> licenseList(Map<String, Object> searchMap) throws DataAccessException {
+		List<HM_P0007VO> list =  p0007DAO.licenseList(searchMap); 
+		return list;
+	}
+	
+	@Override
+	public List<HM_P0007VO> assessmentList(Map<String, Object> searchMap) throws DataAccessException {
+		List<HM_P0007VO> list =  p0007DAO.assessmentList(searchMap); 
+		return list;
+	}
+	
+	@Override
+	public List<HM_P0007VO> rnpList(Map<String, Object> searchMap) throws DataAccessException {
+		List<HM_P0007VO> list =  p0007DAO.rnpList(searchMap); 
+		return list;
+	}
+	
+	@Override
+	public List<HM_P0007VO> languageList(Map<String, Object> searchMap) throws DataAccessException {
+		List<HM_P0007VO> list =  p0007DAO.languageList(searchMap); 
+		return list;
+	}
+	
+	@Override
 	public List<HM_P0007VO> searchList(Map<String, Object> searchMap) throws DataAccessException {
 		List<HM_P0007VO> list =  p0007DAO.searchList(searchMap); 
 		return list;
