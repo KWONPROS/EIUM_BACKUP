@@ -22,7 +22,8 @@
 <script language="javascript">
 
 function LoadPage() {
-mySheet.SetWaitImageVisible(0);
+	
+	
 
 //탭
  createIBTab($('#tab1')[0], $('#tab_contents')[0], 'myTabs', {
@@ -35,7 +36,7 @@ mySheet.SetWaitImageVisible(0);
 });
 
 //탭2   
-createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
+createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs2', {
 	themes: {
         tabs: "flat_blue",
         contents: "flat_blue",
@@ -69,13 +70,14 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
 	        {Header:"병역구분",Type:"Text",SaveName:"military_type",Hidden:1},         
 	        {Header:"군번",Type:"Text",SaveName:"military_number",Hidden:1},
 	        {Header:"제대구분",Type:"Text",SaveName:"discharge_yn",Hidden:1},
-			{Header:"사진",Type:"Image",SaveName:"picture",   Hidden:1  }		
+	        
 		];  
 		IBS_InitSheet(mySheet , initSheet);
   
 		mySheet.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
 		mySheet.SetSheetHeight(300);
-		
+		mySheet.SetWaitImageVisible(0);
+
 		
 		
 		 //mySheet2 //학력
@@ -96,6 +98,7 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
  
 		createIBSheet2($("#ib-container2")[0],"mySheet2", "100%", "300px");
         IBS_InitSheet(mySheet2,initData);
+    	mySheet2.SetWaitImageVisible(0);
 		mySheet2.SetSheetHeight(150);
 
         
@@ -117,16 +120,17 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
        createIBSheet2($("#ib-container3")[0],"mySheet3", "100%", "300px");
        IBS_InitSheet(mySheet3,initData);
        mySheet3.SetSheetHeight(150);
-      
+       mySheet3.SetWaitImageVisible(0);
+   	
     //mySheet4 //면허
      initData.Cols = [
 		  {Header:"상태",SaveName:"sStatus",Type:"Status",align:"Center",width:50},
 		  {Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck"},
           {Header:"사원면허번호",Type:"Text", SaveName:"license_code",Hidden:1},
-          {Header:"자격종류",Type:"Text", SaveName:"license_type", Width:150, Align:"Center"},
+          {Header:"자격증번호",Type:"Text", SaveName:"license_number", Width:60, Align:"Center"},
+          {Header:"자격종류",Type:"Text", SaveName:"license_name", Width:150, Align:"Center"},
           {Header:"취득일",Type:"Text", SaveName:"start_date", Width:60, Align:"Center"},
           {Header:"만료일",Type:"Text", SaveName:"end_date", Width:60, Align:"Center"},
-          {Header:"자격증번호",Type:"Text", SaveName:"license_number", Width:60, Align:"Center"},
           {Header:"발행기관",Type:"Text", SaveName:"institute", Width:60, Align:"Center"},
           {Header:"수당",Type:"Text", SaveName:"bonus", Width:60, Align:"Center"},
       ];
@@ -134,23 +138,29 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
      createIBSheet2($("#ib-container4")[0],"mySheet4", "100%", "300px");
      IBS_InitSheet(mySheet4,initData);
      mySheet4.SetSheetHeight(150);
-    
+     mySheet4.SetWaitImageVisible(0);
+    	
  
 		
     //mySheet5 //인사발령
      initData.Cols = [
-        {Header:"발령호수",Type:"Text", SaveName:"hr_appoint_number", Width:60, Align:"Center",Edit:0,InsertEdit:"0", UpdateEdit:"0"},
-        {Header:"발령일자",Type:"Text", SaveName:"hr_appoint_date", Width:60, Align:"Center",Edit:0,InsertEdit:"0", UpdateEdit:"0"},
-        {Header:"제목",Type:"Text", SaveName:"hr_appoint_title", Width:60, Align:"Center",Edit:0,InsertEdit:"0", UpdateEdit:"0"},
-        {Header:"발령내역",Type:"Text", SaveName:"hr_appoint_history", Width:60, Align:"Center",Edit:0, InsertEdit:"0", UpdateEdit:"0"},
-        {Header:"발령전정보",Type:"Text", SaveName:"hr_appoint_before_info", Width:60, Align:"Center",Edit:0, InsertEdit:"0", UpdateEdit:"0"},
-        {Header:"현정보",Type:"Text", SaveName:"hr_appoint_current_info", Width:60, Align:"Center",Edit:0, InsertEdit:"0", UpdateEdit:"0"},
-        {Header:"발령후정보",Type:"Text", SaveName:"hr_appoint_after_info", Width:60, Align:"Center",Edit:0, InsertEdit:"0", UpdateEdit:"0"},
+        {Header:"발령코드",Type:"Text", SaveName:"appoint_code", Width:60, Align:"Center",Edit:0,InsertEdit:"0", UpdateEdit:"0"},
+        {Header:"발령구분",Type:"Text", SaveName:"hr_appoint_index_name", Width:60, Align:"Center",Edit:0,InsertEdit:"0", UpdateEdit:"0"},
+        {Header:"발령이름",Type:"Text", SaveName:"appoint_title", Width:60, Align:"Center",Edit:0,InsertEdit:"0", UpdateEdit:"0"},
+        {Header:"발령일자",Type:"Text", SaveName:"appoint_date", Width:60, Align:"Center",Edit:0, InsertEdit:"0", UpdateEdit:"0"},
+        {Header:"발령자",Type:"Text", SaveName:"employee_name", Width:60, Align:"Center",Edit:0, InsertEdit:"0", UpdateEdit:"0"},
+        {Header:"재직상태",Type:"Text", SaveName:"work_status_name", Width:60, Align:"Center",Edit:0, InsertEdit:"0", UpdateEdit:"0"},
+        {Header:"사업장",Type:"Text", SaveName:"site_name", Width:60, Align:"Center",Edit:0, InsertEdit:"0", UpdateEdit:"0"},
+        {Header:"부서",Type:"Text", SaveName:"department_name", Width:60, Align:"Center",Edit:0, InsertEdit:"0", UpdateEdit:"0"},
+        {Header:"직급",Type:"Text", SaveName:"position_name", Width:60, Align:"Center",Edit:0, InsertEdit:"0", UpdateEdit:"0"},
+        {Header:"직책",Type:"Text", SaveName:"duty_name", Width:60, Align:"Center",Edit:0, InsertEdit:"0", UpdateEdit:"0"},
     ];
          
      createIBSheet2($("#ib-container5")[0],"mySheet5", "100%", "300px");
      IBS_InitSheet(mySheet5,initData);
-     mySheet5.SetSheetHeight(150);      
+     mySheet5.SetSheetHeight(150);
+     mySheet5.SetWaitImageVisible(0);
+ 	
     //mySheet6 //인사고과
    initData.Cols = [
 		{Header:"상태",SaveName:"sStatus",Type:"Status",align:"Center",width:50},
@@ -169,30 +179,28 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
    createIBSheet2($("#ib-container6")[0],"mySheet6", "100%", "300px");
    IBS_InitSheet(mySheet6,initData);
    mySheet6.SetSheetHeight(150);
- 
+   mySheet6.SetWaitImageVisible(0);
+	
 		 //mySheet7 //근태
 	   initData.Cols = [
-			{Header:"년월|년월|년월",Type:"Text",Width:30,SaveName:"Status",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
-			{Header:"평일근무|정상|일",Type:"Text",Width:30,SaveName:"Delete",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
-			{Header:"평일근무|정상|시간",Type:"Text",Width:30,SaveName:"Delete",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
-			{Header:"평일근무|연장|일",Type:"Text",Width:30,SaveName:"Delete",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
-			{Header:"평일근무|연장|시간",Type:"Text",Width:30,SaveName:"Delete",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
-			{Header:"특근근무|정상|일",Type:"Text",Width:30,SaveName:"Delete",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
-			{Header:"특근근무|정상|시간",Type:"Text",Width:30,SaveName:"Delete",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
-			{Header:"특근근무|연장|일",Type:"Text",Width:30,SaveName:"Delete",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
-			{Header:"특근근무|연장|시간",Type:"Text",Width:30,SaveName:"Delete",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
-			{Header:"결과|년휴|월휴",Type:"Text",Width:30,SaveName:"Status",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
-			{Header:"결과|년휴|월휴",Type:"Text",Width:30,SaveName:"Status",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
-			{Header:"결과|정상|일",Type:"Text",Width:30,SaveName:"Delete",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
-			{Header:"결과|정상|시간",Type:"Text",Width:30,SaveName:"Delete",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
-			{Header:"결과|조퇴|일",Type:"Text",Width:30,SaveName:"Delete",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
-			{Header:"결과|조퇴|시간",Type:"Text",Width:30,SaveName:"Delete",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+			{Header:"년월|년월",Type:"Text",Width:30,SaveName:"total_month",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+			{Header:"평일근무|정상시간",Type:"Text",Width:30,SaveName:"weekday_normal_work_time",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+			{Header:"평일근무|연장시간",Type:"Text",Width:30,SaveName:"weekday_extension_work_time",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+			{Header:"평일근무|야간시간",Type:"Text",Width:30,SaveName:"weekday_night_work_time",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+			{Header:"휴일근무|정상시간",Type:"Text",Width:30,SaveName:"holiday_normal_work_time",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+			{Header:"휴일근무|연장시간",Type:"Text",Width:30,SaveName:"holiday_extension_work_time",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+			{Header:"휴일근무|야간시간",Type:"Text",Width:30,SaveName:"holiday_night_work_time",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+			{Header:"결과|출근일",Type:"Text",Width:30,SaveName:"working_status00",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+			{Header:"결과|지각일",Type:"Text",Width:30,SaveName:"working_status01",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+			{Header:"결과|조퇴일",Type:"Text",Width:30,SaveName:"working_status02",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+			{Header:"결과|외출일",Type:"Text",Width:30,SaveName:"working_status03",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
 	    ];
 	         
 	   createIBSheet2($("#ib-container7")[0],"mySheet7", "100%", "300px");
 	      IBS_InitSheet(mySheet7,initData);
 	      mySheet7.SetSheetHeight(150);    
-	      
+	      mySheet7.SetWaitImageVisible(0);
+	  
     //mySheet8 //출장
    initData.Cols = [
 			{Header:"출장고유번호",Type:"Text", SaveName:"business_trip_code",Hidden:1},
@@ -211,7 +219,8 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
    createIBSheet2($("#ib-container8")[0],"mySheet8", "100%", "300px");
    IBS_InitSheet(mySheet8,initData);
    mySheet8.SetSheetHeight(150);
-    
+	mySheet8.SetWaitImageVisible(0);
+  	
     //mySheet9 //상벌관리
    initData.Cols = [
 		{Header:"상태",SaveName:"sStatus",Type:"Status",align:"Center",width:50},
@@ -230,13 +239,14 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
    createIBSheet2($("#ib-container9")[0],"mySheet9", "100%", "300px");
    IBS_InitSheet(mySheet9,initData);
    mySheet9.SetSheetHeight(150);  
-   
+   mySheet9.SetWaitImageVisible(0);
+ 	
    //mySheet10 //어학시험
    initData.Cols = [
 	   {Header:"상태",SaveName:"sStatus",Type:"Status",align:"Center",width:50},
 		{Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck"},
 		{Header:"어학시험고유번호",Type:"Text", SaveName:"language_code",Hidden:1},
-		{Header:"시험명",Type:"Text", SaveName:"name", Width:60, Align:"Center"},
+		{Header:"시험명",Type:"Text", SaveName:"language_name", Width:60, Align:"Center"},
 		{Header:"유효기간시작일",Type:"Text", SaveName:"start_date", Width:100, Align:"Center"},
 		{Header:"유효기간종료일",Type:"Text", SaveName:"end_date", Width:100, Align:"Center"},
 		{Header:"점수",Type:"Text", SaveName:"grade", Width:100, Align:"Center"},
@@ -246,7 +256,8 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
         
   createIBSheet2($("#ib-container10")[0],"mySheet10", "100%", "300px");
   IBS_InitSheet(mySheet10,initData);
-  mySheet10.SetSheetHeight(150);  
+  mySheet10.SetSheetHeight(150);
+  mySheet10.SetWaitImageVisible(0);   
   //mySheet11 //교육관리
   initData.Cols = [
      {Header:"교육명",Type:"Text", SaveName:"employee_training_name", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
@@ -263,7 +274,9 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs', {
 		];       
  createIBSheet2($("#ib-container11")[0],"mySheet11", "100%", "300px");
  IBS_InitSheet(mySheet11,initData);
- mySheet11.SetSheetHeight(150);	
+ mySheet11.SetSheetHeight(150);
+ mySheet11.SetWaitImageVisible(0);   
+
 	}
 	
 //로우 클릭시
@@ -274,10 +287,10 @@ function mySheet_OnClick(Row, Col) {
 			mySheet2.DoSearch("${contextPath}/hm/p0007/searchEducation.do", x);
 			mySheet3.DoSearch("${contextPath}/hm/p0007/searchCareer.do", x);
 		    mySheet4.DoSearch("${contextPath}/hm/p0007/searchLicense.do", x);
-	/* 		mySheet5.DoSearch("${contextPath}/hm/p0007/searchAppoint.do", x);
-	 */		mySheet6.DoSearch("${contextPath}/hm/p0007/searchAssessment.do", x);
-	/* 		mySheet7.DoSearch("${contextPath}/hm/p0007/searchWorking_status.do", x);
-	 */		mySheet8.DoSearch("${contextPath}/hm/p0007/searchBusiness_trip.do", x);
+	 		mySheet5.DoSearch("${contextPath}/hm/p0007/searchAppoint.do", x);
+	 		mySheet6.DoSearch("${contextPath}/hm/p0007/searchAssessment.do", x);
+	 		mySheet7.DoSearch("${contextPath}/hm/p0007/searchWorking_status.do", x);
+			mySheet8.DoSearch("${contextPath}/hm/p0007/searchBusiness_trip.do", x);
 			mySheet9.DoSearch("${contextPath}/hm/p0007/searchRnp.do", x);
 			mySheet10.DoSearch("${contextPath}/hm/p0007/searchEmployee_language.do", x);
 			mySheet11.DoSearch("${contextPath}/hm/p0007/searchTraining_assessment.do", x);		  
@@ -297,7 +310,6 @@ function mySheet_OnClick(Row, Col) {
 	      $('select[name=military_type]').val(mySheet.GetCellValue(Row,13));
 	      $('input[name=military_number]').val(mySheet.GetCellValue(Row,14));
 	      $('select[name=discharge_yn]').val(mySheet.GetCellValue(Row,15));
-	      $('#uploadedImg').attr('src',"${contextPath}/hm/p0007/getByteImage.do?employee_code="+mySheet.GetCellValue(Row,2));	
 	      
 
 	      
@@ -326,22 +338,13 @@ function mySheet_OnClick(Row, Col) {
 			mySheet9.RemoveAll();
 			mySheet10.RemoveAll();
 			mySheet11.RemoveAll();
-		      $('input[name=height]').val(mySheet.GetCellValue(Row,4));
-		      $('input[name=weight]').val(mySheet.GetCellValue(Row,5)); 
-		      $('input[name=blood_type]').val(mySheet.GetCellValue(Row,6));
-		      $('input[name=hobby]').val(mySheet.GetCellValue(Row,7));
-		      $('input[name=special_ability]').val(mySheet.GetCellValue(Row,8));
-		      $('input[name=handicapped_yn]').val(mySheet.GetCellValue(Row,9));
-		      $('input[name=marriage_yn]').val(mySheet.GetCellValue(Row,10));
-		      $('input[name=religion]').val(mySheet.GetCellValue(Row,11));
-		      $('input[name=residential_division]').val(mySheet.GetCellValue(Row,12));
-		      $('input[name=military_type]').val(mySheet.GetCellValue(Row,13));
-		      $('input[name=military_number]').val(mySheet.GetCellValue(Row,14));
-		      $('input[name=discharge_yn]').val(mySheet.GetCellValue(Row,15));
-			
+			$("form").each(function() {  
+	            this.reset();
+	         });  
 			break;
 			
 		case "save": // 저장
+
 			 mySheet.SetCellValue($('input[name=myRow]').val(),4,$('input[name=height]').val());
 	         mySheet.SetCellValue($('input[name=myRow]').val(),5,$('input[name=weight]').val());
 	         mySheet.SetCellValue($('input[name=myRow]').val(),6,$('select[name=blood_type]').val());
@@ -357,13 +360,17 @@ function mySheet_OnClick(Row, Col) {
 	          
 
 		var tempStr = mySheet.GetSaveString();
-		mySheet.DoSave("${contextPath}/hm/p0007/saveHr_info.do", x);
- 		mySheet2.DoSave("${contextPath}/hm/p0007/saveEducation.do", x);
-		mySheet3.DoSave("${contextPath}/hm/p0007/saveCareer.do", x);
 		mySheet4.DoSave("${contextPath}/hm/p0007/saveLicense.do", x);
+
+/* 안댐	
+
+mySheet.DoSave("${contextPath}/hm/p0007/saveHr_info.do", x);
+O mySheet2.DoSave("${contextPath}/hm/p0007/saveEducation.do", x);
+O mySheet3.DoSave("${contextPath}/hm/p0007/saveCareer.do", x);
+ 		
 		mySheet6.DoSave("${contextPath}/hm/p0007/saveAssessment.do", x);
 		mySheet9.DoSave("${contextPath}/hm/p0007/saveRnp.do", x);
-		mySheet10.DoSave("${contextPath}/hm/p0007/saveEmployee_language.do", x);
+		mySheet10.DoSave("${contextPath}/hm/p0007/saveEmployee_language.do", x); */
 			break;
 			
 			
@@ -397,7 +404,7 @@ function mySheet_OnClick(Row, Col) {
 			      
 		   case "insert11":
 			      var row = mySheet11.DataInsert(-1);
-			      break;
+			      break; 
 			       
 
 		}
@@ -534,15 +541,7 @@ function mySheet_OnClick(Row, Col) {
 		document.form.resist_address_detail.value = addrDetail;	
 	}
 
-	function readURL(input) {
-		if (input.files && input.files[0]) {
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				$('#uploadedImg').attr('src', e.target.result);
-			}
-			reader.readAsDataURL(input.files[0]);
-		}
-	}
+
 						
 	        
 	// }
@@ -591,18 +590,7 @@ function mySheet_OnClick(Row, Col) {
 .IBbutton:hover {
 	background-color: #2C3E50;
 }
-.pictureUpload{
-	font-size: 13px;
-	margin-left: 5px;
-	background-color: #3498DB;
-	color: white;
-	padding: 5px 50px;
-	border-radius: 7px;
-	text-decoration: none;
-}
-.pictureUpload:hover {
-	background-color: #2C3E50;
-}
+
 
 .left {
 	position: relative;
@@ -613,7 +601,7 @@ function mySheet_OnClick(Row, Col) {
 
 .right {
 	position: relative;
-	top: -380px;
+	top: -170px;
 	left: 400px;
 	height: 400px;
 	width: 900px;
@@ -623,7 +611,7 @@ function mySheet_OnClick(Row, Col) {
 
 .right-down {
 	position: relative;
-	top: -500px;
+	top: -300px;
 	left: 400px;
 	height: 400px;
 	width: 900px;
@@ -683,13 +671,7 @@ border : none;
 		</header>
 	</div>
 	<div class="left">
-		<table class="tg1" >
-  <tr>
-<td class="tg-dm68"><img id=uploadedImg alt="" src="" ></td></tr>
-  
-</table>
-		
-		
+
 		<script>createIBSheet("mySheet", "100%", "100%");</script>
 	</div>
 
