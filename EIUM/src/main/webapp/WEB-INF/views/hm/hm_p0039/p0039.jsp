@@ -30,47 +30,14 @@
 .IBbutton:hover {
 	background-color: #2C3E50;
 }
-.left{
-position: absolute;
-top: 145px;
-left: 50px;
-}
+
 .rightbuttons{
    margin-top:40px;
    margin:10px;
    position: absolute;
    right: 0px;
 }
-.right{
-position: relative;
-top: 150px;
-left: 600px;
-width: 700px;
 
-}
-.right table{
-font-size:13px;
-font-weight:bold;
-position: relative;
-left: 40px;
-padding: 20px;
-}
-.right table tr td:nth-child(1){
-text-align:right;
-}
-.right table tr td:nth-child(2){
-width: 20px;
-height: 25px;
-}
-.right table tr td:nth-child(3) input{
-width: 130px;
-height: 20px;
-padding-left: 10px;
-margin-right:10px;
-box-sizing: border-box;
-border: 1px solid #CCCCCC;
-border-radius: 2px;
-} 
 .title {
     width:100%;
    color: #2C3E50;
@@ -85,19 +52,63 @@ border-radius: 2px;
    top: 50px;
 
 }
-#searchBar {
-	background: #EBEBEB;
-	padding: 10px 30px;
-	margin-bottom: 20px;
-	border-radius: 5px;
-	font-size: 12px;
-	border-radius:5px;
-}
+
 .leftbuttons{
    margin-top:40px;
    margin:10px;
    position: absolute;
    left: 0px;
+}
+#searchBar {
+	background: #EBEBEB;
+	margin-bottom: 20px;
+	border-radius: 5px;
+	font-size: 12px;
+	border-radius:5px;
+	position:relative;
+	top:130px;
+	width:1500px;
+	left:20px;
+	padding-top:20px;
+	padding-bottom:20px;
+}
+
+#searchBar input, select {
+	height: 24px;
+	border-radius: 3px;
+	border: none;
+	padding-left: 5px;
+	vertical-align: middle;
+	text-align: center;
+}
+.searchBarTitle {
+	background: #5E5E5E;
+	padding: 4px;
+	color: white;
+	border-radius: 5px;
+	margin: 5px 5px 0 70px;
+	vertical-align: middle;
+	margin-left: 30px;
+	font-size:12px;
+
+}
+span{
+    background: #5E5E5E;
+    padding: 5px 5px;
+    color: white;
+    border-radius: 5px;
+    margin-right:10px;
+    font-size:12px;
+}
+img{
+margin-left:5px;
+margin-right:5px;
+vertical-align: middle;
+}
+.sheet1{
+position:relative;
+top:130px;
+left:20px;
 }
 </style>
 	
@@ -112,13 +123,13 @@ border-radius: 2px;
 		initSheet.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:3}
 		initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 		initSheet.Cols = [
-			{Header:"NO",Type:"Seq",SaveName:"SEQ",Edit:0},
-			{Header:"사원코드",Type:"Text",SaveName:"employee_CODE",Edit:0,Width:"100",Align:"Center"},
-			{Header:"사원명",Type:"Text",SaveName:"employee_NAME",Edit:0,Width:"100",Align:"Center"},
-			{Header:"부서",Type:"Text",SaveName:"department_NAME",Edit:0,Width:"100",Align:"Center"},
-			{Header:"직책",Type:"Text",SaveName:"duty_NAME",Edit:0,Width:"100",Align:"Center"},
-			{Header:"입사일",Type:"Text",SaveName:"employee_JOIN_DATE",Edit:0,Width:"100",Align:"Center"},
-			{Header:"년수",Type:"Text",SaveName:"working_YEARS",Edit:0,Width:"100",Align:"Center"},
+			{Header:"NO",Type:"Seq",SaveName:"SEQ",Edit:0,Width:60,Align:"Center"},
+			{Header:"사원코드",Type:"Text",SaveName:"employee_CODE",Edit:0,Width:"235",Align:"Center"},
+			{Header:"사원명",Type:"Text",SaveName:"employee_NAME",Edit:0,Width:"235",Align:"Center"},
+			{Header:"부서",Type:"Text",SaveName:"department_NAME",Edit:0,Width:"235",Align:"Center"},
+			{Header:"직책",Type:"Text",SaveName:"duty_NAME",Edit:0,Width:"235",Align:"Center"},
+			{Header:"입사일",Type:"Text",SaveName:"employee_JOIN_DATE",Edit:0,Width:"260",Align:"Center"},
+			{Header:"년수",Type:"Text",SaveName:"working_YEARS",Edit:0,Width:"235",Align:"Center"},
 				];
 			IBS_InitSheet(mySheet, initSheet);
 			
@@ -212,34 +223,32 @@ function departmentValue(rowData){
 			</header>
 		</div>
 
-	   <div class="left">
+	 
        <div id="searchBar">
-		 사업장<input type="text" id="site">
-		<a href="javascript:siteSearch()" >사업장검색</a>
-		부서<input id="department" type="text" >
-		<a href="javascript:departmentSearch()" >부서검색</a>
-		퇴사자<select id="resigner">
+
+		<span class="searchBarTitle">사업장</span><input type="text" id="site"><a href="javascript:siteSearch()" ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
+		<span class="searchBarTitle" style="padding:4 13px 4 13px;">부 서</span><input id="department" type="text" ><a href="javascript:departmentSearch()" ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
+		<span class="searchBarTitle">퇴사자</span><select id="resigner">
 		<option value='0'selected>0.제외</option>
 		<option value='1'>1.포함</option>
 		</select>
-		<div>
-		기준일<input id="date"type="text"  class="Datepicker">
-
-		년수기준<select id="day">
+		<span class="searchBarTitle">기준일</span><input id="date"type="text"  class="Datepicker">
+		<span class="searchBarTitle">년수기준</span><select id="day">
 		<option value='0' selected>0.일수 버림</option>
 		<option value='1'>1.일수 표시</option>
 		</select>
-		<input type="text" id="yearsOption">년이하
-		</div>	
-		</div>
+		<input style="margin-left:30px;" type="text" id="yearsOption"><span class="searchBarTitle" style="margin-left:5px;">년이하</span>
 		</div>
 
 
 
 
-<div style="position: absolute; top: 220px; left: 70px;">
+
+
+
+<div class="sheet1">
 <script>
-createIBSheet("mySheet", "800px", "500px");
+createIBSheet("mySheet", "1500px", "550px");
 </script>
 </div>
 </form>

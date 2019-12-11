@@ -57,6 +57,7 @@
 position:relative;
 top:60px;
 left:20px;
+width:1500px;
 }
 #searchBar {
 	background: #EBEBEB;
@@ -85,7 +86,7 @@ left:20px;
 	padding: 4px;
 	color: white;
 	border-radius: 5px;
-	margin: 5px 5px 0 70px;
+	margin: 5px 5px 0 180px;
 	vertical-align: middle;
 	margin-left: 50px;
 	font-size:12px;
@@ -123,15 +124,15 @@ vertical-align: middle;
 		initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 		initSheet.Cols = [
 			{Header:"NO",Type:"Seq",SaveName:"SEQ",Edit:0,Width:"60"},
-			{Header:"사원코드",Type:"Text",SaveName:"employee_CODE",Edit:0,Width:"160"},
-			{Header:"사원명",Type:"Text",SaveName:"employee_NAME",Edit:0,Width:"160"},
-			{Header:"주민등록번호",Type:"Text",SaveName:"resident_RESISTRATION_NUMBER",Edit:0,Width:"180"},	
-			{Header:"부서",Type:"Text",SaveName:"department_NAME",Edit:0,Width:"150"},
-			{Header:"직책",Type:"Text",SaveName:"duty_NAME",Edit:0,Width:"150"},
-			{Header:"입사일",Type:"Text",SaveName:"employee_JOIN_DATE",Edit:0,Width:"155"},
-			{Header:"퇴사일",Type:"Text",SaveName:"employee_RESIGNATION_DATE",Edit:0,Width:"155"},
-			{Header:"재직기간",Type:"Text",SaveName:"working_YEARS",Edit:0,Width:"150"},
-			{Header:"최종학력명",Type:"Text",SaveName:"final_EDUCATION",Edit:0,Width:"180"}
+			{Header:"사원코드",Type:"Text",SaveName:"employee_CODE",Edit:0,Width:"160",Align:"Center"},
+			{Header:"사원명",Type:"Text",SaveName:"employee_NAME",Edit:0,Width:"160",Align:"Center"},
+			{Header:"주민등록번호",Type:"Text",SaveName:"resident_RESISTRATION_NUMBER",Edit:0,Width:"180",Align:"Center"},	
+			{Header:"부서",Type:"Text",SaveName:"department_NAME",Edit:0,Width:"150",Align:"Center"},
+			{Header:"직책",Type:"Text",SaveName:"duty_NAME",Edit:0,Width:"150",Align:"Center"},
+			{Header:"입사일",Type:"Text",SaveName:"employee_JOIN_DATE",Edit:0,Width:"155",Align:"Center"},
+			{Header:"퇴사일",Type:"Text",SaveName:"employee_RESIGNATION_DATE",Edit:0,Width:"155",Align:"Center"},
+			{Header:"재직기간",Type:"Text",SaveName:"working_YEARS",Edit:0,Width:"150",Align:"Center"},
+			{Header:"최종학력명",Type:"Text",SaveName:"final_EDUCATION",Edit:0,Width:"180",Align:"Center"}
 				];
 			IBS_InitSheet(mySheet, initSheet);
 			
@@ -253,37 +254,38 @@ function pay_type(rowData){
 
        <div id="searchBar">
        <div style="margin-top:10px;">
-		 <span class="searchBarTitle">사업장</span><input type="text" id="site">
+		 <span class="searchBarTitle"  style="margin-left:120px;">사업장</span><input type="text" id="site">
 		<a href="javascript:siteSearch()" ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
 		
-		<span class="searchBarTitle" style="margin-left:40px;padding:4px 13px 4px 13px">부서</span><input id="department" type="text" >
+		<span class="searchBarTitle" style="margin-left:60px;padding:4px 13px 4px 13px">부서</span><input id="department" type="text" >
 		<a href="javascript:departmentSearch()" ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
 		
-		<span class="searchBarTitle" style="margin-left:25px;margin-right:5px;padding:4px 13px 4px 13px">직 종</span><input id="job_class" type="text" >
+		<span class="searchBarTitle" style="margin-left:60px;margin-right:5px;padding:4px 13px 4px 13px">직 종</span><input id="job_class" type="text" >
 		<a href="javascript:JOB_CLASS()" ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
 		
 		<span class="searchBarTitle" style="padding:4px 16px 4px 16px">직급</span><input id="position" type="text" >
 		<a href="javascript:POSITION()" ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
 		</div>
 		<div style="margin-top:10px;">
-		<span class="searchBarTitle" style="margin-left:50px;padding:4px 10px 4px 10px">직책</span><input id="duty" type="text" >
+		<span class="searchBarTitle" style="margin-left:120px;padding:4px 10px 4px 10px">직책</span><input id="duty" type="text" >
 		<a href="javascript:DUTY()" ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
 		
-		<span class="searchBarTitle" style="margin-left:40px;padding:4px 13px 4px 13px">직무</span><input id="job_dis" type="text" >
+		<span class="searchBarTitle" style="margin-left:60px;padding:4px 13px 4px 13px">직무</span><input id="job_dis" type="text" >
 		<a href="javascript:JOB_DIS()" ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
 		
-		<span class="searchBarTitle" style="margin-left:25px;">고용형태</span><input id="work_type" type="text" >
+		<span class="searchBarTitle" style="margin-left:60px;">고용형태</span><input id="work_type" type="text" >
 		<a href="javascript:WORK_TYPE()" ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
 		
 		<span class="searchBarTitle" style="margin-left:50px;">급여형태</span><input id="pay_type" type="text" >
 		<a href="javascript:PAY_TYPE()" ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
 		</div>
 		<div style="margin-top:10px;">
-		<span class="searchBarTitle" >기준일</span><input id="date"type="text"  class="Datepicker"><span style="margin:0 42px 0 42px; padding-top:0 ; padding-bottom:0">~</span><input id="date2"type="text"  class="Datepicker">
+		<span class="searchBarTitle" style="margin-left:120px;" >기준일</span><input id="date"type="text"  class="Datepicker"><spann style="margin:0 58px 0 58px">~</spann><input id="date2"type="text"  class="Datepicker">
 		
-		<span class="searchBarTitle" style="margin-left:25px;">퇴사자포함</span><input type="checkbox" id ="resigner" value="1">
+		<span class="searchBarTitle" style="margin-left:58px;">퇴사자포함</span><input type="checkbox" id ="resigner" value="1">
 		</div>
 		</div>	
+
 
 
 
