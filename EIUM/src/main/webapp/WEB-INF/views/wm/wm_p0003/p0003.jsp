@@ -90,17 +90,95 @@
 			break;
 		case "reset":
 			mySheet.RemoveAll();
-		    $('#date').attr('value', "");
-		    $('#date2').attr('value', "");
-		    $('#Select').attr('value', "");
-		    $('#p_text').attr('value', "");
-		    $('#p_text').attr('placeholder', "내용을 입력해주세요.");
+			$("form").each(function() {  
+	            this.reset();
+	         });  
 			break;
 		case "down":
 			var param = { Mode : -1 };
 	        mySheet.Down2Excel(param);
 	        break;
 		}
+	}
+	
+	
+	function selectSite() {
+		$.ajax({
+
+					url : "${contextPath}/sm/p0006/SiteList.do",//목록을 조회 할 url
+
+					type : "POST",
+
+					dataType : "JSON",
+
+					success : function(data) {
+
+						for (var i = 0; i < data['Data'].length; i++) {
+							
+							
+
+							var option = "<option name='1' value='" + data['Data'][i].site_NAME + "'>"
+									+ data['Data'][i].site_NAME + "</option>";
+
+							//대상 콤보박스에 추가
+
+							$('#SiteList').append(option);
+
+						}
+
+					},
+
+					error : function(jqxhr, status, error) {
+
+						alert("에러");
+
+					}
+
+				});
+
+	}
+
+	function selectDept() {
+
+		var SiteList = $('#SiteList').val();
+
+		$
+				.ajax({
+
+					url : "${contextPath}/sm/p0006/DeptList.do",//목록을 조회 할 url
+
+					type : "POST",
+
+					data : {
+						"SiteList" : SiteList
+					},
+
+					dataType : "JSON",
+
+					success : function(data) {
+						$(".1").remove();
+
+						for (var i = 0; i < data['Data'].length; i++) {
+
+							var option = "<option class='1' value='" + data['Data'][i].department_NAME + "'>"
+									+ data['Data'][i].department_NAME
+									+ "</option>";
+
+							//대상 콤보박스에 추가
+							$('#DeptList').append(option);
+
+						}
+
+					},
+
+					error : function(jqxhr, status, error) {
+
+						alert("에러");
+
+					}
+
+				});
+
 	}
 	
 
@@ -155,7 +233,7 @@ background-color: #2C3E50;
 	border-radius: 5px;
 	margin: 0 5px 0 70px;
 	vertical-align: middle;
-	margin-left: 120px;
+	margin-left: 1px;
 }
 #searchBar {
 	background: #EBEBEB;
@@ -179,6 +257,9 @@ background-color: #2C3E50;
 	top: 130px;
 	left: 60px;
 	width: 1000px;
+}
+#p_text, #date, #date2{
+    width: 150px;
 }
 .ui-datepicker{ font-size: 12px; width: 160px; }
 .ui-datepicker select.ui-datepicker-month{ width:30%; font-size: 11px; }
@@ -207,10 +288,22 @@ background-color: #2C3E50;
         <div id="searchBar">
             <span class="searchBarTitle">사용일자</span> <input type="text" id="date" class="Datepicker">
              ~ <input type="text" id="date2" class="Datepicker">
-            <span class="searchBarTitle">조회조건</span> <select id="Select">
+            <span class="searchBarTitle">근태종류</span> <select id="vacaTYPE">
+			<option value="" selected>전체</option>
+			<option value="연차" >연차</option>
+			<option value="특별휴가" >특별휴가</option>
+			<option value="경조휴가" >경조휴가</option>
+		</select>
+		<span class="searchBarTitle">사업장</span> <select id="SiteList"  onchange="selectDept()">
+			<option value="" selected>전체</option>
+		</select>
+		<span class="searchBarTitle">부서</span><select id="DeptList">
+			<option value="" selected>전체</option>
+		</select>
+            <span class="searchBarTitle" >조회조건</span><select id="Employee_Select" style="width: 80px;">
 		    <option value="" selected>구분</option>
-			<option value="사원명">사원명</option>
-			<option value="부서">부서</option>
+			<option value="employee_name">사원명</option>
+			<option value="employee_code">사원코드</option>
 		</select>
 		<input type="text" id="p_text" placeholder="내용을 입력해주세요.">
         </div>
@@ -219,6 +312,8 @@ background-color: #2C3E50;
 		<div style="position: absolute; top: 220px; left: 70px;">
 			<script type="text/javascript">
 				createIBSheet("mySheet", "1500px", "600px");
+				selectSite();
+				selectDept();
 			</script>
 		</div>
 

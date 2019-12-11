@@ -339,6 +339,7 @@ margin-left: 15px;
 			<script type="text/javascript">
 				createIBSheet("mySheet", "1500px", "620px");
 				selectSite();
+				selectDept();
 			</script>
 		</div>
 

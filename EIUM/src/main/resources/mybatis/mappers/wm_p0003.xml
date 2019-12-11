@@ -36,78 +36,52 @@
          and ew.position_code = p.position_code
          and d.site_code = s.site_code
       ]]>
-      <choose>
-             <when test= " Select.equals('사원명') and p_text != '' and p_text != null and date != ''  and  date != null and date2 != '' and date2 != null ">
-			    and TO_DATE(VACATION_START_DATE, 'YYYY-MM-DD') <![CDATA[>=]]> #{date}
-                and TO_DATE(VACATION_END_DATE, 'YYYY-MM-DD') <![CDATA[<=]]> #{date2}
-				and e.employee_name LIKE <![CDATA['%'||#{p_text,jdbcType=VARCHAR}||'%']]>
-				order by vh.VACATION_END_DATE DESC 
-			</when> <!-- date date2 사원명 -->
-      
-             <when test= " Select.equals('부서') and p_text != '' and p_text != null and date != ''  and  date != null and date2 != '' and date2 != null ">
-				and TO_DATE(VACATION_START_DATE, 'YYYY-MM-DD') <![CDATA[>=]]> #{date}
-                and TO_DATE(VACATION_END_DATE, 'YYYY-MM-DD') <![CDATA[<=]]> #{date2}
-				and d.department_name LIKE <![CDATA['%'||#{p_text,jdbcType=VARCHAR}||'%']]>
-				order by vh.VACATION_END_DATE DESC
-			</when> <!-- date date2 부서 -->
-            
-            
-            
-            
-			<when test= " Select.equals('사원명') and p_text != '' and p_text != null and date != ''  and  date != null "> 
-				and TO_DATE(VACATION_START_DATE, 'YYYY-MM-DD') <![CDATA[>=]]> #{date}
-				and e.employee_name LIKE <![CDATA['%'||#{p_text,jdbcType=VARCHAR}||'%']]>
-				order by vh.VACATION_END_DATE DESC 
-			</when> <!-- date null 사원명 -->
-			
-			<when test= " Select.equals('부서') and p_text != '' and p_text != null and date != ''  and  date != null "> 
-                and TO_DATE(VACATION_START_DATE, 'YYYY-MM-DD') <![CDATA[>=]]> #{date}
-				and d.department_name LIKE <![CDATA['%'||#{p_text,jdbcType=VARCHAR}||'%']]>
-				order by vh.VACATION_END_DATE DESC
-			</when> <!-- date null 부서 -->
-			
-			<when test= " Select.equals('사원명') and p_text != '' and p_text != null and date2 != '' and date2 != null "> 
-				and TO_DATE(VACATION_END_DATE, 'YYYY-MM-DD') <![CDATA[<=]]> #{date2}
-				and e.employee_name LIKE <![CDATA['%'||#{p_text,jdbcType=VARCHAR}||'%']]>
-				order by vh.VACATION_END_DATE DESC
-			</when> <!-- null date2 사원명 -->
-			
-			<when test= " Select.equals('부서') and p_text != '' and p_text != null and date2 != '' and date2 != null"> 
-				and TO_DATE(VACATION_END_DATE, 'YYYY-MM-DD') <![CDATA[<=]]> #{date2}
-				and d.department_name LIKE <![CDATA['%'||#{p_text,jdbcType=VARCHAR}||'%']]>
-				order by vh.VACATION_END_DATE DESC
-			</when> <!-- null date2 부서 -->
-			
-			<when test= " date != ''  and  date != null and date2 != '' and date2 != null "> 
-				and TO_DATE(VACATION_START_DATE, 'YYYY-MM-DD') <![CDATA[>=]]> #{date}
-                and TO_DATE(VACATION_END_DATE, 'YYYY-MM-DD') <![CDATA[<=]]> #{date2}
-				order by vh.VACATION_END_DATE DESC 
-			</when> <!-- date date2 null -->
-			
-            <when test= " date2 != '' and date2 != null "> 
-				and TO_DATE(VACATION_END_DATE, 'YYYY-MM-DD') <![CDATA[<=]]> #{date2}
-				order by vh.VACATION_END_DATE DESC 
-			</when> <!-- null date2 null -->
-		
-			<when test= " date != ''  and  date != null "> 
-				and TO_DATE(VACATION_START_DATE, 'YYYY-MM-DD') <![CDATA[>=]]> #{date}
-				order by vh.VACATION_END_DATE DESC 
-			</when> <!-- date null null -->
 
-            <when test= " Select.equals('사원명') and p_text != '' and p_text != null "> 
-				and e.employee_name LIKE <![CDATA['%'||#{p_text,jdbcType=VARCHAR}||'%']]>
-				order by vh.VACATION_END_DATE DESC 
-			</when> <!-- null null 사원명 -->
-			
-			<when test= " Select.equals('부서') and p_text != '' and p_text != null "> 
-	     		and d.department_name LIKE <![CDATA['%'||#{p_text,jdbcType=VARCHAR}||'%']]>
-				order by vh.VACATION_END_DATE DESC 
-			</when> <!-- null null 부서 -->
-		
-			<otherwise>
-			    order by vh.VACATION_END_DATE DESC
-			</otherwise> <!-- 조건x(전체조회) -->
-	   </choose>
+    <choose>
+	  <when test="date != null and date !='' ">
+	  and TO_DATE(VACATION_START_DATE, 'YYYY-MM-DD') <![CDATA[>=]]> #{date}
+	  </when>
+	</choose>
+	
+	<choose>
+	  <when test="date2 != null and date2 !='' ">
+	  and TO_DATE(VACATION_END_DATE, 'YYYY-MM-DD') <![CDATA[<=]]> #{date2}
+	  </when>
+	</choose>
+	
+	<choose>
+	  <when test="vacaTYPE != null and vacaTYPE !='' ">
+	  and vacation_type = #{vacaTYPE}
+	  </when>
+	</choose>
+	
+	<choose>
+	  <when test="SiteList != null and SiteList !='' ">
+      and s.site_name=#{SiteList}
+	  </when>
+	</choose>
+	
+	<choose>
+	  <when test="DeptList != null and DeptList !='' ">
+      and d.department_name=#{DeptList}
+	  </when>
+	</choose>
+	
+	<choose>
+	  <when test="Employee_Select.equals('employee_name') and p_text != null and p_text !='' ">
+      and e.employee_name LIKE <![CDATA['%'||#{p_text,jdbcType=VARCHAR}||'%']]>
+	  </when>
+	</choose>
+	
+	<choose>
+	  <when test="Employee_Select.equals('employee_code') and p_text != null and p_text !='' ">
+      and e.employee_code LIKE <![CDATA['%'||#{p_text,jdbcType=VARCHAR}||'%']]>
+	  </when>
+	</choose>
+	
+	order by vh.VACATION_END_DATE DESC
+            
+            
 	</select>
 
 

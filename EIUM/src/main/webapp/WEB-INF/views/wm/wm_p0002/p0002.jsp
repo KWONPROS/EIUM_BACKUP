@@ -17,6 +17,7 @@
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script type="text/javascript" src="${contextPath}/resources/js/jquery.mtz.monthpicker.js"></script>
 <script type="text/javascript">
+
 	var pageheightoffset = 200; //시트높이 계산용
 
 	//sheet 기본설정
@@ -82,11 +83,9 @@
 			break;
 		case "reset":
 			mySheet.RemoveAll();
-		    $('#date').attr('value', "");
-		    $('#vacaTYPE').attr('value', "");
-		    $('#Select').attr('value', "");
-		    $('#p_text').attr('value', "");
-		    $('#p_text').attr('placeholder', "내용을 입력해주세요.");
+			$("form").each(function() {  
+	            this.reset();
+	         });  
 			break;
 		case "save":
 			mySheet.DoSave("${contextPath}/wm/p0002/saveData.do");
@@ -222,6 +221,85 @@
 		mySheet.DoSearch("${contextPath}/wm/p0002/searchList.do", param);
 	}
 	
+	function selectSite() {
+		$.ajax({
+
+					url : "${contextPath}/sm/p0006/SiteList.do",//목록을 조회 할 url
+
+					type : "POST",
+
+					dataType : "JSON",
+
+					success : function(data) {
+
+						for (var i = 0; i < data['Data'].length; i++) {
+							
+							
+
+							var option = "<option name='1' value='" + data['Data'][i].site_NAME + "'>"
+									+ data['Data'][i].site_NAME + "</option>";
+
+							//대상 콤보박스에 추가
+
+							$('#SiteList').append(option);
+
+						}
+
+					},
+
+					error : function(jqxhr, status, error) {
+
+						alert("에러");
+
+					}
+
+				});
+
+	}
+
+	function selectDept() {
+
+		var SiteList = $('#SiteList').val();
+
+		$
+				.ajax({
+
+					url : "${contextPath}/sm/p0006/DeptList.do",//목록을 조회 할 url
+
+					type : "POST",
+
+					data : {
+						"SiteList" : SiteList
+					},
+
+					dataType : "JSON",
+
+					success : function(data) {
+						$(".1").remove();
+
+						for (var i = 0; i < data['Data'].length; i++) {
+
+							var option = "<option class='1' value='" + data['Data'][i].department_NAME + "'>"
+									+ data['Data'][i].department_NAME
+									+ "</option>";
+
+							//대상 콤보박스에 추가
+							$('#DeptList').append(option);
+
+						}
+
+					},
+
+					error : function(jqxhr, status, error) {
+
+						alert("에러");
+
+					}
+
+				});
+
+	}
+	
 	
 </script>
 
@@ -278,7 +356,7 @@ background-color: #2C3E50;
 	border-radius: 5px;
 	margin: 0 5px 0 70px;
 	vertical-align: middle;
-	margin-left: 120px;
+	margin-left: 45px;
 }
 #searchBar {
 	background: #EBEBEB;
@@ -332,10 +410,16 @@ background-color: #2C3E50;
 			<option value="특별휴가" >특별휴가</option>
 			<option value="경조휴가" >경조휴가</option>
 		</select>
-		<span class="searchBarTitle">조회조건</span> <select id="Select">
+		<span class="searchBarTitle">사업장</span> <select id="SiteList"  onchange="selectDept()">
+			<option value="" selected>전체</option>
+		</select>
+		<span class="searchBarTitle">부서</span><select id="DeptList">
+			<option value="" selected>전체</option>
+		</select>
+		<span class="searchBarTitle" >조회조건</span><select id="Employee_Select" style="width: 70px;">
 		    <option value="" selected>구분</option>
-			<option value="사업장">사업장</option>
-			<option value="부서">부서</option>
+			<option value="employee_name">사원명</option>
+			<option value="employee_code">사원코드</option>
 		</select>
 		<input type="text" id="p_text" placeholder="내용을 입력해주세요.">
         </div>
@@ -344,6 +428,8 @@ background-color: #2C3E50;
 		<div style="position: absolute; top: 220px; left: 70px;">
 			<script type="text/javascript">
 				createIBSheet("mySheet", "1500px", "600px");
+				selectSite();
+				selectDept();
 			</script>
 		</div>
     <input type="hidden" id="PemployeeCode">

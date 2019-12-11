@@ -50,6 +50,9 @@ public class WM_P0005ControllerImpl implements WM_P0005Controller{
 		
 		searchMap.put("date", request.getParameter("date"));
 		searchMap.put("date2", request.getParameter("date2"));
+		searchMap.put("SiteList", request.getParameter("SiteList"));
+		searchMap.put("DeptList", request.getParameter("DeptList"));
+		searchMap.put("Employee_Select", request.getParameter("Employee_Select"));
 		searchMap.put("p_text", request.getParameter("p_text"));
 		
 		List<WM_P0005VO> data = WM_P0005Service.searchList(searchMap);

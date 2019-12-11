@@ -48,81 +48,47 @@
          and ew.position_code = p.position_code
          and d.site_code = s.site_code
       ]]>
-      <choose>
-             <when test= " Select.equals('사업장') and p_text != '' and p_text != null and date != ''  and  date != null and vacaTYPE != '' and vacaTYPE != null ">
-				and SUBSTR(TO_DATE(SUBSTR(VACATION_START_DATE,1,6), 'YYYY-MM'),1,5) <![CDATA[<=]]> #{date,jdbcType=VARCHAR}
-				and SUBSTR(TO_DATE(SUBSTR(VACATION_END_DATE,1,6), 'YYYY-MM'),1,5) <![CDATA[>=]]> #{date,jdbcType=VARCHAR}
-				and vacation_type = #{vacaTYPE}
-				and s.site_name LIKE <![CDATA['%'||#{p_text,jdbcType=VARCHAR}||'%']]>
-				order by vh.VACATION_END_DATE DESC 
-			</when> <!-- 귀속연월 근태종류 사업장 -->
-      
-             <when test= " Select.equals('부서') and p_text != '' and p_text != null and date != ''  and  date != null and vacaTYPE != '' and vacaTYPE != null ">
-				and SUBSTR(TO_DATE(SUBSTR(VACATION_START_DATE,1,6), 'YYYY-MM'),1,5) <![CDATA[<=]]> #{date,jdbcType=VARCHAR}
-				and SUBSTR(TO_DATE(SUBSTR(VACATION_END_DATE,1,6), 'YYYY-MM'),1,5) <![CDATA[>=]]> #{date,jdbcType=VARCHAR}
-				and vacation_type = #{vacaTYPE}
-				and d.department_name LIKE <![CDATA['%'||#{p_text,jdbcType=VARCHAR}||'%']]>
-				order by vh.VACATION_END_DATE DESC 
-			</when> <!-- 귀속연월 근태종류 부서 -->
-      
-            <when test= " date != ''  and  date != null and vacaTYPE != '' and vacaTYPE != null ">
-				and SUBSTR(TO_DATE(SUBSTR(VACATION_START_DATE,1,6), 'YYYY-MM'),1,5) <![CDATA[<=]]> #{date,jdbcType=VARCHAR}
-				and SUBSTR(TO_DATE(SUBSTR(VACATION_END_DATE,1,6), 'YYYY-MM'),1,5) <![CDATA[>=]]> #{date,jdbcType=VARCHAR}
-				and vacation_type = #{vacaTYPE}
-				order by vh.VACATION_END_DATE DESC
-			</when> <!-- 귀속연월 근태종류 -->
-            
-			<when test= " Select.equals('사업장') and p_text != '' and p_text != null and date != ''  and  date != null "> 
-                and SUBSTR(TO_DATE(SUBSTR(VACATION_START_DATE,1,6), 'YYYY-MM'),1,5) <![CDATA[<=]]> #{date,jdbcType=VARCHAR}
-				and SUBSTR(TO_DATE(SUBSTR(VACATION_END_DATE,1,6), 'YYYY-MM'),1,5) <![CDATA[>=]]> #{date,jdbcType=VARCHAR}
-				and s.site_name LIKE <![CDATA['%'||#{p_text,jdbcType=VARCHAR}||'%']]>
-				order by vh.VACATION_END_DATE DESC 
-			</when> <!-- 귀속연월 null 사업장 -->
-			
-			<when test= " Select.equals('부서') and p_text != '' and p_text != null and date != ''  and  date != null "> 
-                and SUBSTR(TO_DATE(SUBSTR(VACATION_START_DATE,1,6), 'YYYY-MM'),1,5) <![CDATA[<=]]> #{date,jdbcType=VARCHAR}
-				and SUBSTR(TO_DATE(SUBSTR(VACATION_END_DATE,1,6), 'YYYY-MM'),1,5) <![CDATA[>=]]> #{date,jdbcType=VARCHAR}
-				and d.department_name LIKE <![CDATA['%'||#{p_text,jdbcType=VARCHAR}||'%']]>
-				order by vh.VACATION_END_DATE DESC
-			</when> <!-- 귀속연월 null 부서 -->
-			
-			<when test= " Select.equals('사업장') and p_text != '' and p_text != null and vacaTYPE != '' and vacaTYPE != null "> 
-				and vacation_type = #{vacaTYPE}
-				and s.site_name LIKE <![CDATA['%'||#{p_text,jdbcType=VARCHAR}||'%']]>
-				order by vh.VACATION_END_DATE DESC
-			</when> <!-- null 근태종류 사업장 -->
-			
-			<when test= " Select.equals('부서') and p_text != '' and p_text != null and vacaTYPE != '' and vacaTYPE != null "> 
-				and vacation_type = #{vacaTYPE}
-				and d.department_name LIKE <![CDATA['%'||#{p_text,jdbcType=VARCHAR}||'%']]>
-				order by vh.VACATION_END_DATE DESC
-			</when> <!-- null 근태종류 부서 -->
-			
-            <when test= " vacaTYPE != '' and vacaTYPE != null "> 
-				and vacation_type = #{vacaTYPE}
-				order by vh.VACATION_END_DATE DESC 
-			</when> <!-- null 근태종류 null -->
-
-            <when test= " Select.equals('사업장') and p_text != '' and p_text != null "> 
-				and s.site_name LIKE <![CDATA['%'||#{p_text,jdbcType=VARCHAR}||'%']]>
-				order by vh.VACATION_END_DATE DESC 
-			</when> <!-- null null 사업장 -->
-			
-			<when test= " Select.equals('부서') and p_text != '' and p_text != null "> 
-	     		and d.department_name LIKE <![CDATA['%'||#{p_text,jdbcType=VARCHAR}||'%']]>
-				order by vh.VACATION_END_DATE DESC 
-			</when> <!-- null null 부서 -->
-			
-			<when test= " date != ''  and  date != null "> 
-                and SUBSTR(TO_DATE(SUBSTR(VACATION_START_DATE,1,6), 'YYYY-MM'),1,5) <![CDATA[<=]]> #{date,jdbcType=VARCHAR}
-				and SUBSTR(TO_DATE(SUBSTR(VACATION_END_DATE,1,6), 'YYYY-MM'),1,5) <![CDATA[>=]]> #{date,jdbcType=VARCHAR}
-				order by vh.VACATION_END_DATE DESC
-			</when> <!-- 귀속연월 -->
-		
-			<otherwise>
-			    order by vh.VACATION_END_DATE DESC
-			</otherwise> <!-- 조건x(전체조회) -->
-	   </choose>
+     
+    <choose>
+	  <when test="date != null and date !='' ">
+	  and SUBSTR(TO_DATE(SUBSTR(VACATION_START_DATE,1,6), 'YYYY-MM'),1,5) <![CDATA[<=]]> #{date,jdbcType=VARCHAR}
+	  and SUBSTR(TO_DATE(SUBSTR(VACATION_END_DATE,1,6), 'YYYY-MM'),1,5) <![CDATA[>=]]> #{date,jdbcType=VARCHAR}
+	  </when>
+	</choose>
+	
+	<choose>
+	  <when test="vacaTYPE != null and vacaTYPE !='' ">
+	  and vacation_type = #{vacaTYPE}
+	  </when>
+	</choose>
+	
+	<choose>
+	  <when test="SiteList != null and SiteList !='' ">
+      and s.site_name=#{SiteList}
+	  </when>
+	</choose>
+	
+	<choose>
+	  <when test="DeptList != null and DeptList !='' ">
+      and d.department_name=#{DeptList}
+	  </when>
+	</choose>
+	
+	<choose>
+	  <when test="Employee_Select.equals('employee_name') and p_text != null and p_text !='' ">
+      and e.employee_name LIKE <![CDATA['%'||#{p_text,jdbcType=VARCHAR}||'%']]>
+	  </when>
+	</choose>
+	
+	<choose>
+	  <when test="Employee_Select.equals('employee_code') and p_text != null and p_text !='' ">
+      and e.employee_code LIKE <![CDATA['%'||#{p_text,jdbcType=VARCHAR}||'%']]>
+	  </when>
+	</choose>
+	
+	order by vh.VACATION_END_DATE DESC
+     
+     
 	</select>
 	
 	<insert id="insertData" parameterType="java.util.Map">
