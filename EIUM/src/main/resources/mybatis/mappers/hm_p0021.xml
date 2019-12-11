@@ -38,7 +38,9 @@ AND etl.employee_training_code=#{eduCode}
 		ATTITUDE_SCORE=#{attitude_SCORE},
 		SCORE=#{score},
 		TOTAL=#{total},
-		ASSESSMENT_DESC=#{assessment_DESC}
+		ASSESSMENT_DESC=#{assessment_DESC},
+		upt_user_id = #{user, jdbcType=VARCHAR},
+		upt_date = sysdate
 		
 		
 		

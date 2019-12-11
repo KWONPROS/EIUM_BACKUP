@@ -14,15 +14,11 @@ public interface HM_P0022Service {
 
 	List<HM_P0022VO> appointList2(Map<String, Object> searchMap) throws DataAccessException;
 
-	void saveData1(Map<String, String[]> dataMap) throws DataAccessException;
-
 	List<HM_P0022VO> masterEmployee_p02(Map<String, Object> searchMap) throws DataAccessException;
 
 	List<HM_P0022VO> homeEmployeeSearch(Map<String, Object> searchMap) throws DataAccessException;
 
 	List<HM_P0022VO> homeSearch_p03(Map<String, Object> searchMap) throws DataAccessException;
-
-	void saveData2(Map<String, String[]> dataMap) throws DataAccessException;
 
 	List<HM_P0022VO> homeSearch_p02(Map<String, Object> searchMap) throws DataAccessException;
 
@@ -30,11 +26,16 @@ public interface HM_P0022Service {
 
 	List<HM_P0022VO> homeSearch_p05(Map<String, Object> searchMap) throws DataAccessException;
 
-	void saveData3(Map<String, String[]> dataMap) throws DataAccessException;
-
-	void saveData4(Map<String, String[]> dataMap) throws DataAccessException;
 
 	List<HM_P0022VO> appointList3(Map<String, Object> searchMap) throws DataAccessException;
+
+	void saveData1(Map<String, String[]> dataMap, String u) throws DataAccessException;
+
+	void saveData2(Map<String, String[]> dataMap, String u) throws DataAccessException;
+
+	void saveData3(Map<String, String[]> dataMap, String u) throws DataAccessException;
+
+	void saveData4(Map<String, String[]> dataMap, String u) throws DataAccessException;
 
 
 

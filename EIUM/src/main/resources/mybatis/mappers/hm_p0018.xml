@@ -73,13 +73,15 @@
 		   , EMPLOYEE_TRAINING_TIME = #{employee_TRAINING_TIME}
 		   , EMPLOYEE_TRAINING_PEOPLE = #{employee_TRAINING_PEOPLE}
 		   , EMPLOYEE_TRAINING_IN_OUT = #{employee_TRAINING_IN_OUT}
+    	   , upt_user_id = #{user, jdbcType=VARCHAR}
+		   , upt_date = sysdate
 
 		where EMPLOYEE_TRAINING_CODE = #{employee_TRAINING_CODE}
 	</update>	
 	
  <insert id="insertData" parameterType="java.util.Map">
-		insert into EMPLOYEE_TRAINING(EMPLOYEE_TRAINING_CODE,EMPLOYEE_TRAINING_NAME,EMPLOYEE_TRAINING_START_DATE,EMPLOYEE_TRAINING_END_DATE,EMPLOYEE_TRAINING_DATE_COUNT,EMPLOYEE_TRAINING_GOAL,EMPLOYEE_TRAINING_LOCATION,EMPLOYEE_TRAINING_TEACHER,EMPLOYEE_TRAINING_INSITUTION,EMPLOYEE_TRAINING_TIME,EMPLOYEE_TRAINING_PEOPLE,EMPLOYEE_TRAINING_IN_OUT) 
-		values(#{employee_TRAINING_CODE},#{employee_TRAINING_NAME},#{employee_TRAINING_START_DATE},#{employee_TRAINING_END_DATE},#{employee_TRAINING_DATE_COUNT},#{employee_TRAINING_GOAL}, #{employee_TRAINING_LOCATION},#{employee_TRAINING_TEACHER},#{employee_TRAINING_INSITUTION},#{employee_TRAINING_TIME},#{employee_TRAINING_PEOPLE},#{employee_TRAINING_IN_OUT})
+		insert into EMPLOYEE_TRAINING(EMPLOYEE_TRAINING_CODE,EMPLOYEE_TRAINING_NAME,EMPLOYEE_TRAINING_START_DATE,EMPLOYEE_TRAINING_END_DATE,EMPLOYEE_TRAINING_DATE_COUNT,EMPLOYEE_TRAINING_GOAL,EMPLOYEE_TRAINING_LOCATION,EMPLOYEE_TRAINING_TEACHER,EMPLOYEE_TRAINING_INSITUTION,EMPLOYEE_TRAINING_TIME,EMPLOYEE_TRAINING_PEOPLE,EMPLOYEE_TRAINING_IN_OUT,int_user_id, int_date) 
+		values(#{employee_TRAINING_CODE},#{employee_TRAINING_NAME},#{employee_TRAINING_START_DATE},#{employee_TRAINING_END_DATE},#{employee_TRAINING_DATE_COUNT},#{employee_TRAINING_GOAL}, #{employee_TRAINING_LOCATION},#{employee_TRAINING_TEACHER},#{employee_TRAINING_INSITUTION},#{employee_TRAINING_TIME},#{employee_TRAINING_PEOPLE},#{employee_TRAINING_IN_OUT},#{user},sysdate)
 	</insert>	
 	
 	<delete id="deleteData" parameterType="java.util.Map">
@@ -115,14 +117,16 @@
 	
 	<update id="emplyoeeListupdateData" parameterType="java.util.Map">
 		update EMPLOYEE_TRAINING_LIST
-		set  employee_CODE=#{employee_CODE}
+		set  employee_CODE=#{employee_CODE}, upt_user_id = #{user, jdbcType=VARCHAR}, upt_date = sysdate
+		
 		where employee_CODE=#{employee_CODE}
 
 	</update>	
 	
  <insert id="emplyoeeListinsertData" parameterType="java.util.Map">
-		insert into EMPLOYEE_TRAINING_LIST(employee_CODE,EMPLOYEE_TRAINING_CODE,CODE) 
-		values(#{employee_CODE},#{employee_TRAINING_CODE,jdbcType=VARCHAR},EMPLOYEE_TRAINING_LIST_CODE.NEXTVAL)
+		insert into EMPLOYEE_TRAINING_LIST(employee_CODE,EMPLOYEE_TRAINING_CODE,CODE,int_user_id, int_date) 
+		values(#{employee_CODE},#{employee_TRAINING_CODE,jdbcType=VARCHAR},EMPLOYEE_TRAINING_LIST_CODE.NEXTVAL,#{user},sysdate
+		)
 	</insert>	
 	
 	<delete id="emplyoeeListdeleteData" parameterType="java.util.Map">

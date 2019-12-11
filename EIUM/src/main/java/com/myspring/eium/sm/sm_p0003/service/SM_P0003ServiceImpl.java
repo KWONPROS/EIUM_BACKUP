@@ -30,13 +30,13 @@ public class SM_P0003ServiceImpl implements SM_P0003Service {
 
 
 	@Override
-	public void saveData(Map<String, String[]> dataMap) throws DataAccessException {
+	public void saveData(Map<String, String[]> dataMap,String u) throws DataAccessException {
 		String[] status = dataMap.get("Status");
 		int length = status.length; // row수
 		int i = 0;
 		
 		for(String str : status) {
-			Map<String, String> row = getRow(dataMap, length, i); // 현재 Index의 Row Map
+			Map<String, String> row = getRow(dataMap, length, i,u); // 현재 Index의 Row Map
 			if("I".equals(str)) { // 추가
 				sM_P0003DAO.insertData(row);
 			}else if("U".equals(str)) { // 수정
@@ -48,12 +48,13 @@ public class SM_P0003ServiceImpl implements SM_P0003Service {
 		}
 	}
 	
-	private Map getRow(Map<String, String[]> dataMap, int length, int index) {
+	private Map getRow(Map<String, String[]> dataMap, int length, int index,String u) {
 		Map<String, String> row = new HashMap<String, String>();
 		for(String name : dataMap.keySet()) {
 			String[] data = dataMap.get(name);
 			if(length == data.length) {
 				row.put(name, data[index]);
+				row.put("user",u);
 			}
 		}		
 		return row;
@@ -70,13 +71,13 @@ public class SM_P0003ServiceImpl implements SM_P0003Service {
 	}
 	
 	@Override
-	public void saveDatapopup(Map<String, String[]> dataMap) throws DataAccessException {
+	public void saveDatapopup(Map<String, String[]> dataMap,String u) throws DataAccessException {
 		String[] status = dataMap.get("Status");
 		int length = status.length; // row��
 		int i = 0;
 		
 		for(String str : status) {
-			Map<String, String> row = getRow(dataMap, length, i); // ���� Index�� Row Map
+			Map<String, String> row = getRow(dataMap, length, i,u); // ���� Index�� Row Map
 			if("I".equals(str)) { // �߰�
 				sM_P0003DAO.insertDatapopup(row);
 			}else if("U".equals(str)) { // ����
