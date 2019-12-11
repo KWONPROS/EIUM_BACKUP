@@ -26,6 +26,34 @@ public class HM_P0007DAOImpl implements HM_P0007DAO {
 		List<HM_P0007VO> list = sqlSession.selectList("mapper.hm_p0007.searchList", searchMap);
 		return list;
 	}
+	
+	@Override
+	public List<HM_P0007VO> languageList(Map<String, Object> searchMap) throws DataAccessException {
+		System.out.println("searchMAp: "+searchMap);
+		List<HM_P0007VO> list = sqlSession.selectList("mapper.hm_p0007.languageList", searchMap);
+		return list;
+	}
+	
+	@Override
+	public List<HM_P0007VO> licenseList(Map<String, Object> searchMap) throws DataAccessException {
+		System.out.println("searchMAp: "+searchMap);
+		List<HM_P0007VO> list = sqlSession.selectList("mapper.hm_p0007.licenseList", searchMap);
+		return list;
+	}
+	
+	@Override
+	public List<HM_P0007VO> assessmentList(Map<String, Object> searchMap) throws DataAccessException {
+		System.out.println("searchMAp: "+searchMap);
+		List<HM_P0007VO> list = sqlSession.selectList("mapper.hm_p0007.assessmentList", searchMap);
+		return list;
+	}
+	
+	@Override
+	public List<HM_P0007VO> rnpList(Map<String, Object> searchMap) throws DataAccessException {
+		System.out.println("searchMAp: "+searchMap);
+		List<HM_P0007VO> list = sqlSession.selectList("mapper.hm_p0007.rnpList", searchMap);
+		return list;
+	}
 
 	@Override
 	public void insertData(Map<String, String> row) throws DataAccessException {
@@ -43,10 +71,6 @@ public class HM_P0007DAOImpl implements HM_P0007DAO {
 	}
 	
 
-	@Override
-	public Map<String, Object> getByteImage(Map<String, Object> searchMap) {
-		System.out.println("dao확인 :"+searchMap.get("employee_code"));
-		return sqlSession.selectOne("mapper.hm_p0007.getByteImage" ,searchMap);
-	}
+
 
 }

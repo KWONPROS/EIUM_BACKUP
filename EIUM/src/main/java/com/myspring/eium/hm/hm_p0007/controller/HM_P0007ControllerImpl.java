@@ -47,6 +47,42 @@ public class HM_P0007ControllerImpl implements HM_P0007Controller {
 		ModelAndView mav = new ModelAndView("hm/hm_p0007/p0007");
 	
 		return mav;
+	}
+	
+	@Override
+	@RequestMapping(value = "/hm/p0007/language_Popup.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView language_Popup(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("hm/hm_p0007/p0007_languageList");
+	
+		return mav;
+	} 
+	
+	@Override
+	@RequestMapping(value = "/hm/p0007/license_Popup.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView license_Popup(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("hm/hm_p0007/p0007_licenseList");
+	
+		return mav;
+	} 
+	
+	@Override
+	@RequestMapping(value = "/hm/p0007/assessment_Popup.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView assessment_Popup(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("hm/hm_p0007/p0007_assessmentList");
+	
+		return mav;
+	} 
+	
+	@Override
+	@RequestMapping(value = "/hm/p0007/rnp_Popup.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView rnp_Popup(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("hm/hm_p0007/p0007_rnpList");
+	
+		return mav;
 	} 
 	
 	@Override
@@ -69,6 +105,72 @@ public class HM_P0007ControllerImpl implements HM_P0007Controller {
     	System.out.println("resultMap::::"+resultMap);
         return resultMap;
 	}
+	
+	@Override
+	@RequestMapping(value = "/hm/p0007/license_List.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map license_List(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+		
+		
+		List<HM_P0007VO> data = hM_P0007Service.licenseList(searchMap);
+
+        resultMap.put("Data", data);
+    	System.out.println("resultMap::::"+resultMap);
+        return resultMap;
+	}
+	
+	@Override
+	@RequestMapping(value = "/hm/p0007/assessment_List.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map assessment_List(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+		
+		
+		List<HM_P0007VO> data = hM_P0007Service.assessmentList(searchMap);
+
+        resultMap.put("Data", data);
+    	System.out.println("resultMap::::"+resultMap);
+        return resultMap;
+	}
+	
+	@Override
+	@RequestMapping(value = "/hm/p0007/rnp_List.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map rnp_List(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+		
+		
+		List<HM_P0007VO> data = hM_P0007Service.rnpList(searchMap);
+
+        resultMap.put("Data", data);
+    	System.out.println("resultMap::::"+resultMap);
+        return resultMap;
+	}
+	
+	@Override
+	@RequestMapping(value = "/hm/p0007/language_List.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map language_List(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+		
+		
+		List<HM_P0007VO> data = hM_P0007Service.languageList(searchMap);
+
+        resultMap.put("Data", data);
+    	System.out.println("resultMap::::"+resultMap);
+        return resultMap;
+	}
+	
+	
 	
 	
 
@@ -112,43 +214,11 @@ public class HM_P0007ControllerImpl implements HM_P0007Controller {
 	}
 	
 	
-	@Override
-	@RequestMapping(value = "/hm/p0007/findAddress.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView findAddress(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView mav = new ModelAndView("/hm/hm_p0007/p0007Address");
-		return mav;
-
-	}
-	
-	@Override
-	@RequestMapping(value = "/hm/p0007/findAddress2.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView findAddress2(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView mav = new ModelAndView("/hm/hm_p0007/p0007Address2");
-		return mav;
-
-	}
 	
 	
 	
-	@Override
-	@RequestMapping(value = "/hm/p0007/getByteImage.do")
-	@ResponseBody
-	public ResponseEntity<byte[]> getByteImage(HttpServletRequest request, HttpServletResponse response)throws Exception {
-		
-		Map<String, Object> searchMap = new HashMap<String, Object>();
-		Map<String, Object> resultMap = new HashMap<String, Object>(); 
-
-		searchMap.put("employee_code", request.getParameter("employee_code"));
-		System.out.println("controller확인 :"+searchMap.get("employee_code"));
-		
-		resultMap = p0007dao.getByteImage(searchMap);
-		
-		byte[] imageContent = (byte[]) resultMap.get("picture");
-
-		final HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.IMAGE_PNG);
-		return new ResponseEntity<byte[]>(imageContent, headers, HttpStatus.OK);
-	}
+	
+	
 
 
 	

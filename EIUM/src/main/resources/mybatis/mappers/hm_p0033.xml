@@ -33,17 +33,17 @@
 
 	<select id = "hr_assessment_List" resultMap="P0033resultVO" parameterType="java.util.Map">
 	
-		select hr_assessment_code, hr_assessment_name
-		from hr_assessment
-		order by hr_assessment_code
+		select assessment_code, assessment_name
+		from assessment
+		order by assessment_code
 	</select>
 	
 	
 		<select id = "hr_rnp_List" resultMap="P0033resultVO" parameterType="java.util.Map">
 	
-		select hr_rnp_code, hr_rnp_name
-		from hr_rnp
-		order by hr_rnp_code
+		select rnp_code, rnp_name
+		from rnp
+		order by rnp_code
 		
 	</select>
 	
@@ -70,12 +70,13 @@
 	
 			<when test= " hr_assessment_code =='' and site_code  =='' and employee_code == '' and date =='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			order by e.employee_code
 			
 			]]> 
@@ -84,12 +85,13 @@
    		    
    		   	<when test= " hr_assessment_code =='' and site_code  =='' and employee_code == '' and date =='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			and  to_date(h.hr_assessment_test_end_date,'YYYY-MM-DD') <= to_date(#{date2},'YYYY-MM-DD')
 			order by e.employee_code
 			
@@ -99,12 +101,13 @@
    		    
    		   	<when test= " hr_assessment_code =='' and site_code  =='' and employee_code == '' and date !='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			and to_date(#{date},'YYYY-MM-DD') <= to_date(h.hr_assessment_test_start_date,'YYYY-MM-DD')
 			order by e.employee_code
 			]]> 
@@ -112,12 +115,13 @@
    		    
    		   	<when test= " hr_assessment_code =='' and site_code  =='' and employee_code != '' and date =='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			and e.employee_code = #{employee_code}
 			order by e.employee_code
 			]]> 
@@ -126,12 +130,13 @@
    		    
    		   	<when test= " hr_assessment_code =='' and site_code  !='' and employee_code == '' and date =='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			and s.site_code = #{site_code}
 			order by e.employee_code
 			]]> 
@@ -140,11 +145,12 @@
    		    
    		   	<when test= " hr_assessment_code !='' and site_code  =='' and employee_code == '' and date =='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
+			and a.assessment_code = h.assessment_code
 			and d.site_code = s.site_code
 			and h.hr_assessment_code = #{hr_assessment_code}
 			order by e.employee_code
@@ -155,12 +161,13 @@
    		    
    		    <when test= " hr_assessment_code !='' and site_code  !='' and employee_code == '' and date =='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			and h.hr_assessment_code = #{hr_assessment_code}
 			and s.site_code = #{site_code}
 			order by e.employee_code
@@ -171,12 +178,13 @@
    		    
    		    <when test= " hr_assessment_code !='' and site_code  =='' and employee_code != '' and date =='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			and h.hr_assessment_code = #{hr_assessment_code}
 			and e.employee_code = #{employee_code}
 			order by e.employee_code
@@ -186,12 +194,13 @@
    		    
    		    <when test= " hr_assessment_code !='' and site_code  =='' and employee_code == '' and date !='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			and h.hr_assessment_code = #{hr_assessment_code}
 			and  to_date(#{date},'YYYY-MM-DD') <= to_date(h.hr_assessment_test_start_date,'YYYY-MM-DD')
 			order by e.employee_code
@@ -202,12 +211,13 @@
    		    
    		    <when test= " hr_assessment_code !='' and site_code  =='' and employee_code == '' and date =='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			and h.hr_assessment_code = #{hr_assessment_code}
 			and  to_date(h.hr_assessment_test_end_date,'YYYY-MM-DD') <= to_date(#{date2},'YYYY-MM-DD')
 			order by e.employee_code
@@ -218,12 +228,13 @@
    		    
    		    <when test= " hr_assessment_code =='' and site_code  !='' and employee_code != '' and date =='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			and s.site_code = #{site_code}
 			and e.employee_code = #{employee_code}
 			order by e.employee_code
@@ -234,12 +245,13 @@
    		    
    		    <when test= " hr_assessment_code =='' and site_code  !='' and employee_code == '' and date !='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			and s.site_code = #{site_code}
 			and  to_date(#{date},'YYYY-MM-DD') <= to_date(h.hr_assessment_test_start_date,'YYYY-MM-DD')
 			order by e.employee_code
@@ -250,12 +262,13 @@
    		    
    		    <when test= " hr_assessment_code =='' and site_code  !='' and employee_code == '' and date =='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
 			from employee e, hr_assessment h, employee_work ew, department d, site s
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			and s.site_code = #{site_code}
 			and  to_date(h.hr_assessment_test_end_date,'YYYY-MM-DD') <= to_date(#{date2},'YYYY-MM-DD')
 			order by e.employee_code
@@ -266,12 +279,13 @@
    		    
    		    <when test= " hr_assessment_code =='' and site_code  =='' and employee_code != '' and date !='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			and e.employee_code = #{employee_code}
 			and  to_date(#{date},'YYYY-MM-DD') <= to_date(h.hr_assessment_test_start_date,'YYYY-MM-DD')
 			order by e.employee_code
@@ -282,12 +296,13 @@
    		    
    		    <when test= " hr_assessment_code =='' and site_code  =='' and employee_code != '' and date =='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			and e.employee_code = #{employee_code}
 			and  to_date(h.hr_assessment_test_end_date,'YYYY-MM-DD') <= to_date(#{date2},'YYYY-MM-DD')
 			order by e.employee_code
@@ -298,12 +313,13 @@
    		    
    		    <when test= " hr_assessment_code =='' and site_code  =='' and employee_code == '' and date !='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			and  to_date(#{date},'YYYY-MM-DD') <= to_date(h.hr_assessment_test_start_date,'YYYY-MM-DD')
 			and  to_date(h.hr_assessment_test_end_date,'YYYY-MM-DD') <= to_date(#{date2},'YYYY-MM-DD')
 			order by e.employee_code
@@ -315,12 +331,13 @@
 	
 			<when test= " hr_assessment_code !='' and site_code  !='' and employee_code != '' and date =='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			and h.hr_assessment_code = #{hr_assessment_code}
 			and s.site_code = #{site_code}
 			and e.employee_code = #{employee_code}
@@ -331,12 +348,13 @@
    		    
 			<when test= " hr_assessment_code !='' and site_code  !='' and employee_code == '' and date !='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			and h.hr_assessment_code = #{hr_assessment_code}
 			and s.site_code = #{site_code}
 			and  to_date(#{date},'YYYY-MM-DD') <= to_date(h.hr_assessment_test_start_date,'YYYY-MM-DD')
@@ -347,12 +365,13 @@
 
 			<when test= " hr_assessment_code !='' and site_code  !='' and employee_code == '' and date =='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			and h.hr_assessment_code = #{hr_assessment_code}
 			and s.site_code = #{site_code}
 			and  to_date(h.hr_assessment_test_end_date,'YYYY-MM-DD') <= to_date(#{date2},'YYYY-MM-DD')
@@ -363,12 +382,13 @@
    		    
    		    <when test= " hr_assessment_code !='' and site_code  =='' and employee_code != '' and date !='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			and h.hr_assessment_code = #{hr_assessment_code}
 			and e.employee_code = #{employee_code}
 			and  to_date(#{date},'YYYY-MM-DD') <= to_date(h.hr_assessment_test_start_date,'YYYY-MM-DD')
@@ -379,12 +399,13 @@
    		    
    		    <when test= " hr_assessment_code !='' and site_code  =='' and employee_code != '' and date =='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			and h.hr_assessment_code = #{hr_assessment_code}
 			and e.employee_code = #{employee_code}
 			and  to_date(h.hr_assessment_test_end_date,'YYYY-MM-DD') <= to_date(#{date2},'YYYY-MM-DD')
@@ -394,12 +415,13 @@
    		    
    		    <when test= " hr_assessment_code !='' and site_code  =='' and employee_code == '' and date !='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			and h.hr_assessment_code = #{hr_assessment_code}
 			and  to_date(#{date},'YYYY-MM-DD') <= to_date(h.hr_assessment_test_start_date,'YYYY-MM-DD')
 			and  to_date(h.hr_assessment_test_end_date,'YYYY-MM-DD') <= to_date(#{date2},'YYYY-MM-DD')
@@ -409,12 +431,13 @@
    		    
    		    <when test= " hr_assessment_code =='' and site_code  !='' and employee_code != '' and date !='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			and s.site_code = #{site_code}
 			and e.employee_code = #{employee_code}
 			and  to_date(#{date},'YYYY-MM-DD') <= to_date(h.hr_assessment_test_start_date,'YYYY-MM-DD')
@@ -424,11 +447,12 @@
    		    
    		    <when test= " hr_assessment_code =='' and site_code  !='' and employee_code != '' and date =='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
+			and a.assessment_code = h.assessment_code
 			and d.site_code = s.site_code
 			and s.site_code = #{site_code}
 			and e.employee_code = #{employee_code}
@@ -439,12 +463,13 @@
    		    
    		    <when test= " hr_assessment_code =='' and site_code  !='' and employee_code == '' and date !='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			and s.site_code = #{site_code}
 			and  to_date(#{date},'YYYY-MM-DD') <= to_date(h.hr_assessment_test_start_date,'YYYY-MM-DD')
 			and  to_date(h.hr_assessment_test_end_date,'YYYY-MM-DD') <= to_date(#{date2},'YYYY-MM-DD')
@@ -455,12 +480,13 @@
    		    
    		    <when test= " hr_assessment_code =='' and site_code  =='' and employee_code != '' and date !='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			and e.employee_code = #{employee_code}
 			and  to_date(#{date},'YYYY-MM-DD') <= to_date(h.hr_assessment_test_start_date,'YYYY-MM-DD')
 			and  to_date(h.hr_assessment_test_end_date,'YYYY-MM-DD') <= to_date(#{date2},'YYYY-MM-DD')
@@ -470,12 +496,13 @@
    		    
    		    <when test= " hr_assessment_code !='' and site_code  !='' and employee_code != '' and date !='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			and h.hr_assessment_code = #{hr_assessment_code}
 			and s.site_code = #{site_code}
 			and e.employee_code = #{employee_code}
@@ -486,12 +513,13 @@
    		    
    		    <when test= " hr_assessment_code !='' and site_code  !='' and employee_code != '' and date =='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			and h.hr_assessment_code = #{hr_assessment_code}
 			and s.site_code = #{site_code}
 			and e.employee_code = #{employee_code}
@@ -503,12 +531,13 @@
    		    
    		    <when test= " hr_assessment_code !='' and site_code  !='' and employee_code == '' and date !='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			and h.hr_assessment_code = #{hr_assessment_code}
 			and s.site_code = #{site_code}
 			and  to_date(#{date},'YYYY-MM-DD') <= to_date(h.hr_assessment_test_start_date,'YYYY-MM-DD')
@@ -520,12 +549,13 @@
    		    
    		    <when test= " hr_assessment_code !='' and site_code  =='' and employee_code != '' and date !='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			and h.hr_assessment_code = #{hr_assessment_code}
 			and e.employee_code = #{employee_code}
 			and  to_date(#{date},'YYYY-MM-DD') <= to_date(h.hr_assessment_test_start_date,'YYYY-MM-DD')
@@ -536,12 +566,13 @@
    		    
    		    <when test= " hr_assessment_code =='' and site_code  !='' and employee_code != '' and date !='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			and s.site_code = #{site_code}
 			and e.employee_code = #{employee_code}
 			and  to_date(#{date},'YYYY-MM-DD') <= to_date(h.hr_assessment_test_start_date,'YYYY-MM-DD')
@@ -555,12 +586,13 @@
 	
 			<when test= " hr_assessment_code !='' and site_code  !='' and employee_code != '' and date !='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
-			from employee e, hr_assessment h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+			from employee e, hr_assessment h, employee_work ew, department d, site s, assessment a
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and a.assessment_code = h.assessment_code
 			and h.hr_assessment_code = #{hr_assessment_code}
 			and s.site_code = #{site_code}
 			and e.employee_code = #{employee_code}
@@ -580,12 +612,13 @@
 	
 			<when test= " hr_rnp_code =='' and site_code  =='' and employee_code == '' and date =='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and r.rnp_code =h.rnp_code
 			
 			]]> 
    		    </when>	
@@ -593,10 +626,11 @@
    		    
    		   	<when test= " hr_rnp_code =='' and site_code  =='' and employee_code == '' and date =='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
+			and r.rnp_code =h.rnp_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
 			and  to_date(h.hr_rnp_end_date,'YYYY-MM-DD') <= to_date(#{date2},'YYYY-MM-DD')
@@ -608,10 +642,11 @@
    		    
    		   	<when test= " hr_rnp_code =='' and site_code  =='' and employee_code == '' and date !='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
+			and r.rnp_code =h.rnp_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
 			and to_date(#{date},'YYYY-MM-DD') <= to_date(h.hr_rnp_start_date,'YYYY-MM-DD')
@@ -620,10 +655,11 @@
    		    
    		   	<when test= " hr_rnp_code =='' and site_code  =='' and employee_code != '' and date =='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index,  h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index,  h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
+			and r.rnp_code =h.rnp_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
 			and e.employee_code = #{employee_code}
@@ -633,10 +669,11 @@
    		    
    		   	<when test= " hr_rnp_code =='' and site_code  !='' and employee_code == '' and date =='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
+			and r.rnp_code =h.rnp_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
 			and s.site_code = #{site_code}
@@ -646,11 +683,12 @@
    		    
    		   	<when test= " hr_rnp_code !='' and site_code  =='' and employee_code == '' and date =='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
+			and r.rnp_code =h.rnp_code
 			and d.site_code = s.site_code
 			and h.hr_rnp_code = #{hr_rnp_code}
 			]]> 
@@ -660,11 +698,12 @@
    		    
    		    <when test= " hr_rnp_code !='' and site_code  !='' and employee_code == '' and date =='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
+			and r.rnp_code =h.rnp_code
 			and d.site_code = s.site_code
 			and h.hr_rnp_code = #{hr_rnp_code}
 			and s.site_code = #{site_code}
@@ -675,11 +714,12 @@
    		    
    		    <when test= " hr_rnp_code !='' and site_code  =='' and employee_code != '' and date =='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
+			and r.rnp_code =h.rnp_code
 			and d.site_code = s.site_code
 			and h.hr_rnp_code = #{hr_rnp_code}
 			and e.employee_code = #{employee_code}
@@ -689,11 +729,12 @@
    		    
    		    <when test= " hr_rnp_code !='' and site_code  =='' and employee_code == '' and date !='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
+			and r.rnp_code =h.rnp_code
 			and d.site_code = s.site_code
 			and h.hr_rnp_code = #{hr_rnp_code}
 			and  to_date(#{date},'YYYY-MM-DD') <= to_date(h.hr_rnp_start_date,'YYYY-MM-DD')
@@ -704,11 +745,12 @@
    		    
    		    <when test= " hr_rnp_code !='' and site_code  =='' and employee_code == '' and date =='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
+			and r.rnp_code =h.rnp_code
 			and d.site_code = s.site_code
 			and h.hr_rnp_code = #{hr_rnp_code}
 			and  to_date(h.hr_rnp_end_date,'YYYY-MM-DD') <= to_date(#{date2},'YYYY-MM-DD')
@@ -719,11 +761,12 @@
    		    
    		    <when test= " hr_rnp_code =='' and site_code  !='' and employee_code != '' and date =='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
+			and r.rnp_code =h.rnp_code
 			and d.site_code = s.site_code
 			and s.site_code = #{site_code}
 			and e.employee_code = #{employee_code}
@@ -734,11 +777,12 @@
    		    
    		    <when test= " hr_rnp_code =='' and site_code  !='' and employee_code == '' and date !='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
+			and r.rnp_code =h.rnp_code
 			and d.site_code = s.site_code
 			and s.site_code = #{site_code}
 			and  to_date(#{date},'YYYY-MM-DD') <= to_date(h.hr_rnp_start_date,'YYYY-MM-DD')
@@ -749,11 +793,12 @@
    		    
    		    <when test= " hr_rnp_code =='' and site_code  !='' and employee_code == '' and date =='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
+			and r.rnp_code =h.rnp_code
 			and d.site_code = s.site_code
 			and s.site_code = #{site_code}
 			and  to_date(h.hr_rnp_end_date,'YYYY-MM-DD') <= to_date(#{date2},'YYYY-MM-DD')
@@ -764,11 +809,12 @@
    		    
    		    <when test= " hr_rnp_code =='' and site_code  =='' and employee_code != '' and date !='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
+			and r.rnp_code =h.rnp_code
 			and d.site_code = s.site_code
 			and e.employee_code = #{employee_code}
 			and to_date(#{date},'YYYY-MM-DD') <= to_date(h.hr_rnp_start_date,'YYYY-MM-DD')
@@ -779,11 +825,12 @@
    		    
    		    <when test= " hr_rnp_code =='' and site_code  =='' and employee_code != '' and date =='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
+			and r.rnp_code =h.rnp_code
 			and d.site_code = s.site_code
 			and e.employee_code = #{employee_code}
 			and  to_date(h.hr_rnp_end_date,'YYYY-MM-DD') <= to_date(#{date2},'YYYY-MM-DD')
@@ -794,11 +841,12 @@
    		    
    		    <when test= " hr_rnp_code =='' and site_code  =='' and employee_code == '' and date !='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
+			and r.rnp_code =h.rnp_code
 			and d.site_code = s.site_code
 			and  to_date(h.hr_rnp_end_date,'YYYY-MM-DD') <= to_date(#{date2},'YYYY-MM-DD')
 			and to_date(#{date},'YYYY-MM-DD') <= to_date(h.hr_rnp_start_date,'YYYY-MM-DD')
@@ -810,11 +858,12 @@
 	
 			<when test= " hr_rnp_code !='' and site_code  !='' and employee_code != '' and date =='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
+			and r.rnp_code =h.rnp_code
 			and d.site_code = s.site_code
 			and h.hr_rnp_code = #{hr_rnp_code}
 			and s.site_code = #{site_code}
@@ -825,11 +874,12 @@
    		    
 			<when test= " hr_rnp_code !='' and site_code  !='' and employee_code == '' and date !='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
+			and r.rnp_code =h.rnp_code
 			and d.site_code = s.site_code
 			and h.hr_rnp_code = #{hr_rnp_code}
 			and s.site_code = #{site_code}
@@ -840,11 +890,12 @@
 
 			<when test= " hr_rnp_code !='' and site_code  !='' and employee_code == '' and date =='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
+			and r.rnp_code =h.rnp_code
 			and d.site_code = s.site_code
 			and h.hr_rnp_code = #{hr_rnp_code}
 			and s.site_code = #{site_code}
@@ -855,11 +906,12 @@
    		    
    		    <when test= " hr_rnp_code !='' and site_code  =='' and employee_code != '' and date !='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
+			and r.rnp_code =h.rnp_code
 			and d.site_code = s.site_code
 			and h.hr_rnp_code = #{hr_rnp_code}
 			and e.employee_code = #{employee_code}
@@ -870,12 +922,13 @@
    		    
    		    <when test= " hr_rnp_code !='' and site_code  =='' and employee_code != '' and date =='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and r.rnp_code =h.rnp_code
 			and h.hr_rnp_code = #{hr_rnp_code}
 			and e.employee_code = #{employee_code}
 			and  to_date(h.hr_rnp_end_date,'YYYY-MM-DD') <= to_date(#{date2},'YYYY-MM-DD')
@@ -884,11 +937,12 @@
    		    
    		    <when test= " hr_rnp_code !='' and site_code  =='' and employee_code == '' and date !='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
+			and r.rnp_code =h.rnp_code
 			and d.site_code = s.site_code
 			and h.hr_rnp_code = #{hr_rnp_code}
 			and  to_date(h.hr_rnp_end_date,'YYYY-MM-DD') <= to_date(#{date2},'YYYY-MM-DD')
@@ -898,11 +952,12 @@
    		    
    		    <when test= " hr_rnp_code =='' and site_code  !='' and employee_code != '' and date !='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
+			and r.rnp_code =h.rnp_code
 			and d.site_code = s.site_code
 			and s.site_code = #{site_code}
 			and e.employee_code = #{employee_code}
@@ -912,12 +967,13 @@
    		    
    		    <when test= " hr_rnp_code =='' and site_code  !='' and employee_code != '' and date =='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and r.rnp_code =h.rnp_code
 			and s.site_code = #{site_code}
 			and e.employee_code = #{employee_code}
 			and  to_date(h.hr_rnp_end_date,'YYYY-MM-DD') <= to_date(#{date2},'YYYY-MM-DD')
@@ -926,12 +982,13 @@
    		    
    		    <when test= " hr_rnp_code =='' and site_code  !='' and employee_code == '' and date !='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and r.rnp_code =h.rnp_code
 			and s.site_code = #{site_code}
 			and  to_date(h.hr_rnp_end_date,'YYYY-MM-DD') <= to_date(#{date2},'YYYY-MM-DD')
 			and to_date(#{date},'YYYY-MM-DD') <= to_date(h.hr_rnp_start_date,'YYYY-MM-DD')
@@ -941,12 +998,13 @@
    		    
    		    <when test= " hr_rnp_code =='' and site_code  =='' and employee_code != '' and date !='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and r.rnp_code =h.rnp_code
 			and e.employee_code = #{employee_code}
 			and  to_date(h.hr_rnp_end_date,'YYYY-MM-DD') <= to_date(#{date2},'YYYY-MM-DD')
 			and to_date(#{date},'YYYY-MM-DD') <= to_date(h.hr_rnp_start_date,'YYYY-MM-DD')
@@ -955,12 +1013,13 @@
    		    
    		    <when test= " hr_rnp_code !='' and site_code  !='' and employee_code != '' and date !='' and date2 =='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and r.rnp_code =h.rnp_code
 			and h.hr_rnp_code = #{hr_rnp_code}
 			and s.site_code = #{site_code}
 			and e.employee_code = #{employee_code}
@@ -970,12 +1029,13 @@
    		    
    		    <when test= " hr_rnp_code !='' and site_code  !='' and employee_code != '' and date =='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and r.rnp_code =h.rnp_code
 			and h.hr_rnp_code = #{hr_rnp_code}
 			and s.site_code = #{site_code}
 			and e.employee_code = #{employee_code}
@@ -986,12 +1046,13 @@
    		    
    		    <when test= " hr_rnp_code !='' and site_code  !='' and employee_code == '' and date !='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and r.rnp_code =h.rnp_code
 			and h.hr_rnp_code = #{hr_rnp_code}
 			and s.site_code = #{site_code}
 			and  to_date(h.hr_rnp_end_date,'YYYY-MM-DD') <= to_date(#{date2},'YYYY-MM-DD')
@@ -1002,12 +1063,13 @@
    		    
    		    <when test= " hr_rnp_code !='' and site_code  =='' and employee_code != '' and date !='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and r.rnp_code =h.rnp_code
 			and h.hr_rnp_code = #{hr_rnp_code}
 			and e.employee_code = #{employee_code}
 			and  to_date(h.hr_rnp_end_date,'YYYY-MM-DD') <= to_date(#{date2},'YYYY-MM-DD')
@@ -1017,12 +1079,13 @@
    		    
    		    <when test= " hr_rnp_code =='' and site_code  !='' and employee_code != '' and date !='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and r.rnp_code =h.rnp_code
 			and s.site_code = #{site_code}
 			and e.employee_code = #{employee_code}
 			and  to_date(h.hr_rnp_end_date,'YYYY-MM-DD') <= to_date(#{date2},'YYYY-MM-DD')
@@ -1035,12 +1098,13 @@
 	
 			<when test= " hr_rnp_code !='' and site_code  !='' and employee_code != '' and date !='' and date2 !='' ">	
 			<![CDATA[		
-			select e.employee_code, e.employee_name, h.hr_rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
-			from employee e, hr_rnp h, employee_work ew, department d, site s
+			select e.employee_code, e.employee_name, r.rnp_name, h.hr_rnp_index, h.hr_rnp_date, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_history
+			from employee e, hr_rnp h, employee_work ew, department d, site s, rnp r
 			where e.employee_code = h.employee_code
 			and e.employee_code = ew.employee_code
 			and ew.department_code = d.department_code
 			and d.site_code = s.site_code
+			and r.rnp_code =h.rnp_code
 			and h.hr_rnp_code = #{hr_rnp_code}
 			and s.site_code = #{site_code}
 			and e.employee_code = #{employee_code}

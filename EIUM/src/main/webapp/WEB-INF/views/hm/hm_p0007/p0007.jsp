@@ -90,7 +90,7 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs2', {
           {Header:"학교명",Type:"Text", SaveName:"school_name", Width:60, Align:"Center"},
           {Header:"입학일",Type:"Text", SaveName:"start_date", Width:60, Align:"Center"},
           {Header:"졸업일",Type:"Text", SaveName:"end_date", Width:60, Align:"Center"},
-          {Header:"구분",Type:"Text", SaveName:"available", Width:60, Align:"Center"},
+          {Header:"구분",Type:"Combo", SaveName:"available", Width:60, Align:"Center", ComboText:"졸업|중퇴|휴학", ComboCode:"졸업|중퇴|휴학"},
           {Header:"전공과목",Type:"Text", SaveName:"major", Width:60, Align:"Center"},
           {Header:"부전공",Type:"Text", SaveName:"minor", Width:60, Align:"Center"},
           {Header:"학위구분",Type:"Text", SaveName:"graduate_yn", Width:60, Align:"Center"},
@@ -113,7 +113,7 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs2', {
           {Header:"근무년한",Type:"Text", SaveName:"sum_year", Width:60, Align:"Center"},
           {Header:"담당업무",Type:"Text", SaveName:"role", Width:60, Align:"Center"},
           {Header:"직위",Type:"Text", SaveName:"position", Width:60, Align:"Center"},
-          {Header:"급여",Type:"Text", SaveName:"salary", Width:60, Align:"Center"},
+          {Header:"급여",Type:"Int", SaveName:"salary", Width:60, Align:"Center"},
           {Header:"퇴직사유",Type:"Text", SaveName:"reason", Width:60, Align:"Center"},
           {Header:"근속기간",Type:"Text", SaveName:"total_work", Width:60, Align:"Center"},
       ];
@@ -126,13 +126,13 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs2', {
      initData.Cols = [
 		  {Header:"상태",SaveName:"sStatus",Type:"Status",align:"Center",width:50},
 		  {Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck"},
-          {Header:"사원면허번호",Type:"Text", SaveName:"license_code",Hidden:1},
+          {Header:"사원면허번호",Type:"Text", SaveName:"employee_license_code",Hidden:1},
           {Header:"자격증번호",Type:"Text", SaveName:"license_number", Width:60, Align:"Center"},
-          {Header:"자격종류",Type:"Text", SaveName:"license_name", Width:150, Align:"Center"},
+          {Header:"자격종류",Type:"Popup", SaveName:"license_name", Width:150, Align:"Center"},
           {Header:"취득일",Type:"Text", SaveName:"start_date", Width:60, Align:"Center"},
           {Header:"만료일",Type:"Text", SaveName:"end_date", Width:60, Align:"Center"},
           {Header:"발행기관",Type:"Text", SaveName:"institute", Width:60, Align:"Center"},
-          {Header:"수당",Type:"Text", SaveName:"bonus", Width:60, Align:"Center"},
+          {Header:"수당",Type:"Combo", SaveName:"bonus", Width:60, Align:"Center", ComboText:"해당|비해당", ComboCode:"해당|비해당"},
       ];
         
      createIBSheet2($("#ib-container4")[0],"mySheet4", "100%", "300px");
@@ -166,7 +166,7 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs2', {
 		{Header:"상태",SaveName:"sStatus",Type:"Status",align:"Center",width:50},
 		{Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck"},
 		{Header:"인사고과고유번호",Type:"Text", SaveName:"hr_assessment_code",Hidden:1},
-        {Header:"고과명",Type:"Text", SaveName:"hr_assessment_name", Width:60, Align:"Center"},
+        {Header:"고과명",Type:"Popup", SaveName:"assessment_name", Width:60, Align:"Center"},
         {Header:"평가시작일",Type:"Text", SaveName:"hr_assessment_test_start_date", Width:60, Align:"Center"},
         {Header:"평가종료일",Type:"Text", SaveName:"hr_assessment_test_end_date", Width:60, Align:"Center"},
         {Header:"고과일",Type:"Text", SaveName:"hr_assessment_date", Width:60, Align:"Center"},
@@ -204,15 +204,15 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs2', {
     //mySheet8 //출장
    initData.Cols = [
 			{Header:"출장고유번호",Type:"Text", SaveName:"business_trip_code",Hidden:1},
-		    {Header:"출장국가",Type:"Text", SaveName:"country", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+		    {Header:"출장국가",Type:"Text", SaveName:"country_name", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
    		    {Header:"출장지",Type:"Text", SaveName:"area", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
 		    {Header:"시작일",Type:"Text", SaveName:"start_date", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
 	        {Header:"종료일",Type:"Text", SaveName:"end_date", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
-	        {Header:"항공료",Type:"Text", SaveName:"flight_cost", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
-	        {Header:"본인부담",Type:"Text", SaveName:"self_burden", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
-	        {Header:"회사부담",Type:"Text", SaveName:"company_burden", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
-		    {Header:"기타비용",Type:"Text", SaveName:"ect_cost", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
-		    {Header:"총비용",Type:"Text", SaveName:"total_cost", Width:60, Align:"Center",CalcLogic:"|6|+|7|+|8|",InsertEdit:"0", UpdateEdit:"0"},
+	        {Header:"항공료",Type:"Int", SaveName:"flight_cost", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+	        {Header:"본인부담",Type:"Int", SaveName:"self_burden", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+	        {Header:"회사부담",Type:"Int", SaveName:"company_burden", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+		    {Header:"기타비용",Type:"Int", SaveName:"ect_cost", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+		    {Header:"총비용",Type:"Int", SaveName:"total_cost", Width:60, Align:"Center",CalcLogic:"|6|+|7|+|8|",InsertEdit:"0", UpdateEdit:"0"},
 		    {Header:"목적",Type:"Text", SaveName:"purpose", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"}
     ];
          
@@ -226,12 +226,12 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs2', {
 		{Header:"상태",SaveName:"sStatus",Type:"Status",align:"Center",width:50},
 		{Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck"},
 		{Header:"상벌관리고유번호",Type:"Text", SaveName:"hr_rnp_code",Hidden:1},
-        {Header:"구분",Type:"Text", SaveName:"hr_rnp_index", Width:60, Align:"Center"},
-        {Header:"포상/징계명",Type:"Text", SaveName:"hr_rnp_name", Width:100, Align:"Center"},
+        {Header:"구분",Type:"Combo", SaveName:"hr_rnp_index", Width:60, Align:"Center", ComboText:"포상|징계", ComboCode:"포상|징계"},
+        {Header:"포상/징계명",Type:"Popup", SaveName:"rnp_name", Width:100, Align:"Center"},
         {Header:"포상/징계일",Type:"Text", SaveName:"hr_rnp_date", Width:100, Align:"Center"},
         {Header:"포상/징계내역",Type:"Text", SaveName:"hr_rnp_history", Width:100, Align:"Center"},
         {Header:"시행처",Type:"Text", SaveName:"hr_rnp_institute", Width:60, Align:"Center"},
-        {Header:"금액",Type:"Text", SaveName:"hr_rnp_cost", Width:60, Align:"Center"},
+        {Header:"금액",Type:"Int", SaveName:"hr_rnp_cost", Width:60, Align:"Center"},
         {Header:"징계시작일",Type:"Text", SaveName:"hr_rnp_start_date", Width:100, Align:"Center"},
         {Header:"징계종료일",Type:"Text", SaveName:"hr_rnp_end_date", Width:100, Align:"Center"},
     ];
@@ -246,7 +246,7 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs2', {
 	   {Header:"상태",SaveName:"sStatus",Type:"Status",align:"Center",width:50},
 		{Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck"},
 		{Header:"어학시험고유번호",Type:"Text", SaveName:"language_code",Hidden:1},
-		{Header:"시험명",Type:"Text", SaveName:"language_name", Width:60, Align:"Center"},
+		{Header:"시험명",Type:"Popup", SaveName:"language_name", Width:60, Align:"Center"},
 		{Header:"유효기간시작일",Type:"Text", SaveName:"start_date", Width:100, Align:"Center"},
 		{Header:"유효기간종료일",Type:"Text", SaveName:"end_date", Width:100, Align:"Center"},
 		{Header:"점수",Type:"Text", SaveName:"grade", Width:100, Align:"Center"},
@@ -519,30 +519,60 @@ O mySheet3.DoSave("${contextPath}/hm/p0007/saveCareer.do", x);
 				         }
 					}
 	
+					
+					
+	function mySheet4_OnPopupClick(Row,Col,Value){
+		
+		if(Col=="4"){
+			
+		window.open("${contextPath}/hm/p0007/license_Popup.do", "a", "width=500, height=700, left=100, top=50"); 
+		}
+		
+	}				
+
+	function mySheet6_OnPopupClick(Row,Col,Value){
+		
+		if(Col=="3"){
+			
+		window.open("${contextPath}/hm/p0007/assessment_Popup.do", "a", "width=500, height=700, left=100, top=50"); 
+		}
+		
+	}
 	
-						
-	function goPopup(){
-		var pop = window.open("findAddress.do","addressPopup","width=570,height=420, scrollbars=yes, resizable=yes"); 
+	function mySheet9_OnPopupClick(Row,Col,Value){
+		
+		if(Col=="4"){
+			
+		window.open("${contextPath}/hm/p0007/rnp_Popup.do", "a", "width=500, height=700, left=100, top=50"); 
+		}
+		
 	}
-
-	function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
-
-		document.form.current_address.value = roadAddrPart1;	
-		document.form.current_address_detail.value = addrDetail;	
-	}		
 	
-	function goPopup2(){
-		var pop = window.open("findAddress2.do","addressPopup","width=570,height=420, scrollbars=yes, resizable=yes"); 
+	function mySheet10_OnPopupClick(Row,Col,Value){
+		
+		if(Col=="3"){
+			
+		window.open("${contextPath}/hm/p0007/language_Popup.do", "a", "width=500, height=700, left=100, top=50"); 
+		}
+		
 	}
+	
+			
 
-	function jusoCallBack2(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
 
-		document.form.resist_address.value = roadAddrPart1;	
-		document.form.resist_address_detail.value = addrDetail;	
+	function assessmentValue(rowData){
+		mySheet6.SetRowData(mySheet6.GetSelectRow(),rowData);
 	}
-
-
-						
+	function rnpValue(rowData){
+		mySheet9.SetRowData(mySheet9.GetSelectRow(),rowData);
+	}
+	
+	function licenseValue(rowData){
+		mySheet4.SetRowData(mySheet4.GetSelectRow(),rowData);
+	}
+	function languageValue(rowData){
+		mySheet10.SetRowData(mySheet10.GetSelectRow(),rowData);
+	}
 	        
 	// }
 </script>

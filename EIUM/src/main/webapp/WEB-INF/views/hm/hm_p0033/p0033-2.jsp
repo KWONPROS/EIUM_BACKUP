@@ -75,7 +75,7 @@
 		        {Header:"사원코드",Type:"Text",SaveName:"employee_code", MinWidth:50,  Align:"Center", Edit: 0},	
 		        {Header:"사원명",Type:"Text",SaveName:"employee_name", MinWidth:80, Align:"Center", Edit: 0},
 				{Header:"구분",Type:"Text",SaveName:"hr_rnp_index", MinWidth:120, Align:"Center", Edit: 0},
-				{Header:"포상/징계명",Type:"Text",SaveName:"hr_rnp_name", MinWidth:120, Align:"Center", Edit: 0},
+				{Header:"포상/징계명",Type:"Text",SaveName:"rnp_name", MinWidth:120, Align:"Center", Edit: 0},
 				{Header:"포상/징계일자",Type:"Text",SaveName:"hr_rnp_date", MinWidth:120, Align:"Center", Edit: 0},
 				{Header:"포상/징계내역",Type:"Text",SaveName:"hr_rnp_history", MinWidth:120, Align:"Center", Edit: 0},
 				{Header:"사행처",Type:"Text",SaveName:"hr_rnp_institute", MinWidth:80, Align:"Center", Edit: 0},

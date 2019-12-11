@@ -71,9 +71,10 @@ public class SM_P0004ControllerImpl implements SM_P0004Controller{
 		Map<String, String[]> dataMap = new HashMap<String, String[]>();  // 저장할 Data
 		Map<String, Object> resultMap = new HashMap<String, Object>(); // 처리결과
 	
-		  HttpSession session = request.getSession(); LoginVO loginvo = new LoginVO();
+		  HttpSession session = request.getSession();
+		  LoginVO loginvo = new LoginVO();
 		  loginvo = (LoginVO)session.getAttribute("login"); 
-		  String user= (loginvo.getEmployee_name());
+		  String user = (loginvo.getEmployee_name());
 	
 
 		

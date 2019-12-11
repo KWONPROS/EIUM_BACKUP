@@ -74,7 +74,7 @@
 			 {Header:"NO",Type:"Seq",SaveName:"NUMBER",MinWidth:50, Align:"Center" },
 		        {Header:"사원코드",Type:"Text",SaveName:"employee_code", MinWidth:50,  Align:"Center", Edit: 0},	
 		        {Header:"사원명",Type:"Text",SaveName:"employee_name", MinWidth:80, Align:"Center", Edit: 0},
-				{Header:"고과명",Type:"Text",SaveName:"hr_assessment_name", MinWidth:120, Align:"Center", Edit: 0},
+				{Header:"고과명",Type:"Text",SaveName:"assessment_name", MinWidth:120, Align:"Center", Edit: 0},
 				{Header:"평가시작일",Type:"Text",SaveName:"hr_assessment_test_start_date", MinWidth:120, Align:"Center", Edit: 0},
 				{Header:"평가종료일",Type:"Text",SaveName:"hr_assessment_test_end_date", MinWidth:120, Align:"Center", Edit: 0},
 				{Header:"고과일자",Type:"Text",SaveName:"hr_assessment_date", MinWidth:120, Align:"Center", Edit: 0},
