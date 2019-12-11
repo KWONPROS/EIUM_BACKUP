@@ -28,6 +28,7 @@
          and e.employee_code = ac.employee_code(+)
          and e.employee_code = ew.employee_code
          and ew.company_code = c.company_code 
+         order by e.employee_code
       ]]>
 	</select>
 	
