@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class HM_P0007_10VO {
-	private String name;
+	private String language_name;
 	private String language_code;
 	private String employee_code;
 	private String start_date;
@@ -95,8 +95,18 @@ public class HM_P0007_10VO {
 
 
 
-	public String getName() {
-		return name;
+
+
+
+
+
+
+
+
+
+
+	public String getLanguage_name() {
+		return language_name;
 	}
 
 
@@ -107,8 +117,20 @@ public class HM_P0007_10VO {
 
 
 
-	public void setName(String name) {
-		this.name = name;
+	public void setLanguage_name(String language_name) {
+		this.language_name = language_name;
+	}
+
+
+
+
+
+
+
+
+
+	public void setInstitute(String institute) {
+		this.institute = institute;
 	}
 
 

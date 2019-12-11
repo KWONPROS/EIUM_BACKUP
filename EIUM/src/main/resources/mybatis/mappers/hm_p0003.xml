@@ -42,6 +42,16 @@
 		<result column="OUT_REASON_NAME" property="admin_LIST_NAME" />
 		<result column="COUNTRY_CODE" property="admin_LIST_CODE" />
 		<result column="COUNTRY_NAME" property="admin_LIST_NAME" />
+		<result column="LICENSE_CODE" property="admin_LIST_CODE" />
+		<result column="LICENSE_NAME" property="admin_LIST_NAME" />
+		<result column="WORK_STATUS_CODE" property="admin_LIST_CODE" />
+		<result column="WORK_STATUS_NAME" property="admin_LIST_NAME" />
+		<result column="LANGUAGE_CODE" property="admin_LIST_CODE" />
+		<result column="LANGUAGE_NAME" property="admin_LIST_NAME" />
+		<result column="ASSESSMENT_CODE" property="admin_LIST_CODE" />
+		<result column="ASSESSMENT_NAME" property="admin_LIST_NAME" />
+		<result column="RNP_CODE" property="admin_LIST_CODE" />
+		<result column="RNP_NAME" property="admin_LIST_NAME" />
 
 	</resultMap>
 

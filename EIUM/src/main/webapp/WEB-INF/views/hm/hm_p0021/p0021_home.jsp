@@ -192,7 +192,7 @@ function setPopupValue(){
 	}
 	
 	  
-	  function showPopup() { window.open("${contextPath}/hm/p0018/home2_p01.do", "a", "width=600, height=500, left=100, top=50");
+	  function showPopup() { window.open("${contextPath}/hm/p0018/home2_p01.do", "a", "width=517, height=517");
 	  
 	  }
 	  
@@ -246,29 +246,8 @@ left: 600px;
 width: 700px;
 
 }
-.right table{
-font-size:13px;
-font-weight:bold;
-position: relative;
-left: 40px;
-padding: 20px;
-}
-.right table tr td:nth-child(1){
-text-align:right;
-}
-.right table tr td:nth-child(2){
-width: 20px;
-height: 25px;
-}
-.right table tr td:nth-child(3) input{
-width: 130px;
-height: 20px;
-padding-left: 10px;
-margin-right:10px;
-box-sizing: border-box;
-border: 1px solid #CCCCCC;
-border-radius: 2px;
-} 
+
+
 .title {
     width:100%;
    color: #2C3E50;
@@ -293,7 +272,7 @@ border-radius: 2px;
 	position:absolute;
 	top:120px;
 	width:1480px;
-	left:20px;
+	left:60px;
 	padding-top:20px;
 	padding-bottom:20px;
 	
@@ -309,28 +288,43 @@ border-radius: 2px;
 .sheet1{
 position:relative;
 top:190px;
-left:15px;
+left:55px;
 border-bottom:2px solid #C3C3C3;
-padding-bottom:10px;
+padding-bottom:15px;
 width:1540px;
 }
 .sheet2{
 position:relative;
-top:200px;
-left:15px;
+top:205px;
+left:55px;
+width:1540px;
 }
 span{
-    background: #5E5E5E;
+    margin-left: 110px;
+	background: #5E5E5E;
     padding: 5px 5px;
     color: white;
     border-radius: 5px;
-    margin-right:10px;
+    margin-right: 10px;
+    vertical-align: middle;
 }
 img{
 margin-left:5px;
 margin-right:5px;
 vertical-align: middle;
 }
+#frm a{
+
+	text-decoration: none;
+}
+#frm input{
+height: 22px;
+	border-radius: 3px;
+	border: none;
+	padding-left:5px;
+	vertical-align: middle;
+}
+
 
 </style>
 
@@ -355,7 +349,7 @@ vertical-align: middle;
 
 	<div class="sheet2">
 		<script>
-			createIBSheet("mySheet2", "1545px", "300px");
+			createIBSheet("mySheet2", "1545px", "320px");
 		</script>
 	</div>
 
@@ -370,8 +364,9 @@ vertical-align: middle;
 		<button type="button" onclick="doAction('down')" class="IBbutton">엑셀</button>
 	</div>
 	<div id="searchBar">
-	<form name="frm" >
-	<span>교육코드</span><input type="text" id="eduCode" value="" onChange="LoadPage()"><a href="javascript:showPopup();" ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a> <input type="text" id="eduName" disabled>
+	<form id="frm" name="frm" >
+	<span>교육코드</span><a href="javascript:showPopup();" ><input type="text" id="eduCode" value="" onChange="LoadPage()"style="width: 150px;" placeholder="교육코드">
+	 <input type="text" id="eduName" placeholder="교육명" style="width: 200px;"readonly ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
 	</form>
 	</div>
 	
