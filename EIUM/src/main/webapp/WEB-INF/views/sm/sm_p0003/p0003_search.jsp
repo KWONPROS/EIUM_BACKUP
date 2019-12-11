@@ -19,13 +19,13 @@
 
 .IBbutton {
 	font-size: 13px;
-    margin-left: 5px;
-    border: 0;
-    background-color: #2B69A0;
-    color: white;
-    padding: 5px 15px;
-    border-radius: 7px;
-    text-decoration: none;
+	margin-left: 5px;
+	border: 0;
+	background-color: #2B69A0;
+	color: white;
+	padding: 5px 15px;
+	border-radius: 7px;
+	text-decoration: none;
 }
 
 .title {
@@ -74,10 +74,10 @@
 
 .sheet {
 	position: relative;
-	top:180px; 
-	left:50px;
+	top: 220px;
+	left: 50px;
+	width: Spx;
 }
-
 
 .leftbuttons {
 	margin-top: 40px;
@@ -103,24 +103,39 @@
 	position: relative;
 	top: 300px;
 }
-#SiteList{
-    height: 22px;
-    border-radius: 3px;
-    border: none;
-    vertical-align: middle;
-    text-align: center;
-    padding-left:10px;
-	width:200px
-}
-span{
-    background: #5E5E5E;
-    padding: 5px 5px;
-    color: white;
-    border-radius: 5px;
-    margin-right:10px;
-    vertical-align: middle;
+
+#SiteList {
+	height: 22px;
+	border-radius: 3px;
+	border: none;
+	vertical-align: middle;
+	text-align: center;
+	padding-left: 10px;
+	width: 200px
 }
 
+span {
+	background: #5E5E5E;
+	padding: 5px 5px;
+	color: white;
+	border-radius: 5px;
+	margin-right: 10px;
+	vertical-align: middle;
+}
+
+.searchBar {
+	padding: 25px 0px 25px 100px;
+	background: #EBEBEB;
+	margin-bottom: 20px;
+	border-radius: 5px;
+	font-size: 12px;
+	border-radius: 5px;
+	position: absolute;
+	top: 135px;
+	left: 55px;
+	width: 1350px;
+	
+}
 </style>
 <meta charset="UTF-8">
 <title>부서등록</title>
@@ -165,11 +180,11 @@ function LoadPage(){
 	function mySheet_OnPopupClick(Row,Col){
 		if(Col=="4"){
 			
-			window.open("${contextPath}/sm/p0003/siteSearch_Init.do", "a", "width=500, height=700, left=100, top=50"); 
+			window.open("${contextPath}/sm/p0003/siteSearch_Init.do", "a", "width=342,height=520, scrollbars=yes, resizable=yes"); 
 
 			}
 		if (Col=="6"){
-			window.open("${contextPath}/sm/p0003/sectorSearch_Init.do", "a", "width=500, height=700, left=100, top=50");	
+			window.open("${contextPath}/sm/p0003/sectorSearch_Init.do", "a","width=342,height=520, scrollbars=yes, resizable=yes");	
 
 		}
 	
@@ -279,8 +294,7 @@ $.ajax({
 
 	<form name="frm">
 
-		<div class="searchBar"
-			style="background: #EBEBEB; padding: 10px 30px; margin-bottom: 20px; border-radius: 5px; font-size: 12px; border-radius: 5px; position: absolute; top: 135px; left:55px; width:1395px;">
+		<div class="searchBar">
 			<span>사업장</span> <select id="SiteList">
 				<option value="" selected>전체</option>
 			</select>
@@ -306,7 +320,7 @@ $.ajax({
         
             <div class="sheet">
 				<script>
-					createIBSheet("mySheet", "1500px", "580px");
+					createIBSheet("mySheet", "1500px", "620px");
 					selectSite();
 				</script>
 				

@@ -21,11 +21,11 @@ function LoadPage(){
 	//아이비시트 초기화
 	var initSheet = {};
 	initSheet.Cfg={SearchMode:smLazyLoad,ToolTip:1};
-	initSheet.HeaderMode = {Sort:1,ColMove:1,ColResize:1,HeaderCheck:1};
+	initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 	initSheet.Cols=[
 
-		{Header:"사업장코드",Type:"Text",Width:100,SaveName:"site_CODE",Align:"Center"},
-		{Header:"사업장이름",Type:"Text",Width:100,SaveName:"site_NAME",Align:"Center"},
+		{Header:"사업장코드",Type:"Text",MinWidth:150,SaveName:"site_CODE",Align:"Center"},
+		{Header:"사업장이름",Type:"Text",MinWidth:170,SaveName:"site_NAME",Align:"Center"},
 
 
 		];
