@@ -25,52 +25,33 @@
 	padding: 5px 15px;
 	border-radius: 7px;
 	text-decoration: none;
+	border:0;
 }
 .IBbutton:hover {
 	background-color: #2C3E50;
 }
 .left{
 position: absolute;
-top: 230px;
-left: 50px;
+top: 140px;
+left: 37px;
+border-right:2px solid #C3C3C3;
+padding-right:10px;
 }
 .rightbuttons {
 	margin-top: 50px;
 	margin: 20px;
 	position: absolute;
-	right: 30px;
+	right: 0px;
 	top:0px;
 }
 .right{
 position: relative;
-top: 160px;
-left: 300px;
-width: 700px;
+top:50px;
+left: 250px;
+width: 1400px;
 
 }
-.right table{
-font-size:13px;
-font-weight:bold;
-position: relative;
-left: 40px;
-padding: 20px;
-}
-.right table tr td:nth-child(1){
-text-align:right;
-}
-.right table tr td:nth-child(2){
-width: 20px;
-height: 25px;
-}
-.right table tr td:nth-child(3) input{
-width: 130px;
-height: 20px;
-padding-left: 10px;
-margin-right:10px;
-box-sizing: border-box;
-border: 1px solid #CCCCCC;
-border-radius: 2px;
-} 
+
 .title {
 	width: 100%;
 	color: #2C3E50;
@@ -84,19 +65,6 @@ border-radius: 2px;
 	position: absolute;
 	top: 50px;
 }
-#searchBar {
-	background: #EBEBEB;
-	padding: 10px 30px;
-	margin-bottom: 20px;
-	border-radius: 5px;
-	font-size: 12px;
-	border-radius:5px;
-	position:relative;
-	top:80px;
-	width:1300px;
-	left:50px;
-	
-}
 
 .leftbuttons {
 	margin-top: 40px;
@@ -104,6 +72,60 @@ border-radius: 2px;
 	position: absolute;
 	left: 0px;
 	top: 0px;
+}
+
+.topline {
+	width: 1670px;
+    border-top: thin solid #5E5E5E;
+    position: absolute;
+    top: 50px;
+    left: 5px;
+
+}
+#searchBar {
+	background: #EBEBEB;
+	margin-bottom: 20px;
+	border-radius: 5px;
+	font-size: 12px;
+	border-radius:5px;
+	position:relative;
+	top:60px;
+	width:1500px;
+	left:30px;
+	padding-top:20px;
+	padding-bottom:20px;
+}
+
+#searchBar input, select {
+	height: 24px;
+	border-radius: 3px;
+	border: none;
+	padding-left: 5px;
+	vertical-align: middle;
+	text-align: center;
+}
+.searchBarTitle {
+	background: #5E5E5E;
+	padding: 4px;
+	color: white;
+	border-radius: 5px;
+	margin: 5px 5px 0 100px;
+	vertical-align: middle;
+	font-size:12px;
+
+}
+span{
+    background: #5E5E5E;
+    padding: 5px 5px;
+    color: white;
+    border-radius: 5px;
+    margin-right:10px;
+    font-size:12px;
+}
+img{
+margin-left:5px;
+margin-right:5px;
+vertical-align: middle;
 }
 </style>
 	
@@ -174,37 +196,37 @@ border-radius: 2px;
 			Type : "Text",
 			SaveName : "employee_CODE",
 			Edit : 0,
-			Width : 100
+			Width : 90
 		}, {
 			Header : "사원명",
 			Type : "Text",
 			SaveName : "employee_NAME",
 			Edit : 0,
-			Width : 100
+			Width : 90
 		}, {
 			Header : "시작일",
 			Type : "Text",
 			SaveName : "employee_TRAINING_START_DATE",
 			Edit : 0,
-			Width : 100
+			Width : 145
 		}, {
 			Header : "종료일",
 			Type : "Text",
 			SaveName : "employee_TRAINING_END_DATE",
 			Edit : 0,
-			Width : 100
+			Width : 145
 		}, {
 			Header : "교육시간",
 			Type : "Text",
 			SaveName : "employee_TRAINING_TIME",
 			Edit : 0,
-			Width : 100
+			Width : 90
 		}, {
 			Header : "교육일수",
 			Type : "Text",
 			SaveName : "employee_TRAINING_DATE_COUNT",
 			Edit : 0,
-			Width : 100
+			Width : 90
 		}, {
 			Header : "이수여부",
 			Type : "Combo",
@@ -212,37 +234,37 @@ border-radius: 2px;
 			"ComboText" : "이수|미이수",
 			"ComboCode" : "Y|N",
 			Edit : 0,
-			Width : 100
+			Width : 90
 		}, {
 			Header : "출석점수",
 			Type : "Text",
 			SaveName : "attendence_SCORE",
 			Edit : 0,
-			Width : 100
+			Width : 90
 		}, {
 			Header : "태도점수",
 			Type : "Text",
 			SaveName : "attitude_SCORE",
 			Edit : 0,
-			Width : 100
+			Width : 90
 		}, {
 			Header : "평가점수",
 			Type : "Text",
 			SaveName : "score",
 			Edit : 0,
-			Width : 100
+			Width : 90
 		}, {
 			Header : "합계",
 			Type : "Text",
 			SaveName : "total",
 			Edit : 0,
-			Width : 100
+			Width : 90
 		}, {
 			Header : "교육평가",
 			Type : "Text",
 			SaveName : "assessment_DESC",
 			Edit : 0,
-			Width : 100
+			Width : 180
 		}, ];
 		IBS_InitSheet(mySheet2, initSheet2);
 
@@ -341,11 +363,10 @@ border-radius: 2px;
 <form name="frm" >
 
 
-<div id="searchBar">
-교육기간
 
-<input id="date"type="text"  class="Datepicker">
-~
+<div id="searchBar">
+<span class="searchBarTitle">교육기간</span> <input id="date"type="text"  class="Datepicker">
+<spann style="margin: 0 20px 0 20px; ">~</spann>
 <input  id="date2"type="text" class="Datepicker">
 </div>
 
@@ -357,12 +378,13 @@ border-radius: 2px;
 		<button type="button" onclick="doAction('down')" class="IBbutton">엑셀</button>
 	</div>
 </form>
+<div class="topline"></div>
 
 	<div class="left">
 	<div class="ib_product">
 		<script>
 			//IBSheet 객체 생성 (객체 id, 너비, 높이)
-			createIBSheet("mySheet", "100%", "304px");
+			createIBSheet("mySheet", "100%", "450px");
 		</script>
 	</div>
 	</div>
@@ -377,7 +399,7 @@ border-radius: 2px;
 	<div class="right">
 	
 	<script>
-	createIBSheet("mySheet2","1200px", "304px");
+	createIBSheet("mySheet2","1300px", "450px");
 	</script>
 	
 	</div>
