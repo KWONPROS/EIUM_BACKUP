@@ -56,13 +56,13 @@
 			Align : "Center",
 			Width : 100,
 			UpdateEdit : 0,
-			Width:160
+			Width:180
 		}, {
 			Header : "교육명",
 			Type : "Text",
 			SaveName : "employee_TRAINING_NAME",
 			Align : "Center",
-			Width:160
+			Width:180
 		}, {
 			Header : "시작일",
 			Type : "Date",
@@ -70,14 +70,14 @@
 			Edit : 1,
 			Align : "Center",
 			Format : "Ymd",
-			Width:190
+			Width:210
 		}, {
 			Header : "종료일",
 			Type : "Date",
 			SaveName : "employee_TRAINING_END_DATE",
 			Format : "Ymd",
 			Align:"Center",
-			Width : 190
+			Width : 210
 		}, {
 			Header : "교육일수",
 			Type : "Text",
@@ -260,8 +260,8 @@
 
 .left {
 	position: absolute;
-	top: 120px;
-	left: 85px;	
+	top: 100px;
+	left: 50px;	
 }
 
 .rightbuttons {
@@ -283,10 +283,10 @@
 
 .right {
 	position: relative;
-	top: 110px;
-	left: 960px;
+	top: 90px;
+	left: 1000px;
 	width: 450px;
-	height:505px;
+	height:520px;
 	background: #EDF0F5;
 	border-radius: 10px;
 
@@ -355,7 +355,7 @@
 		<div style="padding-right: 30px;border-right: 2px solid #C3C3C3;margin-right: 15px;">
 			<script>
 				//IBSheet 객체 생성 (객체 id, 너비, 높이)
-				createIBSheet("mySheet", "100%", "500px");
+				createIBSheet("mySheet", "100%", "520px");
 			</script>
 		</div>
 	</div>

@@ -20,7 +20,7 @@
 	top: 50px;
 }
 .main_content2{
-padding:0px 20px 20px 20px; background:#fff; _background:none;
+padding:10px 20px 20px 20px; background:#fff; _background:none;
 
 }
 
