@@ -176,7 +176,7 @@
 		  });
 		});
 		
-		
+		searchCondition();
 	}
 	
 	//사원검색 조건
@@ -184,6 +184,7 @@
 		 var cond =document.getElementById("condition").value;
 		 var command =$('input[name="emp_radio"]:checked').val();	 
 		 mySheet.DoSearch('${contextPath}/hm/p0004/searchList.do','condition='+cond+"&command="+command);
+		
 	   }
 	
 	/*Sheet 각종 처리*/
@@ -281,6 +282,11 @@
 	            break;      
 		}
 	}
+	function mySheet_OnSearchEnd(c,m){
+		 mySheet_OnClick(1, 5);
+	}
+	
+	
 	//로우 클릭시
 	function mySheet_OnClick(Row, Col) {
 		if (Row != 0) {
