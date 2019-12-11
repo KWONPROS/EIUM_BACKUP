@@ -89,24 +89,29 @@ border-radius: 2px;
 .sheet1{
 position:relative;
 top:110px;
-height: auto;
+left:20px;
+border-bottom:2px solid #C3C3C3;
+padding-bottom:15px;
+width:1540px;
 }
 .sheet2{
 position:relative;
-top:130px;
- height: auto;
+top:125px;
+left:20px;
+
 }
 #searchBar {
 	background: #EBEBEB;
-	padding: 10px 30px;
 	margin-bottom: 20px;
 	border-radius: 5px;
 	font-size: 12px;
 	border-radius:5px;
 	position:relative;
 	top:120px;
-	width:1300px;
-	left:15px;
+	width:1540px;
+	left:20px;
+	padding-top:20px;
+	padding-bottom:12px;
 	
 }
 .leftbuttons {
@@ -116,7 +121,37 @@ top:130px;
 	left: 0px;
 	top: 0px;
 }
-
+span{
+    background: #5E5E5E;
+    padding: 5px 5px;
+    color: white;
+    border-radius: 5px;
+    margin-right:10px;
+    font-size:12px;
+}
+img{
+margin-left:5px;
+margin-right:5px;
+vertical-align: middle;
+}
+#searchBar input, select {
+	height: 24px;
+	border-radius: 3px;
+	border: none;
+	padding-left: 5px;
+	vertical-align: middle;
+	text-align: center;
+}
+.searchBarTitle {
+	background: #5E5E5E;
+	padding: 4px;
+	color: white;
+	border-radius: 5px;
+	margin: 0 5px 0 70px;
+	vertical-align: middle;
+	margin-left: 100px;
+	font-size:12px;
+}
 </style>
 
 <script>
@@ -152,16 +187,16 @@ initSheet.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:3, MergeSheet:msHead
 initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 initSheet.Cols = [
       {Header:"상태|상태",Type:"Status",SaveName:"Status", Align:"Center",Hidden:1},
-      {Header:"삭제|삭제",Type:"DelCheck",SaveName:"DEL_CHK"},
-      {Header:"발령일자|발령일자",Type:"Date",SaveName:"appoint_DATE",Align:"Center",Width:100},
-      {Header:"발령번호|발령번호",Type:"Text",SaveName:"appoint_CODE",Align:"Center",Width:100},   
-      {Header:"제목|제목",Type:"Text",SaveName:"appoint_TITLE",Align:"Center",Width:100},         
-      {Header:"마감|마감",Type:"Button",SaveName:"appoint_YN",Align:"Center",Width:100,InsertEdit:0},         
-      {Header:"작성자|직원번호",Type:"Popup",SaveName:"masterEmployee_CODE",Align:"Center",Width:100},
-      {Header:"작성자|작성자명",Type:"Text",SaveName:"employee_NAME",Align:"Center",Width:100,InsertEdit:0},
-      {Header:"작성자|사업장",Type:"Text",SaveName:"site_NAME",Align:"Center",Width:100,InsertEdit:0},
-      {Header:"작성자|부서",Type:"Text",SaveName:"department_NAME",Align:"Center",Width:100,InsertEdit:0},
-      {Header:"작성자|직책",Type:"Text",SaveName:"duty_NAME",Align:"Center",Width:100,InsertEdit:0}
+      {Header:"삭제|삭제",Type:"DelCheck",SaveName:"DEL_CHK", Width:60},
+      {Header:"발령일자|발령일자",Type:"Date",SaveName:"appoint_DATE",Align:"Center",Width:150},
+      {Header:"발령번호|발령번호",Type:"Text",SaveName:"appoint_CODE",Align:"Center",Width:150},   
+      {Header:"제목|제목",Type:"Text",SaveName:"appoint_TITLE",Align:"Center",Width:280},         
+      {Header:"마감|마감",Type:"Button",SaveName:"appoint_YN",Align:"Center",Width:150,InsertEdit:0},         
+      {Header:"작성자|직원번호",Type:"Popup",SaveName:"masterEmployee_CODE",Align:"Center",Width:150},
+      {Header:"작성자|작성자명",Type:"Text",SaveName:"employee_NAME",Align:"Center",Width:150,InsertEdit:0},
+      {Header:"작성자|사업장",Type:"Text",SaveName:"site_NAME",Align:"Center",Width:150,InsertEdit:0},
+      {Header:"작성자|부서",Type:"Text",SaveName:"department_NAME",Align:"Center",Width:150,InsertEdit:0},
+      {Header:"작성자|직책",Type:"Text",SaveName:"duty_NAME",Align:"Center",Width:150,InsertEdit:0}
       ];
    IBS_InitSheet(mySheet1, initSheet);
    mySheet1.SetEditableColorDiff(1); //편집불가능한 셀 표시 구분
@@ -173,8 +208,8 @@ initSheet.Cols = [
    initSheet2.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:3, FrozenCol:5,MouseHoverMode:2}
    initSheet2.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
    initSheet2.Cols = [
-         {Header:"상태",Type:"Status",SaveName:"Status", Align:"Center"},
-         {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK"},
+         {Header:"상태",Type:"Status",SaveName:"Status", Align:"Center",Width:60},
+         {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",Width:60},
          {Header:"인사발령내역고유번호",Type:"Text",SaveName:"appoint_HISTORY_CODE",Align:"Center",Width:100,"Hidden":1},   
          {Header:"사원코드",Type:"Text",SaveName:"employee_CODE",Align:"Center",Width:100,InsertEdit:0},
          {Header:"사원명",Type:"Popup",SaveName:"employee_NAME",Align:"Center",Width:100},         
@@ -398,31 +433,32 @@ function mySheet1_OnSaveEnd(){
 	<div id="searchBar">
 		<form name="frm">
 
-			발령일 <input id="date" type="text" class="Datepicker"> ~ <input
-				id="date2" type="text" class="Datepicker"> <span>제목</span> <input
-				id="title" type="text" class="" style="width: 160px"> <span>작성자</span>
-			<input id="masterEmpl" type="text"> <input
-				id="masterEmplCode" type="hidden"> <a
-				href="javascript:goPopup()"><img
-				src="${contextPath}/resources/image/icons/icon_plus.png"></a>
-
+			<span class="searchBarTitle">발령일</span> <input id="date" type="text" class="Datepicker"><spann style="margin-left:20px; margin-right:20px"> ~ </spann> <input id="date2" type="text" class="Datepicker">
+			<span class="searchBarTitle" >제목</span> <input id="title" type="text"  style="width:300px;"> 
+			<span class="searchBarTitle">작성자</span><input id="masterEmpl" type="text"> <input id="masterEmplCode" type="hidden"> <a href="javascript:goPopup()"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
+	
 		</form>
 	</div>
 	<div class="sheet1">
-		발령제목 <a href="javascript:doAction('insert1')" class="IBbutton">입력</a>
-		<a href="javascript:doAction('save1')" class="IBbutton">저장</a>
+		<div style="padding:5px 5px 5px 0;">
+		<span>발령제목</span>
+			<a href="javascript:doAction('insert1')" class="IBbutton" style="position:relative;left:1335;">입력</a>	
+			<a href="javascript:doAction('save1')" class="IBbutton" style="position:relative;left:1335;">저장</a>
+		</div>
 		<script type="text/javascript">
-			createIBSheet("mySheet1", "100%", "30%");
+			createIBSheet("mySheet1", "1600px", "240px");
 		</script>
 	</div>
 
 
 	<div class="sheet2">
-		발령후내역
-			<a href="javascript:doAction('insert2')" class="IBbutton">입력</a>
-			<a href="javascript:doAction('save2')" class="IBbutton">저장</a>
+			<div style="padding:5px 5px 5px 0;">
+			<span>발령후내역</span>
+			<a href="javascript:doAction('insert2')" class="IBbutton" style="position:relative;left:1320;">입력</a>
+			<a href="javascript:doAction('save2')" class="IBbutton"style="position:relative;left:1320;">저장</a>
+			</div>
 		<script type="text/javascript">
-			createIBSheet("mySheet2", "100%", "40%");
+			createIBSheet("mySheet2", "1542px", "280px");
 		</script>
 	</div>
 

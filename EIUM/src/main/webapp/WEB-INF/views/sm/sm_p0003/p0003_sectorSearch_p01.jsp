@@ -18,12 +18,12 @@ function LoadPage(){
 	//아이비시트 초기화
 	var initSheet = {};
 	initSheet.Cfg={SearchMode:smLazyLoad,ToolTip:1};
-	initSheet.HeaderMode = {Sort:1,ColMove:1,ColResize:1,HeaderCheck:1};
+	initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 	initSheet.Cols=[
 
-		{Header:"부문코드",Type:"Text",Width:100,SaveName:"sector_CODE",Align:"Center"},
-		{Header:"부문명",Type:"Text",Width:100,SaveName:"sector_NAME",Align:"Center"},
-		{Header:"사용기간",Type:"Text",Width:100,SaveName:"sector_TERM",Align:"Center"},
+		{Header:"부문코드",Type:"Text",MinWidth:100,SaveName:"sector_CODE",Align:"Center"},
+		{Header:"부문명",Type:"Text",MinWidth:100,SaveName:"sector_NAME",Align:"Center"},
+		{Header:"사용기간",Type:"Text",MinWidth:120,SaveName:"sector_TERM",Align:"Center"},
 
 
 		];

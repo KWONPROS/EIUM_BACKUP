@@ -18,7 +18,7 @@ function LoadPage(){
    //아이비시트 초기화
    var initSheet = {};
    initSheet.Cfg={SearchMode:smLazyLoad,ToolTip:1};
-   initSheet.HeaderMode = {Sort:1,ColMove:1,ColResize:1,HeaderCheck:1};
+   initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
    initSheet.Cols=[
 
 	   {Header:"회사코드",Type:"Text",SaveName: "COMPANY_CODE",MinWidth:150,KeyField:1,Align:"Center"},	

@@ -185,6 +185,21 @@ var graphColors = (function() {
 	    	}
 	    	});
 	    
+		
+	    var date = new Date();
+        var year  = date.getFullYear().toString().substr(2,4);
+        var lastyear  = (date.getFullYear()-1).toString().substr(2,4);
+        var month = date.getMonth() + 1;
+        var currentYear = year +"/"+ month;
+        var currentlastYear = lastyear +"/"+ month;
+        
+        
+	    $("#searchDate1").val(currentlastYear);
+	    $("#searchDate2").val(currentYear);
+		mySheet.DoSearch("${contextPath}/pm/p0010/searchList.do",FormQueryStringEnc(document.frm));
+
+        
+		        
 	}//LoadPage
 
 	

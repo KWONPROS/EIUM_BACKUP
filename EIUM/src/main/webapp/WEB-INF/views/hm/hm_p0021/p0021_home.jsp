@@ -90,18 +90,18 @@ function setPopupValue(){
 		initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 		initSheet.Cols = [
 
-				{Header:"교육코드",Type:"Text",SaveName:"employee_TRAINING_CODE", Align:"Center",Width:80},
-				{Header:"교육명",Type:"Text",SaveName:"employee_TRAINING_NAME",Align:"Center",Width:80},			
-				{Header:"시작일",Type:"Text",SaveName:"employee_TRAINING_START_DATE", Edit: 1, Align:"Center",Format:"Ymd",Width:80},			
-				{Header:"종료일",Type:"Text",SaveName:"employee_TRAINING_END_DATE",Format:"Ymd",Width:80},			
-				{Header:"교육일수",Type:"Text",SaveName:"employee_TRAINING_DATE_COUNT",Width:80},
-				{Header:"교육목적",Type:"Text",SaveName:"employee_TRAINING_GOAL",Width:80},
-				{Header:"교육장소",Type:"Text",SaveName:"employee_TRAINING_LOCATION",Width:80},			
-				{Header:"담당강사",Type:"Text",SaveName:"employee_TRAINING_TEACHER",Width:80},			
-				{Header:"교육기관",Type:"Text",SaveName:"employee_TRAINING_INSITUTION",Width:80},			
-				{Header:"교육시간",Type:"Text",SaveName:"employee_TRAINING_TIME",Width:80},
-				{Header:"대상인원",Type:"Text",SaveName:"employee_TRAINING_PEOPLE",Width:80},	
-				{Header:"사내외구분",Type:"Text",SaveName:"employee_TRAINING_IN_OUT",Width:80},	
+				{Header:"교육코드",Type:"Text",SaveName:"employee_TRAINING_CODE", Align:"Center",Width:120},
+				{Header:"교육명",Type:"Text",SaveName:"employee_TRAINING_NAME",Align:"Center",Width:120},			
+				{Header:"시작일",Type:"Text",SaveName:"employee_TRAINING_START_DATE", Edit: 1, Align:"Center",Format:"Ymd",Width:130},			
+				{Header:"종료일",Type:"Text",SaveName:"employee_TRAINING_END_DATE",Format:"Ymd",Width:130,Align:"Center"},			
+				{Header:"교육일수",Type:"Text",SaveName:"employee_TRAINING_DATE_COUNT",Width:120},
+				{Header:"교육목적",Type:"Text",SaveName:"employee_TRAINING_GOAL",Width:200},
+				{Header:"교육장소",Type:"Text",SaveName:"employee_TRAINING_LOCATION",Width:120},			
+				{Header:"담당강사",Type:"Text",SaveName:"employee_TRAINING_TEACHER",Width:120},			
+				{Header:"교육기관",Type:"Text",SaveName:"employee_TRAINING_INSITUTION",Width:120},			
+				{Header:"교육시간",Type:"Text",SaveName:"employee_TRAINING_TIME",Width:120},
+				{Header:"대상인원",Type:"Text",SaveName:"employee_TRAINING_PEOPLE",Width:120},	
+				{Header:"사내외구분",Type:"Text",SaveName:"employee_TRAINING_IN_OUT",Width:120},	
 
 				];
 			IBS_InitSheet(mySheet, initSheet);
@@ -121,8 +121,8 @@ function setPopupValue(){
 			initSheet2.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:3}
 			initSheet2.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 			initSheet2.Cols = [
-					{Header:"상태",Type:"Status",SaveName:"STATUS", Align:"Center",Width:80},
-					{Header:"사원코드",Type:"Text",SaveName:"employee_CODE", Align:"Center",Width:80},
+					{Header:"상태",Type:"Status",SaveName:"STATUS", Align:"Center",Width:60},
+					{Header:"사원코드",Type:"Text",SaveName:"employee_CODE", Align:"Center",Width:60},
 					{Header:"사원명",Type:"Text",SaveName:"employee_NAME", Align:"Center",InsertEdit:0,Width:80},	
 					{Header:"부서",Type:"Text",SaveName:"department_NAME",InsertEdit:0,Width:80},
 					{Header:"직책",Type:"Text",SaveName:"position_NAME",InsertEdit:0,Width:80},
@@ -131,7 +131,7 @@ function setPopupValue(){
 					{Header:"태도점수",Type:"Text",SaveName:"attitude_SCORE",InsertEdit:0,Width:80},
 					{Header:"평가점수",Type:"Text",SaveName:"score",InsertEdit:0,Width:80},
 					{Header:"합계",Type:"Text",SaveName:"total",InsertEdit:0,CalcLogic:"|6|+|7|+|8|",Width:80},
-					{Header:"교육평가",Type:"Text",SaveName:"assessment_DESC",InsertEdit:0,Width:80},
+					{Header:"교육평가",Type:"Text",SaveName:"assessment_DESC",InsertEdit:0,Width:110},
 
 					];
 				IBS_InitSheet(mySheet2,initSheet2);
@@ -192,7 +192,7 @@ function setPopupValue(){
 	}
 	
 	  
-	  function showPopup() { window.open("${contextPath}/hm/p0018/home2_p01.do", "a", "width=600, height=500, left=100, top=50");
+	  function showPopup() { window.open("${contextPath}/hm/p0018/home2_p01.do", "a", "width=517, height=517");
 	  
 	  }
 	  
@@ -246,29 +246,8 @@ left: 600px;
 width: 700px;
 
 }
-.right table{
-font-size:13px;
-font-weight:bold;
-position: relative;
-left: 40px;
-padding: 20px;
-}
-.right table tr td:nth-child(1){
-text-align:right;
-}
-.right table tr td:nth-child(2){
-width: 20px;
-height: 25px;
-}
-.right table tr td:nth-child(3) input{
-width: 130px;
-height: 20px;
-padding-left: 10px;
-margin-right:10px;
-box-sizing: border-box;
-border: 1px solid #CCCCCC;
-border-radius: 2px;
-} 
+
+
 .title {
     width:100%;
    color: #2C3E50;
@@ -291,8 +270,13 @@ border-radius: 2px;
 	font-size: 12px;
 	border-radius:5px;
 	position:absolute;
-	top:150px;
-	width:1000px;
+	top:120px;
+	width:1480px;
+	left:60px;
+	padding-top:20px;
+	padding-bottom:20px;
+	
+	
 }
 .leftbuttons{
    margin-top:40px;
@@ -303,12 +287,44 @@ border-radius: 2px;
 }
 .sheet1{
 position:relative;
-top:220px;
+top:190px;
+left:55px;
+border-bottom:2px solid #C3C3C3;
+padding-bottom:15px;
+width:1540px;
 }
 .sheet2{
 position:relative;
-top:250px;
+top:205px;
+left:55px;
+width:1540px;
 }
+span{
+    margin-left: 110px;
+	background: #5E5E5E;
+    padding: 5px 5px;
+    color: white;
+    border-radius: 5px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+img{
+margin-left:5px;
+margin-right:5px;
+vertical-align: middle;
+}
+#frm a{
+
+	text-decoration: none;
+}
+#frm input{
+height: 22px;
+	border-radius: 3px;
+	border: none;
+	padding-left:5px;
+	vertical-align: middle;
+}
+
 
 </style>
 
@@ -327,13 +343,13 @@ top:250px;
 	<div class="sheet1">
 		<script>
 			//IBSheet 객체 생성 (객체 id, 너비, 높이)
-			createIBSheet("mySheet", "1200px", "200px");
+			createIBSheet("mySheet", "1600px", "300px");
 		</script>
 	</div>
 
 	<div class="sheet2">
 		<script>
-			createIBSheet("mySheet2", "1000px", "200px");
+			createIBSheet("mySheet2", "1545px", "320px");
 		</script>
 	</div>
 
@@ -348,8 +364,9 @@ top:250px;
 		<button type="button" onclick="doAction('down')" class="IBbutton">엑셀</button>
 	</div>
 	<div id="searchBar">
-	<form name="frm" >
-	교육코드<input type="text" id="eduCode" value="" onChange="LoadPage()"><a href="javascript:showPopup();" ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a> <input type="text" id="eduName" disabled>
+	<form id="frm" name="frm" >
+	<span>교육코드</span><a href="javascript:showPopup();" ><input type="text" id="eduCode" value="" onChange="LoadPage()"style="width: 150px;" placeholder="교육코드">
+	 <input type="text" id="eduName" placeholder="교육명" style="width: 200px;"readonly ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
 	</form>
 	</div>
 	

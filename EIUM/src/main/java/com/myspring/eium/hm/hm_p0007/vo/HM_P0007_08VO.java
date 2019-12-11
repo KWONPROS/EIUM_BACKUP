@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 public class HM_P0007_08VO {
 	private String business_trip_code;
 	private String employee_code;
-	private String country;
+	private String country_code;
 	private String area;
 	private String start_date;
 	private String end_date;
@@ -79,14 +79,8 @@ public class HM_P0007_08VO {
 
 
 	
-
-
-
-
-
-
-	public String getCountry() {
-		return country;
+	public String getCountry_code() {
+		return country_code;
 	}
 
 
@@ -94,8 +88,8 @@ public class HM_P0007_08VO {
 
 
 
-	public void setCountry(String country) {
-		this.country = country;
+	public void setCountry_code(String country_code) {
+		this.country_code = country_code;
 	}
 
 

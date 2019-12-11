@@ -169,8 +169,8 @@
 	</select>
 	
 	<insert id="insertCareer" parameterType="java.util.Map">
-		insert into employee_career(employee_code,career_code,company_name,start_date,end_date,sum_year,role,position,salary, reason, total_work, int_user_id, int_date) 
-		values(#{x},carrer_code_seq.nextval,#{company_name},#{start_date},#{end_date},#{sum_year},#{role},#{position}, #{salary}, #{reason}, #{total_work}, #{user}, sysdate)
+		insert into employee_career(employee_code,career_code,company_name,start_date,end_date,sum_year,role,position, salary,reason, total_work, int_user_id, int_date) 
+		values(#{x},career_code_seq.nextval,#{company_name},#{start_date},#{end_date},#{sum_year},#{role},#{position}, #{salary}, #{reason}, #{total_work}, #{user}, sysdate)
 	</insert>	
 	
 	<update id="updateCareer" parameterType="java.util.Map">
@@ -216,21 +216,21 @@
 
 	<select id="searchLicense" resultMap="p0007_04resultVO">
       <![CDATA[
-         select license_code, license_type, start_date, end_date, license_number, institute, bonus
-         from employee_license
-         where employee_code = #{x}
+         select e.license_code, l.license_name, e.start_date, e.end_date, e.license_number, e.institute, e.bonus
+         from employee_license e , license l
+         where e.license_code = l.license_code
+         and employee_code = #{x}
                ]]>
 	</select>
 	
 	<insert id="insertLicense" parameterType="java.util.Map">
-		insert into employee_license(employee_code,license_code,license_type,start_date,end_date,license_number,institute,bonus,int_user_id,int_date) 
-		values(#{x},license_code_seq.nextval,#{license_type},#{start_date},#{end_date},#{license_number},#{institute},#{bonus},#{user},sysdate)
+		insert into employee_license(employee_code,license_code,start_date,end_date,license_number,institute,bonus,int_user_id,int_date) 
+		values(#{x},license_code_seq.nextval,#{start_date},#{end_date},#{license_number},#{institute},#{bonus}, #{user},sysdate)
 	</insert>	
 	
 	<update id="updateLicense" parameterType="java.util.Map">
 		update employee_license
-		set license_type = #{license_type}
-		   , start_date = #{start_date}
+		set start_date = #{start_date}
 		   , end_date = #{end_date}
 		   , license_number = #{license_number}
 		   , institute = #{institute}
@@ -251,10 +251,10 @@
 
 
 	<resultMap id="p0007_05resultVO" type="HM_P0007_05VO">
-		<result property="employee_code" column="employee_code" />
+		<result property="appoint_employee_code" column="employee_code" />
 		<result property="hr_appoint_number" column="hr_appoint_number" />
-		<result property="hr_appoint_date" column="hr_appoint_date" />
-		<result property="hr_appoint_title" column="hr_appoint_title" />
+		<result property="appoint_date" column="hr_appoint_date" />
+		<result property="appoint_title" column="hr_appoint_title" />
 		<result property="hr_appoint_history" column="hr_appoint_history" />
 		<result property="hr_appoint_before_info" column="hr_appoint_before_info" />
 		<result property="hr_appoint_current_info" column="hr_appoint_current_info" />
@@ -264,9 +264,20 @@
 
 	<select id="searchAppoint" resultMap="p0007_05resultVO">
       <![CDATA[
-         select hr_appoint_number, hr_appoint_date, hr_appoint_title, hr_appoint_history, hr_appoint_before_info, hr_appoint_current_info, hr_appoint_after_info
-         from hr_appoint
-         where employee_code = #{x}
+		select i.hr_appoint_index_name, a.appoint_code, a.appoint_title, a.appoint_date, w.work_status_name, s.site_name, d.department_name, p.position_name, dt.duty_name, e.employee_name
+		from hr_appoint a, hr_appoint_history h, hr_appoint_index i, employee e, employee_work ew, site s, department d, position p,  duty dt, work_status w
+		where h.appoint_employee_code = ew.employee_code
+		and h.appoint_code = a.appoint_code
+		and h.appoint_index_code = i.hr_appoint_index_code
+		and h.site_code = s.site_code
+		and h.department_code = d.department_code
+		and h.position_code = p.position_code
+		and h.duty_code = dt.duty_code
+		and a.masteremployee_code = e.employee_code
+		and h.work_status_code = w.work_status_code
+		and h.appoint_employee_code = #{x}
+		and a.appoint_yn = '마감완료'
+		order by a.appoint_code
                ]]>
 	</select>
 	
@@ -342,9 +353,9 @@
 
 	<select id="searchWorking_status" resultMap="p0007_07resultVO">
       <![CDATA[
-         select hr_appoint_number, hr_appoint_date, hr_appoint_title, hr_appoint_history, hr_appoint_before_info, hr_appoint_current_info, hr_appoint_after_info
-         from hr_appoint
-         where employee_code = #{x}
+        select t.total_month, t.weekday_normal_work_time, t.weekday_extension_work_time, t.weekday_night_work_time, t.holiday_normal_work_time, t.holiday_extension_work_time, t.holiday_night_work_time, (select count(working_status_desc)from working_status where working_status_desc = '00' and employee_code =#{x}) as working_status00, (select count(working_status_desc) from working_status where working_status_desc = '01' and employee_code =#{x}) as working_status01, (select count(working_status_desc) from working_status where working_status_desc = '02' and employee_code =#{x}) as working_status02, (select count(working_status_desc) from working_status where working_status_desc = '03' and employee_code =#{x}) as working_status03
+		from total_working_status t 
+		where t.employee_code = #{x}
                ]]>
 	</select>
 	
@@ -372,19 +383,20 @@
 
 	<select id="searchBusiness_trip" resultMap="p0007_08resultVO">
       <![CDATA[
-          select business_trip_code, country, area, start_date, end_date, flight_cost, self_burden, company_burden, ect_cost, total_cost, purpose
-         from employee_business_trip
-         where employee_code = #{x}
+          select e.business_trip_code, country_name, e.area, e.start_date, e.end_date, e.flight_cost, e.self_burden, e.company_burden, e.ect_cost, e.total_cost, e.purpose
+         from employee_business_trip e , country c
+         where e.country_code = c.country_code
+         and e.employee_code = #{x}
                ]]>
 	</select>
 	<insert id="insertemployee_business_trip" parameterType="java.util.Map">
-		insert into employee_business_trip(employee_code,business_trip_code,country,area,start_date,end_date,flight_cost,self_burden, company_burden, ect_cost,total_cost,int_user_id,int_date) 
-		values(#{x},business_trip_code_seq.nextval,#{country},#{area},#{start_date},#{end_date},#{flight_cost},#{self_burden},#{company_burden},#{ect_cost},#{total_cost},#{user},sysdate)
+		insert into employee_business_trip(employee_code,business_trip_code,country_code,area,start_date,end_date,flight_cost,self_burden, company_burden, ect_cost,total_cost,int_user_id,int_date) 
+		values(#{x},business_trip_code_seq.nextval,#{country_code},#{area},#{start_date},#{end_date},#{flight_cost},#{self_burden},#{company_burden},#{ect_cost},#{total_cost},#{user},sysdate)
 	</insert>	
 	
 	<update id="updateemployee_business_trip" parameterType="java.util.Map">
 		update employee_business_trip
-		set country = #{country}
+		set country_code = #{country_code}
 		   , area = #{area}
 		   , start_date = #{start_date}
 		   , end_date = #{end_date}
@@ -479,9 +491,10 @@
 
 	<select id="searchEmployee_language" resultMap="p0007_10resultVO">
       <![CDATA[
-          select language_code, employee_code, name, start_date, end_date, grade, institute
-         from employee_language
-         where employee_code = #{x}
+          select e.language_code, e.employee_code, l.language_name, e.start_date, e.end_date, e.grade, e.institute
+         from employee_language e, language l
+         where e.language_code = l.language_code
+         and e.employee_code = #{x}
                ]]>
 	</select>
 	<insert id="insertEmployee_language" parameterType="java.util.Map">

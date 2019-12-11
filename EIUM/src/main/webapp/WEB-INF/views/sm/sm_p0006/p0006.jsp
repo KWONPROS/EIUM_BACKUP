@@ -31,25 +31,15 @@
 		};
 		initSheet.HeaderMode = {
 			Sort : 1,
-			ColMove : 1,
-			ColResize : 10,
+			ColMove : 0,
+			ColResize : 0,
 			HeaderCheck : 1
 		};
-		initSheet.Cols = [ {
-			"Header" : "계정ID",
-			"SaveName" : "employee_ID",
-			"Type" : "Text",
-			"Width" : 150,
-			"Align" : "Center","UpdateEdit":0
-		}, {
-			"Header" : "사원명",
-			"SaveName" : "employee_NAME",
-			"Type" : "Text",
-			"Width" : 150,
-			"Align" : "Center","UpdateEdit":0
-		},
-        { "Header" : "부서명", "SaveName" : "department_NAME", "Type" : "Text", "Width" : 150, "Align" : "Center","UpdateEdit":0 },
-        { "Header" : "직급", "SaveName" : "position_NAME", "Type" : "Text", "Width" : 150, "Align" : "Center","UpdateEdit":0 }
+		initSheet.Cols = [ 
+			{"Header" : "ID","SaveName" : "employee_ID","Type" : "Text","Width" : 170,"Align" : "Center","UpdateEdit":0}, 
+			{"Header" : "사원명","SaveName" : "employee_NAME","Type" : "Text","Width" : 200,"Align" : "Center","UpdateEdit":0},
+        	{ "Header" : "부서명", "SaveName" : "department_NAME", "Type" : "Text", "Width" : 200, "Align" : "Center","UpdateEdit":0 },
+        	{ "Header" : "직급명", "SaveName" : "position_NAME", "Type" : "Text", "Width" : 200, "Align" : "Center","UpdateEdit":0 }
         ];
 
 		var initSheet2 = {};
@@ -59,8 +49,8 @@
 		};
 		initSheet2.HeaderMode = {
 			Sort : 1,
-			ColMove : 1,
-			ColResize : 10,
+			ColMove : 0,
+			ColResize : 0,
 			HeaderCheck : 1
 		};
 		initSheet2.Cols = [ {
@@ -82,14 +72,14 @@
 			"Header" : "권한명",
 			"SaveName" : "authority_NAME",
 			"Type" : "Text",
-			"Width" : 230,
+			"Width" : 300,
 			"Align" : "Center",
 			"UpdateEdit" : 0
 		}, {
 			"Header" : "권한부여",
 			"SaveName" : "authority_GRANT",
 			"Type" : "Radio",
-			"Width" : 150,
+			"Width" : 250,
 			"Align" : "Center"
 		} ];
 		IBS_InitSheet(mySheet, initSheet);
@@ -265,22 +255,24 @@ background-color: #2C3E50;
 }
 
 .searchBarTitle {
+
+	margin-left: 110px;
 	background: #5E5E5E;
-	padding: 4px;
-	color: white;
-	border-radius: 5px;
-	margin: 0 5px 0 70px;
-	vertical-align: middle;
-	margin-left: 130px;
+    padding: 5px 5px;
+    color: white;
+    border-radius: 5px;
+    margin-right: 10px;
+    vertical-align: middle;
 }
 #searchBar {
-	background: #EBEBEB;
-	padding: 20px 20px;
-	margin-bottom: 20px;
-	border-radius: 5px;
-	font-size: 12px;
-	border-radius:5px;
-	width: 1065px;
+	padding: 25px 0px 25px 0px;
+    background: #EBEBEB;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size: 12px;
+    border-radius: 5px;
+    position: absolute;
+    width: 1450px;
 }
 #searchBar input, select {
 	height: 24px;
@@ -289,6 +281,7 @@ background-color: #2C3E50;
 	padding-left: 5px;
 	vertical-align: middle;
 	text-align: center;
+	width: 120px;
 }
 .left {
 	position: relative;
@@ -298,9 +291,9 @@ background-color: #2C3E50;
 }
 .right{
  position: relative;
- width:830px;
+width: 1350px;
 top: -570px;
-left: 390px; 
+left: 450px; 
 padding: 0 0 0 30px;
 border-left: 2px solid #C3C3C3;
 margin-left: 15px;
@@ -333,25 +326,25 @@ margin-left: 15px;
 		<span class="searchBarTitle">부서</span><select id="DeptList">
 			<option value="" selected>전체</option>
 		</select>
-		<span class="searchBarTitle">조회조건</span><select id="Employee_Select">
+		<span class="searchBarTitle" >조회조건</span><select id="Employee_Select" style="width: 70px;">
 		    <option value="" selected>구분</option>
 			<option value="employee_name">사원명</option>
 			<option value="employee_code">사원코드</option>
 		</select>
-		<input type="text" id="p_text" placeholder="내용을 입력해주세요.">
+		<input type="text" id="p_text" placeholder="내용을 입력해주세요." style="width: 200px;text-align: left;">
         </div>
 		</div>
 
-		<div style="position: absolute; top: 220px; left: 70px;">
+		<div style="position: absolute; top: 230px; left: 70px;width: 1500px;">
 			<script type="text/javascript">
-				createIBSheet("mySheet", "1500px", "600px");
+				createIBSheet("mySheet", "1500px", "620px");
 				selectSite();
 			</script>
 		</div>
 
-		<div class="right" style="position: absolute; top: 220px; left: 685px;">
+		<div class="right" style="position: absolute; top: 230px; left: 855px;width: 1500px;">
 			<script>
-				createIBSheet("mySheet2", "1500px", "600px");
+				createIBSheet("mySheet2", "1500px", "620px");
 			</script>
 		</div>
 

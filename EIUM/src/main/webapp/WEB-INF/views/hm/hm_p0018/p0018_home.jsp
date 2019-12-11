@@ -56,13 +56,13 @@
 			Align : "Center",
 			Width : 100,
 			UpdateEdit : 0,
-			Width:160
+			Width:180
 		}, {
 			Header : "교육명",
 			Type : "Text",
 			SaveName : "employee_TRAINING_NAME",
 			Align : "Center",
-			Width:160
+			Width:180
 		}, {
 			Header : "시작일",
 			Type : "Date",
@@ -70,14 +70,14 @@
 			Edit : 1,
 			Align : "Center",
 			Format : "Ymd",
-			Width:190
+			Width:210
 		}, {
 			Header : "종료일",
 			Type : "Date",
 			SaveName : "employee_TRAINING_END_DATE",
 			Format : "Ymd",
 			Align:"Center",
-			Width : 190
+			Width : 210
 		}, {
 			Header : "교육일수",
 			Type : "Text",
@@ -138,6 +138,9 @@
 			break;
 		case "reload": //초기화
 			//조회 데이터 삭제
+		$("form").each(function() {  
+            this.reset();
+		});
 			mySheet.RemoveAll();
 			break;
 		case "save": //저장
@@ -260,8 +263,8 @@
 
 .left {
 	position: absolute;
-	top: 120px;
-	left: 85px;	
+	top: 80px;
+	left: 50px;	
 }
 
 .rightbuttons {
@@ -283,10 +286,10 @@
 
 .right {
 	position: relative;
-	top: 110px;
-	left: 960px;
-	width: 450px;
-	height:505px;
+	top: 70px;
+	left: 1000px;
+	width: 500px;
+	height:640px;
 	background: #EDF0F5;
 	border-radius: 10px;
 
@@ -297,7 +300,7 @@
 	font-weight: bold;
 	position: relative;
 	left: 40px;
-	padding: 20px;
+	padding: 40px;
 }
 
 .right table tr td:nth-child(1) {
@@ -355,7 +358,7 @@
 		<div style="padding-right: 30px;border-right: 2px solid #C3C3C3;margin-right: 15px;">
 			<script>
 				//IBSheet 객체 생성 (객체 id, 너비, 높이)
-				createIBSheet("mySheet", "100%", "500px");
+				createIBSheet("mySheet", "100%", "640px");
 			</script>
 		</div>
 	</div>

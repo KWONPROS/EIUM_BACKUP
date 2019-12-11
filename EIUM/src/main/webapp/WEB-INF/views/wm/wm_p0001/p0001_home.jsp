@@ -48,8 +48,8 @@
 		initSheet.HeaderMode = {Sort:1,ColMove:1,ColResize:1,HeaderCheck:1};
 		initSheet.Cols = [		
 		
-	        {Header:"사원코드",Type:"Text",SaveName:"employee_CODE", Width:80, KeyField:1, Align:"Center", Edit: 0},	
-			{Header:"사원명",Type:"Text",SaveName:"employee_NAME",MinWidth:120, Align:"Center", Edit: 0},			
+	        {Header:"사원코드",Type:"Text",SaveName:"employee_CODE", Width:100, KeyField:1, Align:"Center", Edit: 0},	
+			{Header:"사원명",Type:"Text",SaveName:"employee_NAME",MinWidth:150, Align:"Center", Edit: 0},			
 			{Header:"부서명",Type:"Text",SaveName:"department_NAME",MinWidth:150, Align:"Center", Edit: 0},
 			{Header:"부서코드", Type:"Text", SaveName:"department_CODE", Align:"Center", Edit: 0, Hidden: 1}
 		];   
@@ -114,8 +114,8 @@
 			{Header:"휴일연장근무시간(시간)",Type:"Text",SaveName:"holiday_EXTENSION_WORK_TIME", Width:160,Edit:1,Align:"Center"},			
 			{Header:"휴일야간근무시간(시간)",Type:"Text",SaveName:"holiday_NIGHT_WORK_TIME", Width:160,Edit:1,Align:"Center"},
 			//etc
-			{Header:"평일(일)",Type:"Text",SaveName:"weekday",Edit:0, Width:95,Align:"Center"},	
-			{Header:"휴일(일)",Type:"Text",SaveName:"holiday",Edit:0, Width:95,Align:"Center"},			
+			{Header:"평일(일)",Type:"Text",SaveName:"weekday",Edit:0, Width:105,Align:"Center"},	
+			{Header:"휴일(일)",Type:"Text",SaveName:"holiday",Edit:0, Width:105,Align:"Center"},			
 			{Header:"총정상근무일(일)",Type:"Text",SaveName:"normal_WORK_DAY", Width:140,Edit:1,Align:"Center"},
 			{Header:"총연장근무일(일)",Type:"Text",SaveName:"extension_WORK_DAY", Width:140,Edit:1,Align:"Center"}
 		];
@@ -123,9 +123,9 @@
 		IBS_InitSheet(mySheet3, initSheet3);
 		mySheet3.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
 		mySheet3.SetAutoRowHeight(0);
-		mySheet3.SetSheetHeight(75);
-		mySheet3.SetDataRowHeight(34); //데이터 row의 높이 조절
-		mySheet3.SetHeaderRowHeight(37);  //헤더 행의 높이 조절 
+		mySheet3.SetSheetHeight(80);
+		mySheet3.SetDataRowHeight(48); //데이터 row의 높이 조절
+		mySheet3.SetHeaderRowHeight(30);  //헤더 행의 높이 조절 
 		/* mySheet3.SetSelectionMode(1); */
 		
 
@@ -225,6 +225,10 @@
 			$('#Employee_Select').val('');
 			$('#p_text').val('');
 			$('#p_text').attr('placeholder', "사원명or사원코드");
+			
+			$("#WORK_TIME").each(function() {  
+				this.reset();  
+	         });  
 			break;
 		case "save": // 저장
 			mySheet2.DoSave("${contextPath}/wm/p0001/saveData.do", "p_emp_code=" + mySheet.GetCellValue(mySheet.GetSelectRow(),0));
@@ -1999,7 +2003,7 @@
 		if(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_START_TIME"))<="0900" && mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_END_TIME"))>="1800"){ //정상출근
 			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "00");
 		}else if(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_START_TIME"))=="0900" && mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0900" && mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_END_TIME"))<"1800"){ //조퇴
-			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "02");
+			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "02"); 
 		}else if(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_START_TIME"))>"0900"){ //지각
 			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "01");
 		}
@@ -2010,13 +2014,13 @@
 	}
 	function mySheet2_OnChange(Row, Col){
 		//출근, 조퇴, 외출 프로세스
-		if(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_START_TIME"))<="0900" && mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_END_TIME"))>="1800"){ //정상출근
+		/* if(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_START_TIME"))<="0900" && mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_END_TIME"))>="1800"){ //정상출근
 			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "00");
 		}else if(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_START_TIME"))=="0900" && mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0900" && mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_END_TIME"))<"1800"){ //조퇴
-			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "02");
+			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "02"); 
 		}else if(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_START_TIME"))>"0900"){ //지각
 			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "01");
-		}
+		} */
 		
 		
 		///////////////////////////////////////////////////////////////////평일 휴일 정상근무 휴일정상근무 프로세스
@@ -2252,96 +2256,108 @@
 
 .left{
 	position: relative;
-	top: 110px;
-	left: 30px;
-	width: 1053px;
+	top: 130px;
+	left: 60px;
+	width: 1450px;
 }
 .center{
 	position: relative;
-	top: -390px;
-	left: 460px;
+	top: -285px;
+	left: 520px;
 	width: 670px;
 	/* 670px; */
 }
 .right_end{
 position: relative;
-top: -895px;
+top: -785px;
 left: 1150px;
-width: 300px;
-background: #EDF0F5;
+width: 360px;
+background: #d4d4d4;
 border-radius: 10px;
+height: 500px;
 }
+.right_end table {
+height: 60%;
+vertical-align: middle;
+}
+
 .right_end table{
-font-size:13px;
-font-weight:bold;
-padding: 20px;
+font-size:12px;
+padding: 30px;
 }
-.right_end table tr td:nth-child(1){
+
+
+.right_end table tr td:nth-child(1) span{
 text-align:right;
+background: #5E5E5E;
+padding: 5px 10px 5px 10px;
+    color: white;
+    border-radius: 4px;
+    vertical-align: middle;
+    font-weight: normal;
 }
 .right_end table tr td:nth-child(2){
 width: 20px;
-height: 25px;
 }
 
 .right_end table tr td:nth-child(3) input{
-width: 80px;
 height: 20px;
-padding-left: 10px;
-margin-right:10px;
-box-sizing: border-box;
-border: 1px solid #CCCCCC;
-border-radius: 2px;
+	border-radius: 3px;
+	border: none;
+	padding-right: 10px;
+	vertical-align: middle;
+	text-align: right;
+	width: 60px;
 } 
 
 .bottom{
 position: relative;
-top:  -580px;
-left: 30px;
+    top: -770px;
+    left: 60px;
+width: 1450px;
+border-top: 2px solid #C3C3C3;
+padding-top: 15px;
+height: 95px;
 }
-
+.leftbottom{
+position: relative;
+	top: 230px;
+	left: 60px;
+	width: 430px;
+border-right: 2px solid #C3C3C3;
+margin-right: 15px;
+padding-bottom: 15px;
+}
 #searchBar {
-	background: #EBEBEB;
-	padding: 15px 125px;
-	margin-bottom: 30px;
-	border-radius: 5px;
-	font-size: 12px;
-	/*여기서 중간 텀띄우기*/
+	padding: 25px 0px 25px 0px;
+    background: #EBEBEB;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size: 12px;
+    border-radius: 5px;
+    position: absolute;
+    width: 1450px;
 }
 
-.left input{
+.left input, select{
 	height: 22px;
-	width: 100px;
 	border-radius: 3px;
 	border: none;
 	padding-left:5px;
 	vertical-align: middle;
 }
+.left span{
+margin-left: 110px;
+	background: #5E5E5E;
+    padding: 5px 5px;
+    color: white;
+    border-radius: 5px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
 
-.left_rightsearch input{
-	height: 22px;
-	width: 140px;
-	border-radius: 3px;
-	border: none;
-	padding-left:5px;
-	vertical-align: middle;
-}
-.yearMonth {
-	background: #5E5E5E;
-	padding: 5px 5px;
-	color: white;
-	border-radius: 5px;
-}
-.kindofsearch{
-	background: #5E5E5E;
-	padding: 5px 5px;
-	color: white;
-	border-radius: 5px;
-}
-.left_rightsearch{
-	display: inline;
-	float: right;
-}
+
+
 .GridMain1 .GridMain2 .GMMainTable {
 	border: 0px;
 }
@@ -2381,7 +2397,7 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 			<span class="yearMonth">귀속연월</span> 
 			<input id="monthpicker" type="text">
 			<img id="btn_monthpicker" src="${contextPath}/resources/image/icons/icon_calendar.png">
-			<div class="left_rightsearch">
+			
 			<span class="kindofsearch">사업장구분</span>
 				<select id="SiteList" onchange="selectDept()">
 					<option value="" selected>전체</option>
@@ -2399,9 +2415,12 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 			<input type="text" id="p_text" placeholder="사원명 or사원코드">
 			<input type="hidden" id="Ppayment_code">
 			<input type="hidden" id="Ppayment_des_name">
-		</div>
+	
 		</form>
-		<script>createIBSheet("mySheet", "100%", "100%");
+		
+	</div>
+	<div class="leftbottom">
+	<script>createIBSheet("mySheet", "100%", "100%");
 		selectSite();
 		</script>
 	</div>
@@ -2410,60 +2429,43 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 		
 	</div>
 	
+	<form id=WORK_TIME>
 	<div class="right_end">
+	
 		<table>
 			<tr>
-				<td>평일정상근무시간</td>
+				<td><span>평일정상근무시간</span></td>
 				<td><input type="hidden" name="myRow"></td>
-				<td><input type="text" name="weekday_NORMAL_WORK_TIME" maxlength="5" class="WORK_TIME"  placeholder="__:__" >시간</td>
+				<td><input type="text" name="weekday_NORMAL_WORK_TIME" maxlength="5" class="WORK_TIME"  placeholder="__:__" > 시간</td>
 			</tr>
 			<tr>
-				<td>평일연장근무시간</td>
+				<td><span>평일연장근무시간</span></td>
 				<td></td>
-				<td><input type="text" name="weekday_EXTENSION_WORK_TIME" maxlength="5" class="WORK_TIME"  placeholder="__:__" >시간</td>
+				<td><input type="text" name="weekday_EXTENSION_WORK_TIME" maxlength="5" class="WORK_TIME"  placeholder="__:__" > 시간</td>
 			</tr>
 			<tr>
-				<td>평일야간근무시간</td>
+				<td><span>평일야간근무시간</span></td>
 				<td></td>
-				<td><input type="text" name="weekday_NIGHT_WORK_TIME" maxlength="5" class="WORK_TIME"  placeholder="__:__" >시간</td>
+				<td><input type="text" name="weekday_NIGHT_WORK_TIME" maxlength="5" class="WORK_TIME"  placeholder="__:__" > 시간</td>
 			</tr>
 			<tr>
-				<td>휴일정상근무시간</td>
+				<td><span>휴일정상근무시간</span></td>
 				<td></td>
-				<td><input type="text" name="holiday_NORMAL_WORK_TIME" maxlength="5" class="WORK_TIME"  placeholder="__:__" >시간</td>
+				<td><input type="text" name="holiday_NORMAL_WORK_TIME" maxlength="5" class="WORK_TIME"  placeholder="__:__" > 시간</td>
 			</tr>
 			<tr>
-				<td>휴일연장근무시간</td>
+				<td><span>휴일연장근무시간</span></td>
 				<td></td>
-				<td><input type="text" name="holiday_EXTENSION_WORK_TIME" maxlength="5" class="WORK_TIME" placeholder="__:__" >시간</td>
+				<td><input type="text" name="holiday_EXTENSION_WORK_TIME" maxlength="5" class="WORK_TIME" placeholder="__:__" > 시간</td>
 			</tr>
 			<tr>
-				<td>휴일야간근무시간</td>
+				<td><span>휴일야간근무시간</span></td>
 				<td></td>
-				<td><input type="text" name="holiday_NIGHT_WORK_TIME" maxlength="5" class="WORK_TIME" placeholder="__:__" >시간</td>
+				<td><input type="text" name="holiday_NIGHT_WORK_TIME" maxlength="5" class="WORK_TIME" placeholder="__:__" > 시간</td>
 			</tr>
-			<!-- <tr>
-				<td>평일</td>
-				<td></td>
-				<td><input type="text" name="weekday" maxlength="2" class="WORK_TIME" placeholder="__" >일</td>
-			</tr>
-			<tr>
-				<td>휴일</td>
-				<td></td>
-				<td><input type="text" name="holiday" maxlength="2" class="WORK_TIME" placeholder="__" >일</td>
-			</tr>
-			<tr>
-				<td>총정상근무일</td>
-				<td></td>
-				<td><input type="text" name="normal_WORK_DAY" maxlength="2" class="WORK_TIME" placeholder="__" >일</td>
-			</tr>
-			<tr>
-				<td>총연장근무일</td>
-				<td></td>
-				<td><input type="text" name="extension_WORK_DAY" maxlength="2" class="WORK_TIME" placeholder="__" >일</td>
-			</tr> -->
 		</table>
 	</div>
+	</form>
 	<div class="bottom">
 		<script>createIBSheet("mySheet3", "100%", "100%");</script>
 	</div>

@@ -71,6 +71,7 @@ ul, ol {
 	padding: 5px 15px;
 	border-radius: 7px;
 	text-decoration: none;
+	border:0px;
 }
 
 
@@ -96,24 +97,57 @@ ul, ol {
 	margin: 10px;
 	position: absolute;
 	left: 0px;
-	top: 0px;
+	top: 10px;
 }
 .sheet1{
 position:relative;
-top:180px;
+top:70px;
+left:20px;
 }
 #searchBar {
 	background: #EBEBEB;
-	padding: 10px 30px;
 	margin-bottom: 20px;
 	border-radius: 5px;
 	font-size: 12px;
 	border-radius:5px;
 	position:relative;
-	top:120px;
-	width:1300px;
-	left:15px;
-	
+	top:70px;
+	width:1590px;
+	left:20px;
+	padding-top:20px;
+	padding-bottom:20px;
+}
+
+#searchBar input, select {
+	height: 24px;
+	border-radius: 3px;
+	border: none;
+	padding-left: 5px;
+	vertical-align: middle;
+	text-align: center;
+}
+.searchBarTitle {
+	background: #5E5E5E;
+	padding: 4px;
+	color: white;
+	border-radius: 5px;
+	margin: 0 5px 0 70px;
+	vertical-align: middle;
+	margin-left: 50px;
+	font-size:12px;
+}
+span{
+    background: #5E5E5E;
+    padding: 5px 5px;
+    color: white;
+    border-radius: 5px;
+    margin-right:10px;
+    font-size:12px;
+}
+img{
+margin-left:5px;
+margin-right:5px;
+vertical-align: middle;
 }
 
 </style>
@@ -141,10 +175,10 @@ var initSheet = {};
 initSheet.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:3, MergeSheet:msHeaderOnly}
 initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 initSheet.Cols = [
-	  {Header:"NO",Type:"Seq",SaveName:"seq",Align:"Center",Width:100},
+	  {Header:"NO",Type:"Seq",SaveName:"seq",Align:"Center",Width:60},
       {Header:"인사발령내역고유번호",Type:"Text",SaveName:"appoint_HISTORY_CODE",Align:"Center",Width:100,"Hidden":1},   
-      {Header:"사원코드",Type:"Text",SaveName:"employee_CODE",Align:"Center",Width:100,InsertEdit:0},
-      {Header:"사원명",Type:"Text",SaveName:"employee_NAME",Align:"Center",Width:100},         
+      {Header:"사원코드",Type:"Text",SaveName:"employee_CODE",Align:"Center",Width:80,InsertEdit:0},
+      {Header:"사원명",Type:"Text",SaveName:"employee_NAME",Align:"Center",Width:80},         
       {Header:"시작일자",Type:"Date",SaveName:"start_DATE",Align:"Center",Width:100,Format:"Ymd"},         
       {Header:"종료일자",Type:"Date",SaveName:"end_DATE",Align:"Center",Width:100,Format:"Ymd"},
       {Header:"발령구분",Type:"Text",SaveName:"hr_APPOINT_INDEX_NAME",Align:"Center",Width:100},
@@ -154,9 +188,9 @@ initSheet.Cols = [
       {Header:"사업장코드",Type:"Text",SaveName:"site_CODE",Align:"Center",Width:100,Hidden:1},
       {Header:"부서",Type:"Text",SaveName:"department_NAME",Align:"Center",Width:100},
       {Header:"부서코드",Type:"Text",SaveName:"department_CODE",Align:"Center",Width:100,Hidden:1},
-      {Header:"직종",Type:"Text",SaveName:"job_CLASS_NAME",Align:"Center",Width:100},
-      {Header:"직급",Type:"Text",SaveName:"position_NAME",Align:"Center",Width:100},
-      {Header:"직책",Type:"Text",SaveName:"duty_NAME",Align:"Center",Width:100},
+      {Header:"직종",Type:"Text",SaveName:"job_CLASS_NAME",Align:"Center",Width:90},
+      {Header:"직급",Type:"Text",SaveName:"position_NAME",Align:"Center",Width:90},
+      {Header:"직책",Type:"Text",SaveName:"duty_NAME",Align:"Center",Width:90},
       {Header:"직무",Type:"Text",SaveName:"job_DIS_NAME",Align:"Center",Width:100},
       {Header:"급여유형",Type:"Text",SaveName:"pay_TYPE_NAME",Align:"Center",Width:100},
       {Header:"급여호봉",Type:"Text",SaveName:"pay_GRADE_NAME",Align:"Center",Width:100},
@@ -223,13 +257,13 @@ function departmentValue(rowData){
 
 
 <div id="searchBar">
-발령일시작일
+<span class="searchBarTitle">발령일시작일</span>
 
 <input id="date"type="text"  class="Datepicker">
 ~
 <input  id="date2"type="text" class="Datepicker">
 
-<span>발령구분</span>
+<span class="searchBarTitle">발령구분</span>
 <select id = "appoint_index"  class="" style="width: 160px">
 <option value="" selected >전체</option>
 <option value="채용" >채용</option>
@@ -248,14 +282,14 @@ function departmentValue(rowData){
 <option value="정직해제">정직해제</option>
 </select>
 
-<span>부서</span>
+<span class="searchBarTitle">부서</span>
 <input id="department" type="text" >
-<a href="javascript:goPopup()" >부서검색</a>
+<a href="javascript:goPopup()" ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
 
-<span>직원</span>
+<span class="searchBarTitle">직원</span>
 <input id="employee" type="text" >
 <input id="EmplCode" type="hidden">
-<a href="javascript:goPopup2()" >사원검색</a>
+<a href="javascript:goPopup2()" ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
 
 </div>
 </form>
@@ -268,7 +302,7 @@ function departmentValue(rowData){
 	</div>
 	<div class="sheet1">
 		<script type="text/javascript">
-			createIBSheet("mySheet1", "100%", "40%");
+			createIBSheet("mySheet1", "1600px", "600px");
 		</script>
 	</div>
 </body>

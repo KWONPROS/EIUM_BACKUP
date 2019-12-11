@@ -393,7 +393,7 @@ width:200px;
 	<div class="left">
 		<script>
 			//IBSheet 객체 생성 (객체 id, 너비, 높이)
-			createIBSheet("mySheet", "1000px", "500px");
+			createIBSheet("mySheet", "1000px", "600px");
 			
 		</script>
 	</div>
@@ -403,7 +403,7 @@ width:200px;
 	<div class="right">
 		<script>
 			//IBSheet 객체 생성 (객체 id, 너비, 높이)
-			createIBSheet("mySheet2", "550px", "500px");
+			createIBSheet("mySheet2", "550px", "600px");
 			
 		</script>
 	</div>

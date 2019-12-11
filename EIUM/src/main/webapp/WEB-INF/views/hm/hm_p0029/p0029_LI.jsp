@@ -119,7 +119,7 @@
 
 <style type="text/css">
 .title {
-    width:100%;
+    width:97%;
    color: #2C3E50;
    font-weight: bold;
    font-size: 20px;
@@ -250,7 +250,7 @@ background-color: #2C3E50;
 
 		<div class="center">
 			<script type="text/javascript">
-				createIBSheet("mySheet", "1500px", "600px");
+				createIBSheet("mySheet", "1500px", "500px");
 			</script>
 		</div>
       <input type="hidden" id="Poption_code_temp" >
