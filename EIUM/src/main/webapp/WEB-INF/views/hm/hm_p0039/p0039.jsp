@@ -248,7 +248,7 @@ function departmentValue(rowData){
 
 <div class="sheet1">
 <script>
-createIBSheet("mySheet", "1500px", "550px");
+createIBSheet("mySheet", "1500px", "600px");
 </script>
 </div>
 </form>

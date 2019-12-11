@@ -378,7 +378,7 @@ vertical-align: middle;
 	<div class="left">
 		<script>
 			//IBSheet 객체 생성 (객체 id, 너비, 높이)
-			createIBSheet("mySheet", "100%", "450px");
+			createIBSheet("mySheet", "100%", "520px");
 
 		</script>
 	</div>
@@ -394,7 +394,7 @@ vertical-align: middle;
 	<div class="right">
 	
 	<script>
-	createIBSheet("mySheet2", "1300px", "450px");
+	createIBSheet("mySheet2", "1300px", "520px");
 	</script>
 	
 	</div>

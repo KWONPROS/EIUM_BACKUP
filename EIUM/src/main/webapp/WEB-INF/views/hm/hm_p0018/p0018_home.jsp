@@ -138,6 +138,9 @@
 			break;
 		case "reload": //초기화
 			//조회 데이터 삭제
+		$("form").each(function() {  
+            this.reset();
+		});
 			mySheet.RemoveAll();
 			break;
 		case "save": //저장
@@ -260,7 +263,7 @@
 
 .left {
 	position: absolute;
-	top: 100px;
+	top: 80px;
 	left: 50px;	
 }
 
@@ -283,10 +286,10 @@
 
 .right {
 	position: relative;
-	top: 90px;
+	top: 70px;
 	left: 1000px;
-	width: 450px;
-	height:520px;
+	width: 500px;
+	height:640px;
 	background: #EDF0F5;
 	border-radius: 10px;
 
@@ -297,7 +300,7 @@
 	font-weight: bold;
 	position: relative;
 	left: 40px;
-	padding: 20px;
+	padding: 40px;
 }
 
 .right table tr td:nth-child(1) {
@@ -355,7 +358,7 @@
 		<div style="padding-right: 30px;border-right: 2px solid #C3C3C3;margin-right: 15px;">
 			<script>
 				//IBSheet 객체 생성 (객체 id, 너비, 높이)
-				createIBSheet("mySheet", "100%", "520px");
+				createIBSheet("mySheet", "100%", "640px");
 			</script>
 		</div>
 	</div>

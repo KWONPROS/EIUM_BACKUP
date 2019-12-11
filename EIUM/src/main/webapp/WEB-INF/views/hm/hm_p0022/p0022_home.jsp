@@ -91,12 +91,12 @@ position:relative;
 top:110px;
 left:20px;
 border-bottom:2px solid #C3C3C3;
-padding-bottom:10px;
+padding-bottom:15px;
 width:1540px;
 }
 .sheet2{
 position:relative;
-top:120px;
+top:125px;
 left:20px;
 
 }
@@ -433,32 +433,32 @@ function mySheet1_OnSaveEnd(){
 	<div id="searchBar">
 		<form name="frm">
 
-			<span class="searchBarTitle">발령일</span> <input id="date" type="text" class="Datepicker"> ~ <input id="date2" type="text" class="Datepicker">
+			<span class="searchBarTitle">발령일</span> <input id="date" type="text" class="Datepicker"><spann style="margin-left:20px; margin-right:20px"> ~ </spann> <input id="date2" type="text" class="Datepicker">
 			<span class="searchBarTitle" >제목</span> <input id="title" type="text"  style="width:300px;"> 
 			<span class="searchBarTitle">작성자</span><input id="masterEmpl" type="text"> <input id="masterEmplCode" type="hidden"> <a href="javascript:goPopup()"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
 	
 		</form>
 	</div>
 	<div class="sheet1">
-		<div style="padding:5px;">
+		<div style="padding:5px 5px 5px 0;">
 		<span>발령제목</span>
 			<a href="javascript:doAction('insert1')" class="IBbutton" style="position:relative;left:1335;">입력</a>	
 			<a href="javascript:doAction('save1')" class="IBbutton" style="position:relative;left:1335;">저장</a>
 		</div>
 		<script type="text/javascript">
-			createIBSheet("mySheet1", "1600px", "200px");
+			createIBSheet("mySheet1", "1600px", "240px");
 		</script>
 	</div>
 
 
 	<div class="sheet2">
-			<div style="padding:5px;">
+			<div style="padding:5px 5px 5px 0;">
 			<span>발령후내역</span>
 			<a href="javascript:doAction('insert2')" class="IBbutton" style="position:relative;left:1320;">입력</a>
 			<a href="javascript:doAction('save2')" class="IBbutton"style="position:relative;left:1320;">저장</a>
 			</div>
 		<script type="text/javascript">
-			createIBSheet("mySheet2", "1542px", "300px");
+			createIBSheet("mySheet2", "1542px", "280px");
 		</script>
 	</div>
 

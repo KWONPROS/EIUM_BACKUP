@@ -302,7 +302,7 @@ function departmentValue(rowData){
 	</div>
 	<div class="sheet1">
 		<script type="text/javascript">
-			createIBSheet("mySheet1", "1600px", "550px");
+			createIBSheet("mySheet1", "1600px", "600px");
 		</script>
 	</div>
 </body>
