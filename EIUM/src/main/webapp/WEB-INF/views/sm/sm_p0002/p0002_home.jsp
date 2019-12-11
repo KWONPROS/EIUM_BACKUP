@@ -22,15 +22,7 @@
    /*Sheet 기본 설정 */
    function LoadPage() {
       mySheet.RemoveAll();
-    //탭
-      createIBTab($('#ib_sheetTab')[0], $('#ib_sheetContents')[0], 'sheetTab', {
-		    themes: {
-		        tabs: "flat_blue",
-		        contents: "flat_blue",
-		        contextMenu: "flat_blue"
-		    },
-		    allowCloseBTN: false
-		});
+    
       //아이비시트 초기화
       var initSheet = {};
       initSheet.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0};
@@ -152,6 +144,8 @@
    function mySheet_OnSearchEnd(code,msg){
 	   if(mySheet.GetCellValue(1,3)!=-1){
 	   mySheet_OnClick(1, 0);		   
+	   }else{
+		   $(".tg").find("input").val("");
 	   }
    }
    
@@ -387,14 +381,6 @@ padding: 0px 5px 0px 2px;
 
 	<form name="form" id="form" method="post">
 		<div class="right">
-
-			<div id="ib_sheetTab">
-				<div class="ib-tab-tabs-item">
-					<a class="ib-tab-tabs-item__link is-active"><span
-						class="ib-tab-tabs-item__title">사업장정보 </span></a>
-				</div>
-			</div>
-
 
 			<div id="ib_sheetContents">
 				<div class="ib-tab-contents__item" style="background: none;">

@@ -123,8 +123,8 @@
 		IBS_InitSheet(mySheet3, initSheet3);
 		mySheet3.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
 		mySheet3.SetAutoRowHeight(0);
-		mySheet3.SetSheetHeight(80);
-		mySheet3.SetDataRowHeight(48); //데이터 row의 높이 조절
+		mySheet3.SetSheetHeight(75);
+		mySheet3.SetDataRowHeight(40); //데이터 row의 높이 조절
 		mySheet3.SetHeaderRowHeight(30);  //헤더 행의 높이 조절 
 		/* mySheet3.SetSelectionMode(1); */
 		

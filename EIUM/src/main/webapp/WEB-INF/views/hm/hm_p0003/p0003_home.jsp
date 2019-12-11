@@ -43,7 +43,7 @@
 	        {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:65},	
 	        {Header:"테이블물리명",Type:"Text",SaveName:"t_NAME",Hidden:1 } ,	
 			{Header:"코드",Type:"Text",SaveName:"admin_LIST_CODE",MinWidth:200,KeyField:1, Align:"Center",Edit:0},			
-			{Header:"관리내역명",Type:"Text",SaveName:"admin_LIST_NAME",MinWidth:600, Align:"Center"}					
+			{Header:"관리내역명",Type:"Text",SaveName:"admin_LIST_NAME",MinWidth:700, Align:"Center"}					
 
 			
 		];   
@@ -153,7 +153,7 @@ border-right: 2px solid #C3C3C3;
 }
 .right{
  position: relative;
- width:930px;
+ width:1030px;
 top: -570px;
 left: 440px; 
 padding: 0 0 0 30px;

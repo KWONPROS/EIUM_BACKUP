@@ -433,7 +433,7 @@ function mySheet1_OnSaveEnd(){
 	<div id="searchBar">
 		<form name="frm">
 
-			<span class="searchBarTitle">발령일</span> <input id="date" type="text" class="Datepicker"> ~ <input id="date2" type="text" class="Datepicker">
+			<span class="searchBarTitle">발령일</span> <input id="date" type="text" class="Datepicker" readonly> ~ <input id="date2" type="text" class="Datepicker" readonly>
 			<span class="searchBarTitle" >제목</span> <input id="title" type="text"  style="width:300px;"> 
 			<span class="searchBarTitle">작성자</span><input id="masterEmpl" type="text"> <input id="masterEmplCode" type="hidden"> <a href="javascript:goPopup()"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
 	
