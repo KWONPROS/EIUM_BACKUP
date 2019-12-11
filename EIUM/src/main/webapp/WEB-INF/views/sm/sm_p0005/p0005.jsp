@@ -38,7 +38,7 @@ function LoadPage(){
    initSheet2.Cols=[
 	    {"Header":"상태","SaveName":"sStatus","Type":"Status","Align":"Center","Width":60,"ColMerge":0},
 		{"Header":"사용가능한메뉴","SaveName":"access_GRANT","Type":"CheckBox","Width":50,"Align":"Center","ColMerge":0},
-		{"Header":"사용가능한메뉴","SaveName":"menu_NAME","Type":"Text","Width":200,"Align":"Center","ColMerge":0},
+		{"Header":"사용가능한메뉴","SaveName":"menu_NAME","Type":"Text","Width":300,"Align":"Center","ColMerge":0},
 		{"Header":"조회권한","SaveName":"access_RANGE","Type":"Combo", "ComboText":"사업장|부서|사원", "ComboCode":"사업장|부서|사원", "Width":150,"ColMerge":0,"Align":"Center"},
 		{"Header":"추가","SaveName":"access_INSERT","Type":"CheckBox","Width":120,"ColMerge":0},
 		{"Header":"수정","SaveName":"access_UPDATE","Type":"CheckBox","Width":120,"ColMerge":0},
@@ -163,15 +163,15 @@ margin-left: 15px;
     <header> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 등록정보관리 : 권한관리</header>
     </div>
     
-<div style="position:absolute; top:140px; left:65px;">
+<div style="position:absolute; top:140px; left:65px;width: 1500px;">
 <script type="text/javascript">
-createIBSheet("mySheet", "1500px", "600px");
+createIBSheet("mySheet", "1500px", "710px");
 </script>
 </div>
 
-<div class="right" style="position:absolute; top:140px; left:500px;">
+<div class="right" style="position:absolute; top:140px; left:500px; width: 1500px;">
 <script>
-createIBSheet("mySheet2", "1500px", "600px");
+createIBSheet("mySheet2", "1500px", "710px");
 </script>
 </div>
 

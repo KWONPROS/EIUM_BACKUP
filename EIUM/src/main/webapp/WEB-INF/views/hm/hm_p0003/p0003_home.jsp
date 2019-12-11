@@ -22,8 +22,8 @@
 		initSheet.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0};
 		initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 		initSheet.Cols = [		
-			{Header:"코드",Type:"Text",SaveName:"admin_CODE",MinWidth:100,KeyField:1,Edit:0, Align:"Center"},
-			{Header:"관리항목명",Type:"Text",SaveName:"admin_NAME",MinWidth:200,KeyField:1,Edit:0, Align:"Center"},			
+			{Header:"코드",Type:"Text",SaveName:"admin_CODE",MinWidth:120,KeyField:1,Edit:0, Align:"Center"},
+			{Header:"관리항목명",Type:"Text",SaveName:"admin_NAME",MinWidth:230,KeyField:1,Edit:0, Align:"Center"},			
 			{Header:"테이블물리명",Type:"Text",SaveName:"admin_LIST_NAME" ,Hidden:1}			
 		];   
 		IBS_InitSheet( mySheet , initSheet);
@@ -39,10 +39,10 @@
 		initSheet2.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 		initSheet2.Cols = [
 			
-	     	{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:60, Align:"Center"},
-	        {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:60},	
-	        {Header:"테이블물리명",Type:"Text",SaveName:"t_NAME"   ,Hidden:1 } ,	
-			{Header:"코드",Type:"Text",SaveName:"admin_LIST_CODE",MinWidth:100,KeyField:1, Align:"Center",Edit:0},			
+	     	{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:65},
+	        {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:65},	
+	        {Header:"테이블물리명",Type:"Text",SaveName:"t_NAME",Hidden:1 } ,	
+			{Header:"코드",Type:"Text",SaveName:"admin_LIST_CODE",MinWidth:200,KeyField:1, Align:"Center",Edit:0},			
 			{Header:"관리내역명",Type:"Text",SaveName:"admin_LIST_NAME",MinWidth:600, Align:"Center"}					
 
 			
@@ -145,7 +145,7 @@ background-color: #2C3E50;
 }
 .left{
 position: relative;
-width:300px;
+width:350px;
 top: 130px;
 left: 60px;
 padding: 0 30px 0 0;
@@ -153,9 +153,9 @@ border-right: 2px solid #C3C3C3;
 }
 .right{
  position: relative;
- width:830px;
+ width:930px;
 top: -570px;
-left: 390px; 
+left: 440px; 
 padding: 0 0 0 30px;
 border-left: 2px solid #C3C3C3;
 }

@@ -29,34 +29,32 @@
 		initSheet.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0, MergeSheet:msHeaderOnly};
 		initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 		initSheet.Cols = [
-		{Header:"상태|상태",Type:"Status",Width:70,SaveName:"Status",Align:"Center"},
-		{Header:"삭제|삭제",Type:"DelCheck",Width:70,SaveName:"Delete",Align:"Center"},
-		{Header:"지급고유번호",Type:"Text",Width:120,SaveName:"payment_code",Align:"Center",Hidden:"1"}, 
-		{Header:"지급회수|지급일자",Type:"Date", Align:"Center", Width:120, SaveName:"payment_date",Align:"Center", Format:"yyyy-MM-dd"}, 
-		{Header:"지급회수|지급분류",Type:"Combo",Width:120,SaveName:"payment_des_name", ComboText:"동시|급여|상여", ComboCode:"300|100|200",PopupText:"동시|급여|상여"}
+		{Header:"상태",Type:"Status",Width:60,SaveName:"Status",Align:"Center"},
+		{Header:"삭제",Type:"DelCheck",Width:60,SaveName:"Delete",Align:"Center"},
+		{Header:"지급고유번호",Type:"Text",SaveName:"payment_code",Hidden:"1"}, 
+		{Header:"지급일자",Type:"Date", Align:"Center", Width:250, SaveName:"payment_date",Align:"Center", Format:"yyyy-MM-dd"}, 
+		{Header:"지급분류",Type:"Combo",Width:170, SaveName:"payment_des_name", Align:"Center",ComboText:"동시|급여|상여", ComboCode:"300|100|200",PopupText:"동시|급여|상여"}
 		];
 		IBS_InitSheet(mySheet, initSheet);
   
-		mySheet.SetSheetHeight(200);
-		mySheet.SetSheetWidth(700); 
+		mySheet.SetSheetHeight(610);
 		
 		mySheet2.RemoveAll();
 		var initSheet2 = {};
 		initSheet2.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0, MergeSheet:msHeaderOnly};
 		initSheet2.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 		initSheet2.Cols = [
-		{Header:"상태|상태",Type:"Status",Width:70,SaveName:"Status",Align:"Center"},
-		{Header:"삭제|삭제",Type:"DelCheck",Width:70,SaveName:"Delete",Align:"Center"},
-		{Header:"지급선정고유번호",Type:"Text",Width:120,SaveName:"selection_of_payment_code", Align:"Center",Hidden:"1"}, 
-		{Header:"직급직종및급여형태|사업장코드",Type:"Text",Width:120,SaveName:"site_code", Align:"Center", Hidden:"1"}, 
-		{Header:"직급직종및급여형태|사업장",Type:"Popup",Width:120,SaveName:"site_name", Align:"Center"}, 
-		{Header:"직급직종및급여형태|직종코드",Type:"Text",Width:120,SaveName:"job_class_code", Align:"Center", Hidden:"1"}, 
-		{Header:"직급직종및급여형태|직종",Type:"Popup",Width:120,SaveName:"job_class_name" , Align:"Center"}
+		{Header:"상태|상태",Type:"Status",Width:65,SaveName:"Status",Align:"Center"},
+		{Header:"삭제|삭제",Type:"DelCheck",Width:65,SaveName:"Delete",Align:"Center"},
+		{Header:"지급선정고유번호",Type:"Text",SaveName:"selection_of_payment_code",Hidden:"1"}, 
+		{Header:"직급직종및급여형태|사업장코드",Type:"Text",SaveName:"site_code", Hidden:"1"}, 
+		{Header:"직급직종및급여형태|사업장",Type:"Popup",Width:350,SaveName:"site_name", Align:"Center"}, 
+		{Header:"직급직종및급여형태|직종코드",Type:"Text",SaveName:"job_class_code",Hidden:"1"}, 
+		{Header:"직급직종및급여형태|직종",Type:"Popup",Width:350,SaveName:"job_class_name" , Align:"Center"}
 		];
 		IBS_InitSheet(mySheet2, initSheet2);
   
-		mySheet2.SetSheetHeight(200);
-		mySheet2.SetSheetWidth(700); 
+		mySheet2.SetSheetHeight(610);
 		
 
 		/* MonthPicker 옵션 */
@@ -146,7 +144,7 @@
 		}
 		
 		
-	function mySheet_OnDblClick(Row,Col,Value){
+	function mySheet_OnClick(Row,Col,Value){
 		  x = "x=" + mySheet.GetCellValue(Row, 2);			  
 			mySheet2.DoSearch("${contextPath}/hm/p0002/searchSelect.do", x);
 	}
@@ -265,34 +263,44 @@
 
 .left{
 	position: relative;
-	top: 110px;
+	top: 130px;
 	left: 60px;
-	width: 750px;
+	width: 560px;
 }
 
 .right{
 	position: relative;
-	top: -90px;
-	left: 500px;
-	width: 750px;
+	top: -480px;
+	left: 620px;
+	width: 830px;
+	padding: 0 0 0 30px;
+    border-left: 2px solid #C3C3C3;
+    margin-left: 15px;
 }
 
 #searchBar {
-	background: #EBEBEB;
-	padding: 15px 15px;
-	margin-bottom: 30px;
-	border-radius: 5px;
-	width: 350px;
-	font-size: 12px;
+	padding: 25px 0px 25px 0px;
+    background: #EBEBEB;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size: 12px;
+    border-radius: 5px;
+    position: absolute;
+    width: 1450px;
+   position: relative;
+	top: 130px;
+	left: 60px;
+
 }
 
-.left input{
-	height: 22px;
-	width: 100px;
+#searchBar input{
+	height: 24px;
 	border-radius: 3px;
 	border: none;
-	padding-left:5px;
+	padding-right: 10px;
 	vertical-align: middle;
+	text-align: right;
+	width: 150px;
 }
 
 .left_rightsearch input{
@@ -304,10 +312,13 @@
 	vertical-align: middle;
 }
 .yearMonth {
+	margin-left: 110px;
 	background: #5E5E5E;
-	padding: 5px 5px;
-	color: white;
-	border-radius: 5px;
+    padding: 5px 5px;
+    color: white;
+    border-radius: 5px;
+    margin-right: 10px;
+    vertical-align: middle;
 }
 .kindofsearch{
 	background: #5E5E5E;
@@ -345,15 +356,16 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 			<i class="fa fa-arrow-circle-right" aria-hidden="true"></i> 기초환경설정 : 지급일등록
 		</header>
 	</div>
-	<div class="left">
+	
 	
 	<div id="searchBar">
            <span class="yearMonth">귀속연월</span> 
 			<input id="monthpicker" type="text">
 			<img id="btn_monthpicker"  src="${contextPath}/resources/image/icons/icon_calendar.png">
 		</div>
-			
+		
 
+	<div class="left">
 		<script>createIBSheet("mySheet", "100%", "100%");</script>
 	</div>
 	
