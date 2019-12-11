@@ -42,7 +42,7 @@ function PageLoad(){
 	contents = document.getElementById("tab_contents");
 	createIBTab(tabBar,contents,"myTabs",{
 		widthTabBar: "100%",
-		heightContents:($(window).height()-200) + "px"
+		heightContents:($(window).height()-130) + "px"
     });
 	
 	myTabs.setOptions({
