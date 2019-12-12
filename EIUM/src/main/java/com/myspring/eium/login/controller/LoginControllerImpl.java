@@ -99,6 +99,7 @@ public class LoginControllerImpl   implements LoginController {
     		session.setAttribute("accessnum", accessMap);
     		session.setAttribute("menu_code", menuList);
     		session.setAttribute("access_range", accessRange);
+    		session.setAttribute("authority_code", data.get(0).getAuthority_code());
 
     		session.setAttribute("login", data.get(0));
     		session.setAttribute("isLogOn", true);
