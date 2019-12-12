@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.eium.wm.wm_p0002.vo.WM_P0002VO;
+import com.myspring.eium.login.vo.LoginVO;
 import com.myspring.eium.sm.sm_p0003.vo.SM_P0003VO;
 import com.myspring.eium.wm.wm_p0002.service.WM_P0002ServiceImpl;
 
@@ -79,6 +80,10 @@ public class WM_P0002ControllerImpl implements WM_P0002Controller{
 		Map<String, String[]> dataMap = new HashMap<String, String[]>();
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
+		HttpSession session = request.getSession(); LoginVO loginvo = new LoginVO();
+		loginvo = (LoginVO)session.getAttribute("login"); 
+		String user= (loginvo.getEmployee_id());
+		
 	    String x = request.getParameter("x");
 	    
 		Enumeration enu = request.getParameterNames();
@@ -103,7 +108,7 @@ public class WM_P0002ControllerImpl implements WM_P0002Controller{
 			result.put("Message","���忡 �����Ͽ����ϴ�");
 			e.printStackTrace();
 		}*/
-		WM_P0002Service.saveData(dataMap, x);	
+		WM_P0002Service.saveData(dataMap, x, user);	
 		resultMap.put("Result", result);         
         return resultMap;
 	}

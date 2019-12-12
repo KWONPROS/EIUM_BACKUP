@@ -11,5 +11,5 @@ public interface WM_P0004Service {
 	 public List<WM_P0004VO> searchList(Map<String, Object> searchMap) throws DataAccessException;
 	 public List<WM_P0004VO> searchEmployeeList(Map<String, Object> searchMap);
 	 public List<WM_P0004VO> searchCountryList(Map<String, Object> searchMap);
-	 public void saveData(Map<String, String[]> dataMap, String x) throws DataAccessException;
+	 public void saveData(Map<String, String[]> dataMap, String x, String user) throws DataAccessException;
 }
