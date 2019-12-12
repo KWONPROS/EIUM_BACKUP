@@ -52,5 +52,15 @@
 			<beans:property name="paramName" value="lang" />
 		</beans:bean>
 	</mvc:interceptors>
+	
+<mvc:interceptors>
+	<mvc:interceptor>
+		<mvc:mapping path="/**/*.do"/>
+		<beans:bean class="com.myspring.eium.interceptor.interceptor" />
+	</mvc:interceptor>
+</mvc:interceptors>
+
+
+
 
 </beans:beans>
