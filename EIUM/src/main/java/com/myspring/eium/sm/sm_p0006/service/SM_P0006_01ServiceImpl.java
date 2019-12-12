@@ -37,7 +37,7 @@ public class SM_P0006_01ServiceImpl implements SM_P0006_01Service {
 	
 
 	@Override
-	public void saveData(Map<String, String[]> dataMap, String x) throws DataAccessException {
+	public void saveData(Map<String, String[]> dataMap, String x, String user) throws DataAccessException {
 		
 		String[] status = dataMap.get("sStatus");
 		int length = status.length; // row��
@@ -45,7 +45,7 @@ public class SM_P0006_01ServiceImpl implements SM_P0006_01Service {
 		
 		
 		for(String str : status) {
-			Map<String, String> row = getRow(dataMap, length, i, x); // ���� Index�� Row Map
+			Map<String, String> row = getRow(dataMap, length, i, x, user); // ���� Index�� Row Map
 			if("U".equals(str)) { // ����
 			sM_P0006_01DAO.updateData(row);		
 				for(String key : row.keySet()){ 	 
@@ -56,13 +56,14 @@ public class SM_P0006_01ServiceImpl implements SM_P0006_01Service {
 		}
 	}
 
-	private Map<String, String> getRow(Map<String, String[]> dataMap, int length, int i, String x) {
+	private Map<String, String> getRow(Map<String, String[]> dataMap, int length, int i, String x, String user) {
 		Map<String, String> row = new HashMap<String, String>();
 		for(String name : dataMap.keySet()) {
 			String[] data = dataMap.get(name);
 			if(length == data.length) {
 				row.put(name, data[i]);
 				row.put("x", x);
+				row.put("user", user);
 			}
 		}		
 		return row;

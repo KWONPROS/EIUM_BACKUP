@@ -92,8 +92,8 @@
 	</select>
 	
 	<insert id="insertData" parameterType="java.util.Map">
-		insert into VACATION_CHANGE_HISTORY(VACATION_CODE, EMPLOYEE_CODE, BEFORE_VACATION_REMAIN_DATE, VACATION_TYPE, VACATION_START_DATE, VACATION_END_DATE, VACATION_APPLY_DATE, AFTER_VACATION_REMAIN_DATE)
-		 values(VACATION_CODE_SEQ.NEXTVAL, #{employee_CODE}, #{before_VACATION_REMAIN_DATE}, #{vacation_TYPE}, #{vacation_START_DATE}, #{vacation_END_DATE}, #{vacation_APPLY_DATE}, #{after_VACATION_REMAIN_DATE})
+		insert into VACATION_CHANGE_HISTORY(VACATION_CODE, EMPLOYEE_CODE, BEFORE_VACATION_REMAIN_DATE, VACATION_TYPE, VACATION_START_DATE, VACATION_END_DATE, VACATION_APPLY_DATE, AFTER_VACATION_REMAIN_DATE,int_user_id, int_date)
+		 values(VACATION_CODE_SEQ.NEXTVAL, #{employee_CODE}, #{before_VACATION_REMAIN_DATE}, #{vacation_TYPE}, #{vacation_START_DATE}, #{vacation_END_DATE}, #{vacation_APPLY_DATE}, #{after_VACATION_REMAIN_DATE},#{user},sysdate)
 	</insert>
 	
 	<update id="updateData" parameterType="java.util.Map">
@@ -102,9 +102,11 @@
             ON (EMPLOYEE_CODE = #{employee_CODE})
             WHEN MATCHED THEN
                       UPDATE SET VACATION_REMAIN_DATE = #{after_VACATION_REMAIN_DATE}
+                      , upt_user_id = #{user, jdbcType=VARCHAR}
+                      , upt_date = sysdate
             WHEN NOT MATCHED THEN
-                      insert (EMPLOYEE_CODE, VACATION_REMAIN_DATE)
-                            values(#{employee_CODE}, #{after_VACATION_REMAIN_DATE})
+                      insert (EMPLOYEE_CODE, VACATION_REMAIN_DATE,int_user_id, int_date)
+                            values(#{employee_CODE}, #{after_VACATION_REMAIN_DATE},#{user},sysdate)
 	</update>
 	
 	<update id="updateData2" parameterType="java.util.Map">
@@ -114,6 +116,8 @@
 			, VACATION_START_DATE = #{vacation_START_DATE, jdbcType=VARCHAR}
 			, VACATION_END_DATE = #{vacation_END_DATE, jdbcType=VARCHAR}
 			, VACATION_APPLY_DATE = #{vacation_APPLY_DATE, jdbcType=VARCHAR}
+			, upt_user_id = #{user, jdbcType=VARCHAR}
+            , upt_date = sysdate
 		where VACATION_CODE = #{vacation_CODE, jdbcType=VARCHAR}
 	</update>
 	
@@ -125,6 +129,8 @@
 	<update id="updateData3" parameterType="java.util.Map">
 		update VACATION_remain
 		set VACATION_REMAIN_DATE = VACATION_REMAIN_DATE + #{vacation_APPLY_DATE}
+		, upt_user_id = #{user, jdbcType=VARCHAR}
+        , upt_date = sysdate
 		where employee_code = #{employee_CODE}
 	</update>
 

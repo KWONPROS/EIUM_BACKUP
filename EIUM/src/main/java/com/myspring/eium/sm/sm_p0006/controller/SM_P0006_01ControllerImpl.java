@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myspring.eium.login.vo.LoginVO;
 import com.myspring.eium.sm.sm_p0006.service.SM_P0006_01ServiceImpl;
 import com.myspring.eium.sm.sm_p0006.vo.SM_P0006_01VO;
 
@@ -66,6 +68,10 @@ public class SM_P0006_01ControllerImpl implements SM_P0006_01Controller{
 		Map<String, String[]> dataMap = new HashMap<String, String[]>(); // ������ Data
 		Map<String, Object> resultMap = new HashMap<String, Object>(); // ó�����
 		
+		HttpSession session = request.getSession(); LoginVO loginvo = new LoginVO();
+		loginvo = (LoginVO)session.getAttribute("login"); 
+		String user= (loginvo.getEmployee_id());
+		
 	    String x = request.getParameter("x");
 	    
 		Enumeration enu = request.getParameterNames();
@@ -92,7 +98,7 @@ public class SM_P0006_01ControllerImpl implements SM_P0006_01Controller{
 			result.put("Message","���忡 �����Ͽ����ϴ�");
 			e.printStackTrace();
 		}*/
-		sM_P0006_01ServiceImpl.saveData(dataMap, x);	
+		sM_P0006_01ServiceImpl.saveData(dataMap, x, user);	
 		resultMap.put("Result", result);         
         return resultMap;
 	}

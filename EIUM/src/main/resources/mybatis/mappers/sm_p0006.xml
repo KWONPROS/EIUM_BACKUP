@@ -138,10 +138,12 @@
             ON (EMPLOYEE_ID = #{x} AND authority_code = #{authority_CODE})
             WHEN MATCHED THEN
                       UPDATE SET authority_grant = '1'
+                      , upt_user_id = #{user, jdbcType=VARCHAR}
+                      , upt_date = sysdate
                       DELETE WHERE employee_id = #{x} AND authority_code = #{authority_CODE} AND authority_grant = '1'
             WHEN NOT MATCHED THEN
-                      insert (employee_id, authority_code, authority_grant)
-                            values(#{x}, #{authority_CODE}, '1')
+                      insert (employee_id, authority_code, authority_grant,int_user_id, int_date)
+                            values(#{x}, #{authority_CODE}, '1',#{user},sysdate)
 	</insert>
 
 

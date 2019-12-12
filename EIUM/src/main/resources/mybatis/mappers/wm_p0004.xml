@@ -102,8 +102,8 @@
 	</select>
 	
 	<insert id="insertData" parameterType="java.util.Map">
-		insert into EMPLOYEE_BUSINESS_TRIP(BUSINESS_TRIP_CODE, EMPLOYEE_CODE, start_DATE, end_DATE, country_CODE, area, flight_COST, self_BURDEN, company_BURDEN, ect_COST, total_COST, purpose)
-		 values(BUSINESS_TRIP_CODE_SEQ.NEXTVAL, #{employee_CODE}, #{start_DATE}, #{end_DATE}, #{country_CODE}, #{area}, #{flight_COST}, #{self_BURDEN}, #{company_BURDEN}, #{ect_COST}, #{total_COST}, #{purpose})
+		insert into EMPLOYEE_BUSINESS_TRIP(BUSINESS_TRIP_CODE, EMPLOYEE_CODE, start_DATE, end_DATE, country_CODE, area, flight_COST, self_BURDEN, company_BURDEN, ect_COST, total_COST, purpose,int_user_id, int_date)
+		 values(BUSINESS_TRIP_CODE_SEQ.NEXTVAL, #{employee_CODE}, #{start_DATE}, #{end_DATE}, #{country_CODE}, #{area}, #{flight_COST}, #{self_BURDEN}, #{company_BURDEN}, #{ect_COST}, #{total_COST}, #{purpose},#{user},sysdate)
 	</insert>
 	
 	<update id="updateData" parameterType="java.util.Map">
@@ -118,6 +118,8 @@
 			, ect_COST = #{ect_COST, jdbcType=VARCHAR}
 			, total_COST = #{total_COST, jdbcType=VARCHAR}
 			, purpose = #{purpose, jdbcType=VARCHAR}
+			, upt_user_id = #{user, jdbcType=VARCHAR}
+            , upt_date = sysdate
 		where BUSINESS_TRIP_CODE = #{business_TRIP_CODE, jdbcType=VARCHAR}
 	</update>
 	
