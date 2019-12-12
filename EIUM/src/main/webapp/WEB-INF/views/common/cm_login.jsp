@@ -3,12 +3,15 @@
     isELIgnored="false" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
  
 <!DOCTYPE html>
 <html>
 <head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 <script type="text/javascript">
 function fn_findID(){
@@ -144,14 +147,15 @@ right: 15px;
 
 <body>
 <script>
-console.log(${msg});
-var bool = ${msg};
-console.log(bool);
-if(bool!= null && !bool.equals('')){
-	alert("${msg}");
-}
-</script>
 
+$(function(){
+    var responseMessage ="<%=request.getParameter("result")%>" ;
+	var message = "아이디와 비밀번호를 확인하여 주십시오." ;
+    if(responseMessage != "null" ){
+        alert(message);
+    }
+});
+</script>
 	<video id="video" preload="auto" autoplay="autoplay" loop="loop" muted="muted" >
 		<source src="${contextPath}/resources/image/init_background.mp4">
 	</video>
@@ -160,7 +164,7 @@ if(bool!= null && !bool.equals('')){
 
 	<div class="login-container">
 			<div class="login-form">
-				<form name="form"  method="post" action="${contextPath}/login/LoginCheck.do">
+				<form name="form"  method="post" action="${contextPath}/LoginCheck.do">
 				<h3><img class="logo" alt="logo" src="${contextPath}/resources/image/EIUM_logo.png"> EIUM</h3>
 				
 					<h3 id="languages" >

@@ -1,7 +1,7 @@
 package com.myspring.eium.login.controller;
 
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,7 +58,7 @@ public class LoginControllerImpl   implements LoginController {
 
 	
 	@Override
-	@RequestMapping(value = "/login/LoginCheck.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/LoginCheck.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public ModelAndView appointList(@ModelAttribute("login") LoginVO login, RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
@@ -77,41 +77,48 @@ public class LoginControllerImpl   implements LoginController {
 		searchMap.put("employee_password", login.getEmployee_password());
 		
 		List<LoginVO> data = loginService.searchList(searchMap);
-		
-		if(data.get(0).getAccess_grant() != null && !data.get(0).getAccess_grant().equals("")) {
+		try {
+			if(data.get(0).getAccess_grant() != null && !data.get(0).getAccess_grant().equals("")) {
+				
+			}
 			
+
+	    	if(data != null && data.isEmpty() != true) {
+	    		HttpSession session = request.getSession();
+	    		
+	    		
+	    		for(i=0; i<data.size(); i++) {
+	    			accessMap.put(data.get(i).getMenu_code() , i);
+	    			 menuList.add(data.get(i).getMenu_code());
+	    			 accessRange.add(data.get(i).getAccess_range());
+
+	    		}
+	    		menuList.sort(null);
+	    
+	   		
+	    		session.setAttribute("accessnum", accessMap);
+	    		session.setAttribute("menu_code", menuList);
+	    		session.setAttribute("access_range", accessRange);
+
+	    		session.setAttribute("login", data.get(0));
+	    		session.setAttribute("isLogOn", true);
+	    		
+	    		mav.setViewName("redirect:/main.do");
+	    		}
+
+			
+		} catch (Exception e) {
+
+	     
+
+				mav.addObject("result", "false");
+	            mav.setViewName("redirect:/login.do");
+
+
 		}
+		return mav;
+
 		
-
-    	if(data != null && data.isEmpty() != true) {
-    		HttpSession session = request.getSession();
-    		
-    		
-    		for(i=0; i<data.size(); i++) {
-    			accessMap.put(data.get(i).getMenu_code() , i);
-    			 menuList.add(data.get(i).getMenu_code());
-    			 accessRange.add(data.get(i).getAccess_range());
-
-    		}
-    		menuList.sort(null);
-    
-   		
-    		session.setAttribute("accessnum", accessMap);
-    		session.setAttribute("menu_code", menuList);
-    		session.setAttribute("access_range", accessRange);
-
-    		session.setAttribute("login", data.get(0));
-    		session.setAttribute("isLogOn", true);
-    		
-    		mav.setViewName("redirect:/main.do");
-    		}
-    	
-    	else {
-    		
-            mav.addObject("msg", "로그인에 실패하였습니다.");
-            mav.setViewName("redirect:/login.do");
-    		}
-    	return mav;
 	}
 
 }
