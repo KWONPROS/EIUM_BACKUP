@@ -1,6 +1,6 @@
 package com.myspring.eium.wm.wm_p0005.controller;
 
-import java.util.Enumeration;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myspring.eium.login.vo.LoginVO;
 import com.myspring.eium.wm.wm_p0005.service.WM_P0005ServiceImpl;
 import com.myspring.eium.wm.wm_p0005.vo.WM_P0005VO;
 
@@ -45,9 +46,25 @@ public class WM_P0005ControllerImpl implements WM_P0005Controller{
 	@ResponseBody
 	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession(); 
+		LoginVO loginvo = new LoginVO();
+		loginvo = (LoginVO)session.getAttribute("login"); 
+		
+		Map<String, Object> accessMap = new HashMap<String, Object>();
+		ArrayList<String> accessRange = new ArrayList<String>();		
+		accessRange = (ArrayList<String>) session.getAttribute("access_range"); 
+		accessMap = (Map<String, Object>) session.getAttribute("accessnum");		
+		int n =  (Integer) accessMap.get("M024");
+		System.out.println(accessRange.get(n));
+
+
+		
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
+		searchMap.put("access_range", request.getParameter("access_range"));
+		searchMap.put("Semployee_name", request.getParameter("Semployee_name"));
+		searchMap.put("Sdepartment_name", request.getParameter("Sdepartment_name"));
 		searchMap.put("date", request.getParameter("date"));
 		searchMap.put("date2", request.getParameter("date2"));
 		searchMap.put("SiteList", request.getParameter("SiteList"));

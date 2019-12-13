@@ -454,11 +454,12 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 	     <div id="searchBar">
              <span class="searchBarTitle">귀속연월</span> <input id="monthpicker" type="text">
 			<img id="btn_monthpicker"  src="${contextPath}/resources/image/icons/icon_calendar.png">
-		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 		   <span class="searchBarTitle">지급일</span> <a href="javascript:showPopup();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a><input type="text" id="Ppayment_date"><br><br>
 		  <span class="searchBarTitle">사업장구분</span> <select id="searchSite" onchange="selectType()">
 			<option value="all" selected>전체</option>
-			</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</select>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		   <span class="searchBarTitle">부서</span> <select id="searchTYPE">
 		  	<option value="all" selected>전체</option>
 		</select> 

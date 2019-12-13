@@ -763,7 +763,6 @@ border : none;
 </head>
 <body onload="LoadPage()" style="overflow-x: hidden">
 <form name="frm">
-<c:set var="num" scope="request" value="${sessionScope.accessnum['M011']}"/>
 	<div class="leftbuttons">
 		<a href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
 	</div>
@@ -912,9 +911,6 @@ border : none;
 
 		</div>
 	</div>
-	<input type="hidden" id="Semployee_name" value="${sessionScope.login.employee_name}" >
-	<input type="hidden" id="Sdepartment_name" value="${sessionScope.login.department_name}" >
-    <input type="hidden" id="access_range" value="${sessionScope.access_range[num]}" >
 </form>
 </body>
 </html>
