@@ -187,6 +187,19 @@ right: 15px;
 #languages .language:hover{
 	transform:scale(1.2);
 }
+.saveid{
+    padding-left: 0px;
+    margin-left: 224px;
+    font-size: 12px;
+	color: #0062cc;
+}
+.login-form h4 {
+	color: #0062cc;
+	margin-top: 0px;
+	margin-left: 8px;
+    margin-bottom: 0px;
+    font-size: 15px;
+}
 
 
 
@@ -225,7 +238,7 @@ $(function(){
 					</h3>
 						   
 				 	<h3><spring:message code="login"  text="로그인" /></h3>
-					<input type="checkbox" id="idSaveCheck" >아이디 저장
+					<h4><input type="checkbox" id="idSaveCheck" class="saveid">아이디 저장</h4>
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="ID" value="" name="employee_id"/><br>
 						<input type="password" class="form-control" placeholder="Password" value="" name="employee_password"/><br> 
