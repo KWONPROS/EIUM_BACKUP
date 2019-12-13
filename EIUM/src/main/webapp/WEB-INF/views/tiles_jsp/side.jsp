@@ -50,10 +50,10 @@
 <jsp:include page="/WEB-INF/views/locale.jsp" /> 
 <script> //메뉴트리
 var data = {Data:[
-	<c:if test="${authority_code eq 'A000'}">
+	<c:if test="${authority_code eq 'A000'}" >
 	{menuCode:"m000",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:lo_RegistrationInformationManagement},
 	</c:if>
-	<c:if test="${authority_code eq 'A003'}">
+	<c:if test="${authority_code eq 'A003'}" >
 	{menuCode:"m000",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:lo_RegistrationInformationManagement},
 	</c:if>
 	
@@ -78,10 +78,10 @@ var data = {Data:[
 	</c:if>
 	</c:forEach>
 	
-	<c:if test="${authority_code eq 'A000'}">
+	<c:if test="${authority_code eq 'A000'}" >
 	{menuCode:"m06",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:lo_Environmentsetting},
 	</c:if>
-	<c:if test="${authority_code eq 'A003'}">
+	<c:if test="${authority_code eq 'A003'}" >
 	{menuCode:"m06",Level:0,FontColor:"white", BackColor:"#2C3E50",TITLE:lo_Environmentsetting},
 	</c:if>
 	
