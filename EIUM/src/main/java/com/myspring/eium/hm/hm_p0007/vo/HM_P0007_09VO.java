@@ -8,7 +8,8 @@ public class HM_P0007_09VO {
 	private String hr_rnp_code;
 	private String employee_code;
 	private String hr_rnp_index;
-	private String hr_rnp_name;
+	private String rnp_code;
+	private String rnp_name;
 	private String hr_rnp_date;
 	private String hr_rnp_history;
 	private String hr_rnp_institute;
@@ -22,6 +23,24 @@ public class HM_P0007_09VO {
 	
 	
 	
+
+	public String getRnp_code() {
+		return rnp_code;
+	}
+
+
+
+
+
+
+	public void setRnp_code(String rnp_code) {
+		this.rnp_code = rnp_code;
+	}
+
+
+
+
+
 
 	public String getHr_rnp_code() {
 		return hr_rnp_code;
@@ -103,8 +122,15 @@ public class HM_P0007_09VO {
 
 
 
-	public String getHr_rnp_name() {
-		return hr_rnp_name;
+	
+
+
+
+
+
+
+	public String getRnp_name() {
+		return rnp_name;
 	}
 
 
@@ -112,8 +138,8 @@ public class HM_P0007_09VO {
 
 
 
-	public void setHr_rnp_name(String hr_rnp_name) {
-		this.hr_rnp_name = hr_rnp_name;
+	public void setRnp_name(String rnp_name) {
+		this.rnp_name = rnp_name;
 	}
 
 

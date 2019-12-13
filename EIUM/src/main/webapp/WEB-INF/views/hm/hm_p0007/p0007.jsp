@@ -26,7 +26,7 @@ function LoadPage() {
 	
 
 //탭
- createIBTab($('#tab1')[0], $('#tab_contents')[0], 'myTabs', {
+ createIBTab($('#tab1')[0], $('#tab_contents1')[0], 'myTabs1', {
 	 themes: {
         tabs: "flat_blue",
         contents: "flat_blue",
@@ -69,7 +69,7 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs2', {
 	        {Header:"거주구분",Type:"Text",SaveName:"residential_division",Hidden:1},
 	        {Header:"병역구분",Type:"Text",SaveName:"military_type",Hidden:1},         
 	        {Header:"군번",Type:"Text",SaveName:"military_number",Hidden:1},
-	        {Header:"제대구분",Type:"Text",SaveName:"discharge_yn",Hidden:1},
+	        {Header:"제대구분",Type:"Text",SaveName:"discharge_yn",Hidden:1}
 	        
 		];  
 		IBS_InitSheet(mySheet , initSheet);
@@ -88,12 +88,12 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs2', {
 		  {Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck"},
           {Header:"사원학력고유번호",Type:"Text", SaveName:"education_code",Hidden:1},
           {Header:"학교명",Type:"Text", SaveName:"school_name", Width:60, Align:"Center"},
-          {Header:"입학일",Type:"Text", SaveName:"start_date", Width:60, Align:"Center"},
-          {Header:"졸업일",Type:"Text", SaveName:"end_date", Width:60, Align:"Center"},
+          {Header:"입학일",Type:"Text", SaveName:"start_date", Width:60, Align:"Center",Format:"Ymd"},
+          {Header:"졸업일",Type:"Text", SaveName:"end_date", Width:60, Align:"Center",Format:"Ymd"},
           {Header:"구분",Type:"Combo", SaveName:"available", Width:60, Align:"Center", ComboText:"졸업|중퇴|휴학", ComboCode:"졸업|중퇴|휴학"},
           {Header:"전공과목",Type:"Text", SaveName:"major", Width:60, Align:"Center"},
           {Header:"부전공",Type:"Text", SaveName:"minor", Width:60, Align:"Center"},
-          {Header:"학위구분",Type:"Text", SaveName:"graduate_yn", Width:60, Align:"Center"},
+          {Header:"학위구분",Type:"Text", SaveName:"graduate_yn", Width:60, Align:"Center"}
       ];
  
 		createIBSheet2($("#ib-container2")[0],"mySheet2", "100%", "300px");
@@ -108,14 +108,14 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs2', {
 		  {Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck"},
           {Header:"사원경력고유번호",Type:"Text", SaveName:"career_code",Hidden:1},
           {Header:"직장명",Type:"Text", SaveName:"company_name", Width:60, Align:"Center"},
-          {Header:"입사일",Type:"Text", SaveName:"start_date", Width:60, Align:"Center"},
-          {Header:"퇴사일",Type:"Text", SaveName:"end_date", Width:60, Align:"Center"},
+          {Header:"입사일",Type:"Text", SaveName:"start_date", Width:60, Align:"Center",Format:"Ymd"},
+          {Header:"퇴사일",Type:"Text", SaveName:"end_date", Width:60, Align:"Center",Format:"Ymd"},
           {Header:"근무년한",Type:"Text", SaveName:"sum_year", Width:60, Align:"Center"},
           {Header:"담당업무",Type:"Text", SaveName:"role", Width:60, Align:"Center"},
           {Header:"직위",Type:"Text", SaveName:"position", Width:60, Align:"Center"},
           {Header:"급여",Type:"Int", SaveName:"salary", Width:60, Align:"Center"},
           {Header:"퇴직사유",Type:"Text", SaveName:"reason", Width:60, Align:"Center"},
-          {Header:"근속기간",Type:"Text", SaveName:"total_work", Width:60, Align:"Center"},
+          {Header:"근속기간",Type:"Text", SaveName:"total_work", Width:60, Align:"Center"}
       ];
        createIBSheet2($("#ib-container3")[0],"mySheet3", "100%", "300px");
        IBS_InitSheet(mySheet3,initData);
@@ -128,11 +128,12 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs2', {
 		  {Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck"},
           {Header:"사원면허번호",Type:"Text", SaveName:"employee_license_code",Hidden:1},
           {Header:"자격증번호",Type:"Text", SaveName:"license_number", Width:60, Align:"Center"},
+          {Header:"자격코드",Type:"Text", SaveName:"license_code", Width:150, Align:"Center",Hidden:1},
           {Header:"자격종류",Type:"Popup", SaveName:"license_name", Width:150, Align:"Center"},
-          {Header:"취득일",Type:"Text", SaveName:"start_date", Width:60, Align:"Center"},
-          {Header:"만료일",Type:"Text", SaveName:"end_date", Width:60, Align:"Center"},
+          {Header:"취득일",Type:"Text", SaveName:"start_date", Width:60, Align:"Center",Format:"Ymd"},
+          {Header:"만료일",Type:"Text", SaveName:"end_date", Width:60, Align:"Center",Format:"Ymd"},
           {Header:"발행기관",Type:"Text", SaveName:"institute", Width:60, Align:"Center"},
-          {Header:"수당",Type:"Combo", SaveName:"bonus", Width:60, Align:"Center", ComboText:"해당|비해당", ComboCode:"해당|비해당"},
+          {Header:"수당",Type:"Combo", SaveName:"bonus", Width:60, Align:"Center", ComboText:"해당|비해당", ComboCode:"해당|비해당"}
       ];
         
      createIBSheet2($("#ib-container4")[0],"mySheet4", "100%", "300px");
@@ -147,13 +148,13 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs2', {
         {Header:"발령코드",Type:"Text", SaveName:"appoint_code", Width:60, Align:"Center",Edit:0,InsertEdit:"0", UpdateEdit:"0"},
         {Header:"발령구분",Type:"Text", SaveName:"hr_appoint_index_name", Width:60, Align:"Center",Edit:0,InsertEdit:"0", UpdateEdit:"0"},
         {Header:"발령이름",Type:"Text", SaveName:"appoint_title", Width:60, Align:"Center",Edit:0,InsertEdit:"0", UpdateEdit:"0"},
-        {Header:"발령일자",Type:"Text", SaveName:"appoint_date", Width:60, Align:"Center",Edit:0, InsertEdit:"0", UpdateEdit:"0"},
+        {Header:"발령일자",Type:"Text", SaveName:"appoint_date", Width:60, Align:"Center",Edit:0, InsertEdit:"0", UpdateEdit:"0",Format:"Ymd"},
         {Header:"발령자",Type:"Text", SaveName:"employee_name", Width:60, Align:"Center",Edit:0, InsertEdit:"0", UpdateEdit:"0"},
         {Header:"재직상태",Type:"Text", SaveName:"work_status_name", Width:60, Align:"Center",Edit:0, InsertEdit:"0", UpdateEdit:"0"},
         {Header:"사업장",Type:"Text", SaveName:"site_name", Width:60, Align:"Center",Edit:0, InsertEdit:"0", UpdateEdit:"0"},
         {Header:"부서",Type:"Text", SaveName:"department_name", Width:60, Align:"Center",Edit:0, InsertEdit:"0", UpdateEdit:"0"},
         {Header:"직급",Type:"Text", SaveName:"position_name", Width:60, Align:"Center",Edit:0, InsertEdit:"0", UpdateEdit:"0"},
-        {Header:"직책",Type:"Text", SaveName:"duty_name", Width:60, Align:"Center",Edit:0, InsertEdit:"0", UpdateEdit:"0"},
+        {Header:"직책",Type:"Text", SaveName:"duty_name", Width:60, Align:"Center",Edit:0, InsertEdit:"0", UpdateEdit:"0"}
     ];
          
      createIBSheet2($("#ib-container5")[0],"mySheet5", "100%", "300px");
@@ -166,14 +167,15 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs2', {
 		{Header:"상태",SaveName:"sStatus",Type:"Status",align:"Center",width:50},
 		{Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck"},
 		{Header:"인사고과고유번호",Type:"Text", SaveName:"hr_assessment_code",Hidden:1},
+		{Header:"인사고과코드",Type:"Text", SaveName:"assessment_code",Hidden:1},
         {Header:"고과명",Type:"Popup", SaveName:"assessment_name", Width:60, Align:"Center"},
-        {Header:"평가시작일",Type:"Text", SaveName:"hr_assessment_test_start_date", Width:60, Align:"Center"},
-        {Header:"평가종료일",Type:"Text", SaveName:"hr_assessment_test_end_date", Width:60, Align:"Center"},
-        {Header:"고과일",Type:"Text", SaveName:"hr_assessment_date", Width:60, Align:"Center"},
+        {Header:"평가시작일",Type:"Text", SaveName:"hr_assessment_test_start_date", Width:60, Align:"Center",Format:"Ymd"},
+        {Header:"평가종료일",Type:"Text", SaveName:"hr_assessment_test_end_date", Width:60, Align:"Center",Format:"Ymd"},
+        {Header:"고과일",Type:"Text", SaveName:"hr_assessment_date", Width:60, Align:"Center",Format:"Ymd"},
         {Header:"고과자",Type:"Text", SaveName:"hr_assessment_master", Width:60, Align:"Center"},
         {Header:"반영률",Type:"Text", SaveName:"hr_assessment_reflection_pcnt", Width:60, Align:"Center"},
         {Header:"점수",Type:"Text", SaveName:"hr_assessment_score", Width:60, Align:"Center"},
-        {Header:"등급",Type:"Text", SaveName:"hr_assessment_grade", Width:60, Align:"Center"},
+        {Header:"등급",Type:"Text", SaveName:"hr_assessment_grade", Width:60, Align:"Center"}
     ];
          
    createIBSheet2($("#ib-container6")[0],"mySheet6", "100%", "300px");
@@ -193,7 +195,7 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs2', {
 			{Header:"결과|출근일",Type:"Text",Width:30,SaveName:"working_status00",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
 			{Header:"결과|지각일",Type:"Text",Width:30,SaveName:"working_status01",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
 			{Header:"결과|조퇴일",Type:"Text",Width:30,SaveName:"working_status02",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
-			{Header:"결과|외출일",Type:"Text",Width:30,SaveName:"working_status03",Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+			{Header:"결과|외출일",Type:"Text",Width:30,SaveName:"working_status03",Align:"Center",InsertEdit:"0", UpdateEdit:"0"}
 	    ];
 	         
 	   createIBSheet2($("#ib-container7")[0],"mySheet7", "100%", "300px");
@@ -206,8 +208,8 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs2', {
 			{Header:"출장고유번호",Type:"Text", SaveName:"business_trip_code",Hidden:1},
 		    {Header:"출장국가",Type:"Text", SaveName:"country_name", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
    		    {Header:"출장지",Type:"Text", SaveName:"area", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
-		    {Header:"시작일",Type:"Text", SaveName:"start_date", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
-	        {Header:"종료일",Type:"Text", SaveName:"end_date", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+		    {Header:"시작일",Type:"Text", SaveName:"start_date", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0",Format:"Ymd"},
+	        {Header:"종료일",Type:"Text", SaveName:"end_date", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0",Format:"Ymd"},
 	        {Header:"항공료",Type:"Int", SaveName:"flight_cost", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
 	        {Header:"본인부담",Type:"Int", SaveName:"self_burden", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
 	        {Header:"회사부담",Type:"Int", SaveName:"company_burden", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
@@ -227,13 +229,14 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs2', {
 		{Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck"},
 		{Header:"상벌관리고유번호",Type:"Text", SaveName:"hr_rnp_code",Hidden:1},
         {Header:"구분",Type:"Combo", SaveName:"hr_rnp_index", Width:60, Align:"Center", ComboText:"포상|징계", ComboCode:"포상|징계"},
+		{Header:"상벌관리코드",Type:"Text", SaveName:"rnp_code",Hidden:1},
         {Header:"포상/징계명",Type:"Popup", SaveName:"rnp_name", Width:100, Align:"Center"},
-        {Header:"포상/징계일",Type:"Text", SaveName:"hr_rnp_date", Width:100, Align:"Center"},
+        {Header:"포상/징계일",Type:"Text", SaveName:"hr_rnp_date", Width:100, Align:"Center",Format:"Ymd"},
         {Header:"포상/징계내역",Type:"Text", SaveName:"hr_rnp_history", Width:100, Align:"Center"},
         {Header:"시행처",Type:"Text", SaveName:"hr_rnp_institute", Width:60, Align:"Center"},
         {Header:"금액",Type:"Int", SaveName:"hr_rnp_cost", Width:60, Align:"Center"},
-        {Header:"징계시작일",Type:"Text", SaveName:"hr_rnp_start_date", Width:100, Align:"Center"},
-        {Header:"징계종료일",Type:"Text", SaveName:"hr_rnp_end_date", Width:100, Align:"Center"},
+        {Header:"징계시작일",Type:"Text", SaveName:"hr_rnp_start_date", Width:100, Align:"Center",Format:"Ymd"},
+        {Header:"징계종료일",Type:"Text", SaveName:"hr_rnp_end_date", Width:100, Align:"Center",Format:"Ymd"}
     ];
          
    createIBSheet2($("#ib-container9")[0],"mySheet9", "100%", "300px");
@@ -245,12 +248,13 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs2', {
    initData.Cols = [
 	   {Header:"상태",SaveName:"sStatus",Type:"Status",align:"Center",width:50},
 		{Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck"},
-		{Header:"어학시험고유번호",Type:"Text", SaveName:"language_code",Hidden:1},
+		{Header:"어학시험고유번호",Type:"Text", SaveName:"employee_language_code",Hidden:1},
+		{Header:"시험코드",Type:"Text", SaveName:"language_code", Width:60, Align:"Center",Hidden:1},
 		{Header:"시험명",Type:"Popup", SaveName:"language_name", Width:60, Align:"Center"},
-		{Header:"유효기간시작일",Type:"Text", SaveName:"start_date", Width:100, Align:"Center"},
-		{Header:"유효기간종료일",Type:"Text", SaveName:"end_date", Width:100, Align:"Center"},
+		{Header:"유효기간시작일",Type:"Text", SaveName:"start_date", Width:100, Align:"Center",Format:"Ymd"},
+		{Header:"유효기간종료일",Type:"Text", SaveName:"end_date", Width:100, Align:"Center",Format:"Ymd"},
 		{Header:"점수",Type:"Text", SaveName:"grade", Width:100, Align:"Center"},
-		{Header:"주관기관",Type:"Text", SaveName:"institute", Width:60, Align:"Center"},
+		{Header:"주관기관",Type:"Text", SaveName:"institute", Width:60, Align:"Center"}
 		];
 	  
         
@@ -261,8 +265,8 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs2', {
   //mySheet11 //교육관리
   initData.Cols = [
      {Header:"교육명",Type:"Text", SaveName:"employee_training_name", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
-     {Header:"시작일",Type:"Text", SaveName:"employee_training_start_date", Width:100, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
-     {Header:"종료일",Type:"Text", SaveName:"employee_training_end_date", Width:100, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+     {Header:"시작일",Type:"Text", SaveName:"employee_training_start_date", Width:100, Align:"Center",InsertEdit:"0", UpdateEdit:"0",Format:"Ymd"},
+     {Header:"종료일",Type:"Text", SaveName:"employee_training_end_date", Width:100, Align:"Center",InsertEdit:"0", UpdateEdit:"0",Format:"Ymd"},
      {Header:"교육시간",Type:"Text", SaveName:"employee_training_time", Width:100, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
      {Header:"교육일수",Type:"Text", SaveName:"employee_training_date_count", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
      {Header:"이수여부",Type:"Text", SaveName:"finish_yn", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
@@ -270,7 +274,7 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs2', {
      {Header:"태도점수",Type:"Text", SaveName:"attitude_score", Width:100, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
      {Header:"평가점수",Type:"Text", SaveName:"score", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
      {Header:"합계",Type:"Text", SaveName:"total", Width:60, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
-     {Header:"교육평가",Type:"Text", SaveName:"assessment_desc", Width:100, Align:"Center",InsertEdit:"0", UpdateEdit:"0"},
+     {Header:"교육평가",Type:"Text", SaveName:"assessment_desc", Width:100, Align:"Center",InsertEdit:"0", UpdateEdit:"0"}
 		];       
  createIBSheet2($("#ib-container11")[0],"mySheet11", "100%", "300px");
  IBS_InitSheet(mySheet11,initData);
@@ -281,7 +285,7 @@ createIBTab($('#tab2')[0], $('#tab_contents_2')[0], 'myTabs2', {
 	
 //로우 클릭시
 function mySheet_OnClick(Row, Col) {
-	/* if (Row != 0) {	 */		
+	if (Row != 0) {	
 		  x = "x=" + mySheet.GetCellValue(Row, 2);
 	
 			mySheet2.DoSearch("${contextPath}/hm/p0007/searchEducation.do", x);
@@ -315,7 +319,7 @@ function mySheet_OnClick(Row, Col) {
 	      
 	      
 	    
-/* 	} */
+	} 
 }
 
 	/*Sheet 각종 처리*/
@@ -344,33 +348,49 @@ function mySheet_OnClick(Row, Col) {
 			break;
 			
 		case "save": // 저장
+			console.log(myTabs1.tabs.getActiveTab());
+			if(myTabs1.tabs.getActiveTab() == 0){
+				 mySheet.SetCellValue($('input[name=myRow]').val(),4,$('input[name=height]').val());
+		         mySheet.SetCellValue($('input[name=myRow]').val(),5,$('input[name=weight]').val());
+		         mySheet.SetCellValue($('input[name=myRow]').val(),6,$('select[name=blood_type]').val());
+		         mySheet.SetCellValue($('input[name=myRow]').val(),7,$('input[name=hobby]').val());
+		         mySheet.SetCellValue($('input[name=myRow]').val(),8,$('input[name=special_ability]').val());
+		         mySheet.SetCellValue($('input[name=myRow]').val(),9,$('select[name=handicapped_yn]').val());
+		         mySheet.SetCellValue($('input[name=myRow]').val(),10,$('select[name=marriage_yn]').val());
+		         mySheet.SetCellValue($('input[name=myRow]').val(),11,$('select[name=religion]').val());
+		         mySheet.SetCellValue($('input[name=myRow]').val(),12,$('select[name=residential_division]').val());
+		         mySheet.SetCellValue($('input[name=myRow]').val(),13,$('select[name=military_type]').val());
+		         mySheet.SetCellValue($('input[name=myRow]').val(),14,$('input[name=military_number]').val());
+		         mySheet.SetCellValue($('input[name=myRow]').val(),15,$('select[name=discharge_yn]').val());
+		 		 mySheet.DoSave("${contextPath}/hm/p0007/saveHr_info.do", x);
 
-			 mySheet.SetCellValue($('input[name=myRow]').val(),4,$('input[name=height]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),5,$('input[name=weight]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),6,$('select[name=blood_type]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),7,$('input[name=hobby]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),8,$('input[name=special_ability]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),9,$('select[name=handicapped_yn]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),10,$('select[name=marriage_yn]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),11,$('select[name=religion]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),12,$('select[name=residential_division]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),13,$('select[name=military_type]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),14,$('input[name=military_number]').val());
-	         mySheet.SetCellValue($('input[name=myRow]').val(),15,$('select[name=discharge_yn]').val());
-	          
+			}
+			
+			if(myTabs1.tabs.getActiveTab() == 1){
+				mySheet2.DoSave("${contextPath}/hm/p0007/saveEducation.do", x);
+			}
+			
+			if(myTabs1.tabs.getActiveTab() == 2){
+				mySheet3.DoSave("${contextPath}/hm/p0007/saveCareer.do", x)
+				}
+			
+			if(myTabs1.tabs.getActiveTab() == 3){
+				mySheet4.DoSave("${contextPath}/hm/p0007/saveLicense.do", x);
+				}
+			
+			if(myTabs1.tabs.getActiveTab() == 4){
+				mySheet10.DoSave("${contextPath}/hm/p0007/saveEmployee_language.do", x);
+			}
+			
+			if(myTabs2.tabs.getActiveTab() == 1){
+				mySheet6.DoSave("${contextPath}/hm/p0007/saveAssessment.do", x);
 
-		var tempStr = mySheet.GetSaveString();
-		mySheet4.DoSave("${contextPath}/hm/p0007/saveLicense.do", x);
+			}
+			if(myTabs2.tabs.getActiveTab() == 4){
+				mySheet9.DoSave("${contextPath}/hm/p0007/saveRnp.do", x);
 
-/* 안댐	
-
-mySheet.DoSave("${contextPath}/hm/p0007/saveHr_info.do", x);
-O mySheet2.DoSave("${contextPath}/hm/p0007/saveEducation.do", x);
-O mySheet3.DoSave("${contextPath}/hm/p0007/saveCareer.do", x);
- 		
-		mySheet6.DoSave("${contextPath}/hm/p0007/saveAssessment.do", x);
-		mySheet9.DoSave("${contextPath}/hm/p0007/saveRnp.do", x);
-		mySheet10.DoSave("${contextPath}/hm/p0007/saveEmployee_language.do", x); */
+			}
+			
 			break;
 			
 			
@@ -415,6 +435,62 @@ O mySheet3.DoSave("${contextPath}/hm/p0007/saveCareer.do", x);
 	// 저장완료 후 처리할 작업
 	// code: 0(저장성공), -1(저장실패)
 	function mySheet_OnSaveEnd(code, msg) {
+		if (msg != "") {
+			alert(msg);
+			//번호 다시 매기기
+			//mySheet.ReNumberSeq();
+		}
+	}
+	
+	function mySheet2_OnSaveEnd(code, msg) {
+		if (msg != "") {
+			alert(msg);
+			//번호 다시 매기기
+			//mySheet.ReNumberSeq();
+		}
+	}
+	
+	function mySheet3_OnSaveEnd(code, msg) {
+		if (msg != "") {
+			alert(msg);
+			//번호 다시 매기기
+			//mySheet.ReNumberSeq();
+		}
+	}
+	
+	function mySheet4_OnSaveEnd(code, msg) {
+		if (msg != "") {
+			alert(msg);
+			//번호 다시 매기기
+			//mySheet.ReNumberSeq();
+		}
+	}
+	
+	function mySheet6_OnSaveEnd(code, msg) {
+		if (msg != "") {
+			alert(msg);
+			//번호 다시 매기기
+			//mySheet.ReNumberSeq();
+		}
+	}
+	
+	function mySheet9_OnSaveEnd(code, msg) {
+		if (msg != "") {
+			alert(msg);
+			//번호 다시 매기기
+			//mySheet.ReNumberSeq();
+		}
+	}
+	
+	function mySheet10_OnSaveEnd(code, msg) {
+		if (msg != "") {
+			alert(msg);
+			//번호 다시 매기기
+			//mySheet.ReNumberSeq();
+		}
+	}
+	
+	function mySheet11_OnSaveEnd(code, msg) {
 		if (msg != "") {
 			alert(msg);
 			//번호 다시 매기기
@@ -523,7 +599,7 @@ O mySheet3.DoSave("${contextPath}/hm/p0007/saveCareer.do", x);
 					
 	function mySheet4_OnPopupClick(Row,Col,Value){
 		
-		if(Col=="4"){
+		if(Col=="5"){
 			
 		window.open("${contextPath}/hm/p0007/license_Popup.do", "a", "width=500, height=700, left=100, top=50"); 
 		}
@@ -532,7 +608,7 @@ O mySheet3.DoSave("${contextPath}/hm/p0007/saveCareer.do", x);
 
 	function mySheet6_OnPopupClick(Row,Col,Value){
 		
-		if(Col=="3"){
+		if(Col=="4"){
 			
 		window.open("${contextPath}/hm/p0007/assessment_Popup.do", "a", "width=500, height=700, left=100, top=50"); 
 		}
@@ -541,7 +617,7 @@ O mySheet3.DoSave("${contextPath}/hm/p0007/saveCareer.do", x);
 	
 	function mySheet9_OnPopupClick(Row,Col,Value){
 		
-		if(Col=="4"){
+		if(Col=="5"){
 			
 		window.open("${contextPath}/hm/p0007/rnp_Popup.do", "a", "width=500, height=700, left=100, top=50"); 
 		}
@@ -550,7 +626,7 @@ O mySheet3.DoSave("${contextPath}/hm/p0007/saveCareer.do", x);
 	
 	function mySheet10_OnPopupClick(Row,Col,Value){
 		
-		if(Col=="3"){
+		if(Col=="4"){
 			
 		window.open("${contextPath}/hm/p0007/language_Popup.do", "a", "width=500, height=700, left=100, top=50"); 
 		}
@@ -573,6 +649,8 @@ O mySheet3.DoSave("${contextPath}/hm/p0007/saveCareer.do", x);
 	function languageValue(rowData){
 		mySheet10.SetRowData(mySheet10.GetSelectRow(),rowData);
 	}
+	
+
 	        
 	// }
 </script>
@@ -624,8 +702,8 @@ O mySheet3.DoSave("${contextPath}/hm/p0007/saveCareer.do", x);
 
 .left {
 	position: relative;
-	top: 130px;
-	left: 60px;
+	top: 100px;
+	left: 100px;
 	width: 403px;
 }
 
@@ -701,10 +779,8 @@ border : none;
 		</header>
 	</div>
 	<div class="left">
-
-		<script>createIBSheet("mySheet", "100%", "100%");</script>
-	</div>
-
+		<script>createIBSheet("mySheet", "1500px", "710px");</script>
+    </div>
 
 	<div class="right">
 
@@ -719,7 +795,7 @@ border : none;
 			</div>
 		</div>
 
-		<div id="tab_contents" class="ib-tab-contents" >
+		<div id="tab_contents1" class="ib-tab-contents" >
 		
 			<div class="ib-tab-contents__item" style="background: none;">
 			
@@ -733,7 +809,9 @@ border : none;
     <th class="tg-lu1x" rowspan="5"><i class="fa fa-address-book" aria-hidden="true"></i><br>개<br>인<br>정<br>보</th>  
   </tr>
    <tr>
-   <td class="tg-8thm">신장</td><td class="tg-v9i9" ><input type="text" id="height" name="height"><td class="tg-8thm">체중</td><td class="tg-v9i9" ><input type="text" id="weight" name="weight"><td class="tg-8thm">
+
+   <td class="tg-8thm">신장</td><td class="tg-v9i9" >      <input type="hidden"	name="myRow">
+   <input type="text" id="height" name="height"><td class="tg-8thm">체중</td><td class="tg-v9i9" ><input type="text" id="weight" name="weight"><td class="tg-8thm">
    
    혈액형</td><td class="tg-v9i9" ><select name="blood_type"><option value='A형' selected>A형</option>
 									<option value='B형'>B형</option>

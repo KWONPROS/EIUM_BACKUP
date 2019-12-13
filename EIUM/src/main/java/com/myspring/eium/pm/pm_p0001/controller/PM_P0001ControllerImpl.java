@@ -95,12 +95,14 @@ public class PM_P0001ControllerImpl implements PM_P0001Controller {
 		searchMap.put("searchSite", request.getParameter("searchSite"));
 		searchMap.put("searchTYPE", request.getParameter("searchTYPE"));
 		searchMap.put("searchDetail", request.getParameter("searchDetail"));
+		searchMap.put("monthpicker", request.getParameter("monthpicker"));
 
 
 		System.out.println(request.getParameter("Ppayment_code"));
 		System.out.println(request.getParameter("searchSite"));
 		System.out.println(request.getParameter("searchTYPE"));
 		System.out.println(request.getParameter("searchDetail"));
+		System.out.println(request.getParameter("monthpicker"));
 
 		List<PM_P0001VO> data = p0001Service.searchList(searchMap);
 		

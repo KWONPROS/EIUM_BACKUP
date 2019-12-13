@@ -44,11 +44,13 @@ function setPaygrade(){
 		initSheet.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0};
 		initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 		initSheet.Cols = [		
-	        {Header:"NO",Type:"Seq",SaveName:"NUMBER",MinWidth:50, Align:"Center" },	
-	        {Header:"사원코드",Type:"Text",SaveName:"employee_code", MinWidth:50,  Align:"Center", KeyField:1, Edit: 0},	
-			{Header:"사원명",Type:"Text",SaveName:"employee_name", MinWidth:120, Align:"Center", Edit: 0},
-			{Header:"지급고유번호",Type:"Text",SaveName:"payment_code", MinWidth:120, Align:"Center", Hidden:"1"},
-			{Header:"지급구분",Type:"Text",SaveName:"payment_des_name", MinWidth:120, Align:"Center"},
+	        {Header:"NO",Type:"Seq",SaveName:"NUMBER",Width:60, Align:"Center" },	
+	        {Header:"사원코드",Type:"Text",SaveName:"employee_code", Width:160,  Align:"Center", KeyField:1, Edit: 0},	
+			{Header:"사원명",Type:"Text",SaveName:"employee_name", Width:160, Align:"Center", Edit: 0},
+			{Header:"사업장명",Type:"Text",SaveName:"site_name", Width:160, Align:"Center", Edit: 0},
+			{Header:"부서명",Type:"Text",SaveName:"department_name", Width:160, Align:"Center", Edit: 0},
+			{Header:"지급고유번호",Type:"Text",SaveName:"payment_code", Width:140, Align:"Center", Hidden:"1"},
+			{Header:"지급구분",Type:"Text",SaveName:"payment_des_name", Width:160, Align:"Center"},
 			{Header:"호봉",Type:"Text",SaveName:"salary",MinWidth:70, Align:"Center" , Hidden:1},
 			{Header:"평일정상근무시간",Type:"Text",SaveName:"weekday_normal_work_time",MinWidth:70, Align:"Center", Hidden:1 },
 			{Header:"평일연장근무일시간",Type:"Text",SaveName:"weekday_extension_work_time",MinWidth:70, Align:"Center", Hidden:1},
@@ -61,7 +63,6 @@ function setPaygrade(){
 		IBS_InitSheet( mySheet , initSheet);
   
 		mySheet.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
-		mySheet.SetSheetHeight(250);
 		
 		//아이비시트2------------------------------------------------------
 		mySheet2.RemoveAll();
@@ -69,18 +70,17 @@ function setPaygrade(){
 		initSheet2.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:0};
 		initSheet2.HeaderMode = {Sort:1, ColMove:0, ColResize:0, HeaderCheck:1};
 		initSheet2.Cols = [
-			{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
-	        {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},	
-       		{Header:"급여계산서고유번호",Type:"Text",SaveName:"payment_receipt_code",MinWidth:70, Align:"Center",Hidden:"1"},
-	        {Header:"지급항목",Type:"Combo", MinWidth:70, SaveName:"payment_receipt_item", ComboText:"|기본급|상여급", ComboCode:"|기본급|상여급"},
-			{Header:"총액",Type:"AutoSum", Format:"Integer", SaveName:"payment_receipt_price", MinWidth:70, Align:"Center"}
+			{Header:"상태",Type:"Status",SaveName:"STATUS",Width:60, Align:"Center"},
+	        {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",Width:60},	
+       		{Header:"급여계산서고유번호",Type:"Text",SaveName:"payment_receipt_code",Width:200, Align:"Center",Hidden:"1"},
+	        {Header:"지급항목",Type:"Combo",Width:175, SaveName:"payment_receipt_item", ComboText:"|기본급|상여급", ComboCode:"|기본급|상여급", Align:"Center"},
+			{Header:"총액",Type:"AutoSum", Format:"Integer", SaveName:"payment_receipt_price", Width:175, Align:"Center"}
 			
 			];
 		
 		IBS_InitSheet( mySheet2 , initSheet2);
 		  
 		mySheet2.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
-		mySheet2.SetSheetHeight(250);
 		
 		
 		
@@ -111,6 +111,8 @@ function setPaygrade(){
 		case "search": //조회
 			var param = FormQueryStringEnc(document.frm);
 			mySheet.DoSearch("${contextPath}/pm/p0001/searchList.do", param);
+			mySheet2.RemoveAll();
+
 			//조회조건에 맞도록 조회하기
 			break;
 
@@ -145,13 +147,13 @@ function setPaygrade(){
 	
 	function mySheet2_OnChange(Row, Col, Value) {
 	    if(mySheet2.GetCellValue(Row, 3) == "기본급"){
-	    	var a = mySheet.GetCellValue(x, 5)/209;
-	    	var z = (a*mySheet.GetCellValue(x, 6)) + ((a*1.5)*mySheet.GetCellValue(x, 7)) + ((a*1.5)*mySheet.GetCellValue(x, 8))+ ((a*1.5)*mySheet.GetCellValue(x, 9))+ ((a*2)*mySheet.GetCellValue(x, 10))+ ((a*2.5)*mySheet.GetCellValue(x, 11));
+	    	var a = mySheet.GetCellValue(x, 7)/209;
+	    	var z = (a*mySheet.GetCellValue(x, 8)) + ((a*1.5)*mySheet.GetCellValue(x, 9)) + ((a*1.5)*mySheet.GetCellValue(x, 10))+ ((a*1.5)*mySheet.GetCellValue(x, 11))+ ((a*2)*mySheet.GetCellValue(x, 12))+ ((a*2.5)*mySheet.GetCellValue(x, 13));
 	       mySheet2.SetCellValue(Row, 4, z);
 	   }
 	    
 	    if(mySheet2.GetCellValue(Row, 3) == "상여급"){
-	    	var z = mySheet.GetCellValue(x, 5);
+	    	var z = mySheet.GetCellValue(x, 7);
 	       mySheet2.SetCellValue(Row, 4, z);
 	   }
 	}
@@ -161,7 +163,7 @@ function setPaygrade(){
 	//로우 클릭시
 function mySheet_OnClick(Row, Col) {
 			x = mySheet.GetSelectRow(); 
-			var param = "x="+mySheet.GetCellValue(Row, 1)+"&y="+mySheet.GetCellValue(Row, 3);
+			var param = "x="+mySheet.GetCellValue(Row, 1)+"&y="+mySheet.GetCellValue(Row, 5);
 			mySheet2.DoSearch("${contextPath}/pm/p0001/searchReceipt.do", param);
 
 	}
@@ -312,7 +314,14 @@ function mySheet_OnClick(Row, Col) {
 	position: absolute;
 	top: 50px;
 }
-
+.searchBarTitle {
+	background: #5E5E5E;
+	padding: 4px;
+	color: white;
+	border-radius: 5px;
+	margin: 0 5px 0 80px;
+	vertical-align: middle;
+}
 .leftbuttons {
 	margin-top: 40px;
 	margin: 10px;
@@ -344,16 +353,18 @@ function mySheet_OnClick(Row, Col) {
 .left{
 	position: relative;
 	top: 110px;
-	left: 60px;
-	width: 1053px;
+	left: 30px;
+	width: 1400px;
 }
 
 .right{
 	position: relative;
 	top: -140px;
- 	left: 450px;
-	width: 750px;
-	
+	left: 620px;
+	width: 830px;
+	padding: 0 0 0 30px;
+    border-left: 2px solid #C3C3C3;
+    margin-left: 15px;
 }
 
 .bottom{
@@ -441,30 +452,33 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 	</div>
 	<div class="left">
 	     <div id="searchBar">
-            귀속연월 : <input id="monthpicker" type="text">
+             <span class="searchBarTitle">귀속연월</span> <input id="monthpicker" type="text">
 			<img id="btn_monthpicker"  src="${contextPath}/resources/image/icons/icon_calendar.png">
 		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-		  지급일: <a href="javascript:showPopup();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a><input type="text" id="Ppayment_date"><br><br>
-		 사업장구분: <select id="searchSite" onchange="selectType()">
+		   <span class="searchBarTitle">지급일</span> <a href="javascript:showPopup();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a><input type="text" id="Ppayment_date"><br><br>
+		  <span class="searchBarTitle">사업장구분</span> <select id="searchSite" onchange="selectType()">
 			<option value="all" selected>전체</option>
 			</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		  부서: <select id="searchTYPE">
+		   <span class="searchBarTitle">부서</span> <select id="searchTYPE">
 		  	<option value="all" selected>전체</option>
 		</select> 
 		<input type="hidden" id="Ppayment_code">
 		<input type="hidden" id="Ppayment_des_name">
 		</div>
 		
-
-		<script>
-		createIBSheet("mySheet", "100%", "100%");
+<div style="position: absolute; top: 110px; ">
+		<script>		
+		createIBSheet("mySheet", "900px", "600px");
 		selectSite();
 		</script>
 	</div>
+	</div>
 	
+	<div style="position: absolute; top: 370px; left: 300px;">
 	<div class="right">
-		<script>createIBSheet("mySheet2", "100%", "100%");</script>
+		<script>createIBSheet("mySheet2", "700px", "600px");</script>
 	</div>	
+	</div>
 </form>
 <input type="hidden" id="Pposition_name">
 <input type="hidden" id="Ppay_grade_name">

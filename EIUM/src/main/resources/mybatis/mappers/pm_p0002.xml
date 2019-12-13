@@ -123,12 +123,10 @@
 			<when test= " total == 'emp' and searchSite  =='all' and searchTYPE == 'all'">	
 			<![CDATA[		
  			select distinct ew.employee_code, e.employee_name, p.payment_code, d.department_name
-			from payment p, selection_of_payment sp, employee_work ew, employee e, department d, site s
-			where p.payment_code = sp.payment_code
-			and sp.job_class_code = ew.job_class_code
-			and sp.site_code = d.site_code
-			and sp.site_code = s.site_code
+			from payment p,  payment_receipt pr, employee_work ew, employee e, department d, site s
+			where p.payment_code = pr.payment_code
 			and ew.department_code =d.department_code
+			and pr.employee_code = ew.employee_code
 			and ew.employee_code =e.employee_code
 			and p.payment_code = #{Ppayment_code}
 			order by ew.employee_code
@@ -138,27 +136,24 @@
    		    <when test= " total == 'emp' and searchSite  =='all' and searchTYPE != 'all'">
    		    <![CDATA[		
  			select distinct ew.employee_code, e.employee_name, p.payment_code, d.department_name
-			from payment p, selection_of_payment sp, employee_work ew, employee e, department d, site s
-			where p.payment_code = sp.payment_code
-			and sp.job_class_code = ew.job_class_code
-			and sp.site_code = d.site_code
+			from payment p,  payment_receipt pr, employee_work ew, employee e, department d, site s
+			where p.payment_code = pr.payment_code
 			and ew.department_code =d.department_code
+			and pr.employee_code = ew.employee_code
 			and ew.employee_code =e.employee_code
 			and p.payment_code = #{Ppayment_code}
- 			and d.department_name =  #{searchTYPE} 
+			and d.department_name =  #{searchTYPE} 
 			order by ew.employee_code
  			]]> 
 			</when>
 			
 			<when test= " total =='emp' and searchSite  !='all' and searchTYPE == 'all'">	
 			<![CDATA[		
-  			select distinct ew.employee_code, e.employee_name, p.payment_code, d.department_name
-			from payment p, selection_of_payment sp, employee_work ew, employee e, department d, site s
-			where p.payment_code = sp.payment_code
-			and sp.job_class_code = ew.job_class_code
-			and sp.site_code = d.site_code
-			and sp.site_code = s.site_code			
+ 			select distinct ew.employee_code, e.employee_name, p.payment_code, d.department_name
+			from payment p,  payment_receipt pr, employee_work ew, employee e, department d, site s
+			where p.payment_code = pr.payment_code
 			and ew.department_code =d.department_code
+			and pr.employee_code = ew.employee_code
 			and ew.employee_code =e.employee_code
 			and p.payment_code = #{Ppayment_code}
 			and s.site_name = #{searchSite}
@@ -168,13 +163,11 @@
    		    
    		    <when test= " total =='emp' and searchSite  !='all' and searchTYPE != 'all'">	
 			<![CDATA[		
- 			 			select distinct ew.employee_code, e.employee_name, p.payment_code, d.department_name
-			from payment p, selection_of_payment sp, employee_work ew, employee e, department d, site s
-			where p.payment_code = sp.payment_code
-			and sp.job_class_code = ew.job_class_code
-			and sp.site_code = d.site_code
-			and sp.site_code = s.site_code
+ 			select distinct ew.employee_code, e.employee_name, p.payment_code, d.department_name
+			from payment p,  payment_receipt pr, employee_work ew, employee e, department d, site s
+			where p.payment_code = pr.payment_code
 			and ew.department_code =d.department_code
+			and pr.employee_code = ew.employee_code
 			and ew.employee_code =e.employee_code
 			and p.payment_code = #{Ppayment_code}
 			and s.site_name = #{searchSite}

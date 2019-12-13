@@ -264,6 +264,15 @@ function mySheet_OnClick(Row, Col) {
 	right: 0px;
 }
 
+.searchBarTitle {
+	background: #5E5E5E;
+	padding: 4px;
+	color: white;
+	border-radius: 5px;
+	margin: 0 5px 0 80px;
+	vertical-align: middle;
+}
+
 .IBbutton {
 	font-size: 13px;
 	margin-left: 5px;
@@ -281,16 +290,18 @@ function mySheet_OnClick(Row, Col) {
 .left{
 	position: relative;
 	top: 110px;
-	left: 60px;
-	width: 1053px;
+	left: 30px;
+	width: 1400px;
 }
 
 .right{
 	position: relative;
 	top: -140px;
- 	left: 450px;
-	width: 750px;
-	
+	left: 620px;
+	width: 830px;
+	padding: 0 0 0 30px;
+    border-left: 2px solid #C3C3C3;
+    margin-left: 15px;
 }
 
 .bottom{
@@ -377,14 +388,14 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 	</div>
 	<div class="left">
 	     <div id="searchBar">
-            귀속연월 : <input id="monthpicker" type="text">
+            <span class="searchBarTitle">귀속연월</span> <input id="monthpicker" type="text">
 			<img id="btn_monthpicker"  src="${contextPath}/resources/image/icons/icon_calendar.png">
 		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-		  지급일: <a href="javascript:showPopup();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a><input type="text" id="Ppayment_date"><br><br>
-		 사업장구분: <select id="searchSite" onchange="selectType()">
+		  <span class="searchBarTitle">지급일</span> <a href="javascript:showPopup();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a><input type="text" id="Ppayment_date"><br><br>
+		 <span class="searchBarTitle">사업장구분</span> <select id="searchSite" onchange="selectType()">
 			<option value="all" selected>전체</option>
 			</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		  부서: <select id="searchTYPE">
+		  <span class="searchBarTitle">부서</span> <select id="searchTYPE">
 		  	<option value="all" selected>전체</option>
 		</select> 
 		</div>

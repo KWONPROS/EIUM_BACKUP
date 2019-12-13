@@ -36,20 +36,19 @@
 		initSheet.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0};
 		initSheet.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 		initSheet.Cols = [		
-	        {Header:"NO",Type:"Seq",SaveName:"NUMBER",MinWidth:50, Align:"Center" },
-	        {Header:"은행",Type:"Text",SaveName:"bank_name", MinWidth:80,  Align:"Center", Edit: 0},	
-	        {Header:"사원코드",Type:"Text",SaveName:"employee_code", MinWidth:100,  Align:"Center", Edit: 0},	
-	        {Header:"사원명",Type:"Text",SaveName:"employee_name", MinWidth:100, Align:"Center", Edit: 0},
-			{Header:"계좌번호",Type:"Text",SaveName:"account_number_1", MinWidth:180, Align:"Center", Edit: 0},
-			{Header:"예금주명",Type:"Text",SaveName:"account_name_1", MinWidth:120, Align:"Center", Edit: 0},
-			{Header:"지급구분",Type:"Text",SaveName:"payment_receipt_item", MinWidth:120, Align:"Center", Edit: 0},
-			{Header:"실지급액",Type:"Int",SaveName:"payment_receipt_price", MinWidth:120, Align:"Center", Edit: 0},
-			{Header:"지급일자",Type:"Text",SaveName:"payment_date", MinWidth:120, Align:"Center", Format:"Ymd", Edit: 0 }
+	        {Header:"NO",Type:"Seq",SaveName:"NUMBER",Width:60, Align:"Center" },
+	        {Header:"은행",Type:"Text",SaveName:"bank_name", Width:155,  Align:"Center", Edit: 0},	
+	        {Header:"사원코드",Type:"Text",SaveName:"employee_code", Width:155,  Align:"Center", Edit: 0},	
+	        {Header:"사원명",Type:"Text",SaveName:"employee_name", Width:155, Align:"Center", Edit: 0},
+			{Header:"계좌번호",Type:"Text",SaveName:"account_number_1", Width:250, Align:"Center", Edit: 0},
+			{Header:"예금주명",Type:"Text",SaveName:"account_name_1", Width:155, Align:"Center", Edit: 0},
+			{Header:"지급구분",Type:"Text",SaveName:"payment_receipt_item", Width:155, Align:"Center", Edit: 0},
+			{Header:"실지급액",Type:"Int",SaveName:"payment_receipt_price", Width:155, Align:"Center", Edit: 0},
+			{Header:"지급일자",Type:"Text",SaveName:"payment_date", Width:155, Align:"Center", Format:"Ymd", Edit: 0 }
 		];   
 		IBS_InitSheet( mySheet , initSheet);
   
 		mySheet.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
-		mySheet.SetSheetHeight(250);
 		
 		//아이비시트2------------------------------------------------------
 		
@@ -290,6 +289,15 @@ function mySheet_OnClick(Row, Col) {
 	right: 0px;
 }
 
+.searchBarTitle {
+	background: #5E5E5E;
+	padding: 4px;
+	color: white;
+	border-radius: 5px;
+	margin: 0 5px 0 80px;
+	vertical-align: middle;
+}
+
 .IBbutton {
 	font-size: 13px;
 	margin-left: 5px;
@@ -307,8 +315,8 @@ function mySheet_OnClick(Row, Col) {
 .left{
 	position: relative;
 	top: 110px;
-	left: 60px;
-	width: 1053px;
+	left: 30px;
+	width: 1400px;
 }
 
 .right{
@@ -402,31 +410,32 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 	<div class="left">
 	     <div id="searchBar">
 	     
-            귀속연월 : <input id="monthpicker" type="text">
+            <span class="searchBarTitle">귀속연월</span> <input id="monthpicker" type="text">
 			<img id="btn_monthpicker"  src="${contextPath}/resources/image/icons/icon_calendar.png">
 		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-		  지급일 : <a href="javascript:showPopup();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a><input type="text" id="Ppayment_date"><br><br>
-		 은행구분 : <select id="searchBank">
+		  <span class="searchBarTitle">지급일</span> <a href="javascript:showPopup();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a><input type="text" id="Ppayment_date"><br><br>
+		 <span class="searchBarTitle">은행구분</span> <select id="searchBank">
 			<option value="all" selected>전체</option>
 			</select>  
 		 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		 사업장구분 : <select id="searchSite" onchange="selectType()">
+		 <span class="searchBarTitle">사업장구분</span> <select id="searchSite" onchange="selectType()">
 			<option value="all" selected>전체</option>
 			</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		  부서 : <select id="searchTYPE">
+		 <span class="searchBarTitle">부서</span> <select id="searchTYPE">
 		  	<option value="all" selected>전체</option>
 		</select> 
 		</div>
 		<input type="hidden" id="Ppayment_code">
 		<input type="hidden" id="Ppayment_des_name">
 		
-
+		<div style="position: absolute; top: 110px;">
 		<script>
-		createIBSheet("mySheet", "100%", "100%");
+		createIBSheet("mySheet", "1500px", "600px");
 		selectBank();
 		selectSite();
 		selectType();
 		</script>
+		</div>
 	</div>
 
 	

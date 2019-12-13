@@ -148,7 +148,8 @@
 		case "search": //조회
 			var param = FormQueryStringEnc(document.frm);
 			var total = $('#total').val();
-			
+			mySheet2.RemoveAll();
+
 			if(total =='emp' ){
 				mySheet1.DoSearch("${contextPath}/pm/p0002/searchList.do", param);
 			}
@@ -449,19 +450,30 @@ function selectDivision() {
 	background-color: #2C3E50;
 }
 
+.searchBarTitle {
+	background: #5E5E5E;
+	padding: 4px;
+	color: white;
+	border-radius: 5px;
+	margin: 0 5px 0 80px;
+	vertical-align: middle;
+}
+
 .left{
 	position: relative;
 	top: 110px;
-	left: 60px;
-	width: 1053px;
+	left: 30px;
+	width: 1400px;
 }
 
 .right{
 	position: absolute;
  	 top : 240px;
- 	left: 450px;
+	left: 620px;
 	width: 750px;
-	
+	padding: 0 0 0 30px;
+    border-left: 2px solid #C3C3C3;
+    margin-left: 15px;
 }
 
 .bottom{
@@ -566,19 +578,19 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 	</div>
 	<div class="left">
 	     <div id="searchBar">
-            귀속연월 : <input id="monthpicker" type="text">
+            <span class="searchBarTitle">귀속연월</span> <input id="monthpicker" type="text">
 			<img id="btn_monthpicker"  src="${contextPath}/resources/image/icons/icon_calendar.png">
 		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-		  지급일: <a href="javascript:showPopup();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a><input type="text" id="Ppayment_date"><br><br>
-		 사업장구분: <select id="searchSite" onchange="selectType()">
+		  <span class="searchBarTitle">지급일</span> <a href="javascript:showPopup();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a><input type="text" id="Ppayment_date"><br><br>
+		 <span class="searchBarTitle">사업장구분</span> <select id="searchSite" onchange="selectType()">
 			<option value="all" selected>전체</option>
 			</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		  
-		  부서: <select id="searchTYPE">
+		 <span class="searchBarTitle"> 부서</span> <select id="searchTYPE">
 		  	<option value="all" selected>전체</option>
 		</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		
-		  집계: <select id="total"  onchange="selectDivision()">
+		 <span class="searchBarTitle"> 집계</span> <select id="total"  onchange="selectDivision()">
 		  	<option value="emp" selected>1.사원별</option>
 		  	<option value="dep">2.부서별</option>
 		  	<option value="sit">3.사업장별</option>

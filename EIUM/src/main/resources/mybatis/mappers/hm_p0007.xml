@@ -98,8 +98,7 @@
  
  <update id="updateHr_info" parameterType="java.util.Map">
 		update employee_hr_info
-		set employee_name_hn = #{employee_name_hn}
-		   , hobby = #{hobby}
+		set hobby = #{hobby}
 		   , special_ability = #{special_ability}
 		   , height = #{height}
 		   , weight = #{weight}
@@ -247,7 +246,7 @@
 
 	<select id="searchLicense" resultMap="p0007_04resultVO">
       <![CDATA[
-         select e.license_code, l.license_name, e.start_date, e.end_date, e.license_number, e.institute, e.bonus
+         select e.employee_license_code, e.license_code, l.license_name, e.start_date, e.end_date, e.license_number, e.institute, e.bonus
          from employee_license e , license l
          where e.license_code = l.license_code
          and employee_code = #{x}
@@ -255,20 +254,21 @@
 	</select>
 	
 	<insert id="insertLicense" parameterType="java.util.Map">
-		insert into employee_license(employee_code,license_code,start_date,end_date,license_number,institute,bonus,int_user_id,int_date) 
-		values(#{x},license_code_seq.nextval,#{start_date},#{end_date},#{license_number},#{institute},#{bonus}, #{user},sysdate)
+		insert into employee_license(employee_code ,employee_license_code, license_code, start_date,end_date,license_number,institute,bonus,int_user_id,int_date)
+		values(#{x},employee_license_code_seq.nextval,#{license_code},#{start_date},#{end_date},#{license_number},#{institute},#{bonus}, #{user},sysdate)
 	</insert>	
 	
 	<update id="updateLicense" parameterType="java.util.Map">
 		update employee_license
-		set start_date = #{start_date}
+		set license_code = #{license_code}
+		   , start_date = #{start_date}
 		   , end_date = #{end_date}
 		   , license_number = #{license_number}
 		   , institute = #{institute}
 		   , bonus = #{bonus}
 		   , upt_user_id = #{user}
 		   , upt_date = sysdate
-		where license_code = #{license_code}
+		where employee_license_code = #{employee_license_code}
 	</update>	
 	
  
@@ -334,20 +334,22 @@
 
 	<select id="searchAssessment" resultMap="p0007_06resultVO">
       <![CDATA[
-         select hr_assessment_code, hr_assessment_name, hr_assessment_test_start_date, hr_assessment_test_end_date, hr_assessment_date, hr_assessment_master, hr_assessment_reflection_pcnt, hr_assessment_score, hr_assessment_grade
-         from hr_assessment
-         where employee_code = #{x}
+        select h.hr_assessment_code, h.assessment_code, a.assessment_name, h.hr_assessment_test_start_date, h.hr_assessment_test_end_date, h.hr_assessment_date, h.hr_assessment_master, h.hr_assessment_reflection_pcnt, h.hr_assessment_score, h.hr_assessment_grade
+         from hr_assessment h, assessment a
+         where h.assessment_code = a.assessment_code
+         and h.employee_code = #{x}
+         order by h.hr_assessment_code
                ]]>
 	</select>
 	
 	<insert id="insertAssessment" parameterType="java.util.Map">
-		insert into hr_assessment(employee_code,hr_assessment_code,hr_assessment_name,hr_assessment_test_start_date,hr_assessment_test_end_date,hr_assessment_date,hr_assessment_master,hr_assessment_reflection_pcnt,hr_assessment_score,hr_assessment_grade,int_user_id,int_date) 
-		values(#{x},hr_assessment_code_seq.nextval,#{hr_assessment_name},#{hr_assessment_test_start_date},#{hr_assessment_test_end_date},#{hr_assessment_date},#{hr_assessment_master},#{hr_assessment_reflection_pcnt},#{hr_assessment_score},#{hr_assessment_grade},#{user},sysdate)
+		insert into hr_assessment(employee_code,hr_assessment_code, assessment_code,hr_assessment_test_start_date,hr_assessment_test_end_date,hr_assessment_date,hr_assessment_master,hr_assessment_reflection_pcnt,hr_assessment_score,hr_assessment_grade,int_user_id,int_date) 
+		values(#{x},hr_assessment_code_seq.nextval,#{assessment_code},#{hr_assessment_test_start_date},#{hr_assessment_test_end_date},#{hr_assessment_date},#{hr_assessment_master},#{hr_assessment_reflection_pcnt},#{hr_assessment_score},#{hr_assessment_grade},#{user},sysdate)
 	</insert>	
 	
 	<update id="updateAssessment" parameterType="java.util.Map">
 		update hr_assessment
-		set hr_assessment_name = #{license_type}
+		set assessment_code = #{assessment_code}
 		   , hr_assessment_test_start_date = #{hr_assessment_test_start_date}
 		   , hr_assessment_test_end_date = #{hr_assessment_test_end_date}
 		   , hr_assessment_date = #{hr_assessment_date}
@@ -470,21 +472,23 @@
 
 	<select id="searchRnp" resultMap="p0007_09resultVO">
       <![CDATA[
-         select hr_rnp_code, hr_rnp_index, hr_rnp_name, hr_rnp_date, hr_rnp_history, hr_rnp_institute, hr_rnp_cost, hr_rnp_start_date, hr_rnp_end_date
-         from hr_rnp
-         where employee_code = #{x}
+ 		 select h.hr_rnp_code, h.hr_rnp_index, h.rnp_code, r.rnp_name, h.hr_rnp_date, h.hr_rnp_history, h.hr_rnp_institute, h.hr_rnp_cost, h.hr_rnp_start_date, h.hr_rnp_end_date
+         from hr_rnp h, rnp r
+         where h.rnp_code = r.rnp_code
+         and h.employee_code = #{x}
+         order by h.hr_rnp_code
                ]]>
 	</select>
 	
-	<insert id="inserthr_rnp" parameterType="java.util.Map">
-		insert into hr_rnp(employee_code,hr_rnp_code,hr_rnp_index,hr_rnp_name,hr_rnp_date,hr_rnp_history,hr_rnp_institute,hr_rnp_cost,hr_rnp_start_date,hr_rnp_end_date,int_user_id,int_date) 
-		values(#{x},hr_rnp_code_seq.nextval,#{hr_rnp_index},#{hr_rnp_name},#{hr_rnp_date},#{hr_rnp_history},#{hr_rnp_institute},#{hr_rnp_cost},#{hr_rnp_start_date},#{hr_rnp_end_date},#{user},sysdate)
+	<insert id="insertRnp" parameterType="java.util.Map">
+		insert into hr_rnp(employee_code,hr_rnp_code, rnp_code, hr_rnp_index,hr_rnp_date,hr_rnp_history,hr_rnp_institute,hr_rnp_cost,hr_rnp_start_date,hr_rnp_end_date,int_user_id,int_date) 
+		values(#{x},hr_rnp_code_seq.nextval,#{rnp_code},#{hr_rnp_index},#{hr_rnp_date},#{hr_rnp_history},#{hr_rnp_institute},#{hr_rnp_cost},#{hr_rnp_start_date},#{hr_rnp_end_date},#{user},sysdate)
 	</insert>	
 	
-	<update id="updatehr_rnp" parameterType="java.util.Map">
+	<update id="updateRnp" parameterType="java.util.Map">
 		update hr_rnp
-		set hr_rnp_index = #{hr_rnp_index}
-		   , hr_rnp_name = #{hr_rnp_name}
+		set rnp_code = #{rnp_code}
+		   , hr_rnp_index = #{hr_rnp_index}
 		   , hr_rnp_date = #{hr_rnp_date}
 		   , hr_rnp_history = #{hr_rnp_history}
 		   , hr_rnp_institute = #{hr_rnp_institute}
@@ -498,7 +502,7 @@
 	
  
 	
-	<delete id="deletehr_rnp" parameterType="java.util.Map">
+	<delete id="deleteRnp" parameterType="java.util.Map">
 		delete hr_rnp
 		where hr_rnp_code = #{hr_rnp_code}
 	</delete>
@@ -522,27 +526,27 @@
 
 	<select id="searchEmployee_language" resultMap="p0007_10resultVO">
       <![CDATA[
-          select e.language_code, e.employee_code, l.language_name, e.start_date, e.end_date, e.grade, e.institute
+          select e.employee_language_code, e.language_code, e.employee_code, l.language_name, e.start_date, e.end_date, e.grade, e.institute
          from employee_language e, language l
          where e.language_code = l.language_code
          and e.employee_code = #{x}
                ]]>
 	</select>
 	<insert id="insertEmployee_language" parameterType="java.util.Map">
-		insert into employee_language(employee_code, language_code, name, start_date, end_date,grade, institute, int_user_id, int_date) 
-		values(#{x},language_code_seq.nextval, #{name}, #{start_date}, #{end_date}, #{grade}, #{institute}, #{user}, sysdate)
+		insert into employee_language(employee_code, employee_language_code, language_code, start_date, end_date,grade, institute, int_user_id, int_date) 
+		values(#{x},employee_language_code_seq.nextval, #{language_code}, #{start_date}, #{end_date}, #{grade}, #{institute}, #{user}, sysdate)
 	</insert>	
 	
 	<update id="updateEmployee_language" parameterType="java.util.Map">
 		update employee_language
-		set name = #{name}
+		set language_code = #{language_code}
 		   , start_date = #{start_date}
 		   , end_date = #{end_date}
 		   , grade = #{grade}
 		   , institute = #{institute}
 		   , upt_user_id = #{user}
 		   , upt_date = sysdate
-		where language_code = #{language_code}
+		where employee_language_code = #{employee_language_code}
 	</update>	
 	
  
