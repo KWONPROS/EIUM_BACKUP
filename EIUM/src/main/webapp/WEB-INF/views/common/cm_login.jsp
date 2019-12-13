@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script type="text/javascript">
 function fn_findID(){
     var url = "findIdNPwd.do?command=id";
@@ -187,20 +187,67 @@ right: 15px;
 #languages .language:hover{
 	transform:scale(1.2);
 }
-.saveid{
+.checks{
     padding-left: 0px;
     margin-left: 224px;
-    font-size: 12px;
+    font-size: 14px;
 	color: #0062cc;
+    vertical-align: middle;
+    font-weight: 600;
 }
 .login-form h4 {
 	color: #0062cc;
 	margin-top: 0px;
 	margin-left: 8px;
     margin-bottom: 0px;
-    font-size: 15px;
+    font-size: 14px;
 }
-
+.checks {
+    position: relative;
+}
+.checks input[type="checkbox"] {
+    position: absolute; 
+    width: 1px;
+    height: 1px; 
+    padding: 0; 
+    margin: -1px; 
+    overflow: hidden; 
+    clip:rect(0,0,0,0); 
+    border: 0 
+} 
+.checks input[type="checkbox"] + label {
+    display: inline-block;
+    position: relative; 
+    cursor: pointer; 
+    -webkit-user-select: none; 
+    -moz-user-select: none; 
+    -ms-user-select: none; 
+}
+ .checks input[type="checkbox"] + label:before {
+    content: ' '; 
+    display: inline-block; 
+    width: 21px; 
+    height: 21px;  
+    line-height: 21px; 
+    margin: -2px 8px 0 0; 
+    text-align: center; 
+    vertical-align: middle; 
+    background: #fafafa; 
+    border: 1px solid #cacece; 
+    border-radius : 3px; 
+    box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+}
+.checks input[type="checkbox"] + label:active:before, .checks input[type="checkbox"]:checked + label:active:before {
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+.checks input[type="checkbox"]:checked + label:before {
+    content: '\2714';
+    color: #99a1a7; 
+    text-shadow: 1px 1px #fff;
+    background: #e9ecee; 
+    border-color: #adb8c0; 
+    box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+}
 
 
 </style>
@@ -238,7 +285,7 @@ $(function(){
 					</h3>
 						   
 				 	<h3><spring:message code="login"  text="로그인" /></h3>
-					<h4><input type="checkbox" id="idSaveCheck" class="saveid">아이디 저장</h4>
+				 	<div class="checks"> <input type="checkbox" id="idSaveCheck"> <label for="idSaveCheck">아이디 저장</label> </div>
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="ID" value="" name="employee_id"/><br>
 						<input type="password" class="form-control" placeholder="Password" value="" name="employee_password"/><br> 
