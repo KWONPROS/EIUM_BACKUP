@@ -21,14 +21,14 @@ function LoadPage(){
 	initSheet.HeaderMode = {Sort:1,ColMove:1,ColResize:1,HeaderCheck:1};
 	initSheet.Cols=[
 
-		{Header:"자격면허코드",Type:"Text",Width:100,SaveName:"license_code",Align:"Center"},
-		{Header:"자격면허명",Type:"Text",Width:100,SaveName:"license_name",Align:"Center"},
+		{Header:"자격면허코드",Type:"Text",Width:230,SaveName:"license_code",Align:"Center"},
+		{Header:"자격면허명",Type:"Text",Width:230,SaveName:"license_name",Align:"Center"},
 
 
 		];
 	IBS_InitSheet(mySheet2,initSheet);
 	mySheet2.SetEditableColorDiff(1);
-
+	mySheet2.SetSheetHeight(620);
 	mySheet2.SetColEditable(0,0);
 	mySheet2.SetColEditable(1,0);
 	mySheet2.SetColEditable(2,0);
