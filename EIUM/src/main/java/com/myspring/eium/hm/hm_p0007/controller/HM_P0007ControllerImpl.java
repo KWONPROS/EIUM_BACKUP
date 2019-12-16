@@ -2,6 +2,7 @@ package com.myspring.eium.hm.hm_p0007.controller;
 
 
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -14,10 +15,6 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -92,6 +89,7 @@ public class HM_P0007ControllerImpl implements HM_P0007Controller {
 		request.setCharacterEncoding("utf-8");
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+<<<<<<< HEAD
 		HttpSession session = request.getSession(); 
 		LoginVO loginvo = new LoginVO();
 
@@ -99,6 +97,26 @@ public class HM_P0007ControllerImpl implements HM_P0007Controller {
 		searchMap.put("access_range", request.getParameter("access_range"));
 		searchMap.put("Semployee_name", request.getParameter("Semployee_name"));
 		searchMap.put("Sdepartment_name", request.getParameter("Sdepartment_name"));
+=======
+		
+		HttpSession session = request.getSession(); 
+		LoginVO loginvo = new LoginVO();
+		loginvo = (LoginVO)session.getAttribute("login"); 
+		
+		Map<String, Object> accessMap = new HashMap<String, Object>();
+		ArrayList<String> accessRange = new ArrayList<String>();		
+		accessRange = (ArrayList<String>) session.getAttribute("access_range"); 
+		accessMap = (Map<String, Object>) session.getAttribute("accessnum");	
+		
+		int n =  (Integer) accessMap.get("M011");
+		System.out.println(accessRange.get(n));
+		System.out.println("사원코드"+loginvo.getEmployee_code());
+		System.out.println("부서코드"+loginvo.getDepartment_code());
+		
+		searchMap.put("access_range", accessRange.get(n));
+		searchMap.put("Semployee_code",loginvo.getEmployee_code());
+		searchMap.put("Sdepartment_code", loginvo.getDepartment_code());
+>>>>>>> refs/remotes/origin/master
 		
 		
 		List<HM_P0007VO> data = hM_P0007Service.searchList(searchMap);
