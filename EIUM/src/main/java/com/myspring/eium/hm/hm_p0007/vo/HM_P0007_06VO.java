@@ -7,7 +7,8 @@ import org.springframework.stereotype.Component;
 public class HM_P0007_06VO {
 	private String hr_assessment_code;
 	private String employee_code;
-	private String hr_assessment_name;
+	private String assessment_code;
+	private String assessment_name;
 	private String hr_assessment_test_start_date;
 	private String hr_assessment_test_end_date;
 	private String hr_assessment_date;
@@ -17,6 +18,24 @@ public class HM_P0007_06VO {
 	private String hr_assessment_grade;
 	private String user;
 
+
+
+
+
+
+
+	public String getAssessment_code() {
+		return assessment_code;
+	}
+
+
+
+
+
+
+	public void setAssessment_code(String assessment_code) {
+		this.assessment_code = assessment_code;
+	}
 
 
 
@@ -83,8 +102,14 @@ public class HM_P0007_06VO {
 
 
 
-	public String getHr_assessment_name() {
-		return hr_assessment_name;
+
+
+
+
+
+
+	public String getAssessment_name() {
+		return assessment_name;
 	}
 
 
@@ -92,8 +117,8 @@ public class HM_P0007_06VO {
 
 
 
-	public void setHr_assessment_name(String hr_assessment_name) {
-		this.hr_assessment_name = hr_assessment_name;
+	public void setAssessment_name(String assessment_name) {
+		this.assessment_name = assessment_name;
 	}
 
 

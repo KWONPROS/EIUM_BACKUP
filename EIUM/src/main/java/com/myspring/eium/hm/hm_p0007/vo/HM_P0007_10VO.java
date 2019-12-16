@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class HM_P0007_10VO {
+	private String employee_language_code;
 	private String language_name;
 	private String language_code;
 	private String employee_code;
@@ -15,6 +16,30 @@ public class HM_P0007_10VO {
 	private String user;
 
 	
+
+
+
+
+
+
+
+
+	public String getEmployee_language_code() {
+		return employee_language_code;
+	}
+
+
+
+
+
+
+
+
+
+	public void setEmployee_language_code(String employee_language_code) {
+		this.employee_language_code = employee_language_code;
+	}
+
 
 
 

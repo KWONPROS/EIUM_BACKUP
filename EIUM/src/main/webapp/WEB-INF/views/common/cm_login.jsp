@@ -11,8 +11,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script type="text/javascript">
 function fn_findID(){
     var url = "findIdNPwd.do?command=id";
@@ -27,6 +26,58 @@ function fn_findPWD(){
     window.open(url, name, option);
 }
 
+$(document).ready(function(){
+	 
+    // 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 없으면 공백으로 들어감.
+    var key = getCookie("key");
+    $('[name="employee_id"]').val(key); 
+     
+    if($('[name="employee_id"]').val() != ""){ // 그 전에 ID를 저장해서 처음 페이지 로딩 시, 입력 칸에 저장된 ID가 표시된 상태라면,
+        $("#idSaveCheck").attr("checked", true); // ID 저장하기를 체크 상태로 두기.
+    }
+     
+    $("#idSaveCheck").change(function(){ // 체크박스에 변화가 있다면,
+        if($("#idSaveCheck").is(":checked")){ // ID 저장하기 체크했을 때,
+            setCookie("key", $('[name="employee_id"]').val(), 7); // 7일 동안 쿠키 보관
+        }else{ // ID 저장하기 체크 해제 시,
+            deleteCookie("key");
+        }
+    });
+     
+    // ID 저장하기를 체크한 상태에서 ID를 입력하는 경우, 이럴 때도 쿠키 저장.
+    $('[name="employee_id"]').keyup(function(){ // ID 입력 칸에 ID를 입력할 때,
+        if($("#idSaveCheck").is(":checked")){ // ID 저장하기를 체크한 상태라면,
+            setCookie("key", $('[name="employee_id"]').val(), 7); // 7일 동안 쿠키 보관
+        }
+    });
+});
+ 
+function setCookie(cookieName, value, exdays){
+    var exdate = new Date();
+    exdate.setDate(exdate.getDate() + exdays);
+    var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
+    document.cookie = cookieName + "=" + cookieValue;
+}
+ 
+function deleteCookie(cookieName){
+    var expireDate = new Date();
+    expireDate.setDate(expireDate.getDate() - 1);
+    document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
+}
+ 
+function getCookie(cookieName) {
+    cookieName = cookieName + '=';
+    var cookieData = document.cookie;
+    var start = cookieData.indexOf(cookieName);
+    var cookieValue = '';
+    if(start != -1){
+        start += cookieName.length;
+        var end = cookieData.indexOf(';', start);
+        if(end == -1)end = cookieData.length;
+        cookieValue = cookieData.substring(start, end);
+    }
+    return unescape(cookieValue);
+}
 </script>
 
 
@@ -136,7 +187,67 @@ right: 15px;
 #languages .language:hover{
 	transform:scale(1.2);
 }
-
+.checks{
+    padding-left: 0px;
+    margin-left: 224px;
+    font-size: 14px;
+	color: #0062cc;
+    vertical-align: middle;
+    font-weight: 600;
+}
+.login-form h4 {
+	color: #0062cc;
+	margin-top: 0px;
+	margin-left: 8px;
+    margin-bottom: 0px;
+    font-size: 14px;
+}
+.checks {
+    position: relative;
+}
+.checks input[type="checkbox"] {
+    position: absolute; 
+    width: 1px;
+    height: 1px; 
+    padding: 0; 
+    margin: -1px; 
+    overflow: hidden; 
+    clip:rect(0,0,0,0); 
+    border: 0 
+} 
+.checks input[type="checkbox"] + label {
+    display: inline-block;
+    position: relative; 
+    cursor: pointer; 
+    -webkit-user-select: none; 
+    -moz-user-select: none; 
+    -ms-user-select: none; 
+}
+ .checks input[type="checkbox"] + label:before {
+    content: ' '; 
+    display: inline-block; 
+    width: 21px; 
+    height: 21px;  
+    line-height: 21px; 
+    margin: -2px 8px 0 0; 
+    text-align: center; 
+    vertical-align: middle; 
+    background: #fafafa; 
+    border: 1px solid #cacece; 
+    border-radius : 3px; 
+    box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+}
+.checks input[type="checkbox"] + label:active:before, .checks input[type="checkbox"]:checked + label:active:before {
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+.checks input[type="checkbox"]:checked + label:before {
+    content: '\2714';
+    color: #99a1a7; 
+    text-shadow: 1px 1px #fff;
+    background: #e9ecee; 
+    border-color: #adb8c0; 
+    box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+}
 
 
 </style>
@@ -174,6 +285,7 @@ $(function(){
 					</h3>
 						   
 				 	<h3><spring:message code="login"  text="로그인" /></h3>
+				 	<div class="checks"> <input type="checkbox" id="idSaveCheck"> <label for="idSaveCheck">아이디 저장</label> </div>
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="ID" value="" name="employee_id"/><br>
 						<input type="password" class="form-control" placeholder="Password" value="" name="employee_password"/><br> 

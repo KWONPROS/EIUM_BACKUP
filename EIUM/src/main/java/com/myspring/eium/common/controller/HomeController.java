@@ -51,8 +51,16 @@ public class HomeController {
 
 	@RequestMapping(value = "/login.do", method =  RequestMethod.GET)
 	public String Login( Locale locale,HttpServletRequest request, HttpServletResponse response) throws Exception {
-System.out.println("나는홈컨털러");
 		return "common/cm_login";
+	}
+	
+	@RequestMapping(value = "/logout.do", method =  RequestMethod.GET)
+	public void Logout( Locale locale,HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		
+		session.invalidate();
+		
+		response.sendRedirect("/EIUM/login.do");
 	}
 	
 	

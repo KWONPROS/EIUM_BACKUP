@@ -18,6 +18,7 @@ public class PM_P0003VO {
 	private String pay_grade_name;
 	private String salary;
 	private String job_class_name;
+	private String site_name;
 	private String weekday_normal_work_time;
 	private String weekday_extension_work_time;
 	private String weekday_night_work_time;
@@ -32,6 +33,12 @@ public class PM_P0003VO {
 	
 	
 
+	public String getSite_name() {
+		return site_name;
+	}
+	public void setSite_name(String site_name) {
+		this.site_name = site_name;
+	}
 	public String getAccessRange() {
 		return accessRange;
 	}

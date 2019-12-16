@@ -10,6 +10,7 @@ public class PM_P0001VO {
 	private String payment_receipt_code;
 	private String payment_receipt_item;
 	private String payment_receipt_price;
+	private String site_name;
 	private String payment_code;
 	private String payment_date;
 	private String payment_des_name;
@@ -30,6 +31,12 @@ public class PM_P0001VO {
 	
 	
 
+	public String getSite_name() {
+		return site_name;
+	}
+	public void setSite_name(String site_name) {
+		this.site_name = site_name;
+	}
 	public String getWeekday_normal_work_time() {
 		return weekday_normal_work_time;
 	}

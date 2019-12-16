@@ -88,16 +88,21 @@ public class PM_P0003ControllerImpl implements PM_P0003Controller {
 		HttpSession session = request.getSession(); 
 		LoginVO loginvo = new LoginVO();
 		loginvo = (LoginVO)session.getAttribute("login"); 
-		System.out.println("·Î±×ÀÎ¾ÆÀÌµð´Â"+loginvo.getEmployee_name());
-		System.out.println("ºÎ¼­¸íÀº"+loginvo.getDepartment_name());
+		System.out.println("ï¿½Î±ï¿½ï¿½Î¾ï¿½ï¿½Ìµï¿½ï¿½"+loginvo.getEmployee_name());
+		System.out.println("ï¿½Î¼ï¿½ï¿½ï¿½ï¿½ï¿½"+loginvo.getDepartment_name());
 		
 		Map<String, Object> accessMap = new HashMap<String, Object>();
 		ArrayList<String> accessRange = new ArrayList<String>();		
 		accessRange = (ArrayList<String>) session.getAttribute("access_range"); 
 		accessMap = (Map<String, Object>) session.getAttribute("accessnum");		
+		System.out.println("access_range:"+request.getParameter("access_range"));
+
+		for(int i =0; i< accessRange.size(); i++) {
+			System.out.println(accessRange.get(i));
+		}
 		int n =  (Integer) accessMap.get("M024");
 		System.out.println(accessRange.get(n));
-
+		
 		
 				
 
@@ -214,7 +219,7 @@ public class PM_P0003ControllerImpl implements PM_P0003Controller {
 
 		
 		
-		// ÀúÀå Data ÃßÃâÇÏ±â
+		// ï¿½ï¿½ï¿½ï¿½ Data ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 		Enumeration enu = request.getParameterNames();
 		while (enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
@@ -227,10 +232,10 @@ public class PM_P0003ControllerImpl implements PM_P0003Controller {
 		try {
 			p0003Service.saveData(dataMap, user, x, y);	
 			result.put("Code","0");
-			result.put("Message","ÀúÀåµÇ¾ú½À´Ï´Ù");
+			result.put("Message","ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½");
 		}catch(Exception e) {                                                               
 			result.put("Code","-1");
-			result.put("Message","ÀúÀå¿¡ ½ÇÆÐÇÏ¿´½À´Ï´Ù");
+			result.put("Message","ï¿½ï¿½ï¿½å¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½");
 			e.printStackTrace();
 		}
 		

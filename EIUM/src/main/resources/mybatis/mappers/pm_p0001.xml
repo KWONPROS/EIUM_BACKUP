@@ -93,21 +93,13 @@
 		delete payment_receipt
 		where payment_receipt_code = #{payment_receipt_code}
 	</delete>
-			<!-- select distinct ew.employee_code, e.employee_name, p.payment_code, pd.payment_des_name
-			from employee e, employee_work ew, payment p, selection_of_payment sp, department d, job_class j, payment_des pd
-			where p.payment_code = sp.payment_code
-			and sp.site_code = d.site_code
-			and d.department_code = ew.department_code
-			and j.job_class_code = ew.job_class_code
-			and ew.employee_code = e.employee_code
-			and p.payment_des_code = pd.payment_des_code
- 			and p.payment_code = #{Ppayment_code} -->	
+			
 	
 	<select id = "searchList" resultMap="P0001resultVO" parameterType="java.util.Map">
 	<choose>	
 			<when test= " searchSite  =='all' and searchTYPE == 'all'">	
 			<![CDATA[		
- 			select distinct e.employee_code, e.employee_name, p.payment_code, pd.payment_des_name, pt.salary, t.weekday_normal_work_time, t.weekday_extension_work_time, t.weekday_night_work_time, t.holiday_normal_work_time, t.holiday_extension_work_time, t.holiday_night_work_time
+ 			select distinct e.employee_code, e.employee_name, p.payment_code, pd.payment_des_name, pt.salary, t.weekday_normal_work_time, t.weekday_extension_work_time, t.weekday_night_work_time, t.holiday_normal_work_time, t.holiday_extension_work_time, t.holiday_night_work_time, s.site_name, d.department_name
 			from employee e, employee_work ew, payment p, payment_des pd, pay_grade_table pt, total_working_status t, selection_of_payment sp, department d, site s, pay_grade pg
 			where  p.payment_code = sp.payment_code
 			and p.payment_des_code = pd.payment_des_code
@@ -122,12 +114,13 @@
 			and TO_DATE(SUBSTR(pt.start_date,1,6), 'YYYY-MM')< sysdate
 			and sysdate < TO_DATE(SUBSTR(pt.end_date,1,6), 'YYYY-MM')
 			and p.payment_code = #{Ppayment_code}
+			and SUBSTR(TO_DATE(t.total_month, 'YYYY-MM'),1,5) = #{monthpicker}
 			]]> 
    		    </when>
    		    
    		    <when test= " searchSite  =='all' and searchTYPE != 'all'">
    		    <![CDATA[		
-			select distinct e.employee_code, e.employee_name, p.payment_code, pd.payment_des_name, pt.salary, t.weekday_normal_work_time, t.weekday_extension_work_time, t.weekday_night_work_time, t.holiday_normal_work_time, t.holiday_extension_work_time, t.holiday_night_work_time
+			select distinct e.employee_code, e.employee_name, p.payment_code, pd.payment_des_name, pt.salary, t.weekday_normal_work_time, t.weekday_extension_work_time, t.weekday_night_work_time, t.holiday_normal_work_time, t.holiday_extension_work_time, t.holiday_night_work_time, s.site_name, d.department_name
 			from employee e, employee_work ew, payment p, payment_des pd, pay_grade_table pt, total_working_status t, selection_of_payment sp, department d, site s, pay_grade pg
 			where  p.payment_code = sp.payment_code
 			and p.payment_des_code = pd.payment_des_code
@@ -142,13 +135,15 @@
 			and TO_DATE(SUBSTR(pt.start_date,1,6), 'YYYY-MM')< sysdate
 			and sysdate < TO_DATE(SUBSTR(pt.end_date,1,6), 'YYYY-MM')
 			and p.payment_code = #{Ppayment_code}
- 			and d.department_name =  #{searchTYPE} 
+ 			and d.department_name =  #{searchTYPE}
+ 			and SUBSTR(TO_DATE(t.total_month, 'YYYY-MM'),1,5) = #{monthpicker}
+ 			 
  			]]> 
 			</when>
 			
 			<when test= " searchSite  !='all' and searchTYPE == 'all'">	
 			<![CDATA[		
- 			select distinct e.employee_code, e.employee_name, p.payment_code, pd.payment_des_name, pt.salary, t.weekday_normal_work_time, t.weekday_extension_work_time, t.weekday_night_work_time, t.holiday_normal_work_time, t.holiday_extension_work_time, t.holiday_night_work_time
+ 			select distinct e.employee_code, e.employee_name, p.payment_code, pd.payment_des_name, pt.salary, t.weekday_normal_work_time, t.weekday_extension_work_time, t.weekday_night_work_time, t.holiday_normal_work_time, t.holiday_extension_work_time, t.holiday_night_work_time, s.site_name, d.department_name
 			from employee e, employee_work ew, payment p, payment_des pd, pay_grade_table pt, total_working_status t, selection_of_payment sp, department d, site s, pay_grade pg
 			where  p.payment_code = sp.payment_code
 			and p.payment_des_code = pd.payment_des_code
@@ -164,12 +159,13 @@
 			and sysdate < TO_DATE(SUBSTR(pt.end_date,1,6), 'YYYY-MM')
 			and p.payment_code = #{Ppayment_code}
 			and s.site_name = #{searchSite}
+			and SUBSTR(TO_DATE(t.total_month, 'YYYY-MM'),1,5) = #{monthpicker}
 			]]> 
    		    </when>
    		    
    		    <when test= " searchSite  !='all' and searchTYPE != 'all'">	
 			<![CDATA[		
- 			select distinct e.employee_code, e.employee_name, p.payment_code, pd.payment_des_name, pt.salary, t.weekday_normal_work_time, t.weekday_extension_work_time, t.weekday_night_work_time, t.holiday_normal_work_time, t.holiday_extension_work_time, t.holiday_night_work_time
+ 			select distinct e.employee_code, e.employee_name, p.payment_code, pd.payment_des_name, pt.salary, t.weekday_normal_work_time, t.weekday_extension_work_time, t.weekday_night_work_time, t.holiday_normal_work_time, t.holiday_extension_work_time, t.holiday_night_work_time, s.site_name, d.department_name
 			from employee e, employee_work ew, payment p, payment_des pd, pay_grade_table pt, total_working_status t, selection_of_payment sp, department d, site s, pay_grade pg
 			where  p.payment_code = sp.payment_code
 			and p.payment_des_code = pd.payment_des_code
@@ -186,6 +182,7 @@
 			and p.payment_code = #{Ppayment_code}
 			and s.site_name = #{searchSite}
 			and d.department_name =  #{searchTYPE} 
+			and SUBSTR(TO_DATE(t.total_month, 'YYYY-MM'),1,5) = #{monthpicker}
 			
 			]]> 
    		    </when>		

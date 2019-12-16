@@ -140,7 +140,7 @@ text-decoration: none;
 
 	<div class="homelogin">
 		<a href="javascript:tabMenu.goToFirstTab()"><span id="headerinfo" class="icon"><i class="fa fa-home"> Home</i></span></a> 
-		<a href="${contextPath}/login.do"><span id="headerinfo"class="icon"><i class="fa fa-share-square-o"> Logout</i></span></a>
+		<a href="${contextPath}/logout.do"><span id="headerinfo"class="icon"><i class="fa fa-share-square-o"> Logout</i></span></a>
 	</div>
 
 	<div id="cc">

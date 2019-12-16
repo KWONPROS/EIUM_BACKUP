@@ -40,16 +40,16 @@
 		initSheet1.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0};
 		initSheet1.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 		initSheet1.Cols = [		
-	        {Header:"NO",Type:"Seq",SaveName:"NUMBER",MinWidth:50, Align:"Center" },	
-	        {Header:"사원코드",Type:"Text",SaveName:"employee_code", MinWidth:50,  Align:"Center", KeyField:1, Edit: 0},	
-	        {Header:"사원명",Type:"Text",SaveName:"employee_name", MinWidth:120, Align:"Center", Edit: 0},
-			{Header:"지급고유번호",Type:"Text",SaveName:"payment_code", MinWidth:120, Align:"Center", Hidden:"1"},
-	        {Header:"부서",Type:"Text",SaveName:"department_name", MinWidth:120, Align:"Center", Edit: 0}
+	        {Header:"NO",Type:"Seq",SaveName:"NUMBER",Width:60, Align:"Center" },	
+	        {Header:"사원코드",Type:"Text",SaveName:"employee_code", Width:200,  Align:"Center", KeyField:1, Edit: 0},	
+	        {Header:"사원명",Type:"Text",SaveName:"employee_name", Width:200, Align:"Center", Edit: 0},
+			{Header:"지급고유번호",Type:"Text",SaveName:"payment_code", Width:200, Align:"Center", Hidden:"1"},
+			{Header:"사업장",Type:"Text",SaveName:"site_name", Width:200, Align:"Center", Edit: 0},
+			{Header:"부서",Type:"Text",SaveName:"department_name", Width:200, Align:"Center", Edit: 0}
 		];   
 		IBS_InitSheet( mySheet1 , initSheet1);
   
 		mySheet1.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
-		mySheet1.SetSheetHeight(250);
 		
 		//아이비시트2------------------------------------------------------
 		mySheet2.RemoveAll();
@@ -57,15 +57,14 @@
 		initSheet2.Cfg = {SearchMode:smLazyLoad, ToolTip:1, sizeMode:0};
 		initSheet2.HeaderMode = {Sort:1, ColMove:0, ColResize:0, HeaderCheck:1};
 		initSheet2.Cols = [
-	        {Header:"지급항목",Type:"Combo", MinWidth:70, SaveName:"payment_receipt_item", ComboText:"|기본급|상여급", ComboCode:"|기본급|상여급", Edit: 0},
-			{Header:"총액",Type:"AutoSum", Format:"Integer", SaveName:"payment_receipt_price", MinWidth:70, Align:"Center", Edit: 0}
+	        {Header:"지급항목",Type:"Combo", Width:235, SaveName:"payment_receipt_item", ComboText:"|기본급|상여급", ComboCode:"|기본급|상여급", Edit: 0},
+			{Header:"총액",Type:"AutoSum", Format:"Integer", SaveName:"payment_receipt_price", Width:235, Align:"Center", Edit: 0}
 			
 			];
 		
 		IBS_InitSheet( mySheet2 , initSheet2);
 		  
 		mySheet2.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
-		mySheet2.SetSheetHeight(250);
 
 
 		
@@ -74,16 +73,16 @@
 		initSheet3.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0};
 		initSheet3.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 		initSheet3.Cols = [		
-	        {Header:"NO",Type:"Seq",SaveName:"NUMBER",MinWidth:50, Align:"Center" },	
-	        {Header:"코드",Type:"Text",SaveName:"department_code", MinWidth:50,  Align:"Center", KeyField:1, Edit: 0},	
-	        {Header:"부서명",Type:"Text",SaveName:"department_name", MinWidth:120, Align:"Center", Edit: 0},
-			{Header:"지급고유번호",Type:"Text",SaveName:"payment_code", MinWidth:120, Align:"Center", Hidden:"1"},
-			{Header:"인원수",Type:"Text",SaveName:"employee_code", MinWidth:120, Align:"Center", Edit: 0}
+	        {Header:"NO",Type:"Seq",SaveName:"NUMBER",Width:60, Align:"Center" },	
+	        {Header:"부서코드",Type:"Text",SaveName:"department_code", Width:200,  Align:"Center", KeyField:1, Edit: 0},	
+	        {Header:"사업장명",Type:"Text",SaveName:"site_name", Width:200, Align:"Center", Edit: 0},
+			{Header:"부서명",Type:"Text",SaveName:"department_name", Width:200, Align:"Center", Edit: 0},
+			{Header:"지급고유번호",Type:"Text",SaveName:"payment_code", Width:120, Align:"Center", Hidden:"1"},
+			{Header:"인원수",Type:"Text",SaveName:"employee_code", Width:200, Align:"Center", Edit: 0}
 		];   
 		IBS_InitSheet( mySheet3 , initSheet3);
   
 		mySheet3.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
-		mySheet3.SetSheetHeight(250);
 		mySheet3.SetVisible(0); 
 		
 		mySheet4.RemoveAll();
@@ -91,16 +90,15 @@
 		initSheet4.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0};
 		initSheet4.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 		initSheet4.Cols = [		
-	        {Header:"NO",Type:"Seq",SaveName:"NUMBER",MinWidth:50, Align:"Center" },	
-	        {Header:"코드",Type:"Text",SaveName:"site_code", MinWidth:50,  Align:"Center", KeyField:1, Edit: 0},	
-	        {Header:"사업장명",Type:"Text",SaveName:"site_name", MinWidth:120, Align:"Center", Edit: 0},
-			{Header:"지급고유번호",Type:"Text",SaveName:"payment_code", MinWidth:120, Align:"Center", Hidden:"1"},
-			{Header:"인원수",Type:"Text",SaveName:"employee_code", MinWidth:120, Align:"Center", Edit: 0}
+	        {Header:"NO",Type:"Seq",SaveName:"NUMBER",Width:60, Align:"Center" },	
+	        {Header:"사업장코드",Type:"Text",SaveName:"site_code", Width:266,  Align:"Center", KeyField:1, Edit: 0},	
+	        {Header:"사업장명",Type:"Text",SaveName:"site_name", Width:266, Align:"Center", Edit: 0},
+			{Header:"지급고유번호",Type:"Text",SaveName:"payment_code", Width:266, Align:"Center", Hidden:"1"},
+			{Header:"인원수",Type:"Text",SaveName:"employee_code", Width:266, Align:"Center", Edit: 0}
 		];   
 		IBS_InitSheet( mySheet4 , initSheet4);
   
 		mySheet4.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
-		mySheet4.SetSheetHeight(250);
 		mySheet4.SetVisible(0); 
 		
 		
@@ -109,16 +107,15 @@
 		initSheet5.Cfg = {SearchMode:smLazyLoad,ToolTip:1,sizeMode:0};
 		initSheet5.HeaderMode = {Sort:1,ColMove:0,ColResize:0,HeaderCheck:1};
 		initSheet5.Cols = [		
-	        {Header:"NO",Type:"Seq",SaveName:"NUMBER",MinWidth:50, Align:"Center" },	
-	        {Header:"코드",Type:"Text",SaveName:"job_class_code", MinWidth:50,  Align:"Center", KeyField:1, Edit: 0},	
-	        {Header:"직종명",Type:"Text",SaveName:"job_class_name", MinWidth:120, Align:"Center", Edit: 0},
-			{Header:"지급고유번호",Type:"Text",SaveName:"payment_code", MinWidth:120, Align:"Center", Hidden:"1"},
-			{Header:"인원수",Type:"Text",SaveName:"employee_code", MinWidth:120, Align:"Center", Edit: 0}
+	        {Header:"NO",Type:"Seq",SaveName:"NUMBER",Width:60, Align:"Center" },	
+	        {Header:"직종코드",Type:"Text",SaveName:"job_class_code", Width:266,  Align:"Center", KeyField:1, Edit: 0},	
+	        {Header:"직종명",Type:"Text",SaveName:"job_class_name", Width:266, Align:"Center", Edit: 0},
+			{Header:"지급고유번호",Type:"Text",SaveName:"payment_code", Width:266, Align:"Center", Hidden:"1"},
+			{Header:"인원수",Type:"Text",SaveName:"employee_code", Width:266, Align:"Center", Edit: 0}
 		];   
 		IBS_InitSheet( mySheet5 , initSheet5);
   
 		mySheet5.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
-		mySheet5.SetSheetHeight(250);
  		mySheet5.SetVisible(0); 
 		
 		/* MonthPicker 옵션 */
@@ -148,7 +145,8 @@
 		case "search": //조회
 			var param = FormQueryStringEnc(document.frm);
 			var total = $('#total').val();
-			
+			mySheet2.RemoveAll();
+
 			if(total =='emp' ){
 				mySheet1.DoSearch("${contextPath}/pm/p0002/searchList.do", param);
 			}
@@ -239,7 +237,7 @@ function mySheet1_OnClick(Row, Col) {
 	
 function mySheet3_OnClick(Row, Col) { 
 	x = "x=" + mySheet3.GetCellValue(Row, 1);
-	var param = "x="+mySheet3.GetCellValue(Row, 1)+"&y="+mySheet3.GetCellValue(Row, 3) +"&p="+FormQueryStringEnc(document.frm);
+	var param = "x="+mySheet3.GetCellValue(Row, 1)+"&y="+mySheet3.GetCellValue(Row, 4) +"&p="+FormQueryStringEnc(document.frm);
 	mySheet2.DoSearch("${contextPath}/pm/p0002/searchReceipt.do", param);
 
 }
@@ -449,19 +447,30 @@ function selectDivision() {
 	background-color: #2C3E50;
 }
 
+.searchBarTitle {
+	background: #5E5E5E;
+	padding: 4px;
+	color: white;
+	border-radius: 5px;
+	margin: 0 5px 0 80px;
+	vertical-align: middle;
+}
+
 .left{
 	position: relative;
 	top: 110px;
-	left: 60px;
-	width: 1053px;
+	left: 30px;
+	width: 1400px;
 }
 
 .right{
 	position: absolute;
  	 top : 240px;
- 	left: 450px;
+	left: 620px;
 	width: 750px;
-	
+	padding: 0 0 0 30px;
+    border-left: 2px solid #C3C3C3;
+    margin-left: 15px;
 }
 
 .bottom{
@@ -566,19 +575,19 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 	</div>
 	<div class="left">
 	     <div id="searchBar">
-            귀속연월 : <input id="monthpicker" type="text">
+            <span class="searchBarTitle">귀속연월</span> <input id="monthpicker" type="text">
 			<img id="btn_monthpicker"  src="${contextPath}/resources/image/icons/icon_calendar.png">
 		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-		  지급일: <a href="javascript:showPopup();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a><input type="text" id="Ppayment_date"><br><br>
-		 사업장구분: <select id="searchSite" onchange="selectType()">
+		  <span class="searchBarTitle">지급일</span> <a href="javascript:showPopup();"><img src="${contextPath}/resources/image/icons/icon_plus.png"></a><input type="text" id="Ppayment_date"><br><br>
+		 <span class="searchBarTitle">사업장구분</span> <select id="searchSite" onchange="selectType()">
 			<option value="all" selected>전체</option>
 			</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		  
-		  부서: <select id="searchTYPE">
+		 <span class="searchBarTitle"> 부서</span> <select id="searchTYPE">
 		  	<option value="all" selected>전체</option>
 		</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		
-		  집계: <select id="total"  onchange="selectDivision()">
+		 <span class="searchBarTitle"> 집계</span> <select id="total"  onchange="selectDivision()">
 		  	<option value="emp" selected>1.사원별</option>
 		  	<option value="dep">2.부서별</option>
 		  	<option value="sit">3.사업장별</option>
@@ -591,7 +600,7 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 		
 		
 		<script>		
-		createIBSheet("mySheet1", "100%", "100%");
+		createIBSheet("mySheet1", "900px", "600px");
 
 		selectSite();
 		</script>
@@ -599,27 +608,29 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 		
 		<div class = sheet2>
 		<script>
-		createIBSheet("mySheet3", "100%", "100%");
+		createIBSheet("mySheet3", "900px", "600px");
 		</script>
 		</div>
 		
 		<div class = sheet3>
 		<script>
-		createIBSheet("mySheet4", "100%", "100%");
+		createIBSheet("mySheet4", "900px", "600px");
 		</script>
 		</div>
 
 
 		<div class = sheet4>
 		<script>
-		createIBSheet("mySheet5", "100%", "100%");
+		createIBSheet("mySheet5", "900px", "600px");
 		</script>
 		</div>
 		
 	</div>
 	
+	<div style="position: absolute; top: 0px; left: 300px;">
 	<div class="right">
-		<script>createIBSheet("mySheet2", "100%", "100%");</script>
+		<script>createIBSheet("mySheet2", "700px", "600px");</script>
+	</div>
 	</div>	
 </form>
 
