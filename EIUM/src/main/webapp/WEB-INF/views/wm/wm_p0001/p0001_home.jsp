@@ -80,14 +80,14 @@
 			{Header:"비고",Type:"Combo",SaveName:"working_STATUS_DESC",MinWidth:80, Align:"Center", "ComboText":"출근|지각|조퇴|외출", "ComboCode":"00|01|02|03"},
 			{Header:"그 달의 해당YN:",Type:"Text",SaveName:"working_STATUS_YN", MinWidth:50,Align:"Center",Hidden:1},
 			//평일(table)
-			{Header:"평일정상근무시간",Type:"Text",SaveName:"weekday_NORMAL_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:"", Hidden:1},	
-			{Header:"평일연장근무시간",Type:"Text",SaveName:"weekday_EXTENSION_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:"", Hidden:1},			
-			{Header:"평일야간근무시간",Type:"Text",SaveName:"weekday_NIGHT_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:"", Hidden:1},
+			{Header:"평일정상근무시간",Type:"Text",SaveName:"weekday_NORMAL_WORK_TIME", Width:80, Align:"Center",ZeroToReplaceChar:""},	
+			{Header:"평일연장근무시간",Type:"Text",SaveName:"weekday_EXTENSION_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:""},			
+			{Header:"평일야간근무시간",Type:"Text",SaveName:"weekday_NIGHT_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:""},
 			
 			//휴일(table)
-			{Header:"휴일정상근무시간",Type:"Text",SaveName:"holiday_NORMAL_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:"", Hidden:1},	
-			{Header:"휴일연장근무시간",Type:"Text",SaveName:"holiday_EXTENSION_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:"", Hidden:1},			
-			{Header:"휴일야간근무시간",Type:"Text",SaveName:"holiday_NIGHT_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:"", Hidden:1}
+			{Header:"휴일정상근무시간",Type:"Text",SaveName:"holiday_NORMAL_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:""},	
+			{Header:"휴일연장근무시간",Type:"Text",SaveName:"holiday_EXTENSION_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:""},			
+			{Header:"휴일야간근무시간",Type:"Text",SaveName:"holiday_NIGHT_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:""}
 		];
 		
 		IBS_InitSheet( mySheet2 , initSheet2);
@@ -270,6 +270,10 @@
 			
 			//총 정상 근무일 : T_NO_COUNT
 			//총 연장 근무일 : T_EX_COUNT
+			/* alert(mySheet2.GetCellValue(1, 13));
+			alert(Math.floor((mySheet2.GetCellValue(1, 13)/100))); */
+			/* alert(mySheet2.GetCellValue(1, 13)%100); */
+			
 			var T_week_NO_TIME = mySheet2.ComputeSum("|13|"); //총 평일 정상 근무시간
 			var T_week_EX_TIME = mySheet2.ComputeSum("|14|"); //총 평일 연장 근무시간
 			var T_week_NI_TIME = mySheet2.ComputeSum("|15|"); //총 평일 야간 근무시간
@@ -1262,7 +1266,7 @@
 		
 		if(Row!=0){
 			$('input[name=myRow]').val(Row);
-			var abcde = $('input[name=weekday_NORMAL_WORK_TIME]').val(textWithtimeFormat(mySheet2.GetCellValue(Row, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"))));
+			var abcde = $('input[name=weekday_NORMAL_WORK_TIME]').val(mySheet2.GetCellValue(Row, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME")));
 			$('input[name=weekday_EXTENSION_WORK_TIME]').val(textWithtimeFormat(mySheet2.GetCellValue(Row, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"))));
 			$('input[name=weekday_NIGHT_WORK_TIME]').val(textWithtimeFormat(mySheet2.GetCellValue(Row, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"))));
 			
@@ -2036,7 +2040,17 @@
 		
 		
 		///////////////////////////////////////////////////////////////////평일 휴일 정상근무 휴일정상근무 프로세스
+		/* if((mySheet2.GetCellValue(Row, 9)!=null && mySheet2.GetCellValue(Row, 9)!= "" &&  평일정상)){
+		mySheet2.SetCellValue(Row, 13, Math.floor((mySheet2.GetCellValue(Row, 9)/100))*60 + mySheet2.GetCellValue(Row, 9)%100);
+	}
 		
+		if((mySheet2.GetCellValue(Row, 9)!=null && mySheet2.GetCellValue(Row, 9)!= "" &&  평일연장)){
+			mySheet2.SetCellValue(Row, 14, Math.floor((mySheet2.GetCellValue(Row, 9)/100))*60 + mySheet2.GetCellValue(Row, 9)%100);
+		}
+		
+		if((mySheet2.GetCellValue(Row, 9)!=null && mySheet2.GetCellValue(Row, 9)!= "" &&  평일야간)){
+			mySheet2.SetCellValue(Row, 14, Math.floor((mySheet2.GetCellValue(Row, 9)/100))*60 + mySheet2.GetCellValue(Row, 9)%100);
+		} */
 	}
 	// 저장완료 후 처리할 작업
 	// code: 0(저장성공), -1(저장실패)
@@ -2442,6 +2456,7 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 	</div>
 	
 	<form id=WORK_TIME>
+	
 	<div class="right_end">
 	
 		<table>

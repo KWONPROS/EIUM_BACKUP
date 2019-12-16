@@ -92,6 +92,8 @@ public class HM_P0007ControllerImpl implements HM_P0007Controller {
 		request.setCharacterEncoding("utf-8");
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
+		HttpSession session = request.getSession(); 
+		LoginVO loginvo = new LoginVO();
 
 
 		searchMap.put("access_range", request.getParameter("access_range"));
