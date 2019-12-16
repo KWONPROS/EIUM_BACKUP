@@ -1,5 +1,6 @@
 package com.myspring.eium.hm.hm_p0021.controller;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -67,6 +68,23 @@ public class HM_P0021ControllerImpl implements HM_P0021Controller{
 		request.setCharacterEncoding("utf-8");
 		Map<String, Object> searchMap = new HashMap<String, Object>(); // 검색조건
 		Map<String, Object> resultMap = new HashMap<String, Object>(); // 조회결과
+		HttpSession session = request.getSession(); 
+		LoginVO loginvo = new LoginVO();
+		loginvo = (LoginVO)session.getAttribute("login"); 
+		
+		Map<String, Object> accessMap = new HashMap<String, Object>();
+		ArrayList<String> accessRange = new ArrayList<String>();		
+		accessRange = (ArrayList<String>) session.getAttribute("access_range"); 
+		accessMap = (Map<String, Object>) session.getAttribute("accessnum");	
+		
+		int n =  (Integer) accessMap.get("M013");
+		System.out.println(accessRange.get(n));
+		System.out.println("사원코드"+loginvo.getEmployee_code());
+		System.out.println("부서코드"+loginvo.getDepartment_code());
+		
+		searchMap.put("access_range", accessRange.get(n));
+		searchMap.put("Semployee_code",loginvo.getEmployee_code());
+		searchMap.put("Sdepartment_code", loginvo.getDepartment_code());
 		
 		searchMap.put("eduCode", request.getParameter("eduCode"));
 		System.out.println("컨트롤러######"+request.getParameter("eduCode"));

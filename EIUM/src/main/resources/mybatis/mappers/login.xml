@@ -30,7 +30,7 @@
 
 	<select id="searchList" resultType="loginVO"  parameterType="java.util.Map" >
 
-      	select ac.employee_id, e.employee_name, d.department_name, s.site_name, c.company_name, u.authority_code, m.menu_code, m.access_range
+      	select ac.employee_id, e.employee_code, e.employee_name, d.department_code, d.department_name, s.site_name, c.company_name, u.authority_code, m.menu_code, m.access_range
          from account ac, employee e, employee_work ew, DEPARTMENT d, SITE s, COMPANY c, user_auth u, menu_by_authority m
 		where ac.employee_code = e.employee_code
 		and ew.employee_code = e.employee_code

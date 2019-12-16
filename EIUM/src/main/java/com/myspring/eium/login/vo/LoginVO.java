@@ -7,6 +7,7 @@ public class LoginVO {
 	 private String employee_id;
 	 private String employee_name;
 	 private String employee_password;
+	 private String department_code;
 	 private String department_name;
 	 private String company_name; 
 	 private String employee_code;	 
@@ -19,6 +20,14 @@ public class LoginVO {
 	 
 	 
 	 
+	public String getDepartment_code() {
+		return department_code;
+	}
+
+	public void setDepartment_code(String department_code) {
+		this.department_code = department_code;
+	}
+
 	public String getDepartment_name() {
 		return department_name;
 	}
