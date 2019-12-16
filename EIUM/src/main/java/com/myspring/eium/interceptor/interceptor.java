@@ -21,13 +21,19 @@ public class interceptor extends HandlerInterceptorAdapter{
 
 	        Object obj = session.getAttribute("login");
 			String requestUrl=request.getRequestURL().toString();
-
+			System.out.println("$$$$$$$$$$$$$$$"+requestUrl);
+			
 			if(requestUrl.contains("/login.do")){
 				return true;
 				}
 			if(requestUrl.contains("/LoginCheck.do")) {
 				return true;
 			}
+			if(requestUrl.contains("/findIdNPwd.do")) {
+				System.out.println("2$$$$$$$$$$$$$$$"+requestUrl);
+				return true;
+			}
+
 	
 	        if ( obj == null && requestUrl.contains("/main.do")){
 	        	response.sendRedirect("/EIUM/login.do");
