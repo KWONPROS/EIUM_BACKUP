@@ -88,20 +88,20 @@ public class PM_P0003ControllerImpl implements PM_P0003Controller {
 		HttpSession session = request.getSession(); 
 		LoginVO loginvo = new LoginVO();
 		loginvo = (LoginVO)session.getAttribute("login"); 
-		System.out.println("�α��ξ��̵��"+loginvo.getEmployee_name());
-		System.out.println("�μ�����"+loginvo.getDepartment_name());
 		
 		Map<String, Object> accessMap = new HashMap<String, Object>();
 		ArrayList<String> accessRange = new ArrayList<String>();		
 		accessRange = (ArrayList<String>) session.getAttribute("access_range"); 
-		accessMap = (Map<String, Object>) session.getAttribute("accessnum");		
-		System.out.println("access_range:"+request.getParameter("access_range"));
-
-		for(int i =0; i< accessRange.size(); i++) {
-			System.out.println(accessRange.get(i));
-		}
+		accessMap = (Map<String, Object>) session.getAttribute("accessnum");	
+		
 		int n =  (Integer) accessMap.get("M024");
 		System.out.println(accessRange.get(n));
+		System.out.println("사원코드"+loginvo.getEmployee_code());
+		System.out.println("부서코드"+loginvo.getDepartment_code());
+		
+		searchMap.put("access_range", accessRange.get(n));
+		searchMap.put("Semployee_code",loginvo.getEmployee_code());
+		searchMap.put("Sdepartment_code", loginvo.getDepartment_code());
 		
 		
 				
@@ -110,17 +110,13 @@ public class PM_P0003ControllerImpl implements PM_P0003Controller {
 		searchMap.put("searchSite", request.getParameter("searchSite"));
 		searchMap.put("searchTYPE", request.getParameter("searchTYPE"));
 		searchMap.put("searchDetail", request.getParameter("searchDetail"));
-		searchMap.put("access_range", request.getParameter("access_range"));
-		searchMap.put("Semployee_name", request.getParameter("Semployee_name"));
-		searchMap.put("Sdepartment_name", request.getParameter("Sdepartment_name"));
+
 
 		System.out.println("Ppayment_code:"+request.getParameter("Ppayment_code"));
 		System.out.println("searchSite:"+request.getParameter("searchSite"));
 		System.out.println("searchTYPE:"+request.getParameter("searchTYPE"));
 		System.out.println("searchDetail:"+request.getParameter("searchDetail"));
-		System.out.println("access_range:"+request.getParameter("access_range"));
-		System.out.println("Semployee_name:"+request.getParameter("Semployee_name"));
-		System.out.println("Sdepartment_name:"+request.getParameter("Sdepartment_name"));
+
 		
 		List<PM_P0003VO> data = p0003Service.searchList(searchMap);
 		

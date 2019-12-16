@@ -21,7 +21,6 @@ public class interceptor extends HandlerInterceptorAdapter{
 
 	        Object obj = session.getAttribute("login");
 			String requestUrl=request.getRequestURL().toString();
-			System.out.println("$$$$$$$$$$$$$$$"+requestUrl);
 			
 			if(requestUrl.contains("/login.do")){
 				return true;
@@ -30,7 +29,6 @@ public class interceptor extends HandlerInterceptorAdapter{
 				return true;
 			}
 			if(requestUrl.contains("/findIdNPwd.do")) {
-				System.out.println("2$$$$$$$$$$$$$$$"+requestUrl);
 				return true;
 			}
 
@@ -41,7 +39,17 @@ public class interceptor extends HandlerInterceptorAdapter{
 	        }
 	        if(obj == null) {
 	        	PrintWriter out = response.getWriter();
-	        	out.println("<script>window.parent.history.back();</script>");
+
+	        	out.println("<script>	if(window.opener){\r\n" + 
+	        			"		if(window.opener.closed){\r\n" + 
+	        			"			top.location.href=\"/EIUM/login.do\";\r\n" + 
+	        			"		}else{\r\n" + 
+	        			"			window.opener.top.location.href=\"/EIUM/login.do\";\r\n" + 
+	        			"			self.close();\r\n" + 
+	        			"		}\r\n" + 
+	        			"	}else{\r\n" + 
+	        			"		top.location.href=\"/EIUM/login.do\";\r\n" + 
+	        			"	}</script>");
 	        	
 	        	return false;
 	        }

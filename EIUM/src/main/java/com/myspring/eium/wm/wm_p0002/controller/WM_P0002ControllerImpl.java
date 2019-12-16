@@ -1,5 +1,6 @@
 package com.myspring.eium.wm.wm_p0002.controller;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -47,7 +48,7 @@ public class WM_P0002ControllerImpl implements WM_P0002Controller{
 	public ModelAndView employeeSearch_init(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		ModelAndView mav = new ModelAndView("/wm/wm_p0002/p0002_employeeSearch_p01");
-	
+
 		return mav;
 	} 
 	
@@ -59,6 +60,21 @@ public class WM_P0002ControllerImpl implements WM_P0002Controller{
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
+		
+		HttpSession session = request.getSession(); 
+		LoginVO loginvo = new LoginVO();
+		loginvo = (LoginVO)session.getAttribute("login"); 
+		
+		Map<String, Object> accessMap = new HashMap<String, Object>();
+		ArrayList<String> accessRange = new ArrayList<String>();		
+		accessRange = (ArrayList<String>) session.getAttribute("access_range"); 
+		accessMap = (Map<String, Object>) session.getAttribute("accessnum");	
+		
+		int n =  (Integer) accessMap.get("M029");
+		
+		searchMap.put("access_range", accessRange.get(n));
+		searchMap.put("Semployee_code",loginvo.getEmployee_code());
+		searchMap.put("Sdepartment_code", loginvo.getDepartment_code());
 		searchMap.put("date", request.getParameter("date"));
 		searchMap.put("vacaTYPE", request.getParameter("vacaTYPE"));
 		searchMap.put("SiteList", request.getParameter("SiteList"));

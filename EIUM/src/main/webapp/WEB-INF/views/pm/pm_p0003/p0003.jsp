@@ -369,7 +369,6 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 </head>
 <body onload="LoadPage()" >
 <form name="frm">
-<c:set var="num" scope="request" value="${sessionScope.accessnum['M024']}"/>
 
 	<div class="leftbuttons">
 		<a href="javascript:doAction('down')" class="IBbutton">엑셀</a>
@@ -413,9 +412,7 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 		<script>createIBSheet("mySheet2", "700px", "600px");</script>
 	</div>
 	</div>	
-	<input type="hidden" id="Semployee_name" value="${sessionScope.login.employee_name}" >
-	<input type="hidden" id="Sdepartment_name" value="${sessionScope.login.department_name}" >
-    <input type="hidden" id="access_range" value="${sessionScope.access_range[num]}" >
+
 </form>
       
 

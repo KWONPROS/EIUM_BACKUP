@@ -87,53 +87,45 @@ AND EW.work_status_code = ws.work_status_code(+)
 AND AP.APPOINT_YN = '마감완료'
    
 			]]>
-				<choose>
-	<when test="data != '' and date2 !='' and appoint_index !='' and employee !='' and department !='' ">
+			
+	<choose>
+	 	<when test="data != '' and date2 !='' ">
 	AND to_date(hah.start_date,'YYYY-MM-DD') BETWEEN  #{date} AND #{date2}
-	AND AI.hr_appoint_INDEX_NAME=#{appoint_index}
-	AND e.employee_name=#{employee}
-	AND d.department_NAME=#{department}
 	</when>
-	<when test="data != '' and date2 !='' and appoint_index !='' and department !='' ">
-	AND to_date(hah.start_date,'YYYY-MM-DD') BETWEEN  #{date} AND #{date2}
-	AND AI.hr_appoint_INDEX_NAME=#{appoint_index}
-	AND d.department_NAME=#{department}	
-	</when>
-	<when test="data != '' and date2 !='' and department !='' ">
-	AND to_date(hah.start_date,'YYYY-MM-DD') BETWEEN  #{date} AND #{date2}
-	AND d.department_NAME=#{department}	
-	</when>
-	<when test="appoint_index !='' and employee !='' and department !='' "> 
-	AND AI.hr_appoint_INDEX_NAME=#{appoint_index}
-	AND e.employee_name = #{employee}
-	AND d.department_NAME = #{department}
-	</when>
-	<when test="appoint_index !='' and employee !='' "> 
-	AND AI.hr_appoint_INDEX_NAME=#{appoint_index}
-	AND e.employee_name = #{employee}
-	</when>
-	<when test="data != '' and date2 !='' and appoint_index!='' ">
-	AND to_date(hah.start_date,'YYYY-MM-DD') BETWEEN  #{date} AND #{date2}
+	</choose>
+	
+	<choose>
+	  <when test="appoint_index !='' and appoint_index != null ">
 	AND AI.hr_appoint_INDEX_NAME=#{appoint_index}
 	</when>
-		<when test="data != '' and date2 !='' and employee != '' ">
-	AND to_date(hah.start_date,'YYYY-MM-DD') BETWEEN  #{date} AND #{date2}
-	AND e.employee_NAME=#{employee}
-	</when>
-	<when test="data != '' and date2 !='' ">
-	AND to_date(hah.start_date,'YYYY-MM-DD') BETWEEN  #{date} AND #{date2}
-	</when>
-	<when test="employee !='' and employee != null ">
+	</choose>
+	
+	<choose>
+	  <when test="employee !='' and employee != null ">
 	AND e.employee_name=#{employee}	
 	</when>
-	<when test="department !='' and department != null ">
+	</choose>		
+	
+	<choose>
+	  <when test="department !='' and department != null ">
 	AND d.department_NAME=#{department}	
 	</when>
-	<when test="appoint_index !='' and appoint_index != null ">
-	AND AI.hr_appoint_INDEX_NAME=#{appoint_index}
-	</when>
+	</choose>		
 	
+	<choose>
+		  <when test="access_range == '부서' ">
+      and d.department_code = #{Sdepartment_code}
+      	  </when>
 	</choose>
+	
+	<choose>
+	  <when test="access_range == '사원' ">
+      and e.employee_code = #{Semployee_code}
+	  </when>
+	</choose>
+	
+	order by EMPLOYEE_CODE
+				
 	</select>
 
 </mapper>

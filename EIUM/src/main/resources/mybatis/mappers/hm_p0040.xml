@@ -23,60 +23,49 @@
 	
 	 
 	<select id="searchList" resultMap="P0040resultVO" parameterType="java.util.Map"> 
+		SELECT distinct e.employee_code,e.employee_name
+	    FROM employee_training_list etl,employee_training et,employee e,site s,department d,employee_work ew
+  		WHERE et.employee_training_code = etl.employee_training_code
+   		AND etl.employee_code = e.employee_code
+		AND e.employee_code = ew.employee_code
+		AND ew.department_code=d.department_code	
+		AND d.site_code = s.site_code
 			<choose>
 			<when test= "date != ''  and  date2 !='' ">
 			
-    SELECT e.employee_code,e.employee_name
-    FROM employee_training_list etl,employee_training et,employee e
-    WHERE et.employee_training_code = etl.employee_training_code
-    AND etl.employee_code = e.employee_code
     AND to_date(et.employee_training_start_date,'YYYY-MM-DD') BETWEEN #{date} AND #{date2}            
     AND to_date(et.employee_training_end_date,'YYYY-MM-DD') BETWEEN #{date} AND #{date2}
 			</when>
-				<when test= "site != '' ">
-			
-	SELECT e.employee_code,e.employee_name
-    FROM employee e,site s,department d,employee_work ew
-    WHERE e.employee_code = ew.employee_code
-    AND  ew.department_code=d.department_code
-    AND d.site_code = s.site_code
-    AND s.site_name = #{site}
-			     
-      
-
-			</when>
-				<when test= "department != '' ">
-			
-      	SELECT e.employee_code,e.employee_name
-    FROM employee e,department d,employee_work ew
-    WHERE e.employee_code = ew.employee_code
-    AND  ew.department_code=d.department_code
-	AND  d.department_name=#{department}
-			     
-
-			</when>
-		<when test= "date != ''  and  date2 !='' and department !='' ">
-	
-    SELECT e.employee_code,e.employee_name
-    FROM employee_training_list etl,employee_training et,employee e,employee_work ew,department d
-    WHERE et.employee_training_code = etl.employee_training_code
-    and etl.employee_code = e.employee_code
-    AND e.employee_code = ew.employee_code
-    AND ew.department_code = d.department_code
-    AND to_date(et.employee_training_start_date,'YYYY-MM-DD') BETWEEN #{date} AND #{date2}            
-    AND to_date(et.employee_training_end_date,'YYYY-MM-DD') BETWEEN #{date} AND #{date2}
-    AND d.department_name = #{department}
-    
- 
-		</when>
-		<otherwise>
-
-    
-    SELECT employee_code,employee_name
-    FROM employee
- 	order by employee_code
-		</otherwise>
 			</choose>
+			
+			
+			<choose>
+	<when test= "site != '' ">
+    AND s.site_name = #{site}
+    </when>
+			</choose>
+			
+			<choose>
+				<when test= "department != '' ">
+	AND  d.department_name=#{department}
+			</when>
+			</choose>
+			
+				<choose>
+		  <when test="access_range == '부서' ">
+      and d.department_code = #{Sdepartment_code}
+      	  </when>
+	</choose>
+	
+	<choose>
+	  <when test="access_range == '사원' ">
+      and e.employee_code = #{Semployee_code}
+	  </when>
+	</choose>
+
+
+ 	order by e.employee_code
+
 	</select>
 	
 	<select id="searchEmployee" resultMap="P0040resultVO" parameterType="java.util.Map"> 

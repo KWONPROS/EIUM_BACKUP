@@ -33,7 +33,7 @@
          select e.employee_code, e.employee_name, eh.hobby, eh.special_ability, eh.height, eh.weight, eh.blood_type, eh.handicapped_yn, eh.marriage_yn, eh.religion, eh.military_type, eh.military_number, eh.discharge_yn, eh.residential_division
          from employee e, employee_hr_info eh
          where e.employee_code = eh.employee_code
-         and e.employee_name = #{Semployee_name}
+         and e.employee_code = #{Semployee_code}
          order by e.employee_code
       ]]>
       </when>
@@ -45,7 +45,7 @@
          where e.employee_code = eh.employee_code
          and e.employee_code = ew.employee_code
          and ew.department_code = d.department_code
-         and d.department_name = #{Sdepartment_name}
+         and d.department_code = #{Sdepartment_code}
          order by e.employee_code
       ]]>
       </when>
