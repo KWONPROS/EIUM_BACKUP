@@ -23,15 +23,15 @@ function LoadPage(){
 	initSheet.Cfg={SearchMode:smLazyLoad,ToolTip:1};
 	initSheet.HeaderMode = {Sort:1,ColMove:1,ColResize:1,HeaderCheck:1};
 	initSheet.Cols=[
-		{Header:"사원코드",Type:"Text",Width:100,SaveName:"employee_CODE",Align:"Center"},
-		{Header:"사원명",Type:"Text",Width:100,SaveName:"employee_NAME",Align:"Center"},
+		{Header:"사원코드",Type:"Text",Width:230,SaveName:"employee_CODE",Align:"Center"},
+		{Header:"사원명",Type:"Text",Width:230,SaveName:"employee_NAME",Align:"Center"},
 		{Header:"부서명",Type:"Text",Width:100,SaveName:"department_NAME",Align:"Center", Hidden:1},
 		{Header:"직급",Type:"Text",Width:100,SaveName:"position_NAME",Align:"Center", Hidden:1},
 		{Header:"현재 잔여일수",Type:"Text",Width:100,SaveName:"vacation_REMAIN_DATE",Align:"Center", Hidden:1}
 		];
 	IBS_InitSheet(mySheet,initSheet);
 	mySheet.SetEditableColorDiff(1);
-	
+	mySheet.SetSheetHeight(620);
 	mySheet.SetColEditable(0,0);
 	mySheet.DoSearch("${contextPath}/wm/p0002/employeeSearch_p01.do")
 

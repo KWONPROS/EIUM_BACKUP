@@ -116,12 +116,12 @@
 		
 		if(Col=="3"){
 		window.name = "parent";
-		window.open("${contextPath}/wm/p0004/employeeSearch_Init.do", "a", "width=500, height=700, left=100, top=50");
+		window.open("${contextPath}/wm/p0004/employeeSearch_Init.do", "a", "width=480, height=700, left=100, top=50");
 		}
 		
 		if(Col=="10"){
 			window.name = "parent2";
-			window.open("${contextPath}/wm/p0004/countrySearch_Init.do", "a", "width=500, height=700, left=100, top=50");
+			window.open("${contextPath}/wm/p0004/countrySearch_Init.do", "a", "width=480, height=700, left=100, top=50");
 		}
 	}
 	

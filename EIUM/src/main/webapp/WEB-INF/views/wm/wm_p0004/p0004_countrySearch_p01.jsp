@@ -23,12 +23,12 @@ function LoadPage(){
 	initSheet.Cfg={SearchMode:smLazyLoad,ToolTip:1};
 	initSheet.HeaderMode = {Sort:1,ColMove:1,ColResize:1,HeaderCheck:1};
 	initSheet.Cols=[
-		{Header:"국가코드",Type:"Text",Width:100,SaveName:"country_CODE",Align:"Center"},
-		{Header:"국가명",Type:"Text",Width:100,SaveName:"country_NAME",Align:"Center"}
+		{Header:"국가코드",Type:"Text",Width:230,SaveName:"country_CODE",Align:"Center"},
+		{Header:"국가명",Type:"Text",Width:230,SaveName:"country_NAME",Align:"Center"}
 		];
 	IBS_InitSheet(mySheet,initSheet);
 	mySheet.SetEditableColorDiff(1);
-	
+	mySheet.SetSheetHeight(620);
 	mySheet.SetColEditable(0,0);
 	mySheet.DoSearch("${contextPath}/wm/p0004/countrySearch_p01.do")
 
