@@ -21,6 +21,7 @@
 	type="text/javascript"></script>
 
 <script>
+
 	/*Sheet 기본 설정 */
 	function LoadPage() {
 		mySheet.RemoveAll();
@@ -341,7 +342,6 @@
 <body onload="LoadPage()">
 
 
-
 	<div class="rightbuttons">
 		<a href="javascript:doAction('reload')" class="IBbutton">초기화</a> <a
 			href="javascript:doAction('insert')" class="IBbutton">추가</a> <a
@@ -362,10 +362,6 @@
 			</script>
 		</div>
 	</div>
-
-
-
-
 
 	<form name="form" id="form" method="post">
 

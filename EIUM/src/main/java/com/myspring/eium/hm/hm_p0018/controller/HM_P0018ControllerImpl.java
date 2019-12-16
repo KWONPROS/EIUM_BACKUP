@@ -1,5 +1,6 @@
 package com.myspring.eium.hm.hm_p0018.controller;
 
+import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -32,13 +33,14 @@ public class HM_P0018ControllerImpl implements HM_P0018Controller{
 	
 	@Autowired
 	HM_P0018VO hM_P0018VO;
+
 	
 	@Override
 	@RequestMapping(value = "hm/p0018/searchInit.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView tabInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		ModelAndView mav = new ModelAndView("hm/hm_p0018/p0018_tab");
-	
+		
 		return mav;
 	}
 	@Override
