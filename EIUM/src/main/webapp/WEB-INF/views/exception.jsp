@@ -26,6 +26,24 @@
 
 
 </style>
+
+<script type="text/javascript">
+
+function goMain(){
+	if(window.opener){
+		if(window.opener.closed){
+			top.location.href="/EIUM/main.do";
+		}else{
+			window.opener.top.location.href="/EIUM/main.do";
+			self.close();
+		}
+	}else{
+		top.location.href="/EIUM/main.do";
+	}
+}
+
+</script>
+
 <meta charset="UTF-8">
 <title>exception</title>
 </head>
@@ -35,5 +53,6 @@
     <img src="/EIUM/resources/image/img_notfound.png">
     </div>
     </section>
+    <a style="position:absolute;top:580px;left:700px;" onClick="goMain()"><img src="/EIUM/resources/image/img_notfound02.png" alt="메인으로가기버튼"></a>
 </body>
 </html>

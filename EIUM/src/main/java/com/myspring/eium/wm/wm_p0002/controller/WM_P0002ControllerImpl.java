@@ -48,7 +48,7 @@ public class WM_P0002ControllerImpl implements WM_P0002Controller{
 	public ModelAndView employeeSearch_init(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		ModelAndView mav = new ModelAndView("/wm/wm_p0002/p0002_employeeSearch_p01");
-	
+
 		return mav;
 	} 
 	
@@ -71,9 +71,6 @@ public class WM_P0002ControllerImpl implements WM_P0002Controller{
 		accessMap = (Map<String, Object>) session.getAttribute("accessnum");	
 		
 		int n =  (Integer) accessMap.get("M029");
-		System.out.println(accessRange.get(n));
-		System.out.println("사원코드"+loginvo.getEmployee_code());
-		System.out.println("부서코드"+loginvo.getDepartment_code());
 		
 		searchMap.put("access_range", accessRange.get(n));
 		searchMap.put("Semployee_code",loginvo.getEmployee_code());

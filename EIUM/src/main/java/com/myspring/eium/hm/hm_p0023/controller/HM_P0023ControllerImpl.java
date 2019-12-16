@@ -73,9 +73,6 @@ public class HM_P0023ControllerImpl implements HM_P0023Controller{
 		accessMap = (Map<String, Object>) session.getAttribute("accessnum");	
 		
 		int n =  (Integer) accessMap.get("M015");
-		System.out.println(accessRange.get(n));
-		System.out.println("사원코드"+loginvo.getEmployee_code());
-		System.out.println("부서코드"+loginvo.getDepartment_code());
 		
 		searchMap.put("access_range", accessRange.get(n));
 		searchMap.put("Semployee_code",loginvo.getEmployee_code());
