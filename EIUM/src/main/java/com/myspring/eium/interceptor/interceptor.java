@@ -1,5 +1,7 @@
 package com.myspring.eium.interceptor;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -26,12 +28,19 @@ public class interceptor extends HandlerInterceptorAdapter{
 			if(requestUrl.contains("/LoginCheck.do")) {
 				return true;
 			}
-	        if ( obj == null ){
-
-	            response.sendRedirect("/EIUM/login.do");
+	
+	        if ( obj == null && requestUrl.contains("/main.do")){
+	        	response.sendRedirect("/EIUM/login.do");
 	            return false;
 	        }
-	         
+	        if(obj == null) {
+	        	PrintWriter out = response.getWriter();
+	        	out.println("<script>window.parent.history.back();</script>");
+	        	
+	        	return false;
+	        }
+
+
 	        return super.preHandle(request, response, handler);
 	    }
 

@@ -40,6 +40,7 @@ padding:0px 20px 20px 20px; background:#fff; _background:none;
 	type="text/javascript"></script>
 <script>
 function PageLoad(){
+
 	var tabBar = document.getElementById("tab"),
 	contents = document.getElementById("tab_contents");
 	createIBTab(tabBar,contents,"myTabs",{
@@ -76,6 +77,7 @@ function PageLoad(){
 		]
 	});
 }
+
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>

@@ -5,6 +5,31 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+.rightbuttons {
+	margin-top: 50px;
+	margin: 20px;
+	position: absolute;
+	right: 150px;
+	boder-right:1px solid #C3C3C3;
+	top:0px;
+	}
+.IBbutton {
+	
+	font-size: 13px;
+    margin-left: 5px;
+    border: 0;
+    background-color: #2B69A0;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 7px;
+    text-decoration: none;
+}
+
+.IBbutton:hover {
+	background-color: #2C3E50;
+}
+</style>
 <meta charset="UTF-8">
 <script src="${contextPath}/resources/ibsheet/ibsheetinfo.js"></script>
 <script src="${contextPath}/resources/ibsheet/ibsheet.js"></script>
@@ -58,17 +83,18 @@ function doAction(sAction){
 	}
 }
 </script>
-
 <title>부문등록</title>
 </head>
 <body onload="LoadPage()">
-  			  <div class="buttons">
- 				<a href="javascript:doAction('insert')" class="f1_btn_gray lightgray">추가</a>
-                <a href="javascript:doAction('save')" class="f1_btn_white gray">저장</a>
+  			  <div class="rightbuttons">
+ 				<a href="javascript:doAction('insert')" class="IBbutton">추가</a>
+                <a href="javascript:doAction('save')" class="IBbutton">저장</a>
                </div>
-<script>
-createIBSheet("mySheet","100","300px");
-</script>
-            
+               <div style="position:absolute;top:50px;left:20px;">
+				<script>
+				createIBSheet("mySheet","100","300px");
+				</script>
+     		  </div>     
+     		  
 </body>
 </html>
