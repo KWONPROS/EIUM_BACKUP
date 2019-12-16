@@ -120,7 +120,7 @@ function getCookie(cookieName) {
 	height:30px;
 	font-weight: 600;
 	color: #fff;
-	background-color: #0062cc;
+	background-color: #0067B8;
 }
 
 .login-form .form-control {
@@ -128,14 +128,14 @@ function getCookie(cookieName) {
 	width: 315px;
 	height: 30px;
 	padding-left: 10px;
-	border-bottom: #0062cc 1px solid;
+	border-bottom: #0067B8 1px solid;
 	margin-bottom: 5px;
 	outline: none;
 }
 
 .login-form .Forget {
 	font-size: 12px;
-	color: #0062cc;
+	color: #0067B8;
 	font-weight: 600;
 	padding-left: 20px;
 	text-decoration: none;
@@ -188,23 +188,22 @@ right: 15px;
 	transform:scale(1.2);
 }
 .checks{
-    padding-left: 0px;
-    margin-left: 224px;
-    font-size: 14px;
-	color: #0062cc;
+	color: #0067B8;
     vertical-align: middle;
     font-weight: 600;
+    position: relative;  
+	top:-38px;
+    font-size: 12px;
+    left: 260px;
 }
 .login-form h4 {
-	color: #0062cc;
+	color: #0067B8;
 	margin-top: 0px;
 	margin-left: 8px;
     margin-bottom: 0px;
     font-size: 14px;
 }
-.checks {
-    position: relative;
-}
+
 .checks input[type="checkbox"] {
     position: absolute; 
     width: 1px;
@@ -226,9 +225,9 @@ right: 15px;
  .checks input[type="checkbox"] + label:before {
     content: ' '; 
     display: inline-block; 
-    width: 21px; 
-    height: 21px;  
-    line-height: 21px; 
+    width: 15px; 
+    height: 15px;  
+    line-height: 15px;
     margin: -2px 8px 0 0; 
     text-align: center; 
     vertical-align: middle; 
@@ -283,14 +282,16 @@ $(function(){
 						<img class="language" alt="EN" src="${contextPath}/resources/image/icons/icon_usa.png" onclick="location.href='login.do?lang=en'">
 						<img class="language" alt="CN" src="${contextPath}/resources/image/icons/icon_china.png" onclick="location.href='login.do?lang=cn'">
 					</h3>
-						   
+				 	
+				 	
 				 	<h3><spring:message code="login"  text="로그인" /></h3>
-				 	<div class="checks"> <input type="checkbox" id="idSaveCheck"> <label for="idSaveCheck">아이디 저장</label> </div>
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="ID" value="" name="employee_id"/><br>
 						<input type="password" class="form-control" placeholder="Password" value="" name="employee_password"/><br> 
+				 		
 						<a onclick="fn_findID()" class="Forget"><spring:message code="findId"/></a><br> 
 						<a onclick="fn_findPWD()" class="Forget"><spring:message code="findPwd"/></a>
+					 	<div class="checks"> <input type="checkbox" id="idSaveCheck"> <label for="idSaveCheck"><spring:message code="lo_saveID"/></label> </div>
 						<input type="submit" class="btnSubmit" value="<spring:message code="lo_next"/>" />  
 					</div>
 

@@ -185,7 +185,7 @@
 		col=Col;
 		
 		if(Col=="3"){
-		window.open("${contextPath}/wm/p0002/employeeSearch_Init.do", "a", "width=500, height=700, left=100, top=50");
+		window.open("${contextPath}/wm/p0002/employeeSearch_Init.do", "a", "width=480, height=700, left=100, top=50");
 		}
 	}
 	
