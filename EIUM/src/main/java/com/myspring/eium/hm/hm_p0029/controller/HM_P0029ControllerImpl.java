@@ -1,20 +1,17 @@
 package com.myspring.eium.hm.hm_p0029.controller;
 
-import java.util.Enumeration;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,7 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.myspring.eium.hm.hm_p0029.dao.HM_P0029DAO;
 import com.myspring.eium.hm.hm_p0029.service.HM_P0029Service;
 import com.myspring.eium.hm.hm_p0029.vo.HM_P0029VO;
-import com.myspring.eium.hm.hm_p0033.vo.HM_P0033VO;
+import com.myspring.eium.login.vo.LoginVO;
 
 @Controller
 public class HM_P0029ControllerImpl implements HM_P0029Controller {
@@ -152,6 +149,26 @@ public class HM_P0029ControllerImpl implements HM_P0029Controller {
 		request.setCharacterEncoding("utf-8");
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		HttpSession session = request.getSession(); 
+		LoginVO loginvo = new LoginVO();
+		loginvo = (LoginVO)session.getAttribute("login"); 
+		
+		Map<String, Object> accessMap = new HashMap<String, Object>();
+		ArrayList<String> accessRange = new ArrayList<String>();		
+		accessRange = (ArrayList<String>) session.getAttribute("access_range"); 
+		accessMap = (Map<String, Object>) session.getAttribute("accessnum");	
+		
+		int n =  (Integer) accessMap.get("M016");
+		System.out.println(accessRange.get(n));
+		System.out.println("사원코드"+loginvo.getEmployee_code());
+		System.out.println("부서코드"+loginvo.getDepartment_code());
+		
+		searchMap.put("access_range", accessRange.get(n));
+		searchMap.put("Semployee_code",loginvo.getEmployee_code());
+		searchMap.put("Sdepartment_code", loginvo.getDepartment_code());
+		
+		
 		searchMap.put("command", request.getParameter("command"));
 		searchMap.put("condition", request.getParameter("condition"));
 
@@ -189,6 +206,25 @@ public class HM_P0029ControllerImpl implements HM_P0029Controller {
 		request.setCharacterEncoding("utf-8");
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		HttpSession session = request.getSession(); 
+		LoginVO loginvo = new LoginVO();
+		loginvo = (LoginVO)session.getAttribute("login"); 
+		
+		Map<String, Object> accessMap = new HashMap<String, Object>();
+		ArrayList<String> accessRange = new ArrayList<String>();		
+		accessRange = (ArrayList<String>) session.getAttribute("access_range"); 
+		accessMap = (Map<String, Object>) session.getAttribute("accessnum");	
+		
+		int n =  (Integer) accessMap.get("M016");
+		System.out.println(accessRange.get(n));
+		System.out.println("사원코드"+loginvo.getEmployee_code());
+		System.out.println("부서코드"+loginvo.getDepartment_code());
+		
+		searchMap.put("access_range", accessRange.get(n));
+		searchMap.put("Semployee_code",loginvo.getEmployee_code());
+		searchMap.put("Sdepartment_code", loginvo.getDepartment_code());
+		
 		searchMap.put("command", request.getParameter("command"));
 		searchMap.put("condition", request.getParameter("condition"));
 		// 0 : 사업장, 1: 부서
@@ -223,6 +259,23 @@ public class HM_P0029ControllerImpl implements HM_P0029Controller {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		searchMap.put("command", request.getParameter("command"));
 		searchMap.put("condition", request.getParameter("condition"));
+		HttpSession session = request.getSession(); 
+		LoginVO loginvo = new LoginVO();
+		loginvo = (LoginVO)session.getAttribute("login"); 
+		
+		Map<String, Object> accessMap = new HashMap<String, Object>();
+		ArrayList<String> accessRange = new ArrayList<String>();		
+		accessRange = (ArrayList<String>) session.getAttribute("access_range"); 
+		accessMap = (Map<String, Object>) session.getAttribute("accessnum");	
+		
+		int n =  (Integer) accessMap.get("M016");
+		System.out.println(accessRange.get(n));
+		System.out.println("사원코드"+loginvo.getEmployee_code());
+		System.out.println("부서코드"+loginvo.getDepartment_code());
+		
+		searchMap.put("access_range", accessRange.get(n));
+		searchMap.put("Semployee_code",loginvo.getEmployee_code());
+		searchMap.put("Sdepartment_code", loginvo.getDepartment_code());
 
 		// 0 : 사업장, 1: 부서
 		searchMap.put("Poption_code_temp", request.getParameter("Poption_code_temp"));
@@ -253,6 +306,23 @@ public class HM_P0029ControllerImpl implements HM_P0029Controller {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		searchMap.put("command", request.getParameter("command"));
 		searchMap.put("condition", request.getParameter("condition"));
+		HttpSession session = request.getSession(); 
+		LoginVO loginvo = new LoginVO();
+		loginvo = (LoginVO)session.getAttribute("login"); 
+		
+		Map<String, Object> accessMap = new HashMap<String, Object>();
+		ArrayList<String> accessRange = new ArrayList<String>();		
+		accessRange = (ArrayList<String>) session.getAttribute("access_range"); 
+		accessMap = (Map<String, Object>) session.getAttribute("accessnum");	
+		
+		int n =  (Integer) accessMap.get("M016");
+		System.out.println(accessRange.get(n));
+		System.out.println("사원코드"+loginvo.getEmployee_code());
+		System.out.println("부서코드"+loginvo.getDepartment_code());
+		
+		searchMap.put("access_range", accessRange.get(n));
+		searchMap.put("Semployee_code",loginvo.getEmployee_code());
+		searchMap.put("Sdepartment_code", loginvo.getDepartment_code());
 
 		// 0 : 사업장, 1: 부서
 		searchMap.put("Poption_code_temp", request.getParameter("Poption_code_temp"));

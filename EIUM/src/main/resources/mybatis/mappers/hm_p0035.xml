@@ -91,6 +91,18 @@
 	  </when>  
 	</choose>
 	
+		<choose>
+		  <when test="access_range == '부서' ">
+      and de.department_code = #{Sdepartment_code}
+      	  </when>
+	</choose>
+	
+	<choose>
+	  <when test="access_range == '사원' ">
+      and e.employee_code = #{Semployee_code}
+	  </when>
+	</choose>
+	
 	ORDER BY ew.employee_code
 
 	</select>

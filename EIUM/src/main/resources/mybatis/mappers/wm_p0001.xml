@@ -40,102 +40,58 @@
 		<![CDATA[
 			SELECT DISTINCT(E.EMPLOYEE_CODE), E.EMPLOYEE_NAME, S.SITE_NAME,D.DEPARTMENT_NAME, D.DEPARTMENT_CODE  
 			FROM EMPLOYEE E, EMPLOYEE_WORK EW, DEPARTMENT D, SITE S, WORKING_STATUS WS
+			WHERE E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE(+)
+			AND D.SITE_CODE = S.SITE_CODE(+)
+			AND EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE(+)
+			AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE(+)
+			AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
+			
 		]]>
-		<choose>
-			<when test= "Employee_Select.equals('employee_name') and p_text != '' and p_text != null and SiteList != ''  and  SiteList != null and DeptList != '' and DeptList != null ">
-				WHERE E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE(+)
-				AND D.SITE_CODE = S.SITE_CODE(+)
-				AND EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE(+)
-				AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE(+)
+		<choose>	
+			<when test= " SiteList != ''  and  SiteList != null">
 				and S.SITE_NAME = #{SiteList,jdbcType=VARCHAR}
+			</when> <!-- 3 사업장 부서 -->
+	   </choose>
+	 
+	 		<choose>	
+			<when test= " DeptList != ''  and  DeptList != null">
 				and D.DEPARTMENT_NAME = #{DeptList,jdbcType=VARCHAR}
-				and E.EMPLOYEE_NAME LIKE '%'||#{p_text,jdbcType=VARCHAR}||'%'
-				AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
-				order by E.EMPLOYEE_CODE ASC
-			</when> <!--1 년월 사업장 부서 사원명 --> 
-			
-			<when test= " Employee_Select.equals('employee_code') and p_text != '' and p_text != null and SiteList != ''  and  SiteList != null and DeptList != '' and DeptList != null ">
-				WHERE E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE(+)
-				AND D.SITE_CODE = S.SITE_CODE(+)
-				AND EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE(+)
-				AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE(+)
-				and S.SITE_NAME = #{SiteList,jdbcType=VARCHAR}
-				and D.DEPARTMENT_NAME = #{DeptList,jdbcType=VARCHAR}
-				and E.EMPLOYEE_CODE LIKE '%'||#{p_text,jdbcType=VARCHAR}||'%'
-				AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
-				order by E.EMPLOYEE_CODE ASC 
-			</when> <!-- 2 사업장 부서 사원코드 -->
-			
-			<when test= " SiteList != ''  and  SiteList != null and DeptList != '' and DeptList != null">
-				WHERE E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE(+)
-				AND D.SITE_CODE = S.SITE_CODE(+)
-				AND EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE(+)
-				AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE(+)
-				and S.SITE_NAME = #{SiteList,jdbcType=VARCHAR}
-				and D.DEPARTMENT_NAME = #{DeptList,jdbcType=VARCHAR}
-				AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
-				order by E.EMPLOYEE_CODE ASC
 			</when> <!-- 3 사업장 부서 -->
 			
-			<when test= " Employee_Select.equals('employee_name') and p_text != '' and p_text != null and SiteList != ''  and  SiteList != null "> 
-				WHERE E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE(+)
-				AND D.SITE_CODE = S.SITE_CODE(+)
-				AND EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE(+)
-				AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE(+)
-				and S.SITE_NAME = #{SiteList,jdbcType=VARCHAR}
+	 </choose>			
+		
+		<choose>
+			<when test= "Employee_Select.equals('employee_name') and p_text != '' and p_text != null">
 				and E.EMPLOYEE_NAME LIKE '%'||#{p_text,jdbcType=VARCHAR}||'%'
-				AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
-				order by E.EMPLOYEE_CODE ASC
-			</when> <!-- 4 사업장 null 사원명 -->
+			</when> <!--1 년월 사업장 부서 사원명 -->
+			</choose> 
 			
-			<when test= " Employee_Select.equals('employee_code') and p_text != '' and p_text != null and SiteList != ''  and  SiteList != null "> 
-				WHERE E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE(+)
-				AND D.SITE_CODE = S.SITE_CODE(+)
-				AND EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE(+)
-				AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE(+)
-				and S.SITE_NAME = #{SiteList,jdbcType=VARCHAR}
+		<choose>
+	
+			<when test= " Employee_Select.equals('employee_code') and p_text != '' and p_text != null">
+
 				and E.EMPLOYEE_CODE LIKE '%'||#{p_text,jdbcType=VARCHAR}||'%'
-				AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
-				order by E.EMPLOYEE_CODE ASC
-			</when> <!-- 5 사업장 null 사원코드 -->
+				order by E.EMPLOYEE_CODE ASC 
+			</when> <!-- 2 사업장 부서 사원코드 -->
+			</choose> 
+			
+			
+	<choose>
+		  <when test="access_range == '부서' ">
+      and d.department_code = #{Sdepartment_code}
+      	  </when>
+	</choose>
+	
+	<choose>
+	  <when test="access_range == '사원' ">
+      and e.employee_code = #{Semployee_code}
+	  </when>
+	</choose>
+			
+	 	
+			
 				
-			<when test= " SiteList != ''  and  SiteList != null">
-				WHERE E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE(+)
-				AND D.SITE_CODE = S.SITE_CODE(+)
-				AND EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE(+)
-				AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE(+)
-				and S.SITE_NAME = #{SiteList,jdbcType=VARCHAR}
-				AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
-				order by E.EMPLOYEE_CODE ASC
-			</when> <!-- 6 사업장  -->
-			
-			<when test= " Employee_Select.equals('employee_code') and p_text != '' and p_text != null "> 
-				WHERE E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE(+)
-				AND D.SITE_CODE = S.SITE_CODE(+)
-				AND EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE(+)
-				AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE(+)
-				and E.EMPLOYEE_CODE LIKE '%'||#{p_text,jdbcType=VARCHAR}||'%'
-				AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
-				order by E.EMPLOYEE_CODE ASC
-			</when> <!-- 7 null null 사원코드  -->
-			
-			<when test= " Employee_Select.equals('employee_name') and p_text != '' and p_text != null "> 
-				WHERE E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE(+)
-				AND D.SITE_CODE = S.SITE_CODE(+)
-				AND EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE(+)
-				AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE(+)
-				and E.EMPLOYEE_NAME LIKE '%'||#{p_text,jdbcType=VARCHAR}||'%'
-				AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
-				order by E.EMPLOYEE_CODE ASC
-			</when> <!-- 8 null null 사원명  -->
-			<otherwise>
-			    WHERE E.EMPLOYEE_CODE = EW.EMPLOYEE_CODE(+)
-				AND D.SITE_CODE = S.SITE_CODE(+)
-				AND EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE(+)
-				AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE(+)
 				ORDER BY E.EMPLOYEE_CODE ASC 
-			</otherwise> <!-- 조건x(전체조회) 년월도 없는경우 -->
-		</choose>
 	</select>
 	
 	<!-- //////////////////////////////////////WORKING_STATUS_SEARCHLIST ///////////////////////////////-->

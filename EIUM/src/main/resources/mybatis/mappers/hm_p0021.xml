@@ -28,6 +28,18 @@ AND ew.position_code=p.position_code
 AND ew.department_code=d.department_code
 AND etl.employee_training_code=#{eduCode}
 			]]>
+			
+			<choose>
+		  <when test="access_range == '부서' ">
+      and d.department_code = #{Sdepartment_code}
+      	  </when>
+	</choose>
+	
+	<choose>
+	  <when test="access_range == '사원' ">
+      and e.employee_code = #{Semployee_code}
+	  </when>
+	</choose>
 	</select>
 	
 	<update id="eduScoreUpdate" parameterType="java.util.Map">

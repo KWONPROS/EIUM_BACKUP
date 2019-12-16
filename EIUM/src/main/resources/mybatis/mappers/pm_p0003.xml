@@ -135,7 +135,7 @@
 			and ew.employee_code =e.employee_code
 			and d.site_code = s.site_code
 			and p.payment_code = #{Ppayment_code}
-			and e.employee_name = #{Semployee_name}
+ 			and e.employee_code = #{Semployee_code}
 			order by ew.employee_code
 			]]> 
    		    </when>
@@ -151,7 +151,7 @@
 			and d.site_code = s.site_code
 			and p.payment_code = #{Ppayment_code}
  			and d.department_name =  #{searchTYPE} 
- 			and e.employee_name = #{Semployee_name}
+ 			and e.employee_code = #{Semployee_code}
  			order by ew.employee_code
  			
  			]]> 
@@ -168,7 +168,7 @@
 			and d.site_code = s.site_code
 			and p.payment_code = #{Ppayment_code}
 			and s.site_name = #{searchSite}
-			and e.employee_name = #{Semployee_name}
+			and e.employee_code = #{Semployee_code}
 			order by ew.employee_code
 			
 			]]> 
@@ -186,7 +186,7 @@
 			and p.payment_code = #{Ppayment_code}
 			and s.site_name = #{searchSite}
 			and d.department_name =  #{searchTYPE} 
-			and e.employee_name = #{Semployee_name}
+			and e.employee_code = #{Semployee_code}
 			order by ew.employee_code
 			
 			
@@ -204,7 +204,7 @@
 			and ew.employee_code =e.employee_code
 			and d.site_code = s.site_code
 			and p.payment_code = #{Ppayment_code}
-			and d.department_name =  #{Sdepartment_name}
+			and d.department_code =  #{Sdepartment_code}
 			order by ew.employee_code 
 			
 			]]> 
@@ -220,7 +220,7 @@
 			and ew.employee_code =e.employee_code
 			and d.site_code = s.site_code
 			and p.payment_code = #{Ppayment_code}
- 			and d.department_name =  #{Sdepartment_name}
+			and d.department_code =  #{Sdepartment_code}
  			order by ew.employee_code
  			]]> 
 			</when>
@@ -236,7 +236,7 @@
 			and d.site_code = s.site_code
 			and p.payment_code = #{Ppayment_code}
 			and s.site_name = #{searchSite}
-			and d.department_name =  #{Sdepartment_name}
+			and d.department_code =  #{Sdepartment_code}
 			order by ew.employee_code
 			
 			]]> 
@@ -253,7 +253,7 @@
 			and d.site_code = s.site_code
 			and p.payment_code = #{Ppayment_code}
 			and s.site_name = #{searchSite}
- 			and d.department_name =  #{Sdepartment_name}
+			and d.department_code =  #{Sdepartment_code}
  			order by ew.employee_code
 			
 			]]> 

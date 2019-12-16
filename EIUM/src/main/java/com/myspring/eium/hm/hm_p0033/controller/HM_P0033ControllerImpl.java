@@ -1,6 +1,7 @@
 package com.myspring.eium.hm.hm_p0033.controller;
 
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -171,13 +172,29 @@ public class HM_P0033ControllerImpl implements HM_P0033Controller {
 		request.setCharacterEncoding("utf-8");
 		Map<String, Object> searchMap = new HashMap<String, Object>(); 
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
-
+		HttpSession session = request.getSession(); 
+		LoginVO loginvo = new LoginVO();
+		loginvo = (LoginVO)session.getAttribute("login"); 
+		
+		Map<String, Object> accessMap = new HashMap<String, Object>();
+		ArrayList<String> accessRange = new ArrayList<String>();		
+		accessRange = (ArrayList<String>) session.getAttribute("access_range"); 
+		accessMap = (Map<String, Object>) session.getAttribute("accessnum");	
+		
+		int n =  (Integer) accessMap.get("M017");
+		System.out.println(accessRange.get(n));
+		System.out.println("사원코드"+loginvo.getEmployee_code());
+		System.out.println("부서코드"+loginvo.getDepartment_code());
+		
+		searchMap.put("access_range", accessRange.get(n));
+		searchMap.put("Semployee_code",loginvo.getEmployee_code());
+		searchMap.put("Sdepartment_code", loginvo.getDepartment_code());
+		
 		searchMap.put("hr_assessment_code", request.getParameter("Phr_assessment_code"));
 		searchMap.put("site_code", request.getParameter("Psite_code"));
 		searchMap.put("employee_code", request.getParameter("Pemployee_code"));
 		searchMap.put("date", request.getParameter("date"));
 		searchMap.put("date2", request.getParameter("date2"));
-		searchMap.put("access_range", request.getParameter("access_range"));
 
 
 
@@ -202,7 +219,23 @@ public class HM_P0033ControllerImpl implements HM_P0033Controller {
 		request.setCharacterEncoding("utf-8");
 		Map<String, Object> searchMap = new HashMap<String, Object>(); 
 		Map<String, Object> resultMap = new HashMap<String, Object>(); 
-
+		HttpSession session = request.getSession(); 
+		LoginVO loginvo = new LoginVO();
+		loginvo = (LoginVO)session.getAttribute("login"); 
+		
+		Map<String, Object> accessMap = new HashMap<String, Object>();
+		ArrayList<String> accessRange = new ArrayList<String>();		
+		accessRange = (ArrayList<String>) session.getAttribute("access_range"); 
+		accessMap = (Map<String, Object>) session.getAttribute("accessnum");	
+		
+		int n =  (Integer) accessMap.get("M017");
+		System.out.println(accessRange.get(n));
+		System.out.println("사원코드"+loginvo.getEmployee_code());
+		System.out.println("부서코드"+loginvo.getDepartment_code());
+		
+		searchMap.put("access_range", accessRange.get(n));
+		searchMap.put("Semployee_code",loginvo.getEmployee_code());
+		searchMap.put("Sdepartment_code", loginvo.getDepartment_code());
 		searchMap.put("hr_rnp_code", request.getParameter("Phr_rnp_code"));
 		searchMap.put("site_code", request.getParameter("Psite_code"));
 		searchMap.put("employee_code", request.getParameter("Pemployee_code"));

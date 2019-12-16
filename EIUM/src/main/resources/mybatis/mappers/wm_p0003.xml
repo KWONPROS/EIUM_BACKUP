@@ -79,6 +79,18 @@
 	  </when>
 	</choose>
 	
+	<choose>
+		  <when test="access_range == '부서' ">
+      and d.department_code = #{Sdepartment_code}
+      	  </when>
+	</choose>
+	
+	<choose>
+	  <when test="access_range == '사원' ">
+      and e.employee_code = #{Semployee_code}
+	  </when>
+	</choose>
+	
 	order by vh.VACATION_END_DATE DESC
             
             

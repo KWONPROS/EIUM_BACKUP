@@ -117,6 +117,19 @@
 	AND pt.pay_type_name = #{pay_type}
 	</when>
 	</choose>
+	
+	
+	<choose>
+		  <when test="access_range == '부서' ">
+      and d.department_code = #{Sdepartment_code}
+      	  </when>
+	</choose>
+	
+	<choose>
+	  <when test="access_range == '사원' ">
+      and e.employee_code = #{Semployee_code}
+	  </when>
+	</choose>
 
 	</select>
 	
@@ -204,6 +217,18 @@
 	<when test="date != '' and date2 != '' ">
 	AND ew.employee_join_date BETWEEN #{date} AND #{date2}
 	</when>
+	</choose>
+	
+		<choose>
+		  <when test="access_range == '부서' ">
+      and d.department_code = #{Sdepartment_code}
+      	  </when>
+	</choose>
+	
+	<choose>
+	  <when test="access_range == '사원' ">
+      and e.employee_code = #{Semployee_code}
+	  </when>
 	</choose>
 	
 	</select>
@@ -304,6 +329,18 @@
 	<when test="date != '' and date2 != '' ">
 	AND ew.EMPLOYEE_RESIGNATION_DATE BETWEEN #{date} AND #{date2}
 	</when>
+	</choose>
+	
+		<choose>
+		  <when test="access_range == '부서' ">
+      and d.department_code = #{Sdepartment_code}
+      	  </when>
+	</choose>
+	
+	<choose>
+	  <when test="access_range == '사원' ">
+      and e.employee_code = #{Semployee_code}
+	  </when>
 	</choose>
 
 	</select>	
