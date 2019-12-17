@@ -37,6 +37,7 @@
          FROM employee e LEFT OUTER JOIN employee_work ew ON ew.employee_code = e.employee_code
                          LEFT OUTER JOIN department d ON ew.department_code = d.department_code
                          LEFT OUTER JOIN position p ON ew.position_code = p.position_code
+         ORDER BY e.employee_code
       ]]>
 	</select>
 	
@@ -44,6 +45,7 @@
 	  <![CDATA[
          SELECT country_code, country_name
          FROM country
+         ORDER BY country_code
       ]]>
 	</select>
 
