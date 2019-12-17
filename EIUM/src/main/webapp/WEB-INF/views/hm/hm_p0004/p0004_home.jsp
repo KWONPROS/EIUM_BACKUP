@@ -36,9 +36,9 @@
 		initSheet.Cols = [		
 			{Header:"상태",Type:"Status",SaveName:"STATUS" ,Hidden:1},
 	        {Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",Hidden:1},	
-	        {Header:"사원코드",Type:"Text",SaveName:"emp_CODE",MinWidth:80,KeyField:1,Edit:0,Align:"Center"},	
-			{Header:"사원명",Type:"Text",SaveName:"emp_NAME",MinWidth:140,Edit:0,Align:"Center"},			
-			{Header:"부서명",Type:"Text",SaveName:"dep_NAME",MinWidth:183,Edit:0,Align:"Center"},  //4
+	        {Header:"사원코드",Type:"Text",SaveName:"emp_CODE",MinWidth:120,KeyField:1,Edit:0,Align:"Center"},	
+			{Header:"사원명",Type:"Text",SaveName:"emp_NAME",MinWidth:120,Edit:0,Align:"Center"},			
+			{Header:"부서명",Type:"Text",SaveName:"dep_NAME",MinWidth:140,Edit:0,Align:"Center"},  //4
 			
 			//인적정보
 			{Header:"사원명(영문)",Type:"Text",SaveName:"emp_NAME_EN", Hidden:1},			
