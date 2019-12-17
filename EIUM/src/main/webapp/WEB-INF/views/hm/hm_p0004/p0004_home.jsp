@@ -624,7 +624,7 @@ text-decoration: none;
 }
 </style>
 </head>
-<body onload="LoadPage()">
+<body onload="LoadPage()" style="overflow: hidden;">
 	<div class="leftbuttons">
 		 <a href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
 	</div>
