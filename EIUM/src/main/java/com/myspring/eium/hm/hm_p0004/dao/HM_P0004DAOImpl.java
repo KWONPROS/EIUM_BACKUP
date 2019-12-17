@@ -44,7 +44,7 @@ public class HM_P0004DAOImpl implements HM_P0004DAO {
 	@Override
 	public void updateData(Map<String, String> row) throws DataAccessException {
 		sqlSession.update("mapper.hm_p0004.updateData", row);
-		sqlSession.update("mapper.hm_p0004.updateData2", row);
+		/* sqlSession.update("mapper.hm_p0004.updateData2", row); */
 		sqlSession.update("mapper.hm_p0004.updateData3", row);
 	}
 
