@@ -80,14 +80,14 @@
 			{Header:"비고",Type:"Combo",SaveName:"working_STATUS_DESC",MinWidth:80, Align:"Center", "ComboText":"출근|지각|조퇴|외출", "ComboCode":"00|01|02|03"},
 			{Header:"그 달의 해당YN:",Type:"Text",SaveName:"working_STATUS_YN", MinWidth:50,Align:"Center",Hidden:1},
 			//평일(table)
-			{Header:"평일정상근무시간",Type:"Text",SaveName:"weekday_NORMAL_WORK_TIME", Width:80, Align:"Center",ZeroToReplaceChar:""},	
-			{Header:"평일연장근무시간",Type:"Text",SaveName:"weekday_EXTENSION_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:""},			
-			{Header:"평일야간근무시간",Type:"Text",SaveName:"weekday_NIGHT_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:""},
+			{Header:"평일정상근무시간",Type:"Text",SaveName:"weekday_NORMAL_WORK_TIME", Width:80, Align:"Center",ZeroToReplaceChar:"", Hidden:1},	
+			{Header:"평일연장근무시간",Type:"Text",SaveName:"weekday_EXTENSION_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:"", Hidden:1},			
+			{Header:"평일야간근무시간",Type:"Text",SaveName:"weekday_NIGHT_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:"", Hidden:1},
 			
 			//휴일(table)
-			{Header:"휴일정상근무시간",Type:"Text",SaveName:"holiday_NORMAL_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:""},	
-			{Header:"휴일연장근무시간",Type:"Text",SaveName:"holiday_EXTENSION_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:""},			
-			{Header:"휴일야간근무시간",Type:"Text",SaveName:"holiday_NIGHT_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:""}
+			{Header:"휴일정상근무시간",Type:"Text",SaveName:"holiday_NORMAL_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:"", Hidden:1},	
+			{Header:"휴일연장근무시간",Type:"Text",SaveName:"holiday_EXTENSION_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:"", Hidden:1},			
+			{Header:"휴일야간근무시간",Type:"Text",SaveName:"holiday_NIGHT_WORK_TIME", Width:80, Align:"Center",Format:"0000",ZeroToReplaceChar:"", Hidden:1}
 		];
 		
 		IBS_InitSheet( mySheet2 , initSheet2);
@@ -179,7 +179,7 @@
 		        
 		        if (key !== 8 && key !== 9) {
 		        	if ($text.val().length === 2) {
-                        $text.val($text.val() + ':');
+                        $text.val($text.val() + '');
                     }
 		        }
 		        return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
@@ -1258,7 +1258,14 @@
 					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), holi_NO_TIME);
 					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME);
 				}
-			} 
+			}
+			//시간을 분으로
+			mySheet2.SetCellValue(i,13,(mySheet2.GetCellValue(i, 13)/100)*60 + mySheet2.GetCellValue(i, 13)%100);
+			mySheet2.SetCellValue(i,14,mySheet2.GetCellValue(i, 14)/100*60 + mySheet2.GetCellValue(i, 14)%100);
+			mySheet2.SetCellValue(i,15,mySheet2.GetCellValue(i, 15)/100*60 + mySheet2.GetCellValue(i, 15)%100);
+			mySheet2.SetCellValue(i,16,mySheet2.GetCellValue(i, 16)/100*60 + mySheet2.GetCellValue(i, 16)%100);
+			mySheet2.SetCellValue(i,17,mySheet2.GetCellValue(i, 17)/100*60 + mySheet2.GetCellValue(i, 17)%100);
+			mySheet2.SetCellValue(i,18,mySheet2.GetCellValue(i, 18)/100*60 + mySheet2.GetCellValue(i, 18)%100);
 		}
 	}
 	function mySheet2_OnClick(Row, Col){
@@ -1266,7 +1273,7 @@
 		
 		if(Row!=0){
 			$('input[name=myRow]').val(Row);
-			var abcde = $('input[name=weekday_NORMAL_WORK_TIME]').val(mySheet2.GetCellValue(Row, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME")));
+			var abcde = $('input[name=weekday_NORMAL_WORK_TIME]').val(textWithtimeFormat(mySheet2.GetCellValue(Row, mySheet2.SaveNameCol("weekday_NORMAL_WORK_TIME"))));
 			$('input[name=weekday_EXTENSION_WORK_TIME]').val(textWithtimeFormat(mySheet2.GetCellValue(Row, mySheet2.SaveNameCol("weekday_EXTENSION_WORK_TIME"))));
 			$('input[name=weekday_NIGHT_WORK_TIME]').val(textWithtimeFormat(mySheet2.GetCellValue(Row, mySheet2.SaveNameCol("weekday_NIGHT_WORK_TIME"))));
 			
@@ -1278,17 +1285,21 @@
 	function textWithtimeFormat(x) {
 		if(x > 10000){
 			var temp_x = x.toString().replace(/\B(?=(\d{2})+(?!\d))/g, ":");
-			return temp_x.replace(':','');
+			return temp_x.replace('','');
 		}else if(x < 10000&& x >= 1000){
-			return x.toString().replace(/\B(?=(\d{2})+(?!\d))/g, ":");
+			return x.toString().replace(/\B(?=(\d{2})+(?!\d))/g, "");
 		}else if(x < 1000 && x >= 100){
-			return  "0"+ x.toString().replace(/\B(?=(\d{2})+(?!\d))/g, ":");
+			return  " "+ x.toString().replace(/\B(?=(\d{2})+(?!\d))/g, "");
 		}else if(x == 0){
 			return "";
 		}else if(x < 100){
-			return "00:" +  x.toString().replace(/\B(?=(\d{2})+(?!\d))/g, ":");
+			return "" +  x.toString().replace(/\B(?=(\d{2})+(?!\d))/g, ":");
 		}
 	    
+	}
+	function HourWithminFormat(x){
+		alert((x/100)*60 + (x%100));
+		return (x/100)*60 + (x%100);
 	}
 
 
@@ -2009,7 +2020,14 @@
 					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_NORMAL_WORK_TIME"), holi_NO_TIME);
 					mySheet2.SetCellValue(i, mySheet2.SaveNameCol("holiday_EXTENSION_WORK_TIME"), holi_EX_TIME);
 				}
-			} 
+			}//주말 끝
+			//시간을 분으로
+			mySheet2.SetCellValue(i,13,(mySheet2.GetCellValue(i, 13)/100)*60 + mySheet2.GetCellValue(i, 13)%100);
+			mySheet2.SetCellValue(i,14,mySheet2.GetCellValue(i, 14)/100*60 + mySheet2.GetCellValue(i, 14)%100);
+			mySheet2.SetCellValue(i,15,mySheet2.GetCellValue(i, 15)/100*60 + mySheet2.GetCellValue(i, 15)%100);
+			mySheet2.SetCellValue(i,16,mySheet2.GetCellValue(i, 16)/100*60 + mySheet2.GetCellValue(i, 16)%100);
+			mySheet2.SetCellValue(i,17,mySheet2.GetCellValue(i, 17)/100*60 + mySheet2.GetCellValue(i, 17)%100);
+			mySheet2.SetCellValue(i,18,mySheet2.GetCellValue(i, 18)/100*60 + mySheet2.GetCellValue(i, 18)%100);
 		}
 		
 		mySheet3.DoSearch("${contextPath}/wm/p0001/TWS_searchList.do", "P_EMP_CODE=" + mySheet.GetCellValue(mySheet.GetSelectRow(), 0) + "&monthpicker=" +$('#monthpicker').val());
@@ -2030,20 +2048,40 @@
 	}
 	function mySheet2_OnChange(Row, Col){
 		//출근, 조퇴, 외출 프로세스
-		/* if(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_START_TIME"))<="0900" && mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_END_TIME"))>="1800"){ //정상출근
-			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "00");
-		}else if(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_START_TIME"))=="0900" && mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_END_TIME"))>"0900" && mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_END_TIME"))<"1800"){ //조퇴
-			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "02"); 
-		}else if(mySheet2.GetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_START_TIME"))>"0900"){ //지각
-			mySheet2.SetCellValue(mySheet2.GetSelectRow(), mySheet2.SaveNameCol("working_STATUS_DESC"), "01");
-		} */
+		/* mok = (mySheet2.GetCellValue(Row, 13)/100)*60;
 		
+		na = mySheet2.GetCellValue(Row, 13)%100;
+		alert(mok);
+		alert(na);
+		alert(mok+na);
+		if((mySheet2.GetCellValue(Row, 13)!=null && mySheet2.GetCellValue(Row, 13)!= "")){
+			mySheet2.SetCellValue(Row, 13, mok+na);
+		} */
+		/* mySheet2.SetCellValue(1, 13, mok+na); */
 		
 		///////////////////////////////////////////////////////////////////평일 휴일 정상근무 휴일정상근무 프로세스
-		/* if((mySheet2.GetCellValue(Row, 9)!=null && mySheet2.GetCellValue(Row, 9)!= "" &&  평일정상)){
-		mySheet2.SetCellValue(Row, 13, Math.floor((mySheet2.GetCellValue(Row, 9)/100))*60 + mySheet2.GetCellValue(Row, 9)%100);
-	}
-		
+	/* 	var Total_Maskingcell = mySheet2.GetDataLastRow();
+		for(let i = 1; i <= Total_Maskingcell; i++){
+		if((mySheet2.GetCellValue(Row, 13)!=null && mySheet2.GetCellValue(Row, 13)!= "")){
+			mySheet2.SetCellValue(Row, 13, Math.floor((mySheet2.GetCellValue(Row, 13)/100))*60 + mySheet2.GetCellValue(Row, 13)%100);
+		}
+		if((mySheet2.GetCellValue(Row, 14)!=null && mySheet2.GetCellValue(Row, 14)!= "")){
+			mySheet2.SetCellValue(Row, 14, Math.floor((mySheet2.GetCellValue(Row, 14)/100))*60 + mySheet2.GetCellValue(Row, 14)%100);
+		}
+		if((mySheet2.GetCellValue(Row, 15)!=null && mySheet2.GetCellValue(Row, 15)!= "")){
+			mySheet2.SetCellValue(Row, 15, Math.floor((mySheet2.GetCellValue(Row, 15)/100))*60 + mySheet2.GetCellValue(Row, 15)%100);
+		}
+		if((mySheet2.GetCellValue(Row, 16)!=null && mySheet2.GetCellValue(Row, 16)!= "")){
+			mySheet2.SetCellValue(Row, 16, Math.floor((mySheet2.GetCellValue(Row, 16)/100))*60 + mySheet2.GetCellValue(Row, 16)%100);
+		}
+		if((mySheet2.GetCellValue(Row, 17)!=null && mySheet2.GetCellValue(Row, 17)!= "")){
+			mySheet2.SetCellValue(Row, 17, Math.floor((mySheet2.GetCellValue(Row, 17)/100))*60 + mySheet2.GetCellValue(Row, 17)%100);
+		}
+		if((mySheet2.GetCellValue(Row, 18)!=null && mySheet2.GetCellValue(Row, 18)!= "")){
+			mySheet2.SetCellValue(Row, 18, Math.floor((mySheet2.GetCellValue(Row, 18)/100))*60 + mySheet2.GetCellValue(Row, 18)%100);
+		}
+		} */
+		/*
 		if((mySheet2.GetCellValue(Row, 9)!=null && mySheet2.GetCellValue(Row, 9)!= "" &&  평일연장)){
 			mySheet2.SetCellValue(Row, 14, Math.floor((mySheet2.GetCellValue(Row, 9)/100))*60 + mySheet2.GetCellValue(Row, 9)%100);
 		}
@@ -2461,34 +2499,34 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 	
 		<table>
 			<tr>
-				<td><span>평일정상근무시간</span></td>
+				<td><span>평일정상근무시간(분)</span></td>
 				<td><input type="hidden" name="myRow"></td>
-				<td><input type="text" name="weekday_NORMAL_WORK_TIME" maxlength="5" class="WORK_TIME"  placeholder="__:__" > 시간</td>
+				<td><input type="text" name="weekday_NORMAL_WORK_TIME" maxlength="5" class="WORK_TIME"  placeholder="_____" > 시간(분)</td>
 			</tr>
 			<tr>
-				<td><span>평일연장근무시간</span></td>
+				<td><span>평일연장근무시간(분)</span></td>
 				<td></td>
-				<td><input type="text" name="weekday_EXTENSION_WORK_TIME" maxlength="5" class="WORK_TIME"  placeholder="__:__" > 시간</td>
+				<td><input type="text" name="weekday_EXTENSION_WORK_TIME" maxlength="5" class="WORK_TIME"  placeholder="_____" > 시간(분)</td>
 			</tr>
 			<tr>
-				<td><span>평일야간근무시간</span></td>
+				<td><span>평일야간근무시간(분)</span></td>
 				<td></td>
-				<td><input type="text" name="weekday_NIGHT_WORK_TIME" maxlength="5" class="WORK_TIME"  placeholder="__:__" > 시간</td>
+				<td><input type="text" name="weekday_NIGHT_WORK_TIME" maxlength="5" class="WORK_TIME"  placeholder="_____" > 시간(분)</td>
 			</tr>
 			<tr>
-				<td><span>휴일정상근무시간</span></td>
+				<td><span>휴일정상근무시간(분)</span></td>
 				<td></td>
-				<td><input type="text" name="holiday_NORMAL_WORK_TIME" maxlength="5" class="WORK_TIME"  placeholder="__:__" > 시간</td>
+				<td><input type="text" name="holiday_NORMAL_WORK_TIME" maxlength="5" class="WORK_TIME"  placeholder="_____" > 시간(분)</td>
 			</tr>
 			<tr>
-				<td><span>휴일연장근무시간</span></td>
+				<td><span>휴일연장근무시간(분)</span></td>
 				<td></td>
-				<td><input type="text" name="holiday_EXTENSION_WORK_TIME" maxlength="5" class="WORK_TIME" placeholder="__:__" > 시간</td>
+				<td><input type="text" name="holiday_EXTENSION_WORK_TIME" maxlength="5" class="WORK_TIME" placeholder="_____" > 시간(분)</td>
 			</tr>
 			<tr>
-				<td><span>휴일야간근무시간</span></td>
+				<td><span>휴일야간근무시간(분)</span></td>
 				<td></td>
-				<td><input type="text" name="holiday_NIGHT_WORK_TIME" maxlength="5" class="WORK_TIME" placeholder="__:__" > 시간</td>
+				<td><input type="text" name="holiday_NIGHT_WORK_TIME" maxlength="5" class="WORK_TIME" placeholder="_____" > 시간(분)</td>
 			</tr>
 		</table>
 	</div>
