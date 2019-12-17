@@ -29,13 +29,13 @@ function LoadPage(){
    initSheet.Cfg={SearchMode:smLazyLoad,ToolTip:1,MouseHoverMode:2};
    initSheet.HeaderMode = {Sort:1,ColMove:1,ColResize:12,HeaderCheck:1};
    initSheet.Cols=[
-	   {Header:"상태",SaveName:"sStatus",Type:"Status",align:"Center" ,Width:60},
+	   {Header:"상태",SaveName:"sStatus",Type:"Status",align:"Center" ,Width:60, Align:"Center"},
 	   {Header:"삭제",SaveName:"DEL_CHK",Type:"DelCheck" ,Width:60},
 	   {Header:"사원코드",SaveName:"employee_code",Type:"Text", Width:180, Align:"Center" , KeyField:1, UpdateEdit:"0"},
-	   {Header:"사원명",SaveName:"employee_name",Type:"Text",Width:180, KeyField:1 },
+	   {Header:"사원명",SaveName:"employee_name",Type:"Text", Align:"Center", Width:150, KeyField:1 },
 	   {Header:"회사코드", Type:"Popup", SaveName:"company_code",Width:180, Align:"Center" , KeyField:1},
 	   {Header:"회사명",SaveName:"company_name",Type:"Text",Width:170, KeyField:1, Align:"Center", UpdateEdit:"0", InsertEdit:"0" },
-	   {Header:"사용자여부",Type:"Combo", Width:60, Align:"Center", SaveName:"employee_available_yn", ComboText:"Y|N", ComboCode:"Y|N"},
+	   {Header:"사용자여부",Type:"Combo", Width:110, Align:"Center", SaveName:"employee_available_yn", ComboText:"Y|N", ComboCode:"Y|N"},
 	   {Header:"아이디",SaveName:"employee_id", Align:"Center",type:"Text",Width:180, KeyField:1, UpdateEdit:"0"},
 	   {Header:"암호",SaveName:"employee_password", Align:"Center",type:"Text", KeyField:1, Width:180},
 	   {Header:"전화번호",Type:"Text", Align:"Center", Align:"Center", SaveName:"contact", Format:"PhoneNo", Width:180},
@@ -214,9 +214,6 @@ padding: 10px;0px;10px;0px;
 createIBSheet("mySheet2", "1500px", "600px");
 </script>
 </div> -->
-
-	<input type="hidden" id="Pdepartment_code">
-	<input type="hidden" id="Pdepartment_name">
 
 <!--    </form>
  --></body>

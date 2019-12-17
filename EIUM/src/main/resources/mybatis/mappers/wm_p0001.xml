@@ -44,7 +44,6 @@
 			AND D.SITE_CODE = S.SITE_CODE(+)
 			AND EW.DEPARTMENT_CODE = D.DEPARTMENT_CODE(+)
 			AND E.EMPLOYEE_CODE = WS.EMPLOYEE_CODE(+)
-			AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
 			
 		]]>
 		<choose>	
@@ -87,6 +86,12 @@
       and e.employee_code = #{Semployee_code}
 	  </when>
 	</choose>
+	
+	<choose>
+		  <when test="WORKING_STATUS_MONTH != '' and WORKING_STATUS_MONTH != null ">
+			AND WS.WORKING_STATUS_MONTH = SUBSTR(#{P_WS_MONTH}, 1,4)||SUBSTR(#{P_WS_MONTH}, 6,7)
+	  </when>
+	   </choose>
 			
 	 	
 			

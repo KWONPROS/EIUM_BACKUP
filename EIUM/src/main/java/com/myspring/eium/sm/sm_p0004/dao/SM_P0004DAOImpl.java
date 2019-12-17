@@ -63,6 +63,7 @@ public class SM_P0004DAOImpl implements SM_P0004DAO {
 		sqlSession.update("mapper.sm_p0004.updateData1", row);
 		sqlSession.update("mapper.sm_p0004.updateData2", row);
 		sqlSession.update("mapper.sm_p0004.updateData3", row);
+		sqlSession.update("mapper.sm_p0004.updateData4", row);
 
 	}
 

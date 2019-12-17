@@ -91,6 +91,22 @@ function doAction(sAction){
   
    
 }
+
+function mySheet_OnSaveEnd(code, msg) {
+	if (msg != "") {
+		alert(msg);
+		//번호 다시 매기기
+		//mySheet.ReNumberSeq();
+	}
+}
+
+function mySheet2_OnSaveEnd(code, msg) {
+	if (msg != "") {
+		alert(msg);
+		//번호 다시 매기기
+		//mySheet.ReNumberSeq();
+	}
+}
 	</script>
 	<style type="text/css">
 .title {
