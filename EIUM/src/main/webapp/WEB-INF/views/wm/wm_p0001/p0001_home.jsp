@@ -2042,47 +2042,9 @@
 	}
 	function mySheet2_OnChange(Row, Col){
 		//출근, 조퇴, 외출 프로세스
-		/* mok = (mySheet2.GetCellValue(Row, 13)/100)*60;
-		
-		na = mySheet2.GetCellValue(Row, 13)%100;
-		alert(mok);
-		alert(na);
-		alert(mok+na);
-		if((mySheet2.GetCellValue(Row, 13)!=null && mySheet2.GetCellValue(Row, 13)!= "")){
-			mySheet2.SetCellValue(Row, 13, mok+na);
-		} */
-		/* mySheet2.SetCellValue(1, 13, mok+na); */
 		
 		///////////////////////////////////////////////////////////////////평일 휴일 정상근무 휴일정상근무 프로세스
-	/* 	var Total_Maskingcell = mySheet2.GetDataLastRow();
-		for(let i = 1; i <= Total_Maskingcell; i++){
-		if((mySheet2.GetCellValue(Row, 13)!=null && mySheet2.GetCellValue(Row, 13)!= "")){
-			mySheet2.SetCellValue(Row, 13, Math.floor((mySheet2.GetCellValue(Row, 13)/100))*60 + mySheet2.GetCellValue(Row, 13)%100);
-		}
-		if((mySheet2.GetCellValue(Row, 14)!=null && mySheet2.GetCellValue(Row, 14)!= "")){
-			mySheet2.SetCellValue(Row, 14, Math.floor((mySheet2.GetCellValue(Row, 14)/100))*60 + mySheet2.GetCellValue(Row, 14)%100);
-		}
-		if((mySheet2.GetCellValue(Row, 15)!=null && mySheet2.GetCellValue(Row, 15)!= "")){
-			mySheet2.SetCellValue(Row, 15, Math.floor((mySheet2.GetCellValue(Row, 15)/100))*60 + mySheet2.GetCellValue(Row, 15)%100);
-		}
-		if((mySheet2.GetCellValue(Row, 16)!=null && mySheet2.GetCellValue(Row, 16)!= "")){
-			mySheet2.SetCellValue(Row, 16, Math.floor((mySheet2.GetCellValue(Row, 16)/100))*60 + mySheet2.GetCellValue(Row, 16)%100);
-		}
-		if((mySheet2.GetCellValue(Row, 17)!=null && mySheet2.GetCellValue(Row, 17)!= "")){
-			mySheet2.SetCellValue(Row, 17, Math.floor((mySheet2.GetCellValue(Row, 17)/100))*60 + mySheet2.GetCellValue(Row, 17)%100);
-		}
-		if((mySheet2.GetCellValue(Row, 18)!=null && mySheet2.GetCellValue(Row, 18)!= "")){
-			mySheet2.SetCellValue(Row, 18, Math.floor((mySheet2.GetCellValue(Row, 18)/100))*60 + mySheet2.GetCellValue(Row, 18)%100);
-		}
-		} */
-		/*
-		if((mySheet2.GetCellValue(Row, 9)!=null && mySheet2.GetCellValue(Row, 9)!= "" &&  평일연장)){
-			mySheet2.SetCellValue(Row, 14, Math.floor((mySheet2.GetCellValue(Row, 9)/100))*60 + mySheet2.GetCellValue(Row, 9)%100);
-		}
-		
-		if((mySheet2.GetCellValue(Row, 9)!=null && mySheet2.GetCellValue(Row, 9)!= "" &&  평일야간)){
-			mySheet2.SetCellValue(Row, 14, Math.floor((mySheet2.GetCellValue(Row, 9)/100))*60 + mySheet2.GetCellValue(Row, 9)%100);
-		} */
+	
 	}
 	// 저장완료 후 처리할 작업
 	// code: 0(저장성공), -1(저장실패)
