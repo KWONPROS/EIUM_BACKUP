@@ -9,7 +9,7 @@ public class SM_P0004VO {
 	private String employee_id;
 	private String employee_available_yn;
 	private String employee_password;
-	private String access_range;
+	private String contact;
 	private String company_code;
 	private String company_name;
 	private String user;
@@ -53,7 +53,6 @@ public class SM_P0004VO {
 	}
 
 
-	private String contact;
 
 	public SM_P0004VO() {
 
@@ -100,13 +99,6 @@ public class SM_P0004VO {
 		this.employee_password = employee_password;
 	}
 
-	public String getAccess_range() {
-		return access_range;
-	}
-
-	public void setAccess_range(String access_range) {
-		this.access_range = access_range;
-	}
 
 	public String getContact() {
 		return contact;

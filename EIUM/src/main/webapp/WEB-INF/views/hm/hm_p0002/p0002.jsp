@@ -144,7 +144,7 @@
 		}
 		
 		
-	function mySheet_OnClick(Row,Col,Value){
+	function mySheet_OnDblClick(Row,Col,Value){
 		  x = "x=" + mySheet.GetCellValue(Row, 2);			  
 			mySheet2.DoSearch("${contextPath}/hm/p0002/searchSelect.do", x);
 	}

@@ -195,20 +195,14 @@
 		case "search": //조회
 			
 			var param = FormQueryStringEnc(document.searchBar);
-			if($("#monthpicker").val() == ''){
-				alert('귀속연월은 필수항목입니다');
-				$("#sum").hide();
-				$("#add").hide();
-				$("#dead_buttons").hide(); //마감버튼은 보여주고
-				$("#dead_cancel_buttons").hide(); //계산버튼은 보여주고
-			}else{
+			
 				mySheet.DoSearch("${contextPath}/wm/p0001/EMP_searchList.do", param);
 				//조회조건에 맞도록 조회하기
 				$("#sum").show();
 				$("#add").show();
 				$("#dead_buttons").show(); //마감버튼은 보여주고
 				$("#dead_cancel_buttons").show(); //계산버튼은 보여주고
-			}
+			
 			break;
 
 		case "reload": //초기화

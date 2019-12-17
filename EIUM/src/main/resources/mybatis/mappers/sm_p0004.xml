@@ -9,7 +9,7 @@
         <result property="employee_name" column="employee_name" />
         <result property="employee_id" column="employee_id" />
         <result property="employee_available_yn" column="employee_available_yn" />
-        <result property="employee_id" column="employee_password" />
+        <result property="company_code" column="company_code" />
         <result property="employee_password" column="employee_password" />
         <result property="contact" column="contact" />
         <result property="int_user_id" column="int_user_id" />
@@ -22,12 +22,12 @@
 
 	<select id="selectAllp0004List" resultMap="p0004Result">
       <![CDATA[
-         select distinct e.employee_code, e.employee_name, e.employee_available_yn, ac.employee_id , ac.employee_password, ei.contact, ew.company_code, c.company_name
+		 select distinct e.employee_code, e.employee_name, e.employee_available_yn, ac.employee_id , ac.employee_password, ei.contact, ew.company_code, c.company_name
          from employee e, account ac, employee_hr_info ei, employee_work ew, company c
          where e.employee_code = ei.employee_code(+)
          and e.employee_code = ac.employee_code(+)
-         and e.employee_code = ew.employee_code
-         and ew.company_code = c.company_code 
+         and e.employee_code = ew.employee_code(+)
+         and ew.company_code = c.company_code(+)
          order by e.employee_code
       ]]>
 	</select>
@@ -62,7 +62,7 @@
 	</insert>	
 			<insert id="insertData5" parameterType="java.util.Map">
 
-		insert into employee_work(employee_code, int_user_id, int_date) values(#{employee_code}, #{user}, sysdate)	
+		insert into employee_work(employee_code, company_code, int_user_id, int_date) values(#{employee_code}, #{company_code}, #{user}, sysdate)	
 	</insert>
 	
 				
@@ -93,6 +93,14 @@
 	<update id="updateData3" parameterType="java.util.Map">
 		update employee_hr_info
 		set contact = #{contact, jdbcType=VARCHAR}
+			, upt_user_id = #{user, jdbcType=VARCHAR}
+			, upt_date = sysdate
+		where employee_code = #{employee_code, jdbcType=VARCHAR}
+	</update>
+	
+		<update id="updateData4" parameterType="java.util.Map">
+		update employee_work
+		set company_code = #{company_code, jdbcType=VARCHAR}
 			, upt_user_id = #{user, jdbcType=VARCHAR}
 			, upt_date = sysdate
 		where employee_code = #{employee_code, jdbcType=VARCHAR}
