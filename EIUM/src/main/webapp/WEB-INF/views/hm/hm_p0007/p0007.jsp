@@ -761,7 +761,7 @@ border : none;
 
 </style>
 </head>
-<body onload="LoadPage()" style="overflow-x: hidden">
+<body onload="LoadPage()" style="overflow: hidden;">
 <form name="frm">
 	<div class="leftbuttons">
 		<a href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
@@ -783,7 +783,7 @@ border : none;
 
 	<div class="right">
 
-		 <div id="tab1" class="ib-tab-tab">
+		 <div id="tab1" class="ib-tab-tab">  
                <div class="ib-tab-tabs-item">
 				<a class="ib-tab-tabs-item__link is-active"><span class="ib-tab-tabs-item__title">신체/병역/기타</span></a> 
 				<a class="ib-tab-tabs-item__link"><span class="ib-tab-tabs-item__title">학력</span></a>
