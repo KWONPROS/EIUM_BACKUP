@@ -29,7 +29,7 @@ public class HomeDAO{
 	public List<HomeVO> findvacation(String emp_id){
 		String answer =  sqlSession.selectOne("mapper.common.findVacationAuth",emp_id);
 		List<HomeVO> list = new ArrayList<HomeVO>();
-		if("»ç¾÷Àå".equals(answer)) {
+		if("ì‚¬ì—…ìž¥".equals(answer)) {
 			list = sqlSession.selectList("mapper.common.findAllVacation",emp_id);			
 		}else {
 			list = sqlSession.selectList("mapper.common.findLimitedVacation",emp_id);		
@@ -39,7 +39,7 @@ public class HomeDAO{
 	public List<HomeVO> findbusiness(String emp_id){
 		String answer =  sqlSession.selectOne("mapper.common.findBusinessAuth",emp_id);
 		List<HomeVO> list = new ArrayList<HomeVO>();
-		if("»ç¾÷Àå".equals(answer)) {
+		if("ì‚¬ì—…ìž¥".equals(answer)) {
 			list = sqlSession.selectList("mapper.common.findAllBusiness",emp_id);			
 		}else {
 			list = sqlSession.selectList("mapper.common.findLimitedBusiness",emp_id);		
