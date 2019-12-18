@@ -233,7 +233,6 @@ initSheet.Cols = [
       mySheet2.SetEditableColorDiff(1); //편집불가능한 셀 표시 구분
 
 
-
 }
 
 function mySheet1_OnRowSearchEnd(Row) {
@@ -289,8 +288,9 @@ function mySheet1_OnClick(Row,Col){
 	function magam(appointCode){
 	
 		var dataMap = JSON.parse(mySheet2.GetSearchData("${contextPath}/hm/p0022/appointList3.do",appointCode));
+		console.log(dataMap);
 		for(var i in dataMap.Data){
-			var send = {"Status":"U","employee_JOIN_DATE":dataMap.Data[i].employee_JOIN_DATE,"department_CODE":dataMap.Data[i].department_CODE,"job_CLASS_CODE":dataMap.Data[i].job_CLASS_CODE,"position_CODE":dataMap.Data[i].position_CODE,"duty_CODE":dataMap.Data[i].duty_CODE,"job_DIS_CODE":dataMap.Data[i].job_DIS_CODE,"pay_TYPE_CODE":dataMap.Data[i].pay_TYPE_CODE,"pay_GRADE_CODE":dataMap.Data[i].pay_GRADE_CODE,"out_REASON_CODE":dataMap.Data[i].out_REASON_CODE,"employee_CODE":dataMap.Data[i].employee_CODE,"work_STATUS":dataMap.Data[i].work_STATUS}
+			var send = {"Status":"U","employee_JOIN_DATE":dataMap.Data[i].employee_JOIN_DATE,"department_CODE":dataMap.Data[i].department_CODE,"job_CLASS_CODE":dataMap.Data[i].job_CLASS_CODE,"position_CODE":dataMap.Data[i].position_CODE,"duty_CODE":dataMap.Data[i].duty_CODE,"job_DIS_CODE":dataMap.Data[i].job_DIS_CODE,"pay_TYPE_CODE":dataMap.Data[i].pay_TYPE_CODE,"pay_GRADE_CODE":dataMap.Data[i].pay_GRADE_CODE,"out_REASON_CODE":dataMap.Data[i].out_REASON_CODE,"employee_CODE":dataMap.Data[i].employee_CODE,"work_STATUS_CODE":dataMap.Data[i].work_STATUS_CODE}
 
 			$.ajax({
 			    url:'${contextPath}/hm/p0022/saveData4.do', //request 보낼 서버의 경로

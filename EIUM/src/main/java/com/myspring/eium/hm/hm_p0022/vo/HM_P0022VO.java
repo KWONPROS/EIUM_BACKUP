@@ -152,6 +152,13 @@ String employee_NAME;
 String hr_APPOINT_INDEX_NAME;
 String appoint_INDEX_NAME;
 String work_STATUS_NAME;
+String work_STATUS_CODE;
+public String getWork_STATUS_CODE() {
+	return work_STATUS_CODE;
+}
+public void setWork_STATUS_CODE(String work_STATUS_CODE) {
+	this.work_STATUS_CODE = work_STATUS_CODE;
+}
 String join_DATE;
 String employee_JOIN_DATE;
 String site_CODE;
