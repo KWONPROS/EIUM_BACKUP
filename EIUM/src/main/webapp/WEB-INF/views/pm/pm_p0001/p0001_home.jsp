@@ -147,9 +147,11 @@ function setPaygrade(){
 	
 	function mySheet2_OnChange(Row, Col, Value) {
 	    if(mySheet2.GetCellValue(Row, 3) == "기본급"){
-	    	var a = mySheet.GetCellValue(x, 7)/209;
+	    	var a = Math.floor((mySheet.GetCellValue(x, 7)/(12540)));
+	    	alert(a);
 	    	var z = (a*mySheet.GetCellValue(x, 8)) + ((a*1.5)*mySheet.GetCellValue(x, 9)) + ((a*1.5)*mySheet.GetCellValue(x, 10))+ ((a*1.5)*mySheet.GetCellValue(x, 11))+ ((a*2)*mySheet.GetCellValue(x, 12))+ ((a*2.5)*mySheet.GetCellValue(x, 13));
-	       mySheet2.SetCellValue(Row, 4, z);
+	    	alert(z);
+	    	mySheet2.SetCellValue(Row, 4, z);
 	   }
 	    
 	    if(mySheet2.GetCellValue(Row, 3) == "상여급"){
@@ -355,6 +357,7 @@ function mySheet_OnClick(Row, Col) {
 	top: 110px;
 	left: 30px;
 	width: 1400px;
+	z-index: 10px;
 }
 
 .right{
@@ -365,6 +368,8 @@ function mySheet_OnClick(Row, Col) {
 	padding: 0 0 0 30px;
     border-left: 2px solid #C3C3C3;
     margin-left: 15px;
+    z-index: 5px;
+    
 }
 
 .bottom{
@@ -467,7 +472,7 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 		<input type="hidden" id="Ppayment_des_name">
 		</div>
 		
-<div style="position: absolute; top: 110px; ">
+<div style="position: absolute; top: 110px; z-index: 1; ">
 		<script>		
 		createIBSheet("mySheet", "900px", "600px");
 		selectSite();
@@ -475,7 +480,7 @@ img {vertical-align: middle; padding: 0px 5px 0px 2px; }
 	</div>
 	</div>
 	
-	<div style="position: absolute; top: 370px; left: 300px;">
+	<div style="position: absolute; top: 370px; left: 300px; z-index: 0;">
 	<div class="right">
 		<script>createIBSheet("mySheet2", "700px", "600px");</script>
 	</div>	
