@@ -237,7 +237,7 @@ public class HM_P0022ControllerImpl implements HM_P0022Controller{
 		
 		
 		searchMap.put("param", request.getParameter("param"));
-		System.out.println("#########파람이여"+request.getParameter("param"));
+
 		List<HM_P0022VO> data = hM_P0022Service.homeEmployeeSearch(searchMap);
         resultMap.put("Data", data);
         
