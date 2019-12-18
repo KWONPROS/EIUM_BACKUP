@@ -232,8 +232,9 @@
 			
 			break;
 		case "insert": //추가
+
 			var row = mySheet2.DataInsert(-1);
-			
+		
 			break;
 		
 		case "calculate": //정산
