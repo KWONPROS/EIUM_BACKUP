@@ -217,7 +217,7 @@
                mySheet.SetCellValue($('input[name=myRow]').val(),6,$('input[name=hanName]').val());
                mySheet.SetCellValue($('input[name=myRow]').val(),7,$('input[name=foreignYN]').val());
                mySheet.SetCellValue($('input[name=myRow]').val(),8,$('input[name=rrNumber]').val());
-               mySheet.SetCellValue($('input[name=myRow]').val(),9,$('input[name=sex]').val());
+               mySheet.SetCellValue($('input[name=myRow]').val(),9,$('select[name=sex]').val());
                mySheet.SetCellValue($('input[name=myRow]').val(),10,$('input[name=birthDate]').val());
                mySheet.SetCellValue($('input[name=myRow]').val(),11,$('input[name=contactNum]').val());
                mySheet.SetCellValue($('input[name=myRow]').val(),12,$('input[name=finalEduCode]').val());   
@@ -278,7 +278,12 @@
                sendData();
 
                mySheet.DoSave("${contextPath}/hm/p0004/saveData.do");
-               mySheet2.DoSave("${contextPath}/hm/p0004/saveData2.do", empCode); 
+               
+               if(mySheet2.IsDataModified()) {
+            	   mySheet2.DoSave("${contextPath}/hm/p0004/saveData2.do", empCode); 
+            	  }
+
+              
                break;      
       }
    }
@@ -297,7 +302,7 @@
             $('input[name=hanName]').val(mySheet.GetCellValue(Row,6)); 
             $('input[name=foreignYN]').val(mySheet.GetCellValue(Row,7));
             $('input[name=rrNumber]').val(mySheet.GetCellValue(Row,8));
-            $('input[name=sex]').val(mySheet.GetCellValue(Row,9));
+            $('select[name=sex]').val(mySheet.GetCellValue(Row,9));
             $('input[name=birthDate]').val(mySheet.GetCellValue(Row,10));
             $('input[name=contactNum]').val(mySheet.GetCellValue(Row,11));
             $('input[name=finalEduCode]').val(mySheet.GetCellValue(Row,12));
