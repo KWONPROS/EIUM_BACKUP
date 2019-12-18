@@ -215,7 +215,7 @@
 	
 	<choose>
 	<when test="date != '' and date2 != '' ">
-	AND ew.employee_join_date BETWEEN #{date} AND #{date2}
+	AND TO_DATE(ew.employee_join_date,'YYYY-MM-DD') BETWEEN #{date} AND #{date2}
 	</when>
 	</choose>
 	
@@ -271,11 +271,7 @@
     AND ew.work_type_code = wt.work_type_code(+)
     AND ew.pay_type_code = pt.pay_type_code(+)
     AND ROUND(MOD(MOD(MONTHS_BETWEEN(SYSDATE,employee_join_date)/12, 1)*12, 1)*(365/12),0) > '0'
-	<choose>
-	<when test="resigner == null ">
-	 AND ew.employee_resignation_date is null 
-	</when>
-	</choose>
+
 	<choose>
 	<when test="site != '' and site != null">
 	AND s.site_name = #{site}
@@ -327,7 +323,7 @@
 	
 	<choose>
 	<when test="date != '' and date2 != '' ">
-	AND ew.EMPLOYEE_RESIGNATION_DATE BETWEEN #{date} AND #{date2}
+	AND TO_DATE(ew.employee_resignation_date,'YYYY-MM-DD') BETWEEN #{date} AND #{date2}
 	</when>
 	</choose>
 	

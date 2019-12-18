@@ -41,6 +41,8 @@
 	    <result property="pay_TYPE_CODE" column="pay_TYPE_CODE" />
 	    <result property="pay_GRADE_CODE" column="pay_GRADE_CODE" />
 	    <result property="out_REASON_CODE" column="out_REASON_CODE" />	
+	    <result property="resignation_DATE" column="resignation_DATE" />	
+	    <result property="employee_RESIGNATION_DATE" column="employee_RESIGNATION_DATE" />	
 	    
 
 	</resultMap> 
@@ -101,7 +103,8 @@ pt.PAY_TYPE_NAME,
 pg.PAY_GRADE_NAME,
 orn.OUT_REASON_NAME,
 HAH.START_DATE,
-HAH.END_DATE
+HAH.END_DATE,
+HAH.RESIGNATION_DATE
 
 FROM HR_APPOINT_HISTORY HAH,
     EMPLOYEE_WORK EW,
@@ -159,7 +162,8 @@ HAH.PAY_TYPE_CODE,
 HAH.PAY_GRADE_CODE,
 HAH.OUT_REASON_CODE,
 HAH.START_DATE,
-HAH.END_DATE
+HAH.END_DATE,
+HAH.RESIGNATION_DATE
 
 FROM HR_APPOINT_HISTORY HAH,
     EMPLOYEE_WORK EW,
@@ -275,8 +279,8 @@ PT.PAY_TYPE_CODE,
 PG.PAY_GRADE_NAME,
 PG.PAY_GRADE_CODE,
 ORN.OUT_REASON_NAME,
-ORN.OUT_REASON_CODE
-
+ORN.OUT_REASON_CODE,
+EW.EMPLOYEE_RESIGNATION_DATE
 
 FROM EMPLOYEE_WORK EW,
     EMPLOYEE E,
@@ -393,8 +397,8 @@ AND site_name = #{E_id jdbcType=VARCHAR}
 	
 	<insert id="insertData2" parameterType="java.util.Map">
 
-	insert into hr_appoint_history(appoint_history_code, appoint_index_code , appoint_employee_code , appoint_code , start_date , end_date , work_status_code ,join_date , site_code , department_code , job_class_code , position_code , duty_code , job_dis_code , pay_type_code , pay_grade_code , out_reason_code ,int_user_id, int_date)
-	values (APPOINT_HISTORY_CODE_SEQ.nextval , #{hr_APPOINT_INDEX_NAME,jdbcType=VARCHAR} ,#{employee_CODE,jdbcType=VARCHAR},#{appointCode,jdbcType=VARCHAR},#{start_DATE,jdbcType=VARCHAR},#{end_DATE,jdbcType=VARCHAR},#{work_STATUS_NAME,jdbcType=VARCHAR},#{employee_JOIN_DATE,jdbcType=VARCHAR} ,#{site_CODE,jdbcType=VARCHAR} , #{department_CODE,jdbcType=VARCHAR} ,#{job_CLASS_NAME,jdbcType=VARCHAR} ,#{position_NAME,jdbcType=VARCHAR}, #{duty_NAME,jdbcType=VARCHAR} , #{job_DIS_NAME,jdbcType=VARCHAR} ,#{pay_TYPE_NAME,jdbcType=VARCHAR} , #{pay_GRADE_NAME,jdbcType=VARCHAR},#{out_REASON_NAME,jdbcType=VARCHAR},#{user},sysdate)
+	insert into hr_appoint_history(appoint_history_code, appoint_index_code , appoint_employee_code , appoint_code , start_date , end_date , work_status_code ,join_date , site_code , department_code , job_class_code , position_code , duty_code , job_dis_code , pay_type_code , pay_grade_code , out_reason_code ,int_user_id, int_date,RESIGNATION_DATE)
+	values (APPOINT_HISTORY_CODE_SEQ.nextval , #{hr_APPOINT_INDEX_NAME,jdbcType=VARCHAR} ,#{employee_CODE,jdbcType=VARCHAR},#{appointCode,jdbcType=VARCHAR},#{start_DATE,jdbcType=VARCHAR},#{end_DATE,jdbcType=VARCHAR},#{work_STATUS_NAME,jdbcType=VARCHAR},#{employee_JOIN_DATE,jdbcType=VARCHAR} ,#{site_CODE,jdbcType=VARCHAR} , #{department_CODE,jdbcType=VARCHAR} ,#{job_CLASS_NAME,jdbcType=VARCHAR} ,#{position_NAME,jdbcType=VARCHAR}, #{duty_NAME,jdbcType=VARCHAR} , #{job_DIS_NAME,jdbcType=VARCHAR} ,#{pay_TYPE_NAME,jdbcType=VARCHAR} , #{pay_GRADE_NAME,jdbcType=VARCHAR},#{out_REASON_NAME,jdbcType=VARCHAR},#{user},sysdate,#{resignation_DATE,jdbcType=VARCHAR})
  
 	 </insert>
 	
@@ -422,6 +426,7 @@ AND site_name = #{E_id jdbcType=VARCHAR}
 			, PAY_TYPE_CODE=#{pay_TYPE_NAME,jdbcType=VARCHAR}   
 			, PAY_GRADE_CODE=#{pay_GRADE_NAME,jdbcType=VARCHAR}   
 			, OUT_REASON_CODE=#{out_REASON_NAME,jdbcType=VARCHAR}   
+			, RESIGNATION_DATE=#{resignation_DATE,jdbcType=VARCHAR}   
 						   
 			, upt_user_id = #{user, jdbcType=VARCHAR}
 			, upt_date = sysdate
@@ -442,7 +447,7 @@ AND site_name = #{E_id jdbcType=VARCHAR}
 	<update id="updateData4" parameterType="java.util.Map">
 	 update EMPLOYEE_WORK 
  	 set EMPLOYEE_JOIN_DATE = #{employee_JOIN_DATE,jdbcType=VARCHAR}, DEPARTMENT_CODE = #{department_CODE,jdbcType=VARCHAR}, JOB_CLASS_CODE = #{job_CLASS_CODE,jdbcType=VARCHAR}, POSITION_CODE = #{position_CODE,jdbcType=VARCHAR}, DUTY_CODE = #{duty_CODE,jdbcType=VARCHAR},
-     JOB_DIS_CODE = #{job_DIS_CODE,jdbcType=VARCHAR}, PAY_TYPE_CODE = #{pay_TYPE_CODE,jdbcType=VARCHAR}, PAY_GRADE_CODE = #{pay_GRADE_CODE,jdbcType=VARCHAR}, OUT_REASON_CODE = #{out_REASON_CODE,jdbcType=VARCHAR},work_STATUS_CODE = #{work_STATUS_CODE},upt_user_id = #{user, jdbcType=VARCHAR},upt_date = sysdate
+     JOB_DIS_CODE = #{job_DIS_CODE,jdbcType=VARCHAR}, PAY_TYPE_CODE = #{pay_TYPE_CODE,jdbcType=VARCHAR}, PAY_GRADE_CODE = #{pay_GRADE_CODE,jdbcType=VARCHAR}, OUT_REASON_CODE = #{out_REASON_CODE,jdbcType=VARCHAR},work_STATUS_CODE = #{work_STATUS_CODE},upt_user_id = #{user, jdbcType=VARCHAR},upt_date = sysdate , EMPLOYEE_RESIGNATION_DATE = #{resignation_DATE}
      where EMPLOYEE_CODE = #{employee_CODE,jdbcType=VARCHAR}
 
 	</update>

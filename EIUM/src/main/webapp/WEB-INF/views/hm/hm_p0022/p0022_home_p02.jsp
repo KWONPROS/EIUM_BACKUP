@@ -24,7 +24,7 @@
 .left{
 position: absolute;
 top: 145px;
-left: 50px;
+left: 10px;
 }
 
 .rightbuttons {
@@ -100,11 +100,11 @@ function LoadPage(){
 	initSheet.Cfg={SearchMode:smLazyLoad,ToolTip:1};
 	initSheet.HeaderMode = {Sort:1,ColMove:1,ColResize:1,HeaderCheck:1};
 	initSheet.Cols=[
-		{Header:"NO",Type:"Seq",Width:70,SaveName:"seq",Align:"Center"},
-		{Header:"사원코드",Type:"Text",Width:70,SaveName:"masterEmployee_CODE",Align:"Center"},
-		{Header:"사원명",Type:"Text",Width:70,SaveName:"employee_NAME",Align:"Center"},
-		{Header:"사업장",Type:"Text",Width:70,SaveName:"site_NAME",Align:"Center"},
-		{Header:"부서",Type:"Text",Width:70,SaveName:"department_NAME",Align:"Center"},
+		{Header:"NO",Type:"Seq",Width:30,SaveName:"seq",Align:"Center"},
+		{Header:"사원코드",Type:"Text",Width:90,SaveName:"masterEmployee_CODE",Align:"Center"},
+		{Header:"사원명",Type:"Text",Width:90,SaveName:"employee_NAME",Align:"Center"},
+		{Header:"사업장",Type:"Text",Width:90,SaveName:"site_NAME",Align:"Center"},
+		{Header:"부서",Type:"Text",Width:90,SaveName:"department_NAME",Align:"Center"},
 		{Header:"직책",Type:"Text",Width:70,SaveName:"duty_NAME",Align:"Center"},
 
 		];
@@ -152,7 +152,7 @@ function mySheet_OnDblClick(Row,Col){
 	<div class="left">
 	<div class="ib_product">
 	<script>
-		createIBSheet("mySheet", "100%", "500px");
+		createIBSheet("mySheet", "500px", "500px");
 	</script>
 	</div>
 	</div>

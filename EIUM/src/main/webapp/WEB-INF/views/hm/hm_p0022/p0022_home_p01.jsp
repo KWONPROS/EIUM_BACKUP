@@ -101,8 +101,8 @@ function LoadPage(){
 	initSheet.HeaderMode = {Sort:1,ColMove:1,ColResize:1,HeaderCheck:1};
 	initSheet.Cols=[
 		{Header:"NO",Type:"Seq",Width:70,SaveName:"seq",Align:"Center"},
-		{Header:"사원코드",Type:"Text",Width:70,SaveName:"employee_CODE",Align:"Center"},
-		{Header:"사원명",Type:"Text",Width:70,SaveName:"employee_NAME",Align:"Center"},
+		{Header:"사원코드",Type:"Text",Width:120,SaveName:"employee_CODE",Align:"Center"},
+		{Header:"사원명",Type:"Text",Width:120,SaveName:"employee_NAME",Align:"Center"},
 		{Header:"재직상태",Type:"Text",Width:70,SaveName:"work_STATUS_NAME",Align:"Center",Hidden:1},
 		{Header:"입사일",Type:"Text",Width:70,SaveName:"employee_JOIN_DATE",Align:"Center",Hidden:1},
 		{Header:"사업장명",Type:"Text",Width:70,SaveName:"site_NAME",Align:"Center",Hidden:1},
@@ -116,6 +116,7 @@ function LoadPage(){
 		{Header:"급여형태",Type:"Text",Width:70,SaveName:"pay_TYPE_NAME",Align:"Center",Hidden:1},
 		{Header:"호봉",Type:"Text",Width:70,SaveName:"pay_GRADE_NAME",Align:"Center",Hidden:1},
 		{Header:"퇴직사유",Type:"Text",Width:70,SaveName:"out_REASON_NAME",Align:"Center",Hidden:1},
+		{Header:"퇴직일자",Type:"Text",Width:70,SaveName:"employee_RESIGNATION_DATE",Align:"Center",Hidden:1}
 		
 		];
 	IBS_InitSheet(mySheet,initSheet);
@@ -161,7 +162,7 @@ window.opener.popupValue2(rowData);
 	<div class="left">
 	<div class="ib_product">
 	<script>
-		createIBSheet("mySheet", "100%", "500px");
+		createIBSheet("mySheet", "500px", "500px");
 	</script>
 	</div>
 	</div>

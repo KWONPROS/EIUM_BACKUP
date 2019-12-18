@@ -221,6 +221,23 @@ String job_DIS_CODE;
 String pay_TYPE_CODE;
 String pay_GRADE_CODE;
 String out_REASON_CODE;
+String resignation_DATE;
+
+
+public String getResignation_DATE() {
+	return resignation_DATE;
+}
+public void setResignation_DATE(String resignation_DATE) {
+	this.resignation_DATE = resignation_DATE;
+}
+public String getEmployee_RESIGNATION_DATE() {
+	return employee_RESIGNATION_DATE;
+}
+public void setEmployee_RESIGNATION_DATE(String employee_RESIGNATION_DATE) {
+	this.employee_RESIGNATION_DATE = employee_RESIGNATION_DATE;
+}
+String employee_RESIGNATION_DATE;
+
 public String getJob_CLASS_CODE() {
 	return job_CLASS_CODE;
 }

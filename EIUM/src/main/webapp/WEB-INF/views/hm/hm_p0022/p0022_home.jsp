@@ -228,7 +228,9 @@ initSheet.Cols = [
          {Header:"직무",Type:"Combo",SaveName:"job_DIS_NAME",Align:"Center",Width:100,"ComboText":"|CEO|CTO", "ComboCode":"|100|200"},
          {Header:"급여유형",Type:"Combo",SaveName:"pay_TYPE_NAME",Align:"Center",Width:100},
          {Header:"급여호봉",Type:"Combo",SaveName:"pay_GRADE_NAME",Align:"Center",Width:100,"ComboText":"|1호봉|2호봉|3호봉|4호봉|5호봉|6호봉|7호봉|8호봉|9호봉|10호봉", "ComboCode":"|C01|C02|C03|C04|C05|C06|C07|C08|C09|C10"},
-         {Header:"퇴직사유",Type:"Combo",SaveName:"out_REASON_NAME",Align:"Center",Width:100,"ComboText":"|해고|병가", "ComboCode":"|100|200"}         ];
+         {Header:"퇴직사유",Type:"Combo",SaveName:"out_REASON_NAME",Align:"Center",Width:100,"ComboText":"|해고|병가", "ComboCode":"|100|200"},
+         {Header:"퇴직일자",Type:"Date",SaveName:"resignation_DATE",Align:"Center",Width:100}        
+         ];
       IBS_InitSheet(mySheet2,initSheet2);
       mySheet2.SetEditableColorDiff(1); //편집불가능한 셀 표시 구분
 
@@ -290,8 +292,7 @@ function mySheet1_OnClick(Row,Col){
 		var dataMap = JSON.parse(mySheet2.GetSearchData("${contextPath}/hm/p0022/appointList3.do",appointCode));
 		console.log(dataMap);
 		for(var i in dataMap.Data){
-			var send = {"Status":"U","employee_JOIN_DATE":dataMap.Data[i].employee_JOIN_DATE,"department_CODE":dataMap.Data[i].department_CODE,"job_CLASS_CODE":dataMap.Data[i].job_CLASS_CODE,"position_CODE":dataMap.Data[i].position_CODE,"duty_CODE":dataMap.Data[i].duty_CODE,"job_DIS_CODE":dataMap.Data[i].job_DIS_CODE,"pay_TYPE_CODE":dataMap.Data[i].pay_TYPE_CODE,"pay_GRADE_CODE":dataMap.Data[i].pay_GRADE_CODE,"out_REASON_CODE":dataMap.Data[i].out_REASON_CODE,"employee_CODE":dataMap.Data[i].employee_CODE,"work_STATUS_CODE":dataMap.Data[i].work_STATUS_CODE}
-
+			var send = {"Status":"U","employee_JOIN_DATE":dataMap.Data[i].employee_JOIN_DATE,"department_CODE":dataMap.Data[i].department_CODE,"job_CLASS_CODE":dataMap.Data[i].job_CLASS_CODE,"position_CODE":dataMap.Data[i].position_CODE,"duty_CODE":dataMap.Data[i].duty_CODE,"job_DIS_CODE":dataMap.Data[i].job_DIS_CODE,"pay_TYPE_CODE":dataMap.Data[i].pay_TYPE_CODE,"pay_GRADE_CODE":dataMap.Data[i].pay_GRADE_CODE,"out_REASON_CODE":dataMap.Data[i].out_REASON_CODE,"employee_CODE":dataMap.Data[i].employee_CODE,"work_STATUS_CODE":dataMap.Data[i].work_STATUS_CODE,"resignation_DATE":dataMap.Data[i].resignation_DATE}
 			$.ajax({
 			    url:'${contextPath}/hm/p0022/saveData4.do', //request 보낼 서버의 경로
 			    type:'post', // 메소드(get, post, put 등)
