@@ -761,7 +761,7 @@ border : none;
 
 </style>
 </head>
-<body onload="LoadPage()" style="overflow-x: hidden">
+<body onload="LoadPage()" style="overflow: hidden;">
 <form name="frm">
 	<div class="leftbuttons">
 		<a href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
