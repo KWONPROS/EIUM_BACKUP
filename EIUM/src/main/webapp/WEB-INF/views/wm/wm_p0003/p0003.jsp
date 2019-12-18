@@ -258,8 +258,8 @@ background-color: #2C3E50;
 	left: 60px;
 	width: 1000px;
 }
-#p_text, #date, #date2{
-    width: 150px;
+#date, #date2{
+    width: 100px;
 }
 .ui-datepicker{ font-size: 12px; width: 160px; }
 .ui-datepicker select.ui-datepicker-month{ width:30%; font-size: 11px; }

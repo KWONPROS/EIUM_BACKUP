@@ -356,7 +356,7 @@ background-color: #2C3E50;
 	border-radius: 5px;
 	margin: 0 5px 0 70px;
 	vertical-align: middle;
-	margin-left: 45px;
+	margin-left: 36px;
 }
 #searchBar {
 	background: #EBEBEB;
@@ -374,6 +374,9 @@ background-color: #2C3E50;
 	padding-left: 5px;
 	vertical-align: middle;
 	text-align: center;
+}
+#date{
+    width: 130px;
 }
 
 .ui-datepicker{ font-size: 12px; width: 160px; }
