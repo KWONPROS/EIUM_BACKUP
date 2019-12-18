@@ -31,11 +31,12 @@ public interface HM_P0022Service {
 
 	void saveData1(Map<String, String[]> dataMap, String u) throws DataAccessException;
 
-	void saveData2(Map<String, String[]> dataMap, String u) throws DataAccessException;
 
 	void saveData3(Map<String, String[]> dataMap, String u) throws DataAccessException;
 
 	void saveData4(Map<String, String[]> dataMap, String u) throws DataAccessException;
+
+	void saveData2(Map<String, String[]> dataMap, String u, String appointCode) throws DataAccessException;
 
 
 

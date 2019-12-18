@@ -297,7 +297,8 @@ public class HM_P0022ControllerImpl implements HM_P0022Controller{
 		  HttpSession session = request.getSession(); LoginVO loginvo = new LoginVO();
 		  loginvo = (LoginVO)session.getAttribute("login"); 
 		  String user= (loginvo.getEmployee_id());
-		  
+		  String appointCode = request.getParameter("appointCode");
+		  System.out.println("%%%%%%%%%%%%"+appointCode);
 		Enumeration enu = request.getParameterNames();
 		while (enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
@@ -308,7 +309,7 @@ public class HM_P0022ControllerImpl implements HM_P0022Controller{
 		
 		Map<String, String> result = new HashMap<String, String>();
 		try {
-			hM_P0022Service.saveData2(dataMap,user);	
+			hM_P0022Service.saveData2(dataMap,user,appointCode);	
 			result.put("Code","0");
 			result.put("Message","저장성공");
 		}catch(Exception e) {

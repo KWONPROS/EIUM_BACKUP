@@ -102,13 +102,13 @@ public class HM_P0022ServiceImpl implements HM_P0022Service{
 	}
 	
 	@Override
-	public void saveData2(Map<String, String[]> dataMap,String u) throws DataAccessException {
+	public void saveData2(Map<String, String[]> dataMap,String u,String appointCode) throws DataAccessException {
 		String[] status = dataMap.get("Status");
 		int length = status.length; // row수
 		int i = 0;
 		
 		for(String str : status) {
-			Map<String, String> row = getRow(dataMap, length, i,u); // 현재 Index의 Row Map
+			Map<String, String> row = getRow2(dataMap, length, i,u,appointCode); // 현재 Index의 Row Map
 			if("I".equals(str)) { // 추가
 				hM_P0022DAO.insertData2(row);
 			}else if("U".equals(str)) { // 수정
@@ -170,7 +170,20 @@ public class HM_P0022ServiceImpl implements HM_P0022Service{
 
 
 
+	private Map getRow2(Map<String, String[]> dataMap, int length, int index,String u,String appointCode) {
+		Map<String, String> row = new HashMap<String, String>();
+		for(String name : dataMap.keySet()) {
+			String[] data = dataMap.get(name);
+			if(length == data.length) {
+				row.put(name, data[index]);
+				row.put("user", u);
+				row.put("appointCode",appointCode);
 
+			}
+		}		
+		return row;
+	}
+	
 	
 
 	
