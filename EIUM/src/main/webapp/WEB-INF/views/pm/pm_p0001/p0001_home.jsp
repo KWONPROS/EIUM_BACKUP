@@ -148,9 +148,7 @@ function setPaygrade(){
 	function mySheet2_OnChange(Row, Col, Value) {
 	    if(mySheet2.GetCellValue(Row, 3) == "기본급"){
 	    	var a = Math.floor((mySheet.GetCellValue(x, 7)/(12540)));
-	    	alert(a);
 	    	var z = (a*mySheet.GetCellValue(x, 8)) + ((a*1.5)*mySheet.GetCellValue(x, 9)) + ((a*1.5)*mySheet.GetCellValue(x, 10))+ ((a*1.5)*mySheet.GetCellValue(x, 11))+ ((a*2)*mySheet.GetCellValue(x, 12))+ ((a*2.5)*mySheet.GetCellValue(x, 13));
-	    	alert(z);
 	    	mySheet2.SetCellValue(Row, 4, z);
 	   }
 	    
