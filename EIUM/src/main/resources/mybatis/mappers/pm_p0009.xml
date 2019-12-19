@@ -68,7 +68,7 @@ and o.site_name = #{searchSite}
 <if test="DeptList != '전체' and DeptList!=null and DeptList!=''">
 and c.department_name = #{DeptList}
 </if>
-
+order by c.DEPARTMENT_CODE
 
 	</select>
 
