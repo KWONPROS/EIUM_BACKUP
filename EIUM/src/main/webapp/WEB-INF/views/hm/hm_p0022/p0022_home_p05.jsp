@@ -8,77 +8,6 @@
 
 <style type="text/css">
 
-.IBbutton {
-	font-size: 13px;
-	margin-left: 5px;
-	background-color: #2B69A0;
-	color: white;
-	padding: 5px 15px;
-	border-radius: 7px;
-	text-decoration: none;
-}
-.IBbutton:hover {
-	background-color: #2C3E50;
-}
-
-.left{
-position: absolute;
-top: 145px;
-left: 50px;
-}
-
-.rightbuttons {
-	margin-top: 50px;
-	margin: 20px;
-	position: absolute;
-	right: 30px;
-}
-.right{
-position: relative;
-top: 150px;
-left: 600px;
-width: 700px;
-background: #EDF0F5;
-border-radius: 10px;
-}
-
-.right table{
-font-size:13px;
-font-weight:bold;
-position: relative;
-left: 40px;
-padding: 20px;
-}
-.right table tr td:nth-child(1){
-text-align:right;
-}
-.right table tr td:nth-child(2){
-width: 20px;
-height: 25px;
-}
-.right table tr td:nth-child(3) input{
-width: 130px;
-height: 20px;
-padding-left: 10px;
-margin-right:10px;
-box-sizing: border-box;
-border: 1px solid #CCCCCC;
-border-radius: 2px;
-} 
-.title {
-	width: 100%;
-	color: #2C3E50;
-	font-weight: bold;
-	font-size: 20px;
-	padding-left: 30px;
-	padding-bottom: 10px;
-	padding-top: 20px;
-	border-top: thin solid #5E5E5E;
-	border-bottom: thin dashed #5E5E5E;
-	position: absolute;
-	top: 50px;
-}
-
 
 </style>
 
@@ -100,16 +29,16 @@ function LoadPage(){
 	initSheet.Cfg={SearchMode:smLazyLoad,ToolTip:1};
 	initSheet.HeaderMode = {Sort:1,ColMove:1,ColResize:1,HeaderCheck:1};
 	initSheet.Cols=[
-		{Header:"NO",Type:"Seq",Width:70,SaveName:"seq",Align:"Center"},
-		{Header:"부서코드",Type:"Text",Width:70,SaveName:"department_CODE",Align:"Center"},
-		{Header:"부서명",Type:"Text",Width:70,SaveName:"department_NAME",Align:"Center"},
+		{Header:"NO",Type:"Seq",MinWidth:60,SaveName:"seq",Align:"Center"},
+		{Header:"부서코드",Type:"Text",MinWidth:130,SaveName:"department_CODE",Align:"Center"},
+		{Header:"부서명",Type:"Text",MinWidth:140,SaveName:"department_NAME",Align:"Center"},
 		];
 	IBS_InitSheet(mySheet,initSheet);
 	mySheet.SetEditableColorDiff(1);
 
 	mySheet.SetColEditable(2,0);
-	var param=FormQueryStringEnc(document.frm);
-	mySheet.DoSearch("${contextPath}/hm/p0022/homeSearch_p05.do",param);
+
+	mySheet.DoSearch("${contextPath}/hm/p0022/homeSearch_p05.do");
 }
 
 
@@ -121,8 +50,8 @@ function doAction(sAction) {
 	switch(sAction){
 	
 	case "search": //조회
-		var param=FormQueryStringEnc(document.frm);
-		mySheet.DoSearch("${contextPath}/hm/p0022/homeSearch_p05.do",param);
+
+		mySheet.DoSearch("${contextPath}/hm/p0022/homeSearch_p05.do");
 		break;
 	
 	case "reload": //초기화
@@ -193,16 +122,6 @@ function selectSite() {
 	</div>
 	</div>
 	
-<form name="frm">
-
-<input type="hidden" value=<%=request.getParameter("name")%> id="SiteList">
- 
-		
-			
-</form>
-	
-
-
 
 	
 </body>
