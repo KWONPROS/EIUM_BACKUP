@@ -23,9 +23,9 @@ function LoadPage(){
 	initSheet.Cols=[
 		{Header:"NO",Type:"Seq",Width:100,SaveName:"seq",Align:"Center"},
 		{Header:"교육코드",Type:"Text",Width:100,SaveName:"employee_TRAINING_CODE",Align:"Center"},
-		{Header:"교육명",Type:"Text",Width:100,SaveName:"employee_TRAINING_NAME",Align:"Center"},
-		{Header:"시작일",Type:"Text",Width:100,SaveName:"employee_TRAINING_START_DATE",Align:"Center"},
-		{Header:"종료일",Type:"Text",Width:100,SaveName:"employee_TRAINING_END_DATE",Align:"Center"},
+		{Header:"교육명",Type:"Text",Width:120,SaveName:"employee_TRAINING_NAME",Align:"Center"},
+		{Header:"시작일",Type:"Date",Width:120,SaveName:"employee_TRAINING_START_DATE",Align:"Center"},
+		{Header:"종료일",Type:"Date",Width:120,SaveName:"employee_TRAINING_END_DATE",Align:"Center"},
 		];
 	IBS_InitSheet(mySheet,initSheet);
 	mySheet.SetEditableColorDiff(1);

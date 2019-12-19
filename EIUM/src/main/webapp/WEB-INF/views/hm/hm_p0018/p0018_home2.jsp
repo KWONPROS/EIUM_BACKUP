@@ -218,7 +218,7 @@ function LoadPage() {
 	  function mySheet2_OnPopupClick(Row,Col){
 			if(Col=="2"){
 				
-				window.open("${contextPath}/hm/p0018/home2_p02.do", "a", "width=500, height=700, left=100, top=50"); 
+				window.open("${contextPath}/hm/p0018/home2_p02.do", "a", "width=550, height=700, left=100, top=50"); 
 
 				}
 	  }

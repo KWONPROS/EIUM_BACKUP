@@ -54,7 +54,7 @@
 								      ]]>
 			</when>
 			</choose>
-
+			order by EMPLOYEE_TRAINING_CODE
 	</select>
 	
 	
