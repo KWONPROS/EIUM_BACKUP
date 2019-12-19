@@ -298,14 +298,14 @@
 		select i.hr_appoint_index_name, a.appoint_code, a.appoint_title, a.appoint_date, w.work_status_name, s.site_name, d.department_name, p.position_name, dt.duty_name, e.employee_name
 		from hr_appoint a, hr_appoint_history h, hr_appoint_index i, employee e, employee_work ew, site s, department d, position p,  duty dt, work_status w
 		where h.appoint_employee_code = ew.employee_code
-		and h.appoint_code = a.appoint_code
-		and h.appoint_index_code = i.hr_appoint_index_code
-		and h.site_code = s.site_code
-		and h.department_code = d.department_code
-		and h.position_code = p.position_code
-		and h.duty_code = dt.duty_code
-		and a.masteremployee_code = e.employee_code
-		and h.work_status_code = w.work_status_code
+		and h.appoint_code = a.appoint_code(+)
+		and h.appoint_index_code = i.hr_appoint_index_code(+)
+		and h.site_code = s.site_code(+)
+		and h.department_code = d.department_code(+)
+		and h.position_code = p.position_code(+)
+		and h.duty_code = dt.duty_code(+)
+		and a.masteremployee_code = e.employee_code(+)
+		and h.work_status_code = w.work_status_code(+)
 		and h.appoint_employee_code = #{x}
 		and a.appoint_yn = '마감완료'
 		order by a.appoint_code

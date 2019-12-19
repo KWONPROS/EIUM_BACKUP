@@ -47,7 +47,6 @@ position: relative;
 top: 150px;
 left: 600px;
 width: 700px;
-
 }
 .right table{
 font-size:13px;
@@ -85,7 +84,6 @@ border-radius: 2px;
 	position: absolute;
 	top: 50px;
 }
-
 .sheet1{
 position:relative;
 top:110px;
@@ -98,7 +96,6 @@ width:1540px;
 position:relative;
 top:120px;
 left:20px;
-
 }
 #searchBar {
 	background: #EBEBEB;
@@ -178,8 +175,6 @@ $("#date2").change(function() {
 		return;
 	}
 	});
-
-
 mySheet1.RemoveAll();
 //아이비시트 초기화
 var initSheet = {};
@@ -200,7 +195,6 @@ initSheet.Cols = [
       ];
    IBS_InitSheet(mySheet1, initSheet);
    mySheet1.SetEditableColorDiff(1); //편집불가능한 셀 표시 구분
-
    
    mySheet2.RemoveAll();
    //아이비시트 초기화
@@ -233,28 +227,22 @@ initSheet.Cols = [
          ];
       IBS_InitSheet(mySheet2,initSheet2);
       mySheet2.SetEditableColorDiff(1); //편집불가능한 셀 표시 구분
-
-
 }
-
 function mySheet1_OnRowSearchEnd(Row) {
 	x = mySheet1.GetCellValue(Row, 5);
     if(mySheet1.GetCellValue(Row, 5) == "마감완료"){
 	    mySheet1.SetRowEditable(Row,0);
 	}
 }
-
 function mySheet2_OnRowSearchEnd(Row) {
     if(x == "마감완료"){
 	    mySheet2.SetRowEditable(Row,0);
 	}
 }
-
 function mySheet1_OnClick(Row,Col){
 	var status=mySheet1.GetCellValue(Row,0);
 	var finish=mySheet1.GetCellValue(Row,5);
 	if(status!="I"&& Col!=5){
-
 	appointCode ="appointCode="+mySheet1.GetCellValue(Row,3);
 	mySheet2.DoSearch("${contextPath}/hm/p0022/appointList2.do",appointCode);
 	
@@ -269,7 +257,6 @@ function mySheet1_OnClick(Row,Col){
 	
 	function mySheet1_OnButtonClick(Row,Col){
 		 var appointCode ="appointCode="+mySheet1.GetCellValue(Row,3);
-
 		
 		if(mySheet1.GetCellValue(Row,Col)=="마감"){
 	  
@@ -292,7 +279,7 @@ function mySheet1_OnClick(Row,Col){
 		var dataMap = JSON.parse(mySheet2.GetSearchData("${contextPath}/hm/p0022/appointList3.do",appointCode));
 		console.log(dataMap);
 		for(var i in dataMap.Data){
-			var send = {"Status":"U","employee_JOIN_DATE":dataMap.Data[i].employee_JOIN_DATE,"department_CODE":dataMap.Data[i].department_CODE,"job_CLASS_CODE":dataMap.Data[i].job_CLASS_CODE,"position_CODE":dataMap.Data[i].position_CODE,"duty_CODE":dataMap.Data[i].duty_CODE,"job_DIS_CODE":dataMap.Data[i].job_DIS_CODE,"pay_TYPE_CODE":dataMap.Data[i].pay_TYPE_CODE,"pay_GRADE_CODE":dataMap.Data[i].pay_GRADE_CODE,"out_REASON_CODE":dataMap.Data[i].out_REASON_CODE,"employee_CODE":dataMap.Data[i].employee_CODE,"work_STATUS_CODE":dataMap.Data[i].work_STATUS_CODE,"resignation_DATE":dataMap.Data[i].resignation_DATE}
+			var send = {"Status":"U","employee_JOIN_DATE":dataMap.Data[i].join_DATE,"department_CODE":dataMap.Data[i].department_CODE,"job_CLASS_CODE":dataMap.Data[i].job_CLASS_CODE,"position_CODE":dataMap.Data[i].position_CODE,"duty_CODE":dataMap.Data[i].duty_CODE,"job_DIS_CODE":dataMap.Data[i].job_DIS_CODE,"pay_TYPE_CODE":dataMap.Data[i].pay_TYPE_CODE,"pay_GRADE_CODE":dataMap.Data[i].pay_GRADE_CODE,"out_REASON_CODE":dataMap.Data[i].out_REASON_CODE,"employee_CODE":dataMap.Data[i].employee_CODE,"work_STATUS_CODE":dataMap.Data[i].work_STATUS_CODE,"resignation_DATE":dataMap.Data[i].resignation_DATE}
 			$.ajax({
 			    url:'${contextPath}/hm/p0022/saveData4.do', //request 보낼 서버의 경로
 			    type:'post', // 메소드(get, post, put 등)
@@ -304,16 +291,10 @@ function mySheet1_OnClick(Row,Col){
 			        //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
 			    }
 			});
-
 		}
 		var send="";
 			
-
-
-
 	}
-
-
 function doAction(sAction) {
 	switch (sAction) {
 	case "search":
@@ -342,7 +323,6 @@ function doAction(sAction) {
 		mySheet2.DoSave("${contextPath}/hm/p0022/saveData2.do",appointCode);		
 		break;
 	case "down":
-
 		mySheet1.Down2ExcelBuffer(true);
 		mySheet1.Down2Excel();
 		mySheet2.Down2Excel();
@@ -350,13 +330,9 @@ function doAction(sAction) {
 		break;
 	}
 }
-
-
-
 function goPopup(){
 	window.open("${contextPath}/hm/p0022/homeInit_p03.do", "a", "width=500, height=700, left=100, top=50 location=0");
 }
-
 function popupValue(emplyCode,emplyName){
 	$("#masterEmpl").val(emplyName);
 	$("#masterEmplCode").val(emplyCode);
@@ -365,7 +341,6 @@ function popupValue(emplyCode,emplyName){
 	
 }
 function popupValue2(rowData){
-
 	
 	mySheet2.SetRowData(mySheet2.GetSelectRow(),rowData);
 	
@@ -385,9 +360,7 @@ function popupValue5(rowData){
 	mySheet2.SetRowData(mySheet2.GetSelectRow(),rowData);
 	
 }
-
 	
-
 function mySheet2_OnPopupClick(Row,Col) {  	
 	
 	if(Col==4){
@@ -403,7 +376,7 @@ function mySheet2_OnPopupClick(Row,Col) {
 }
 function mySheet1_OnPopupClick(Row,Col){
 	if(Col==6){
-	window.open("${contextPath}/hm/p0022/homeInit_p02.do", "a", "width=500, height=700, left=100, top=50 location=no")
+	window.open("${contextPath}/hm/p0022/homeInit_p02.do", "a", "width=510, height=520,resizable = no, scrollbars = no" );
 	}
 }
 function mySheet1_OnSaveEnd(){
@@ -411,7 +384,6 @@ function mySheet1_OnSaveEnd(){
     mySheet1.DoSearch("${contextPath}/hm/p0022/appointList.do", param);
     mySheet2.RemoveAll();
 }
-
 </script>
 <meta charset="UTF-8">
 <title>인사발령</title>
@@ -448,7 +420,7 @@ function mySheet1_OnSaveEnd(){
 		</div>
 		<script type="text/javascript">
 			createIBSheet("mySheet1", "1600px", "200px");
-		</script>
+		</script>  
 	</div>
 
 
