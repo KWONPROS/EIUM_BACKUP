@@ -376,7 +376,9 @@ function mySheet2_OnPopupClick(Row,Col) {
 }
 function mySheet1_OnPopupClick(Row,Col){
 	if(Col==6){
-	window.open("${contextPath}/hm/p0022/homeInit_p02.do", "a","width=342,height=520,resizable = no, scrollbars = no")
+
+	window.open("${contextPath}/hm/p0022/homeInit_p02.do", "a", "width=510, height=520,resizable = no, scrollbars = no" );
+
 	}
 }
 function mySheet1_OnSaveEnd(){
@@ -420,7 +422,7 @@ function mySheet1_OnSaveEnd(){
 		</div>
 		<script type="text/javascript">
 			createIBSheet("mySheet1", "1600px", "200px");
-		</script>
+		</script>  
 	</div>
 
 

@@ -6,81 +6,6 @@
 <html>
 <head>
 
-<style type="text/css">
-
-.IBbutton {
-	font-size: 13px;
-	margin-left: 5px;
-	background-color: #2B69A0;
-	color: white;
-	padding: 5px 15px;
-	border-radius: 7px;
-	text-decoration: none;
-}
-.IBbutton:hover {
-	background-color: #2C3E50;
-}
-
-.left{
-position: absolute;
-top: 145px;
-left: 10px;
-}
-
-.rightbuttons {
-	margin-top: 50px;
-	margin: 20px;
-	position: absolute;
-	right: 30px;
-}
-.right{
-position: relative;
-top: 150px;
-left: 600px;
-width: 700px;
-background: #EDF0F5;
-border-radius: 10px;
-}
-
-.right table{
-font-size:13px;
-font-weight:bold;
-position: relative;
-left: 40px;
-padding: 20px;
-}
-.right table tr td:nth-child(1){
-text-align:right;
-}
-.right table tr td:nth-child(2){
-width: 20px;
-height: 25px;
-}
-.right table tr td:nth-child(3) input{
-width: 130px;
-height: 20px;
-padding-left: 10px;
-margin-right:10px;
-box-sizing: border-box;
-border: 1px solid #CCCCCC;
-border-radius: 2px;
-} 
-.title {
-	width: 100%;
-	color: #2C3E50;
-	font-weight: bold;
-	font-size: 20px;
-	padding-left: 30px;
-	padding-bottom: 10px;
-	padding-top: 20px;
-	border-top: thin solid #5E5E5E;
-	border-bottom: thin dashed #5E5E5E;
-	position: absolute;
-	top: 50px;
-}
-
-
-</style>
 
 <meta charset="UTF-8">
 <title>사원검색팝업</title>
@@ -94,7 +19,7 @@ border-radius: 2px;
 
 
 function LoadPage(){
-	mySheet.RemoveAll();
+	mySheet.RemoveAll();  
 	//아이비시트 초기화
 	var initSheet = {};
 	initSheet.Cfg={SearchMode:smLazyLoad,ToolTip:1};
@@ -112,7 +37,7 @@ function LoadPage(){
 	mySheet.SetEditableColorDiff(1);
 
 	mySheet.SetColEditable(2,0);
-
+	mySheet.DoSearch("${contextPath}/hm/p0022/homeSearch_p02.do");
 }
 
 
@@ -125,7 +50,7 @@ function doAction(sAction) {
 	
 	case "search": //조회
 		var param=FormQueryStringEnc(document.frm);
-		mySheet.DoSearch("${contextPath}/hm/p0022/homeSearch_p02.do",param);
+		mySheet.DoSearch("${contextPath}/hm/p0022/homeSearch_p02.do");
 		break;
 	
 	case "reload": //초기화
@@ -156,6 +81,7 @@ function mySheet_OnDblClick(Row,Col){
 	</script>
 	</div>
 	</div>
+
 	
 <form name="frm">
 <div class="searchBar">
@@ -170,5 +96,7 @@ function mySheet_OnDblClick(Row,Col){
 	</div>
 
 	
+
+
 </body>
 </html>

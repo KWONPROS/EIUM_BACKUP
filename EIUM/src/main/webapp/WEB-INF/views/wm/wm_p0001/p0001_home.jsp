@@ -313,7 +313,7 @@
 				//평일 총 정상근무일 + 휴일 총 정상 근무일
 				T_NO_COUNT = T_holi_NO_DAY + T_week_NO_DAY;
 				//평일 총 연장 근무일 + 휴일 총 연장 근무일  = (평일 연장 근무일 - 평일 정상 근무일) + (휴일 연장 근무일 - 평일 정상 근무일) 
-				T_EX_COUNT = (T_week_EX_DAY - T_week_NO_DAY) + (T_holi_EX_DAY - T_holi_NO_DAY);
+				T_EX_COUNT = (T_week_EX_DAY) + (T_holi_EX_DAY);
 			}
 			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("weekday"), T_week_count);
 			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("holiday"), T_holi_count);
@@ -404,7 +404,7 @@
 				//평일 총 정상근무일 + 휴일 총 정상 근무일
 				T_NO_COUNT = T_holi_NO_DAY + T_week_NO_DAY;
 				//평일 총 연장 근무일 + 휴일 총 연장 근무일  = (평일 연장 근무일 - 평일 정상 근무일) + (휴일 연장 근무일 - 평일 정상 근무일) 
-				T_EX_COUNT = (T_week_EX_DAY - T_week_NO_DAY) + (T_holi_EX_DAY - T_holi_NO_DAY);
+				T_EX_COUNT = (T_week_EX_DAY) + (T_holi_EX_DAY);
 			}
 			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("weekday"), T_week_count);
 			mySheet3.SetCellValue(1, mySheet3.SaveNameCol("holiday"), T_holi_count);

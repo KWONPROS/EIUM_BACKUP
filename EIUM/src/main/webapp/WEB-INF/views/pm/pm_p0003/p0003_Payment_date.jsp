@@ -21,8 +21,8 @@ function LoadPage(){
 	initSheet.HeaderMode = {Sort:1,ColMove:1,ColResize:1,HeaderCheck:1};
 	initSheet.Cols=[
 		{Header:"지급코드",Type:"Text", Align:"Center", Width:120, SaveName:"payment_code", Hidden:"1"}, 
-		{Header:"지급일자",Type:"Date", Align:"Center",MinWidth:150, SaveName:"payment_date", Format:"yyyy-MM-dd"}, 
-		{Header:"지급분류",Type:"Text", Align:"Center",MinWidth:170, SaveName:"payment_des_name"}
+		{Header:"지급일자",Type:"Date", Align:"Center",MinWidth:230, SaveName:"payment_date", Format:"yyyy-MM-dd"}, 
+		{Header:"지급분류",Type:"Text", Align:"Center",MinWidth:230, SaveName:"payment_des_name"}
 		];
 	IBS_InitSheet(mySheet2,initSheet);
 	
@@ -30,6 +30,7 @@ function LoadPage(){
 	mySheet2.SetColEditable(0,0);
 	mySheet2.SetColEditable(1,0);
 	mySheet2.SetColEditable(2,0);
+	mySheet2.SetSheetHeight(620);
 
 	
 	var monthpicker =${monthpicker};

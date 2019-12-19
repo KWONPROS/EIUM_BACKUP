@@ -23,8 +23,8 @@ function LoadPage(){
 
 		{Header:"사원코드",Type:"Text",Width:100,SaveName:"employee_code",Align:"Center"},
 		{Header:"사원명",Type:"Text",Width:100,SaveName:"employee_name",Align:"Center"},
-		{Header:"부서명",Type:"Text",Width:100,SaveName:"department_name",Align:"Center"},
-		{Header:"사업장명",Type:"Text",Width:100,SaveName:"site_name",Align:"Center"}
+		{Header:"부서명",Type:"Text",Width:125,SaveName:"department_name",Align:"Center"},
+		{Header:"사업장명",Type:"Text",Width:125,SaveName:"site_name",Align:"Center"}
 
 		];
 	IBS_InitSheet(mySheet2,initSheet);
@@ -34,6 +34,8 @@ function LoadPage(){
 	mySheet2.SetColEditable(1,0);
 	mySheet2.SetColEditable(2,0);
 	mySheet2.SetColEditable(3,0);
+	mySheet2.SetSheetHeight(620);
+
 	mySheet2.DoSearch("${contextPath}/hm/p0033/employee_List.do")
 
 

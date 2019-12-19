@@ -125,21 +125,21 @@
 	 function showPopup1() {
 		 var url = '${contextPath}/hm/p0033/searchHrassessment.do';
 
-		 window.open(url, "a", "width=600, height=500, left=100, top=50");
+		 window.open(url, "a", "width=480, height=650, left=100, top=50");
 	  
 	  }
 	 
 	 function showPopup2() {
 		 var url = '${contextPath}/hm/p0033/searchSite.do';
 
-		 window.open(url, "a", "width=600, height=500, left=100, top=50");
+		 window.open(url, "a", "width=480, height=650, left=100, top=50");
 	  
 	  }
 	 
 	 function showPopup3() {
 		 var url = '${contextPath}/hm/p0033/searchEmployeename.do';
 
-		 window.open(url, "a", "width=600, height=500, left=100, top=50");
+		 window.open(url, "a", "width=480, height=650, left=100, top=50");
 	  
 	  }
 	

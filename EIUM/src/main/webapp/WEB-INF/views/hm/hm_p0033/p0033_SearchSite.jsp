@@ -21,8 +21,8 @@ function LoadPage(){
 	initSheet.HeaderMode = {Sort:1,ColMove:1,ColResize:1,HeaderCheck:1};
 	initSheet.Cols=[
 
-		{Header:"사업장코드",Type:"Text",Width:100,SaveName:"site_code",Align:"Center"},
-		{Header:"사업장명",Type:"Text",Width:100,SaveName:"site_name",Align:"Center"},
+		{Header:"사업장코드",Type:"Text",Width:230,SaveName:"site_code",Align:"Center"},
+		{Header:"사업장명",Type:"Text",Width:230,SaveName:"site_name",Align:"Center"},
 
 		];
 	IBS_InitSheet(mySheet2,initSheet);
@@ -30,6 +30,7 @@ function LoadPage(){
 
 	mySheet2.SetColEditable(0,0);
 	mySheet2.SetColEditable(1,0);
+	mySheet2.SetSheetHeight(620);
 
 	mySheet2.DoSearch("${contextPath}/hm/p0033/site_List.do")
 

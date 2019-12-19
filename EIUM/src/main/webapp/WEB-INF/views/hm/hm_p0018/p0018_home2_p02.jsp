@@ -100,9 +100,9 @@ function LoadPage(){
 	initSheet.Cfg={SearchMode:smLazyLoad,ToolTip:1};
 	initSheet.HeaderMode = {Sort:1,ColMove:1,ColResize:1,HeaderCheck:1};
 	initSheet.Cols=[
-		{Header:"NO",Type:"Seq",Width:100,SaveName:"seq",Align:"Center"},
-		{Header:"사원코드",Type:"Text",Width:100,SaveName:"employee_CODE",Align:"Center"},
-		{Header:"사원명",Type:"Text",Width:100,SaveName:"employee_NAME",Align:"Center"},
+		{Header:"NO",Type:"Seq",Width:60,SaveName:"seq",Align:"Center"},
+		{Header:"사원코드",Type:"Text",Width:150,SaveName:"employee_CODE",Align:"Center"},
+		{Header:"사원명",Type:"Text",Width:170,SaveName:"employee_NAME",Align:"Center"},
 		{Header:"부서",Type:"Text",Width:100,SaveName:"department_NAME",Align:"Center",Hidden:1},
 		{Header:"직책",Type:"Text",Width:100,SaveName:"position_NAME",Align:"Center",Hidden:1},
 		
@@ -157,7 +157,7 @@ function doAction(sAction) {
 	<div class="left">
 	<div class="ib_product">
 	<script>
-		createIBSheet("mySheet", "100%", "500px");
+		createIBSheet("mySheet", "500px", "500px");
 
 	</script>
 	</div>
