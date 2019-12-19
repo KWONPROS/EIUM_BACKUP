@@ -420,7 +420,7 @@ function mySheet1_OnSaveEnd(){
 		</div>
 		<script type="text/javascript">
 			createIBSheet("mySheet1", "1600px", "200px");
-		</script>
+		</script>  
 	</div>
 
 

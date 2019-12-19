@@ -19,7 +19,7 @@
 
 
 function LoadPage(){
-	mySheet.RemoveAll();
+	mySheet.RemoveAll();  
 	//아이비시트 초기화
 	var initSheet = {};
 	initSheet.Cfg={SearchMode:smLazyLoad,ToolTip:1};
