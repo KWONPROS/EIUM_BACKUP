@@ -331,11 +331,7 @@ function doAction(sAction) {
 	}
 }
 function goPopup(){
-<<<<<<< HEAD
 	window.open("${contextPath}/hm/p0022/homeInit_p03.do", "a","width=342,height=520,resizable = no, scrollbars = no");
-=======
-	window.open("${contextPath}/hm/p0022/homeInit_p03.do", "a", "width=350,height=520,resizable = no, scrollbars = no");
->>>>>>> refs/remotes/origin/master
 }
 function popupValue(emplyCode,emplyName){
 	$("#masterEmpl").val(emplyName);
@@ -368,10 +364,10 @@ function popupValue5(rowData){
 function mySheet2_OnPopupClick(Row,Col) {  	
 	
 	if(Col==4){
-		window.open("${contextPath}/hm/p0022/homeInit_p01.do", "a", "width=342,height=520,resizable = no, scrollbars = no");
+		window.open("${contextPath}/hm/p0022/homeInit_p01.do", "a", "width=500,height=705,resizable = no, scrollbars = no");
 	}
 	 if(Col==10){
-		 window.open("${contextPath}/hm/p0022/homeInit_p04.do", "a", "width=342,height=520,resizable = no, scrollbars = no");
+		 window.open("${contextPath}/hm/p0022/homeInit_p04.do", "a", "width=503,height=710,resizable = no, scrollbars = no");
 	 }
 	 if(Col==12){
 		var x=mySheet2.GetCellValue(Row,10);
@@ -383,7 +379,7 @@ function mySheet2_OnPopupClick(Row,Col) {
 function mySheet1_OnPopupClick(Row,Col){
 	if(Col==6){
 
-	window.open("${contextPath}/hm/p0022/homeInit_p02.do", "a","width=350,height=520,resizable = no, scrollbars = no" );
+	window.open("${contextPath}/hm/p0022/homeInit_p02.do", "a","width=510,height=526,resizable = no, scrollbars = no" );
 
 	}
 }

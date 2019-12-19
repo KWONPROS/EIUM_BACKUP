@@ -49,7 +49,7 @@ function doAction(sAction) {
 	switch(sAction){
 	
 	case "search": //조회
-		var param=FormQueryStringEnc(document.frm);
+		
 		mySheet.DoSearch("${contextPath}/hm/p0022/homeSearch_p02.do");
 		break;
 	
@@ -82,20 +82,7 @@ function mySheet_OnDblClick(Row,Col){
 	</div>
 	</div>
 
-	
-<form name="frm">
-<div class="searchBar">
-사원명<input type="text" id="E_id"  onKeypress="if(event.keyCode==13) {doAction('search'); return false;}">
-</div>
-</form>
-	
-    <div class="rightbuttons">
-	  <a href="javascript:doAction('reload')"  class="IBbutton">초기화</a>
-	  <a href="javascript:doAction('search')"  class="IBbutton">조회</a>
 
-	</div>
-
-	
 
 
 </body>
