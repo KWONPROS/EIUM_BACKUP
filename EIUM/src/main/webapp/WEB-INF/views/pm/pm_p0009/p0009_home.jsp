@@ -31,8 +31,19 @@ var graphColors = (function() {
 	colors[1]="#3498DB";
 	colors[2]="#2C3E50";
 	colors[3]="#2980B9";
+	colors[4]="#376092";
+	colors[5]="#95B3D7";
+	colors[6]="#B9CDE5";
+	colors[7]="#DCE6F2";
+	colors[8]="#4291E9";
+	colors[9]="#C9E1F5";
+	colors[10]="#00B050";
+	colors[11]="#1ABC9C";
+	colors[12]="#3498DB";
+	colors[13]="#2C3E50";
+	colors[14]="#92D050";
+	colors[15]="#90B7CE";
 
-	
 	return colors;
 }());
 	/*Sheet 기본 설정 */
@@ -446,7 +457,7 @@ position:relative;
 
 </style>
 </head>
-<body onload="LoadPage()">
+<body onload="LoadPage()" style="overflow: hidden;">
 	<div class="leftbuttons">
 		<a href="javascript:doAction('excel')" class="IBbutton">엑셀</a>
 	</div>
