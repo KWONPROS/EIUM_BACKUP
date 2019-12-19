@@ -601,7 +601,7 @@ function mySheet_OnClick(Row, Col) {
 		
 		if(Col=="5"){
 			
-		window.open("${contextPath}/hm/p0007/license_Popup.do", "a", "width=500, height=700, left=100, top=50"); 
+		window.open("${contextPath}/hm/p0007/license_Popup.do", "a", "width=480, height=650, left=100, top=50"); 
 		}
 		
 	}				
@@ -610,7 +610,7 @@ function mySheet_OnClick(Row, Col) {
 		
 		if(Col=="4"){
 			
-		window.open("${contextPath}/hm/p0007/assessment_Popup.do", "a", "width=500, height=700, left=100, top=50"); 
+		window.open("${contextPath}/hm/p0007/assessment_Popup.do", "a", "width=480, height=650, left=100, top=50"); 
 		}
 		
 	}
@@ -619,7 +619,7 @@ function mySheet_OnClick(Row, Col) {
 		
 		if(Col=="5"){
 			
-		window.open("${contextPath}/hm/p0007/rnp_Popup.do", "a", "width=500, height=700, left=100, top=50"); 
+		window.open("${contextPath}/hm/p0007/rnp_Popup.do", "a", "width=480, height=650, left=100, top=50"); 
 		}
 		
 	}
@@ -628,7 +628,7 @@ function mySheet_OnClick(Row, Col) {
 		
 		if(Col=="4"){
 			
-		window.open("${contextPath}/hm/p0007/language_Popup.do", "a", "width=500, height=700, left=100, top=50"); 
+		window.open("${contextPath}/hm/p0007/language_Popup.do", "a", "width=480, height=650, left=100, top=50"); 
 		}
 		
 	}

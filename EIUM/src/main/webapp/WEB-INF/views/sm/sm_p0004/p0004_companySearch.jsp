@@ -21,13 +21,14 @@ function LoadPage(){
 	initSheet.HeaderMode = {Sort:1,ColMove:1,ColResize:1,HeaderCheck:1};
 	initSheet.Cols=[
 
-		{Header:"회사코드",Type:"Text",Width:100,SaveName:"company_code",Align:"Center"},
-		{Header:"회사명",Type:"Text",Width:100,SaveName:"company_name",Align:"Center"},
+		{Header:"회사코드",Type:"Text",Width:230,SaveName:"company_code",Align:"Center"},
+		{Header:"회사명",Type:"Text",Width:230,SaveName:"company_name",Align:"Center"},
 		];
 	IBS_InitSheet(mySheet3,initSheet);
 	mySheet3.SetEditableColorDiff(1);
 	mySheet3.SetColEditable(0,0);
 	mySheet3.SetColEditable(1,0);
+	mySheet3.SetSheetHeight(620);
 
 	mySheet3.DoSearch("${contextPath}/sm/p0004/company_list.do")
 

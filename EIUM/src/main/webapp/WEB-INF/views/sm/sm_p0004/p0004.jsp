@@ -90,7 +90,7 @@ function doAction(sAction){
 		
 		if(Col=="4"){
 			
-		window.open("${contextPath}/sm/p0004/company_Search.do", "a", "width=500, height=700, left=100, top=50"); 
+		window.open("${contextPath}/sm/p0004/company_Search.do", "a", "width=480, height=650, left=100, top=50"); 
 		}
 		
 		

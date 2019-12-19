@@ -129,7 +129,7 @@ function mySheet_OnClick(Row, Col) {
 		 var monthpicker = $('#monthpicker').val();
 		 var url = '${contextPath}/pm/p0004/searchPaymentdate.do?monthpicker='+monthpicker;
 
-		 window.open(url, "a", "width=600, height=500, left=100, top=50");
+		 window.open(url, "a", "width=480, height=650, left=100, top=50");
 	  
 	  }
 	 

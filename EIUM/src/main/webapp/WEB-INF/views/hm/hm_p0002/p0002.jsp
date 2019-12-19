@@ -170,12 +170,12 @@
 		
 		if(Col=="4"){
 			
-		window.open("${contextPath}/hm/p0002/site_Search.do", "a", "width=500, height=700, left=100, top=50"); 
+		window.open("${contextPath}/hm/p0002/site_Search.do", "a", "width=480, height=650, left=100, top=50"); 
 		}
 		
 		if(Col=="6"){
 			
-		window.open("${contextPath}/hm/p0002/jobclass_Search.do", "a", "width=500, height=700, left=100, top=50"); 
+		window.open("${contextPath}/hm/p0002/jobclass_Search.do", "a", "width=480, height=650, left=100, top=50"); 
 		}
 	}
 	
