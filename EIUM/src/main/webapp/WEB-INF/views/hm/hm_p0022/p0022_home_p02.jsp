@@ -158,7 +158,9 @@ function mySheet_OnDblClick(Row,Col){
 	</div>
 	
 <form name="frm">
+<div class="searchBar">
 사원명<input type="text" id="E_id"  onKeypress="if(event.keyCode==13) {doAction('search'); return false;}">
+</div>
 </form>
 	
     <div class="rightbuttons">

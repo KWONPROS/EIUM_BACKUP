@@ -331,7 +331,7 @@ function doAction(sAction) {
 	}
 }
 function goPopup(){
-	window.open("${contextPath}/hm/p0022/homeInit_p03.do", "a", "width=500, height=700, left=100, top=50 location=0");
+	window.open("${contextPath}/hm/p0022/homeInit_p03.do", "a","width=342,height=520,resizable = no, scrollbars = no");
 }
 function popupValue(emplyCode,emplyName){
 	$("#masterEmpl").val(emplyName);
@@ -364,19 +364,19 @@ function popupValue5(rowData){
 function mySheet2_OnPopupClick(Row,Col) {  	
 	
 	if(Col==4){
-		window.open("${contextPath}/hm/p0022/homeInit_p01.do", "a", "width=500, height=700, left=100, top=50 location=no");
+		window.open("${contextPath}/hm/p0022/homeInit_p01.do", "a", "width=342,height=520,resizable = no, scrollbars = no");
 	}
 	 if(Col==10){
-		 window.open("${contextPath}/hm/p0022/homeInit_p04.do", "a", "width=500, height=700, left=100, top=50 location=no");
+		 window.open("${contextPath}/hm/p0022/homeInit_p04.do", "a", "width=342,height=520,resizable = no, scrollbars = no");
 	 }
 	 if(Col==12){
 		var x=mySheet2.GetCellValue(Row,10);
-		window.open("${contextPath}/hm/p0022/homeInit_p05.do?name="+x, "a", "width=500, height=700, left=100, top=50 location=no");
+		window.open("${contextPath}/hm/p0022/homeInit_p05.do?name="+x, "a","width=342,height=520,resizable = no, scrollbars = no");
 	 }
 }
 function mySheet1_OnPopupClick(Row,Col){
 	if(Col==6){
-	window.open("${contextPath}/hm/p0022/homeInit_p02.do", "a", "width=500, height=700, left=100, top=50 location=no")
+	window.open("${contextPath}/hm/p0022/homeInit_p02.do", "a","width=342,height=520,resizable = no, scrollbars = no")
 	}
 }
 function mySheet1_OnSaveEnd(){

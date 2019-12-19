@@ -23,61 +23,51 @@
 
 .left{
 position: absolute;
-top: 145px;
-left: 50px;
+top: 70px;
+left: 10px;
+width:300px;
 }
 
 .rightbuttons {
-	margin-top: 50px;
 	margin: 20px;
 	position: absolute;
-	right: 30px;
-}
-.right{
-position: relative;
-top: 150px;
-left: 600px;
-width: 700px;
-background: #EDF0F5;
-border-radius: 10px;
+	right: 10px;
+	top:10px;
 }
 
-.right table{
-font-size:13px;
-font-weight:bold;
-position: relative;
-left: 40px;
-padding: 20px;
+
+#searchBar {
+	background: #EBEBEB;
+	margin-bottom: 20px;
+	border-radius: 5px;
+	font-size: 12px;
+	border-radius:5px;
+	position:relative;
+	top:10px;
+	width:280px;
+	left:10px;
+	padding-top:10px;
+	padding-bottom:10px;
+	
 }
-.right table tr td:nth-child(1){
-text-align:right;
+span{
+    background: #5E5E5E;
+    padding: 5px 5px;
+    color: white;
+    border-radius: 5px;
+    margin-right:10px;
+    font-size:12px;
+    margin-left:15px;
 }
-.right table tr td:nth-child(2){
-width: 20px;
-height: 25px;
+#searchBar input, select {
+	height: 24px;
+	border-radius: 3px;
+	border: none;
+	padding-left: 5px;
+	vertical-align: middle;
+	text-align: center;
 }
-.right table tr td:nth-child(3) input{
-width: 130px;
-height: 20px;
-padding-left: 10px;
-margin-right:10px;
-box-sizing: border-box;
-border: 1px solid #CCCCCC;
-border-radius: 2px;
-} 
-.title {
-	width: 100%;
-	color: #2C3E50;
-	font-weight: bold;
-	font-size: 20px;
-	padding-left: 30px;
-	padding-bottom: 10px;
-	padding-top: 20px;
-	border-top: thin solid #5E5E5E;
-	border-bottom: thin dashed #5E5E5E;
-	position: absolute;
-	top: 50px;
-}
+
 
 
 </style>
@@ -101,8 +91,8 @@ function LoadPage(){
 	initSheet.HeaderMode = {Sort:1,ColMove:1,ColResize:1,HeaderCheck:1};
 	initSheet.Cols=[
 		{Header:"NO",Type:"Seq",Width:70,SaveName:"seq",Align:"Center"},
-		{Header:"사업장코드",Type:"Text",Width:70,SaveName:"site_CODE",Align:"Center"},
-		{Header:"사업장명",Type:"Text",Width:70,SaveName:"site_NAME",Align:"Center"},
+		{Header:"사업장코드",Type:"Text",Width:230,SaveName:"site_CODE",Align:"Center"},
+		{Header:"사업장명",Type:"Text",Width:170,SaveName:"site_NAME",Align:"Center"},
 		];
 	IBS_InitSheet(mySheet,initSheet);
 	mySheet.SetEditableColorDiff(1);
@@ -144,19 +134,16 @@ function mySheet_OnDblClick(Row,Col){
 
 </head>
 <body onLoad="LoadPage()">
-	<div class="clear hidden"></div>
 	<div class="left">
-	<div class="ib_product">
 	<script>
-		createIBSheet("mySheet", "100%", "500px");
+		createIBSheet("mySheet", "490px", "620px");
 	</script>
 	</div>
-	</div>
-	
+	<div id="searchBar">
 <form name="frm">
-사업장명<input type="text" id="E_id"  onKeypress="if(event.keyCode==13) {doAction('search'); return false;}">
+<span>사업장명</span><input type="text" id="E_id"  onKeypress="if(event.keyCode==13) {doAction('search'); return false;}">
 </form>
-	
+	</div>
     <div class="rightbuttons">
 	  <a href="javascript:doAction('reload')"  class="IBbutton">초기화</a>
 	  <a href="javascript:doAction('search')"  class="IBbutton">조회</a>
