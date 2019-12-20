@@ -42,8 +42,8 @@ public class HomeService {
 		// 네이버일 경우 smtp.naver.com 을 입력합니다. 
 		// Google일 경우 smtp.gmail.com 을 입력합니다. 
 		String host = "smtp.naver.com"; 
-		final String username = "won0935"; //네이버 아이디를 입력해주세요. @nave.com은 입력하지 마시구요. 
-		final String password = "Songjw0935!"; //네이버 이메일 비밀번호를 입력해주세요. 
+		final String username = ""; //네이버 아이디를 입력해주세요. @nave.com은 입력하지 마시구요. 
+		final String password = ""; //네이버 이메일 비밀번호를 입력해주세요. 
 		int port=465; //포트번호 
 		
 		// 메일 내용 
