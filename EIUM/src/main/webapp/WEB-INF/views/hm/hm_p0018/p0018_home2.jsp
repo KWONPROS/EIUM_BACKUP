@@ -106,15 +106,15 @@ function LoadPage() {
 
 				{Header:"교육명",Type:"Text",SaveName:"employee_TRAINING_NAME", Align:"Center",Width:100},			
 				{Header:"시작일",Type:"Date",SaveName:"employee_TRAINING_START_DATE", Edit: 1, Align:"Center",Format:"Ymd",Width:100},			
-				{Header:"종료일",Type:"Date",SaveName:"employee_TRAINING_END_DATE",Format:"Ymd",Width:100},			
-				{Header:"교육일수",Type:"Text",SaveName:"employee_TRAINING_DATE_COUNT",Width:100},
-				{Header:"교육목적",Type:"Text",SaveName:"employee_TRAINING_GOAL",Width:100},
-				{Header:"교육장소",Type:"Text",SaveName:"employee_TRAINING_LOCATION",Width:100},			
-				{Header:"담당강사",Type:"Text",SaveName:"employee_TRAINING_TEACHER",Width:100},			
-				{Header:"교육기관",Type:"Text",SaveName:"employee_TRAINING_INSITUTION",Width:100 },			
-				{Header:"교육시간",Type:"Text",SaveName:"employee_TRAINING_TIME",Width:100},			
-				{Header:"대상인원",Type:"Text",SaveName:"employee_TRAINING_PEOPLE",Width:100},			
-				{Header:"사내외구분",Type:"Text",SaveName:"employee_TRAINING_IN_OUT",Width:100},			
+				{Header:"종료일",Type:"Date",SaveName:"employee_TRAINING_END_DATE",Format:"Ymd",Width:100, Align:"Center"},			
+				{Header:"교육일수",Type:"Text",SaveName:"employee_TRAINING_DATE_COUNT",Width:100, Align:"Center"},
+				{Header:"교육목적",Type:"Text",SaveName:"employee_TRAINING_GOAL",Width:100, Align:"Center"},
+				{Header:"교육장소",Type:"Text",SaveName:"employee_TRAINING_LOCATION",Width:100, Align:"Center"},			
+				{Header:"담당강사",Type:"Text",SaveName:"employee_TRAINING_TEACHER",Width:100, Align:"Center"},			
+				{Header:"교육기관",Type:"Text",SaveName:"employee_TRAINING_INSITUTION",Width:100, Align:"Center"},			
+				{Header:"교육시간",Type:"Text",SaveName:"employee_TRAINING_TIME",Width:100, Align:"Center"},			
+				{Header:"대상인원",Type:"Text",SaveName:"employee_TRAINING_PEOPLE",Width:100, Align:"Center"},			
+				{Header:"사내외구분",Type:"Text",SaveName:"employee_TRAINING_IN_OUT",Width:100, Align:"Center"},			
 
 
 				];

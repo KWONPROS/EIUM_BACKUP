@@ -47,7 +47,7 @@ padding-right:10px;
 .right{
 position: relative;
 top:50px;
-left: 250px;
+left: 280px;
 width: 1400px;
 
 }
@@ -163,13 +163,13 @@ vertical-align: middle;
 			Type : "Text",
 			SaveName : "employee_TRAINING_CODE",
 			Edit : 0,
-			Width : 100
+			Width : 100,Align:"Center"
 		}, {
 			Header : "교육명",
 			Type : "Text",
 			SaveName : "employee_TRAINING_NAME",
 			Edit : 0,
-			Width : 100
+			Width : 130,Align:"Center"
 		} ];
 		IBS_InitSheet(mySheet, initSheet);
 
@@ -196,37 +196,37 @@ vertical-align: middle;
 			Type : "Text",
 			SaveName : "employee_CODE",
 			Edit : 0,
-			Width : 90
+			Width : 90,Align:"Center"
 		}, {
 			Header : "사원명",
 			Type : "Text",
 			SaveName : "employee_NAME",
 			Edit : 0,
-			Width : 90
+			Width : 90,Align:"Center"
 		}, {
 			Header : "시작일",
 			Type : "Text",
 			SaveName : "employee_TRAINING_START_DATE",
 			Edit : 0,
-			Width : 145
+			Width : 145,Align:"Center"
 		}, {
 			Header : "종료일",
 			Type : "Text",
 			SaveName : "employee_TRAINING_END_DATE",
 			Edit : 0,
-			Width : 145
+			Width : 145,Align:"Center"
 		}, {
 			Header : "교육시간",
 			Type : "Text",
 			SaveName : "employee_TRAINING_TIME",
 			Edit : 0,
-			Width : 90
+			Width : 90,Align:"Center"
 		}, {
 			Header : "교육일수",
 			Type : "Text",
 			SaveName : "employee_TRAINING_DATE_COUNT",
 			Edit : 0,
-			Width : 90
+			Width : 90,Align:"Center"
 		}, {
 			Header : "이수여부",
 			Type : "Combo",
@@ -234,37 +234,37 @@ vertical-align: middle;
 			"ComboText" : "이수|미이수",
 			"ComboCode" : "Y|N",
 			Edit : 0,
-			Width : 90
+			Width : 90,Align:"Center"
 		}, {
 			Header : "출석점수",
 			Type : "Text",
 			SaveName : "attendence_SCORE",
 			Edit : 0,
-			Width : 90
+			Width : 90,Align:"Center"
 		}, {
 			Header : "태도점수",
 			Type : "Text",
 			SaveName : "attitude_SCORE",
 			Edit : 0,
-			Width : 90
+			Width : 90,Align:"Center"
 		}, {
 			Header : "평가점수",
 			Type : "Text",
 			SaveName : "score",
 			Edit : 0,
-			Width : 90
+			Width : 90,Align:"Center"
 		}, {
 			Header : "합계",
 			Type : "Text",
 			SaveName : "total",
 			Edit : 0,
-			Width : 90
+			Width : 90,Align:"Center"
 		}, {
 			Header : "교육평가",
 			Type : "Text",
 			SaveName : "assessment_DESC",
 			Edit : 0,
-			Width : 180
+			Width : 150,Align:"Center"
 		}, ];
 		IBS_InitSheet(mySheet2, initSheet2);
 

@@ -49,6 +49,8 @@
 			Header : "삭제",
 			Type : "DelCheck",
 			SaveName : "DEL_CHK",
+			Align : "Center",
+
 			Width:60
 		}, {
 			Header : "교육코드",
