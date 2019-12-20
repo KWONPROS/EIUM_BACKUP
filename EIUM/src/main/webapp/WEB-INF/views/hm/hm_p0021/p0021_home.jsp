@@ -192,7 +192,7 @@ function setPopupValue(){
 	}
 	
 	  
-	  function showPopup() { window.open("${contextPath}/hm/p0018/home2_p01.do", "a", "width=517, height=517");
+	  function showPopup() { window.open("${contextPath}/hm/p0018/home2_p01.do", "a", "width=600, height=500");
 	  
 	  }
 	  
@@ -349,7 +349,7 @@ height: 22px;
 
 	<div class="sheet2">
 		<script>
-			createIBSheet("mySheet2", "1545px", "320px");
+			createIBSheet("mySheet2", "1545px", "300px");
 		</script>
 	</div>
 
@@ -365,8 +365,8 @@ height: 22px;
 	</div>
 	<div id="searchBar">
 	<form id="frm" name="frm" >
-	<span>교육코드</span><a href="javascript:showPopup();" ><input type="text" id="eduCode" value="" onChange="LoadPage()"style="width: 150px;" placeholder="교육코드">
-	 <input type="text" id="eduName" placeholder="교육명" style="width: 200px;"readonly ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
+	<span>교육코드</span><input type="text" id="eduCode" value="" onChange="LoadPage()"style="width: 150px;" placeholder="교육코드">
+	 <input type="text" id="eduName" placeholder="교육명" style="width: 200px;"readonly ><a href="javascript:showPopup();" ><img src="${contextPath}/resources/image/icons/icon_plus.png"></a>
 	</form>
 	</div>
 	
