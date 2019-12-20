@@ -64,7 +64,7 @@ function mySheet_OnDblClick(Row, Col, Value) {
 </head>
 <body onload="LoadPage()">
 				<script>
-					createIBSheet("mySheet", "100%", "500px");
+					createIBSheet("mySheet", "100%", "480px");
 				</script>
 	<input type="hidden" id="CeduCode">
 	<input type="hidden" id="CeduName">
